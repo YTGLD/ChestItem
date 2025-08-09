@@ -32,6 +32,17 @@
   "item.chest_item.conch.string.1": "攻击有概率召唤闪电球对目标造成伤害",
   "item.chest_item.conch": "闪电海螺",
 
+  "item.chest_item.stone.string.0": "坚如磐石",
+  "item.chest_item.stone.string.1": "增加5点击退抗性和一些防御值",
+  "item.chest_item.stone": "重石",
+
+  "item.chest_item.lead.string.0": "重量级选手",
+  "item.chest_item.lead.string.1": "每攻击3次，下一次攻击必定暴击",
+  "item.chest_item.lead": "恶意重铅",
+
+  "item.chest_item.knife.string.0": "命运齿轮的缓缓转动",
+  "item.chest_item.knife.string.1": "攻击加成在-10%到20%随机变化",
+  "item.chest_item.knife": "掩埋刀锋",
 
   "item.chest_item.life_crystal.string.0": "超级生命力",
   "item.chest_item.life_crystal.string.1": "增加10点最大生命值",

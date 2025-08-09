@@ -36,22 +36,6 @@ public abstract class MRender extends RenderType {
         }
         return Minecraft.getInstance().getMainRenderTarget();
     });
-    public static final RenderType CHEST_END = create(
-            "end_chest",
-            1536,
-            false,
-            false,
-            RenderPs.BACK,
-            RenderType.CompositeState.builder()
-                    .setOutputState(outline)
-                    .setTextureState(
-                            RenderStateShard.MultiTextureStateShard.builder()
-                                    .add(TheEndPortalRenderer.END_SKY_LOCATION, false)
-                                    .add(TheEndPortalRenderer.END_PORTAL_LOCATION, false)
-                                    .build()
-                    )
-                    .createCompositeState(false)
-    );
 
     public static final RenderType LIGHTNING_OUTLINE = create(
             "lightning",
@@ -96,7 +80,6 @@ public abstract class MRender extends RenderType {
                 .withLocation("pipeline/end_gateway")
                 .withShaderDefine("PORTAL_LAYERS", 16)
                 .withCull(false)
-                .withBlend(BlendFunction.TRANSLUCENT)
                 .build());
 
     }

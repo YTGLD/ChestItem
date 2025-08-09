@@ -7,8 +7,7 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
-import com.ytgld.chest_item.items.other.Conch;
-import com.ytgld.chest_item.items.other.DrugHeal;
+import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -20,6 +19,8 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 public class EventMain {
@@ -29,10 +30,20 @@ public class EventMain {
         Conch.event(event);
     }
     @SubscribeEvent
+    public void tick(CriticalHitEvent event){
+        Lead.event(event);
+    }
+
+    @SubscribeEvent
+    public void tick(LivingIncomingDamageEvent event){
+        Knife.event(event);
+    }
+    @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
         GodBlood.tick(event);
         DrugHeal.tick(event);
         LifeCrystal.tick(event);
+        Stone.tick(event);
     }
     @SubscribeEvent
     public void attack(LivingEntityUseItemEvent.Start event){
@@ -64,6 +75,12 @@ public class EventMain {
                         .add(LootItem.lootTableItem(InitItems.Bone_Head)
                                 .when(LootItemRandomChanceCondition.randomChance(0.05f)))
                         .add(LootItem.lootTableItem(InitItems.Conch_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                        .add(LootItem.lootTableItem(InitItems.Lead_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                        .add(LootItem.lootTableItem(InitItems.Stone_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                        .add(LootItem.lootTableItem(InitItems.Knife_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.05f)))
                         .build());
             }

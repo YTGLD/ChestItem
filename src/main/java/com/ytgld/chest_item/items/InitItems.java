@@ -3,8 +3,7 @@ package com.ytgld.chest_item.items;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
-import com.ytgld.chest_item.items.other.Conch;
-import com.ytgld.chest_item.items.other.DrugHeal;
+import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -32,6 +31,12 @@ public class InitItems {
             (resourceLocation)-> new BoneHead(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> Conch_ = register("conch",
             (resourceLocation)-> new Conch(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Lead_ = register("lead",
+            (resourceLocation)-> new Lead(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Stone_ = register("stone",
+            (resourceLocation)-> new Stone(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Knife_ = register("knife",
+            (resourceLocation)-> new Knife(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item>  register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -48,6 +53,9 @@ public class InitItems {
                     output.accept(InitItems.Life_Crystal);
                     output.accept(InitItems.Bone_Head);
                     output.accept(InitItems.Conch_);
+                    output.accept(InitItems.Lead_);
+                    output.accept(InitItems.Stone_);
+                    output.accept(InitItems.Knife_);
                 }).build());
 
     }
