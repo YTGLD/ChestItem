@@ -1,5 +1,7 @@
 package com.ytgld.chest_item.other;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public interface IPlayer {
-    ChestInventory chest_item$chestInventory();
+    AtomicReference<ChestInventory> chest_item$chestInventory();
 }

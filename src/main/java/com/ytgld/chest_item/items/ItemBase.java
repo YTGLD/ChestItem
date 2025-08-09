@@ -21,6 +21,11 @@ public class ItemBase extends Item implements Terror{
     }
 
     @Override
+    public int getMaxStackSize(ItemStack stack) {
+        return 1;
+    }
+
+    @Override
     public @NotNull Component getName(@NotNull ItemStack stack) {
         Component component = super.getName(stack);
         MutableComponent co = component.copy();

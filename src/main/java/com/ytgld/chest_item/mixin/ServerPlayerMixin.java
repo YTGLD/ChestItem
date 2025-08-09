@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.mixin;
 
 import com.mojang.authlib.GameProfile;
+import com.ytgld.chest_item.other.IPlayer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +20,10 @@ public abstract class ServerPlayerMixin extends Player{
 
     @Inject(method = "restoreFrom", at = @At(value = "RETURN"))
     private void restoreFrom(ServerPlayer that, boolean keepEverything, CallbackInfo ci) {
-
+        if ((ServerPlayer) (Object)this instanceof IPlayer player){
+            if (that instanceof IPlayer iPlayer){
+                player.chest_item$chestInventory().set(iPlayer.chest_item$chestInventory().get());
+            }
+        }
     }
 }

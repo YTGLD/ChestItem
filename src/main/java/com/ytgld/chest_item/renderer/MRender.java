@@ -53,7 +53,7 @@ public abstract class MRender extends RenderType {
             1536,
             false,
             false,
-            RenderPipelines.END_GATEWAY,
+            RenderPs.BACK,
             RenderType.CompositeState.builder()
                     .setTextureState(
                             RenderStateShard.MultiTextureStateShard.builder()

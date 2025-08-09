@@ -12,23 +12,25 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 @Mixin(Player.class)
 public class PlayerMixin implements IPlayer {
     @Unique
-    protected ChestInventory chest_item$chestInventory = new ChestInventory((Player) (Object)this);
+    protected final AtomicReference<ChestInventory> chest_item$chestInventory = new AtomicReference<>(new ChestInventory((Player) (Object) this));
 
     @Inject(method = "readAdditionalSaveData", at = @At(value = "RETURN"))
     private void readAdditionalSaveData(ValueInput p_422427_, CallbackInfo ci) {
-        this.chest_item$chestInventory.fromSlots(p_422427_.listOrEmpty("ChestItems", ItemStackWithSlot.CODEC));
+        this.chest_item$chestInventory.get().fromSlots(p_422427_.listOrEmpty("ChestItems", ItemStackWithSlot.CODEC));
 
     }
     @Inject(method = "addAdditionalSaveData", at = @At(value = "RETURN"))
     private void addAdditionalSaveData(ValueOutput p_421801_, CallbackInfo ci) {
-        this.chest_item$chestInventory.storeAsSlots(p_421801_.list("ChestItems", ItemStackWithSlot.CODEC));
+        this.chest_item$chestInventory.get().storeAsSlots(p_421801_.list("ChestItems", ItemStackWithSlot.CODEC));
     }
 
     @Override
-    public ChestInventory chest_item$chestInventory() {
+    public AtomicReference<ChestInventory> chest_item$chestInventory() {
         return chest_item$chestInventory;
     }
 }
