@@ -23,6 +23,14 @@
 
 
 
+  "item.chest_item.bone_head.string.0": "熟悉的形状，熟悉的味道",
+  "item.chest_item.bone_head.string.1": "增加33%进食速度",
+  "item.chest_item.bone_head": "无厌之骸骨",
+
+
+  "item.chest_item.conch.string.0": "为什么不听听这个海螺说的是什么呢",
+  "item.chest_item.conch.string.1": "攻击有概率召唤闪电球对目标造成伤害",
+  "item.chest_item.conch": "闪电海螺",
 
 
   "item.chest_item.life_crystal.string.0": "超级生命力",

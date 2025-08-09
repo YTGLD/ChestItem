@@ -30,7 +30,59 @@
                     {
                         "name": "BlurDir",
                         "type": "vec2",
-                        "value": [ 1.0, 0.0 ]
+                        "value": [ 2.0, 0.0 ]
+                    },
+                    {
+                        "name": "Radius",
+                        "type": "float",
+                        "value": 2.5
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "chest_item:post/blur",
+            "fragment_shader": "chest_item:post/entity_outline_box_blur",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "chest_item:entity_outline",
+                    "bilinear": true
+                }
+            ],
+            "output": "swap",
+            "uniforms": {
+                "BlurConfig": [
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [ 0.0, 2.0 ]
+                    },
+                    {
+                        "name": "Radius",
+                        "type": "float",
+                        "value": 2.5
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "chest_item:post/blur",
+            "fragment_shader": "chest_item:post/entity_outline_box_blur",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "swap",
+                    "bilinear": true
+                }
+            ],
+            "output": "chest_item:entity_outline",
+            "uniforms": {
+                "BlurConfig": [
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [ 2.0, 0.0 ]
                     },
                     {
                         "name": "Radius",
@@ -56,7 +108,59 @@
                     {
                         "name": "BlurDir",
                         "type": "vec2",
-                        "value": [ 0.0, 1.0 ]
+                        "value": [ 0.0, 2.0 ]
+                    },
+                    {
+                        "name": "Radius",
+                        "type": "float",
+                        "value": 2.0
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "chest_item:post/blur",
+            "fragment_shader": "chest_item:post/entity_outline_box_blur",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "swap",
+                    "bilinear": true
+                }
+            ],
+            "output": "chest_item:entity_outline",
+            "uniforms": {
+                "BlurConfig": [
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [ 2.0, 0.0 ]
+                    },
+                    {
+                        "name": "Radius",
+                        "type": "float",
+                        "value": 2.0
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "chest_item:post/blur",
+            "fragment_shader": "chest_item:post/entity_outline_box_blur",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "chest_item:entity_outline",
+                    "bilinear": true
+                }
+            ],
+            "output": "swap",
+            "uniforms": {
+                "BlurConfig": [
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [ 0.0, 2.0 ]
                     },
                     {
                         "name": "Radius",
@@ -80,7 +184,7 @@
                     {
                         "name": "ColorModulate",
                         "type": "vec4",
-                        "value": [ 1,1,1,10]
+                        "value": [ 1, 1,1, 1.5 ]
                     }
                 ]
             },

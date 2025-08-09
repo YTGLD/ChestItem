@@ -5,32 +5,38 @@ import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
+import com.ytgld.chest_item.items.other.Conch;
 import com.ytgld.chest_item.items.other.DrugHeal;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 public class EventMain {
     @SubscribeEvent
     public void ItemStackAttackEvent(ItemStackAttackEvent event){
         GodBlood.attack(event);
+        Conch.event(event);
     }
     @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
         GodBlood.tick(event);
         DrugHeal.tick(event);
         LifeCrystal.tick(event);
+    }
+    @SubscribeEvent
+    public void attack(LivingEntityUseItemEvent.Start event){
+        BoneHead.event(event);
     }
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
@@ -54,6 +60,10 @@ public class EventMain {
                         .add(LootItem.lootTableItem(InitItems.God_blood)
                                 .when(LootItemRandomChanceCondition.randomChance(0.05f)))
                         .add(LootItem.lootTableItem(InitItems.Drug_Heal)
+                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                        .add(LootItem.lootTableItem(InitItems.Bone_Head)
+                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                        .add(LootItem.lootTableItem(InitItems.Conch_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.05f)))
                         .build());
             }

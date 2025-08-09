@@ -2,6 +2,9 @@ package com.ytgld.chest_item.renderer;
 
 import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.DepthTestFunction;
+import com.mojang.blaze3d.platform.DestFactor;
+import com.mojang.blaze3d.platform.SourceFactor;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
@@ -23,7 +26,7 @@ public abstract class MRender extends RenderType {
     public MRender(String name, int bufferSize, boolean affectsCrumbling, boolean sortOnUpload, Runnable setupState, Runnable clearState) {
         super(name, bufferSize, affectsCrumbling, sortOnUpload, setupState, clearState);
     }
-    public static final OutputStateShard OUTLINE_TARGET = new OutputStateShard("set_outline", () -> {
+    public static final OutputStateShard outline = new OutputStateShard("set_outline", () -> {
         LevelRenderer rendertarget = Minecraft.getInstance().levelRenderer;
         if (rendertarget instanceof MFramebuffer framebuffer){
             if (framebuffer.chest_item$render()!=null) {
@@ -33,21 +36,6 @@ public abstract class MRender extends RenderType {
         }
         return Minecraft.getInstance().getMainRenderTarget();
     });
-    public static final Function<ResourceLocation, RenderType> OUTLINE = Util.memoize(
-            p_414952_ -> {
-                CompositeState rendertype$compositestate = CompositeState.builder()
-                        .setTextureState(new TextureStateShard(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                                ""), false))
-                        .setLightmapState(LIGHTMAP)
-                        .setOverlayState(OVERLAY)
-                        .setOutputState(OUTLINE_TARGET)
-                        .setLayeringState(VIEW_OFFSET_Z_LAYERING)
-                        .createCompositeState(false);
-                return create("entity_shadow", 1536, false,
-                        false, RenderPs.ENTITY_SHADOW, rendertype$compositestate);
-            }
-    );
-
     public static final RenderType CHEST_END = create(
             "end_chest",
             1536,
@@ -55,6 +43,7 @@ public abstract class MRender extends RenderType {
             false,
             RenderPs.BACK,
             RenderType.CompositeState.builder()
+                    .setOutputState(outline)
                     .setTextureState(
                             RenderStateShard.MultiTextureStateShard.builder()
                                     .add(TheEndPortalRenderer.END_SKY_LOCATION, false)
@@ -64,7 +53,38 @@ public abstract class MRender extends RenderType {
                     .createCompositeState(false)
     );
 
+    public static final RenderType LIGHTNING_OUTLINE = create(
+            "lightning",
+            1536,
+            false,
+            true,
+            RenderPipelines.LIGHTNING,
+            RenderType.CompositeState.builder().setOutputState(outline).createCompositeState(false)
+    );
     public static class RenderPs {
+        public static final RenderPipeline  GUI_TEXTURED =
+                (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).withBlend(new BlendFunction(
+                                SourceFactor.SRC_ALPHA,
+                                DestFactor.ONE,
+                                SourceFactor.ONE,
+                                DestFactor.ZERO
+                        ))
+                        .withLocation("pipeline/gui_textured").build());
+
+        public static final RenderPipeline  ENTITY_OUTLINE_BLIT = (RenderPipeline.builder().withLocation("pipeline/entity_outline_blit")
+                .withVertexShader("core/blit_screen")
+                .withFragmentShader("core/blit_screen")
+                .withSampler("InSampler")
+                .withBlend(new BlendFunction(
+                        SourceFactor.SRC_ALPHA,
+                        DestFactor.ONE,
+                        SourceFactor.ONE,
+                        DestFactor.ZERO
+                ))
+                .withDepthWrite(false)
+                .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
+                .withColorWrite(true, false)
+                .withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.QUADS).build());
 
         public static final RenderPipeline BACK =(RenderPipeline.builder(
                 RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
@@ -78,12 +98,6 @@ public abstract class MRender extends RenderType {
                 .withCull(false)
                 .withBlend(BlendFunction.TRANSLUCENT)
                 .build());
-
-        public static final RenderPipeline ENTITY_SHADOW = (RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/entity_shadow")
-                .withVertexShader("core/rendertype_entity_shadow").withFragmentShader("core/rendertype_entity_shadow")
-                .withSampler("Sampler0").withBlend(BlendFunction.TRANSLUCENT).withDepthWrite(false)
-                .withCull(false)
-                .withVertexFormat(DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS).build());
 
     }
 }

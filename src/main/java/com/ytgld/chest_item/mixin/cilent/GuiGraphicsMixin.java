@@ -66,10 +66,14 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
 
 
-                            new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha))).chest_item$blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/fire.png"),
+                            new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha)))
+                                    .chest_item$blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/fire.png"),
                                     (int) adjustedCurrPos.x - 8, (int) adjustedCurrPos.y - 8, 0, 0, 16, 16, 16, 16);
-                            new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha))).chest_item$blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/small_fire.png"),
+
+                            new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha)))
+                                    .chest_item$blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/small_fire.png"),
                                     (int) adjustedPrevPos.x - 8, (int) adjustedPrevPos.y - 8, 0, 0, 16, 16, 16, 16);
+
                             pose.popMatrix();
 
                         }

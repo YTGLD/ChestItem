@@ -1,7 +1,9 @@
 package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
+import com.ytgld.chest_item.items.other.Conch;
 import com.ytgld.chest_item.items.other.DrugHeal;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import net.minecraft.core.registries.Registries;
@@ -26,6 +28,10 @@ public class InitItems {
             (resourceLocation)-> new DrugHeal(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> Life_Crystal = register("life_crystal",
             (resourceLocation)-> new LifeCrystal(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Bone_Head = register("bone_head",
+            (resourceLocation)-> new BoneHead(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Conch_ = register("conch",
+            (resourceLocation)-> new Conch(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item>  register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -40,6 +46,8 @@ public class InitItems {
                     output.accept(InitItems.God_blood);
                     output.accept(InitItems.Drug_Heal);
                     output.accept(InitItems.Life_Crystal);
+                    output.accept(InitItems.Bone_Head);
+                    output.accept(InitItems.Conch_);
                 }).build());
 
     }

@@ -1,5 +1,7 @@
 package com.ytgld.chest_item;
 
+import com.ytgld.chest_item.entity.Entitys;
+import com.ytgld.chest_item.entity.render.AbyssOrbRenderer;
 import com.ytgld.chest_item.event.activated.EventHandler;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.key.ClientEvent;
@@ -10,6 +12,7 @@ import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
@@ -29,7 +32,7 @@ public class Chestitem {
     public Chestitem(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::registerPayloadHandler);
 
-
+        Entitys.REGISTRY.register(modEventBus);
         InitItems.ITEMS.register(modEventBus);
         InitItems.TabChestItem.CREATIVE_MODE_TABS.register(modEventBus);
         DataReg.REGISTRY.register(modEventBus);
@@ -45,6 +48,10 @@ public class Chestitem {
     }
     @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {
+        @SubscribeEvent
+        public static void RegisterRenderPipelinesEvent(EntityRenderersEvent.RegisterRenderers event){
+            event.registerEntityRenderer(Entitys.Abyss_Orb.get(), AbyssOrbRenderer::new);
+        }
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent evt) {
             NeoForge.EVENT_BUS.register(new ClientEvent());

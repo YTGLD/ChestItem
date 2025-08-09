@@ -12,12 +12,6 @@ public class ChestInventory extends SimpleContainer {
     public ChestInventory(Player player) {
         super(9);
     }
-
-    @Override
-    public int getMaxStackSize(ItemStack stack) {
-        return 1;
-    }
-
     public void fromSlots(ValueInput.TypedInputList<ItemStackWithSlot> input) {
         for(int i = 0; i < this.getContainerSize(); ++i) {
             this.setItem(i, ItemStack.EMPTY);

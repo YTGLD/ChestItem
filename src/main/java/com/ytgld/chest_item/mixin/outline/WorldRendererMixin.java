@@ -1,19 +1,25 @@
 package com.ytgld.chest_item.mixin.outline;
 
+import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.framegraph.FrameGraphBuilder;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.resource.ResourceHandle;
+import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.textures.GpuTextureView;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.renderer.DefaultFramebufferSets;
 import com.ytgld.chest_item.renderer.MFramebuffer;
+import com.ytgld.chest_item.renderer.MRender;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.PostChain;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.joml.Matrix4f;
@@ -25,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.OptionalInt;
 import java.util.Set;
 
 @Mixin(LevelRenderer.class)
@@ -54,7 +61,7 @@ public abstract class WorldRendererMixin implements MFramebuffer {
     @Inject(method = "doEntityOutline", at = @At(value = "RETURN"))
     private void drawEntityOutlinesFramebuffer(CallbackInfo ci) {
         if (this.minecraft.getMainRenderTarget().getColorTextureView()!=null) {
-            this.chest_item$renderT.blitAndBlendToTexture(this.minecraft.getMainRenderTarget().getColorTextureView());
+            chest_item$blitAndBlendToTexture(this.minecraft.getMainRenderTarget().getColorTextureView());
         }
     }
 
@@ -79,6 +86,7 @@ public abstract class WorldRendererMixin implements MFramebuffer {
         if (handle4 != null) {
             RenderTarget rendertarget = handle4.get();
             if (rendertarget.getColorTexture()!=null&&rendertarget.getDepthTexture()!=null) {
+
                 RenderSystem.getDevice().createCommandEncoder().clearColorAndDepthTextures(rendertarget.getColorTexture(),
                         0, rendertarget.getDepthTexture(), 1.0);
             }
@@ -100,4 +108,34 @@ public abstract class WorldRendererMixin implements MFramebuffer {
     public RenderTarget chest_item$render() {
         return chest_item$renderT;
     }
+    @Unique
+    public void chest_item$blitAndBlendToTexture(GpuTextureView textureView) {
+        RenderSystem.assertOnRenderThread();
+        RenderSystem.AutoStorageIndexBuffer rendersystem$autostorageindexbuffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
+        GpuBuffer gpubuffer = rendersystem$autostorageindexbuffer.getBuffer(6);
+        GpuBuffer gpubuffer1 = RenderSystem.getQuadVertexBuffer();
+        RenderPass renderpass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> {
+            return "Blit render target";
+        }, textureView, OptionalInt.empty());
+
+        try {
+            renderpass.setPipeline(MRender.RenderPs.ENTITY_OUTLINE_BLIT);
+            RenderSystem.bindDefaultUniforms(renderpass);
+            renderpass.setVertexBuffer(0, gpubuffer1);
+            renderpass.setIndexBuffer(gpubuffer, rendersystem$autostorageindexbuffer.type());
+            renderpass.bindSampler("InSampler",chest_item$renderT.getColorTextureView());
+            renderpass.drawIndexed(0, 0, 6, 1);
+
+        } catch (Throwable var9) {
+            try {
+                renderpass.close();
+            } catch (Throwable var8) {
+                var9.addSuppressed(var8);
+            }
+
+            throw var9;
+        }
+        renderpass.close();
+    }
+
 }
