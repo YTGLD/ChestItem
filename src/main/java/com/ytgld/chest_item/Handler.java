@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -17,8 +18,8 @@ public class Handler {
         if (player instanceof IPlayer iPlayer) {
             player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.CHEST_OPEN, SoundSource.AMBIENT,1,1);
             player.openMenu(new SimpleMenuProvider(
-                    (i, inventory, p_53126_) -> ChestMenu.threeRows(i, inventory,
-                            iPlayer.chest_item$chestInventory().get()), Component.translatable("container.chest_item.chest")
+                    (i, inventory, p_53126_) -> new ChestMenu(MenuType.GENERIC_9x1,i,inventory,
+                            iPlayer.chest_item$chestInventory().get(),1), Component.translatable("container.chest_item.chest")
             ));
         }
     }
