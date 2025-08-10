@@ -14,6 +14,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 import net.neoforged.api.distmarker.Dist;
@@ -39,7 +40,6 @@ public class Chestitem {
 
         NeoForge.EVENT_BUS.register(new EventHandler());
         NeoForge.EVENT_BUS.register(new EventMain());
-
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

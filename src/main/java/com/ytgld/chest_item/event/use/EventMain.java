@@ -7,6 +7,7 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
+import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import net.minecraft.ChatFormatting;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -30,13 +32,18 @@ public class EventMain {
         Conch.event(event);
     }
     @SubscribeEvent
+    public void LivingHealEvent(LivingHealEvent event){
+        LifeStone.tick(event);
+    }
+    @SubscribeEvent
     public void tick(CriticalHitEvent event){
         Lead.event(event);
     }
-
     @SubscribeEvent
     public void tick(LivingIncomingDamageEvent event){
         Knife.event(event);
+        ArmorStone.tick(event);
+        StrongerStone.tick(event);
     }
     @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
@@ -44,6 +51,10 @@ public class EventMain {
         DrugHeal.tick(event);
         LifeCrystal.tick(event);
         Stone.tick(event);
+        Ring.tick(event);
+        SeparateRune.tick(event);
+        PainRune.tick(event);
+        UndeadRune.tick(event);
     }
     @SubscribeEvent
     public void attack(LivingEntityUseItemEvent.Start event){
@@ -63,25 +74,47 @@ public class EventMain {
 
         if (event.getName().toString().contains("chests/")) {
 
-            if (event.getName().toString().contains("dungeon")) {
+            if (event.getName().toString().contains("dungeon")
+                    ||event.getName().toString().contains("mineshaft")
+                    ||event.getName().toString().contains("ancient")) {
                 table.addPool(LootPool.lootPool().name(Chestitem.MODID + "dungeon")
+
                         .setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(InitItems.Life_Crystal)
-                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
                         .add(LootItem.lootTableItem(InitItems.God_blood)
-                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
                         .add(LootItem.lootTableItem(InitItems.Drug_Heal)
-                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
                         .add(LootItem.lootTableItem(InitItems.Bone_Head)
-                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
                         .add(LootItem.lootTableItem(InitItems.Conch_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
                         .add(LootItem.lootTableItem(InitItems.Lead_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
                         .add(LootItem.lootTableItem(InitItems.Stone_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
                         .add(LootItem.lootTableItem(InitItems.Knife_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.05f)))
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+                        .add(LootItem.lootTableItem(InitItems.Ring_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+
+
+                        .add(LootItem.lootTableItem(InitItems.Life_Stone)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+                        .add(LootItem.lootTableItem(InitItems.Armor_Stone)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+                        .add(LootItem.lootTableItem(InitItems.Stronger_Stone)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+
+                        .add(LootItem.lootTableItem(InitItems.Separate_Rune)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+                        .add(LootItem.lootTableItem(InitItems.Undead_Rune)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+                        .add(LootItem.lootTableItem(InitItems.Pain_Rune)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+
+
                         .build());
             }
 

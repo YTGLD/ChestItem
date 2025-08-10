@@ -1,51 +1,86 @@
 {
-  "itemGroup.chest_item": "箱子里的小饰品",
+  "itemGroup.chest_item": "Trinkets in the chest",
 
-  "item.chest_item.chest": "可以放入神奇箱子内",
+  "item.chest_item.chest": "Can be placed inside the magic chest, press the bind key to open",
 
-  "key.chest_item": "箱子里的小饰品",
-  "key.chest_item.r": "打开神奇箱子",
-  "container.chest_item.chest": "神奇箱子",
+  "key.chest_item": "Trinkets in the chest",
+  "key.chest_item.r": "Open magic chest",
+  "container.chest_item.chest": "Magic chest",
+
+  "item.chest_item.god_blood.string.0": "Invincible, speed is the key",
+  "item.chest_item.god_blood.string.1": "Attacks will附加 slow effect",
+  "item.chest_item.god_blood.string.2": "Increase 10% speed",
+  "item.chest_item.god_blood.string.3": "Increase 10% attack speed",
+  "item.chest_item.god_blood": "Divine Speed",
+
+  "item.chest_item.drug_heal.string.0": "Unmatched sustainability",
+  "item.chest_item.drug_heal.string.1": "Continuous life recovery",
+  "item.chest_item.drug_heal.string.2": "Increase 5% health",
+  "item.chest_item.drug_heal": "Healing Flask",
+
+  "item.chest_item.bone_head.string.0": "A familiar shape, a familiar taste",
+  "item.chest_item.bone_head.string.1": "Increase 33% eating speed",
+  "item.chest_item.bone_head": "Infinite Bone",
+
+  "item.chest_item.conch.string.0": "Why don't you listen to what this conch shell has to say?",
+  "item.chest_item.conch.string.1": "Attacks have a chance to summon a lightning ball to deal damage to the target",
+  "item.chest_item.conch": "Lightning Conch",
+
+  "item.chest_item.stone.string.0": "Hard as a rock",
+  "item.chest_item.stone.string.1": "Increase 5 knockback resistance and some defense values",
+  "item.chest_item.stone": "Heavy Stone",
+
+  "item.chest_item.lead.string.0": "Heavyweight contender",
+  "item.chest_item.lead.string.1": "Every 3rd attack will definitely be a critical hit",
+  "item.chest_item.lead": "Malicious Lead",
+
+  "item.chest_item.knife.string.0": "The slow turning of fate's gears",
+  "item.chest_item.knife.string.1": "Attack bonuses randomly change between -10% and 20%",
+  "item.chest_item.knife": "Burying Blade",
+
+  "item.chest_item.undead_rune.string.0": "Miner or warrior",
+  "item.chest_item.undead_rune.string.1": "Reduce 50% mob reach distance",
+  "item.chest_item.undead_rune.string.2": "Increase 25% block reach distance",
+  "item.chest_item.undead_rune": "Undead Rune - Foresight",
+
+  "item.chest_item.pain_rune.string.0": "Return of the soul",
+  "item.chest_item.pain_rune.string.1": "Reduce 50% health",
+  "item.chest_item.pain_rune.string.2": "Increase 25% attack speed",
+  "item.chest_item.pain_rune": "Pain Rune - Revival",
+
+  "item.chest_item.separate_rune.string.0": "Torn soul",
+  "item.chest_item.separate_rune.string.1": "Reduce 50% armor",
+  "item.chest_item.separate_rune.string.2": "Increase 25% damage",
+  "item.chest_item.separate_rune": "Split Rune - War",
+
+  "item.chest_item.armor_stone.string.0": "Strong body",
+  "item.chest_item.armor_stone.string.1": "Increase 5% resistance",
+  "item.chest_item.armor_stone": "Golden Guardian",
+
+  "item.chest_item.stronger_stone.string.0": "Sharp sword",
+  "item.chest_item.stronger_stone.string.1": "Increase 10% damage",
+  "item.chest_item.stronger_stone": "Golden War God",
+
+  "item.chest_item.life_stone.string.0": "Resurrection flower",
+  "item.chest_item.life_stone.string.1": "Increase 25% healing",
+  "item.chest_item.life_stone": "Golden Life",
+
+  "item.chest_item.ring.string.0": "A little helper for miners",
+  "item.chest_item.ring.string.1": "Haste II",
+  "item.chest_item.ring": "Miner's Ring",
+
+  "item.chest_item.heart.string.0": "永不停息的工作者",
+  "item.chest_item.heart.string.1": "增加25%饥饿值转换为生命值的速度",
+  "item.chest_item.heart": "仿生心脏",
+
+  "item.chest_item..string.0": "我不叫喂",
+  "item.chest_item.stomach.string.1": "增加75%饥饿值转换为生命值的速度",
+  "item.chest_item.stomach.string.2": "饥饿值随时间缓慢恢复",
+  "item.chest_item.stomach.string.3": "你不再可以食用食物",
+  "item.chest_item.stomach": "人造胃",
 
 
-  "item.chest_item.god_blood.string.0": "无坚不摧，唯快不破",
-  "item.chest_item.god_blood.string.1": "攻击会附加缓慢效果",
-  "item.chest_item.god_blood.string.2":"增加10%速度",
-  "item.chest_item.god_blood.string.3": "增加10%攻速",
-  "item.chest_item.god_blood": "神速力",
-
-
-
-  "item.chest_item.drug_heal.string.0": "无以言表的续航能力",
-  "item.chest_item.drug_heal.string.1": "持续的生命恢复",
-  "item.chest_item.drug_heal.string.2": "增加5%生命值",
-  "item.chest_item.drug_heal": "治疗药壶",
-
-
-
-  "item.chest_item.bone_head.string.0": "熟悉的形状，熟悉的味道",
-  "item.chest_item.bone_head.string.1": "增加33%进食速度",
-  "item.chest_item.bone_head": "无厌之骸骨",
-
-
-  "item.chest_item.conch.string.0": "为什么不听听这个海螺说的是什么呢",
-  "item.chest_item.conch.string.1": "攻击有概率召唤闪电球对目标造成伤害",
-  "item.chest_item.conch": "闪电海螺",
-
-  "item.chest_item.stone.string.0": "坚如磐石",
-  "item.chest_item.stone.string.1": "增加5点击退抗性和一些防御值",
-  "item.chest_item.stone": "重石",
-
-  "item.chest_item.lead.string.0": "重量级选手",
-  "item.chest_item.lead.string.1": "每攻击3次，下一次攻击必定暴击",
-  "item.chest_item.lead": "恶意重铅",
-
-  "item.chest_item.knife.string.0": "命运齿轮的缓缓转动",
-  "item.chest_item.knife.string.1": "攻击加成在-10%到20%随机变化",
-  "item.chest_item.knife": "掩埋刀锋",
-
-  "item.chest_item.life_crystal.string.0": "超级生命力",
-  "item.chest_item.life_crystal.string.1": "增加10点最大生命值",
-  "item.chest_item.life_crystal": "生命水晶"
-
+  "item.chest_item.life_crystal.string.0": "Super life force",
+  "item.chest_item.life_crystal.string.1": "Increase 10 max health",
+  "item.chest_item.life_crystal": "Life Crystal"
 }

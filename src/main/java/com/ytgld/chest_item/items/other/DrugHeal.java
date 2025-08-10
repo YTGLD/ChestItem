@@ -67,7 +67,6 @@ public class DrugHeal  extends ItemBase {
         tooltipAdder.accept(Component.translatable("item.chest_item.drug_heal.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.accept(Component.literal(""));
         tooltipAdder.accept(Component.translatable("item.chest_item.drug_heal.string.1").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.drug_heal.string.1").withStyle(ChatFormatting.GOLD));
         tooltipAdder.accept(Component.translatable("item.chest_item.drug_heal.string.2").withStyle(ChatFormatting.GOLD));
 
     }

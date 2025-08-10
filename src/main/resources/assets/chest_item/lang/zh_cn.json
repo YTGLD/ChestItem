@@ -1,0 +1,84 @@
+{
+  "itemGroup.chest_item": "箱子里的小饰品",
+
+  "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
+
+  "key.chest_item": "箱子里的小饰品",
+  "key.chest_item.r": "打开神奇箱子",
+  "container.chest_item.chest": "神奇箱子",
+
+
+  "item.chest_item.god_blood.string.0": "无坚不摧，唯快不破",
+  "item.chest_item.god_blood.string.1": "攻击会附加缓慢效果",
+  "item.chest_item.god_blood.string.2":"增加10%速度",
+  "item.chest_item.god_blood.string.3": "增加10%攻速",
+  "item.chest_item.god_blood": "神速力",
+
+
+
+  "item.chest_item.drug_heal.string.0": "无以言表的续航能力",
+  "item.chest_item.drug_heal.string.1": "持续的生命恢复",
+  "item.chest_item.drug_heal.string.2": "增加5%生命值",
+  "item.chest_item.drug_heal": "治疗药壶",
+
+
+
+  "item.chest_item.bone_head.string.0": "熟悉的形状，熟悉的味道",
+  "item.chest_item.bone_head.string.1": "增加33%进食速度",
+  "item.chest_item.bone_head": "无厌之骸骨",
+
+
+  "item.chest_item.conch.string.0": "为什么不听听这个海螺说的是什么呢",
+  "item.chest_item.conch.string.1": "攻击有概率召唤闪电球对目标造成伤害",
+  "item.chest_item.conch": "闪电海螺",
+
+  "item.chest_item.stone.string.0": "坚如磐石",
+  "item.chest_item.stone.string.1": "增加5点击退抗性和一些防御值",
+  "item.chest_item.stone": "重石",
+
+  "item.chest_item.lead.string.0": "重量级选手",
+  "item.chest_item.lead.string.1": "每攻击3次，下一次攻击必定暴击",
+  "item.chest_item.lead": "恶意重铅",
+
+  "item.chest_item.knife.string.0": "命运齿轮的缓缓转动",
+  "item.chest_item.knife.string.1": "攻击加成在-10%到20%随机变化",
+  "item.chest_item.knife": "掩埋刀锋",
+
+
+  "item.chest_item.undead_rune.string.0": "矿工还是战士",
+  "item.chest_item.undead_rune.string.1": "减少50%生物触及距离",
+  "item.chest_item.undead_rune.string.2": "增加25%方块触及距离",
+  "item.chest_item.undead_rune": "亡灵符石-远望",
+
+  "item.chest_item.pain_rune.string.0": "魂魄的归来",
+  "item.chest_item.pain_rune.string.1": "减少50%生命值",
+  "item.chest_item.pain_rune.string.2": "增加25%攻速",
+  "item.chest_item.pain_rune": "痛苦符石-复苏",
+
+  "item.chest_item.separate_rune.string.0": "被撕裂的灵魂",
+  "item.chest_item.separate_rune.string.1": "减少50%护甲",
+  "item.chest_item.separate_rune.string.2": "增加25%伤害",
+  "item.chest_item.separate_rune": "割裂符石-战争",
+
+  "item.chest_item.armor_stone.string.0": "强壮的身体",
+  "item.chest_item.armor_stone.string.1": "增加5%抗性",
+  "item.chest_item.armor_stone": "黄金护卫",
+
+  "item.chest_item.stronger_stone.string.0": "锋利的宝剑",
+  "item.chest_item.stronger_stone.string.1": "增加10%伤害",
+  "item.chest_item.stronger_stone": "黄金战神",
+
+
+  "item.chest_item.life_stone.string.0": "复苏的花朵",
+  "item.chest_item.life_stone.string.1": "增加25%治疗",
+  "item.chest_item.life_stone": "黄金生命",
+
+  "item.chest_item.ring.string.0": "挖矿的小帮手",
+  "item.chest_item.ring.string.1": "急迫II",
+  "item.chest_item.ring": "矿工戒指",
+
+  "item.chest_item.life_crystal.string.0": "超级生命力",
+  "item.chest_item.life_crystal.string.1": "增加10点最大生命值",
+  "item.chest_item.life_crystal": "生命水晶"
+
+}
