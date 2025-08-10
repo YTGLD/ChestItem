@@ -69,15 +69,27 @@
   "item.chest_item.ring.string.1": "Haste II",
   "item.chest_item.ring": "Miner's Ring",
 
-  "item.chest_item.heart.string.0": "永不停息的工作者",
-  "item.chest_item.heart.string.1": "增加25%饥饿值转换为生命值的速度",
-  "item.chest_item.heart": "仿生心脏",
+  "item.chest_item.heart.string.0": "Perpetual Worker",
+  "item.chest_item.heart.string.1": "Increases the speed of converting hunger to health by 50%",
+  "item.chest_item.heart": "Bionic Heart",
 
-  "item.chest_item..string.0": "我不叫喂",
-  "item.chest_item.stomach.string.1": "增加75%饥饿值转换为生命值的速度",
-  "item.chest_item.stomach.string.2": "饥饿值随时间缓慢恢复",
-  "item.chest_item.stomach.string.3": "你不再可以食用食物",
-  "item.chest_item.stomach": "人造胃",
+  "item.chest_item.meatball.string.0": "Chicken-flavored, crispy",
+  "item.chest_item.meatball.string.1": "Increases the amount of hunger and saturation restored by eating food",
+  "item.chest_item.meatball": "Meatball",
+
+  "item.chest_item.stomach.string.0": "I'm not Fei",
+  "item.chest_item.stomach.string.1": "Increases the speed of converting hunger to health by 100%",
+  "item.chest_item.stomach.string.2": "Hunger slowly recovers over time",
+  "item.chest_item.stomach.string.3": "Eating food actually reduces hunger",
+  "item.chest_item.stomach": "Artificial Stomach",
+
+  "effect.chest_item.increasing_meat": "Growth",
+
+  "item.chest_item.self_increasing_heart.string.0": "Self-increasing i, i self-decreasing",
+  "item.chest_item.self_increasing_heart.string.1": "Eating food restores temporary health",
+  "item.chest_item.self_increasing_heart.string.2": "Increases eating speed by 17%",
+  "item.chest_item.self_increasing_heart.string.3": "Reduces maximum health by 20%",
+  "item.chest_item.self_increasing_heart": "Self-increasing Heart",
 
 
   "item.chest_item.life_crystal.string.0": "Super life force",

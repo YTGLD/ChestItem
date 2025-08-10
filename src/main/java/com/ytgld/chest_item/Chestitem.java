@@ -1,5 +1,6 @@
 package com.ytgld.chest_item;
 
+import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.render.AbyssOrbRenderer;
 import com.ytgld.chest_item.event.activated.EventHandler;
@@ -33,6 +34,7 @@ public class Chestitem {
     public Chestitem(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::registerPayloadHandler);
 
+        Effects.EFFECT_DEFERRED_REGISTER.register(modEventBus);
         Entitys.REGISTRY.register(modEventBus);
         InitItems.ITEMS.register(modEventBus);
         InitItems.TabChestItem.CREATIVE_MODE_TABS.register(modEventBus);

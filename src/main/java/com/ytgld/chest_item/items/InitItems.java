@@ -4,6 +4,10 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.gold.*;
+import com.ytgld.chest_item.items.meet.Heart;
+import com.ytgld.chest_item.items.meet.MeatBall;
+import com.ytgld.chest_item.items.meet.SelfIncreasingHeart;
+import com.ytgld.chest_item.items.meet.Stomach;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import net.minecraft.core.HolderLookup;
@@ -57,6 +61,14 @@ public class InitItems {
             (resourceLocation)-> new PainRune(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> Undead_Rune = register("undead_rune",
             (resourceLocation)-> new UndeadRune(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Heart_ = register("heart",
+            (resourceLocation)-> new Heart(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Stomach_ = register("stomach",
+            (resourceLocation)-> new Stomach(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Meat_Ball = register("meatball",
+            (resourceLocation)-> new MeatBall(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Self_Increasing_Heart = register("self_increasing_heart",
+            (resourceLocation)-> new SelfIncreasingHeart(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item>  register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -83,6 +95,10 @@ public class InitItems {
                     output.accept(InitItems.Separate_Rune);
                     output.accept(InitItems.Pain_Rune);
                     output.accept(InitItems.Undead_Rune);
+                    output.accept(InitItems.Heart_);
+                    output.accept(InitItems.Stomach_);
+                    output.accept(InitItems.Meat_Ball);
+                    output.accept(InitItems.Self_Increasing_Heart);
                 }).build());
 
     }
@@ -113,7 +129,11 @@ public class InitItems {
                     .add(Stronger_Stone.asItem())
                     .add(Separate_Rune.asItem())
                     .add(Pain_Rune.asItem())
-                    .add(Undead_Rune.asItem());
+                    .add(Undead_Rune.asItem())
+                    .add(InitItems.Heart_.asItem())
+                    .add(InitItems.Meat_Ball.asItem())
+                    .add(InitItems.Self_Increasing_Heart.asItem())
+                    .add(InitItems.Stomach_.asItem());;
         }
         private static TagKey<Item> createTag(String name) {
             return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, name));

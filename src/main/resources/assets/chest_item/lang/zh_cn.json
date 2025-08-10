@@ -77,6 +77,29 @@
   "item.chest_item.ring.string.1": "急迫II",
   "item.chest_item.ring": "矿工戒指",
 
+  "item.chest_item.heart.string.0": "永不停息的工作者",
+  "item.chest_item.heart.string.1": "增加50%饥饿值转换为生命值的速度",
+  "item.chest_item.heart": "仿生心脏",
+
+  "item.chest_item.meatball.string.0": "鸡肉味，嘎嘣脆",
+  "item.chest_item.meatball.string.1": "增加食物恢复的饥饿值和饱和度",
+  "item.chest_item.meatball": "肉球",
+
+  "item.chest_item.stomach.string.0": "我不叫喂",
+  "item.chest_item.stomach.string.1": "增加100%饥饿值转换为生命值的速度",
+  "item.chest_item.stomach.string.2": "饥饿值随时间缓慢恢复",
+  "item.chest_item.stomach.string.3": "食用食物反而会减少饥饿值",
+  "item.chest_item.stomach": "人造胃",
+
+  "effect.chest_item.increasing_meat": "增生",
+
+  "item.chest_item.self_increasing_heart.string.0": "自增i，i自减",
+  "item.chest_item.self_increasing_heart.string.1": "食用食物获得临时生命值",
+  "item.chest_item.self_increasing_heart.string.2": "增加17%进食速度",
+  "item.chest_item.self_increasing_heart.string.3": "减少20%最大生命值",
+  "item.chest_item.self_increasing_heart": "自增心脏",
+
+
   "item.chest_item.life_crystal.string.0": "超级生命力",
   "item.chest_item.life_crystal.string.1": "增加10点最大生命值",
   "item.chest_item.life_crystal": "生命水晶"

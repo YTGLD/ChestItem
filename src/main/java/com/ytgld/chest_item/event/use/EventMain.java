@@ -8,6 +8,9 @@ import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.gold.*;
+import com.ytgld.chest_item.items.meet.MeatBall;
+import com.ytgld.chest_item.items.meet.SelfIncreasingHeart;
+import com.ytgld.chest_item.items.meet.Stomach;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import net.minecraft.ChatFormatting;
@@ -36,11 +39,11 @@ public class EventMain {
         LifeStone.tick(event);
     }
     @SubscribeEvent
-    public void tick(CriticalHitEvent event){
+    public void CriticalHitEvent(CriticalHitEvent event){
         Lead.event(event);
     }
     @SubscribeEvent
-    public void tick(LivingIncomingDamageEvent event){
+    public void LivingIncomingDamageEvent(LivingIncomingDamageEvent event){
         Knife.event(event);
         ArmorStone.tick(event);
         StrongerStone.tick(event);
@@ -55,6 +58,14 @@ public class EventMain {
         SeparateRune.tick(event);
         PainRune.tick(event);
         UndeadRune.tick(event);
+        Stomach.tick(event);
+        SelfIncreasingHeart.tick(event);
+    }
+    @SubscribeEvent
+    public void tick(LivingEntityUseItemEvent.Finish event) {
+        Stomach.tick(event);
+        MeatBall.tick(event);
+        SelfIncreasingHeart.tick(event);
     }
     @SubscribeEvent
     public void attack(LivingEntityUseItemEvent.Start event){
@@ -113,6 +124,17 @@ public class EventMain {
                                 .when(LootItemRandomChanceCondition.randomChance(0.06f)))
                         .add(LootItem.lootTableItem(InitItems.Pain_Rune)
                                 .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+
+
+                        .add(LootItem.lootTableItem(InitItems.Heart_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+                        .add(LootItem.lootTableItem(InitItems.Meat_Ball)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+                        .add(LootItem.lootTableItem(InitItems.Self_Increasing_Heart)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+                        .add(LootItem.lootTableItem(InitItems.Stomach_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.06f)))
+
 
 
                         .build());
