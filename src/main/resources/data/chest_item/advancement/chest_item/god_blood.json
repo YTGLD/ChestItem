@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/root",
+  "criteria": {
+    "god_blood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:god_blood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:god_blood"
+    },
+    "title": {
+      "translate": "item.chest_item.god_blood.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "god_blood"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

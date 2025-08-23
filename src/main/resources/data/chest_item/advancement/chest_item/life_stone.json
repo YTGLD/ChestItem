@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/armor_stone",
+  "criteria": {
+    "life_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:life_stone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:life_stone"
+    },
+    "title": {
+      "translate": "item.chest_item.life_stone.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "life_stone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

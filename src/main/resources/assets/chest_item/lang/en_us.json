@@ -1,0 +1,133 @@
+{
+  "entity.chest_item.abyss_orb": "Abyssal ball",
+  "entity.chest_item.end_spiral": "wormhole",
+  "entity.chest_item.black_vex": "Dark annoyance",
+  "entity.chest_item.end_coming": "The end is coming",
+  "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
+
+
+
+  "itemGroup.chest_item": "Trinkets in the chest",
+
+  "item.chest_item.chest": "Can be placed inside the magic chest, press the bind key to open",
+
+  "key.chest_item": "Trinkets in the chest",
+  "key.chest_item.r": "Open magic chest",
+  "container.chest_item.chest": "Magic chest",
+
+  "item.chest_item.god_blood.string.0": "Invincible, speed is the key",
+  "item.chest_item.god_blood.string.1": "Attacks will附加 slow effect",
+  "item.chest_item.god_blood.string.2": "Increase 10% speed",
+  "item.chest_item.god_blood.string.3": "Increase 10% attack speed",
+  "item.chest_item.god_blood": "Divine Speed",
+  "advancements.chest_item.god_blood.title": "Super speed",
+
+  "item.chest_item.drug_heal.string.0": "Unmatched sustainability",
+  "item.chest_item.drug_heal.string.1": "Continuous life recovery",
+  "item.chest_item.drug_heal.string.2": "Increase 5% health",
+  "item.chest_item.drug_heal": "Healing Flask",
+
+  "item.chest_item.bone_head.string.0": "A familiar shape, a familiar taste",
+  "item.chest_item.bone_head.string.1": "Increase 33% eating speed",
+  "item.chest_item.bone_head": "Infinite Bone",
+
+  "item.chest_item.conch.string.0": "Why don't you listen to what this conch shell has to say?",
+  "item.chest_item.conch.string.1": "Attacks have a chance to summon a lightning ball to deal damage to the target",
+  "item.chest_item.conch": "Lightning Conch",
+
+  "item.chest_item.stone.string.0": "Hard as a rock",
+  "item.chest_item.stone.string.1": "Increase 5 knockback resistance and some defense values",
+  "item.chest_item.stone": "Heavy Stone",
+
+  "item.chest_item.lead.string.0": "Heavyweight contender",
+  "item.chest_item.lead.string.1": "Every 3rd attack will definitely be a critical hit",
+  "item.chest_item.lead": "Malicious Lead",
+
+  "item.chest_item.knife.string.0": "The slow turning of fate's gears",
+  "item.chest_item.knife.string.1": "Attack bonuses randomly change between -10% and 20%",
+  "item.chest_item.knife": "Burying Blade",
+
+  "item.chest_item.undead_rune.string.0": "Miner or warrior",
+  "item.chest_item.undead_rune.string.1": "Reduce 50% mob reach distance",
+  "item.chest_item.undead_rune.string.2": "Increase 25% block reach distance",
+  "item.chest_item.undead_rune": "Undead Rune - Foresight",
+
+  "item.chest_item.pain_rune.string.0": "Return of the soul",
+  "item.chest_item.pain_rune.string.1": "Reduce 50% health",
+  "item.chest_item.pain_rune.string.2": "Increase 25% attack speed",
+  "item.chest_item.pain_rune": "Pain Rune - Revival",
+
+  "item.chest_item.separate_rune.string.0": "Torn soul",
+  "item.chest_item.separate_rune.string.1": "Reduce 50% armor",
+  "item.chest_item.separate_rune.string.2": "Increase 25% damage",
+  "item.chest_item.separate_rune": "Split Rune - War",
+
+  "item.chest_item.armor_stone.string.0": "Strong body",
+  "item.chest_item.armor_stone.string.1": "Increase 5% resistance",
+  "item.chest_item.armor_stone": "Golden Guardian",
+
+  "item.chest_item.stronger_stone.string.0": "Sharp sword",
+  "item.chest_item.stronger_stone.string.1": "Increase 10% damage",
+  "item.chest_item.stronger_stone": "Golden War God",
+
+  "item.chest_item.life_stone.string.0": "Resurrection flower",
+  "item.chest_item.life_stone.string.1": "Increase 25% healing",
+  "item.chest_item.life_stone": "Golden Life",
+
+  "item.chest_item.ring.string.0": "A little helper for miners",
+  "item.chest_item.ring.string.1": "Haste II",
+  "item.chest_item.ring": "Miner's Ring",
+
+  "item.chest_item.heart.string.0": "Perpetual Worker",
+  "item.chest_item.heart.string.1": "Increases the speed of converting hunger to health by 50%",
+  "item.chest_item.heart": "Bionic Heart",
+
+  "item.chest_item.meatball.string.0": "Chicken-flavored, crispy",
+  "item.chest_item.meatball.string.1": "Increases the amount of hunger and saturation restored by eating food",
+  "item.chest_item.meatball": "Meatball",
+
+  "item.chest_item.stomach.string.0": "I'm not Fei",
+  "item.chest_item.stomach.string.1": "Increases the speed of converting hunger to health by 100%",
+  "item.chest_item.stomach.string.2": "Hunger slowly recovers over time",
+  "item.chest_item.stomach.string.3": "Eating food actually reduces hunger",
+  "item.chest_item.stomach": "Artificial Stomach",
+
+  "effect.chest_item.increasing_meat": "Growth",
+
+  "item.chest_item.self_increasing_heart.string.0": "Self-increasing i, i self-decreasing",
+  "item.chest_item.self_increasing_heart.string.1": "Eating food restores temporary health",
+  "item.chest_item.self_increasing_heart.string.2": "Increases eating speed by 17%",
+  "item.chest_item.self_increasing_heart.string.3": "Reduces maximum health by 20%",
+  "item.chest_item.self_increasing_heart": "Self-increasing Heart",
+"attribute.name.chest_item.heal": "heal",
+  "key.chest_item.c": "Unleash Skill",
+  "advancements.chest_item.root.description": "However, this is just a box",
+  "advancements.chest_item.root.title": "trinkets in chests",
+
+"advancements.chest_item.description": "Get this item",
+  "advancements.chest_item.self_increasing_heart.title": "self-circulation",
+
+"item.chest_item.gold_cheese.string.0": "super cheese, super gold",
+  "item.chest_item.gold_cheese.string.1": "Gold items have increased stats when enchanted",
+  "item.chest_item.gold_cheese.string.2": "Greatly increases the experience dropped by gold items for killing monsters",
+  "item.chest_item.gold_cheese.string.3": "Killing a creature has a chance to drop gold(Gold tools required)",
+  "item.chest_item.gold_cheese": "golden cheese",
+"item.chest_item.space.string.0": "The force of space",
+  "item.chest_item.space.string.1": "Press the skill key (C) to summon the Gate of Space to return to the previous point of death",
+  "item.chest_item.space": "space ancestor",
+
+"item.chest_item.vex_ring.string.0": "Good people die good",
+  "item.chest_item.vex_ring.string.1": "Kill a creature to summon a dark annoyance, and he will have your weapon",
+  "item.chest_item.vex_ring.string.2": "Note: Dark annoyance is not dark",
+  "item.chest_item.vex_ring": "Heavenly Mysterious Ring",
+
+  "item.chest_item.god_apple.string.0": "Blood Sacrifice Blood God",
+  "item.chest_item.god_apple.string.1": "Reduces maximum health by 25%",
+  "item.chest_item.god_apple.string.2": "Reduces health regeneration by 40%",
+  "item.chest_item.god_apple.string.3": "You take up to 5 damage",
+  "item.chest_item.god_apple.string.4": "Damage over 5 points will be converted to the same amount of bleeding",
+  "item.chest_item.god_apple": "God's Fruit",
+  "item.chest_item.life_crystal.string.0": "Super life force",
+  "item.chest_item.life_crystal.string.1": "Increase 10 max health",
+  "item.chest_item.life_crystal": "Life Crystal"
+}

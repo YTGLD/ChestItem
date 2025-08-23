@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "package": "com.ytgld.chest_item.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "FoodDataMixin",
+    "PlayerMixin",
+    "ServerPlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "client": [
+    "cilent.AbstractContainerScreenMixin",
+    "cilent.AdvancementWidgetMixin",
+    "cilent.ATabMixin",
+    "cilent.GameRenderMixin",
+    "cilent.GuiGraphicsMixin",
+    "outline.BlackMixin",
+    "outline.WorldRendererMixin"
+  ]
+}

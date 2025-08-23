@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/ring",
+  "criteria": {
+    "stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:stone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:stone"
+    },
+    "title": {
+      "translate": "item.chest_item.stone.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "stone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

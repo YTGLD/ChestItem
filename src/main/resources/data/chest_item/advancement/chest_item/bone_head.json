@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/stone",
+  "criteria": {
+    "bone_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:bone_head"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:bone_head"
+    },
+    "title": {
+      "translate": "item.chest_item.bone_head.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "bone_head"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

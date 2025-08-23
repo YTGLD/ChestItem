@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/separate_rune",
+  "criteria": {
+    "pain_rune": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:pain_rune"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:pain_rune"
+    },
+    "title": {
+      "translate": "item.chest_item.pain_rune.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "pain_rune"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

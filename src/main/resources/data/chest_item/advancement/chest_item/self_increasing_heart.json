@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/root",
+  "criteria": {
+    "self_increasing_heart": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:self_increasing_heart"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:self_increasing_heart"
+    },
+    "title": {
+      "translate": "item.chest_item.self_increasing_heart.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "self_increasing_heart"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
