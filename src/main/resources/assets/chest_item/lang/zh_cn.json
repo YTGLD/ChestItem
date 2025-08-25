@@ -127,6 +127,21 @@
   "item.chest_item.vex_ring.string.2": "注：黑暗恼鬼并不黑暗",
   "item.chest_item.vex_ring": "天玄戒",
 
+  "item.chest_item.imitation_biomass.string.0": "emm...节省了一点栏位",
+  "item.chest_item.imitation_biomass.string.1": "与原先物品效果无法叠加",
+  "item.chest_item.imitation_biomass": "仿生物质",
+
+  "item.chest_item.battery.string.0": "箱子！箱子！我要箱子！",
+  "item.chest_item.battery.string.1": "每次打开战利品箱子会出现1~2个绿宝石",
+  "item.chest_item.battery.string.2": "每次打开战利品箱子都会给予100点经验值",
+  "item.chest_item.battery.string.3": "战利品的数量越多，经验值奖励越多",
+  "item.chest_item.battery.string.4": "累计获得经验值：",
+  "item.chest_item.battery": "充能电池",
+
+  "item.chest_item.the_end_is_coming.string.0": "这不是我血灵大帝吗，怎么到这里当苦工了？",
+  "item.chest_item.the_end_is_coming.string.1": "召唤一个仿生血灵",
+  "item.chest_item.the_end_is_coming.string.2": "按下技能键召唤，再次按下则收回",
+  "item.chest_item.the_end_is_coming": "末日降临",
   "item.chest_item.god_apple.string.0": "血祭血神",
   "item.chest_item.god_apple.string.1": "最大生命值降低 25%",
   "item.chest_item.god_apple.string.2": "减少生命恢复 by 40%",

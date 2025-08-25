@@ -1,15 +1,15 @@
 package com.ytgld.chest_item.entity;
 
 import com.ytgld.chest_item.Chestitem;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -83,11 +83,7 @@ public class AttackEndComing extends ThrowableItemProjectile {
     public int live = 50;
 
     public boolean canSee = true;
-    @Override
-    public void tick() {
-        super.tick();
-        this.setNoGravity(true);
-        this.noPhysics = true;
+    public void attack(){
         Vec3 playerPos = this.position().add(0, 0.75, 0);
         int range = 1;
         if (canSee) {
@@ -99,7 +95,19 @@ public class AttackEndComing extends ThrowableItemProjectile {
                         if (!entitys.getNamespace().equals(Chestitem.MODID)) {
                             if (entity.isAlive()) {
                                 entity.invulnerableTime = 0;
+
+                                if (entity instanceof OwnableEntity ownableEntity) {
+                                    if (ownableEntity.getOwner() != null) {
+                                        if (ownableEntity.getOwner().is(this.getOwner())){
+                                            canSee = false;
+                                            return;
+                                        }
+                                    }
+                                }
                                 entity.hurt(this.getOwner().damageSources().playerAttack(player), (float) (damages + addDamgae + player.getMaxHealth() / 10 + player.getAttributeValue(Attributes.ATTACK_DAMAGE) / 10));
+                                if (follow) {
+                                    this.level().addParticle(ParticleTypes.SONIC_BOOM,this.getX(),this.getY(),this.getZ(),0,0,0);
+                                }
                                 canSee = false;
                             }
                         }
@@ -107,9 +115,20 @@ public class AttackEndComing extends ThrowableItemProjectile {
                 }
             }
         }
+    }
+    @Override
+    public void tick() {
+        super.tick();
+        this.setNoGravity(true);
+        this.noPhysics = true;
+
+        attack();
 
         if (canSee) {
             if (this.tickCount > 100) {
+                if (follow) {
+                    this.level().addParticle(ParticleTypes.SONIC_BOOM,this.getX(),this.getY(),this.getZ(),0,0,0);
+                }
                 canSee = false;
             }
             if (target != null) {

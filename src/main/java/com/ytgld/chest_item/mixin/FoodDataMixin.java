@@ -22,7 +22,7 @@ public class FoodDataMixin {
         if (chestInventory != null) {
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                 ItemStack stack =chestInventory.getItem(i);
-                if (stack.is(InitItems.Heart_)){
+                if (stack.is(InitItems.Heart_)||stack.is(InitItems.ImitationBiomass_)){
                     if (!player.level().isClientSide&&player.tickCount%2 == 1) {
                         tickTimer++;
                         break;

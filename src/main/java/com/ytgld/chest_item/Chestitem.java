@@ -9,6 +9,7 @@ import com.ytgld.chest_item.event.activated.EventHandler;
 import com.ytgld.chest_item.event.key.ChestNetworkHandler;
 import com.ytgld.chest_item.event.key.ClientEvent;
 import com.ytgld.chest_item.event.key.UseCuriosHandler;
+import com.ytgld.chest_item.event.loot.Loots;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
@@ -47,6 +48,7 @@ public class Chestitem {
         InitItems.ITEMS.register(modEventBus);
         InitItems.TabChestItem.CREATIVE_MODE_TABS.register(modEventBus);
         DataReg.REGISTRY.register(modEventBus);
+        Loots.LOOT.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(new EventHandler());
         NeoForge.EVENT_BUS.register(new EventMain());

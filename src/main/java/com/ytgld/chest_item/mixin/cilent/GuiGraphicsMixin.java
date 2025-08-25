@@ -40,12 +40,12 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
     @Override
-    public  void seekingImmortals$addW( ItemStack stack) {
+    public void chest_item$addW(ItemStack stack) {
         GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
         if (stack.getItem() instanceof Terror terror) {
             guiGraphics.pose().pushMatrix();
             if (this.minecraft.screen instanceof IAbstractContainerScreen iAbstractContainerScreen) {
-                List<Vec2> xy = iAbstractContainerScreen.seekingImmortals$xy();
+                List<Vec2> xy = iAbstractContainerScreen.chest_item$xy();
                 if (xy != null) {
                     for (int i = 1; i < xy.size(); i++) {
                         Vec2 prevPos = xy.get(i - 1);
@@ -66,14 +66,13 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             int bs = color & 0xFF;
 
 
-
                             new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha)))
                                     .chest_item$blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/fire.png"),
-                                    (int) adjustedCurrPos.x - 8, (int) adjustedCurrPos.y - 8, 0, 0, 16, 16, 16, 16);
+                                            (int) adjustedCurrPos.x - 8, (int) adjustedCurrPos.y - 8, 0, 0, 16, 16, 16, 16);
 
                             new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha)))
                                     .chest_item$blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/small_fire.png"),
-                                    (int) adjustedPrevPos.x - 8, (int) adjustedPrevPos.y - 8, 0, 0, 16, 16, 16, 16);
+                                            (int) adjustedPrevPos.x - 8, (int) adjustedPrevPos.y - 8, 0, 0, 16, 16, 16, 16);
 
                             pose.popMatrix();
 

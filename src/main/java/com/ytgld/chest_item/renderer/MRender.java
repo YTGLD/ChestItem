@@ -8,7 +8,6 @@ import com.mojang.blaze3d.platform.SourceFactor;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.renderer.outline.MFramebuffer;
 import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -16,7 +15,6 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Function;
@@ -28,16 +26,7 @@ public abstract class MRender extends RenderType {
     public MRender(String name, int bufferSize, boolean affectsCrumbling, boolean sortOnUpload, Runnable setupState, Runnable clearState) {
         super(name, bufferSize, affectsCrumbling, sortOnUpload, setupState, clearState);
     }
-    public static final OutputStateShard outline = new OutputStateShard("set_outline", () -> {
-        LevelRenderer rendertarget = Minecraft.getInstance().levelRenderer;
-        if (rendertarget instanceof MFramebuffer framebuffer){
-            if (framebuffer.chest_item$render()!=null) {
-                framebuffer.chest_item$render().copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
-                return framebuffer.chest_item$render();
-            }
-        }
-        return Minecraft.getInstance().getMainRenderTarget();
-    });
+
     public static final OutputStateShard outline2 = new OutputStateShard("set_outline2", () -> {
         LevelRenderer rendertarget = Minecraft.getInstance().levelRenderer;
         if (rendertarget instanceof MFramebufferBlack framebuffer){
@@ -53,8 +42,8 @@ public abstract class MRender extends RenderType {
             1536,
             false,
             true,
-            RenderPipelines.LIGHTNING,
-            RenderType.CompositeState.builder().setOutputState(outline).createCompositeState(false)
+            RenderPs.LIGHTNING,
+            RenderType.CompositeState.builder().setOutputState(outline2).createCompositeState(false)
     );
     public static final Function<ResourceLocation, RenderType> ENTITY_SHADOW_Outline= Util.memoize(
             p_414938_ -> {
@@ -63,14 +52,14 @@ public abstract class MRender extends RenderType {
                         .setOutputState(ITEM_ENTITY_TARGET)
                         .setLightmapState(LIGHTMAP)
                         .setOverlayState(OVERLAY)
-                        .setOutputState(outline)
+                        .setOutputState(outline2)
                         .createCompositeState(true);
                 return create("item_entity_translucent_cull", 1536,
                         true, true,
                         RenderPipelines.ITEM_ENTITY_TRANSLUCENT_CULL, rendertype$compositestate);
             }
     );
-    public static RenderType end (boolean isOutline){
+    public static RenderType red(boolean isOutline){
         if (isOutline){
             return create("end_gateway", 1536, false, false, RenderPs.BACK,
                     RenderType.CompositeState.builder().setOutputState(outline2).setTextureState(RenderStateShard.MultiTextureStateShard.builder().add(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
@@ -96,6 +85,20 @@ public abstract class MRender extends RenderType {
         );
     }
     public static class RenderPs {
+
+        public static final RenderPipeline  LIGHTNING =
+                (RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
+                        .withVertexShader("core/rendertype_lightning")
+                        .withFragmentShader("core/rendertype_lightning")
+                        .withBlend(new BlendFunction(
+                                SourceFactor.SRC_ALPHA,
+                                DestFactor.ONE,
+                                SourceFactor.ONE,
+                                DestFactor.ZERO
+                        ))
+                        .withVertexFormat(DefaultVertexFormat.POSITION_COLOR,
+                                VertexFormat.Mode.QUADS).build());
+
 
         public static final RenderPipeline GUI_TEXTURED =
                 (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).withBlend(new BlendFunction(

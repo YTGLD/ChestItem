@@ -53,27 +53,31 @@ public class EndComing  extends TamableAnimal {
         return trailPositions;
     }
 
+    public void dis(){
+        Vec3 playerPos = this.position();
+        int range = 10;
+        List<EndComing> imperialHematomas = this.level().getEntitiesOfClass(EndComing.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
+        for (EndComing imperialHematoma : imperialHematomas){
+            if (imperialHematoma.getOwner()!= null &&this.getOwner()!=null) {
+                if (!imperialHematoma.is(this)){
+                    if (imperialHematoma.getOwner().is(this.getOwner())){
+                        imperialHematoma.discard();
+                        return;
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public void tick() {
         super.tick();
         this.setNoGravity(true);
-        {
-            Vec3 playerPos = this.position();
-            int range = 10;
-            List<EndComing> imperialHematomas = this.level().getEntitiesOfClass(EndComing.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
-            for (EndComing imperialHematoma : imperialHematomas){
-                if (imperialHematoma.getOwner()!= null &&this.getOwner()!=null) {
-                    if (!imperialHematoma.is(this)){
-                        if (imperialHematoma.getOwner().is(this.getOwner())){
-                            imperialHematoma.discard();
-                            return;
-                        }
-                    }
-                }
-            }
-        }
+        dis();
 
+        if (this.getOwner() == null) {
+            this.discard();
+        }
         LivingEntity owner = getOwner(); // 获取主人
         LivingEntity target = getTarget(); // 获取目标
         Vec3 currentPos = this.position();

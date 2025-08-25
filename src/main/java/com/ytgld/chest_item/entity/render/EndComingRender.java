@@ -40,8 +40,8 @@ public class EndComingRender extends EntityRenderer<EndComing, EndComingRenderSt
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
         setT(poseStack, entity, bufferSource);
-        renderSphere1(poseStack, bufferSource, 0, MRender.end(true),0.35f);
-        renderSphere1(poseStack, bufferSource, 255, MRender.end(false),0.35f);
+        renderSphere1(poseStack, bufferSource, 0, MRender.red(true),0.35f);
+        renderSphere1(poseStack, bufferSource, 255, MRender.red(false),0.35f);
         poseStack.popPose();
     }
 
@@ -57,16 +57,16 @@ public class EndComingRender extends EntityRenderer<EndComing, EndComingRenderSt
             Vec3 adjustedCurrPos = new Vec3(currPos.x - entity.getX(), currPos.y - entity.getY(), currPos.z - entity.getZ());
             float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
             matrices.pushPose();
-            Handler.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, MRender.end(true),alpha/3f);
-            Handler.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, MRender.end(false),alpha/3f);
+            Handler.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, MRender.red(true),alpha/3f);
+            Handler.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, MRender.red(false),alpha/3f);
             matrices.popPose();
 
         }
     }
 
     public void renderSphere1(@NotNull PoseStack matrices, @NotNull MultiBufferSource vertexConsumers, int light, RenderType renderType, float s ) {
-        int stacks = 20; // 垂直方向的分割数
-        int slices = 20; // 水平方向的分割数
+        int stacks = 10; // 垂直方向的分割数
+        int slices = 10; // 水平方向的分割数
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(renderType);
         for (int i = 0; i < stacks; ++i) {
             float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);

@@ -27,7 +27,7 @@ public class LifeStone  extends ItemBase {
                 if (!player.level().isClientSide) {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
-                        if (stack.is(InitItems.Life_Stone)) {
+                        if (stack.is(InitItems.Life_Stone)||stack.is(InitItems.ImitationBiomass_)) {
                             event.setAmount(event.getAmount()*1.25f);
                             break;
                         }

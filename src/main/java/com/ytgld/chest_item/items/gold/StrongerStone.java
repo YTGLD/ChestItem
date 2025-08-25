@@ -27,7 +27,7 @@ public class StrongerStone extends ItemBase {
                 if (!player.level().isClientSide) {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
-                        if (stack.is(InitItems.Stronger_Stone)) {
+                        if (stack.is(InitItems.Stronger_Stone)||stack.is(InitItems.ImitationBiomass_)) {
                             event.setAmount(event.getAmount()*1.1f);
                             break;
                         }

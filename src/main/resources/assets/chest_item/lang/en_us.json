@@ -120,6 +120,22 @@
   "item.chest_item.vex_ring.string.1": "Kill a creature to summon a dark annoyance, and he will have your weapon",
   "item.chest_item.vex_ring.string.2": "Note: Dark annoyance is not dark",
   "item.chest_item.vex_ring": "Heavenly Mysterious Ring",
+  "item.chest_item.imitation_biomass.string.0": "emm... saves a bit of inventory space",
+  "item.chest_item.imitation_biomass.string.1": "Cannot be stacked with the effects of the original item",
+  "item.chest_item.imitation_biomass": "Imitation Biomass",
+
+    "item.chest_item.battery.string.0": "Chest! Chest! I want a chest!",
+  "item.chest_item.battery.string.1": "Each time you open a loot chest, you will get 1~2 green gems",
+  "item.chest_item.battery.string.2": "Each time you open a loot chest, you will be given 100 points of experience",
+  "item.chest_item.battery.string.3": "The more loot items you get, the more experience points you will be rewarded",
+  "item.chest_item.battery.string.4": "Accumulated experience points：",
+  "item.chest_item.battery": "Battery",
+
+
+  "item.chest_item.the_end_is_coming.string.0": "Isn't this the Blood Spirit Emperor? Why are you working as a worker here?",
+  "item.chest_item.the_end_is_coming.string.1": "Summon a Biomimic Blood Spirit",
+  "item.chest_item.the_end_is_coming.string.2": "Press the skill key to summon, press again to recall.",
+  "item.chest_item.the_end_is_coming": "End Is Coming",
 
   "item.chest_item.god_apple.string.0": "Blood Sacrifice Blood God",
   "item.chest_item.god_apple.string.1": "Reduces maximum health by 25%",

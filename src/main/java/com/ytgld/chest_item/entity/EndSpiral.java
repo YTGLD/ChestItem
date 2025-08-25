@@ -30,6 +30,7 @@ public class EndSpiral extends ThrowableItemProjectile {
     }
     @Override
     public void tick() {
+        super.tick();
         this.setNoGravity(true);
         if (this.tickCount > 200) {
             this.discard();

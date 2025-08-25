@@ -31,18 +31,19 @@ public class EndSpiralRender <T extends EndSpiral> extends net.minecraft.client.
         poseStack.mulPose(Axis.YN.rotationDegrees(-renderState.entity.tickCount*1.555f));
         float s = 0.4f;
         float l = renderState.entity.tickCount / 20f;
+
         if (l > s) {
             l = s;
         }
+
         poseStack.scale(l,l,l);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             poseStack.pushPose();
-            poseStack.mulPose(Axis.YN.rotationDegrees(90*i));
+            poseStack.mulPose(Axis.YN.rotationDegrees(120*i));
             new Spiral(poseStack,new Vec3(0,0,0),bufferSource.getBuffer(MRender.ENTITY_SHADOW_Outline.apply(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                     "textures/withe.png"))));
             poseStack.popPose();
         }
-
 
         poseStack.popPose();
 

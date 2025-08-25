@@ -51,8 +51,8 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
 
         }
         if (entity.canSee) {
-            renderSphere1(poseStack, bufferSource, 0, MRender.end(true),0.15f);
-            renderSphere1(poseStack, bufferSource, 255, MRender.end(false),0.15f);
+            renderSphere1(poseStack, bufferSource, 0, MRender.red(true),0.15f);
+            renderSphere1(poseStack, bufferSource, 255, MRender.red(false),0.15f);
         }
         poseStack.popPose();
     }
@@ -85,8 +85,8 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
             Vec3 adjustedCurrPos = new Vec3(currPos.x - entity.getX(), currPos.y - entity.getY(), currPos.z - entity.getZ());
             float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
             matrices.pushPose();
-            Handler.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, MRender.end(true),alpha/10f);
-            Handler.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, MRender.end(false),alpha/10f);
+            Handler.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, MRender.red(true),alpha/10f);
+            Handler.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, MRender.red(false),alpha/10f);
             matrices.popPose();
 
         }

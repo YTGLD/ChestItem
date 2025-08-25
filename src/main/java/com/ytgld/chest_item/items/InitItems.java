@@ -77,6 +77,10 @@ public class InitItems {
             (resourceLocation)-> new VexRing(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> TheEndIsComing_ = register("the_end_is_coming",
             (resourceLocation)-> new TheEndIsComing(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> ImitationBiomass_ = register("imitation_biomass",
+            (resourceLocation)-> new ImitationBiomass(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Battery_ = register("battery",
+            (resourceLocation)-> new Battery(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -110,6 +114,9 @@ public class InitItems {
                     output.accept(InitItems.God_Apple);
                     output.accept(InitItems.Gold_Cheese);
                     output.accept(InitItems.Space_);
+                    output.accept(InitItems.TheEndIsComing_);
+                    output.accept(InitItems.ImitationBiomass_);
+                    output.accept(InitItems.Battery_);
                 }).build());
 
     }
@@ -145,8 +152,11 @@ public class InitItems {
                     .add(InitItems.Meat_Ball.asItem())
                     .add(InitItems.Self_Increasing_Heart.asItem())
                     .add(InitItems.God_Apple.asItem())
+                    .add(InitItems.TheEndIsComing_.asItem())
                     .add(InitItems.Gold_Cheese.asItem())
                     .add(InitItems.Space_.asItem())
+                    .add(InitItems.ImitationBiomass_.asItem())
+                    .add(InitItems.Battery_.asItem())
                     .add(InitItems.Stomach_.asItem());;
         }
         private static TagKey<Item> createTag(String name) {
