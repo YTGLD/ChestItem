@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/battery",
+  "criteria": {
+    "kaolinite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:kaolinite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:kaolinite"
+    },
+    "title": {
+      "translate": "item.chest_item.kaolinite.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "kaolinite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

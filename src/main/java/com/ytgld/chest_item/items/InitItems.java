@@ -22,6 +22,7 @@ import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -81,6 +82,16 @@ public class InitItems {
             (resourceLocation)-> new ImitationBiomass(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> Battery_ = register("battery",
             (resourceLocation)-> new Battery(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> SpeedHeart_ = register("speed_heart",
+            (resourceLocation)-> new SpeedHeart(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> MAGIC_IRON = register("magic_iron",
+            (resourceLocation)-> new ItemBase(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> WindKnife_ = register("wind_knife",
+            (resourceLocation)-> new WindKnife(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> NuclearReaction_ = register("nuclear_reaction",
+            (resourceLocation)-> new NuclearReaction(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Kaolinite_ = register("kaolinite",
+            (resourceLocation)-> new Kaolinite(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -117,6 +128,11 @@ public class InitItems {
                     output.accept(InitItems.TheEndIsComing_);
                     output.accept(InitItems.ImitationBiomass_);
                     output.accept(InitItems.Battery_);
+                    output.accept(InitItems.MAGIC_IRON);
+                    output.accept(InitItems.SpeedHeart_);
+                    output.accept(InitItems.WindKnife_);
+                    output.accept(InitItems.Kaolinite_);
+                    output.accept(InitItems.NuclearReaction_);
                 }).build());
 
     }
@@ -125,13 +141,19 @@ public class InitItems {
 
 
         public static final TagKey<Item> chestItem = createTag("chest_item");
+        public static final TagKey<Item> chestItem_iron = createTag("chest_item_iron");
 
         public TagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
             super(output, lookupProvider,  Chestitem.MODID);
         }
 
         @Override
-        protected void addTags(HolderLookup.Provider provider) {
+        protected void addTags(HolderLookup.@NotNull Provider provider) {
+            tag(chestItem_iron).add(
+                    SpeedHeart_.asItem())
+                    .add(NuclearReaction_.asItem())
+                    .add(WindKnife_.asItem());
+
             tag(chestItem)
                     .add(God_blood.asItem())
                     .add(Drug_Heal.asItem())
@@ -156,6 +178,7 @@ public class InitItems {
                     .add(InitItems.Gold_Cheese.asItem())
                     .add(InitItems.Space_.asItem())
                     .add(InitItems.ImitationBiomass_.asItem())
+                    .add(InitItems.Kaolinite_.asItem())
                     .add(InitItems.Battery_.asItem())
                     .add(InitItems.Stomach_.asItem());;
         }

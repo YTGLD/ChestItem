@@ -3,7 +3,9 @@
   "package": "com.ytgld.chest_item.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ExperienceOrbMixin",
     "FoodDataMixin",
+    "LivingEntityMixin",
     "PlayerMixin",
     "ServerPlayerMixin"
   ],

@@ -64,6 +64,7 @@ public class EventMain {
         Knife.event(event);
         ArmorStone.tick(event);
         StrongerStone.tick(event);
+        WindKnife.event(event);
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
@@ -82,6 +83,7 @@ public class EventMain {
         Stomach.tick(event);
         SelfIncreasingHeart.tick(event);
         GodApple.event(event);
+        Kaolinite.event(event);
         GodApple.event2(event);
     }
     @SubscribeEvent
@@ -89,10 +91,12 @@ public class EventMain {
         Stomach.tick(event);
         MeatBall.tick(event);
         SelfIncreasingHeart.tick(event);
+        SpeedHeart.eat(event);
     }
     @SubscribeEvent
     public void LivingExperienceDropEvent(LivingExperienceDropEvent event) {
         GoldCheese.event(event);
+        NuclearReaction.event(event);
     }
     @SubscribeEvent
     public void PlayerEnchantItemEvent(PlayerEnchantItemEvent event) {
@@ -165,6 +169,17 @@ public class EventMain {
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
                         .add(LootItem.lootTableItem(InitItems.Stomach_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                        .add(LootItem.lootTableItem(InitItems.Battery_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                        .add(LootItem.lootTableItem(InitItems.MAGIC_IRON)
+                                .when(LootItemRandomChanceCondition.randomChance(0.03f)))
+                        .add(LootItem.lootTableItem(InitItems.SpeedHeart_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Kaolinite_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
 
 
 
