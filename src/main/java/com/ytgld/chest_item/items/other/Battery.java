@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.items.other;
 
-import com.mojang.datafixers.kinds.IdF;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
@@ -19,11 +18,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.function.Consumer;
 
     /**
@@ -45,7 +42,7 @@ public class Battery extends ItemBase {
         if (entity instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
             if (chestInventory!=null) {
-                if (!player.level().isClientSide) {
+                if (!player.level().isClientSide()) {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         CompoundTag compoundTag = stack.get(DataReg.tag);

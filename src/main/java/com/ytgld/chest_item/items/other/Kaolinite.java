@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.neoforged.bus.api.SubscribeEvent;
 
 import java.util.function.Consumer;
 
@@ -24,7 +23,7 @@ public class Kaolinite extends ItemBase {
     public static void event(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide()) {
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.is(InitItems.Kaolinite_)) {

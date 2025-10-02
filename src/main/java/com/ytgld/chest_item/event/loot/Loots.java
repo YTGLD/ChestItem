@@ -2,13 +2,8 @@ package com.ytgld.chest_item.event.loot;
 
 import com.mojang.serialization.MapCodec;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.items.blood.GodBlood;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 

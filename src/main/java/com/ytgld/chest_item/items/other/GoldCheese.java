@@ -37,7 +37,7 @@ public class GoldCheese extends ItemBase {
         if (event.getEntity() instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
             if (chestInventory != null) {
-                if (!player.level().isClientSide) {
+                if (!player.level().isClientSide()) {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.Gold_Cheese)) {
@@ -64,7 +64,7 @@ public class GoldCheese extends ItemBase {
         if (event.getAttackingPlayer() instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
             if (chestInventory != null) {
-                if (!player.level().isClientSide) {
+                if (!player.level().isClientSide()) {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.Gold_Cheese)) {

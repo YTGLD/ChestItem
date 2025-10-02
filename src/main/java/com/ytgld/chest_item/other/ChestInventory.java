@@ -5,6 +5,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.ContainerUser;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.ValueInput;
@@ -40,12 +42,14 @@ public class ChestInventory extends SimpleContainer {
         }
     }
 
-    @Override
-    public void stopOpen(Player player) {
-        super.stopOpen(player);
-        drop(player);
-        player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.CHEST_CLOSE, SoundSource.AMBIENT,1,1);
 
+    @Override
+    public void stopOpen(ContainerUser containerUser) {
+        LivingEntity living = containerUser.getLivingEntity();
+        if (living instanceof Player player) {
+            drop(player);
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.CHEST_CLOSE, SoundSource.AMBIENT, 1, 1);
+        }
     }
 
     public void storeAsSlots(ValueOutput.TypedOutputList<ItemStackWithSlot> output) {

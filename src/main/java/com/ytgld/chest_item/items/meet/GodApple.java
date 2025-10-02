@@ -54,7 +54,7 @@ public class GodApple extends ItemBase {
     public static void event(LivingDamageEvent.Pre event){
         if (!event.getSource().is(DamageTypes.GENERIC_KILL)) {
             if (event.getEntity() instanceof Player player) {
-                if (!player.level().isClientSide) {
+                if (!player.level().isClientSide()) {
                     ChestInventory chestInventory = Handler.getItem(player);
                     if (chestInventory != null) {
                         for (int i = 0; i < chestInventory.getContainerSize(); i++) {
@@ -80,7 +80,7 @@ public class GodApple extends ItemBase {
     public static void event(ItemStackTickEvent event) {
         Player player = event.player;
         ChestInventory chestInventory = event.chestInventory;
-        if (!player.level().isClientSide&&chestInventory!=null){
+        if (!player.level().isClientSide()&&chestInventory!=null){
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.is(InitItems.God_Apple.get())) {
@@ -97,7 +97,7 @@ public class GodApple extends ItemBase {
                             compoundTag.putFloat(bloodTime, 0);
                         }
 
-                        if (!player.level().isClientSide
+                        if (!player.level().isClientSide()
                                 && player.tickCount % 20 == 1) {
                             if (compoundTag.getIntOr(bloodTime, 0) > 0 && compoundTag.getFloatOr(bloodDamage, 0) > 0) {
                                 compoundTag.putInt(bloodTime, compoundTag.getIntOr(bloodTime, 0) - TIME / 10);
@@ -118,7 +118,7 @@ public class GodApple extends ItemBase {
     public static void event2(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide()) {
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.is(InitItems.God_Apple)) {

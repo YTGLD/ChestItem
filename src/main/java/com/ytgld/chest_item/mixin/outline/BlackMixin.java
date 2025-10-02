@@ -1,25 +1,25 @@
 package com.ytgld.chest_item.mixin.outline;
 
-import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.framegraph.FrameGraphBuilder;
+import com.mojang.blaze3d.framegraph.FramePass;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.resource.ResourceHandle;
 import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTextureView;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.outline.BlackFramebufferSets;
 import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
-import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.PostChain;
 import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.state.LevelRenderState;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
@@ -36,9 +36,6 @@ import java.util.Set;
 @Mixin(LevelRenderer.class)
 public abstract class BlackMixin implements MFramebufferBlack {
     @Shadow @Final private Minecraft minecraft;
-
-    @Shadow public abstract void needsUpdate();
-
     @Unique
     private  RenderTarget chest_item$renderTarget_black;
     @Unique
@@ -57,27 +54,38 @@ public abstract class BlackMixin implements MFramebufferBlack {
     }
     @Inject(method = "initOutline", at = @At(value = "RETURN"))
     private void loadEntityOutlinePostProcessor(CallbackInfo ci) {
+
         this.chest_item$renderTarget_black = new TextureTarget(
-                    "Entity Outline For Black", this.minecraft.getWindow().getWidth(),
-                this.minecraft.getWindow().getHeight(), true
-        );
+                "Entity Outline For Black", this.minecraft.getWindow().getWidth(),
+                this.minecraft.getWindow().getHeight(), true);
     }
     @Inject(method = "doEntityOutline", at = @At(value = "RETURN"))
     private void drawEntityOutlinesFramebuffer(CallbackInfo ci) {
-        if (this.minecraft.getMainRenderTarget().getColorTextureView()!=null) {
-            chest_item$blitAndBlendToTexture(this.minecraft.getMainRenderTarget().getColorTextureView());
+        if (this.minecraft.getMainRenderTarget().getColorTextureView() != null) {
+            if (HandlerClient.showOutline) {
+                chest_item$blitAndBlendToTexture(this.minecraft.getMainRenderTarget().getColorTextureView());
+                HandlerClient.showOutline = false;
+            }
         }
     }
 
     @Inject(method = "resize", at = @At(value = "RETURN"))
     private void onResized(int width, int height, CallbackInfo ci) {
-        this.needsUpdate();
         if (this.chest_item$renderTarget_black != null) {
             this.chest_item$renderTarget_black.resize(width, height);
         }
     }
     @Inject(method = "addMainPass", at = @At(value = "RETURN"))
-    private void renderMain(FrameGraphBuilder frameGraphBuilder, Frustum frustum, Camera camera, Matrix4f frustumMatrix, GpuBufferSlice shaderFog, boolean renderBlockOutline, boolean renderEntityOutline, DeltaTracker deltaTracker, ProfilerFiller profiler, CallbackInfo ci) {
+    private void renderMainHEAD(FrameGraphBuilder frameGraphBuilder, Frustum p_366590_, Matrix4f p_362420_, GpuBufferSlice p_418185_, boolean p_363964_, LevelRenderState p_451509_, DeltaTracker p_360931_, ProfilerFiller p_362234_, CallbackInfo ci) {
+        FramePass framepass = frameGraphBuilder.addPass(Chestitem.MODID);
+        if (this.chest_item$defaultFramebufferSets_black.entityOutlineFramebuffer != null) {
+            this.chest_item$defaultFramebufferSets_black.entityOutlineFramebuffer =
+                    framepass.readsAndWrites(this.chest_item$defaultFramebufferSets_black.entityOutlineFramebuffer);
+        }
+    }
+
+    @Inject(method = "addMainPass", at = @At(value = "RETURN"))
+    private void renderMain(FrameGraphBuilder frameGraphBuilder, Frustum p_366590_, Matrix4f p_362420_, GpuBufferSlice p_418185_, boolean p_363964_, LevelRenderState p_451509_, DeltaTracker p_360931_, ProfilerFiller p_362234_, CallbackInfo ci) {
         if (this.chest_item$renderTarget_black != null) {
             this.chest_item$defaultFramebufferSets_black.entityOutlineFramebuffer =
                     frameGraphBuilder.importExternal("black", this.chest_item$renderTarget_black);
@@ -85,7 +93,7 @@ public abstract class BlackMixin implements MFramebufferBlack {
     }
 
     @Inject(method = "addMainPass", at = @At(value = "RETURN"))
-    private void renderMain2INVOKE_ASSIGN(FrameGraphBuilder frameGraphBuilder, Frustum frustum, Camera camera, Matrix4f frustumMatrix, GpuBufferSlice shaderFog, boolean renderBlockOutline, boolean renderEntityOutline, DeltaTracker deltaTracker, ProfilerFiller profiler, CallbackInfo ci) {
+    private void renderMain2INVOKE_ASSIGN(FrameGraphBuilder p_361593_, Frustum p_366590_, Matrix4f p_362420_, GpuBufferSlice p_418185_, boolean p_363964_, LevelRenderState p_451509_, DeltaTracker p_360931_, ProfilerFiller p_362234_, CallbackInfo ci) {
         ResourceHandle<RenderTarget> handle4 = this.chest_item$defaultFramebufferSets_black.entityOutlineFramebuffer;
         if (handle4 != null) {
             RenderTarget rendertarget = handle4.get();
@@ -98,7 +106,7 @@ public abstract class BlackMixin implements MFramebufferBlack {
     }
 
     @Inject(method = "addMainPass", at = @At(value = "RETURN"))
-    private void renderMains(FrameGraphBuilder frameGraphBuilder, Frustum frustum, Camera camera, Matrix4f frustumMatrix, GpuBufferSlice shaderFog, boolean renderBlockOutline, boolean renderEntityOutline, DeltaTracker deltaTracker, ProfilerFiller profiler, CallbackInfo ci) {
+    private void renderMains(FrameGraphBuilder frameGraphBuilder, Frustum p_366590_, Matrix4f p_362420_, GpuBufferSlice p_418185_, boolean p_363964_, LevelRenderState p_451509_, DeltaTracker p_360931_, ProfilerFiller p_362234_, CallbackInfo ci) {
         int i = this.minecraft.getMainRenderTarget().width;
         int j = this.minecraft.getMainRenderTarget().height;
 
@@ -107,12 +115,11 @@ public abstract class BlackMixin implements MFramebufferBlack {
             postchain1.addToFrame(frameGraphBuilder, i, j, this.chest_item$defaultFramebufferSets_black);
         }
     }
+
+
     @Unique
     public void chest_item$blitAndBlendToTexture(GpuTextureView textureView) {
         RenderSystem.assertOnRenderThread();
-        RenderSystem.AutoStorageIndexBuffer rendersystem$autostorageindexbuffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
-        GpuBuffer gpubuffer = rendersystem$autostorageindexbuffer.getBuffer(6);
-        GpuBuffer gpubuffer1 = RenderSystem.getQuadVertexBuffer();
         RenderPass renderpass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> {
             return "Blit render target";
         }, textureView, OptionalInt.empty());
@@ -120,20 +127,23 @@ public abstract class BlackMixin implements MFramebufferBlack {
         try {
             renderpass.setPipeline(MRender.RenderPs.ENTITY_OUTLINE_BLIT);
             RenderSystem.bindDefaultUniforms(renderpass);
-            renderpass.setVertexBuffer(0, gpubuffer1);
-            renderpass.setIndexBuffer(gpubuffer, rendersystem$autostorageindexbuffer.type());
-            renderpass.bindSampler("InSampler",chest_item$renderTarget_black.getColorTextureView());
-            renderpass.drawIndexed(0, 0, 6, 1);
-
-        } catch (Throwable var9) {
-            try {
-                renderpass.close();
-            } catch (Throwable var8) {
-                var9.addSuppressed(var8);
+            renderpass.bindSampler("InSampler", chest_item$renderTarget_black.getColorTextureView());
+            renderpass.draw(0, 3);
+        } catch (Throwable var6) {
+            if (renderpass != null) {
+                try {
+                    renderpass.close();
+                } catch (Throwable var5) {
+                    var6.addSuppressed(var5);
+                }
             }
 
-            throw var9;
+            throw var6;
         }
-        renderpass.close();
+
+        if (renderpass != null) {
+            renderpass.close();
+        }
+
     }
 }

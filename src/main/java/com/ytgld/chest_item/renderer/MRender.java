@@ -37,20 +37,11 @@ public abstract class MRender extends RenderType {
         }
         return Minecraft.getInstance().getMainRenderTarget();
     });
-    public static final RenderType LIGHTNING_OUTLINE = create(
-            "lightning",
-            1536,
-            false,
-            true,
-            RenderPs.LIGHTNING,
-            RenderType.CompositeState.builder().setOutputState(outline2).createCompositeState(false)
-    );
     public static final Function<ResourceLocation, RenderType> ENTITY_SHADOW_Outline= Util.memoize(
             p_414938_ -> {
                 RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
                         .setTextureState(new RenderStateShard.TextureStateShard(p_414938_, false))
                         .setOutputState(ITEM_ENTITY_TARGET)
-                        .setLightmapState(LIGHTMAP)
                         .setOverlayState(OVERLAY)
                         .setOutputState(outline2)
                         .createCompositeState(true);
@@ -61,12 +52,12 @@ public abstract class MRender extends RenderType {
     );
     public static RenderType red(boolean isOutline){
         if (isOutline){
-            return create("end_gateway", 1536, false, false, RenderPs.BACK,
+            return create("red1", 1536, false, false, RenderPs.BACK,
                     RenderType.CompositeState.builder().setOutputState(outline2).setTextureState(RenderStateShard.MultiTextureStateShard.builder().add(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/red.png"), false).add(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"), false).build()).createCompositeState(false)
             );
         }
-        return create("end_gateway", 1536, false, false, RenderPs.TRANSLUCENT,
+        return create("red2", 1536, false, false, RenderPs.TRANSLUCENT,
                 RenderType.CompositeState.builder().setTextureState(RenderStateShard.MultiTextureStateShard.builder().add(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                         "textures/red.png"), false).add(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"), false).build()).createCompositeState(false)
         );
@@ -112,21 +103,17 @@ public abstract class MRender extends RenderType {
 
 
 
-        public static final RenderPipeline ENTITY_OUTLINE_BLIT = (RenderPipeline.builder().withLocation("pipeline/entity_outline_blit")
-                .withVertexShader("core/blit_screen")
-                .withFragmentShader("core/blit_screen")
-                .withSampler("InSampler")
-                .withBlend(new BlendFunction(
+        public static final RenderPipeline ENTITY_OUTLINE_BLIT = RenderPipeline.builder().withLocation("pipeline/entity_outline_blit")
+                .withVertexShader("core/screenquad").withFragmentShader("core/blit_screen").withSampler("InSampler"
+                ).withBlend(new BlendFunction(
                         SourceFactor.SRC_ALPHA,
                         DestFactor.ONE,
                         SourceFactor.ONE,
                         DestFactor.ZERO
-                ))
-                .withDepthWrite(false)
+                )).withDepthWrite(false)
                 .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
-                .withColorWrite(true, false)
-                .withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.QUADS).build());
-
+                .withColorWrite(true,
+                false).withVertexFormat(DefaultVertexFormat.EMPTY, VertexFormat.Mode.TRIANGLES).build();
 
 
 

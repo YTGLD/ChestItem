@@ -35,7 +35,7 @@ public class WindKnife extends ItemBase {
     }
     public static void event(LivingIncomingDamageEvent event){
         if (event.getSource().getEntity() instanceof Player player) {
-            if (!player.level().isClientSide) {
+            if (!player.level().isClientSide()) {
                 ChestInventory chestInventory = Handler.getItem(player);
                 if (chestInventory != null) {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {

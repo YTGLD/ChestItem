@@ -32,7 +32,7 @@ public class DrugHeal  extends ItemBase {
     public static void tick(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide()) {
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.is(InitItems.Drug_Heal)) {

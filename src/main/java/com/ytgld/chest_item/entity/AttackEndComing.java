@@ -41,6 +41,11 @@ public class AttackEndComing extends ThrowableItemProjectile {
     }
 
     @Override
+    public boolean isInWater() {
+        return false;
+    }
+
+    @Override
     protected void onHitBlock(BlockHitResult result) {
     }
 

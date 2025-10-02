@@ -2,8 +2,8 @@ package com.ytgld.chest_item;
 
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
-import com.ytgld.chest_item.entity.render.*;
-import com.ytgld.chest_item.entity.state.BlackVexRenderState;
+import com.ytgld.chest_item.entity.render.AttackEndComingRender;
+import com.ytgld.chest_item.entity.render.EndComingRender;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.EventHandler;
 import com.ytgld.chest_item.event.key.ChestNetworkHandler;
@@ -14,8 +14,6 @@ import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.DataReg;
-import com.ytgld.chest_item.renderer.MRender;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -27,12 +25,9 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import oshi.driver.mac.net.NetStat;
-
-import java.util.UUID;
 
 @Mod(Chestitem.MODID)
 public class Chestitem {
@@ -50,10 +45,6 @@ public class Chestitem {
         InitItems.TabChestItem.CREATIVE_MODE_TABS.register(modEventBus);
         DataReg.REGISTRY.register(modEventBus);
         Loots.LOOT.register(modEventBus);
-
-        for (int i = 0; i < 1000; i++) {
-            System.out.println(UUID.randomUUID());
-        }
         NeoForge.EVENT_BUS.register(new EventHandler());
         NeoForge.EVENT_BUS.register(new EventMain());
 
@@ -65,11 +56,9 @@ public class Chestitem {
     }
     @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {
+
         @SubscribeEvent
         public static void RegisterRenderPipelinesEvent(EntityRenderersEvent.RegisterRenderers event){
-            event.registerEntityRenderer(Entitys.Abyss_Orb.get(), AbyssOrbRenderer::new);
-            event.registerEntityRenderer(Entitys.End_Spiral.get(), EndSpiralRender::new);
-            event.registerEntityRenderer(Entitys.Black_Vex.get(), BlackVexRenderer::new);
             event.registerEntityRenderer(Entitys.AttackEndComing_.get(), AttackEndComingRender::new);
             event.registerEntityRenderer(Entitys.EndComing_.get(), EndComingRender::new);
         }

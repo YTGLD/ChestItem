@@ -18,7 +18,6 @@
     "cilent.AbstractContainerScreenMixin",
     "cilent.AdvancementWidgetMixin",
     "cilent.ATabMixin",
-    "cilent.GameRenderMixin",
     "cilent.GuiGraphicsMixin",
     "outline.BlackMixin"
   ]

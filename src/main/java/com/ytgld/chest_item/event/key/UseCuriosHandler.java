@@ -17,7 +17,6 @@ public class UseCuriosHandler {
         public void handleOpenCurios(final UseChestCurios data, final IPayloadContext ctx) {
             ctx.enqueueWork(() -> {
                 Player player = ctx.player();
-                Space.summon(player);
                 TheEndIsComing.event(player);
             });
         }

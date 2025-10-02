@@ -26,7 +26,7 @@ public class NuclearReaction extends ItemBase {
         if (event.getAttackingPlayer() instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
             if (chestInventory != null) {
-                if (!player.level().isClientSide) {
+                if (!player.level().isClientSide()) {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.NuclearReaction_)) {
@@ -41,7 +41,7 @@ public class NuclearReaction extends ItemBase {
     public static void applyExp(Player player, ExperienceOrb orb) {
         ChestInventory chestInventory = Handler.getItem(player);
         if (chestInventory != null) {
-            if (!player.level().isClientSide) {
+            if (!player.level().isClientSide()) {
                 for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                     ItemStack stack = chestInventory.getItem(i);
                     if (stack.is(InitItems.NuclearReaction_)) {

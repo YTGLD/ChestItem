@@ -27,7 +27,7 @@ public class MeatBall  extends ItemBase {
         if (living instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
             if (chestInventory != null) {
-                if (!player.level().isClientSide) {
+                if (!player.level().isClientSide()) {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.Meat_Ball)) {

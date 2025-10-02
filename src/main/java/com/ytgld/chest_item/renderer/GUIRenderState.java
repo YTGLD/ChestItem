@@ -23,17 +23,19 @@ public record GUIRenderState(RenderPipeline pipeline,
         this(p_415865_, p_416394_, p_415848_, p_416365_, p_416414_, p_416112_, p_416519_, p_416693_, p_415641_, p_416035_, p_415841_, p_415610_, p_415846_, getBounds(p_416365_, p_416414_, p_416112_, p_416519_, p_415848_, p_415846_));
     }
 
-    public void buildVertices(VertexConsumer p_415779_, float p_418375_) {
-        p_415779_.addVertexWith2DPose(this.pose(), (float)this.x0(), (float)this.y0(), p_418375_).setUv2(255,255).setLight(255).setNormal(0,0,0).setUv(this.u0(), this.v0()).setColor(this.color());
-        p_415779_.addVertexWith2DPose(this.pose(), (float)this.x0(), (float)this.y1(), p_418375_).setUv2(255,255).setLight(255).setNormal(0,0,0).setUv(this.u0(), this.v1()).setColor(this.color());
-        p_415779_.addVertexWith2DPose(this.pose(), (float)this.x1(), (float)this.y1(), p_418375_).setUv2(255,255).setLight(255).setNormal(0,0,0).setUv(this.u1(), this.v1()).setColor(this.color());
-        p_415779_.addVertexWith2DPose(this.pose(), (float)this.x1(), (float)this.y0(), p_418375_).setUv2(255,255).setLight(255).setNormal(0,0,0).setUv(this.u1(), this.v0()).setColor(this.color());
-    }
-
     @Nullable
     private static ScreenRectangle getBounds(int x0, int y0, int x1, int y1, Matrix3x2f pose, @Nullable ScreenRectangle scissorArea) {
         ScreenRectangle screenrectangle = (new ScreenRectangle(x0, y0, x1 - x0, y1 - y0)).transformMaxBounds(pose);
         return scissorArea != null ? scissorArea.intersection(screenrectangle) : screenrectangle;
+    }
+
+    @Override
+    public void buildVertices(VertexConsumer vertexConsumer) {
+        vertexConsumer.addVertexWith2DPose(this.pose(), (float)this.x0(), (float)this.y0()).setUv2(255,255).setLight(255).setNormal(0,0,0).setUv(this.u0(), this.v0()).setColor(this.color());
+        vertexConsumer.addVertexWith2DPose(this.pose(), (float)this.x0(), (float)this.y1()).setUv2(255,255).setLight(255).setNormal(0,0,0).setUv(this.u0(), this.v1()).setColor(this.color());
+        vertexConsumer.addVertexWith2DPose(this.pose(), (float)this.x1(), (float)this.y1()).setUv2(255,255).setLight(255).setNormal(0,0,0).setUv(this.u1(), this.v1()).setColor(this.color());
+        vertexConsumer.addVertexWith2DPose(this.pose(), (float)this.x1(), (float)this.y0()).setUv2(255,255).setLight(255).setNormal(0,0,0).setUv(this.u1(), this.v0()).setColor(this.color());
+
     }
 
     public RenderPipeline pipeline() {

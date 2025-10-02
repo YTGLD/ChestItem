@@ -117,25 +117,7 @@ public class EndComing  extends TamableAnimal {
                 this.setTarget(null);
             }
         }
-        if (this.getOwner()!= null &&this.getOwner() instanceof Player player){
-            ChestInventory chestInventory = Handler.getItem(player);
-            if (chestInventory!=null) {
-                if (!player.level().isClientSide) {
-                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                        ItemStack stack = chestInventory.getItem(i);
-                        if (stack.is(InitItems.TheEndIsComing_)) {
-                            CompoundTag compoundTag = stack.get(DataReg.tag);
-                            if (compoundTag!=null) {
-                                if (!compoundTag.getBooleanOr(chestHasEndComing,false)){
-                                    this.discard();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
 
-        }
         float s = 5;
         if (this.getOwner()!= null &&this.getOwner() instanceof Player player&&this.getTarget()!=null){
             if (this.tickCount % (int) s == 0) {
@@ -168,6 +150,38 @@ public class EndComing  extends TamableAnimal {
             } else {
                 this.setTarget(null);
             }
+        }
+        clear();
+    }
+    private void clear(){
+        if (this.getOwner()!= null &&this.getOwner() instanceof Player player){
+            ChestInventory chestInventory = Handler.getItem(player);
+            if (chestInventory!=null) {
+                if (!player.level().isClientSide()) {
+                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                        ItemStack stack = chestInventory.getItem(i);
+                        if (stack.is(InitItems.TheEndIsComing_)) {
+                            CompoundTag compoundTag = stack.get(DataReg.tag);
+                            if (compoundTag!=null) {
+                                if (!compoundTag.getBooleanOr(chestHasEndComing,false)){
+                                    this.discard();
+                                }
+                            }
+                            return;
+                        }else {
+                            CompoundTag compoundTag = stack.get(DataReg.tag);
+                            if (compoundTag!=null){
+                                if (!compoundTag.getBooleanOr(chestHasEndComing,false)){
+                                    this.discard();
+                                }
+                            }else  {
+                                this.discard();
+                            }
+                        }
+                    }
+                }
+            }
+
         }
     }
     public Entity look(Level level, LivingEntity living) {

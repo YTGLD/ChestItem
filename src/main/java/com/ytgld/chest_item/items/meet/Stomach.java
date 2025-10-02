@@ -28,7 +28,7 @@ public class Stomach  extends ItemBase {
         if (living instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
             if (chestInventory!=null) {
-                if (!player.level().isClientSide) {
+                if (!player.level().isClientSide()) {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.Stomach_)) {
@@ -45,7 +45,7 @@ public class Stomach  extends ItemBase {
     public static void tick(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide()) {
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.is(InitItems.Stomach_)) {

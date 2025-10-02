@@ -35,7 +35,7 @@ import java.util.function.Consumer;
  *增加20%攻速
  */
 
-public class GodBlood extends ItemBase {
+public class  GodBlood extends ItemBase {
     public GodBlood(Properties properties) {
         super(properties);
     }
@@ -44,7 +44,7 @@ public class GodBlood extends ItemBase {
         Player player = event.player;
         LivingEntity target = livingIncomingDamageEvent.getEntity();
         ChestInventory chestInventory = event.chestInventory;
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide()) {
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.is(InitItems.God_blood)) {
@@ -56,7 +56,7 @@ public class GodBlood extends ItemBase {
     public static void tick(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide()) {
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.is(InitItems.God_blood)) {

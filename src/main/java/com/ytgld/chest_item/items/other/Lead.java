@@ -27,7 +27,7 @@ public class Lead  extends ItemBase {
         Player player = event.getEntity();
         ChestInventory chestInventory = Handler.getItem(player);
         if (chestInventory!=null) {
-            if (!player.level().isClientSide) {
+            if (!player.level().isClientSide()) {
                 for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                     ItemStack stack = chestInventory.getItem(i);
                     if (stack.is(InitItems.Lead_)) {
