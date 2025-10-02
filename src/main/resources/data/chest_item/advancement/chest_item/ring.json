@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/life_stone",
+  "criteria": {
+    "ring": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:ring"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:ring"
+    },
+    "title": {
+      "translate": "item.chest_item.ring.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "ring"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
