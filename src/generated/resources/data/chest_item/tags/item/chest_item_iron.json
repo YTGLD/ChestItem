@@ -2,6 +2,8 @@
   "values": [
     "chest_item:speed_heart",
     "chest_item:nuclear_reaction",
+    "chest_item:abnormal",
+    "chest_item:complete",
     "chest_item:wind_knife"
   ]
 }

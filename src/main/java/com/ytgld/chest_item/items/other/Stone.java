@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -43,6 +44,11 @@ public class Stone extends ItemBase {
             }
         }
     }
+    @Nullable
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute() {
+        return attributeModifierMultimap();
+    }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Stone_.asItem().getDescriptionId()),
@@ -52,14 +58,6 @@ public class Stone extends ItemBase {
         modifiers.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Stone_.asItem().getDescriptionId()),
                 2, AttributeModifier.Operation.ADD_VALUE));
         return modifiers;
-    }
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
-        tooltipAdder.accept(Component.translatable("item.chest_item.stone.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.stone.string.1").withStyle(ChatFormatting.GOLD));
-
     }
 
     @Override

@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -42,6 +43,11 @@ public class UndeadRune extends ItemBase {
             }
         }
     }
+    @Nullable
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute() {
+        return attributeModifierMultimap();
+    }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
@@ -51,14 +57,6 @@ public class UndeadRune extends ItemBase {
                 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         return modifiers;
-    }
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
-        tooltipAdder.accept(Component.translatable("item.chest_item.undead_rune.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.undead_rune.string.1").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.undead_rune.string.2").withStyle(ChatFormatting.GOLD));
     }
 
     @Override

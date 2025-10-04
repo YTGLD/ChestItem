@@ -76,6 +76,11 @@ public class SelfIncreasingHeart extends ItemBase {
             }
         }
     }
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute() {
+        return attributeModifierMultimap();
+    }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 

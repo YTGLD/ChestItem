@@ -25,6 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -130,6 +131,11 @@ public class GodApple extends ItemBase {
             }
         }
     }
+    @Nullable
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute() {
+        return attributeModifierMultimap();
+    }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
@@ -145,8 +151,6 @@ public class GodApple extends ItemBase {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
         tooltipAdder.accept(Component.translatable("item.chest_item.god_apple.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.god_apple.string.1").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.god_apple.string.2").withStyle(ChatFormatting.GOLD));
         tooltipAdder.accept(Component.translatable("item.chest_item.god_apple.string.3").withStyle(ChatFormatting.GOLD));
         tooltipAdder.accept(Component.translatable("item.chest_item.god_apple.string.4").withStyle(ChatFormatting.GOLD));
 

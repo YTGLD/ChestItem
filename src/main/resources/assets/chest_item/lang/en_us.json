@@ -4,7 +4,7 @@
   "entity.chest_item.black_vex": "Dark annoyance",
   "entity.chest_item.end_coming": "The end is coming",
   "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
-
+  "event.chest_item.equip": "When placed in a magic box：",
 
 
   "itemGroup.chest_item": "Trinkets in the chest",

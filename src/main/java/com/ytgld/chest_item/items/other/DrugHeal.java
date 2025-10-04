@@ -21,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -53,6 +54,11 @@ public class DrugHeal  extends ItemBase {
             }
         }
     }
+    @Nullable
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute() {
+        return attributeModifierMultimap();
+    }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
@@ -67,7 +73,6 @@ public class DrugHeal  extends ItemBase {
         tooltipAdder.accept(Component.translatable("item.chest_item.drug_heal.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.accept(Component.literal(""));
         tooltipAdder.accept(Component.translatable("item.chest_item.drug_heal.string.1").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.drug_heal.string.2").withStyle(ChatFormatting.GOLD));
 
     }
 

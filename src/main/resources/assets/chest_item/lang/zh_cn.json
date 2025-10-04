@@ -6,7 +6,8 @@
   "entity.chest_item.black_vex": "黑暗恼鬼",
   "entity.chest_item.end_coming": "末日降临",
   "entity.chest_item.attack_end_coming": "末日降临的球体",
-
+  "event.chest_item.equip": "放入神奇箱子内时：",
+  "attribute.name.chest_item.heal": "治疗",
 
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",

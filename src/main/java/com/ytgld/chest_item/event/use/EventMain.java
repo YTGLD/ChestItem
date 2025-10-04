@@ -1,11 +1,13 @@
 package com.ytgld.chest_item.event.use;
 
+import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.Terror;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -13,22 +15,71 @@ import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.util.AttributeTooltipContext;
+import net.neoforged.neoforge.common.util.AttributeUtil;
+import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
+import net.neoforged.neoforge.event.GatherSkippedAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEnchantItemEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
 public class EventMain {
+    @SubscribeEvent
+    public void AddAttributeTooltipsEvent(AddAttributeTooltipsEvent evt){
+        AttributeTooltipContext context = evt.getContext();
+        ItemStack stack = evt.getStack();
+        GatherSkippedAttributeTooltipsEvent skipped =
+                NeoForge.EVENT_BUS.post(new GatherSkippedAttributeTooltipsEvent(stack, context));
+
+        if (skipped.isSkippingAll()) {
+            return;
+        }
+        List<Component> attributesTooltip = new ArrayList<>();
+        Player player = context.player();
+
+        if (stack.getItem() instanceof Terror terror) {
+            Multimap<Holder<Attribute>, AttributeModifier> attributes =terror.muAttribute();
+            if (attributes !=null) {
+                attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
+                attributesTooltip.add(Component.empty());
+                attributesTooltip.add(
+                        Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
+
+                if (player != null) {
+                    AttributeUtil.applyTextFor(
+                            stack,
+                            attributesTooltip::add,
+                            attributes,
+                            AttributeTooltipContext.of(player, context,context.tooltipDisplay(), context.flag()));
+                }
+
+                for (Component component : attributesTooltip) {
+                    evt.addTooltipLines(component);
+                }
+            }
+        }
+    }
     @SubscribeEvent
     public void ItemStackAttackEvent(ItemStackAttackEvent event){
         GodBlood.attack(event);
