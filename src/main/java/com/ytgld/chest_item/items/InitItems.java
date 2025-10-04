@@ -4,6 +4,7 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
+import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
@@ -85,13 +86,19 @@ public class InitItems {
     public static final DeferredItem<Item> SpeedHeart_ = register("speed_heart",
             (resourceLocation)-> new SpeedHeart(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> MAGIC_IRON = register("magic_iron",
-            (resourceLocation)-> new ItemBase(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+            (resourceLocation)-> new ItemBase(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> WindKnife_ = register("wind_knife",
             (resourceLocation)-> new WindKnife(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> NuclearReaction_ = register("nuclear_reaction",
             (resourceLocation)-> new NuclearReaction(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> Kaolinite_ = register("kaolinite",
             (resourceLocation)-> new Kaolinite(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> GiantHeart_ = register("giant_heart",
+            (resourceLocation)-> new GiantHeart(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> EndEffect_ = register("end_effect",
+            (resourceLocation)-> new EndEffect(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> EyeBook_ = register("eye_book",
+            (resourceLocation)-> new EyeBook(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -133,6 +140,9 @@ public class InitItems {
                     output.accept(InitItems.WindKnife_);
                     output.accept(InitItems.Kaolinite_);
                     output.accept(InitItems.NuclearReaction_);
+                    output.accept(InitItems.GiantHeart_);
+                    output.accept(InitItems.EndEffect_);
+                    output.accept(InitItems.EyeBook_);
                 }).build());
 
     }
@@ -180,6 +190,9 @@ public class InitItems {
                     .add(InitItems.ImitationBiomass_.asItem())
                     .add(InitItems.Kaolinite_.asItem())
                     .add(InitItems.Battery_.asItem())
+                    .add(InitItems.GiantHeart_.asItem())
+                    .add(InitItems.EndEffect_.asItem())
+                    .add(InitItems.EyeBook_.asItem())
                     .add(InitItems.Stomach_.asItem());;
         }
         private static TagKey<Item> createTag(String name) {

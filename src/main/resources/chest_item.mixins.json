@@ -5,6 +5,7 @@
   "mixins": [
     "ExperienceOrbMixin",
     "FoodDataMixin",
+    "LivingEntityMixin",
     "PlayerMixin",
     "ServerPlayerMixin"
   ],
@@ -18,6 +19,7 @@
     "cilent.AbstractContainerScreenMixin",
     "cilent.AdvancementWidgetMixin",
     "cilent.ATabMixin",
+    "cilent.GameRendererMixin",
     "cilent.GuiGraphicsMixin",
     "outline.BlackMixin"
   ]

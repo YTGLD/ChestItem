@@ -7,6 +7,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ytgld.chest_item.items.other.Battery;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -27,10 +28,14 @@ public class ChestLoot extends LootModifier {
     }
 
     @Override
-    protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> objectArrayList, LootContext lootContext) {
+    protected @NotNull ObjectArrayList<ItemStack> doApply(@NotNull ObjectArrayList<ItemStack> objectArrayList, LootContext lootContext) {
         @Nullable Entity entity = lootContext.getOptionalParameter(LootContextParams.THIS_ENTITY);
-        if (entity!=null) {
-            Battery.objectArrayList(objectArrayList, entity);
+        ResourceLocation s = lootContext.getQueriedLootTableId();
+        String idSting = String.valueOf(s);
+        if (idSting.contains("chests/")) {
+            if (entity != null) {
+                Battery.objectArrayList(objectArrayList, entity);
+            }
         }
         return objectArrayList;
     }

@@ -10,4 +10,6 @@ public class Effects {
     public static final DeferredRegister<MobEffect> EFFECT_DEFERRED_REGISTER = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT,Chestitem.MODID);
     public static final DeferredHolder<MobEffect,MobEffect> IncreasingMeat_ = EFFECT_DEFERRED_REGISTER.register("increasing_meat",
             IncreasingMeat::new);
+    public static final DeferredHolder<MobEffect,MobEffect> Eye_ = EFFECT_DEFERRED_REGISTER.register("eye",
+            Eye::new);
 }

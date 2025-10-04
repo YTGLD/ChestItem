@@ -46,11 +46,12 @@ public class AttackEndComing extends ThrowableItemProjectile {
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult result) {
+    public boolean onGround() {
+        return false;
     }
 
-    public LivingEntity getTarget() {
-        return target;
+    @Override
+    protected void onHitBlock(BlockHitResult result) {
     }
 
     public void setTarget(LivingEntity target) {
@@ -121,6 +122,7 @@ public class AttackEndComing extends ThrowableItemProjectile {
             }
         }
     }
+
     @Override
     public void tick() {
         super.tick();

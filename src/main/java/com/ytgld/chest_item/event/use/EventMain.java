@@ -10,10 +10,7 @@ import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.gold.*;
-import com.ytgld.chest_item.items.meet.GodApple;
-import com.ytgld.chest_item.items.meet.MeatBall;
-import com.ytgld.chest_item.items.meet.SelfIncreasingHeart;
-import com.ytgld.chest_item.items.meet.Stomach;
+import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -65,6 +62,7 @@ public class EventMain {
         ArmorStone.tick(event);
         StrongerStone.tick(event);
         WindKnife.event(event);
+        GiantHeart.LivingIncomingDamageEvent(event);
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
@@ -85,6 +83,7 @@ public class EventMain {
         GodApple.event(event);
         Kaolinite.event(event);
         GodApple.event2(event);
+        EyeBook.tick(event);
     }
     @SubscribeEvent
     public void tick(LivingEntityUseItemEvent.Finish event) {
@@ -178,6 +177,8 @@ public class EventMain {
                         .add(LootItem.lootTableItem(InitItems.SpeedHeart_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
                         .add(LootItem.lootTableItem(InitItems.Kaolinite_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.EyeBook_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
 

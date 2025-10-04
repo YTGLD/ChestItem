@@ -68,6 +68,22 @@ public class EndComing  extends TamableAnimal {
             }
         }
     }
+    public boolean isHasEffectEnd(){
+        if (this.getOwner()!= null &&this.getOwner() instanceof Player player){
+            ChestInventory chestInventory = Handler.getItem(player);
+            if (chestInventory!=null) {
+                if (!player.level().isClientSide()) {
+                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                        ItemStack stack = chestInventory.getItem(i);
+                        if (stack.is(InitItems.EndEffect_)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     @Override
     public void tick() {
@@ -119,10 +135,19 @@ public class EndComing  extends TamableAnimal {
         }
 
         float s = 5;
-        if (this.getOwner()!= null &&this.getOwner() instanceof Player player&&this.getTarget()!=null){
+        if (isHasEffectEnd()){
+            s += 10;
+        }
+        if (s < 1) {
+            s = 1;
+        }
+        if (this.getOwner()!= null &&this.getOwner() instanceof Player &&this.getTarget()!=null){
             if (this.tickCount % (int) s == 0) {
                 AttackEndComing attackBlood = new AttackEndComing(Entitys.AttackEndComing_.get(), this.level());
                 attackBlood.setTarget(this.getTarget());
+                if (isHasEffectEnd()){
+                    attackBlood.damages += 3;
+                }
                 attackBlood.setPos(this.position());
                 attackBlood.setOwner(this.getOwner());
                 attackBlood.follow = false;
@@ -130,58 +155,75 @@ public class EndComing  extends TamableAnimal {
                 playRemoveOneSound(this);
 
             }
-            if (this.tickCount % 10 == 0) {
+            if (this.tickCount % s*2 == 0) {
                 AttackEndComing attackBlood = new AttackEndComing(Entitys.AttackEndComing_.get(), this.level());
                 attackBlood.setTarget(this.getTarget());
+                if (isHasEffectEnd()){
+                    attackBlood.damages += 5;
+                }
                 attackBlood.setPos(this.position());
                 attackBlood.setOwner(this.getOwner());
                 attackBlood.follow = true;
                 attackBlood.setDeltaMovement(new Vec3(Mth.nextFloat(RandomSource.create(),-0.5f,0.5f),Mth.nextFloat(RandomSource.create(),-0.5f,0.5f),Mth.nextFloat(RandomSource.create(),-0.5f,0.5f)));
                 this.level().addFreshEntity(attackBlood);
                 playRemoveOneSound(this);
-
             }
         }
         if (this.getOwner()!= null&&this.getOwner() instanceof Player player) {
-            if (look(player.level(),player) instanceof LivingEntity living) {
-                if (!living.is(this)) {
-                    this.setTarget(living);
+            //不在isHasEffectEnd状态下
+            if (!isHasEffectEnd()) {
+                if (look(player.level(), player) instanceof LivingEntity living) {
+                    if (!living.is(this)) {
+                        this.setTarget(living);
+                    }
+                } else {
+                    this.setTarget(null);
                 }
-            } else {
-                this.setTarget(null);
-            }
-        }
-        clear();
-    }
-    private void clear(){
-        if (this.getOwner()!= null &&this.getOwner() instanceof Player player){
-            ChestInventory chestInventory = Handler.getItem(player);
-            if (chestInventory!=null) {
-                if (!player.level().isClientSide()) {
-                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                        ItemStack stack = chestInventory.getItem(i);
-                        if (stack.is(InitItems.TheEndIsComing_)) {
-                            CompoundTag compoundTag = stack.get(DataReg.tag);
-                            if (compoundTag!=null) {
-                                if (!compoundTag.getBooleanOr(chestHasEndComing,false)){
-                                    this.discard();
-                                }
-                            }
-                            return;
-                        }else {
-                            CompoundTag compoundTag = stack.get(DataReg.tag);
-                            if (compoundTag!=null){
-                                if (!compoundTag.getBooleanOr(chestHasEndComing,false)){
-                                    this.discard();
-                                }
-                            }else  {
-                                this.discard();
-                            }
+            }else {
+                Vec3 playerPos = this.position();
+                int range = 20;
+                List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
+                for (LivingEntity living : entities) {
+                    if (this.getTarget() == null) {
+                        if (living != player&& !(living instanceof EndComing)) {
+                            this.setTarget(living);
                         }
                     }
                 }
             }
 
+        }
+        clear();
+    }
+   public boolean canLive = true;
+    private void clear(){
+        if (canLive) {
+            if (this.getOwner() != null && this.getOwner() instanceof Player player) {
+                ChestInventory chestInventory = Handler.getItem(player);
+                if (chestInventory != null) {
+                    if (!player.level().isClientSide()) {
+                        for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                            ItemStack stack = chestInventory.getItem(i);
+                            if (stack.is(InitItems.TheEndIsComing_)) {
+                                canLive = true;
+                                CompoundTag compoundTag = stack.get(DataReg.tag);
+                                if (compoundTag != null) {
+                                    if (!compoundTag.getBooleanOr(chestHasEndComing, false)) {
+                                        canLive = false;
+                                    }
+                                }
+                                return;
+                            }else {
+                                canLive = false;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        if (!canLive){
+            this.discard();
         }
     }
     public Entity look(Level level, LivingEntity living) {
