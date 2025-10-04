@@ -168,6 +168,9 @@
   "item.chest_item.giant_heart.string.1": "Increases resistance by 20%",
   "item.chest_item.giant_heart.string.2": "Increases the rate at which food turns into health by 100%",
 
+  "item.chest_item.abnormal": "异常构造件",
+  "item.chest_item.complete": "完整构造件",
+
   "item.chest_item.god_apple.string.0": "Blood Sacrifice Blood God",
   "item.chest_item.god_apple.string.1": "Reduces maximum health by 25%",
   "item.chest_item.god_apple.string.2": "Reduces health regeneration by 40%",

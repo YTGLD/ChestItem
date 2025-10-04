@@ -99,6 +99,10 @@ public class InitItems {
             (resourceLocation)-> new EndEffect(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> EyeBook_ = register("eye_book",
             (resourceLocation)-> new EyeBook(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Abnormal = register("abnormal",
+            (resourceLocation)-> new ItemBase(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Complete = register("complete",
+            (resourceLocation)-> new ItemBase(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -143,6 +147,8 @@ public class InitItems {
                     output.accept(InitItems.GiantHeart_);
                     output.accept(InitItems.EndEffect_);
                     output.accept(InitItems.EyeBook_);
+                    output.accept(InitItems.Abnormal);
+                    output.accept(InitItems.Complete);
                 }).build());
 
     }
@@ -162,6 +168,8 @@ public class InitItems {
             tag(chestItem_iron).add(
                     SpeedHeart_.asItem())
                     .add(NuclearReaction_.asItem())
+                    .add(Abnormal.asItem())
+                    .add(Complete.asItem())
                     .add(WindKnife_.asItem());
 
             tag(chestItem)

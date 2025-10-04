@@ -27,6 +27,7 @@ public class ItemBase extends Item implements Terror{
         return co;
     }
 
+
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255,255,0,100);
