@@ -45,7 +45,7 @@ public class UndeadRune extends ItemBase {
     }
     @Nullable
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute() {
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player) {
         return attributeModifierMultimap();
     }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {

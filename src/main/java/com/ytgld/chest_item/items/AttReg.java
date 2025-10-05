@@ -17,10 +17,17 @@ public class AttReg {
     public static final DeferredHolder<Attribute,?> heal = REGISTRY.register("heal",()->{
         return new RangedAttribute("attribute.name.chest_item.heal", 1, -1024, 1024).setSyncable(true);
     });
-
+    public static final DeferredHolder<Attribute,?> instability = REGISTRY.register("instability",()->{
+        return new RangedAttribute("attribute.name.chest_item.instability", 0, -1024, 1024).setSyncable(true);
+    });
+    public static final DeferredHolder<Attribute,?> instability_low = REGISTRY.register("instability_low",()->{
+        return new RangedAttribute("attribute.name.chest_item.instability_low", 0, -1024, 1024).setSyncable(true);
+    });
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER , AttReg.heal,1);
+        event.add(EntityType.PLAYER , AttReg.instability,1);
+        event.add(EntityType.PLAYER , AttReg.instability_low,1);
 
     }
 }

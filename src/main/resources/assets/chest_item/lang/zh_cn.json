@@ -8,6 +8,8 @@
   "entity.chest_item.attack_end_coming": "末日降临的球体",
   "event.chest_item.equip": "放入神奇箱子内时：",
   "attribute.name.chest_item.heal": "治疗",
+  "attribute.name.chest_item.instability": "伤害不稳定性",
+  "attribute.name.chest_item.instability_low": "弱化风险",
 
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
@@ -185,6 +187,19 @@
   "item.chest_item.god_apple.string.3": "你最多受到 5 点伤害",
   "item.chest_item.god_apple.string.4": "超过 5 点的伤害将转换为相同数量的流血",
   "item.chest_item.god_apple": "上帝的果实",
+
+  "item.chest_item.abnormal": "异常构造件",
+  "item.chest_item.complete": "完整构造件",
+
+  "item.chest_item.iron_cube": "坚韧立方体",
+  "item.chest_item.iron_cube.string.0": "坚韧不拔之人",
+  "item.chest_item.iron_cube.string.1": "伤害变得极度稳定，且输出能力有所增加",
+  "item.chest_item.iron_cube.string.2": "生命值降低不会影响你的意志，反而会增加自身的稳定性",
+  "item.chest_item.iron_cube.string.3": "你对防具的护甲有了极大的排斥",
+
+  "item.chest_item.iron_heart": "不稳定脉冲器",
+  "item.chest_item.iron_heart.string.0": "看似胜券在握，实则慌的一批",
+  "item.chest_item.iron_heart.string.1": "伤害不稳定化，整体来说伤害有所提高",
 
   "advancements.chest_item.root.description": "然而这只是个箱子",
   "advancements.chest_item.root.title": "箱子里的小饰品",

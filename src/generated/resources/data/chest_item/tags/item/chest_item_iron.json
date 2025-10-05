@@ -4,6 +4,8 @@
     "chest_item:nuclear_reaction",
     "chest_item:abnormal",
     "chest_item:complete",
+    "chest_item:iron_heart",
+    "chest_item:iron_cube",
     "chest_item:wind_knife"
   ]
 }

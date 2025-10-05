@@ -12,11 +12,16 @@ import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.gold.*;
+import com.ytgld.chest_item.items.iron.IronCube;
+import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -59,7 +64,7 @@ public class EventMain {
         Player player = context.player();
 
         if (stack.getItem() instanceof Terror terror) {
-            Multimap<Holder<Attribute>, AttributeModifier> attributes =terror.muAttribute();
+            Multimap<Holder<Attribute>, AttributeModifier> attributes =terror.muAttribute(player);
             if (attributes !=null) {
                 attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
                 attributesTooltip.add(Component.empty());
@@ -94,10 +99,7 @@ public class EventMain {
                 event.setAmount(event.getAmount()*(attack));
             }
         }
-
-
         LifeStone.tick(event);
-
     }
     @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
@@ -114,6 +116,38 @@ public class EventMain {
         StrongerStone.tick(event);
         WindKnife.event(event);
         GiantHeart.LivingIncomingDamageEvent(event);
+
+        if (event.getSource().getEntity() instanceof LivingEntity living){
+            AttributeInstance instability = living.getAttribute(AttReg.instability);
+            if (instability != null) {
+                float value = (float) instability.getValue();
+                float v1 = value - 1;
+                if (v1>0) {
+                    float apply = Mth.nextFloat(RandomSource.create(), -v1,v1*1.15f);
+                    event.setAmount(event.getAmount()*(1+apply));
+                }else if (v1 != 0){
+                    if (v1 < 0) {
+                        v1 = -v1;
+                    }
+                    event.setAmount(event.getAmount()*(1+v1));
+                }
+            }
+
+            AttributeInstance instability_low = living.getAttribute(AttReg.instability_low);
+            if (instability_low != null) {
+                float value = (float) instability_low.getValue();
+                float v1 = value - 1;
+                if (v1>0) {
+                    float apply = Mth.nextFloat(RandomSource.create(), -v1*1.15f,v1);
+                    event.setAmount(event.getAmount()*(1+apply));
+                }else if (v1 != 0){
+                    if (v1 < 0) {
+                        v1 = -v1;
+                    }
+                    event.setAmount(event.getAmount()*(1+v1));
+                }
+            }
+        }
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
@@ -135,6 +169,8 @@ public class EventMain {
         Kaolinite.event(event);
         GodApple.event2(event);
         EyeBook.tick(event);
+        IronHeart.tick(event);
+        IronCube.ItemStackTickEvent(event);
     }
     @SubscribeEvent
     public void tick(LivingEntityUseItemEvent.Finish event) {
@@ -224,7 +260,7 @@ public class EventMain {
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
                         .add(LootItem.lootTableItem(InitItems.MAGIC_IRON)
-                                .when(LootItemRandomChanceCondition.randomChance(0.03f)))
+                                .when(LootItemRandomChanceCondition.randomChance(0.09f)))
                         .add(LootItem.lootTableItem(InitItems.SpeedHeart_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
                         .add(LootItem.lootTableItem(InitItems.Kaolinite_)

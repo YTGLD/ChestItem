@@ -7,6 +7,8 @@ import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
 import com.ytgld.chest_item.items.gold.*;
+import com.ytgld.chest_item.items.iron.IronCube;
+import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
 import net.minecraft.core.HolderLookup;
@@ -103,6 +105,10 @@ public class InitItems {
             (resourceLocation)-> new ItemBase(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> Complete = register("complete",
             (resourceLocation)-> new ItemBase(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> IronHeart_ = register("iron_heart",
+            (resourceLocation)-> new IronHeart(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> IronCube_ = register("iron_cube",
+            (resourceLocation)-> new IronCube(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -149,6 +155,8 @@ public class InitItems {
                     output.accept(InitItems.EyeBook_);
                     output.accept(InitItems.Abnormal);
                     output.accept(InitItems.Complete);
+                    output.accept(InitItems.IronCube_);
+                    output.accept(InitItems.IronHeart_);
                 }).build());
 
     }
@@ -170,6 +178,8 @@ public class InitItems {
                     .add(NuclearReaction_.asItem())
                     .add(Abnormal.asItem())
                     .add(Complete.asItem())
+                    .add(IronHeart_.asItem())
+                    .add(IronCube_.asItem())
                     .add(WindKnife_.asItem());
 
             tag(chestItem)

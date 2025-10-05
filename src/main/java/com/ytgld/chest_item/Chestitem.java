@@ -43,6 +43,7 @@ public class Chestitem {
         Entitys.REGISTRY.register(modEventBus);
         InitItems.ITEMS.register(modEventBus);
         InitItems.TabChestItem.CREATIVE_MODE_TABS.register(modEventBus);
+
         DataReg.REGISTRY.register(modEventBus);
         Loots.LOOT.register(modEventBus);
         NeoForge.EVENT_BUS.register(new EventHandler());
