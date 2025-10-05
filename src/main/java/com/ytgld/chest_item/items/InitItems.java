@@ -109,6 +109,8 @@ public class InitItems {
             (resourceLocation)-> new IronHeart(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> IronCube_ = register("iron_cube",
             (resourceLocation)-> new IronCube(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> ScarHeart_ = register("scar_heart",
+            (resourceLocation)-> new ScarHeart(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -155,8 +157,9 @@ public class InitItems {
                     output.accept(InitItems.EyeBook_);
                     output.accept(InitItems.Abnormal);
                     output.accept(InitItems.Complete);
-                    output.accept(InitItems.IronCube_);
                     output.accept(InitItems.IronHeart_);
+                    output.accept(InitItems.IronCube_);
+                    output.accept(InitItems.ScarHeart_);
                 }).build());
 
     }
@@ -176,10 +179,10 @@ public class InitItems {
             tag(chestItem_iron).add(
                     SpeedHeart_.asItem())
                     .add(NuclearReaction_.asItem())
-                    .add(Abnormal.asItem())
                     .add(Complete.asItem())
                     .add(IronHeart_.asItem())
                     .add(IronCube_.asItem())
+                    .add(ScarHeart_.asItem())
                     .add(WindKnife_.asItem());
 
             tag(chestItem)

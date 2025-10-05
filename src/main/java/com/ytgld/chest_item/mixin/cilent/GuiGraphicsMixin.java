@@ -39,6 +39,12 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     @Shadow @Final private Matrix3x2fStack pose;
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
+
+    @Override
+    public GuiRenderState cI1_21_9$guiRenderState() {
+        return guiRenderState;
+    }
+
     @Override
     public void chest_item$addW(ItemStack stack) {
         GuiGraphics guiGraphics = (GuiGraphics) (Object) this;

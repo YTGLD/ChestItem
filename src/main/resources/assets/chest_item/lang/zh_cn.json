@@ -10,6 +10,9 @@
   "attribute.name.chest_item.heal": "治疗",
   "attribute.name.chest_item.instability": "伤害不稳定性",
   "attribute.name.chest_item.instability_low": "弱化风险",
+  "attribute.name.chest_item.hyperplasia": "疮疤增生最大值",
+  "attribute.name.chest_item.hyperplasia_speed": "疤痕组织治愈可能",
+  "attribute.name.chest_item.hyperplasia_stronger": "增生组织坚韧度",
 
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
@@ -196,6 +199,10 @@
   "item.chest_item.iron_cube.string.1": "伤害变得极度稳定，且输出能力有所增加",
   "item.chest_item.iron_cube.string.2": "生命值降低不会影响你的意志，反而会增加自身的稳定性",
   "item.chest_item.iron_cube.string.3": "你对防具的护甲有了极大的排斥",
+
+  "item.chest_item.scar_heart": "疤痕组织",
+  "item.chest_item.scar_heart.string.0": "疮疤的增生——对不可能说“不”",
+  "item.chest_item.scar_heart.string.1": "你的疤痕组织进行了增生。从某种意义上说，它是你额外的生命",
 
   "item.chest_item.iron_heart": "不稳定脉冲器",
   "item.chest_item.iron_heart.string.0": "看似胜券在握，实则慌的一批",

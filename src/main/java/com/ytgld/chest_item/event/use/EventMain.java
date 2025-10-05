@@ -20,6 +20,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -63,24 +65,26 @@ public class EventMain {
         List<Component> attributesTooltip = new ArrayList<>();
         Player player = context.player();
 
-        if (stack.getItem() instanceof Terror terror) {
-            Multimap<Holder<Attribute>, AttributeModifier> attributes =terror.muAttribute(player);
-            if (attributes !=null) {
-                attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
-                attributesTooltip.add(Component.empty());
-                attributesTooltip.add(
-                        Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
+        if (player!=null) {
+            if (stack.getItem() instanceof Terror terror) {
+                Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player);
+                if (attributes != null) {
+                    attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
+                    attributesTooltip.add(Component.empty());
+                    attributesTooltip.add(
+                            Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
 
-                if (player != null) {
-                    AttributeUtil.applyTextFor(
-                            stack,
-                            attributesTooltip::add,
-                            attributes,
-                            AttributeTooltipContext.of(player, context,context.tooltipDisplay(), context.flag()));
-                }
+                    if (player != null) {
+                        AttributeUtil.applyTextFor(
+                                stack,
+                                attributesTooltip::add,
+                                attributes,
+                                AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
+                    }
 
-                for (Component component : attributesTooltip) {
-                    evt.addTooltipLines(component);
+                    for (Component component : attributesTooltip) {
+                        evt.addTooltipLines(component);
+                    }
                 }
             }
         }
@@ -116,6 +120,26 @@ public class EventMain {
         StrongerStone.tick(event);
         WindKnife.event(event);
         GiantHeart.LivingIncomingDamageEvent(event);
+
+        if (event.getEntity() instanceof LivingEntity living) {
+            AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
+            if (hyperplasia_stronger != null) {
+                float value = (float) hyperplasia_stronger.getValue();
+                float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                if (data > 0) {
+                    float damage = event.getAmount() / value;
+                    float newData = data - damage;
+                    if (newData > 0) {
+                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, newData);
+                        event.setAmount(0);
+                    } else {
+                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                        event.setAmount(damage - data);
+                    }
+                }
+            }
+
+        }
 
         if (event.getSource().getEntity() instanceof LivingEntity living){
             AttributeInstance instability = living.getAttribute(AttReg.instability);
@@ -171,6 +195,30 @@ public class EventMain {
         EyeBook.tick(event);
         IronHeart.tick(event);
         IronCube.ItemStackTickEvent(event);
+        ScarHeart.tick(event);
+
+
+        LivingEntity living = event.player;
+        AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
+        AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
+
+        if (hyperplasia != null && hyperplasia_speed != null) {
+            float time = (float) (10 * hyperplasia_speed.getValue());
+            if (time < 1) {
+                time = 1;
+            }
+
+            float value = (float) hyperplasia.getValue();
+            float sNumber = value - 1;
+            float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+
+            if (living.tickCount % (time * 20) == 1) {
+                if (data < sNumber) {
+                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 0.5f);
+                    living.level().playSound(null,living.getX(),living.getY(),living.getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT,1,1);
+                }
+            }
+        }
     }
     @SubscribeEvent
     public void tick(LivingEntityUseItemEvent.Finish event) {

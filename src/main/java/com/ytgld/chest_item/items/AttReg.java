@@ -1,33 +1,71 @@
 package com.ytgld.chest_item.items;
 
+import com.mojang.serialization.Codec;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.other.SyncHandler;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
+
+import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = Chestitem.MODID)
 public class AttReg {
+    public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Chestitem.MODID);
+    public static final Supplier<AttachmentType<Float>> hyperplasiaATTACHMENT_TYPES = ATTACHMENT_TYPES.register(
+            "hyperplasia", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf("hyperplasia")).build()
+    );
+
+
+
+
+
     public static final DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, Chestitem.MODID);
     public static final DeferredHolder<Attribute,?> heal = REGISTRY.register("heal",()->{
         return new RangedAttribute("attribute.name.chest_item.heal", 1, -1024, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> instability = REGISTRY.register("instability",()->{
-        return new RangedAttribute("attribute.name.chest_item.instability", 0, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.instability", 1, -1024, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> instability_low = REGISTRY.register("instability_low",()->{
-        return new RangedAttribute("attribute.name.chest_item.instability_low", 0, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.instability_low", 1, -1024, 1024).setSyncable(true);
     });
+
+
+    /**
+     * 疮疤的增生——对不可能说“不”
+     */
+    public static final DeferredHolder<Attribute,?> hyperplasia = REGISTRY.register("hyperplasia",()->{
+        return new RangedAttribute("attribute.name.chest_item.hyperplasia", 1, -1024, 1024).setSyncable(true);
+    });
+
+    public static final DeferredHolder<Attribute,?> hyperplasia_speed = REGISTRY.register("hyperplasia_speed",()->{
+        return new RangedAttribute("attribute.name.chest_item.hyperplasia_speed", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final DeferredHolder<Attribute,?> hyperplasia_stronger = REGISTRY.register("hyperplasia_stronger",()->{
+        return new RangedAttribute("attribute.name.chest_item.hyperplasia_stronger", 1, -1024, 1024).setSyncable(true);
+    });
+
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER , AttReg.heal,1);
         event.add(EntityType.PLAYER , AttReg.instability,1);
         event.add(EntityType.PLAYER , AttReg.instability_low,1);
+        event.add(EntityType.PLAYER , AttReg.hyperplasia,1);
+        event.add(EntityType.PLAYER , AttReg.hyperplasia_speed,1);
+        event.add(EntityType.PLAYER , AttReg.hyperplasia_stronger,1);
 
     }
 }

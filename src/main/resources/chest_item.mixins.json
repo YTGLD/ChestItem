@@ -21,6 +21,7 @@
     "cilent.ATabMixin",
     "cilent.GameRendererMixin",
     "cilent.GuiGraphicsMixin",
+    "cilent.GuiMixin",
     "outline.BlackMixin"
   ]
 }

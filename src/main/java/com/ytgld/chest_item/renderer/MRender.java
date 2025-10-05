@@ -100,9 +100,6 @@ public abstract class MRender extends RenderType {
                         ))
                         .withLocation("pipeline/gui_textured").build());
 
-
-
-
         public static final RenderPipeline ENTITY_OUTLINE_BLIT = RenderPipeline.builder().withLocation("pipeline/entity_outline_blit")
                 .withVertexShader("core/screenquad").withFragmentShader("core/blit_screen").withSampler("InSampler"
                 ).withBlend(new BlendFunction(

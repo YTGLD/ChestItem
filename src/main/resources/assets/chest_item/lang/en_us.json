@@ -8,6 +8,9 @@
 
   "attribute.name.chest_item.instability": "injury instability",
   "attribute.name.chest_item.instability_low": "weakens damage instability",
+  "attribute.name.chest_item.hyperplasia": "hyperplasia",
+  "attribute.name.chest_item.hyperplasia_speed": "Scar tissue healing is possible",
+  "attribute.name.chest_item.hyperplasia_stronger": "hyperplasia hardness",
 
 
   "itemGroup.chest_item": "Trinkets in the chest",
@@ -178,7 +181,9 @@
   "item.chest_item.iron_cube.string.1": "Damage has become extremely stable and the output capacity has been increased",
   "item.chest_item.iron_cube.string.2": "Reducing health does not affect your will, but increases your own stability",
   "item.chest_item.iron_cube.string.3": "You have a great repulsion to armor armor",
-
+  "item.chest_item.scar_heart": "scar tissue",
+  "item.chest_item.scar_heart.string.0": "Scar growth - say no to the impossible",
+  "item.chest_item.scar_heart.string.1": "Your scar tissue has grown. In a sense, it's your extra life",
 
 "item.chest_item.iron_heart": "unstable pulser",
   "item.chest_item.iron_heart.string.0": "It seems that the winner is in hand, but in fact it is a group of panicked",

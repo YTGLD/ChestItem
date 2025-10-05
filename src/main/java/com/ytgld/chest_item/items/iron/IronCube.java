@@ -39,14 +39,16 @@ public class IronCube extends ItemBase {
     public static void ItemStackTickEvent(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.IronCube_)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
+        if (player!=null) {
+            if (!player.level().isClientSide()) {
+                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                    ItemStack stack = chestInventory.getItem(i);
+                    if (stack.is(InitItems.IronCube_)) {
+                        player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
+                        break;
+                    } else {
+                        player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
+                    }
                 }
             }
         }
