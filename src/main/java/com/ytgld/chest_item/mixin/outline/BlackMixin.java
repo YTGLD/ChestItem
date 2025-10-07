@@ -130,20 +130,16 @@ public abstract class BlackMixin implements MFramebufferBlack {
             renderpass.bindSampler("InSampler", chest_item$renderTarget_black.getColorTextureView());
             renderpass.draw(0, 3);
         } catch (Throwable var6) {
-            if (renderpass != null) {
-                try {
-                    renderpass.close();
-                } catch (Throwable var5) {
-                    var6.addSuppressed(var5);
-                }
+            try {
+                renderpass.close();
+            } catch (Throwable var5) {
+                var6.addSuppressed(var5);
             }
 
             throw var6;
         }
 
-        if (renderpass != null) {
-            renderpass.close();
-        }
+        renderpass.close();
 
     }
 }

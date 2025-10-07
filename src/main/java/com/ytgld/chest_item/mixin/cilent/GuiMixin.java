@@ -57,59 +57,17 @@ public abstract class GuiMixin {
         float i = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
         if (i > 0) {
             int a;
-            a = 80;
-            Matrix3x2fStack pose = guiGraphics.pose();
-            float age = player.tickCount/1.5f;
-
+            a = 255;
             int yy = y - (heartRows - 1) * height - 10;
             for (int k = 0; k < 10; k++) {
                 int xx = (x + k * 8) - 1;
-                int centerX = xx + 1;
-                int centerY = yy + 1;
-                int radius = 1;
                 if (k * 2 + 1 < i) {
-                    for (int j = 0; j < 8; j++) {
-                        float s = (float) Math.sin(age*j)/10f;
-                        double angle = 2 * Math.PI * j / 8;
-                        int newX = (int) (centerX + Math.cos(angle) * radius);
-                        int newY = (int) (centerY + Math.sin(angle) * radius);
-
-                        pose.pushMatrix();
-                        if (j==0||j==1) {
-                            pose.translateLocal(s, s);
-                        }else if (j==2||j==3){
-                            pose.translateLocal(s, -s);
-                        }if (j==4||j==5){
-                            pose.translateLocal(-s,s);
-                        }if (j==6||j==7){
-                            pose.translateLocal(-s, -s);
-                        }
-                        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png"),
-                                newX, newY, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
-                        pose.popMatrix();
-                    }
+                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png"),
+                            xx, yy, 0, 0, 11, 11, 11, 11, Light.ARGB.color(a, 255, 255, 255));
                 }
                 if (k * 2 + 1 == i) {
-                    for (int j = 0; j < 8; j++) {
-                        float s = (float) Math.sin(age*j)/10f;
-                        double angle = 2 * Math.PI * j / 8;
-                        int newX = (int) (centerX + Math.cos(angle) * radius);
-                        int newY = (int) (centerY + Math.sin(angle) * radius);
-
-                        pose.pushMatrix();
-                        if (j==0||j==1) {
-                            pose.translateLocal(s, s);
-                        }else if (j==2||j==3){
-                            pose.translateLocal(s, -s);
-                        }if (j==4||j==5){
-                            pose.translateLocal(-s,s);
-                        }if (j==6||j==7){
-                            pose.translateLocal(-s, -s);
-                        }
-                        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_2.png"),
-                                newX, newY, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
-                        pose.popMatrix();
-                    }
+                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_2.png"),
+                            xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
                 }
             }
 

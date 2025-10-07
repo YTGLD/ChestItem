@@ -5,6 +5,7 @@ import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.platform.DepthTestFunction;
 import com.mojang.blaze3d.platform.DestFactor;
 import com.mojang.blaze3d.platform.SourceFactor;
+import com.mojang.blaze3d.shaders.UniformType;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
@@ -76,19 +77,21 @@ public abstract class MRender extends RenderType {
         );
     }
     public static class RenderPs {
-
-        public static final RenderPipeline  LIGHTNING =
-                (RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
-                        .withVertexShader("core/rendertype_lightning")
-                        .withFragmentShader("core/rendertype_lightning")
-                        .withBlend(new BlendFunction(
-                                SourceFactor.SRC_ALPHA,
-                                DestFactor.ONE,
-                                SourceFactor.ONE,
-                                DestFactor.ZERO
-                        ))
-                        .withVertexFormat(DefaultVertexFormat.POSITION_COLOR,
-                                VertexFormat.Mode.QUADS).build());
+        public static final RenderPipeline LIGHTMAP = RenderPipeline.builder()
+                .withLocation("pipeline/lightmap")
+                .withVertexShader("core/screenquad")
+                .withFragmentShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"core/lightmap"))
+                .withUniform("LightmapInfo", UniformType.UNIFORM_BUFFER)
+                .withSampler("Sampler0").withBlend(new BlendFunction(
+                        SourceFactor.SRC_ALPHA,
+                        DestFactor.ONE,
+                        SourceFactor.ONE,
+                        DestFactor.ZERO
+                ))
+                .withVertexFormat(DefaultVertexFormat.EMPTY, VertexFormat.Mode.TRIANGLES)
+                .withDepthWrite(false)
+                .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
+                .build();
 
 
         public static final RenderPipeline GUI_TEXTURED =

@@ -16,6 +16,8 @@
     "requireAnnotations": true
   },
   "client": [
+    "LevelRenderMixin",
+    "LightTextureMixin",
     "cilent.AbstractContainerScreenMixin",
     "cilent.AdvancementWidgetMixin",
     "cilent.ATabMixin",

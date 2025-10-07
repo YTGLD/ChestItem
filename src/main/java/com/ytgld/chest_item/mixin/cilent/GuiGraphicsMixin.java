@@ -14,6 +14,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.render.state.GuiRenderState;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.gui.screens.inventory.tooltip.TooltipRenderUtil;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
@@ -39,7 +41,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     @Shadow @Final private Matrix3x2fStack pose;
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
-
     @Override
     public GuiRenderState cI1_21_9$guiRenderState() {
         return guiRenderState;
@@ -89,11 +90,10 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             guiGraphics.pose().popMatrix();
         }
     }
-    @Inject(at = @At(value = "HEAD"),method = "renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/world/item/ItemStack;)V")
+    @Inject(at = @At(value = "RETURN"),method = "renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/world/item/ItemStack;)V")
     public void ytgld$ClientTooltipPositioner(Font font, List<ClientTooltipComponent> components, int x, int y, ClientTooltipPositioner positioner, ResourceLocation background, ItemStack tooltipStack, CallbackInfo ci) {
-        if (tooltipStack.getItem() instanceof ItemBase) {
-            RenderTooltipEvent.Pre preEvent = ClientHooks.onRenderTooltipPre(tooltipStack, (GuiGraphics) (Object) this, x, y, this.guiWidth(), this.guiHeight(), components, font, positioner);
-
+        if (tooltipStack.getItem() instanceof ItemBase)  {
+            RenderTooltipEvent.Pre preEvent = ClientHooks.onRenderTooltipPre(tooltipStack,  (GuiGraphics) (Object) this, x, y, this.guiWidth(), this.guiHeight(), components, font, positioner);
             if (!preEvent.isCanceled()) {
                 font = preEvent.getFont();
                 x = preEvent.getX();
@@ -102,31 +102,29 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 int j = components.size() == 1 ? -2 : 0;
 
                 ClientTooltipComponent clienttooltipcomponent;
-                for (Iterator<ClientTooltipComponent> var11 = components.iterator(); var11.hasNext(); j += clienttooltipcomponent.getHeight(font)) {
+                for(Iterator<ClientTooltipComponent> var11 = components.iterator(); var11.hasNext(); j += clienttooltipcomponent.getHeight(font)) {
                     clienttooltipcomponent = var11.next();
                     int k = clienttooltipcomponent.getWidth(font);
                     if (k > i) {
                         i = k;
                     }
                 }
-
                 Vector2ic vector2ic = positioner.positionTooltip(this.guiWidth(), this.guiHeight(), x, y, i, j);
                 int l = vector2ic.x();
                 int i1 = vector2ic.y();
                 this.pose.pushMatrix();
-
                 chest_item$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
+
                 this.pose.popMatrix();
             }
         }
     }
     @Unique
     private  void chest_item$renderTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        int i = x - 3 - 4;
-        int j = y - 3 - 4;
-        int k = width + 3 + 3 + 8;
-        int l = height + 3 + 3 + 8;
-        guiGraphics.blitSprite(MRender.RenderPs.BACK,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"null"), i, j, k, l);
-        guiGraphics.blitSprite(MRender.RenderPs.BACK,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"null"), i, j, k, l);
+        int i = x - 3 - 9;
+        int j = y - 3 - 9;
+        int k = width + 3 + 3 + 18;
+        int l = height + 3 + 3 + 18;
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"tooltip/frame"), i, j, k, l);
     }
 }
