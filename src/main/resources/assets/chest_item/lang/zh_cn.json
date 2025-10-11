@@ -203,6 +203,7 @@
   "item.chest_item.scar_heart": "疤痕组织",
   "item.chest_item.scar_heart.string.0": "疮疤的增生——对不可能说“不”",
   "item.chest_item.scar_heart.string.1": "你的疤痕组织进行了增生。从某种意义上说，它是你额外的生命",
+  "item.chest_item.life_coin": "鲜活硬币",
 
   "item.chest_item.iron_heart": "不稳定脉冲器",
   "item.chest_item.iron_heart.string.0": "看似胜券在握，实则慌的一批",
@@ -212,6 +213,9 @@
   "advancements.chest_item.root.title": "箱子里的小饰品",
   "item.chest_item.life_crystal.string.0": "超级生命力",
   "item.chest_item.life_crystal.string.1": "增加10点最大生命值",
-  "item.chest_item.life_crystal": "生命水晶"
+  "item.chest_item.life_crystal": "生命水晶",
 
+  "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
+  "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
+  "chest_item.configuration.MusicAndRender": "渲染和音效"
 }

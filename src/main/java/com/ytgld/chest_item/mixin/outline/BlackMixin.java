@@ -10,6 +10,7 @@ import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.outline.BlackFramebufferSets;
@@ -61,6 +62,9 @@ public abstract class BlackMixin implements MFramebufferBlack {
     }
     @Inject(method = "doEntityOutline", at = @At(value = "RETURN"))
     private void drawEntityOutlinesFramebuffer(CallbackInfo ci) {
+        if (!ConfigC.config.Render.get()){
+            return;
+        }
         if (this.minecraft.getMainRenderTarget().getColorTextureView() != null) {
             if (HandlerClient.showOutline) {
                 chest_item$blitAndBlendToTexture(this.minecraft.getMainRenderTarget().getColorTextureView());

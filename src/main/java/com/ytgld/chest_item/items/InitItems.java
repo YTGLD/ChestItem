@@ -111,6 +111,8 @@ public class InitItems {
             (resourceLocation)-> new IronCube(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> ScarHeart_ = register("scar_heart",
             (resourceLocation)-> new ScarHeart(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> LifeCoin_ = register("life_coin",
+            (resourceLocation)-> new LifeCoin(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -162,6 +164,7 @@ public class InitItems {
                     output.accept(InitItems.Self_Increasing_Heart);
                     output.accept(InitItems.God_Apple);
                     output.accept(InitItems.ScarHeart_);
+                    output.accept(InitItems.LifeCoin_);
                 }).build());
 
     }
@@ -216,6 +219,7 @@ public class InitItems {
                     .add(InitItems.GiantHeart_.asItem())
                     .add(InitItems.EndEffect_.asItem())
                     .add(InitItems.EyeBook_.asItem())
+                    .add(InitItems.LifeCoin_.asItem())
                     .add(InitItems.Stomach_.asItem());;
         }
         private static TagKey<Item> createTag(String name) {

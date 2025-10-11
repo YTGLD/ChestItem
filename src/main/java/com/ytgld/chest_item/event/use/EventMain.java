@@ -2,6 +2,8 @@ package com.ytgld.chest_item.event.use;
 
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.ConfigC;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
@@ -16,6 +18,7 @@ import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
+import com.ytgld.chest_item.other.ChestInventory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -28,6 +31,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -45,11 +49,31 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEnchantItemEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventMain {
+    public static int time = 0;
+    @SubscribeEvent
+    public void ItemTooltipEvent(LevelTickEvent.Pre event){
+        time++;
+    }
+    public boolean isHas(Player player, Item item){
+        ChestInventory chestInventory = Handler.getItem(player);
+        if (chestInventory!=null) {
+            if (!player.level().isClientSide()) {
+                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                    ItemStack getI = chestInventory.getItem(i);
+                    if (getI.is(item)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
     @SubscribeEvent
     public void AddAttributeTooltipsEvent(AddAttributeTooltipsEvent evt){
         AttributeTooltipContext context = evt.getContext();
@@ -123,15 +147,17 @@ public class EventMain {
                 float value = (float) hyperplasia_stronger.getValue();
                 float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
                 if (data > 0) {
-                    float damage = event.getAmount() / value;
-                    float newData = data - damage;
+                    float damage = event.getAmount() ;
+                    float newData = data - damage / 2.25f / value;
                     if (newData > 0) {
-                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, newData);
+                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, (newData));
                         event.setAmount(0);
                     } else {
                         living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
                         event.setAmount(damage - data);
                     }
+                }else {
+                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
                 }
             }
 
@@ -192,7 +218,7 @@ public class EventMain {
         IronHeart.tick(event);
         IronCube.ItemStackTickEvent(event);
         ScarHeart.tick(event);
-
+        LifeCoin.tick(event);
 
         LivingEntity living = event.player;
         AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
@@ -211,8 +237,13 @@ public class EventMain {
             if (living.tickCount % (time * 20) == 1) {
                 if (data < sNumber) {
                     living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 0.5f);
-                    living.level().playSound(null,living.getX(),living.getY(),living.getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT,1,1);
+                    if (ConfigC.config.hyperplasiaMusic.get()) {
+                        living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT, 0.6f, 0.6f);
+                    }
                 }
+            }
+            if (data < 0) {
+                living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
             }
         }
     }

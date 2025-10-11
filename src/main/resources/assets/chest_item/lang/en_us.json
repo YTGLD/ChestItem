@@ -181,11 +181,11 @@
   "item.chest_item.iron_cube.string.1": "Damage has become extremely stable and the output capacity has been increased",
   "item.chest_item.iron_cube.string.2": "Reducing health does not affect your will, but increases your own stability",
   "item.chest_item.iron_cube.string.3": "You have a great repulsion to armor armor",
+  "item.chest_item.life_coin": "Living Coins",
   "item.chest_item.scar_heart": "scar tissue",
   "item.chest_item.scar_heart.string.0": "Scar growth - say no to the impossible",
   "item.chest_item.scar_heart.string.1": "Your scar tissue has grown. In a sense, it's your extra life",
-
-"item.chest_item.iron_heart": "unstable pulser",
+  "item.chest_item.iron_heart": "unstable pulser",
   "item.chest_item.iron_heart.string.0": "It seems that the winner is in hand, but in fact it is a group of panicked",
   "item.chest_item.iron_heart.string.1": "The damage is unstable, and the damage is increased overall",
   "item.chest_item.god_apple.string.0": "Blood Sacrifice Blood God",
@@ -196,5 +196,11 @@
   "item.chest_item.god_apple": "God's Fruit",
   "item.chest_item.life_crystal.string.0": "Super life force",
   "item.chest_item.life_crystal.string.1": "Increase 10 max health",
-  "item.chest_item.life_crystal": "Life Crystal"
+  "item.chest_item.life_crystal": "Life Crystal",
+
+
+
+  "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
+  "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
+  "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects"
 }

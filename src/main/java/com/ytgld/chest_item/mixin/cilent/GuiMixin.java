@@ -23,12 +23,6 @@ import javax.annotation.Nullable;
 @Mixin(Gui.class)
 public abstract class GuiMixin {
 
-    @Shadow @Final private static ResourceLocation ARMOR_FULL_SPRITE;
-
-    @Shadow @Final private static ResourceLocation ARMOR_HALF_SPRITE;
-
-    @Shadow @Final private static ResourceLocation ARMOR_EMPTY_SPRITE;
-
     @Shadow @Nullable protected abstract Player getCameraPlayer();
 
     @Shadow public int leftHeight;
