@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.items.meet;
 
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -10,7 +11,7 @@ import net.minecraft.world.item.component.TooltipDisplay;
 
 import java.util.function.Consumer;
 
-public class Heart  extends ItemBase {
+public class Heart  extends ItemBase implements Meat {
     public Heart(Properties properties) {
         super(properties);
     }

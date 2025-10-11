@@ -4,6 +4,7 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
@@ -18,7 +19,7 @@ import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 
 import java.util.function.Consumer;
 
-public class Stomach  extends ItemBase {
+public class Stomach  extends ItemBase implements Meat {
     public Stomach(Properties properties) {
         super(properties);
     }

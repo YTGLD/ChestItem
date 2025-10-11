@@ -1,7 +1,9 @@
 package com.ytgld.chest_item.mixin.cilent;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.items.Terror;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
@@ -14,7 +16,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.render.state.GuiRenderState;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
-import net.minecraft.client.gui.screens.inventory.tooltip.TooltipRenderUtil;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -114,10 +115,68 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 int i1 = vector2ic.y();
                 this.pose.pushMatrix();
                 chest_item$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
-
                 this.pose.popMatrix();
+                if (tooltipStack.getItem()instanceof Meat){
+                    this.pose.pushMatrix();
+                    si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j,400);
+                    this.pose.popMatrix();
+                }
+
             }
         }
+    }
+    @Unique
+    public void si1_21_4$renderTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
+        // 左上角
+        int topLeftX = x - 3 - 9+2;
+        int topLeftY = y - 3 - 9;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, -2);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/tool_0_0"), 48, 48,  0, 0, topLeftX, topLeftY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+        // 中间位置
+        int middleX = x + (width - 48) / 2;
+        int middleY = y - 3 - 6;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, -7);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/tool_middle_0"),48,48, 0, 0,  middleX, middleY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+
+        // 右上角
+        int topRightX = x + width + 3 - 48+6;
+        int topRightY = y - 3 - 9;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, -2);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/tool_0_1"), 48, 48, 0, 0, topRightX, topRightY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+        // 左下角
+        int bottomLeftX = x - 3 - 9 + 2;
+        int bottomLeftY = y + height + 3 - 48 + 4;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, 4);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/tool_1_0"),48, 48,0, 0, bottomLeftX, bottomLeftY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+        // 右下角
+        int bottomRightX = x + width + 3 - 48 + 6;
+        int bottomRightY = y + height + 3 - 48 + 4;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, 4);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/tool_1_1"),48, 48, 0, 0, bottomRightX, bottomRightY, 48, 48);
+        guiGraphics.pose().popMatrix();
     }
     @Unique
     private  void chest_item$renderTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {

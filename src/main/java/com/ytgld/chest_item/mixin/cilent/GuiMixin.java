@@ -1,10 +1,8 @@
 package com.ytgld.chest_item.mixin.cilent;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.MRender;
-import com.ytgld.chest_item.renderer.RendererFarm;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -12,8 +10,6 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.world.entity.player.Player;
-import org.joml.Matrix3x2fStack;
-import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -62,11 +58,11 @@ public abstract class GuiMixin {
             for (int k = 0; k < 10; k++) {
                 int xx = (x + k * 8) - 1;
                 if (k * 2 + 1 < i) {
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png"),
+                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_CI, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png"),
                             xx, yy, 0, 0, 11, 11, 11, 11, Light.ARGB.color(a, 255, 255, 255));
                 }
                 if (k * 2 + 1 == i) {
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_2.png"),
+                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_CI, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_2.png"),
                             xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
                 }
             }

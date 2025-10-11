@@ -26,14 +26,11 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 @Mod(Chestitem.MODID)
 public class Chestitem {
     public static final String MODID = "chest_item";
-    public static final ResourceLocation POST = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-            "entity_outline");
     public static final ResourceLocation POST_BLACK = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
             "black");
     public Chestitem(IEventBus modEventBus, ModContainer modContainer) {

@@ -137,15 +137,9 @@ public class InitItems {
                     output.accept(InitItems.Separate_Rune);
                     output.accept(InitItems.Pain_Rune);
                     output.accept(InitItems.Undead_Rune);
-                    output.accept(InitItems.Heart_);
-                    output.accept(InitItems.Stomach_);
-                    output.accept(InitItems.Meat_Ball);
-                    output.accept(InitItems.Self_Increasing_Heart);
-                    output.accept(InitItems.God_Apple);
                     output.accept(InitItems.Gold_Cheese);
                     output.accept(InitItems.Space_);
                     output.accept(InitItems.TheEndIsComing_);
-                    output.accept(InitItems.ImitationBiomass_);
                     output.accept(InitItems.Battery_);
                     output.accept(InitItems.MAGIC_IRON);
                     output.accept(InitItems.SpeedHeart_);
@@ -159,6 +153,14 @@ public class InitItems {
                     output.accept(InitItems.Complete);
                     output.accept(InitItems.IronHeart_);
                     output.accept(InitItems.IronCube_);
+
+
+                    output.accept(InitItems.ImitationBiomass_);
+                    output.accept(InitItems.Heart_);
+                    output.accept(InitItems.Stomach_);
+                    output.accept(InitItems.Meat_Ball);
+                    output.accept(InitItems.Self_Increasing_Heart);
+                    output.accept(InitItems.God_Apple);
                     output.accept(InitItems.ScarHeart_);
                 }).build());
 

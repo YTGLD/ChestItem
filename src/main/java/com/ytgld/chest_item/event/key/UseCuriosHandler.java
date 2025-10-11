@@ -1,7 +1,6 @@
 package com.ytgld.chest_item.event.key;
 
 import com.ytgld.chest_item.items.end.TheEndIsComing;
-import com.ytgld.chest_item.items.other.Space;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;

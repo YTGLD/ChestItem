@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.mixin.cilent;
 
-import com.ytgld.chest_item.effect.Effects;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;

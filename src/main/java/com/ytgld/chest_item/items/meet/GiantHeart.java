@@ -3,6 +3,7 @@ package com.ytgld.chest_item.items.meet;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
@@ -20,7 +21,7 @@ import java.util.function.Consumer;
  * <p>
  *  增加100%食物变为生命值的速度
  */
-public class GiantHeart extends ItemBase {
+public class GiantHeart extends ItemBase implements Meat {
     public GiantHeart(Properties properties) {
         super(properties);
     }

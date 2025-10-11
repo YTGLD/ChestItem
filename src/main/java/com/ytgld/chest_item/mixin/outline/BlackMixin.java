@@ -88,7 +88,7 @@ public abstract class BlackMixin implements MFramebufferBlack {
     private void renderMain(FrameGraphBuilder frameGraphBuilder, Frustum p_366590_, Matrix4f p_362420_, GpuBufferSlice p_418185_, boolean p_363964_, LevelRenderState p_451509_, DeltaTracker p_360931_, ProfilerFiller p_362234_, CallbackInfo ci) {
         if (this.chest_item$renderTarget_black != null) {
             this.chest_item$defaultFramebufferSets_black.entityOutlineFramebuffer =
-                    frameGraphBuilder.importExternal("black", this.chest_item$renderTarget_black);
+                    frameGraphBuilder.importExternal("main", this.chest_item$renderTarget_black);
         }
     }
 

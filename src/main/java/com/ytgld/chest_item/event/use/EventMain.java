@@ -19,7 +19,6 @@ import com.ytgld.chest_item.items.other.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -49,7 +48,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerEnchantItemEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class EventMain {
     @SubscribeEvent
@@ -74,13 +72,11 @@ public class EventMain {
                     attributesTooltip.add(
                             Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
 
-                    if (player != null) {
-                        AttributeUtil.applyTextFor(
-                                stack,
-                                attributesTooltip::add,
-                                attributes,
-                                AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
-                    }
+                    AttributeUtil.applyTextFor(
+                            stack,
+                            attributesTooltip::add,
+                            attributes,
+                            AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
 
                     for (Component component : attributesTooltip) {
                         evt.addTooltipLines(component);

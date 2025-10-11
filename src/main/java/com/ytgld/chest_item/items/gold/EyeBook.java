@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.items.gold;
 
-import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;

@@ -8,6 +8,7 @@ import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
@@ -29,7 +30,7 @@ import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
-public class SelfIncreasingHeart extends ItemBase {
+public class SelfIncreasingHeart extends ItemBase implements Meat {
     public SelfIncreasingHeart(Properties properties) {
         super(properties);
     }

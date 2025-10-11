@@ -77,23 +77,20 @@ public abstract class MRender extends RenderType {
         );
     }
     public static class RenderPs {
-        public static final RenderPipeline LIGHTMAP = RenderPipeline.builder()
-                .withLocation("pipeline/lightmap")
-                .withVertexShader("core/screenquad")
-                .withFragmentShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"core/lightmap"))
-                .withUniform("LightmapInfo", UniformType.UNIFORM_BUFFER)
-                .withSampler("Sampler0").withBlend(new BlendFunction(
-                        SourceFactor.SRC_ALPHA,
-                        DestFactor.ONE,
-                        SourceFactor.ONE,
-                        DestFactor.ZERO
-                ))
-                .withVertexFormat(DefaultVertexFormat.EMPTY, VertexFormat.Mode.TRIANGLES)
-                .withDepthWrite(false)
-                .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
-                .build();
 
-
+        public static final RenderPipeline.Snippet GUI_TEXTURED_SNIPPET_CI =
+                RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
+                        .withVertexShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color"))
+                        .withFragmentShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color"))
+                        .withSampler("Sampler0")
+                        .withBlend(new BlendFunction(
+                                SourceFactor.SRC_ALPHA,
+                                DestFactor.ONE,
+                                SourceFactor.ONE,
+                                DestFactor.ZERO
+                        )).withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
+                                VertexFormat.Mode.QUADS)
+                        .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
         public static final RenderPipeline GUI_TEXTURED =
                 (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).withBlend(new BlendFunction(
                                 SourceFactor.SRC_ALPHA,
@@ -102,6 +99,15 @@ public abstract class MRender extends RenderType {
                                 DestFactor.ZERO
                         ))
                         .withLocation("pipeline/gui_textured").build());
+
+        public static final RenderPipeline GUI_TEXTURED_CI =
+                (RenderPipeline.builder(GUI_TEXTURED_SNIPPET_CI).withBlend(new BlendFunction(
+                                SourceFactor.SRC_ALPHA,
+                                DestFactor.ONE,
+                                SourceFactor.ONE,
+                                DestFactor.ZERO
+                        ))
+                        .withLocation("pipeline/gui_textured_ci").build());
 
         public static final RenderPipeline ENTITY_OUTLINE_BLIT = RenderPipeline.builder().withLocation("pipeline/entity_outline_blit")
                 .withVertexShader("core/screenquad").withFragmentShader("core/blit_screen").withSampler("InSampler"

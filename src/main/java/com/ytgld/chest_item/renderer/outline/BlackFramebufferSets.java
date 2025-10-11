@@ -7,8 +7,7 @@ import net.minecraft.client.renderer.PostChain;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
-public class BlackFramebufferSets
-        implements PostChain.TargetBundle  {
+public class BlackFramebufferSets implements PostChain.TargetBundle  {
 
     public  ResourceHandle<RenderTarget> entityOutlineFramebuffer;
     public  ResourceHandle<RenderTarget> mainFramebuffer = ResourceHandle.invalid();

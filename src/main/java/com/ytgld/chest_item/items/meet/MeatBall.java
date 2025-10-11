@@ -3,6 +3,7 @@ package com.ytgld.chest_item.items.meet;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
@@ -17,7 +18,7 @@ import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 
 import java.util.function.Consumer;
 
-public class MeatBall  extends ItemBase {
+public class MeatBall  extends ItemBase implements Meat {
     public MeatBall(Properties properties) {
         super(properties);
     }

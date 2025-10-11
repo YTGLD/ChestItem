@@ -7,7 +7,6 @@ import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.entity.AttackEndComing;
 import com.ytgld.chest_item.entity.state.AttackEndComingRenderState;
 import com.ytgld.chest_item.renderer.MRender;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
