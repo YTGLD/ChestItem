@@ -3,6 +3,7 @@ package com.ytgld.chest_item.mixin.cilent;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.items.Terror;
 import com.ytgld.chest_item.renderer.MRender;
@@ -114,14 +115,24 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 int l = vector2ic.x();
                 int i1 = vector2ic.y();
                 this.pose.pushMatrix();
-                chest_item$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
+                if (tooltipStack.getItem()instanceof ItemBlackShadow){
+                    chest_item$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
+                }else {
+                    chest_item$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
+                }
                 this.pose.popMatrix();
                 if (tooltipStack.getItem()instanceof Meat){
                     this.pose.pushMatrix();
                     si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j,400);
                     this.pose.popMatrix();
                 }
-
+                if (tooltipStack.getItem()instanceof ItemBlackShadow){
+                    this.pose.pushMatrix();
+                    si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j,400);
+                    this.pose.popMatrix();
+                    this.pose.pushMatrix();
+                    this.pose.popMatrix();
+                }
             }
         }
     }
@@ -178,6 +189,61 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         "tooltip/tool_1_1"),48, 48, 0, 0, bottomRightX, bottomRightY, 48, 48);
         guiGraphics.pose().popMatrix();
     }
+
+
+    @Unique
+    public void si1_21_4$renderItemBlackShadowTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
+        // 左上角
+        int topLeftX = x - 3 - 9+2;
+        int topLeftY = y - 3 - 9;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, -2);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/black_shadow/tool_0_0"), 48, 48,  0, 0, topLeftX, topLeftY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+        // 中间位置
+        int middleX = x + (width - 48) / 2;
+        int middleY = y - 3 - 6;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, -7);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/black_shadow/tool_middle_0"),48,48, 0, 0,  middleX, middleY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+
+        // 右上角
+        int topRightX = x + width + 3 - 48+6;
+        int topRightY = y - 3 - 9;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, -2);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/black_shadow/tool_0_1"), 48, 48, 0, 0, topRightX, topRightY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+        // 左下角
+        int bottomLeftX = x - 3 - 9 + 2;
+        int bottomLeftY = y + height + 3 - 48 + 4;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, 4);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/black_shadow/tool_1_0"),48, 48,0, 0, bottomLeftX, bottomLeftY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+        // 右下角
+        int bottomRightX = x + width + 3 - 48 + 6;
+        int bottomRightY = y + height + 3 - 48 + 4;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, 4);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/black_shadow/tool_1_1"),48, 48, 0, 0, bottomRightX, bottomRightY, 48, 48);
+        guiGraphics.pose().popMatrix();
+    }
     @Unique
     private  void chest_item$renderTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
         int i = x - 3 - 9;
@@ -185,5 +251,17 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         int k = width + 3 + 3 + 18;
         int l = height + 3 + 3 + 18;
         guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"tooltip/frame"), i, j, k, l);
+    }
+
+    @Unique
+    private  void chest_item$renderItemBlackShadowTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        int i = x - 3 - 9;
+        int j = y - 3 - 9;
+        int k = width + 3 + 3 + 18;
+        int l = height + 3 + 3 + 18;
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                "tooltip/black_shadow/frame"), i, j, k, l);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                "tooltip/black_shadow/background"), i, j, k, l);
     }
 }

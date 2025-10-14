@@ -40,8 +40,42 @@ public abstract class GuiMixin {
                 this.leftHeight += 20;
             }
         }
+        if (player != null) {
+            float i = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+            int l = p_283143_.guiWidth() / 2 - 91;
+            Profiler.get().push("shadow_shield");
+            cI1_21_9$renderShadowBlackArmor(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 20, 1, 0, l);
+            Profiler.get().pop();
+            if (i > 0) {
+                this.leftHeight += 20;
+            }
+        }
 
     }
+    @Unique
+    private  void cI1_21_9$renderShadowBlackArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
+        float i = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+        if (i > 0) {
+            int a;
+            a = 255;
+            int yy = y - (heartRows - 1) * height - 10;
+            for (int k = 0; k < 10; k++) {
+                int xx = (x + k * 8) - 1;
+                if (k * 2 + 1 < i) {
+                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_CI, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                    "textures/gui/shadow_black_1.png"),
+                            xx, yy, 0, 0, 11, 11, 11, 11, Light.ARGB.color(a, 255, 255, 255));
+                }
+                if (k * 2 + 1 == i) {
+                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_CI, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                    "textures/gui/shadow_black_2.png"),
+                            xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                }
+            }
+
+        }
+    }
+
     @Unique
     private  void cI1_21_9$renderArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
         float i = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);

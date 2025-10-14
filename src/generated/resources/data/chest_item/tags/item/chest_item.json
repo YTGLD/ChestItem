@@ -15,20 +15,13 @@
     "chest_item:separate_rune",
     "chest_item:pain_rune",
     "chest_item:undead_rune",
-    "chest_item:heart",
-    "chest_item:meatball",
-    "chest_item:self_increasing_heart",
-    "chest_item:god_apple",
     "chest_item:the_end_is_coming",
     "chest_item:gold_cheese",
     "chest_item:space",
-    "chest_item:imitation_biomass",
     "chest_item:kaolinite",
     "chest_item:battery",
-    "chest_item:giant_heart",
     "chest_item:end_effect",
     "chest_item:eye_book",
-    "chest_item:life_coin",
-    "chest_item:stomach"
+    "chest_item:heavy_blade"
   ]
 }

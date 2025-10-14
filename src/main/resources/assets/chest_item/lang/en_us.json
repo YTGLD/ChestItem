@@ -11,6 +11,9 @@
   "attribute.name.chest_item.hyperplasia": "hyperplasia",
   "attribute.name.chest_item.hyperplasia_speed": "Scar tissue healing is possible",
   "attribute.name.chest_item.hyperplasia_stronger": "hyperplasia hardness",
+  "attribute.name.chest_item.shadow_shield": "Shadow shield",
+  "attribute.name.chest_item.shadow_shield_speed": "Shadow Shield expansion speed",
+  "attribute.name.chest_item.shadow_shield_stronger": "Shadow shield stability",
 
 
   "itemGroup.chest_item": "Trinkets in the chest",
@@ -181,7 +184,6 @@
   "item.chest_item.iron_cube.string.1": "Damage has become extremely stable and the output capacity has been increased",
   "item.chest_item.iron_cube.string.2": "Reducing health does not affect your will, but increases your own stability",
   "item.chest_item.iron_cube.string.3": "You have a great repulsion to armor armor",
-  "item.chest_item.life_coin": "Living Coins",
   "item.chest_item.scar_heart": "scar tissue",
   "item.chest_item.scar_heart.string.0": "Scar growth - say no to the impossible",
   "item.chest_item.scar_heart.string.1": "Your scar tissue has grown. In a sense, it's your extra life",
@@ -197,6 +199,21 @@
   "item.chest_item.life_crystal.string.0": "Super life force",
   "item.chest_item.life_crystal.string.1": "Increase 10 max health",
   "item.chest_item.life_crystal": "Life Crystal",
+
+  "item.chest_item.life_coin": "Living Coins",
+  "item.chest_item.life_coin.string.0": "The wealth of mutation",
+
+"item.chest_item.heavy_blade": "Tiangang Heavy Blade",
+  "item.chest_item.heavy_blade.string.0": "The blade of self-discipline is terrifying",
+  "item.chest_item.heavy_blade.string.1": "Each point of proliferation tissue provides a 1.5% bonus to all damage (up to 30%)",
+  "item.chest_item.heavy_blade.string.2":"Each armor point provides a 1% bonus to all damage (up to 25%)",
+  "item.chest_item.heavy_blade.string.3": "0.5% bonus to all damage per point of hunger (up to 10%)",
+  "item.chest_item.heavy_blade.string.4": "Reduces all damage by 20% by default",
+
+
+  "item.chest_item.evil_thoughts_forge_dreams": "恶念锻梦",
+  "item.chest_item.evil_thoughts_forge_dreams.string.0": "失败的理论——探索未知",
+  "item.chest_item.evil_thoughts_forge_dreams.string.1": "将50%的增生组织转换成幽影护盾",
 
 
 

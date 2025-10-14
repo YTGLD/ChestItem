@@ -6,10 +6,8 @@ import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
-import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.ItemBase;
-import com.ytgld.chest_item.items.Terror;
+import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -19,9 +17,13 @@ import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -60,20 +62,7 @@ public class EventMain {
     public void ItemTooltipEvent(LevelTickEvent.Pre event){
         time++;
     }
-    public boolean isHas(Player player, Item item){
-        ChestInventory chestInventory = Handler.getItem(player);
-        if (chestInventory!=null) {
-            if (!player.level().isClientSide()) {
-                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                    ItemStack getI = chestInventory.getItem(i);
-                    if (getI.is(item)){
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+
     @SubscribeEvent
     public void AddAttributeTooltipsEvent(AddAttributeTooltipsEvent evt){
         AttributeTooltipContext context = evt.getContext();
@@ -86,24 +75,35 @@ public class EventMain {
         }
         List<Component> attributesTooltip = new ArrayList<>();
         Player player = context.player();
-
         if (player!=null) {
             if (stack.getItem() instanceof Terror terror) {
                 Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player);
                 if (attributes != null) {
                     attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
-                    attributesTooltip.add(Component.empty());
-                    attributesTooltip.add(
-                            Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
+                    evt.addTooltipLines(Component.empty());
+                    if (!(stack.getItem() instanceof ItemBlackShadow)) {
+                        attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
+                    }
 
                     AttributeUtil.applyTextFor(
                             stack,
                             attributesTooltip::add,
                             attributes,
                             AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
+                    Component blackShadow = Component.translatable("event.chest_item.equip")
+                            .withStyle(Style.EMPTY.withColor(Light.ARGB.color(255, 255, 0, 100)));
 
+                    if (stack.getItem() instanceof ItemBlackShadow) {
+                        evt.addTooltipLines(blackShadow);
+                    }
                     for (Component component : attributesTooltip) {
-                        evt.addTooltipLines(component);
+                        if (stack.getItem() instanceof ItemBlackShadow) {
+                            MutableComponent co = component.copy();
+                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80EE82EE)));
+                            evt.addTooltipLines(co);
+                        } else {
+                            evt.addTooltipLines(component);
+                        }
                     }
                 }
             }
@@ -134,12 +134,39 @@ public class EventMain {
         Lead.event(event);
     }
     @SubscribeEvent
+    public void LivingDamageEvent(LivingDamageEvent.Pre event){
+        GodApple.event(event);
+
+        if (event.getEntity() instanceof LivingEntity living) {
+            AttributeInstance shadow_shield_stronger = living.getAttribute(AttReg.shadow_shield_stronger);
+            if (shadow_shield_stronger != null) {
+                float value = (float) shadow_shield_stronger.getValue();
+                float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                if (data > 0) {
+                    float damage = event.getNewDamage() ;
+                    float newData = data - damage / 4.5f / value;
+                    if (newData > 0) {
+                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, (newData));
+                        event.setNewDamage(0);
+                    } else {
+                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                        event.setNewDamage(damage - data);
+                    }
+                }else {
+                    living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                }
+            }
+        }
+    }
+    @SubscribeEvent
     public void LivingIncomingDamageEvent(LivingIncomingDamageEvent event){
         Knife.event(event);
         ArmorStone.tick(event);
         StrongerStone.tick(event);
         WindKnife.event(event);
         GiantHeart.LivingIncomingDamageEvent(event);
+        HeavyBlade.LivingIncomingDamageEvent(event);
+
 
         if (event.getEntity() instanceof LivingEntity living) {
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
@@ -160,7 +187,6 @@ public class EventMain {
                     living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
                 }
             }
-
         }
 
         if (event.getSource().getEntity() instanceof LivingEntity living){
@@ -196,10 +222,6 @@ public class EventMain {
         }
     }
     @SubscribeEvent
-    public void LivingDamageEvent(LivingDamageEvent.Pre event){
-        GodApple.event(event);
-    }
-    @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
         GodBlood.tick(event);
         DrugHeal.tick(event);
@@ -219,34 +241,64 @@ public class EventMain {
         IronCube.ItemStackTickEvent(event);
         ScarHeart.tick(event);
         LifeCoin.tick(event);
-
+        EvilThoughtsForgeDreams.ItemStackTickEvent(event);
         LivingEntity living = event.player;
-        AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
-        AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
+        {
+            AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
+            AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
 
-        if (hyperplasia != null && hyperplasia_speed != null) {
-            float time = (float) (10 * hyperplasia_speed.getValue());
-            if (time < 1) {
-                time = 1;
-            }
+            if (hyperplasia != null && hyperplasia_speed != null) {
+                float time = (float) (10 * hyperplasia_speed.getValue());
+                if (time < 1) {
+                    time = 1;
+                }
 
-            float value = (float) hyperplasia.getValue();
-            float sNumber = value - 1;
-            float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                float value = (float) hyperplasia.getValue();
+                float sNumber = value - 1;
+                float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
 
-            if (living.tickCount % (time * 20) == 1) {
-                if (data < sNumber) {
-                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 0.5f);
-                    if (ConfigC.config.hyperplasiaMusic.get()) {
-                        living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT, 0.6f, 0.6f);
+                if (living.tickCount % (time * 20) == 1) {
+                    if (data < sNumber) {
+                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 0.5f);
+                        if (ConfigC.config.hyperplasiaMusic.get()) {
+                            living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT, 0.6f, 0.6f);
+                        }
                     }
                 }
+                if (data < 0) {
+                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                }
             }
-            if (data < 0) {
-                living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+        }
+        {
+            AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
+            AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
+
+            if (shadow_shield != null && shadow_shield_speed != null) {
+                float time = 200;
+                time /= (float) shadow_shield_speed.getValue();
+                if (time < 20) {
+                    time = 20f;
+                }
+                float value = (float) shadow_shield.getValue();
+                float sNumber = value - 1;
+                float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+
+                if (living.tickCount % (int)time == 1) {
+                    if (data < sNumber) {
+                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, data + 0.5f);
+                        if (ConfigC.config.hyperplasiaMusic.get()) {
+                            living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.WARDEN_HEARTBEAT, SoundSource.AMBIENT, 0.8f, 0.8f);
+                        }
+                    }
+                }
+                if (data < 0) {
+                    living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                }
             }
         }
     }
+
     @SubscribeEvent
     public void tick(LivingEntityUseItemEvent.Finish event) {
         Stomach.tick(event);
@@ -270,8 +322,14 @@ public class EventMain {
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
         if (event.getItemStack().getItem() instanceof ItemBase) {
-            event.getToolTip().add(1, Component.literal(""));
-            event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(ChatFormatting.GOLD));
+            if (event.getItemStack().getItem() instanceof ItemBlackShadow){
+                event.getToolTip().add(1, Component.literal(""));
+                event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(Style.EMPTY
+                        .withColor(Light.ARGB.color(255, 255, 0, 100))));
+            }else {
+                event.getToolTip().add(1, Component.literal(""));
+                event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(ChatFormatting.GOLD));
+            }
         }
     }
     @SubscribeEvent

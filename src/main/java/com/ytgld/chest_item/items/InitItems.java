@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -113,6 +114,10 @@ public class InitItems {
             (resourceLocation)-> new ScarHeart(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> LifeCoin_ = register("life_coin",
             (resourceLocation)-> new LifeCoin(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> HeavyBlade_ = register("heavy_blade",
+            (resourceLocation)-> new HeavyBlade(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> EvilThoughtsForgeDreams_ = register("evil_thoughts_forge_dreams",
+            (resourceLocation)-> new EvilThoughtsForgeDreams(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -148,7 +153,6 @@ public class InitItems {
                     output.accept(InitItems.WindKnife_);
                     output.accept(InitItems.Kaolinite_);
                     output.accept(InitItems.NuclearReaction_);
-                    output.accept(InitItems.GiantHeart_);
                     output.accept(InitItems.EndEffect_);
                     output.accept(InitItems.EyeBook_);
                     output.accept(InitItems.Abnormal);
@@ -157,6 +161,7 @@ public class InitItems {
                     output.accept(InitItems.IronCube_);
 
 
+                    output.accept(InitItems.GiantHeart_);
                     output.accept(InitItems.ImitationBiomass_);
                     output.accept(InitItems.Heart_);
                     output.accept(InitItems.Stomach_);
@@ -165,6 +170,11 @@ public class InitItems {
                     output.accept(InitItems.God_Apple);
                     output.accept(InitItems.ScarHeart_);
                     output.accept(InitItems.LifeCoin_);
+                    output.accept(InitItems.HeavyBlade_);
+
+                    output.accept(InitItems.EvilThoughtsForgeDreams_);
+
+
                 }).build());
 
     }
@@ -174,6 +184,7 @@ public class InitItems {
 
         public static final TagKey<Item> chestItem = createTag("chest_item");
         public static final TagKey<Item> chestItem_iron = createTag("chest_item_iron");
+        public static final TagKey<Item> chestItemMeat = createTag("chest_item_meat");
 
         public TagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
             super(output, lookupProvider,  Chestitem.MODID);
@@ -181,13 +192,26 @@ public class InitItems {
 
         @Override
         protected void addTags(HolderLookup.@NotNull Provider provider) {
+            tag(chestItemMeat).add(
+                        GiantHeart_.asItem())
+                    .add(God_Apple.asItem())
+                    .add(Heart_.asItem())
+                    .add(HeavyBlade_.asItem())
+                    .add(ImitationBiomass_.asItem())
+                    .add(LifeCoin_.asItem())
+                    .add(Meat_Ball.asItem())
+                    .add(ScarHeart_.asItem())
+                    .add(Self_Increasing_Heart.asItem())
+                    .add(Stomach_.asItem());
+
+
+
             tag(chestItem_iron).add(
                     SpeedHeart_.asItem())
                     .add(NuclearReaction_.asItem())
                     .add(Complete.asItem())
                     .add(IronHeart_.asItem())
                     .add(IronCube_.asItem())
-                    .add(ScarHeart_.asItem())
                     .add(WindKnife_.asItem());
 
             tag(chestItem)
@@ -206,21 +230,14 @@ public class InitItems {
                     .add(Separate_Rune.asItem())
                     .add(Pain_Rune.asItem())
                     .add(Undead_Rune.asItem())
-                    .add(InitItems.Heart_.asItem())
-                    .add(InitItems.Meat_Ball.asItem())
-                    .add(InitItems.Self_Increasing_Heart.asItem())
-                    .add(InitItems.God_Apple.asItem())
                     .add(InitItems.TheEndIsComing_.asItem())
                     .add(InitItems.Gold_Cheese.asItem())
                     .add(InitItems.Space_.asItem())
-                    .add(InitItems.ImitationBiomass_.asItem())
                     .add(InitItems.Kaolinite_.asItem())
                     .add(InitItems.Battery_.asItem())
-                    .add(InitItems.GiantHeart_.asItem())
                     .add(InitItems.EndEffect_.asItem())
                     .add(InitItems.EyeBook_.asItem())
-                    .add(InitItems.LifeCoin_.asItem())
-                    .add(InitItems.Stomach_.asItem());;
+                    .add(InitItems.HeavyBlade_.asItem());
         }
         private static TagKey<Item> createTag(String name) {
             return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, name));

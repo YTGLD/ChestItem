@@ -13,6 +13,9 @@
   "attribute.name.chest_item.hyperplasia": "疮疤增生最大值",
   "attribute.name.chest_item.hyperplasia_speed": "疤痕组织治愈可能",
   "attribute.name.chest_item.hyperplasia_stronger": "增生组织坚韧度",
+  "attribute.name.chest_item.shadow_shield": "幽影护盾",
+  "attribute.name.chest_item.shadow_shield_speed": "幽影护盾扩充速度",
+  "attribute.name.chest_item.shadow_shield_stronger": "幽影护盾稳固度",
 
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
@@ -204,10 +207,20 @@
   "item.chest_item.scar_heart.string.0": "疮疤的增生——对不可能说“不”",
   "item.chest_item.scar_heart.string.1": "你的疤痕组织进行了增生。从某种意义上说，它是你额外的生命",
   "item.chest_item.life_coin": "鲜活硬币",
+  "item.chest_item.life_coin.string.0": "异变之财富",
 
   "item.chest_item.iron_heart": "不稳定脉冲器",
   "item.chest_item.iron_heart.string.0": "看似胜券在握，实则慌的一批",
   "item.chest_item.iron_heart.string.1": "伤害不稳定化，整体来说伤害有所提高",
+
+
+
+  "item.chest_item.heavy_blade": "天罡重刃",
+  "item.chest_item.heavy_blade.string.0": "自律的刀锋极为可怕",
+  "item.chest_item.heavy_blade.string.1": "每点增生组织提供1.5%的所有伤害加成（上限30%）",
+  "item.chest_item.heavy_blade.string.2":"每点护甲提供1%所有伤害加成（上限25%）",
+  "item.chest_item.heavy_blade.string.3": "每点饥饿值提供0.5%所有伤害加成（上限10%）",
+  "item.chest_item.heavy_blade.string.4":"默认减少20%所有伤害",
 
   "advancements.chest_item.root.description": "然而这只是个箱子",
   "advancements.chest_item.root.title": "箱子里的小饰品",
