@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {"item": "chest_item:magic_iron"},
+    "A": {"item": "minecraft:lava_bucket"},
+    "C": {"item": "minecraft:prismarine_crystals"},
+    "D": {"item": "chest_item:heart"}
+  },
+  "pattern": [
+    "CDC",
+    "BAB",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:iron_heart"
+  }
+}

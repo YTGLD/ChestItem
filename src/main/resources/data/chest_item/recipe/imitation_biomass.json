@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item": "minecraft:diamond"},
+    "B": {"item": "chest_item:armor_stone"},
+    "C": {"item": "chest_item:life_stone"},
+    "D": {"item": "chest_item:stronger_stone"},
+    "E": {"item": "chest_item:heart"}
+  },
+  "pattern": [
+    " B ",
+    "CAD",
+    " E "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:imitation_biomass"
+  }
+}

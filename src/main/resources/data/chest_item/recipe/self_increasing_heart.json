@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {"item": "chest_item:self_increasing_heart"}
+  },
+  "pattern": [
+    "   ",
+    " B ",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:heart"
+  }
+}

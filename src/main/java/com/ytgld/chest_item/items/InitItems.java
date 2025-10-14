@@ -1,0 +1,242 @@
+package com.ytgld.chest_item.items;
+
+import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.blood.BoneHead;
+import com.ytgld.chest_item.items.blood.GodBlood;
+import com.ytgld.chest_item.items.blood.LifeCrystal;
+import com.ytgld.chest_item.items.end.EndEffect;
+import com.ytgld.chest_item.items.end.TheEndIsComing;
+import com.ytgld.chest_item.items.gold.*;
+import com.ytgld.chest_item.items.iron.IronCube;
+import com.ytgld.chest_item.items.iron.IronHeart;
+import com.ytgld.chest_item.items.meet.*;
+import com.ytgld.chest_item.items.other.*;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
+
+public class InitItems {
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Chestitem.MODID);
+
+    public static final DeferredItem<Item> God_blood = register("god_blood",
+            (resourceLocation)-> new GodBlood(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Drug_Heal = register("drug_heal",
+            (resourceLocation)-> new DrugHeal(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Life_Crystal = register("life_crystal",
+            (resourceLocation)-> new LifeCrystal(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Bone_Head = register("bone_head",
+            (resourceLocation)-> new BoneHead(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Conch_ = register("conch",
+            (resourceLocation)-> new Conch(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Lead_ = register("lead",
+            (resourceLocation)-> new Lead(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Stone_ = register("stone",
+            (resourceLocation)-> new Stone(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Knife_ = register("knife",
+            (resourceLocation)-> new Knife(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Ring_ = register("ring",
+            (resourceLocation)-> new Ring(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Life_Stone = register("life_stone",
+            (resourceLocation)-> new LifeStone(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Armor_Stone = register("armor_stone",
+            (resourceLocation)-> new ArmorStone(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Stronger_Stone = register("stronger_stone",
+            (resourceLocation)-> new StrongerStone(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Separate_Rune = register("separate_rune",
+            (resourceLocation)-> new SeparateRune(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Pain_Rune = register("pain_rune",
+            (resourceLocation)-> new PainRune(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Undead_Rune = register("undead_rune",
+            (resourceLocation)-> new UndeadRune(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Heart_ = register("heart",
+            (resourceLocation)-> new Heart(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Stomach_ = register("stomach",
+            (resourceLocation)-> new Stomach(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Meat_Ball = register("meatball",
+            (resourceLocation)-> new MeatBall(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Self_Increasing_Heart = register("self_increasing_heart",
+            (resourceLocation)-> new SelfIncreasingHeart(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> God_Apple = register("god_apple",
+            (resourceLocation)-> new GodApple(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Gold_Cheese = register("gold_cheese",
+            (resourceLocation)-> new GoldCheese(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Space_ = register("space",
+            (resourceLocation)-> new Space(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Vex_Ring = register("vex_ring",
+            (resourceLocation)-> new VexRing(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> TheEndIsComing_ = register("the_end_is_coming",
+            (resourceLocation)-> new TheEndIsComing(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ImitationBiomass_ = register("imitation_biomass",
+            (resourceLocation)-> new ImitationBiomass(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Battery_ = register("battery",
+            (resourceLocation)-> new Battery(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> SpeedHeart_ = register("speed_heart",
+            (resourceLocation)-> new SpeedHeart(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MAGIC_IRON = register("magic_iron",
+            (resourceLocation)-> new ItemBase(new Item.Properties().stacksTo(64)));
+    public static final DeferredItem<Item> WindKnife_ = register("wind_knife",
+            (resourceLocation)-> new WindKnife(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> NuclearReaction_ = register("nuclear_reaction",
+            (resourceLocation)-> new NuclearReaction(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Kaolinite_ = register("kaolinite",
+            (resourceLocation)-> new Kaolinite(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> GiantHeart_ = register("giant_heart",
+            (resourceLocation)-> new GiantHeart(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> EndEffect_ = register("end_effect",
+            (resourceLocation)-> new EndEffect(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> EyeBook_ = register("eye_book",
+            (resourceLocation)-> new EyeBook(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Abnormal = register("abnormal",
+            (resourceLocation)-> new ItemBase(new Item.Properties().stacksTo(64)));
+    public static final DeferredItem<Item> Complete = register("complete",
+            (resourceLocation)-> new ItemBase(new Item.Properties().stacksTo(64)));
+    public static final DeferredItem<Item> IronHeart_ = register("iron_heart",
+            (resourceLocation)-> new IronHeart(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> IronCube_ = register("iron_cube",
+            (resourceLocation)-> new IronCube(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ScarHeart_ = register("scar_heart",
+            (resourceLocation)-> new ScarHeart(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> LifeCoin_ = register("life_coin",
+            (resourceLocation)-> new LifeCoin(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> HeavyBlade_ = register("heavy_blade",
+            (resourceLocation)-> new HeavyBlade(new Item.Properties().stacksTo(1)));
+
+    public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
+        return ITEMS.register(name,func);
+    }
+
+    public static class TabChestItem{
+        public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Chestitem.MODID);
+        public static final DeferredHolder<CreativeModeTab, CreativeModeTab> tab = CREATIVE_MODE_TABS.register(Chestitem.MODID, () -> CreativeModeTab.builder()
+                .title(Component.translatable("itemGroup.chest_item"))
+                .icon(Items.CHEST::getDefaultInstance)
+                .displayItems((parameters, output) -> {
+                    output.accept(InitItems.God_blood);
+                    output.accept(InitItems.Drug_Heal);
+                    output.accept(InitItems.Life_Crystal);
+                    output.accept(InitItems.Bone_Head);
+                    output.accept(InitItems.Conch_);
+                    output.accept(InitItems.Lead_);
+                    output.accept(InitItems.Stone_);
+                    output.accept(InitItems.Knife_);
+                    output.accept(InitItems.Ring_);
+                    output.accept(InitItems.Life_Stone);
+                    output.accept(InitItems.Armor_Stone);
+                    output.accept(InitItems.Stronger_Stone);
+                    output.accept(InitItems.Separate_Rune);
+                    output.accept(InitItems.Pain_Rune);
+                    output.accept(InitItems.Undead_Rune);
+                    output.accept(InitItems.Gold_Cheese);
+                    output.accept(InitItems.Space_);
+                    output.accept(InitItems.TheEndIsComing_);
+                    output.accept(InitItems.Battery_);
+                    output.accept(InitItems.MAGIC_IRON);
+                    output.accept(InitItems.SpeedHeart_);
+                    output.accept(InitItems.WindKnife_);
+                    output.accept(InitItems.Kaolinite_);
+                    output.accept(InitItems.NuclearReaction_);
+                    output.accept(InitItems.EndEffect_);
+                    output.accept(InitItems.EyeBook_);
+                    output.accept(InitItems.Abnormal);
+                    output.accept(InitItems.Complete);
+                    output.accept(InitItems.IronHeart_);
+                    output.accept(InitItems.IronCube_);
+
+
+                    output.accept(InitItems.GiantHeart_);
+                    output.accept(InitItems.ImitationBiomass_);
+                    output.accept(InitItems.Heart_);
+                    output.accept(InitItems.Stomach_);
+                    output.accept(InitItems.Meat_Ball);
+                    output.accept(InitItems.Self_Increasing_Heart);
+                    output.accept(InitItems.God_Apple);
+                    output.accept(InitItems.ScarHeart_);
+                    output.accept(InitItems.LifeCoin_);
+                    output.accept(InitItems.HeavyBlade_);
+                }).build());
+
+    }
+
+    public static class TagsProvider extends ItemTagsProvider {
+
+
+        public static final TagKey<Item> chestItem = createTag("chest_item");
+        public static final TagKey<Item> chestItem_iron = createTag("chest_item_iron");
+        public static final TagKey<Item> chestItemMeat = createTag("chest_item_meat");
+
+        public TagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, ExistingFileHelper existingFileHelper) {
+            super(output, lookupProvider, blockTagProvider, Chestitem.MODID, existingFileHelper);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.@NotNull Provider provider) {
+            this.tag(chestItemMeat).add(
+                        GiantHeart_.asItem())
+                    .add(God_Apple.asItem())
+                    .add(Heart_.asItem())
+                    .add(HeavyBlade_.asItem())
+                    .add(ImitationBiomass_.asItem())
+                    .add(LifeCoin_.asItem())
+                    .add(Meat_Ball.asItem())
+                    .add(ScarHeart_.asItem())
+                    .add(Self_Increasing_Heart.asItem())
+                    .add(Stomach_.asItem());
+
+
+
+            this. tag(chestItem_iron).add(
+                    SpeedHeart_.asItem())
+                    .add(NuclearReaction_.asItem())
+                    .add(Complete.asItem())
+                    .add(IronHeart_.asItem())
+                    .add(IronCube_.asItem())
+                    .add(WindKnife_.asItem());
+
+            this.  tag(chestItem)
+                    .add(God_blood.asItem())
+                    .add(Drug_Heal.asItem())
+                    .add(Life_Crystal.asItem())
+                    .add(Bone_Head.asItem())
+                    .add(Conch_.asItem())
+                    .add(Lead_.asItem())
+                    .add(Stone_.asItem())
+                    .add(Knife_.asItem())
+                    .add(Ring_.asItem())
+                    .add(Life_Stone.asItem())
+                    .add(Armor_Stone.asItem())
+                    .add(Stronger_Stone.asItem())
+                    .add(Separate_Rune.asItem())
+                    .add(Pain_Rune.asItem())
+                    .add(Undead_Rune.asItem())
+                    .add(InitItems.Self_Increasing_Heart.asItem())
+                    .add(InitItems.TheEndIsComing_.asItem())
+                    .add(InitItems.Gold_Cheese.asItem())
+                    .add(InitItems.Space_.asItem())
+                    .add(InitItems.Kaolinite_.asItem())
+                    .add(InitItems.Battery_.asItem())
+                    .add(InitItems.EndEffect_.asItem())
+                    .add(InitItems.EyeBook_.asItem());
+        }
+        private static TagKey<Item> createTag(String name) {
+            return ItemTags.create(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, name));
+        }
+
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {"tag": "minecraft:meat"},
+    "A": {"item": "chest_item:heart"},
+    "C": {"item": "chest_item:complete"}
+  },
+  "pattern": [
+    " B ",
+    "BAB",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:life_coin"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "boat",
+  "key": {
+    "B": {"item": "chest_item:magic_iron"},
+    "A": {"item":"chest_item:abnormal"}
+  },
+  "pattern": [
+    " B ",
+    "BAB",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:complete"
+  }
+}

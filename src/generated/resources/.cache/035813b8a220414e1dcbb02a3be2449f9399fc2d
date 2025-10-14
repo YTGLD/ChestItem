@@ -1,0 +1,4 @@
+// 1.21.1	2025-10-12T21:52:18.0262271	Tags for minecraft:item mod id chest_item
+9a01d3c9c49a4bdcffee02c809e8e598560e9d4d data/chest_item/tags/item/chest_item.json
+15c82b5099000e048ddcd8c803da283d0be5b7a1 data/chest_item/tags/item/chest_item_iron.json
+14cd696e4c58df32b0f29616a775d737f0cfa936 data/chest_item/tags/item/chest_item_meat.json

@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/iron_heart",
+  "criteria": {
+    "iron_cube": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:iron_cube"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:iron_cube"
+    },
+    "title": {
+      "translate": "item.chest_item.iron_cube.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "iron_cube"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

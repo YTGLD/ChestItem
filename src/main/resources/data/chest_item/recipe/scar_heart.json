@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {"item": "chest_item:magic_iron"},
+    "A": {"item": "chest_item:self_increasing_heart"},
+    "C": {"item": "chest_item:complete"},
+    "D": {"item": "minecraft:netherite_scrap"}
+  },
+  "pattern": [
+    "DCD",
+    "BAB",
+    "DBD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:scar_heart"
+  }
+}

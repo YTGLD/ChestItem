@@ -1,0 +1,98 @@
+package com.ytgld.chest_item;
+
+import com.ytgld.chest_item.effect.Effects;
+import com.ytgld.chest_item.event.Keys;
+import com.ytgld.chest_item.event.activated.EventHandler;
+import com.ytgld.chest_item.event.key.ChestNetworkHandler;
+import com.ytgld.chest_item.event.key.ClientEvent;
+import com.ytgld.chest_item.event.key.UseCuriosHandler;
+import com.ytgld.chest_item.event.loot.Loots;
+import com.ytgld.chest_item.event.use.EventMain;
+import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.other.DataReg;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
+
+@Mod(Chestitem.MODID)
+public class Chestitem {
+    public static final String MODID = "chest_item";
+    public static final ResourceLocation POST_BLACK = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+            "black");
+    public Chestitem(IEventBus modEventBus, ModContainer modContainer) {
+        modEventBus.addListener(this::registerPayloadHandler);
+        AttReg.REGISTRY.register(modEventBus);
+        Effects.EFFECT_DEFERRED_REGISTER.register(modEventBus);
+        InitItems.ITEMS.register(modEventBus);
+        InitItems.TabChestItem.CREATIVE_MODE_TABS.register(modEventBus);
+        AttReg.ATTACHMENT_TYPES.register(modEventBus);
+        DataReg.REGISTRY.register(modEventBus);
+        Loots.LOOT.register(modEventBus);
+        NeoForge.EVENT_BUS.register(new EventHandler());
+        NeoForge.EVENT_BUS.register(new EventMain());
+        modEventBus.addListener(this::onGatherData);
+
+        modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
+    }
+
+    public void onGatherData(GatherDataEvent event) {
+        DataGenerator gen = event.getGenerator();
+        PackOutput packOutput = gen.getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+
+        Chestitem.BlockTagsProviderCO blockTags = new Chestitem.BlockTagsProviderCO(packOutput, lookupProvider, existingFileHelper);
+        gen.addProvider(event.includeServer(), blockTags);
+        gen.addProvider(event.includeServer(), new InitItems.TagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
+
+    }
+    private void registerPayloadHandler(final RegisterPayloadHandlersEvent evt) {
+        ChestNetworkHandler.register(evt.registrar("1.0"));
+        UseCuriosHandler.register(evt.registrar("1.0"));
+    }
+
+
+    public static class  BlockTagsProviderCO extends BlockTagsProvider {
+
+        public BlockTagsProviderCO(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+            super(output, lookupProvider, Chestitem.MODID, existingFileHelper);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.Provider provider) {
+
+        }
+    }
+    @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
+    public static class ClientModEvents {
+
+        @SubscribeEvent
+        public static void setupClient(FMLClientSetupEvent evt) {
+            NeoForge.EVENT_BUS.register(new ClientEvent());
+        }
+        @SubscribeEvent
+        public static void registerBindings(RegisterKeyMappingsEvent event) {
+            event.register(Keys.KEY_MAPPING_LAZY_R);
+            event.register(Keys.KEY_MAPPING_LAZY_C);
+        }
+    }
+}

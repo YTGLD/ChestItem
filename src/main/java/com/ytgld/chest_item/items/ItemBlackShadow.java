@@ -1,0 +1,28 @@
+package com.ytgld.chest_item.items;
+
+import com.ytgld.chest_item.renderer.light.Light;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+
+public class ItemBlackShadow extends ItemBase{
+
+    public ItemBlackShadow(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    public @NotNull Component getName(@NotNull ItemStack stack) {
+        Component component = super.getName(stack);
+        MutableComponent co = component.copy();
+        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD)));
+        return co;
+    }
+    @Override
+    public int color(ItemStack stack) {
+        return Light.ARGB.color(255, 100, 40, 255);
+    }
+}

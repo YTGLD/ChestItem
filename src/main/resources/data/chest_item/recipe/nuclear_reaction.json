@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {"item": "chest_item:magic_iron"},
+    "A": {"item": "minecraft:iron_block"}
+  },
+  "pattern": [
+    " B ",
+    "BAB",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:nuclear_reaction"
+  }
+}
