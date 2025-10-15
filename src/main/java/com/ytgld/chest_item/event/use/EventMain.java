@@ -7,7 +7,9 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
+import com.ytgld.chest_item.items.black.ShadowMint;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -136,8 +138,29 @@ public class EventMain {
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
         GodApple.event(event);
-
+        ShadowShield(event);
+        ShadowMint.hurtAttacker(event);
+    }
+    public void ShadowShield (LivingDamageEvent.Pre event){
         if (event.getEntity() instanceof LivingEntity living) {
+
+
+            if (living instanceof Player player) {
+                ChestInventory chestInventory = Handler.getItem(player);
+                if (chestInventory != null) {
+                    if (!player.level().isClientSide()) {
+                        for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                            ItemStack stack = chestInventory.getItem(i);
+                            if (stack.is(InitItems.ShadowMint_)) {
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
             AttributeInstance shadow_shield_stronger = living.getAttribute(AttReg.shadow_shield_stronger);
             if (shadow_shield_stronger != null) {
                 float value = (float) shadow_shield_stronger.getValue();
@@ -166,7 +189,6 @@ public class EventMain {
         WindKnife.event(event);
         GiantHeart.LivingIncomingDamageEvent(event);
         HeavyBlade.LivingIncomingDamageEvent(event);
-
 
         if (event.getEntity() instanceof LivingEntity living) {
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
@@ -242,13 +264,20 @@ public class EventMain {
         ScarHeart.tick(event);
         LifeCoin.tick(event);
         EvilThoughtsForgeDreams.ItemStackTickEvent(event);
+        DryBones.ItemStackTickEvent(event);
+        ShadowMint.ItemStackTickEvent(event);
+
+
+
+
+
         LivingEntity living = event.player;
         {
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
             AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
 
             if (hyperplasia != null && hyperplasia_speed != null) {
-                float time = (float) (10 * hyperplasia_speed.getValue());
+                float time = (float) (15 * hyperplasia_speed.getValue());
                 if (time < 1) {
                     time = 1;
                 }
@@ -259,7 +288,7 @@ public class EventMain {
 
                 if (living.tickCount % (time * 20) == 1) {
                     if (data < sNumber) {
-                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 0.5f);
+                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 1);
                         if (ConfigC.config.hyperplasiaMusic.get()) {
                             living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT, 0.6f, 0.6f);
                         }
@@ -275,7 +304,7 @@ public class EventMain {
             AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
 
             if (shadow_shield != null && shadow_shield_speed != null) {
-                float time = 200;
+                float time = 300;
                 time /= (float) shadow_shield_speed.getValue();
                 if (time < 20) {
                     time = 20f;
@@ -286,7 +315,7 @@ public class EventMain {
 
                 if (living.tickCount % (int)time == 1) {
                     if (data < sNumber) {
-                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, data + 0.5f);
+                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, data + 1);
                         if (ConfigC.config.hyperplasiaMusic.get()) {
                             living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.WARDEN_HEARTBEAT, SoundSource.AMBIENT, 0.8f, 0.8f);
                         }

@@ -130,8 +130,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     this.pose.pushMatrix();
                     si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j,400);
                     this.pose.popMatrix();
-                    this.pose.pushMatrix();
-                    this.pose.popMatrix();
                 }
             }
         }

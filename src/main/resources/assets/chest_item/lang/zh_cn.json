@@ -228,6 +228,20 @@
   "item.chest_item.life_crystal.string.1": "增加10点最大生命值",
   "item.chest_item.life_crystal": "生命水晶",
 
+  "item.chest_item.evil_thoughts_forge_dreams": "恶念锻梦",
+  "item.chest_item.evil_thoughts_forge_dreams.string.0": "失败的理论——探索未知",
+  "item.chest_item.evil_thoughts_forge_dreams.string.1": "将50%的增生组织转换成幽影护盾",
+
+  "item.chest_item.dry_bones": "腐枯尊骨",
+  "item.chest_item.dry_bones.string.0": "腐烂的头骨",
+  "item.chest_item.dry_bones.string.1": "幽影护盾恢复至100%时给予20%的伤害和攻速加成",
+  "item.chest_item.dry_bones.string.2": "增生组织恢复至100%时给予20%的护甲和速度加成",
+
+  "item.chest_item.shadow_mint": "幽影铸币",
+  "item.chest_item.shadow_mint.string.0": "暗影的赞歌",
+  "item.chest_item.shadow_mint.string.1": "幽影护盾不再可以抵挡伤害，且受到伤害时爆碎并对目标造成伤害",
+  "item.chest_item.shadow_mint.string.2": "若此次爆碎杀死了目标，则恢复4点幽影护盾和生命值",
+
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
   "chest_item.configuration.MusicAndRender": "渲染和音效"
