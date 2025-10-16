@@ -91,6 +91,32 @@ public abstract class MRender extends RenderType {
                         )).withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
                                 VertexFormat.Mode.QUADS)
                         .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
+
+
+        public static RenderPipeline.Snippet snippet(float a) {
+            return    RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
+                    .withVertexShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color_slowness"))
+                    .withFragmentShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color_slowness"))
+                    .withSampler("Sampler0").withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
+                            VertexFormat.Mode.QUADS).withBlend(BlendFunction.TRANSLUCENT)
+                    .withShaderDefine("stronger", a)
+                    .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
+        }
+
+
+        public static  RenderPipeline LightSlowness(boolean light,float stronger) {
+            if (light) {
+                return  (RenderPipeline.builder(snippet(stronger)).withBlend(new BlendFunction(
+                                SourceFactor.SRC_ALPHA,
+                                DestFactor.ONE,
+                                SourceFactor.ONE,
+                                DestFactor.ZERO
+                        ))
+                        .withLocation("pipeline/gui_textured_ci").build());
+            }
+            return  (RenderPipeline.builder(snippet(stronger)).withBlend(BlendFunction.TRANSLUCENT)
+                    .withLocation("pipeline/gui_textured_ci").build());
+        }
         public static final RenderPipeline GUI_TEXTURED =
                 (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).withBlend(new BlendFunction(
                                 SourceFactor.SRC_ALPHA,

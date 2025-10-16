@@ -13,6 +13,7 @@ import com.ytgld.chest_item.event.loot.Loots;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -45,6 +46,7 @@ public class Chestitem {
         Loots.LOOT.register(modEventBus);
         NeoForge.EVENT_BUS.register(new EventHandler());
         NeoForge.EVENT_BUS.register(new EventMain());
+        ChestMenuTypes.register.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
     }

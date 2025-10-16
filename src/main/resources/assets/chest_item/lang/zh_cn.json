@@ -7,6 +7,17 @@
   "entity.chest_item.end_coming": "末日降临",
   "entity.chest_item.attack_end_coming": "末日降临的球体",
   "event.chest_item.equip": "放入神奇箱子内时：",
+  "chest_item.the_imprint_of_the_soul": "永恒奴印",
+  "item.chest_item.the_order_of_the_undead": "亡者号令",
+  "chest_item.the_imprint_of_the_soul.can_not_remove": "它将成为你人生中不可磨灭的污点",
+  "chest_item.the_imprint_of_the_soul.can_not_remove_and": "只有神的力量才能抹去这个奴印",
+
+
+
+
+
+
+
   "attribute.name.chest_item.heal": "治疗",
   "attribute.name.chest_item.instability": "伤害不稳定性",
   "attribute.name.chest_item.instability_low": "弱化风险",

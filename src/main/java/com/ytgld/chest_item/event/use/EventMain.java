@@ -355,6 +355,17 @@ public class EventMain {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(Style.EMPTY
                         .withColor(Light.ARGB.color(255, 255, 0, 100))));
+                if (event.getItemStack().getItem() instanceof TheImprintOfTheSoul soul) {
+                    if (!soul.canRemove(event.getItemStack())) {
+                        if (event.getEntity() !=null && !event.getEntity().isCreative()) {
+                            event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove").withStyle(Style.EMPTY
+                                    .withColor(Light.ARGB.color(255, 255, 20, 80))));
+                        }else {
+                            event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove_and").withStyle(Style.EMPTY
+                                    .withColor(Light.ARGB.color(255, 255, 150, 0))));
+                        }
+                    }
+                }
             }else {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(ChatFormatting.GOLD));

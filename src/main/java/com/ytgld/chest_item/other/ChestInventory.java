@@ -3,6 +3,7 @@ package com.ytgld.chest_item.other;
 import com.ytgld.chest_item.items.ItemBase;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.ContainerUser;
@@ -14,7 +15,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 public class ChestInventory extends SimpleContainer {
     public ChestInventory(Player player) {
-        super(9);
+        super(12);
     }
     public void fromSlots(ValueInput.TypedInputList<ItemStackWithSlot> input) {
         for(int i = 0; i < this.getContainerSize(); ++i) {
@@ -28,6 +29,20 @@ public class ChestInventory extends SimpleContainer {
         }
     }
 
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean canAddItem(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItem(Container target, int slot, ItemStack stack) {
+        return false;
+    }
 
     public void drop(Player player){
         for(int i = 0; i < this.getContainerSize(); ++i) {
@@ -41,7 +56,6 @@ public class ChestInventory extends SimpleContainer {
             }
         }
     }
-
 
     @Override
     public void stopOpen(ContainerUser containerUser) {

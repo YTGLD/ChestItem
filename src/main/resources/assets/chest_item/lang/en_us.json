@@ -6,6 +6,11 @@
   "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
   "event.chest_item.equip": "When placed in a magic box：",
 
+  "chest_item.the_imprint_of_the_soul": "Eternal slave seal",
+  "chest_item.the_imprint_of_the_soul.can_not_remove": "It will become an indelible stain on you",
+  "item.chest_item.the_order_of_the_undead": "Dead Command",
+  "chest_item.the_imprint_of_the_soul.can_not_remove_and": "Only the power of God can magic this slave seal",
+
   "attribute.name.chest_item.instability": "injury instability",
   "attribute.name.chest_item.instability_low": "weakens damage instability",
   "attribute.name.chest_item.hyperplasia": "hyperplasia",

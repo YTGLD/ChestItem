@@ -2,10 +2,7 @@ package com.ytgld.chest_item.mixin.cilent;
 
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.items.ItemBase;
-import com.ytgld.chest_item.items.ItemBlackShadow;
-import com.ytgld.chest_item.items.Meat;
-import com.ytgld.chest_item.items.Terror;
+import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
@@ -19,7 +16,9 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
@@ -261,5 +260,28 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 "tooltip/black_shadow/frame"), i, j, k, l);
         guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                 "tooltip/black_shadow/background"), i, j, k, l);
+    }
+
+
+
+
+
+    @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
+    public void renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (stack.getItem() instanceof TheImprintOfTheSoul soul){
+            ResourceLocation resourceLocation = soul.resourceLocation();
+            GuiGraphics guiGraphics =(GuiGraphics) (Object) this;
+            int color = soul.soulColor();
+            int as = (color >> 24) & 0xFF;
+            int rs = (color >> 16) & 0xFF;
+            int gs = (color >> 8) & 0xFF;
+            int bs = color & 0xFF;
+
+            for (int i = 1; i < 3; i++) {
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.04f * (1 + (i / 5f))),resourceLocation, x, y, 0, 0,16,16,16,16,
+                        Light.ARGB.color(as,rs,gs-i*20,bs-i*10));
+            }
+
+        }
     }
 }
