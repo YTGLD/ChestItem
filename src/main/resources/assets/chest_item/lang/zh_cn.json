@@ -8,7 +8,7 @@
   "entity.chest_item.attack_end_coming": "末日降临的球体",
   "event.chest_item.equip": "放入神奇箱子内时：",
   "chest_item.the_imprint_of_the_soul": "永恒奴印",
-  "item.chest_item.the_order_of_the_undead": "亡者号令",
+
   "chest_item.the_imprint_of_the_soul.can_not_remove": "它将成为你人生中不可磨灭的污点",
   "chest_item.the_imprint_of_the_soul.can_not_remove_and": "只有神的力量才能抹去这个奴印",
 
@@ -252,6 +252,20 @@
   "item.chest_item.shadow_mint.string.0": "暗影的赞歌",
   "item.chest_item.shadow_mint.string.1": "幽影护盾不再可以抵挡伤害，且受到伤害时爆碎并对目标造成伤害",
   "item.chest_item.shadow_mint.string.2": "若此次爆碎杀死了目标，则恢复4点幽影护盾和生命值",
+
+
+  "item.chest_item.the_order_of_the_undead": "亡者号令",
+  "item.chest_item.the_order_of_the_undead.string.1": "“种下奴印，你将不再是人类，而是我们亡灵一脉最好的伙伴......”",
+  "item.chest_item.the_order_of_the_undead.string.2": "免疫魔法伤害",
+  "item.chest_item.the_order_of_the_undead.string.3": "你所造成的非魔法伤害增加30%",
+  "item.chest_item.the_order_of_the_undead.string.4": "免疫所有的负面效果",
+  "item.chest_item.the_order_of_the_undead.string.9": "亡灵不再与你为敌",
+  "item.chest_item.the_order_of_the_undead.string.5": "“但是你要注意。你现在是一个彻头彻尾的亡灵，你应该知道你会怎么样......”",
+  "item.chest_item.the_order_of_the_undead.string.6": "免疫部分类型的治疗",
+  "item.chest_item.the_order_of_the_undead.string.7": "你时常感到饥饿，过度的饥饿会影响你的速度",
+  "item.chest_item.the_order_of_the_undead.string.8": "一旦燃烧，你将一直燃烧",
+
+
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",

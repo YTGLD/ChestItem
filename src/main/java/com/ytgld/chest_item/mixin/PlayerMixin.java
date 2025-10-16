@@ -33,4 +33,7 @@ public class PlayerMixin implements IPlayer {
     public AtomicReference<ChestInventory> chest_item$chestInventory() {
         return chest_item$chestInventory;
     }
+
+
+
 }

@@ -10,6 +10,7 @@ import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -189,7 +190,7 @@ public class EventMain {
         WindKnife.event(event);
         GiantHeart.LivingIncomingDamageEvent(event);
         HeavyBlade.LivingIncomingDamageEvent(event);
-
+        TheOrderOfTheUndead.notMagicDamage(event);
         if (event.getEntity() instanceof LivingEntity living) {
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
             if (hyperplasia_stronger != null) {
@@ -244,6 +245,10 @@ public class EventMain {
         }
     }
     @SubscribeEvent
+    public void LivingChangeTargetEvent(LivingChangeTargetEvent event){
+        TheOrderOfTheUndead.LivingChangeTargetEvent(event);
+    }
+    @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
         GodBlood.tick(event);
         DrugHeal.tick(event);
@@ -266,7 +271,8 @@ public class EventMain {
         EvilThoughtsForgeDreams.ItemStackTickEvent(event);
         DryBones.ItemStackTickEvent(event);
         ShadowMint.ItemStackTickEvent(event);
-
+        TheOrderOfTheUndead.hunger(event);
+        TheOrderOfTheUndead.attrib(event);
 
 
 

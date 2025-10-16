@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
-    @Inject(at = @At("RETURN"), method = "getNightVisionScale", cancellable = true)
+    @Inject(at = @At("RETURN"), method = "getNightVisionScale")
     private static void getNightVisionScale(LivingEntity livingEntity, float nanoTime, CallbackInfoReturnable<Float> cir) {
 
 
