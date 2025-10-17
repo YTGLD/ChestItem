@@ -10,6 +10,7 @@ import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.soul.Glutton;
 import com.ytgld.chest_item.items.black.soul.MadnessTheory;
 import com.ytgld.chest_item.items.black.soul.Mutation;
 import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
@@ -292,7 +293,7 @@ public class EventMain {
         TheOrderOfTheUndead.attrib(event);
         Mutation.attrib(event);
         MadnessTheory.expOrb(event);
-
+        Glutton.attrib(event);
 
         LivingEntity living = event.player;
         {
@@ -357,6 +358,7 @@ public class EventMain {
         MeatBall.tick(event);
         SelfIncreasingHeart.tick(event);
         SpeedHeart.eat(event);
+        Glutton.eatFinish(event);
     }
     @SubscribeEvent
     public void LivingExperienceDropEvent(LivingExperienceDropEvent event) {
@@ -370,6 +372,7 @@ public class EventMain {
     @SubscribeEvent
     public void attack(LivingEntityUseItemEvent.Start event){
         BoneHead.event(event);
+        Glutton.eatStart(event);
     }
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){

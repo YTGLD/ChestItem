@@ -197,6 +197,6 @@ public class Mutation extends TheImprintOfTheSoul {
 
     @Override
     public int soulColor() {
-        return Light.ARGB.color(255,0,255,60);
+        return Light.ARGB.color(255,0,200,100);
     }
 }

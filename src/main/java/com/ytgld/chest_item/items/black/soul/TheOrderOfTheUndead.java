@@ -160,11 +160,7 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
                             player.setRemainingFireTicks(100);
                         }
                         if (player.tickCount % 400 == 1) {
-                            if (player.getFoodData().getSaturationLevel() <= 0) {
-                                player.getFoodData().eat(-1, 0);
-                            }else {
-                                player.getFoodData().eat(0, -0.1f);
-                            }
+                            player.getFoodData().eat(-1, -0.5f);
                         }
                         break;
                     }

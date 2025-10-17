@@ -255,6 +255,21 @@
   "item.chest_item.madness_theory.string.6": "Dropped experience orb has half the lore it contains",
   "item.chest_item.madness_theory.string.7": "You can no longer draw any energy from the experience orb",
 
+
+
+
+
+"item.chest_item.glutton": "gluttonous curse",
+  "item.chest_item.glutton.string.1":"You lowly species should be our slaves",
+  "item.chest_item.glutton.string.2":"Greatly increase eating speed",
+  "item.chest_item.glutton.string.3": "Gain bonus health and damage absorption when approaching fullness",
+  "item.chest_item.glutton.string.4":"Eating food instantly restores health",
+  "item.chest_item.glutton.string.5":"This slave seal is your only way out",
+  "item.chest_item.glutton.string.6":"Hunger and saturation no longer restore health",
+  "item.chest_item.glutton.string.7": "Feeling abnormally hungry all the time",
+  "item.chest_item.glutton.string.8":"Reduced velocity on a full stomach by about 25%",
+
+
   "item.chest_item.the_order_of_the_undead": "Dead Command",
   "item.chest_item.the_order_of_the_undead.string.1": "“Plant the Slave Seal, and you will no longer be a human, but our best companion of the undead......”",
   "item.chest_item.the_order_of_the_undead.string.2": "Immune to magic damage",

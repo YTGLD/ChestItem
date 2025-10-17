@@ -287,6 +287,17 @@
   "item.chest_item.madness_theory.string.6": "掉落的经验球其蕴含的学识减半",
   "item.chest_item.madness_theory.string.7": "你不再可以汲取经验球内的任何能量",
 
+  "item.chest_item.glutton": "饕餮诅咒",
+  "item.chest_item.glutton.string.1":"“你这种卑微的物种就应该做我们的奴隶”",
+  "item.chest_item.glutton.string.2":"极大提高进食速度",
+  "item.chest_item.glutton.string.3":"接近饱腹时获得额外生命值和伤害吸收",
+  "item.chest_item.glutton.string.4":"食用食物会瞬间恢复生命值",
+  "item.chest_item.glutton.string.5":"“这枚奴印是你唯一的出路”",
+  "item.chest_item.glutton.string.6":"饥饿值和饱和度不再可以恢复生命值",
+  "item.chest_item.glutton.string.7":"时刻感到异常的饥饿",
+  "item.chest_item.glutton.string.8":"饱腹时速度减少约25%",
+
+
 
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",

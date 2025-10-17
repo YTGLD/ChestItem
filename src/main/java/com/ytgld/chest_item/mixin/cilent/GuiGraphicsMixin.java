@@ -277,10 +277,22 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int gs = (color >> 8) & 0xFF;
             int bs = color & 0xFF;
 
-            for (int i = 1; i < 3; i++) {
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.04f * (1 + (i / 5f))),resourceLocation, x, y, 0, 0,16,16,16,16,
-                        Light.ARGB.color(as,rs,gs-i*20,bs-i*10));
-            }
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f * (1.4f)),resourceLocation, x, y, 0, 0,16,16,16,16,
+                    Light.ARGB.color(as,rs,gs-20,bs-30));
+
+
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f * (1.4f)),resourceLocation, x-2, y, 0, 0,18,18,18,18,
+                    Light.ARGB.color((int) (as/2.5f),rs,gs-20,bs-30));
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f * (1.4f)),resourceLocation, x, y-2, 0, 0,18,18,18,18,
+                    Light.ARGB.color((int) (as/2.5f),rs,gs-20,bs-30));
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f * (1.4f)),resourceLocation, x-2, y-2, 0, 0,18,18,18,18,
+                    Light.ARGB.color((int) (as/2.5f),rs,gs-20,bs-30));
+
+
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f),resourceLocation, x, y, 0, 0,16,16,16,16,
+                    Light.ARGB.color(as,rs,gs-20,bs-30));
+
+
 
         }
     }
