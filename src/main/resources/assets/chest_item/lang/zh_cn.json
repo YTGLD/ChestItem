@@ -265,6 +265,17 @@
   "item.chest_item.the_order_of_the_undead.string.7": "你时常感到饥饿，过度的饥饿会影响你的速度",
   "item.chest_item.the_order_of_the_undead.string.8": "一旦燃烧，你将一直燃烧",
 
+  "item.chest_item.mutation": "异变",
+  "item.chest_item.mutation.string.1": "“传说中的人族也不过如此.....”",
+  "item.chest_item.mutation.string.2":"每少穿着一件装备护甲增加4点",
+  "item.chest_item.mutation.string.3": "若没有穿着装备，则抗性提高10%",
+  "item.chest_item.mutation.string.4":"减少30%受到的爆炸和灼烧伤害",
+
+  "item.chest_item.mutation.string.5": "“种下奴印，永生永世效忠我们异魔一族...”",
+  "item.chest_item.mutation.string.6":"身着装备自行瓦解",
+  "item.chest_item.mutation.string.7": "每穿着一件装备受到的伤害都会增加",
+  "item.chest_item.mutation.string.8":"受到的魔法伤害增加100%",
+
 
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",

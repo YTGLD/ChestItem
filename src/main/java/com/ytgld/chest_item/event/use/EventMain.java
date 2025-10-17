@@ -10,6 +10,7 @@ import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.soul.Mutation;
 import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
@@ -191,6 +192,12 @@ public class EventMain {
         GiantHeart.LivingIncomingDamageEvent(event);
         HeavyBlade.LivingIncomingDamageEvent(event);
         TheOrderOfTheUndead.notMagicDamage(event);
+        Mutation.notMagicDamage(event);
+
+
+
+
+
         if (event.getEntity() instanceof LivingEntity living) {
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
             if (hyperplasia_stronger != null) {
@@ -273,7 +280,7 @@ public class EventMain {
         ShadowMint.ItemStackTickEvent(event);
         TheOrderOfTheUndead.hunger(event);
         TheOrderOfTheUndead.attrib(event);
-
+        Mutation.attrib(event);
 
 
 

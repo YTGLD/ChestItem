@@ -233,6 +233,18 @@
   "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
   "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
 
+  "item.chest_item.mutation": "mutation",
+
+  "item.chest_item.mutation.string.1": "The legendary Terran race is just like that.....",
+  "item.chest_item.mutation.string.2": "Increases armor by 4 points for each less piece of equipment worn",
+  "item.chest_item.mutation.string.3": "Increases resistance by 10% if not equipped with equipment",
+  "item.chest_item.mutation.string.4": "Reduces explosion and burn damage taken by 30%",
+  "item.chest_item.mutation.string.5": "Plant the slave seal and be loyal to our alien clan forever...",
+  "item.chest_item.mutation.string.6":"disintegrates on its own with equipment",
+  "item.chest_item.mutation.string.7": "Damage taken increases with each piece of equipment worn",
+  "item.chest_item.mutation.string.8": "Magic damage taken increased by 100%",
+
+
 
   "item.chest_item.the_order_of_the_undead": "Dead Command",
   "item.chest_item.the_order_of_the_undead.string.1": "“Plant the Slave Seal, and you will no longer be a human, but our best companion of the undead......”",
