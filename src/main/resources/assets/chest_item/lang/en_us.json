@@ -244,7 +244,16 @@
   "item.chest_item.mutation.string.7": "Damage taken increases with each piece of equipment worn",
   "item.chest_item.mutation.string.8": "Magic damage taken increased by 100%",
 
+"item.chest_item.madness_theory": "madness theory",
 
+"item.chest_item.madness_theory.string.1": "You say that 2+2 is not equal to 4? How much is that? ",
+  "item.chest_item.madness_theory.string.2": "Attacking creatures have a 15% chance to drop an experience orb, containing 20% of the experience at death",
+  "item.chest_item.madness_theory.string.3": "Pick up experience orbs to deal damage to nearby creatures",
+  "item.chest_item.madness_theory.string.4": "Instantly absorb experience balls over a large area",
+
+"item.chest_item.madness_theory.string.5": "Equals 3!" ,
+  "item.chest_item.madness_theory.string.6": "Dropped experience orb has half the lore it contains",
+  "item.chest_item.madness_theory.string.7": "You can no longer draw any energy from the experience orb",
 
   "item.chest_item.the_order_of_the_undead": "Dead Command",
   "item.chest_item.the_order_of_the_undead.string.1": "“Plant the Slave Seal, and you will no longer be a human, but our best companion of the undead......”",

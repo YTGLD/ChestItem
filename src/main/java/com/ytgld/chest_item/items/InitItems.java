@@ -4,6 +4,7 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.soul.MadnessTheory;
 import com.ytgld.chest_item.items.black.soul.Mutation;
 import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
 import com.ytgld.chest_item.items.blood.BoneHead;
@@ -130,6 +131,8 @@ public class InitItems {
             (resourceLocation)-> new TheOrderOfTheUndead(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> Mutation_ = register("mutation",
             (resourceLocation)-> new Mutation(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> MadnessTheory_ = register("madness_theory",
+            (resourceLocation)-> new MadnessTheory(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -189,6 +192,7 @@ public class InitItems {
                     output.accept(InitItems.ShadowMint_);
                     output.accept(InitItems.TheOrderOfTheUndead_);
                     output.accept(InitItems.Mutation_);
+                    output.accept(InitItems.MadnessTheory_);
 
 
                 }).build());

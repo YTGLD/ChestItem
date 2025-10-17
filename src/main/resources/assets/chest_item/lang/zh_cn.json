@@ -276,6 +276,17 @@
   "item.chest_item.mutation.string.7": "每穿着一件装备受到的伤害都会增加",
   "item.chest_item.mutation.string.8":"受到的魔法伤害增加100%",
 
+  "item.chest_item.madness_theory": "癫狂理论",
+
+  "item.chest_item.madness_theory.string.1": "你说2+2不等于4？那等于几？",
+  "item.chest_item.madness_theory.string.2": "攻击生物有15%的概率掉落经验球，蕴含的经验是死亡时的20%",
+  "item.chest_item.madness_theory.string.3": "拾取经验球对附近的生物造成伤害",
+  "item.chest_item.madness_theory.string.4": "瞬间吸取大范围内的经验球",
+
+  "item.chest_item.madness_theory.string.5": "等于3！",
+  "item.chest_item.madness_theory.string.6": "掉落的经验球其蕴含的学识减半",
+  "item.chest_item.madness_theory.string.7": "你不再可以汲取经验球内的任何能量",
+
 
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",

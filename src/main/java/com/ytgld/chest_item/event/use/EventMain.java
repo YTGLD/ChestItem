@@ -10,6 +10,7 @@ import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.soul.MadnessTheory;
 import com.ytgld.chest_item.items.black.soul.Mutation;
 import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
 import com.ytgld.chest_item.items.blood.BoneHead;
@@ -55,6 +56,7 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEnchantItemEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.ArrayList;
@@ -142,10 +144,11 @@ public class EventMain {
         GodApple.event(event);
         ShadowShield(event);
         ShadowMint.hurtAttacker(event);
+        MadnessTheory.attackEXP(event);
     }
     public void ShadowShield (LivingDamageEvent.Pre event){
-        if (event.getEntity() instanceof LivingEntity living) {
 
+        if (event.getEntity() instanceof LivingEntity living) {
 
             if (living instanceof Player player) {
                 ChestInventory chestInventory = Handler.getItem(player);
@@ -184,6 +187,14 @@ public class EventMain {
         }
     }
     @SubscribeEvent
+    public void attackEXP(LivingExperienceDropEvent event){
+        MadnessTheory.attackEXP(event);
+    }
+    @SubscribeEvent
+    public void pick(PlayerXpEvent.PickupXp event){
+        MadnessTheory.attackEXP(event);
+    }
+    @SubscribeEvent
     public void LivingIncomingDamageEvent(LivingIncomingDamageEvent event){
         Knife.event(event);
         ArmorStone.tick(event);
@@ -193,7 +204,6 @@ public class EventMain {
         HeavyBlade.LivingIncomingDamageEvent(event);
         TheOrderOfTheUndead.notMagicDamage(event);
         Mutation.notMagicDamage(event);
-
 
 
 
@@ -281,7 +291,7 @@ public class EventMain {
         TheOrderOfTheUndead.hunger(event);
         TheOrderOfTheUndead.attrib(event);
         Mutation.attrib(event);
-
+        MadnessTheory.expOrb(event);
 
 
         LivingEntity living = event.player;
