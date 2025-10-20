@@ -22,6 +22,11 @@ public abstract class TheImprintOfTheSoul extends ItemBlackShadow{
         MutableComponent co = component.copy();
         MutableComponent soul = Component
                 .translatable("chest_item.the_imprint_of_the_soul");
+        if (canRemove(stack)){
+            soul =  Component
+                    .translatable("chest_item.the_imprint_of_the_soul.1");
+        }
+
         return soul.append(Component.literal("["))
                 .append(co)
                 .append(Component.literal("]"));

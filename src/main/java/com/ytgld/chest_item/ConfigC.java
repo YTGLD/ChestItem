@@ -16,10 +16,14 @@ public class ConfigC {
             Render =  BUILDER
                     .translation("chest_item.config.Render")
                     .define("Render", true);
+            RenderSoul =  BUILDER
+                    .translation("chest_item.config.RenderSoul")
+                    .define("RenderSoul", true);
         }
         BUILDER.pop();
     }
 
     public final ModConfigSpec.BooleanValue hyperplasiaMusic;
     public final ModConfigSpec.BooleanValue Render;
+    public final ModConfigSpec.BooleanValue RenderSoul;
 }

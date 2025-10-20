@@ -5,12 +5,17 @@
   "entity.chest_item.end_coming": "The end is coming",
   "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
   "event.chest_item.equip": "When placed in a magic box：",
-
+  "chest_item.the_imprint_of_the_soul.1": "Treaty",
   "chest_item.the_imprint_of_the_soul": "Eternal slave seal",
+  "chest_item.the_soul": "Will",
   "chest_item.the_imprint_of_the_soul.can_not_remove": "It will become an indelible stain on you",
+
+  "chest_item.the_soul.give": "I feel my soul connected to it......",
+  "chest_item.the_soul.give.1": "Maybe I need to accomplish something to fully sense it......",
 
   "chest_item.the_imprint_of_the_soul.can_not_remove_and": "Only the power of God can magic this slave seal",
 
+  "attribute.name.chest_item.more_speed": "Universal speed",
   "attribute.name.chest_item.instability": "injury instability",
   "attribute.name.chest_item.instability_low": "weakens damage instability",
   "attribute.name.chest_item.hyperplasia": "hyperplasia",
@@ -232,6 +237,7 @@
   "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
   "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
   "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
+  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
 
   "item.chest_item.mutation": "mutation",
 
@@ -255,10 +261,9 @@
   "item.chest_item.madness_theory.string.6": "Dropped experience orb has half the lore it contains",
   "item.chest_item.madness_theory.string.7": "You can no longer draw any energy from the experience orb",
 
-
-
-
-
+"item.chest_item.speed": "limit reaction theory",
+  "item.chest_item.speed.string.1": "Add 30% water, land and air speed and jump power",
+  "item.chest_item.speed.string.2": "Wear 9 different biomimetic products....",
 "item.chest_item.glutton": "gluttonous curse",
   "item.chest_item.glutton.string.1":"You lowly species should be our slaves",
   "item.chest_item.glutton.string.2":"Greatly increase eating speed",

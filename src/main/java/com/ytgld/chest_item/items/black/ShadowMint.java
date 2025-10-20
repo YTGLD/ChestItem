@@ -102,7 +102,7 @@ public class ShadowMint extends ItemBlackShadow {
 
     @Nullable
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player) {
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
         return attributeModifierMultimap();
     }
 

@@ -8,10 +8,13 @@
   "entity.chest_item.attack_end_coming": "末日降临的球体",
   "event.chest_item.equip": "放入神奇箱子内时：",
   "chest_item.the_imprint_of_the_soul": "永恒奴印",
+  "chest_item.the_imprint_of_the_soul.1": "条约",
 
   "chest_item.the_imprint_of_the_soul.can_not_remove": "它将成为你人生中不可磨灭的污点",
   "chest_item.the_imprint_of_the_soul.can_not_remove_and": "只有神的力量才能抹去这个奴印",
-
+  "chest_item.the_soul": "意志",
+  "chest_item.the_soul.give": "我感到我的灵魂与它有所联系......",
+  "chest_item.the_soul.give.1": "或许我该完成一些事情才能完全感应到它......",
 
 
 
@@ -20,6 +23,7 @@
 
   "attribute.name.chest_item.heal": "治疗",
   "attribute.name.chest_item.instability": "伤害不稳定性",
+  "attribute.name.chest_item.more_speed": "通用速度",
   "attribute.name.chest_item.instability_low": "弱化风险",
   "attribute.name.chest_item.hyperplasia": "疮疤增生最大值",
   "attribute.name.chest_item.hyperplasia_speed": "疤痕组织治愈可能",
@@ -298,9 +302,14 @@
   "item.chest_item.glutton.string.8":"饱腹时速度减少约25%",
 
 
+  "item.chest_item.speed": "极限反应论",
+  "item.chest_item.speed.string.1": "加30%水陆空三项速度和跳跃力量",
+  "item.chest_item.speed.string.2": "佩戴9个不同的仿生物品....",
 
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
+  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+
   "chest_item.configuration.MusicAndRender": "渲染和音效"
 }

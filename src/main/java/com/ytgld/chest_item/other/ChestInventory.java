@@ -28,22 +28,6 @@ public class ChestInventory extends SimpleContainer {
             }
         }
     }
-
-    @Override
-    public boolean canPlaceItem(int slot, ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    public boolean canAddItem(ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    public boolean canTakeItem(Container target, int slot, ItemStack stack) {
-        return false;
-    }
-
     public void drop(Player player){
         for(int i = 0; i < this.getContainerSize(); ++i) {
             ItemStack itemstack = this.getItem(i);

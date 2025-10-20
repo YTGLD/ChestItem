@@ -1,7 +1,9 @@
 package com.ytgld.chest_item.mixin.cilent;
 
 import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
@@ -15,7 +17,12 @@ import net.minecraft.client.gui.render.state.GuiRenderState;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -23,7 +30,9 @@ import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import org.joml.Matrix3x2fStack;
+import org.joml.Quaternionf;
 import org.joml.Vector2ic;
+import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -268,32 +277,43 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
-        if (stack.getItem() instanceof TheImprintOfTheSoul soul){
+        if (stack.getItem() instanceof TheImprintOfTheSoul soul) {
             ResourceLocation resourceLocation = soul.resourceLocation();
-            GuiGraphics guiGraphics =(GuiGraphics) (Object) this;
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             int color = soul.soulColor();
             int as = (color >> 24) & 0xFF;
             int rs = (color >> 16) & 0xFF;
             int gs = (color >> 8) & 0xFF;
             int bs = color & 0xFF;
 
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f * (1.4f)),resourceLocation, x, y, 0, 0,16,16,16,16,
-                    Light.ARGB.color(as,rs,gs-20,bs-30));
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.05f * (1.4f)), resourceLocation, x, y, 0, 0, 16, 16, 16, 16,
+                    Light.ARGB.color(as, rs, gs - 20, bs - 30));
+
+            if (ConfigC.config.RenderSoul.get()) {
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f * (1.4f)), resourceLocation, x, y, 0, 0, 22, 22, 22, 22,
+                        Light.ARGB.color((int) (as / 3.3f), rs, gs - 20, bs - 30));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f * (1.4f)), resourceLocation, x - 6, y, 0, 0, 22, 22, 22, 22,
+                        Light.ARGB.color((int) (as / 3.3f), rs, gs - 20, bs - 30));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f * (1.4f)), resourceLocation, x, y - 6, 0, 0, 22, 22, 22, 22,
+                        Light.ARGB.color((int) (as / 3.3f), rs, gs - 20, bs - 30));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f * (1.4f)), resourceLocation, x - 6, y - 6, 0, 0, 22, 22, 22, 22,
+                        Light.ARGB.color((int) (as / 3.3f), rs, gs - 20, bs - 30));
 
 
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f * (1.4f)),resourceLocation, x-2, y, 0, 0,18,18,18,18,
-                    Light.ARGB.color((int) (as/2.5f),rs,gs-20,bs-30));
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f * (1.4f)),resourceLocation, x, y-2, 0, 0,18,18,18,18,
-                    Light.ARGB.color((int) (as/2.5f),rs,gs-20,bs-30));
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f * (1.4f)),resourceLocation, x-2, y-2, 0, 0,18,18,18,18,
-                    Light.ARGB.color((int) (as/2.5f),rs,gs-20,bs-30));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f)), resourceLocation, x, y, 0, 0, 17, 17, 17, 17,
+                        Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f)), resourceLocation, x - 1, y, 0, 0, 17, 17, 17, 17,
+                        Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f)), resourceLocation, x, y - 1, 0, 0, 17, 17, 17, 17,
+                        Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f)), resourceLocation, x - 1, y - 1, 0, 0, 17, 17, 17, 17,
+                        Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
 
 
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(true,0.05f),resourceLocation, x, y, 0, 0,16,16,16,16,
-                    Light.ARGB.color(as,rs,gs-20,bs-30));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.05f), resourceLocation, x, y, 0, 0, 16, 16, 16, 16,
+                        Light.ARGB.color(as, rs, gs - 20, bs - 30));
 
-
-
+            }
         }
     }
 }

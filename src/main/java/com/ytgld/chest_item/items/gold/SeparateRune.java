@@ -38,7 +38,7 @@ public class SeparateRune extends ItemBase {
     }
     @Nullable
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player) {
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
         return attributeModifierMultimap();
     }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {

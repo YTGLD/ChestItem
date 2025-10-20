@@ -187,7 +187,7 @@ public class Mutation extends TheImprintOfTheSoul {
     }
     @Nullable
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player) {
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
         return attributeModifierMultimap(player);
     }
     @Override
@@ -197,6 +197,6 @@ public class Mutation extends TheImprintOfTheSoul {
 
     @Override
     public int soulColor() {
-        return Light.ARGB.color(255,0,200,100);
+        return Light.ARGB.color(255,100,255,100);
     }
 }
