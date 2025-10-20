@@ -46,6 +46,16 @@ public abstract class GuiMixin {
                 this.leftHeight += 20;
             }
         }
+        if (player != null) {
+            float i = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+            int l = p_283143_.guiWidth() / 2 - 91;
+            this.minecraft.getProfiler().push("shadow_shield");
+            cI1_21_9$renderShadowBlackArmor(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 20, 1, 0, l);
+            this.minecraft.getProfiler().pop();
+            if (i > 0) {
+                this.leftHeight += 20;
+            }
+        }
 
     }
     @Unique
@@ -58,13 +68,15 @@ public abstract class GuiMixin {
             for(int k = 0; k < 10; ++k) {
                 int l = x + k * 8;
                 if (k * 2 + 1 < i) {
-                    MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png"),
+                    MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                    "textures/gui/hyperplasia_1.png"),
                             l, j,
                             0, 0, 12, 12, 12, 12,
                             1, 1, 1, 1);
                 }
                 if (k * 2 + 1 == i) {
-                    MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_2.png"),
+                    MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                    "textures/gui/hyperplasia_2.png"),
                             l, j,
                             0, 0, 12, 12, 12, 12,
                             1, 1, 1, 1);
@@ -77,5 +89,34 @@ public abstract class GuiMixin {
 
     }
 
+    @Unique
+    private static void cI1_21_9$renderShadowBlackArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
+        float i = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+        if (i > 0) {
+            RenderSystem.enableBlend();
+            int j = y - (heartRows - 1) * height - 10;
 
+            for(int k = 0; k < 10; ++k) {
+                int l = x + k * 8;
+                if (k * 2 + 1 < i) {
+                    MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                    "textures/gui/shadow_black_1.png"),
+                            l, j,
+                            0, 0, 12, 12, 12, 12,
+                            1, 1, 1, 1);
+                }
+                if (k * 2 + 1 == i) {
+                    MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                    "textures/gui/shadow_black_2.png"),
+                            l, j,
+                            0, 0, 12, 12, 12, 12,
+                            1, 1, 1, 1);
+                }
+
+            }
+
+            RenderSystem.disableBlend();
+        }
+
+    }
 }

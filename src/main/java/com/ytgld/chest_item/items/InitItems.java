@@ -1,6 +1,13 @@
 package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.black.DryBones;
+import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
+import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.soul.Glutton;
+import com.ytgld.chest_item.items.black.soul.MadnessTheory;
+import com.ytgld.chest_item.items.black.soul.Mutation;
+import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -16,6 +23,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -117,6 +125,22 @@ public class InitItems {
             (resourceLocation)-> new LifeCoin(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> HeavyBlade_ = register("heavy_blade",
             (resourceLocation)-> new HeavyBlade(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> EvilThoughtsForgeDreams_ = register("evil_thoughts_forge_dreams",
+            (resourceLocation)-> new EvilThoughtsForgeDreams(new Item.Properties().stacksTo(1)));
+
+
+    public static final DeferredItem<Item> DryBones_ = register("dry_bones",
+            (resourceLocation)-> new DryBones(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ShadowMint_ = register("shadow_mint",
+            (resourceLocation)-> new ShadowMint(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> TheOrderOfTheUndead_ = register("the_order_of_the_undead",
+            (resourceLocation)-> new TheOrderOfTheUndead(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Mutation_ = register("mutation",
+            (resourceLocation)-> new Mutation(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MadnessTheory_ = register("madness_theory",
+            (resourceLocation)-> new MadnessTheory(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Glutton_ = register("glutton",
+            (resourceLocation)-> new Glutton(new Item.Properties().stacksTo(1)));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -170,6 +194,17 @@ public class InitItems {
                     output.accept(InitItems.ScarHeart_);
                     output.accept(InitItems.LifeCoin_);
                     output.accept(InitItems.HeavyBlade_);
+
+                    output.accept(InitItems.EvilThoughtsForgeDreams_);
+                    output.accept(InitItems.DryBones_);
+                    output.accept(InitItems.ShadowMint_);
+
+
+                    output.accept(InitItems.TheOrderOfTheUndead_);
+                    output.accept(InitItems.Mutation_);
+                    output.accept(InitItems.MadnessTheory_);
+                    output.accept(InitItems.Glutton_);
+
                 }).build());
 
     }

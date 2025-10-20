@@ -2,6 +2,8 @@ package com.ytgld.chest_item;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.other.ChestMenuScreen;
+import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.MRender;
 import net.minecraft.DetectedVersion;
 import net.minecraft.client.renderer.ShaderInstance;
@@ -19,6 +21,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -41,12 +44,20 @@ public class ChestitemClient{
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
     @SubscribeEvent
+    public static void regMenu(RegisterMenuScreensEvent event){
+        event.register(ChestMenuTypes.GENERIC_12.get(), ChestMenuScreen::new);
+    }
+    @SubscribeEvent
     public static void EntityRenderersEvent(RegisterShadersEvent event) {
         try {
 
             event.registerShader(new ShaderInstance(event.getResourceProvider(),
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"position_tex_color"),
                     DefaultVertexFormat.POSITION_TEX_COLOR), MRender::setShaderInstance_liveShaderInstance);
+
+            event.registerShader(new ShaderInstance(event.getResourceProvider(),
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"position_tex_color_slowness"),
+                    DefaultVertexFormat.POSITION_TEX_COLOR), MRender::setLiveShaderInstance_slowness);
 
         }catch (IOException exception){
             exception.printStackTrace();

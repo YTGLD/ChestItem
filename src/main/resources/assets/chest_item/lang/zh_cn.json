@@ -13,6 +13,13 @@
   "attribute.name.chest_item.hyperplasia": "疮疤增生最大值",
   "attribute.name.chest_item.hyperplasia_speed": "疤痕组织治愈可能",
   "attribute.name.chest_item.hyperplasia_stronger": "增生组织坚韧度",
+  "attribute.name.chest_item.shadow_shield": "幽影护盾",
+  "attribute.name.chest_item.shadow_shield_speed": "幽影护盾扩充速度",
+  "attribute.name.chest_item.shadow_shield_stronger": "幽影护盾稳固度",
+
+  "chest_item.the_imprint_of_the_soul": "永恒奴印",
+  "chest_item.the_imprint_of_the_soul.can_not_remove": "它将成为你人生中不可磨灭的污点",
+  "chest_item.the_imprint_of_the_soul.can_not_remove_and": "只有神的力量才能抹去这个奴印",
 
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
@@ -225,7 +232,76 @@
   "item.chest_item.life_crystal.string.1": "增加10点最大生命值",
   "item.chest_item.life_crystal": "生命水晶",
 
+  "item.chest_item.evil_thoughts_forge_dreams": "恶念锻梦",
+  "item.chest_item.evil_thoughts_forge_dreams.string.0": "失败的理论——探索未知",
+  "item.chest_item.evil_thoughts_forge_dreams.string.1": "将50%的增生组织转换成幽影护盾",
+
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
-  "chest_item.configuration.MusicAndRender": "渲染和音效"
+  "chest_item.configuration.MusicAndRender": "渲染和音效",
+
+
+
+
+
+
+
+
+
+  "item.chest_item.dry_bones": "腐枯尊骨",
+  "item.chest_item.dry_bones.string.0": "腐烂的头骨",
+  "item.chest_item.dry_bones.string.1": "幽影护盾恢复至100%时给予20%的伤害和攻速加成",
+  "item.chest_item.dry_bones.string.2": "增生组织恢复至100%时给予20%的护甲和速度加成",
+
+  "item.chest_item.shadow_mint": "幽影铸币",
+  "item.chest_item.shadow_mint.string.0": "暗影的赞歌",
+  "item.chest_item.shadow_mint.string.1": "幽影护盾不再可以抵挡伤害，且受到伤害时爆碎并对目标造成伤害",
+  "item.chest_item.shadow_mint.string.2": "若此次爆碎杀死了目标，则恢复4点幽影护盾和生命值",
+
+
+  "item.chest_item.the_order_of_the_undead": "亡者号令",
+  "item.chest_item.the_order_of_the_undead.string.1": "“种下奴印，你将不再是人类，而是我们亡灵一脉最好的伙伴......”",
+  "item.chest_item.the_order_of_the_undead.string.2": "免疫魔法伤害",
+  "item.chest_item.the_order_of_the_undead.string.3": "你所造成的非魔法伤害增加30%",
+  "item.chest_item.the_order_of_the_undead.string.4": "免疫所有的负面效果",
+  "item.chest_item.the_order_of_the_undead.string.9": "亡灵不再与你为敌",
+  "item.chest_item.the_order_of_the_undead.string.5": "“但是你要注意。你现在是一个彻头彻尾的亡灵，你应该知道你会怎么样......”",
+  "item.chest_item.the_order_of_the_undead.string.6": "免疫部分类型的治疗",
+  "item.chest_item.the_order_of_the_undead.string.7": "你时常感到饥饿，过度的饥饿会影响你的速度",
+  "item.chest_item.the_order_of_the_undead.string.8": "一旦燃烧，你将一直燃烧",
+
+  "item.chest_item.mutation": "异变",
+  "item.chest_item.mutation.string.1": "“传说中的人族也不过如此.....”",
+  "item.chest_item.mutation.string.2":"每少穿着一件装备护甲增加4点",
+  "item.chest_item.mutation.string.3": "若没有穿着装备，则抗性提高10%",
+  "item.chest_item.mutation.string.4":"减少30%受到的爆炸和灼烧伤害",
+
+  "item.chest_item.mutation.string.5": "“种下奴印，永生永世效忠我们异魔一族...”",
+  "item.chest_item.mutation.string.6":"身着装备自行瓦解",
+  "item.chest_item.mutation.string.7": "每穿着一件装备受到的伤害都会增加",
+  "item.chest_item.mutation.string.8":"受到的魔法伤害增加100%",
+
+  "item.chest_item.madness_theory": "癫狂理论",
+
+  "item.chest_item.madness_theory.string.1": "你说2+2不等于4？那等于几？",
+  "item.chest_item.madness_theory.string.2": "攻击生物有15%的概率掉落经验球，蕴含的经验是死亡时的20%",
+  "item.chest_item.madness_theory.string.3": "拾取经验球对附近的生物造成伤害",
+  "item.chest_item.madness_theory.string.4": "瞬间吸取大范围内的经验球",
+
+  "item.chest_item.madness_theory.string.5": "等于3！",
+  "item.chest_item.madness_theory.string.6": "掉落的经验球其蕴含的学识减半",
+  "item.chest_item.madness_theory.string.7": "你不再可以汲取经验球内的任何能量",
+
+  "item.chest_item.glutton": "饕餮诅咒",
+  "item.chest_item.glutton.string.1":"“你这种卑微的物种就应该做我们的奴隶”",
+  "item.chest_item.glutton.string.2":"极大提高进食速度",
+  "item.chest_item.glutton.string.3":"接近饱腹时获得额外生命值和伤害吸收",
+  "item.chest_item.glutton.string.4":"食用食物会瞬间恢复生命值",
+  "item.chest_item.glutton.string.5":"“这枚奴印是你唯一的出路”",
+  "item.chest_item.glutton.string.6":"饥饿值和饱和度不再可以恢复生命值",
+  "item.chest_item.glutton.string.7":"时刻感到异常的饥饿",
+  "item.chest_item.glutton.string.8":"饱腹时速度减少约25%"
+
+
+
 }

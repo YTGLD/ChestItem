@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.other;
 
-import com.ytgld.chest_item.items.ItemBase;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -9,15 +8,12 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.EnderChestBlockEntity;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
 
 public class ChestInventory extends SimpleContainer{
 
     public ChestInventory(Player player) {
-        super(9);
+        super(12);
     }
 
     public void fromTag(ListTag tag, HolderLookup.Provider levelRegistry) {

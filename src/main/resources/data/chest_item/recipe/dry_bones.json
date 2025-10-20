@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B":  {"item": "minecraft:obsidian"},
+    "A":  {"item":"minecraft:wither_skeleton_skull"},
+    "C":  {"item":"minecraft:nether_star"},
+    "D":  {"item":"chest_item:undead_rune"}
+  },
+  "pattern": [
+    "BCB",
+    "BAB",
+    "BDB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:dry_bones"
+  }
+}

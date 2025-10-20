@@ -54,6 +54,24 @@ public class AttReg {
         return new RangedAttribute("attribute.name.chest_item.hyperplasia_stronger", 1, -1024, 1024).setSyncable(true);
     });
 
+    /**
+     * 失败的理论——探索未知
+     */
+
+    public static final Supplier<AttachmentType<Float>> shadow_shield_ATTACHMENT_TYPES = ATTACHMENT_TYPES.register(
+            "shadow_shield", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.
+                    fieldOf("shadow_shield").codec()).build()
+
+    );
+    public static final DeferredHolder<Attribute,?> shadow_shield = REGISTRY.register("shadow_shield",()->{
+        return new RangedAttribute("attribute.name.chest_item.shadow_shield", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final DeferredHolder<Attribute,?> shadow_shield_speed = REGISTRY.register("shadow_shield_speed",()->{
+        return new RangedAttribute("attribute.name.chest_item.shadow_shield_speed", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final DeferredHolder<Attribute,?> shadow_shield_stronger = REGISTRY.register("shadow_shield_stronger",()->{
+        return new RangedAttribute("attribute.name.chest_item.shadow_shield_stronger", 1, -1024, 1024).setSyncable(true);
+    });
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER , AttReg.heal,1);
@@ -62,6 +80,9 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.hyperplasia,1);
         event.add(EntityType.PLAYER , AttReg.hyperplasia_speed,1);
         event.add(EntityType.PLAYER , AttReg.hyperplasia_stronger,1);
+        event.add(EntityType.PLAYER , AttReg.shadow_shield,1);
+        event.add(EntityType.PLAYER , AttReg.shadow_shield_speed,1);
+        event.add(EntityType.PLAYER , AttReg.shadow_shield_stronger,1);
 
     }
 }

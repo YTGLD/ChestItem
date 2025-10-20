@@ -6,11 +6,19 @@
   "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
   "event.chest_item.equip": "When placed in a magic box：",
 
+  "chest_item.the_imprint_of_the_soul": "Eternal slave seal",
+  "chest_item.the_imprint_of_the_soul.can_not_remove": "It will become an indelible stain on you",
+
+  "chest_item.the_imprint_of_the_soul.can_not_remove_and": "Only the power of God can magic this slave seal",
+
   "attribute.name.chest_item.instability": "injury instability",
   "attribute.name.chest_item.instability_low": "weakens damage instability",
   "attribute.name.chest_item.hyperplasia": "hyperplasia",
   "attribute.name.chest_item.hyperplasia_speed": "Scar tissue healing is possible",
   "attribute.name.chest_item.hyperplasia_stronger": "hyperplasia hardness",
+  "attribute.name.chest_item.shadow_shield": "Shadow shield",
+  "attribute.name.chest_item.shadow_shield_speed": "Shadow Shield expansion speed",
+  "attribute.name.chest_item.shadow_shield_stronger": "Shadow shield stability",
 
 
   "itemGroup.chest_item": "Trinkets in the chest",
@@ -207,8 +215,97 @@
   "item.chest_item.heavy_blade.string.3": "0.5% bonus to all damage per point of hunger (up to 10%)",
   "item.chest_item.heavy_blade.string.4": "Reduces all damage by 20% by default",
 
+"item.chest_item.evil_thoughts_forge_dreams": "evil thoughts forge dreams",
+  "item.chest_item.evil_thoughts_forge_dreams.string.0": "Failed Theories - Exploring the Unknown",
+  "item.chest_item.evil_thoughts_forge_dreams.string.1": "Convert 50% of the proliferative tissue into a shadow shield",
 
   "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
   "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
-  "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects"
+  "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "item.chest_item.dry_bones": "decaying bones",
+  "item.chest_item.dry_bones.string.0": "decaying skull",
+  "item.chest_item.dry_bones.string.1": "Shadow Shield gives 20% damage and attack speed bonus when it restores to 100%",
+  "item.chest_item.dry_bones.string.2": "Gives 20% Armor and Speed Bonus when Proliferative Tissue recovers to 100%",
+
+  "item.chest_item.shadow_mint": "shadow mint",
+  "item.chest_item.shadow_mint.string.0": "Shadow's Hymn",
+  "item.chest_item.shadow_mint.string.1": "Shadow shield no longer blocks damage and explodes when taken and deals damage to the target",
+  "item.chest_item.shadow_mint.string.2": "If this smash kills the target, restore 4 shadow shields and health",
+  "item.chest_item.mutation": "mutation",
+
+  "item.chest_item.mutation.string.1": "The legendary Terran race is just like that.....",
+  "item.chest_item.mutation.string.2": "Increases armor by 4 points for each less piece of equipment worn",
+  "item.chest_item.mutation.string.3": "Increases resistance by 10% if not equipped with equipment",
+  "item.chest_item.mutation.string.4": "Reduces explosion and burn damage taken by 30%",
+  "item.chest_item.mutation.string.5": "Plant the slave seal and be loyal to our alien clan forever...",
+  "item.chest_item.mutation.string.6":"disintegrates on its own with equipment",
+  "item.chest_item.mutation.string.7": "Damage taken increases with each piece of equipment worn",
+  "item.chest_item.mutation.string.8": "Magic damage taken increased by 100%",
+
+  "item.chest_item.madness_theory": "madness theory",
+
+  "item.chest_item.madness_theory.string.1": "You say that 2+2 is not equal to 4? How much is that? ",
+  "item.chest_item.madness_theory.string.2": "Attacking creatures have a 15% chance to drop an experience orb, containing 20% of the experience at death",
+  "item.chest_item.madness_theory.string.3": "Pick up experience orbs to deal damage to nearby creatures",
+  "item.chest_item.madness_theory.string.4": "Instantly absorb experience balls over a large area",
+
+  "item.chest_item.madness_theory.string.5": "Equals 3!" ,
+  "item.chest_item.madness_theory.string.6": "Dropped experience orb has half the lore it contains",
+  "item.chest_item.madness_theory.string.7": "You can no longer draw any energy from the experience orb",
+
+
+
+
+
+  "item.chest_item.glutton": "gluttonous curse",
+  "item.chest_item.glutton.string.1":"You lowly species should be our slaves",
+  "item.chest_item.glutton.string.2":"Greatly increase eating speed",
+  "item.chest_item.glutton.string.3": "Gain bonus health and damage absorption when approaching fullness",
+  "item.chest_item.glutton.string.4":"Eating food instantly restores health",
+  "item.chest_item.glutton.string.5":"This slave seal is your only way out",
+  "item.chest_item.glutton.string.6":"Hunger and saturation no longer restore health",
+  "item.chest_item.glutton.string.7": "Feeling abnormally hungry all the time",
+  "item.chest_item.glutton.string.8":"Reduced velocity on a full stomach by about 25%",
+
+
+  "item.chest_item.the_order_of_the_undead": "Dead Command",
+  "item.chest_item.the_order_of_the_undead.string.1": "“Plant the Slave Seal, and you will no longer be a human, but our best companion of the undead......”",
+  "item.chest_item.the_order_of_the_undead.string.2": "Immune to magic damage",
+  "item.chest_item.the_order_of_the_undead.string.3": "Increases non-magic damage dealt by you by 30%",
+  "item.chest_item.the_order_of_the_undead.string.4": "immune to all negative effects",
+  "item.chest_item.the_order_of_the_undead.string.9": "The undead are no longer against you",
+  "item.chest_item.the_order_of_the_undead.string.5": "”But you need to pay attention. You're a complete undead now, you should know what you're going to do......“",
+  "item.chest_item.the_order_of_the_undead.string.6": "immune partial type of treatment",
+  "item.chest_item.the_order_of_the_undead.string.7": "You are often hungry",
+  "item.chest_item.the_order_of_the_undead.string.8": "Once burned, you will always burn"
 }

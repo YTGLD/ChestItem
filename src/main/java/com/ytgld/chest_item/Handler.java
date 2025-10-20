@@ -3,14 +3,13 @@ package com.ytgld.chest_item;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.other.ChestItemMenu;
 import com.ytgld.chest_item.other.IPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -20,7 +19,7 @@ public class Handler {
         if (player instanceof IPlayer iPlayer) {
             player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.CHEST_OPEN, SoundSource.AMBIENT,1,1);
             player.openMenu(new SimpleMenuProvider(
-                    (i, inventory, p_53126_) -> new ChestMenu(MenuType.GENERIC_9x1,i,inventory,
+                    (i, inventory, p_53126_) -> new ChestItemMenu(i,inventory,
                             iPlayer.chest_item$chestInventory().get(),1), Component.translatable("container.chest_item.chest")
             ));
         }

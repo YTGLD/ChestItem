@@ -48,6 +48,15 @@ public class FoodDataMixin {
                     }
                 }
             }
+            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                ItemStack stack =chestInventory.getItem(i);
+                if (stack.is(InitItems.Glutton_)){
+                    if (!player.level().isClientSide()) {
+                        tickTimer = 0;
+                        break;
+                    }
+                }
+            }
         }
 
     }

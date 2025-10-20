@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.mixin.cilent;
 
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
 import net.minecraft.client.gui.GuiGraphics;
@@ -37,7 +38,9 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
         ItemStack itemstack = this.menu.getCarried();
         if (!itemstack.isEmpty()){
             if (itemstack.getItem() instanceof ItemBase) {
-                seekingImmortals$vec2.add(new Vec2(mouseX, mouseY));
+                if (!(itemstack.getItem() instanceof TheImprintOfTheSoul soul)) {
+                    seekingImmortals$vec2.add(new Vec2(mouseX, mouseY));
+                }
             }
         }else {
             seekingImmortals$vec2.clear();

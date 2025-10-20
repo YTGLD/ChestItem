@@ -7,6 +7,13 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.DryBones;
+import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
+import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.soul.Glutton;
+import com.ytgld.chest_item.items.black.soul.MadnessTheory;
+import com.ytgld.chest_item.items.black.soul.Mutation;
+import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -55,6 +62,7 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEnchantItemEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.ArrayList;
@@ -139,6 +147,61 @@ public class EventMain {
         Lead.event(event);
     }
     @SubscribeEvent
+    public void LivingDamageEvent(LivingDamageEvent.Pre event){
+        GodApple.event(event);
+        ShadowShield(event);
+        ShadowMint.hurtAttacker(event);
+        MadnessTheory.attackEXP(event);
+    }
+    public void ShadowShield (LivingDamageEvent.Pre event){
+
+        if (event.getEntity() instanceof LivingEntity living) {
+
+            if (living instanceof Player player) {
+                ChestInventory chestInventory = Handler.getItem(player);
+                if (chestInventory != null) {
+                    if (!player.level().isClientSide()) {
+                        for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                            ItemStack stack = chestInventory.getItem(i);
+                            if (stack.is(InitItems.ShadowMint_)) {
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            AttributeInstance shadow_shield_stronger = living.getAttribute(AttReg.shadow_shield_stronger);
+            if (shadow_shield_stronger != null) {
+                float value = (float) shadow_shield_stronger.getValue();
+                float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                if (data > 0) {
+                    float damage = event.getNewDamage() ;
+                    float newData = data - damage / 4.5f / value;
+                    if (newData > 0) {
+                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, (newData));
+                        event.setNewDamage(0);
+                    } else {
+                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                        event.setNewDamage(damage - data);
+                    }
+                }else {
+                    living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                }
+            }
+        }
+    }
+    @SubscribeEvent
+    public void attackEXP(LivingExperienceDropEvent event){
+        MadnessTheory.attackEXP(event);
+    }
+    @SubscribeEvent
+    public void pick(PlayerXpEvent.PickupXp event){
+        MadnessTheory.attackEXP(event);
+    }
+    @SubscribeEvent
     public void LivingIncomingDamageEvent(LivingIncomingDamageEvent event){
         Knife.event(event);
         ArmorStone.tick(event);
@@ -146,6 +209,10 @@ public class EventMain {
         WindKnife.event(event);
         GiantHeart.LivingIncomingDamageEvent(event);
         HeavyBlade.LivingIncomingDamageEvent(event);
+        TheOrderOfTheUndead.notMagicDamage(event);
+        Mutation.notMagicDamage(event);
+
+
 
 
         if (event.getEntity() instanceof LivingEntity living) {
@@ -167,7 +234,6 @@ public class EventMain {
                     living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
                 }
             }
-
         }
 
         if (event.getSource().getEntity() instanceof LivingEntity living){
@@ -203,8 +269,8 @@ public class EventMain {
         }
     }
     @SubscribeEvent
-    public void LivingDamageEvent(LivingDamageEvent.Pre event){
-        GodApple.event(event);
+    public void LivingChangeTargetEvent(LivingChangeTargetEvent event){
+        TheOrderOfTheUndead.LivingChangeTargetEvent(event);
     }
     @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
@@ -226,40 +292,79 @@ public class EventMain {
         IronCube.ItemStackTickEvent(event);
         ScarHeart.tick(event);
         LifeCoin.tick(event);
+        EvilThoughtsForgeDreams.ItemStackTickEvent(event);
+        DryBones.ItemStackTickEvent(event);
+        ShadowMint.ItemStackTickEvent(event);
+        TheOrderOfTheUndead.hunger(event);
+        TheOrderOfTheUndead.attrib(event);
+        Mutation.attrib(event);
+        MadnessTheory.expOrb(event);
+        Glutton.attrib(event);
 
         LivingEntity living = event.player;
-        AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
-        AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
+        {
+            AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
+            AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
 
-        if (hyperplasia != null && hyperplasia_speed != null) {
-            float time = (float) (10 * hyperplasia_speed.getValue());
-            if (time < 1) {
-                time = 1;
-            }
+            if (hyperplasia != null && hyperplasia_speed != null) {
+                float time = (float) (15 * hyperplasia_speed.getValue());
+                if (time < 1) {
+                    time = 1;
+                }
 
-            float value = (float) hyperplasia.getValue();
-            float sNumber = value - 1;
-            float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                float value = (float) hyperplasia.getValue();
+                float sNumber = value - 1;
+                float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
 
-            if (living.tickCount % (time * 20) == 1) {
-                if (data < sNumber) {
-                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 0.5f);
-                    if (ConfigC.config.hyperplasiaMusic.get()) {
-                        living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT, 0.6f, 0.6f);
+                if (living.tickCount % (time * 20) == 1) {
+                    if (data < sNumber) {
+                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 1);
+                        if (ConfigC.config.hyperplasiaMusic.get()) {
+                            living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT, 0.6f, 0.6f);
+                        }
                     }
                 }
+                if (data < 0) {
+                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                }
             }
-            if (data < 0) {
-                living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+        }
+        {
+            AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
+            AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
+
+            if (shadow_shield != null && shadow_shield_speed != null) {
+                float time = 300;
+                time /= (float) shadow_shield_speed.getValue();
+                if (time < 20) {
+                    time = 20f;
+                }
+                float value = (float) shadow_shield.getValue();
+                float sNumber = value - 1;
+                float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+
+                if (living.tickCount % (int)time == 1) {
+                    if (data < sNumber) {
+                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, data + 1);
+                        if (ConfigC.config.hyperplasiaMusic.get()) {
+                            living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.WARDEN_HEARTBEAT, SoundSource.AMBIENT, 0.8f, 0.8f);
+                        }
+                    }
+                }
+                if (data < 0) {
+                    living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                }
             }
         }
     }
+
     @SubscribeEvent
     public void tick(LivingEntityUseItemEvent.Finish event) {
         Stomach.tick(event);
         MeatBall.tick(event);
         SelfIncreasingHeart.tick(event);
         SpeedHeart.eat(event);
+        Glutton.eatFinish(event);
     }
     @SubscribeEvent
     public void LivingExperienceDropEvent(LivingExperienceDropEvent event) {
@@ -273,15 +378,32 @@ public class EventMain {
     @SubscribeEvent
     public void attack(LivingEntityUseItemEvent.Start event){
         BoneHead.event(event);
+        Glutton.eatStart(event);
     }
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
         if (event.getItemStack().getItem() instanceof ItemBase) {
-            event.getToolTip().add(1, Component.literal(""));
-            event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(ChatFormatting.GOLD));
+            if (event.getItemStack().getItem() instanceof ItemBlackShadow){
+                event.getToolTip().add(1, Component.literal(""));
+                event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(Style.EMPTY
+                        .withColor(Light.ARGB.color(255, 255, 0, 100))));
+                if (event.getItemStack().getItem() instanceof TheImprintOfTheSoul soul) {
+                    if (!soul.canRemove(event.getItemStack())) {
+                        if (event.getEntity() !=null && !event.getEntity().isCreative()) {
+                            event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove").withStyle(Style.EMPTY
+                                    .withColor(Light.ARGB.color(255, 255, 20, 80))));
+                        }else {
+                            event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove_and").withStyle(Style.EMPTY
+                                    .withColor(Light.ARGB.color(255, 255, 150, 0))));
+                        }
+                    }
+                }
+            }else {
+                event.getToolTip().add(1, Component.literal(""));
+                event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(ChatFormatting.GOLD));
+            }
         }
     }
-
     @SubscribeEvent
     public void ItemTooltipEventASD(LootTableLoadEvent event) {
 
