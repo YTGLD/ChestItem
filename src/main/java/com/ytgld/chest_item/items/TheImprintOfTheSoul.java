@@ -16,6 +16,9 @@ public abstract class TheImprintOfTheSoul extends ItemBlackShadow{
     }
     public abstract ResourceLocation resourceLocation();
 
+    public boolean isChaos(){
+        return false;
+    };
     @Override
     public @NotNull Component getName(@NotNull ItemStack stack) {
         Component component = super.getName(stack);
@@ -25,6 +28,10 @@ public abstract class TheImprintOfTheSoul extends ItemBlackShadow{
         if (canRemove(stack)){
             soul =  Component
                     .translatable("chest_item.the_imprint_of_the_soul.1");
+        }
+        if (isChaos()) {
+            soul =  Component
+                    .translatable("chest_item.the_imprint_of_the_soul.2");
         }
 
         return soul.append(Component.literal("["))

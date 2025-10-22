@@ -12,4 +12,7 @@ public class Effects {
             IncreasingMeat::new);
     public static final DeferredHolder<MobEffect,MobEffect> Eye_ = EFFECT_DEFERRED_REGISTER.register("eye",
             Eye::new);
+    public static final DeferredHolder<MobEffect,?> invulnerable  =EFFECT_DEFERRED_REGISTER.register("invulnerable",
+            Invulnerable::new);
+
 }

@@ -6,6 +6,7 @@
   "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
   "event.chest_item.equip": "When placed in a magic box：",
   "chest_item.the_imprint_of_the_soul.1": "Treaty",
+  "chest_item.the_imprint_of_the_soul.2": "疯狂的理论",
   "chest_item.the_imprint_of_the_soul": "Eternal slave seal",
   "chest_item.the_soul": "Will",
   "chest_item.the_imprint_of_the_soul.can_not_remove": "It will become an indelible stain on you",
@@ -24,7 +25,8 @@
   "attribute.name.chest_item.shadow_shield": "Shadow shield",
   "attribute.name.chest_item.shadow_shield_speed": "Shadow Shield expansion speed",
   "attribute.name.chest_item.shadow_shield_stronger": "Shadow shield stability",
-
+  "attribute.name.chest_item.looting": "looting",
+  "attribute.name.chest_item.fortune": "fortune",
 
   "itemGroup.chest_item": "Trinkets in the chest",
 
@@ -260,6 +262,30 @@
 "item.chest_item.madness_theory.string.5": "Equals 3!" ,
   "item.chest_item.madness_theory.string.6": "Dropped experience orb has half the lore it contains",
   "item.chest_item.madness_theory.string.7": "You can no longer draw any energy from the experience orb",
+
+
+
+  "item.chest_item.chaos_seven": "Seven Sons of Chaos",
+  "item.chest_item.chaos_seven.string.1": "It is rumored that during the Chaos War, there was a Chaos Immortal Emperor who single-handedly repelled all races and created various magical powers for the human race",
+  "item.chest_item.chaos_seven.string.2":"... After the fall of the Chaos Immortal Emperor, seven people were recognized by its will, they were: ",
+  "item.chest_item.chaos_seven.string.3": "peek",
+  "item.chest_item.chaos_seven.string.4":"Signs of death",
+  "item.chest_item.chaos_seven.string.5": "upside down",
+  "item.chest_item.chaos_seven.string.6":"Redemption",
+  "item.chest_item.chaos_seven.string.7": "fool",
+  "item.chest_item.chaos_seven.string.8":"insight",
+  "item.chest_item.chaos_seven.string.9": "start",
+  "item.chest_item.chaos_seven.string.10": "In the end, these seven people formed an extremely brilliant sect - the Moon Stone, which has been passed down from the Chaos Age to the present...",
+  "item.chest_item.chaos_seven.string.11": "Kill the ender dragon with 7 buffs",
+
+"item.chest_item.chaos_seven.string.12": "immune to darkness, immune to blindness",
+  "item.chest_item.chaos_seven.string.13":"Increases experience drops by 50%",
+  "item.chest_item.chaos_seven.string.14": "Increases damage by five health armor",
+  "item.chest_item.chaos_seven.string.15": "Grant 10 seconds of invincibility upon resurrection",
+  "item.chest_item.chaos_seven.string.16": "increase healing by 50%",
+  "item.chest_item.chaos_seven.string.17":"Add one snatch, add one luck",
+  "item.chest_item.chaos_seven.string.18": "The lower the health, the higher the stats in all aspects",
+
 
 "item.chest_item.speed": "limit reaction theory",
   "item.chest_item.speed.string.1": "Add 30% water, land and air speed and jump power",

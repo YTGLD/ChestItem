@@ -277,7 +277,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
             // 中间位置
             int middleX = x + (width - 48) / 2;
-            int middleY = y - 3 - 6;
+            int middleY = y - 3 - 14;
             guiGraphics.pose().pushMatrix();
             guiGraphics.pose().translate(0.0F, -7);
             guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
@@ -369,15 +369,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     Light.ARGB.color(as, rs, gs - 20, bs - 30));
 
             if (ConfigC.config.RenderSoul.get()) {
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f * (1.4f)), resourceLocation, x, y, 0, 0, 22, 22, 22, 22,
-                        Light.ARGB.color((int) (as / 3.3f), rs, gs - 20, bs - 30));
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f * (1.4f)), resourceLocation, x - 6, y, 0, 0, 22, 22, 22, 22,
-                        Light.ARGB.color((int) (as / 3.3f), rs, gs - 20, bs - 30));
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f * (1.4f)), resourceLocation, x, y - 6, 0, 0, 22, 22, 22, 22,
-                        Light.ARGB.color((int) (as / 3.3f), rs, gs - 20, bs - 30));
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f * (1.4f)), resourceLocation, x - 6, y - 6, 0, 0, 22, 22, 22, 22,
-                        Light.ARGB.color((int) (as / 3.3f), rs, gs - 20, bs - 30));
-
 
                 guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f)), resourceLocation, x, y, 0, 0, 17, 17, 17, 17,
                         Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));

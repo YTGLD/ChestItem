@@ -11,6 +11,7 @@ import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
 import com.ytgld.chest_item.items.black.soul.*;
+import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -130,8 +131,14 @@ public class EventMain {
         LifeStone.tick(event);
     }
     @SubscribeEvent
+    public void exp(LivingExperienceDropEvent event) {
+        ChaosSeven.exp(event);
+    }
+    @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
         Mutation.die(event);
+        ChaosSeven.die(event);
+
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
@@ -202,7 +209,6 @@ public class EventMain {
         HeavyBlade.LivingIncomingDamageEvent(event);
         TheOrderOfTheUndead.notMagicDamage(event);
         Mutation.notMagicDamage(event);
-
 
 
 
@@ -292,6 +298,14 @@ public class EventMain {
         MadnessTheory.expOrb(event);
         Glutton.attrib(event);
         Speed.tick(event);
+        ChaosSeven.tick(event);
+
+
+
+
+
+
+
         LivingEntity living = event.player;
         {
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);

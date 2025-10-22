@@ -6,6 +6,7 @@ import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
 import com.ytgld.chest_item.items.black.soul.*;
+import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -138,6 +139,8 @@ public class InitItems {
             (resourceLocation)-> new Speed(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> DevilCoins_ = register("devil_coins",
             (resourceLocation)-> new DevilCoins(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> ChaosSeven_ = register("chaos_seven",
+            (resourceLocation)-> new ChaosSeven(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -203,6 +206,7 @@ public class InitItems {
                     output.accept(InitItems.Glutton_);
                     output.accept(InitItems.Speed_);
                     output.accept(InitItems.DevilCoins_);
+                    output.accept(InitItems.ChaosSeven_);
 
 
                 }).build());
