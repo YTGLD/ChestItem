@@ -4,6 +4,7 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.give.DevilCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
@@ -135,6 +136,8 @@ public class InitItems {
             (resourceLocation)-> new Glutton(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> Speed_ = register("speed",
             (resourceLocation)-> new Speed(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> DevilCoins_ = register("devil_coins",
+            (resourceLocation)-> new DevilCoins(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -199,6 +202,7 @@ public class InitItems {
                     output.accept(InitItems.MadnessTheory_);
                     output.accept(InitItems.Glutton_);
                     output.accept(InitItems.Speed_);
+                    output.accept(InitItems.DevilCoins_);
 
 
                 }).build());
@@ -238,6 +242,7 @@ public class InitItems {
                     .add(Complete.asItem())
                     .add(IronHeart_.asItem())
                     .add(IronCube_.asItem())
+                    .add(DevilCoins_.asItem())
                     .add(WindKnife_.asItem());
 
             tag(chestItem)

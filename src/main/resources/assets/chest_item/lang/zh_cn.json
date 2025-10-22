@@ -279,6 +279,7 @@
   "item.chest_item.mutation.string.6":"身着装备自行瓦解",
   "item.chest_item.mutation.string.7": "每穿着一件装备受到的伤害都会增加",
   "item.chest_item.mutation.string.8":"受到的魔法伤害增加100%",
+  "item.chest_item.mutation.string.9": "在不佩戴任何防具，并且神奇箱子内只有一枚异魔硬币的情况下杀死凋零",
 
   "item.chest_item.madness_theory": "癫狂理论",
 
@@ -306,6 +307,9 @@
   "item.chest_item.speed.string.1": "加30%水陆空三项速度和跳跃力量",
   "item.chest_item.speed.string.2": "佩戴9个不同的仿生物品....",
 
+
+  "item.chest_item.devil_coins": "异魔硬币",
+  "item.chest_item.devil_coins.string.1":"一枚诡异的硬币，上面刻着奇怪的纹路......",
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",

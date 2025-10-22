@@ -131,7 +131,7 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
-        VexRing.tick(event);
+        Mutation.die(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){

@@ -249,7 +249,7 @@
   "item.chest_item.mutation.string.6":"disintegrates on its own with equipment",
   "item.chest_item.mutation.string.7": "Damage taken increases with each piece of equipment worn",
   "item.chest_item.mutation.string.8": "Magic damage taken increased by 100%",
-
+  "item.chest_item.mutation.string.9": "Kill the Blight without wearing any armor and with only one Demon Coin inside the Magic Chest",
 "item.chest_item.madness_theory": "madness theory",
 
 "item.chest_item.madness_theory.string.1": "You say that 2+2 is not equal to 4? How much is that? ",
@@ -273,8 +273,8 @@
   "item.chest_item.glutton.string.6":"Hunger and saturation no longer restore health",
   "item.chest_item.glutton.string.7": "Feeling abnormally hungry all the time",
   "item.chest_item.glutton.string.8":"Reduced velocity on a full stomach by about 25%",
-
-
+"item.chest_item.devil_coins": "devil_coins",
+  "item.chest_item.devil_coins.string.1":"A strange coin with a strange pattern engraved on it......",
   "item.chest_item.the_order_of_the_undead": "Dead Command",
   "item.chest_item.the_order_of_the_undead.string.1": "“Plant the Slave Seal, and you will no longer be a human, but our best companion of the undead......”",
   "item.chest_item.the_order_of_the_undead.string.2": "Immune to magic damage",

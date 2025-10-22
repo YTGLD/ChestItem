@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
@@ -135,10 +136,17 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     this.pose.popMatrix();
                 }
                 if (tooltipStack.getItem()instanceof ItemBlackShadow){
-                    this.pose.pushMatrix();
-                    si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j,400);
-                    this.pose.popMatrix();
+                    if (tooltipStack.getItem() instanceof TheChaos){
+                        this.pose.pushMatrix();
+                        si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                        this.pose.popMatrix();
+                    }else {
+                        this.pose.pushMatrix();
+                        si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                        this.pose.popMatrix();
+                    }
                 }
+
             }
         }
     }
@@ -250,6 +258,66 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         "tooltip/black_shadow/tool_1_1"),48, 48, 0, 0, bottomRightX, bottomRightY, 48, 48);
         guiGraphics.pose().popMatrix();
     }
+
+
+    @Unique
+    public void si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(-8, -8);
+        {
+            // 左上角
+            int topLeftX = x - 3 - 9 + 3;
+            int topLeftY = y - 3 - 9;
+            guiGraphics.pose().pushMatrix();
+            guiGraphics.pose().translate(0.0F, -2);
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_0_0.png"), topLeftX, topLeftY, 0, 0, 64, 64, 64, 64);
+            guiGraphics.pose().popMatrix();
+
+            // 中间位置
+            int middleX = x + (width - 48) / 2;
+            int middleY = y - 3 - 6;
+            guiGraphics.pose().pushMatrix();
+            guiGraphics.pose().translate(0.0F, -7);
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_middle_0.png"), middleX, middleY, 0, 0, 64, 64, 64, 64);
+            guiGraphics.pose().popMatrix();
+
+
+            // 右上角
+            int topRightX = x + width + 3 - 48 + 6;
+            int topRightY = y - 3 - 9;
+            guiGraphics.pose().pushMatrix();
+            guiGraphics.pose().translate(0.0F, -2);
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_0_1.png"), topRightX, topRightY, 0, 0, 64, 64, 64, 64);
+            guiGraphics.pose().popMatrix();
+
+            // 左下角
+            int bottomLeftX = x - 3 - 9 ;
+            int bottomLeftY = y + height + 3 - 48 + 4;
+            guiGraphics.pose().pushMatrix();
+            guiGraphics.pose().translate(0.0F, 4);
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_1_0.png"), bottomLeftX, bottomLeftY, 0, 0, 64, 64, 64, 64);
+            guiGraphics.pose().popMatrix();
+
+            // 右下角
+            int bottomRightX = x + width + 3 - 48 + 6;
+            int bottomRightY = y + height + 3 - 48 + 4;
+            guiGraphics.pose().pushMatrix();
+            guiGraphics.pose().translate(0.0F, 4);
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_1_1.png"), bottomRightX, bottomRightY, 0, 0, 64, 64, 64, 64);
+            guiGraphics.pose().popMatrix();
+        }
+        guiGraphics.pose().popMatrix();
+    }
     @Unique
     private  void chest_item$renderTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
         int i = x - 3 - 9;
@@ -271,6 +339,17 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 "tooltip/black_shadow/background"), i, j, k, l);
     }
 
+    @Unique
+    private  void chest_item$renderItemBlackShadowTooltipBackground_Chaos(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        int i = x - 3 - 9;
+        int j = y - 3 - 9;
+        int k = width + 3 + 3 + 18;
+        int l = height + 3 + 3 + 18;
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                "tooltip/black_shadow/chaos/frame"), i, j, k, l);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                "tooltip/black_shadow/chaos/background"), i, j, k, l);
+    }
 
 
 

@@ -6,28 +6,35 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import org.apache.logging.log4j.core.appender.rolling.action.IfNot;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -172,18 +179,91 @@ public class Mutation extends TheImprintOfTheSoul {
         }
         return false;
     }
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
-        tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+        if (stack.get(DataReg.tag)==null){
+            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipAdder.accept(Component.literal(""));
+            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.9").withStyle(ChatFormatting.GOLD));
+
+        }else {
+            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipAdder.accept(Component.literal(""));
+            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
+            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+        }
+    }
+
+    public static void die(LivingDeathEvent event){
+        if (event.getSource().getEntity() instanceof Player player){
+            ChestInventory chestInventory = Handler.getItem(player);
+            if (chestInventory != null) {
+                if (event.getEntity() instanceof WitherBoss) {
+                    give(chestInventory, player);
+                }
+            }
+        }
+    }
+    public static void give(ChestInventory chestInventory,Player player){
+        for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+            ItemStack stack = chestInventory.getItem(i);
+            if (stack.is(InitItems.Mutation_)) {
+                return;
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        boolean isCoin = false;
+        for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+            if (chestInventory.getItem(i).isEmpty()){
+                list.add(1);
+            }
+            if (chestInventory.getItem(i).is(InitItems.DevilCoins_)){
+                isCoin = true;
+            }
+        }
+        int o = 0;
+        for (int ignored : list){
+            o++;
+        }
+
+        if (notEq(player)&&o>=8&&isCoin) {
+            ChestInventory inventory = Handler.getItem(player);
+            if (inventory != null) {
+                ItemStack itemStack10 = inventory.getItem(9);
+                ItemStack itemStack11 = inventory.getItem(10);
+                ItemStack itemStack12 = inventory.getItem(11);
+
+                ItemStack soul = new ItemStack(InitItems.Mutation_.asItem());
+                if (soul.get(DataReg.tag) == null) {
+                    soul.set(DataReg.tag,new CompoundTag());
+                }
+
+                if (itemStack10.isEmpty()) {
+                    inventory.setItem(9,soul);
+                    player.playSound(SoundEvents.ELDER_GUARDIAN_CURSE,1,1);
+                    return;
+                }
+                if (itemStack11.isEmpty()){
+                    inventory.setItem(10,soul);
+                    player.playSound(SoundEvents.ELDER_GUARDIAN_CURSE,1,1);
+                    return;
+                }
+                if (itemStack12.isEmpty()) {
+                    inventory.setItem(11,soul);
+                    player.playSound(SoundEvents.ELDER_GUARDIAN_CURSE,1,1);
+                    return;
+                }
+
+            }
+        }
     }
     @Nullable
     @Override

@@ -8,6 +8,7 @@ import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.Meat;
+import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.items.black.TheSoul;
 import com.ytgld.chest_item.other.*;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -36,7 +37,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class Speed  extends TheSoul {
+public class Speed  extends TheImprintOfTheSoul {
     public Speed(Properties properties) {
         super(properties);
     }
@@ -145,12 +146,6 @@ public class Speed  extends TheSoul {
             tooltipAdder.accept(Component.translatable("item.chest_item.speed.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         }
     }
-
-    @Override
-    public boolean canRemove(ItemStack stack) {
-        return false;
-    }
-
     @Override
     public int soulColor() {
         return Light.ARGB.color(255,255,100,100);
