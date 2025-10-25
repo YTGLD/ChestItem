@@ -127,6 +127,7 @@
   "item.chest_item.stomach": "人造胃",
 
   "effect.chest_item.increasing_meat": "增生",
+  "effect.chest_item.invulnerable": "无敌",
   "effect.chest_item.eye": "光敏感",
 
   "item.chest_item.self_increasing_heart.string.0": "自增i，i自减",
@@ -317,7 +318,7 @@
   "item.chest_item.chaos_seven.string.8":"洞悉",
   "item.chest_item.chaos_seven.string.9": "起始",
   "item.chest_item.chaos_seven.string.10":"最终这七个人组建了一个辉煌无比的宗门——“月之石“并从混沌时代流传至今...",
-  "item.chest_item.chaos_seven.string.11": "在拥有7种BUFF的情况下杀死末影龙",
+  "item.chest_item.chaos_seven.string.11": "在拥有7种负面BUFF的情况下杀死末影龙",
 
   "item.chest_item.chaos_seven.string.12": "免疫黑暗，免疫失明",
   "item.chest_item.chaos_seven.string.13":"增加百分之五十经验掉落",
@@ -326,6 +327,11 @@
   "item.chest_item.chaos_seven.string.16": "增加百分之五十治疗",
   "item.chest_item.chaos_seven.string.17":"加一抢夺，加一时运",
   "item.chest_item.chaos_seven.string.18": "生命值越低 各方面属性越高",
+
+  "item.chest_item.brass_coins": "黄铜币",
+  "item.chest_item.silent": "静置沉默",
+  "item.chest_item.silent.string.1": "静止时治疗增加50%",
+  "item.chest_item.silent.string.2": "静止时抗性增加25%",
 
 
   "item.chest_item.speed": "极限反应论",

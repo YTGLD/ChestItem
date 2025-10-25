@@ -4,6 +4,7 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
@@ -141,6 +142,10 @@ public class InitItems {
             (resourceLocation)-> new DevilCoins(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> ChaosSeven_ = register("chaos_seven",
             (resourceLocation)-> new ChaosSeven(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Silent_ = register("silent",
+            (resourceLocation)-> new Silent(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> BrassCoins_ = register("brass_coins",
+            (resourceLocation)-> new BrassCoins(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -152,6 +157,7 @@ public class InitItems {
                 .title(Component.translatable("itemGroup.chest_item"))
                 .icon(Items.CHEST::getDefaultInstance)
                 .displayItems((parameters, output) -> {
+                    output.accept(InitItems.ChaosSeven_);
                     output.accept(InitItems.God_blood);
                     output.accept(InitItems.Drug_Heal);
                     output.accept(InitItems.Life_Crystal);
@@ -198,15 +204,15 @@ public class InitItems {
                     output.accept(InitItems.EvilThoughtsForgeDreams_);
                     output.accept(InitItems.DryBones_);
                     output.accept(InitItems.ShadowMint_);
-
+                    output.accept(InitItems.DevilCoins_);
+                    output.accept(InitItems.BrassCoins_);
 
                     output.accept(InitItems.TheOrderOfTheUndead_);
                     output.accept(InitItems.Mutation_);
                     output.accept(InitItems.MadnessTheory_);
                     output.accept(InitItems.Glutton_);
                     output.accept(InitItems.Speed_);
-                    output.accept(InitItems.DevilCoins_);
-                    output.accept(InitItems.ChaosSeven_);
+                    output.accept(InitItems.Silent_);
 
 
                 }).build());
@@ -272,6 +278,7 @@ public class InitItems {
                     .add(InitItems.Battery_.asItem())
                     .add(InitItems.EndEffect_.asItem())
                     .add(InitItems.EyeBook_.asItem())
+                    .add(InitItems.BrassCoins_.asItem())
                     .add(InitItems.HeavyBlade_.asItem());
         }
         private static TagKey<Item> createTag(String name) {

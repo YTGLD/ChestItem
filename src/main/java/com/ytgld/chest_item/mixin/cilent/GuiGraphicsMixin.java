@@ -1,11 +1,10 @@
 package com.ytgld.chest_item.mixin.cilent;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
+import com.ytgld.chest_item.other.IPlayer;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
@@ -18,22 +17,19 @@ import net.minecraft.client.gui.render.state.GuiRenderState;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
+import org.apache.logging.log4j.core.appender.rolling.action.IfNot;
 import org.joml.Matrix3x2fStack;
-import org.joml.Quaternionf;
 import org.joml.Vector2ic;
-import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,6 +40,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin implements IGuiGraphics {
@@ -52,10 +49,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     @Shadow @Final private Matrix3x2fStack pose;
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
-    @Override
-    public GuiRenderState cI1_21_9$guiRenderState() {
-        return guiRenderState;
-    }
 
     @Override
     public void chest_item$addW(ItemStack stack) {
@@ -352,7 +345,84 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     }
 
 
+    @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
+    public void TheImprintOfTheSoulBlackLight(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (stack.getItem() instanceof TheChaos soul) {
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/shadow/black.png");
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            if (entity instanceof Player player) {
+                float aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                int size = 48;
+                if (aFloat > 255) {
+                    aFloat = 255;
+                }
 
+                if (aFloat == 0) {
+                    return;
+                }
+                int color = soul.soulColor();
+                int as = (color >> 24) & 0xFF;
+                int rs = (color >> 16) & 0xFF;
+                int gs = (color >> 8) & 0xFF;
+                int bs = color & 0xFF;
+
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f), resourceLocation, x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                        Light.ARGB.color((int) aFloat / 2, rs, gs, bs));
+
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_2.png"),
+                        x - 128 + 72 , y - 128 + 72,
+                        0, 0,
+                        128, 128, 128, 128,
+                        Light.ARGB.color((int) aFloat, rs, gs, bs));
+
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_3.png"),
+                        x - 96 / 3 - 8, y - 96 / 3 - 8, 0, 0, 96, 96, 96, 96,
+                        Light.ARGB.color((int) aFloat, rs, gs, bs));
+            }
+        }
+    }
+    @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
+    public void TheImprintOfTheSoulBlackLightHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (stack.getItem() instanceof ItemBlackShadow soul) {
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            if (entity instanceof Player player) {
+                float aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                int size = 48;
+                if (aFloat > 255) {
+                    aFloat = 255;
+                }
+                if (aFloat == 0) {
+                    return;
+                }
+                int color = soul.color(stack);
+                if (stack.getItem() instanceof TheImprintOfTheSoul theImprintOfTheSoul){
+                    color -= theImprintOfTheSoul.soulColor();
+                }
+                int as = (color >> 24) & 0xFF;
+                int rs = (color >> 16) & 0xFF;
+                int gs = (color >> 8) & 0xFF;
+                int bs = color & 0xFF;
+
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, resourceLocation, x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                        Light.ARGB.color((int) aFloat/5, rs, gs, bs));
+
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_2.png"),
+                        x - 96 / 3 - 8, y - 96 / 3 - 8,
+                        0, 0,
+                        96, 96, 96, 96,
+                        Light.ARGB.color((int) ((int) aFloat/2.5), rs, gs, bs));
+
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_3.png"),
+                        x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                        Light.ARGB.color((int) aFloat/2, rs, gs, bs));
+            }
+        }
+    }
 
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {

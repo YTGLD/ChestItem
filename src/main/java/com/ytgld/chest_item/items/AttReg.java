@@ -21,7 +21,10 @@ import java.util.function.Supplier;
 public class AttReg {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Chestitem.MODID);
 
-
+    public static final Supplier<AttachmentType<Float>> black_shadowAttachmentType = ATTACHMENT_TYPES.register(
+            "black_shadow", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler())
+                    .serialize(Codec.FLOAT.fieldOf("black_shadow")).build()
+    );
 
 
 

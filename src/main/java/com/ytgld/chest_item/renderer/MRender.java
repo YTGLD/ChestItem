@@ -91,6 +91,24 @@ public abstract class MRender extends RenderType {
                         )).withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
                                 VertexFormat.Mode.QUADS)
                         .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
+        public static final RenderPipeline GUI_TEXTURED_SNIPPET_Black = RenderPipeline.builder( RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
+                .withVertexShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color_blacks"))
+                .withFragmentShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color_blacks"))
+                .withSampler("Sampler0")
+                .withBlend(new BlendFunction(
+                        SourceFactor.SRC_ALPHA,
+                        DestFactor.ONE,
+                        SourceFactor.ONE,
+                        DestFactor.ZERO
+                )).withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
+                        VertexFormat.Mode.QUADS)
+                .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet())
+                .withBlend(new BlendFunction(
+                        SourceFactor.SRC_ALPHA,
+                        DestFactor.ONE,
+                        SourceFactor.ONE,
+                        DestFactor.ZERO))
+                .withLocation("pipeline/gui_textured_ci_black").build() ;
 
 
         public static RenderPipeline.Snippet snippet(float a) {

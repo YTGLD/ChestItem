@@ -10,6 +10,7 @@ import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.blood.BoneHead;
@@ -129,6 +130,7 @@ public class EventMain {
             }
         }
         LifeStone.tick(event);
+        Silent.livingHealEventSilent_(event);
     }
     @SubscribeEvent
     public void exp(LivingExperienceDropEvent event) {
@@ -138,7 +140,7 @@ public class EventMain {
     public void LivingDeathEvent(LivingDeathEvent event){
         Mutation.die(event);
         ChaosSeven.die(event);
-
+        BrassCoins.die(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
@@ -209,7 +211,7 @@ public class EventMain {
         HeavyBlade.LivingIncomingDamageEvent(event);
         TheOrderOfTheUndead.notMagicDamage(event);
         Mutation.notMagicDamage(event);
-
+        Silent.hurtSilent_(event);
 
 
         if (event.getEntity() instanceof LivingEntity living) {
@@ -300,6 +302,7 @@ public class EventMain {
         Speed.tick(event);
         ChaosSeven.tick(event);
 
+        Silent.tick(event);
 
 
 

@@ -147,22 +147,22 @@ public class ChaosSeven extends TheChaos{
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(ItemStack stack) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
-        modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+        modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse("aaa"+Chestitem.MODID +
                 InitItems.ChaosSeven_.asItem().getDescriptionId()),
                 5, AttributeModifier.Operation.ADD_VALUE));
-        modifiers.put(Attributes.ARMOR, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+        modifiers.put(Attributes.ARMOR, new AttributeModifier(ResourceLocation.parse("aaa"+Chestitem.MODID +
                 InitItems.ChaosSeven_.asItem().getDescriptionId()),
                 5, AttributeModifier.Operation.ADD_VALUE));
-        modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+        modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.parse("aaa"+Chestitem.MODID +
                 InitItems.ChaosSeven_.asItem().getDescriptionId()),
                 5, AttributeModifier.Operation.ADD_VALUE));
-        modifiers.put(AttReg.heal, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+        modifiers.put(AttReg.heal, new AttributeModifier(ResourceLocation.parse("aaa"+Chestitem.MODID +
                 InitItems.ChaosSeven_.asItem().getDescriptionId()),
                 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-        modifiers.put(AttReg.looting, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+        modifiers.put(AttReg.looting, new AttributeModifier(ResourceLocation.parse("aaa"+Chestitem.MODID +
                 InitItems.ChaosSeven_.asItem().getDescriptionId()),
                 1, AttributeModifier.Operation.ADD_VALUE));
-        modifiers.put(AttReg.fortune, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+        modifiers.put(AttReg.fortune, new AttributeModifier(ResourceLocation.parse("aaa"+Chestitem.MODID +
                 InitItems.ChaosSeven_.asItem().getDescriptionId()),
                 1, AttributeModifier.Operation.ADD_VALUE));
 
