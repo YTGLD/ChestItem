@@ -7,6 +7,7 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.CorruptionCrystal;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
@@ -301,8 +302,8 @@ public class EventMain {
         Glutton.attrib(event);
         Speed.tick(event);
         ChaosSeven.tick(event);
-
         Silent.tick(event);
+        CorruptionCrystal.tick(event);
 
 
 

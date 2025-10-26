@@ -220,7 +220,7 @@ public class ChaosSeven extends TheChaos{
                 tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.9").withStyle(ChatFormatting.GRAY));
                 tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.10").withStyle(ChatFormatting.GRAY));
             }else  {
-                tooltipAdder.accept(Component.translatable("key.keyboard.left.shift").withStyle(ChatFormatting.GRAY));
+                tooltipAdder.accept(Component.translatable("options.key.hold").append(Component.translatable("key.keyboard.left.shift")).withStyle(ChatFormatting.GOLD));
             }
             tooltipAdder.accept(Component.literal(""));
             tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.11").withStyle(ChatFormatting.GOLD));

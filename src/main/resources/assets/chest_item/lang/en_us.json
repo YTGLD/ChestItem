@@ -292,7 +292,15 @@
 "item.chest_item.silent": "silent",
   "item.chest_item.silent.string.1": "Increases healing while stationary by 50%",
   "item.chest_item.silent.string.2": "Increases resistance at rest by 25%",
-  "item.chest_item.silent.string.3": "佩戴古老黄铜币并杀死超过300只生物...(反思你的行为，你身上的怨念已经凝聚成了实质)",
+
+  "item.chest_item.silent.string.3": "Wear an Ancient Brass Coin and kill over 300 creatures... (Reflect on your actions, the resentment on your body has condensed into substance)",
+  "item.chest_item.corruption_crystal": "corruption crystal",
+  "item.chest_item.corruption_crystal.string.0": "另类的尝试",
+  "item.chest_item.corruption_crystal.string.2": "我尝试使用一种奇特的异界之石将它牢牢包裹，意外的是，生命水晶缓缓吸取了这些石头的能量",
+  "item.chest_item.corruption_crystal.string.3": "当最后一块石头的能量被吸收，水晶似乎变成了一种...腐烂的状态？至少它闻起来是这样...",
+  "item.chest_item.corruption_crystal.string.4": "它的能量似乎无穷无尽，仿佛它就是一方天地....",
+
+
 
 "item.chest_item.speed": "limit reaction theory",
   "item.chest_item.speed.string.1": "Add 30% water, land and air speed and jump power",

@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.black.CorruptionCrystal;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
@@ -146,6 +147,8 @@ public class InitItems {
             (resourceLocation)-> new Silent(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> BrassCoins_ = register("brass_coins",
             (resourceLocation)-> new BrassCoins(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> CorruptionCrystal_ = register("corruption_crystal",
+            (resourceLocation)-> new CorruptionCrystal(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -204,6 +207,10 @@ public class InitItems {
                     output.accept(InitItems.EvilThoughtsForgeDreams_);
                     output.accept(InitItems.DryBones_);
                     output.accept(InitItems.ShadowMint_);
+                    output.accept(InitItems.CorruptionCrystal_);
+
+
+
                     output.accept(InitItems.DevilCoins_);
                     output.accept(InitItems.BrassCoins_);
 
