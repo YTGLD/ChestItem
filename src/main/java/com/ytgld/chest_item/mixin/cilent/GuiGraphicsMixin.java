@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.renderer.*;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
@@ -21,6 +22,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.metadata.gui.GuiSpriteScaling;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
@@ -154,12 +156,75 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
                 this.pose.popPose();
             }
             if (tooltipStack.getItem() instanceof ItemBlackShadow) {
-                this.pose.pushPose();
-                si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
-                this.pose.popPose();
-
+                if (tooltipStack.getItem() instanceof TheChaos){
+                    this.pose.pushPose();
+                    si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                    this.pose.popPose();
+                }else {
+                    this.pose.pushPose();
+                    si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                    this.pose.popPose();
+                }
             }
         }
+    }
+    @Unique
+    public void si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(-8, -8,0);
+        {
+            // 左上角
+            int topLeftX = x - 3 - 9 + 3;
+            int topLeftY = y - 3 - 9;
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(0.0F, -2,0);
+            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_0_0.png"), topLeftX, topLeftY, 0, 0, 64, 64, 64, 64,1,1,1,1);
+            guiGraphics.pose().popPose();
+
+            // 中间位置
+            int middleX = x + (width - 48) / 2;
+            int middleY = y - 3 - 14;
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(0.0F, -7,0);
+            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_middle_0.png"), middleX, middleY, 0, 0,64, 64, 64, 64,1,1,1,1);
+            guiGraphics.pose().popPose();
+
+
+            // 右上角
+            int topRightX = x + width + 3 - 48 + 6;
+            int topRightY = y - 3 - 9;
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(0.0F, -2,0);
+            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_0_1.png"), topRightX, topRightY, 0, 0,64, 64, 64, 64,1,1,1,1);
+            guiGraphics.pose().popPose();
+
+            // 左下角
+            int bottomLeftX = x - 3 - 9 ;
+            int bottomLeftY = y + height + 3 - 48 + 4;
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(0.0F, 4,0);
+            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_1_0.png"), bottomLeftX, bottomLeftY, 0, 0,64, 64, 64, 64,1,1,1,1);
+            guiGraphics.pose().popPose();
+
+            // 右下角
+            int bottomRightX = x + width + 3 - 48 + 6;
+            int bottomRightY = y + height + 3 - 48 + 4;
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(0.0F, 4,0);
+            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/gui/tooltip/chaos/tool_1_1.png"), bottomRightX, bottomRightY, 0, 0,64, 64, 64, 64,1,1,1,1);
+            guiGraphics.pose().popPose();
+        }
+        guiGraphics.pose().popPose();
     }
     @Unique
     public void si1_21_4$renderTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
@@ -266,6 +331,91 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                         "tooltip/black_shadow/tool_1_1"),48, 48, 0, 0, bottomRightX, bottomRightY, 48, 48);
         guiGraphics.pose().popPose();
+    }
+    @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
+    public void TheImprintOfTheSoulBlackLight(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (stack.getItem() instanceof TheChaos soul) {
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/shadow/black.png");
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            if (entity instanceof Player player) {
+                float aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                int size = 48;
+                if (aFloat > 255) {
+                    aFloat = 255;
+                }
+
+                if (aFloat == 0) {
+                    return;
+                }
+                int color = soul.soulColor();
+                int as = ((color >> 24) & 0xFF) /255;
+                int rs = ((color >> 16) & 0xFF) /255;
+                int gs = ((color >> 8) & 0xFF) /255;
+                int bs = (color & 0xFF) /255;
+                aFloat /= 255;
+
+
+                MGuiGraphicsCI_Life.blit(guiGraphics,resourceLocation, x - size / 3f, y - size / 3f, 0, 0, size, size, size, size,
+                        rs, gs, bs,aFloat);
+
+                MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_2.png"),
+                        x - 128 + 72 , y - 128 + 72,
+                        0, 0,
+                        128, 128, 128, 128,
+                        rs, gs, bs,aFloat);
+
+                MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_3.png"),
+                        x - 96 / 3f - 8, y - 96 / 3f - 8, 0, 0, 96, 96, 96, 96,
+                        rs, gs, bs,aFloat);
+            }
+        }
+    }
+    @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
+    public void TheImprintOfTheSoulBlackLightHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (stack.getItem() instanceof ItemBlackShadow soul) {
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            if (entity instanceof Player player) {
+                float aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                int size = 48;
+                if (aFloat > 255) {
+                    aFloat = 255;
+                }
+                if (aFloat == 0) {
+                    return;
+                }
+                int color = soul.color(stack);
+                if (stack.getItem() instanceof TheImprintOfTheSoul theImprintOfTheSoul){
+                    color -= theImprintOfTheSoul.soulColor();
+                }
+                int as = ((color >> 24) & 0xFF) /255;
+                int rs = ((color >> 16) & 0xFF) /255;
+                int gs = ((color >> 8) & 0xFF) /255;
+                int bs = (color & 0xFF) /255;
+                aFloat /= 255;
+
+
+
+
+
+                MGuiGraphics.blit(guiGraphics, resourceLocation, x - (float) size / 3, y - (float) size / 3, 0, 0, size, size, size, size,
+                      rs, gs, bs,aFloat);
+
+                MGuiGraphics.blit(guiGraphics, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_2.png"),
+                        x - (float) 96 / 3 - 8, y - (float) 96 / 3 - 8,
+                        0, 0,
+                        96, 96, 96, 96,
+                        rs, gs, bs,aFloat);
+
+                MGuiGraphics.blit(guiGraphics, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_3.png"),
+                        x - (float) size / 3, y - (float) size / 3, 0, 0, size, size, size, size,
+                        rs, gs, bs,aFloat);
+            }
+        }
     }
 
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")

@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.mixin;
 
+import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.IPlayer;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +31,22 @@ public class PlayerMixin implements IPlayer {
         compound.put("ChestItems", this.chest_item$chestInventory.get().createTag(player.registryAccess()));
 
     }
-
+    @Inject(method = "tick", at = @At(value = "RETURN"))
+    private void tick(CallbackInfo ci) {
+        if (!((Player) (Object) this).level().isClientSide()) {
+            if (((Player) (Object) this).hasContainerOpen()) {
+                if (((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) < 250) {
+                    ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, ((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) + 25);
+                }
+            } else {
+                if (((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) > 5) {
+                    ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, ((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) - 10);
+                }else {
+                    ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, 0f);
+                }
+            }
+        }
+    }
     @Override
     public AtomicReference<ChestInventory> chest_item$chestInventory() {
         return chest_item$chestInventory;

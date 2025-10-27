@@ -8,6 +8,7 @@
   "entity.chest_item.attack_end_coming": "末日降临的球体",
   "event.chest_item.equip": "放入神奇箱子内时：",
   "chest_item.the_imprint_of_the_soul": "永恒奴印",
+  "chest_item.the_imprint_of_the_soul.2": "疯狂的理论",
   "chest_item.the_imprint_of_the_soul.1": "条约",
 
   "chest_item.the_imprint_of_the_soul.can_not_remove": "它将成为你人生中不可磨灭的污点",
@@ -31,7 +32,8 @@
   "attribute.name.chest_item.shadow_shield": "幽影护盾",
   "attribute.name.chest_item.shadow_shield_speed": "幽影护盾扩充速度",
   "attribute.name.chest_item.shadow_shield_stronger": "幽影护盾稳固度",
-
+  "attribute.name.chest_item.looting": "抢夺",
+  "attribute.name.chest_item.fortune": "时运",
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
 
@@ -125,6 +127,7 @@
   "item.chest_item.stomach": "人造胃",
 
   "effect.chest_item.increasing_meat": "增生",
+  "effect.chest_item.invulnerable": "无敌",
   "effect.chest_item.eye": "光敏感",
 
   "item.chest_item.self_increasing_heart.string.0": "自增i，i自减",
@@ -303,10 +306,44 @@
   "item.chest_item.glutton.string.8":"饱腹时速度减少约25%",
 
 
+
+  "item.chest_item.chaos_seven": "混沌七子",
+  "item.chest_item.chaos_seven.string.1": "传闻在混沌大战时期，有一尊混沌仙帝以一己之力击退万族，并为人族创建了各种的术法神通",
+  "item.chest_item.chaos_seven.string.2":"...在混沌仙帝陨落之后，有七个人得到了它意志的认可，它们分别是：",
+  "item.chest_item.chaos_seven.string.3": "窥眸",
+  "item.chest_item.chaos_seven.string.4":"死兆",
+  "item.chest_item.chaos_seven.string.5": "颠倒",
+  "item.chest_item.chaos_seven.string.6":"救赎",
+  "item.chest_item.chaos_seven.string.7": "愚者",
+  "item.chest_item.chaos_seven.string.8":"洞悉",
+  "item.chest_item.chaos_seven.string.9": "起始",
+  "item.chest_item.chaos_seven.string.10":"最终这七个人组建了一个辉煌无比的宗门——“月之石“并从混沌时代流传至今...",
+  "item.chest_item.chaos_seven.string.11": "在拥有7种负面BUFF的情况下杀死末影龙",
+
+  "item.chest_item.chaos_seven.string.12": "免疫黑暗，免疫失明",
+  "item.chest_item.chaos_seven.string.13":"增加百分之五十经验掉落",
+  "item.chest_item.chaos_seven.string.14": "增加五的伤害 生命 护甲",
+  "item.chest_item.chaos_seven.string.15":"复活时给予十秒无敌",
+  "item.chest_item.chaos_seven.string.16": "增加百分之五十治疗",
+  "item.chest_item.chaos_seven.string.17":"加一抢夺，加一时运",
+  "item.chest_item.chaos_seven.string.18": "生命值越低 各方面属性越高",
+
+  "item.chest_item.brass_coins": "黄铜币",
+  "item.chest_item.silent": "静置沉默",
+  "item.chest_item.silent.string.1": "静止时治疗增加50%",
+  "item.chest_item.silent.string.2": "静止时抗性增加25%",
+
+
   "item.chest_item.speed": "极限反应论",
   "item.chest_item.speed.string.1": "加30%水陆空三项速度和跳跃力量",
   "item.chest_item.speed.string.2": "佩戴9个不同的仿生物品....",
 
+  "item.chest_item.corruption_crystal": "腐化晶体",
+  "item.chest_item.silent.string.3": "佩戴古老黄铜币并杀死超过300只生物...(反思你的行为，你身上的怨念已经凝聚成了实质)",
+  "item.chest_item.corruption_crystal.string.0": "另类的尝试",
+  "item.chest_item.corruption_crystal.string.2": "我尝试使用一种奇特的异界之石将它牢牢包裹，意外的是，生命水晶缓缓吸取了这些石头的能量",
+  "item.chest_item.corruption_crystal.string.3": "当最后一块石头的能量被吸收，水晶似乎变成了一种...腐烂的状态？至少它闻起来是这样...",
+  "item.chest_item.corruption_crystal.string.4": "它的能量似乎无穷无尽，仿佛它就是一方天地....",
 
   "item.chest_item.devil_coins": "异魔硬币",
   "item.chest_item.devil_coins.string.1":"一枚诡异的硬币，上面刻着奇怪的纹路......",
@@ -317,4 +354,3 @@
 
   "chest_item.configuration.MusicAndRender": "渲染和音效"
 }
-

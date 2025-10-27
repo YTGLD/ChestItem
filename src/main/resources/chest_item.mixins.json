@@ -3,6 +3,9 @@
   "package": "com.ytgld.chest_item.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ApplyBonusCountMixin",
+    "EnchantedCountIncreaseFunctionMixin",
+    "EntityMixin",
     "ExperienceOrbMixin",
     "FoodDataMixin",
     "LivingEntityMixin",

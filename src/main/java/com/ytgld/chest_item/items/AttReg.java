@@ -21,9 +21,14 @@ import java.util.function.Supplier;
 public class AttReg {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Chestitem.MODID);
     public static final Supplier<AttachmentType<Float>> hyperplasiaATTACHMENT_TYPES = ATTACHMENT_TYPES.register(
-            "hyperplasia", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf("hyperplasia").codec()).build()
+            "hyperplasia", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler())
+                    .serialize(Codec.FLOAT.fieldOf("hyperplasia").codec()).build()
     );
 
+    public static final Supplier<AttachmentType<Float>> black_shadowAttachmentType = ATTACHMENT_TYPES.register(
+            "black_shadow", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler())
+                    .serialize(Codec.FLOAT.fieldOf("black_shadow").codec()).build()
+    );
 
 
 
@@ -41,6 +46,19 @@ public class AttReg {
     public static final DeferredHolder<Attribute,?> more_speed = REGISTRY.register("more_speed",()->{
         return new RangedAttribute("attribute.name.chest_item.more_speed", 1, -1024, 1024).setSyncable(true);
     });
+    public static final DeferredHolder<Attribute,?> looting = REGISTRY.register("looting",()->{
+        return new RangedAttribute("attribute.name.chest_item.looting", 0, -1024, 1024).setSyncable(true);
+    });
+    public static final DeferredHolder<Attribute,?> fortune = REGISTRY.register("fortune",()->{
+        return new RangedAttribute("attribute.name.chest_item.fortune", 0, -1024, 1024).setSyncable(true);
+    });
+
+
+
+
+
+
+
 
     /**
      * 疮疤的增生——对不可能说“不”
@@ -86,6 +104,7 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.shadow_shield_speed,1);
         event.add(EntityType.PLAYER , AttReg.shadow_shield_stronger,1);
         event.add(EntityType.PLAYER , AttReg.more_speed,1);
-
+        event.add(EntityType.PLAYER , AttReg.looting,0);
+        event.add(EntityType.PLAYER , AttReg.fortune,0);
     }
 }

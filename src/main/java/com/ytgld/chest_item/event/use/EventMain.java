@@ -7,10 +7,13 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.CorruptionCrystal;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.soul.*;
+import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -134,10 +137,17 @@ public class EventMain {
             }
         }
         LifeStone.tick(event);
+        Silent.livingHealEventSilent_(event);
+    }
+    @SubscribeEvent
+    public void exp(LivingExperienceDropEvent event) {
+        ChaosSeven.exp(event);
     }
     @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
         Mutation.die(event);
+        ChaosSeven.die(event);
+        BrassCoins.die(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
@@ -208,8 +218,7 @@ public class EventMain {
         HeavyBlade.LivingIncomingDamageEvent(event);
         TheOrderOfTheUndead.notMagicDamage(event);
         Mutation.notMagicDamage(event);
-
-
+        Silent.hurtSilent_(event);
 
 
         if (event.getEntity() instanceof LivingEntity living) {
@@ -298,6 +307,15 @@ public class EventMain {
         MadnessTheory.expOrb(event);
         Glutton.attrib(event);
         Speed.tick(event);
+        ChaosSeven.tick(event);
+        Silent.tick(event);
+        CorruptionCrystal.tick(event);
+
+
+
+
+
+
         LivingEntity living = event.player;
         {
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
