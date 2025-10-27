@@ -38,7 +38,9 @@ public class AttReg {
     public static final DeferredHolder<Attribute,?> instability_low = REGISTRY.register("instability_low",()->{
         return new RangedAttribute("attribute.name.chest_item.instability_low", 1, -1024, 1024).setSyncable(true);
     });
-
+    public static final DeferredHolder<Attribute,?> more_speed = REGISTRY.register("more_speed",()->{
+        return new RangedAttribute("attribute.name.chest_item.more_speed", 1, -1024, 1024).setSyncable(true);
+    });
 
     /**
      * 疮疤的增生——对不可能说“不”
@@ -83,6 +85,7 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.shadow_shield,1);
         event.add(EntityType.PLAYER , AttReg.shadow_shield_speed,1);
         event.add(EntityType.PLAYER , AttReg.shadow_shield_stronger,1);
+        event.add(EntityType.PLAYER , AttReg.more_speed,1);
 
     }
 }

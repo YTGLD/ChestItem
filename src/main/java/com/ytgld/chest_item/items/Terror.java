@@ -12,5 +12,5 @@ import javax.annotation.Nullable;
 public interface Terror {
     int color(ItemStack stack);
     @Nullable
-    Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player);
+    Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack);
 }

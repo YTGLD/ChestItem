@@ -33,7 +33,7 @@ public class ItemBase extends Item implements Terror {
     }
     @Nullable
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player) {
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
         return null;
     }
 }

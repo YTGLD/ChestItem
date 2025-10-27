@@ -146,7 +146,7 @@ public class Glutton extends TheImprintOfTheSoul {
     }
 
     @Override
-    public @Nullable Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player) {
+    public @Nullable Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
         return attributeModifierMultimap(player);
     }
 

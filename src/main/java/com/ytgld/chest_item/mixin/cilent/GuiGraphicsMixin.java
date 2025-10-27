@@ -285,7 +285,8 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x, y, 0, 0,16,16,16,16,
                     r,g,b-0.2f,1);
 
-
+            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x, y, 0, 0,18,18,18,18,
+                    r,g-0.1f,b,1/2.5f);
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x-2, y, 0, 0,18,18,18,18,
                     r,g-0.1f,b,1/2.5f);
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x, y-2, 0, 0,18,18,18,18,

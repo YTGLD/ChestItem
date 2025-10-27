@@ -4,10 +4,8 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
-import com.ytgld.chest_item.items.black.soul.Glutton;
-import com.ytgld.chest_item.items.black.soul.MadnessTheory;
-import com.ytgld.chest_item.items.black.soul.Mutation;
-import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
+import com.ytgld.chest_item.items.black.give.DevilCoins;
+import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -141,6 +139,10 @@ public class InitItems {
             (resourceLocation)-> new MadnessTheory(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> Glutton_ = register("glutton",
             (resourceLocation)-> new Glutton(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> DevilCoins_ = register("devil_coins",
+            (resourceLocation)-> new DevilCoins(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> Speed_ = register("speed",
+            (resourceLocation)-> new Speed(new Item.Properties().stacksTo(1)));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -204,6 +206,8 @@ public class InitItems {
                     output.accept(InitItems.Mutation_);
                     output.accept(InitItems.MadnessTheory_);
                     output.accept(InitItems.Glutton_);
+                    output.accept(InitItems.Speed_);
+                    output.accept(InitItems.DevilCoins_);
 
                 }).build());
 
@@ -242,6 +246,7 @@ public class InitItems {
                     .add(Complete.asItem())
                     .add(IronHeart_.asItem())
                     .add(IronCube_.asItem())
+                    .add(DevilCoins_.asItem())
                     .add(WindKnife_.asItem());
 
             this.  tag(chestItem)

@@ -10,10 +10,7 @@ import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.DryBones;
 import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
 import com.ytgld.chest_item.items.black.ShadowMint;
-import com.ytgld.chest_item.items.black.soul.Glutton;
-import com.ytgld.chest_item.items.black.soul.MadnessTheory;
-import com.ytgld.chest_item.items.black.soul.Mutation;
-import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
+import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -90,7 +87,7 @@ public class EventMain {
         Player player = context.player();
         if (player!=null) {
             if (stack.getItem() instanceof Terror terror) {
-                Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player);
+                Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player,stack);
                 if (attributes != null) {
                     attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
                     evt.addTooltipLines(Component.empty());
@@ -140,7 +137,7 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
-        VexRing.tick(event);
+        Mutation.die(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
@@ -300,7 +297,7 @@ public class EventMain {
         Mutation.attrib(event);
         MadnessTheory.expOrb(event);
         Glutton.attrib(event);
-
+        Speed.tick(event);
         LivingEntity living = event.player;
         {
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);

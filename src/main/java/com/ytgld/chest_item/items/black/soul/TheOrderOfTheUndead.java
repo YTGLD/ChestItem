@@ -201,7 +201,7 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
 
     @Nullable
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player) {
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
         return attributeModifierMultimap(player);
     }
 
