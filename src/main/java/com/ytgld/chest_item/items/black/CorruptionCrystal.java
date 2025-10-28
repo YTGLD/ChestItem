@@ -53,9 +53,18 @@ public class CorruptionCrystal  extends ItemBlackShadow {
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.CorruptionCrystal_.asItem().getDescriptionId()),
                 6, AttributeModifier.Operation.ADD_VALUE));
+
         modifiers.put(AttReg.shadow_shield, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.CorruptionCrystal_.asItem().getDescriptionId()),
                 6, AttributeModifier.Operation.ADD_VALUE));
+
+        modifiers.put(AttReg.fortune, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                InitItems.CorruptionCrystal_.asItem().getDescriptionId()),
+                1, AttributeModifier.Operation.ADD_VALUE));
+
+        modifiers.put(AttReg.looting, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                InitItems.CorruptionCrystal_.asItem().getDescriptionId()),
+                1, AttributeModifier.Operation.ADD_VALUE));
 
         return modifiers;
     }

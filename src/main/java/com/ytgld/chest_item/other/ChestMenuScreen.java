@@ -31,6 +31,7 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
+    @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;

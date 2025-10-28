@@ -1,4 +1,5 @@
-// 1.21.9	2025-10-12T22:34:04.5118764	Tags for minecraft:item mod id chest_item
-b3f73da1ffd64a771445f4e6a558452bd313f522 data/chest_item/tags/item/chest_item.json
-15c82b5099000e048ddcd8c803da283d0be5b7a1 data/chest_item/tags/item/chest_item_iron.json
+// 1.21.9	2025-10-28T17:42:17.3046348	Tags for minecraft:item mod id chest_item
+b5a89b77ec9b96300bdb91348fd13dad9dcd8f02 data/chest_item/tags/item/chest_item.json
+d7ac2454946c094ad593ad7d9cddfeadf70af3b8 data/chest_item/tags/item/chest_item_bone.json
+ef0bf5a97083f07eb981be19198187f0e0d60a33 data/chest_item/tags/item/chest_item_iron.json
 14cd696e4c58df32b0f29616a775d737f0cfa936 data/chest_item/tags/item/chest_item_meat.json

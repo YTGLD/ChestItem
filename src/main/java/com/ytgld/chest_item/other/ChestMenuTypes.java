@@ -12,7 +12,7 @@ public class ChestMenuTypes {
     public static final DeferredRegister<MenuType<?>> register = DeferredRegister.create(BuiltInRegistries.MENU, Chestitem.MODID);
     public static final DeferredHolder<MenuType<?>, MenuType<ChestItemMenu>> GENERIC_12 = register.register("chest_menu",
             ()-> new MenuType<>((i,inventory)->{
-                return new ChestItemMenu(i,inventory,new SimpleContainer(12 ),1);
+                return new ChestItemMenu(i,inventory,new SimpleContainer(24),2);
             },FeatureFlags.DEFAULT_FLAGS));
 
 }

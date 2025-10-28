@@ -119,6 +119,8 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 this.pose.pushMatrix();
                 if (tooltipStack.getItem()instanceof ItemBlackShadow){
                     chest_item$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
+                }else if (tooltipStack.getItem() instanceof ItemBone){
+                    chest_item$renderItemBoneTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
                 }else {
                     chest_item$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
                 }
@@ -331,7 +333,17 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                 "tooltip/black_shadow/background"), i, j, k, l);
     }
-
+    @Unique
+    private  void chest_item$renderItemBoneTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        int i = x - 3 - 9;
+        int j = y - 3 - 9;
+        int k = width + 3 + 3 + 18;
+        int l = height + 3 + 3 + 18;
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                "tooltip/bone/frame"), i, j, k, l);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                "tooltip/bone/background"), i, j, k, l);
+    }
     @Unique
     private  void chest_item$renderItemBlackShadowTooltipBackground_Chaos(GuiGraphics guiGraphics, int x, int y, int width, int height) {
         int i = x - 3 - 9;
@@ -422,6 +434,40 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         Light.ARGB.color((int) aFloat/2, rs, gs, bs));
             }
         }
+        if (stack.getItem() instanceof ItemBone bone) {
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            if (entity instanceof Player player) {
+                float aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                int size = 48;
+                if (aFloat > 255) {
+                    aFloat = 255;
+                }
+                if (aFloat == 0) {
+                    return;
+                }
+                int color = bone.color(stack);
+                int rs = (color >> 16) & 0xFF;
+                int gs = (color >> 8) & 0xFF;
+                int bs = color & 0xFF;
+
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, resourceLocation, x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                        Light.ARGB.color((int) aFloat/5, rs, gs, bs));
+
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_2.png"),
+                        x - 96 / 3 - 8, y - 96 / 3 - 8,
+                        0, 0,
+                        96, 96, 96, 96,
+                        Light.ARGB.color((int) ((int) aFloat/2.5), rs, gs, bs));
+
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_3.png"),
+                        x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                        Light.ARGB.color((int) aFloat/2, rs, gs, bs));
+            }
+        }
+
     }
 
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")

@@ -15,7 +15,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 public class ChestInventory extends SimpleContainer {
     public ChestInventory(Player player) {
-        super(12);
+        super(24);
     }
     public void fromSlots(ValueInput.TypedInputList<ItemStackWithSlot> input) {
         for(int i = 0; i < this.getContainerSize(); ++i) {

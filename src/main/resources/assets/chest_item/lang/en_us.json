@@ -300,7 +300,26 @@
   "item.chest_item.corruption_crystal.string.3": "当最后一块石头的能量被吸收，水晶似乎变成了一种...腐烂的状态？至少它闻起来是这样...",
   "item.chest_item.corruption_crystal.string.4": "它的能量似乎无穷无尽，仿佛它就是一方天地....",
 
+  "item.chest_item.condense_bone_cube": "骨质凝块",
+  "item.chest_item.condense_bone_cube.string.0": "骨质凝块",
 
+  "item.chest_item.shield_engine": "盾御引擎",
+  "item.chest_item.shield_engine.string.0": "骨质的改变",
+  "item.chest_item.shield_engine.string.1": "生命值低于每损失3%生命值加1%抗性",
+
+  "item.chest_item.alienation_diodes": "异化二极管",
+  "item.chest_item.alienation_diodes.string.0": "即兴反应",
+  "item.chest_item.alienation_diodes.string.1": "增加10%暴击伤害",
+  "item.chest_item.alienation_diodes.string.2": "造成暴击伤害时恢复生命值",
+
+  "item.chest_item.mass_energy_converter": "质能转换器",
+  "item.chest_item.mass_energy_converter.string.0": "质能方程式",
+  "item.chest_item.mass_energy_converter.string.1": "每损失3%生命值，增加1%抗性",
+  "item.chest_item.mass_energy_converter.string.2": "每损失2%生命值，增加1%伤害",
+
+
+  "item.chest_item.qualitative_components": "质化组件",
+  "item.chest_item.qualitative_components.string.0": "质化组件",
 
 "item.chest_item.speed": "limit reaction theory",
   "item.chest_item.speed.string.1": "Add 30% water, land and air speed and jump power",

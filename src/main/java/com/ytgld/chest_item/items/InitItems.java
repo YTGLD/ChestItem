@@ -12,6 +12,7 @@ import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
+import com.ytgld.chest_item.items.condensebone.*;
 import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
 import com.ytgld.chest_item.items.gold.*;
@@ -149,6 +150,16 @@ public class InitItems {
             (resourceLocation)-> new BrassCoins(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> CorruptionCrystal_ = register("corruption_crystal",
             (resourceLocation)-> new CorruptionCrystal(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> CondenseBoneCube_ = register("condense_bone_cube",
+            (resourceLocation)-> new CondenseBoneCube(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> ShieldEngine_ = register("shield_engine",
+            (resourceLocation)-> new ShieldEngine(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> AlienationDiodes_ = register("alienation_diodes",
+            (resourceLocation)-> new AlienationDiodes(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> QualitativeComponents_ = register("qualitative_components",
+            (resourceLocation)-> new QualitativeComponents(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> MassEnergyConverter_ = register("mass_energy_converter",
+            (resourceLocation)-> new MassEnergyConverter(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -191,6 +202,11 @@ public class InitItems {
                     output.accept(InitItems.Complete);
                     output.accept(InitItems.IronHeart_);
                     output.accept(InitItems.IronCube_);
+                    output.accept(InitItems.CondenseBoneCube_);
+                    output.accept(InitItems.ShieldEngine_);
+                    output.accept(InitItems.AlienationDiodes_);
+                    output.accept(InitItems.QualitativeComponents_);
+                    output.accept(InitItems.MassEnergyConverter_);
 
 
                     output.accept(InitItems.GiantHeart_);
@@ -232,6 +248,7 @@ public class InitItems {
         public static final TagKey<Item> chestItem = createTag("chest_item");
         public static final TagKey<Item> chestItem_iron = createTag("chest_item_iron");
         public static final TagKey<Item> chestItemMeat = createTag("chest_item_meat");
+        public static final TagKey<Item> chestItemBone = createTag("chest_item_bone");
 
         public TagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
             super(output, lookupProvider,  Chestitem.MODID);
@@ -239,6 +256,18 @@ public class InitItems {
 
         @Override
         protected void addTags(HolderLookup.@NotNull Provider provider) {
+            tag(chestItemBone).add(
+                    DryBones_.asItem(),
+                    ShieldEngine_.asItem(),
+                    AlienationDiodes_.asItem(),
+                    QualitativeComponents_.asItem(),
+                    MassEnergyConverter_.asItem(),
+                    Bone_Head.asItem()
+            );
+
+
+
+
             tag(chestItemMeat).add(
                         GiantHeart_.asItem())
                     .add(God_Apple.asItem())
@@ -258,19 +287,19 @@ public class InitItems {
                     .add(NuclearReaction_.asItem())
                     .add(Complete.asItem())
                     .add(IronHeart_.asItem())
+                    .add(InitItems.Battery_.asItem())
                     .add(IronCube_.asItem())
                     .add(DevilCoins_.asItem())
+                    .add(Knife_.asItem())
+                    .add(Lead_.asItem())
                     .add(WindKnife_.asItem());
 
             tag(chestItem)
                     .add(God_blood.asItem())
                     .add(Drug_Heal.asItem())
                     .add(Life_Crystal.asItem())
-                    .add(Bone_Head.asItem())
                     .add(Conch_.asItem())
-                    .add(Lead_.asItem())
                     .add(Stone_.asItem())
-                    .add(Knife_.asItem())
                     .add(Ring_.asItem())
                     .add(Life_Stone.asItem())
                     .add(Armor_Stone.asItem())
@@ -282,7 +311,6 @@ public class InitItems {
                     .add(InitItems.Gold_Cheese.asItem())
                     .add(InitItems.Space_.asItem())
                     .add(InitItems.Kaolinite_.asItem())
-                    .add(InitItems.Battery_.asItem())
                     .add(InitItems.EndEffect_.asItem())
                     .add(InitItems.EyeBook_.asItem())
                     .add(InitItems.BrassCoins_.asItem())
