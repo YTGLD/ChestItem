@@ -2,11 +2,13 @@ package com.ytgld.chest_item.tip.an_element;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -79,7 +81,17 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
             SkillBase elt = map.keySet().stream().toList().get(i);
             int number = map.get(elt);
             number++;
-            guiGraphics.drawString(font, Component.translatable("enchantment.level."+number), x+35, y+10, itemBase.color(stack), false);
+            guiGraphics.drawString(font, Component.translatable("item.chest_item.skill.level").append(": ").append(Component.translatable("enchantment.level."+number)),
+                    x+35, y+10, itemBase.color(stack), false);
+
+            String baneName = elt.baneName();
+            String mixinName = baneName + SkillBase.skillBaseXP;
+            int sx = 0;
+            CompoundTag compoundTag = stack.get(DataReg.tag);
+            if (compoundTag!=null) {
+                sx = compoundTag.getIntOr(mixinName, 0);
+            }
+            guiGraphics.drawString(font, Component.translatable( "item.chest_item.skill.xp").append(": ").append(String.valueOf(sx)), x+35, y+20,itemBase.color(stack) , false);
 
         }
     }

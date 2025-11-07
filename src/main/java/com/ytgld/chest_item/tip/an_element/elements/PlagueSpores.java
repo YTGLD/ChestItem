@@ -1,13 +1,15 @@
 package com.ytgld.chest_item.tip.an_element.elements;
 
 
-import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
-import net.minecraft.resources.ResourceLocation;
 
+/**
+ * 按下技能按键对附近生物造成中毒
+ *
+ */
 public class PlagueSpores extends SkillBase {
-    public static final ResourceLocation plagueSpores =
-            ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                    "plague_spores"
-            );
+    @Override
+    public String baneName() {
+        return "plague_spores";
+    }
 }
