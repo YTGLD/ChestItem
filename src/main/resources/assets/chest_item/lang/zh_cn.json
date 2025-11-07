@@ -332,8 +332,6 @@
   "item.chest_item.silent": "静置沉默",
   "item.chest_item.silent.string.1": "静止时治疗增加50%",
   "item.chest_item.silent.string.2": "静止时抗性增加25%",
-
-
   "item.chest_item.speed": "极限反应论",
   "item.chest_item.speed.string.1": "加30%水陆空三项速度和跳跃力量",
   "item.chest_item.speed.string.2": "佩戴9个不同的仿生物品....",
@@ -352,5 +350,9 @@
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
   "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
 
-  "chest_item.configuration.MusicAndRender": "渲染和音效"
+  "chest_item.configuration.MusicAndRender": "渲染和音效",
+  "item.chest_item.fission": "裂变体",
+
+  "item.chest_item.skill.plague_spores": "瘟疫孢子",
+  "item.chest_item.skill.plague_divine_power": "瘟疫之力"
 }

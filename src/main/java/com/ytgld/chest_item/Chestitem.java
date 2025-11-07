@@ -15,6 +15,7 @@ import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -25,9 +26,12 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+
+import java.util.function.Function;
 
 @Mod(Chestitem.MODID)
 public class Chestitem {
@@ -56,7 +60,10 @@ public class Chestitem {
     }
     @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {
-
+        @SubscribeEvent
+        public static void RegisterClientTooltipComponentFactoriesEvent(RegisterClientTooltipComponentFactoriesEvent event){
+            event.register(SkillTooltip.class, Function.identity());
+        }
         @SubscribeEvent
         public static void RegisterRenderPipelinesEvent(EntityRenderersEvent.RegisterRenderers event){
             event.registerEntityRenderer(Entitys.AttackEndComing_.get(), AttackEndComingRender::new);

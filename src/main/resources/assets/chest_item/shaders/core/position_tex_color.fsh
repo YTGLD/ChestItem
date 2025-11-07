@@ -3,17 +3,6 @@
 #moj_import <minecraft:fog.glsl>
 #moj_import <minecraft:matrix.glsl>
 #moj_import <minecraft:globals.glsl>
-
-// Can't moj_import in things used during startup, when resource packs don't exist.
-// This is a copy of dynamicimports.glsl
-layout(std140) uniform DynamicTransforms {
-    mat4 ModelViewMat;
-    vec4 ColorModulator;
-    vec3 ModelOffset;
-    mat4 TextureMat;
-    float LineWidth;
-};
-
 uniform sampler2D Sampler0;
 
 in vec2 texCoord0;
@@ -43,5 +32,5 @@ void main() {
     }
 
     // 输出最终颜色
-    fragColor = color * ColorModulator;
+    fragColor = color ;
 }

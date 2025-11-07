@@ -317,6 +317,12 @@
   "item.chest_item.mass_energy_converter.string.1": "每损失3%生命值，增加1%抗性",
   "item.chest_item.mass_energy_converter.string.2": "每损失2%生命值，增加1%伤害",
 
+  "item.chest_item.skill.plague_spores": "Plague spores",
+  "item.chest_item.skill.plague_divine_power": "The power of the plague",
+  "item.chest_item.fission": "fission",
+
+
+
 
   "item.chest_item.qualitative_components": "质化组件",
   "item.chest_item.qualitative_components.string.0": "质化组件",

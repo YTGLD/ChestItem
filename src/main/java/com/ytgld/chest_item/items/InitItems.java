@@ -160,6 +160,8 @@ public class InitItems {
             (resourceLocation)-> new QualitativeComponents(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> MassEnergyConverter_ = register("mass_energy_converter",
             (resourceLocation)-> new MassEnergyConverter(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Fission_ = register("fission",
+            (resourceLocation)-> new Fission(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -207,6 +209,7 @@ public class InitItems {
                     output.accept(InitItems.AlienationDiodes_);
                     output.accept(InitItems.QualitativeComponents_);
                     output.accept(InitItems.MassEnergyConverter_);
+                    output.accept(InitItems.Fission_);
 
 
                     output.accept(InitItems.GiantHeart_);
