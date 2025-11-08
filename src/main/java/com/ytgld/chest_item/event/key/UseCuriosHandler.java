@@ -2,6 +2,7 @@ package com.ytgld.chest_item.event.key;
 
 import com.ytgld.chest_item.items.end.TheEndIsComing;
 import com.ytgld.chest_item.tip.SkillEvent;
+import com.ytgld.chest_item.tip.an_element.elements.PlagueSpores;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -18,7 +19,7 @@ public class UseCuriosHandler {
             ctx.enqueueWork(() -> {
                 Player player = ctx.player();
                 TheEndIsComing.event(player);
-                SkillEvent.useSkill(player);
+                PlagueSpores.useSkill(player);
             });
         }
     }

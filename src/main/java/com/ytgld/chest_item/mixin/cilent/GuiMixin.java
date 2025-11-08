@@ -86,11 +86,11 @@ public abstract class GuiMixin {
             for (int k = 0; k < 10; k++) {
                 int xx = (x + k * 8) - 1;
                 if (k * 2 + 1 < i) {
-                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_CI, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png"),
+                    guiGraphics.blit(MRender.RenderPs.LightSlowness(false,0.135F), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png"),
                             xx, yy, 0, 0, 11, 11, 11, 11, Light.ARGB.color(a, 255, 255, 255));
                 }
                 if (k * 2 + 1 == i) {
-                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_CI, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_2.png"),
+                    guiGraphics.blit(MRender.RenderPs.LightSlowness(false,0.135F), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_2.png"),
                             xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
                 }
             }

@@ -354,7 +354,10 @@
   "item.chest_item.fission": "裂变体",
   "item.chest_item.skill.xp": "经验值",
   "item.chest_item.skill.level": "等级",
+  "item.chest_item.flesh_and_blood_gears": "血肉齿轮",
 
+  "item.chest_item.skill.terrible_potion": "可怕的药剂",
+  "item.chest_item.skill.therapeutic": "医者意志",
   "item.chest_item.skill.plague_spores": "瘟疫孢子",
   "item.chest_item.skill.plague_divine_power": "瘟疫之力"
 }
