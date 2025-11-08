@@ -84,7 +84,8 @@ public abstract class SkillBase {
      * @param xp 每次增加的经验值
      * @param oneXPForOneLevel 每次升级所需的经验值
      */
-    public static void addXP(ItemStack stack,SkillBase mustHasElement,int xp,int oneXPForOneLevel){
+    public static void addXP(ItemStack stack,SkillBase mustHasElement,int xp,int oneXPForOneLevel,int maxLvl){
+        maxLvl--;
         @Nullable CompoundTag compoundTag = stack.get(DataReg.tag);
         String baneName = mustHasElement.baneName();
         String mixinName = baneName + skillBaseXP;
@@ -94,7 +95,7 @@ public abstract class SkillBase {
         if (compoundTag != null) {
             compoundTag.putInt(mixinName,compoundTag.getIntOr(mixinName,0)+xp);
         }
-        if (getHasElementLevel(stack,mustHasElement)<9) {
+        if (getHasElementLevel(stack,mustHasElement)<maxLvl) {
             if (compoundTag != null) {
                 int xpNumber = compoundTag.getIntOr(mixinName, 0);
                 if (xpNumber % oneXPForOneLevel == 1) {

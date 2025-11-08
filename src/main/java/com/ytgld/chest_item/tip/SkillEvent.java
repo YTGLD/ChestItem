@@ -50,12 +50,12 @@ public class SkillEvent {
 
                                 for (LivingEntity entity : entities) {
                                     if (!entity.is(player)) {
-                                        entity.addEffect(new MobEffectInstance(MobEffects.POISON,200,1),player);
+                                        entity.addEffect(new MobEffectInstance(MobEffects.POISON,200 + lvl*20,1),player);
                                     }
                                 }
 
 
-                                SkillBase.addXP(stack, SkillList.pPlagueSpores, 1, 10);
+                                SkillBase.addXP(stack, SkillList.pPlagueSpores, 1, 10,10);
                                 player.getCooldowns().addCooldown(stack,lvl * 10 + 200);
                             }
                         }
@@ -92,7 +92,7 @@ public class SkillEvent {
                                 if (living.hasEffect(MobEffects.POISON)) {
                                     event.setNewDamage(event.getNewDamage() * 1.2f);
                                 }
-                                SkillBase.addXP(stack, SkillList.pPlagueDivinePower, 1, 100);
+                                SkillBase.addXP(stack, SkillList.pPlagueDivinePower, 1, 100,10);
                             }
                         }
                     }
