@@ -4,7 +4,11 @@
     "chest_item:nuclear_reaction",
     "chest_item:complete",
     "chest_item:iron_heart",
+    "chest_item:battery",
     "chest_item:iron_cube",
+    "chest_item:devil_coins",
+    "chest_item:knife",
+    "chest_item:lead",
     "chest_item:wind_knife"
   ]
 }

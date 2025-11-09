@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class ChestInventory extends SimpleContainer{
 
     public ChestInventory(Player player) {
-        super(12);
+        super(24);
     }
 
     public void fromTag(ListTag tag, HolderLookup.Provider levelRegistry) {

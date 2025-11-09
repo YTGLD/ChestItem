@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {"item": "chest_item:condense_bone_cube"},
+    "B": {"item": "minecraft:diamond"},
+    "A": {"item": "minecraft:ender_pearl"},
+    "D": {"item": "minecraft:blaze_rod"}
+  },
+  "pattern": [
+    "CCC",
+    "BAD",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:alienation_diodes"
+  }
+}

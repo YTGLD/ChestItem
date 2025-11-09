@@ -295,13 +295,30 @@
 
   "item.chest_item.silent.string.3": "Wear an Ancient Brass Coin and kill over 300 creatures... (Reflect on your actions, the resentment on your body has condensed into substance)",
   "item.chest_item.corruption_crystal": "corruption crystal",
-  "item.chest_item.corruption_crystal.string.0": "另类的尝试",
-  "item.chest_item.corruption_crystal.string.2": "我尝试使用一种奇特的异界之石将它牢牢包裹，意外的是，生命水晶缓缓吸取了这些石头的能量",
-  "item.chest_item.corruption_crystal.string.3": "当最后一块石头的能量被吸收，水晶似乎变成了一种...腐烂的状态？至少它闻起来是这样...",
-  "item.chest_item.corruption_crystal.string.4": "它的能量似乎无穷无尽，仿佛它就是一方天地....",
+  "item.chest_item.corruption_crystal.string.0": "alternative attempt",
+  "item.chest_item.corruption_crystal.string.2": "I tried to wrap it tightly with a peculiar otherworldly stone, and unexpectedly, the life crystal slowly sucked the energy of these stones",
+  "item.chest_item.corruption_crystal.string.3": "When the energy of the last stone is absorbed, the crystal seems to become a ... A state of decay? At least that's what it smells like...",
+  "item.chest_item.corruption_crystal.string.4": "Its energy seems endless, as if it were a heaven and earth...",
 
+"item.chest_item.condense_bone_cube": "bone clot",
+  "item.chest_item.condense_bone_cube.string.0": "bone clot",
 
+"item.chest_item.shield_engine": "shield engine",
+  "item.chest_item.shield_engine.string.0": "bone change",
+  "item.chest_item.shield_engine.string.1": "Health below 1% Resistance for every 3% health loss",
 
+"item.chest_item.alienation_diodes": "alienation diode",
+  "item.chest_item.alienation_diodes.string.0": "improvisation",
+  "item.chest_item.alienation_diodes.string.1": "Increases critical damage by 10%",
+  "item.chest_item.alienation_diodes.string.2": "Regenerates health when critical damage is dealt",
+
+"item.chest_item.mass_energy_converter": "mass-energy converter",
+  "item.chest_item.mass_energy_converter.string.0": "mass-energy equation",
+  "item.chest_item.mass_energy_converter.string.1": "For every 3% health loss, increase resistance by 1%",
+  "item.chest_item.mass_energy_converter.string.2": "For every 2% health lost, increase damage by 1%",
+
+"item.chest_item.qualitative_components": "qualitative components",
+  "item.chest_item.qualitative_components.string.0": "qualitative components",
 "item.chest_item.speed": "limit reaction theory",
   "item.chest_item.speed.string.1": "Add 30% water, land and air speed and jump power",
   "item.chest_item.speed.string.2": "Wear 9 different biomimetic products....",

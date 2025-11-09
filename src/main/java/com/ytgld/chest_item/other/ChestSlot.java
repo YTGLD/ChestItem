@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.other;
 
+import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -13,10 +14,19 @@ public class ChestSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        if (this.index < 9) {
-            return !(stack.getItem() instanceof TheImprintOfTheSoul);
-        }else {
+        if (this.index == 9 ||
+                this.index == 10 ||
+                this.index == 11) {
             return stack.getItem() instanceof TheImprintOfTheSoul;
+        }else {
+            if (stack.getItem() instanceof ItemBase){
+                if (stack.getItem() instanceof TheImprintOfTheSoul) {
+                    return false;
+                }
+                return true;
+            }else {
+                return false;
+            }
         }
     }
     @Override

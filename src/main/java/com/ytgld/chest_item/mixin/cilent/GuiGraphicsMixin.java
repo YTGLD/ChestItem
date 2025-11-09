@@ -144,7 +144,13 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
                         Light.ARGB.color(255, 106, 90, 205),
                         Light.ARGB.color(255, 72, 61, 139));
 
-            } else {
+            } else if (tooltipStack.getItem() instanceof ItemBone){
+                TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
+                        Light.ARGB.color(255, 0, 10, 33),
+                        Light.ARGB.color(255, 0, 10, 33),
+                        Light.ARGB.color(255, 50, 255, 20),
+                        Light.ARGB.color(255, 50, 50, 100));
+            }else {
                 TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400, colorEvent.getBackgroundStart(), colorEvent.getBackgroundEnd(),
                         Light.ARGB.color(255, 218, 165, 32),
                         Light.ARGB.color(255, 219, 112, 147));
@@ -374,6 +380,46 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
     }
     @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void TheImprintOfTheSoulBlackLightHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (stack.getItem() instanceof ItemBone bone) {
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            if (entity instanceof Player player) {
+                float aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                int size = 48;
+                if (aFloat > 255) {
+                    aFloat = 255;
+                }
+                if (aFloat == 0) {
+                    return;
+                }
+                int color = bone.color(stack);
+                int as = ((color >> 24) & 0xFF) /255;
+                int rs = ((color >> 16) & 0xFF) /255;
+                int gs = ((color >> 8) & 0xFF) /255;
+                int bs = (color & 0xFF) /255;
+                aFloat /= 255;
+
+
+
+
+
+                MGuiGraphics.blit(guiGraphics, resourceLocation, x - (float) size / 3, y - (float) size / 3, 0, 0, size, size, size, size,
+                        rs, gs, bs,aFloat);
+
+                MGuiGraphics.blit(guiGraphics, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_2.png"),
+                        x - (float) 96 / 3 - 8, y - (float) 96 / 3 - 8,
+                        0, 0,
+                        96, 96, 96, 96,
+                        rs, gs, bs,aFloat);
+
+                MGuiGraphics.blit(guiGraphics, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/black_3.png"),
+                        x - (float) size / 3, y - (float) size / 3, 0, 0, size, size, size, size,
+                        rs, gs, bs,aFloat);
+            }
+        }
+
         if (stack.getItem() instanceof ItemBlackShadow soul) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;

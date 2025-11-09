@@ -332,6 +332,26 @@
   "item.chest_item.silent": "静置沉默",
   "item.chest_item.silent.string.1": "静止时治疗增加50%",
   "item.chest_item.silent.string.2": "静止时抗性增加25%",
+  "item.chest_item.condense_bone_cube": "骨质凝块",
+  "item.chest_item.condense_bone_cube.string.0": "骨质凝块",
+
+  "item.chest_item.shield_engine": "盾御引擎",
+  "item.chest_item.shield_engine.string.0": "骨质的改变",
+  "item.chest_item.shield_engine.string.1": "生命值低于每损失3%生命值加1%抗性",
+
+  "item.chest_item.alienation_diodes": "异化二极管",
+  "item.chest_item.alienation_diodes.string.0": "即兴反应",
+  "item.chest_item.alienation_diodes.string.1": "增加10%暴击伤害",
+  "item.chest_item.alienation_diodes.string.2": "造成暴击伤害时恢复生命值",
+
+  "item.chest_item.mass_energy_converter": "质能转换器",
+  "item.chest_item.mass_energy_converter.string.0": "质能方程式",
+  "item.chest_item.mass_energy_converter.string.1": "每损失3%生命值，增加1%抗性",
+  "item.chest_item.mass_energy_converter.string.2": "每损失2%生命值，增加1%伤害",
+
+
+  "item.chest_item.qualitative_components": "质化组件",
+  "item.chest_item.qualitative_components.string.0": "质化组件",
 
 
   "item.chest_item.speed": "极限反应论",

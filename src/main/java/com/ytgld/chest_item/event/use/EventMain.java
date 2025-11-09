@@ -17,6 +17,10 @@ import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
+import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
+import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
+import com.ytgld.chest_item.items.condensebone.QualitativeComponents;
+import com.ytgld.chest_item.items.condensebone.ShieldEngine;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
@@ -152,6 +156,7 @@ public class EventMain {
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
         Lead.event(event);
+        AlienationDiodes.CriticalHitEvent(event);
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
@@ -200,6 +205,7 @@ public class EventMain {
             }
         }
     }
+
     @SubscribeEvent
     public void attackEXP(LivingExperienceDropEvent event){
         MadnessTheory.attackEXP(event);
@@ -219,6 +225,10 @@ public class EventMain {
         TheOrderOfTheUndead.notMagicDamage(event);
         Mutation.notMagicDamage(event);
         Silent.hurtSilent_(event);
+        ShieldEngine.LivingIncomingDamageEvent(event);
+        MassEnergyConverter.LivingIncomingDamageEvent(event);
+
+
 
 
         if (event.getEntity() instanceof LivingEntity living) {
@@ -310,7 +320,7 @@ public class EventMain {
         ChaosSeven.tick(event);
         Silent.tick(event);
         CorruptionCrystal.tick(event);
-
+        QualitativeComponents.tick(event);
 
 
 

@@ -20,7 +20,7 @@ public class Handler {
             player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.CHEST_OPEN, SoundSource.AMBIENT,1,1);
             player.openMenu(new SimpleMenuProvider(
                     (i, inventory, p_53126_) -> new ChestItemMenu(i,inventory,
-                            iPlayer.chest_item$chestInventory().get(),1), Component.translatable("container.chest_item.chest")
+                            iPlayer.chest_item$chestInventory().get(),2), Component.translatable("container.chest_item.chest")
             ));
         }
     }

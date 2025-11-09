@@ -8,26 +8,19 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public class ChestItemMenu extends AbstractContainerMenu {
-    private static final int SLOTS_PER_ROW = 9;
     private final Container container;
     private final int containerRows;
 
     public ChestItemMenu(int containerId, Inventory playerInventory, Container container, int rows) {
         super(ChestMenuTypes.GENERIC_12.get(), containerId);
-        checkContainerSize(container, rows * 9);
+        checkContainerSize(container, rows * 12);
         this.container = container;
         this.containerRows = rows;
         container.startOpen(playerInventory.player);
         int i = (this.containerRows - 4) * 18;
-
+        this.addChestGrid(container, 8, 0);
         int i1;
         int j1;
-        for(i1 = 0; i1 < this.containerRows; ++i1) {
-            for(j1 = 0; j1 < 12; ++j1) {
-                this.addSlot(new ChestSlot(container, j1 + i1 * 9, 8 + j1 * 18, 18 + i1 * 18));
-            }
-        }
-
         for(i1 = 0; i1 < 3; ++i1) {
             for(j1 = 0; j1 < 9; ++j1) {
                 this.addSlot(new Slot(playerInventory, j1 + i1 * 9 + 9, 8 + j1 * 18, 103 + i1 * 18 + i));
@@ -39,7 +32,14 @@ public class ChestItemMenu extends AbstractContainerMenu {
         }
 
     }
-
+    private void addChestGrid(Container container, int x, int y) {
+        for (int j = 0; j < 12; ++j) {
+            this.addSlot(new ChestSlot(container, j, x + j * 18, y + 18));
+        }
+        for (int j = 0; j < 5; ++j) {
+            this.addSlot(new ChestSlot(container, j + 12, x + j * 18, y + 36));
+        }
+    }
     public boolean stillValid(Player player) {
         return this.container.stillValid(player);
     }
@@ -50,11 +50,15 @@ public class ChestItemMenu extends AbstractContainerMenu {
         if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
-            if (index < this.containerRows * 9) {
-                if (!this.moveItemStackTo(itemstack1, this.containerRows * 9, this.slots.size(), true)) {
+            if (index < 12) {
+                if (!this.moveItemStackTo(itemstack1, 12, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemstack1, 0, this.containerRows * 9, false)) {
+            } else if (index < 17) {
+                if (!this.moveItemStackTo(itemstack1, 0, 12, false)) { // 尝试将物品移动到第一行
+                    return ItemStack.EMPTY;
+                }
+            } else {
                 return ItemStack.EMPTY;
             }
 
