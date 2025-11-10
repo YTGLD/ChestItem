@@ -11,6 +11,9 @@ import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
+import com.ytgld.chest_item.tip.an_element.SkillList;
+import com.ytgld.chest_item.tip.an_element.SkillTooltip;
+import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -21,16 +24,21 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 
-public class SelfIncreasingHeart extends ItemBase implements Meat {
+public class SelfIncreasingHeart extends ItemBase implements Meat,SkillList {
     public SelfIncreasingHeart(Properties properties) {
         super(properties);
     }
@@ -99,6 +107,34 @@ public class SelfIncreasingHeart extends ItemBase implements Meat {
         tooltipAdder.accept(Component.translatable("item.chest_item.self_increasing_heart.string.2").withStyle(ChatFormatting.GOLD));
         tooltipAdder.accept(Component.translatable("item.chest_item.self_increasing_heart.string.3").withStyle(ChatFormatting.GOLD));
 
+    }
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public Map<SkillBase, ResourceLocation> name() {
+        Map<SkillBase, ResourceLocation> map = new HashMap<>();
+        map.put(pHyperplasia, SkillList.pHyperplasia.baneImage());
+        return map;
+    }
+
+    @Override
+    public Map<SkillBase, Component> tooltip() {
+        Map<SkillBase, Component> map = new HashMap<>();
+        map.put(SkillList.pHyperplasia,Component.translatable("item.chest_item.skill."+pHyperplasia.baneName()));
+        return map;
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public Map<SkillBase, Integer> element(ItemStack stack) {
+        Map<SkillBase, Integer> map = new HashMap<>();
+        SkillBase.getElementMap(stack,map,pHyperplasia);
+
+        return map;
+    }
+
+    @Override
+    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+        return Optional.of(new SkillTooltip(this,this,stack));
     }
 
     @Override

@@ -345,16 +345,39 @@
 
   "item.chest_item.devil_coins": "异魔硬币",
   "item.chest_item.devil_coins.string.1":"一枚诡异的硬币，上面刻着奇怪的纹路......",
-
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
   "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+
+  "item.chest_item.condense_bone_cube": "骨质凝块",
+  "item.chest_item.condense_bone_cube.string.0": "骨质凝块",
+
+  "item.chest_item.shield_engine": "盾御引擎",
+  "item.chest_item.shield_engine.string.0": "骨质的改变",
+  "item.chest_item.shield_engine.string.1": "生命值低于每损失3%生命值加1%抗性",
+
+  "item.chest_item.alienation_diodes": "异化二极管",
+  "item.chest_item.alienation_diodes.string.0": "即兴反应",
+  "item.chest_item.alienation_diodes.string.1": "增加10%暴击伤害",
+  "item.chest_item.alienation_diodes.string.2": "造成暴击伤害时恢复生命值",
+
+  "item.chest_item.mass_energy_converter": "质能转换器",
+  "item.chest_item.mass_energy_converter.string.0": "质能方程式",
+  "item.chest_item.mass_energy_converter.string.1": "每损失3%生命值，增加1%抗性",
+  "item.chest_item.mass_energy_converter.string.2": "每损失2%生命值，增加1%伤害",
+
+
+  "item.chest_item.qualitative_components": "质化组件",
+  "item.chest_item.qualitative_components.string.0": "质化组件",
+
 
   "chest_item.configuration.MusicAndRender": "渲染和音效",
   "item.chest_item.fission": "裂变体",
   "item.chest_item.skill.xp": "经验值",
   "item.chest_item.skill.level": "等级",
   "item.chest_item.flesh_and_blood_gears": "血肉齿轮",
+  "item.chest_item.skill.decisively": "决断",
+  "item.chest_item.skill.hyperplasia": "生化增生物",
 
   "item.chest_item.skill.terrible_potion": "可怕的药剂",
   "item.chest_item.skill.therapeutic": "医者意志",

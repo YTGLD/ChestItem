@@ -427,11 +427,94 @@ public class EventMain {
     public void ItemTooltipEventASD(LootTableLoadEvent event) {
 
         LootTable table = event.getTable();
+        if (event.getName().toString().contains("chests/")){
+            if (event.getName().toString().contains("trial_chambers")){
+                table.addPool(LootPool.lootPool().name(Chestitem.MODID + "trial_chambers")
 
+                        .setRolls(ConstantValue.exactly(1))
+
+                        .add(LootItem.lootTableItem(InitItems.Life_Crystal)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.God_blood)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Drug_Heal)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Bone_Head)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Conch_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Lead_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Stone_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Knife_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Ring_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+
+                        .add(LootItem.lootTableItem(InitItems.Life_Stone)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Armor_Stone)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Stronger_Stone)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                        .add(LootItem.lootTableItem(InitItems.Separate_Rune)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Undead_Rune)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Pain_Rune)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+
+                        .add(LootItem.lootTableItem(InitItems.Heart_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Meat_Ball)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Self_Increasing_Heart)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Stomach_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                        .add(LootItem.lootTableItem(InitItems.Battery_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                        .add(LootItem.lootTableItem(InitItems.MAGIC_IRON)
+                                .when(LootItemRandomChanceCondition.randomChance(0.09f)))
+                        .add(LootItem.lootTableItem(InitItems.SpeedHeart_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Kaolinite_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.EyeBook_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Fission_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.FleshAndBloodGears_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+
+
+                        .build());
+
+            }
+        }
+        if (event.getName().toString().contains("pots/")){
+            if (event.getName().toString().contains("trial_chambers")){
+                table.addPool(LootPool.lootPool().name(Chestitem.MODID + "pots")
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(InitItems.MAGIC_IRON).when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Heart_).when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .build());
+
+            }
+        }
         if (event.getName().toString().contains("chests/")) {
-
             if (event.getName().toString().contains("dungeon")
                     ||event.getName().toString().contains("mineshaft")
+                    ||event.getName().toString().contains("ocean")
+                    ||event.getName().toString().contains("bastion")
+                    ||event.getName().toString().contains("treasure")
                     ||event.getName().toString().contains("ancient")) {
                 table.addPool(LootPool.lootPool().name(Chestitem.MODID + "dungeon")
 
@@ -490,6 +573,10 @@ public class EventMain {
                         .add(LootItem.lootTableItem(InitItems.Kaolinite_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
                         .add(LootItem.lootTableItem(InitItems.EyeBook_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Fission_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.FleshAndBloodGears_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
 

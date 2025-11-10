@@ -151,7 +151,7 @@ public class InitItems {
     public static final DeferredItem<Item> CorruptionCrystal_ = register("corruption_crystal",
             (resourceLocation)-> new CorruptionCrystal(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> CondenseBoneCube_ = register("condense_bone_cube",
-            (resourceLocation)-> new CondenseBoneCube(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+            (resourceLocation)-> new CondenseBoneCube(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> ShieldEngine_ = register("shield_engine",
             (resourceLocation)-> new ShieldEngine(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> AlienationDiodes_ = register("alienation_diodes",

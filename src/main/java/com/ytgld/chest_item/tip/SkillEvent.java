@@ -5,9 +5,7 @@ import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.tip.an_element.SkillList;
-import com.ytgld.chest_item.tip.an_element.elements.PlagueDivinePower;
-import com.ytgld.chest_item.tip.an_element.elements.TerriblePotion;
-import com.ytgld.chest_item.tip.an_element.elements.Therapeutic;
+import com.ytgld.chest_item.tip.an_element.elements.*;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
@@ -32,6 +30,7 @@ public class SkillEvent {
                         }
 
                         PlagueDivinePower.PlagueDivinePowerAttack(event,stack);
+                        Decisively.useSkill(event,stack);
                     }
                 }
             }
@@ -52,6 +51,7 @@ public class SkillEvent {
                     }
                     TerriblePotion.pTerriblePotion(stack, player);
                     Therapeutic.pPlagueSpores(stack, player);
+                    Hyperplasia.pHyperplasia(stack,player);
                 }
             }
         }
