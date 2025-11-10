@@ -69,4 +69,14 @@ public class PlagueSpores extends SkillBase {
     public String baneName() {
         return "plague_spores";
     }
+
+    @Override
+    public boolean isPercentage() {
+        return false;
+    }
+
+    @Override
+    public float aneLvlForModify() {
+        return 1;
+    }
 }

@@ -53,5 +53,15 @@ public class PlagueDivinePower  extends SkillBase {
     public String baneName() {
         return "plague_divine_power";
     }
+
+    @Override
+    public boolean isPercentage() {
+        return true;
+    }
+
+    @Override
+    public float aneLvlForModify() {
+        return 0.1f;
+    }
 }
 

@@ -18,14 +18,13 @@ public class Decisively extends SkillBase {
         if (event.getSource().getEntity() instanceof Player player) {
             if (!player.level().isClientSide()) {
                 if (!stack.isEmpty()) {
-
                     if (SkillBase.isHasElement(stack, SkillList.pDecisively)) {
                         LivingEntity living = event.getEntity();
                         if (living.getHealth() >=living.getMaxHealth()){
 
                             int lvl = SkillBase.getHasElementLevel(stack, SkillList.pDecisively);
                             lvl ++;
-                            event.setNewDamage(event.getNewDamage() * (1+(lvl*0.4f)));
+                            event.setNewDamage(event.getNewDamage() * (1+(lvl*SkillList.pDecisively.aneLvlForModify())));
 
                             SkillBase.addXP(stack, SkillList.pDecisively, 1, 30, 3);
 
@@ -40,5 +39,15 @@ public class Decisively extends SkillBase {
     @Override
     public String baneName() {
         return "decisively";
+    }
+
+    @Override
+    public boolean isPercentage() {
+        return true;
+    }
+
+    @Override
+    public float aneLvlForModify() {
+        return 0.4f;
     }
 }

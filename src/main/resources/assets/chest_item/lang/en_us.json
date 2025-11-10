@@ -326,6 +326,13 @@
   "item.chest_item.skill.level": "level",
 
 
+  "item.chest_item.skill.decisively.text": "对满生命值的生物造成额外伤害：",
+  "item.chest_item.skill.hyperplasia.text": "每点疤痕组织都会增加生命值：",
+  "item.chest_item.skill.terrible_potion.text": "低于50%生命值时增加伤害和速度：",
+  "item.chest_item.skill.therapeutic.text": "高于50%生命值时增加治疗：",
+  "item.chest_item.skill.plague_spores.text": "按下技能键释放孢子：",
+  "item.chest_item.skill.plague_divine_power.text": "攻击有概率造成中毒，并对中毒生物造成额外伤害：",
+
   "item.chest_item.skill.hyperplasia": "Biochemical enhancement of biology",
 
   "item.chest_item.flesh_and_blood_gears": "Flesh and blood gears",
