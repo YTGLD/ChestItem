@@ -332,6 +332,23 @@
   "item.chest_item.silent": "静置沉默",
   "item.chest_item.silent.string.1": "静止时治疗增加50%",
   "item.chest_item.silent.string.2": "静止时抗性增加25%",
+  "item.chest_item.speed": "极限反应论",
+  "item.chest_item.speed.string.1": "加30%水陆空三项速度和跳跃力量",
+  "item.chest_item.speed.string.2": "佩戴9个不同的仿生物品....",
+
+  "item.chest_item.corruption_crystal": "腐化晶体",
+  "item.chest_item.silent.string.3": "佩戴古老黄铜币并杀死超过300只生物...(反思你的行为，你身上的怨念已经凝聚成了实质)",
+  "item.chest_item.corruption_crystal.string.0": "另类的尝试",
+  "item.chest_item.corruption_crystal.string.2": "我尝试使用一种奇特的异界之石将它牢牢包裹，意外的是，生命水晶缓缓吸取了这些石头的能量",
+  "item.chest_item.corruption_crystal.string.3": "当最后一块石头的能量被吸收，水晶似乎变成了一种...腐烂的状态？至少它闻起来是这样...",
+  "item.chest_item.corruption_crystal.string.4": "它的能量似乎无穷无尽，仿佛它就是一方天地....",
+
+  "item.chest_item.devil_coins": "异魔硬币",
+  "item.chest_item.devil_coins.string.1":"一枚诡异的硬币，上面刻着奇怪的纹路......",
+  "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
+  "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
+  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+
   "item.chest_item.condense_bone_cube": "骨质凝块",
   "item.chest_item.condense_bone_cube.string.0": "骨质凝块",
 
@@ -354,23 +371,16 @@
   "item.chest_item.qualitative_components.string.0": "质化组件",
 
 
-  "item.chest_item.speed": "极限反应论",
-  "item.chest_item.speed.string.1": "加30%水陆空三项速度和跳跃力量",
-  "item.chest_item.speed.string.2": "佩戴9个不同的仿生物品....",
+  "chest_item.configuration.MusicAndRender": "渲染和音效",
+  "item.chest_item.fission": "裂变体",
+  "item.chest_item.skill.xp": "经验值",
+  "item.chest_item.skill.level": "等级",
+  "item.chest_item.flesh_and_blood_gears": "血肉齿轮",
+  "item.chest_item.skill.decisively": "决断",
+  "item.chest_item.skill.hyperplasia": "生化增生物",
 
-  "item.chest_item.corruption_crystal": "腐化晶体",
-  "item.chest_item.silent.string.3": "佩戴古老黄铜币并杀死超过300只生物...(反思你的行为，你身上的怨念已经凝聚成了实质)",
-  "item.chest_item.corruption_crystal.string.0": "另类的尝试",
-  "item.chest_item.corruption_crystal.string.2": "我尝试使用一种奇特的异界之石将它牢牢包裹，意外的是，生命水晶缓缓吸取了这些石头的能量",
-  "item.chest_item.corruption_crystal.string.3": "当最后一块石头的能量被吸收，水晶似乎变成了一种...腐烂的状态？至少它闻起来是这样...",
-  "item.chest_item.corruption_crystal.string.4": "它的能量似乎无穷无尽，仿佛它就是一方天地....",
-
-  "item.chest_item.devil_coins": "异魔硬币",
-  "item.chest_item.devil_coins.string.1":"一枚诡异的硬币，上面刻着奇怪的纹路......",
-
-  "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
-  "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
-  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
-
-  "chest_item.configuration.MusicAndRender": "渲染和音效"
+  "item.chest_item.skill.terrible_potion": "可怕的药剂",
+  "item.chest_item.skill.therapeutic": "医者意志",
+  "item.chest_item.skill.plague_spores": "瘟疫孢子",
+  "item.chest_item.skill.plague_divine_power": "瘟疫之力"
 }

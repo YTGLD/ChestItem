@@ -12,6 +12,8 @@ import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.tip.SkillEvent;
+import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -24,6 +26,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -33,6 +36,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 
 @Mod(Chestitem.MODID)
 public class Chestitem {
@@ -52,6 +56,7 @@ public class Chestitem {
         NeoForge.EVENT_BUS.register(new EventMain());
         modEventBus.addListener(this::onGatherData);
         ChestMenuTypes.register.register(modEventBus);
+        NeoForge.EVENT_BUS.register(new SkillEvent());
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
     }
@@ -86,7 +91,10 @@ public class Chestitem {
     }
     @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {
-
+        @SubscribeEvent
+        public static void RegisterClientTooltipComponentFactoriesEvent(RegisterClientTooltipComponentFactoriesEvent event){
+            event.register(SkillTooltip.class, Function.identity());
+        }
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent evt) {
             NeoForge.EVENT_BUS.register(new ClientEvent());

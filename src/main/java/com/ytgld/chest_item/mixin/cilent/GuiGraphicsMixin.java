@@ -138,20 +138,21 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
             RenderTooltipEvent.Color colorEvent = ClientHooks.onRenderTooltipColor(this.tooltipStack, (GuiGraphics) (Object) this, l, i1, preEvent.getFont(), p_282615_);
             if (tooltipStack.getItem() instanceof ItemBlackShadow) {
                 TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
-                        Light.ARGB.color(255, 72/3,61/3,139/3),
-                        Light.ARGB.color(255, 72/3,61/3,139/3),
-
+                        Light.ARGB.color(0, 72/3,61/3,139/3),
+                        Light.ARGB.color(0, 72/3,61/3,139/3),
                         Light.ARGB.color(255, 106, 90, 205),
                         Light.ARGB.color(255, 72, 61, 139));
 
             } else if (tooltipStack.getItem() instanceof ItemBone){
                 TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
-                        Light.ARGB.color(255, 0, 10, 33),
-                        Light.ARGB.color(255, 0, 10, 33),
+                        Light.ARGB.color(0, 0, 10, 33),
+                        Light.ARGB.color(0, 0, 10, 33),
                         Light.ARGB.color(255, 50, 255, 20),
                         Light.ARGB.color(255, 50, 50, 100));
             }else {
-                TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400, colorEvent.getBackgroundStart(), colorEvent.getBackgroundEnd(),
+                TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
+                        Light.ARGB.color(0, 218, 165, 32),
+                        Light.ARGB.color(0, 218, 165, 32),
                         Light.ARGB.color(255, 218, 165, 32),
                         Light.ARGB.color(255, 219, 112, 147));
             }

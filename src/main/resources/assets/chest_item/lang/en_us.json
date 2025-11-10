@@ -316,9 +316,23 @@
   "item.chest_item.mass_energy_converter.string.0": "mass-energy equation",
   "item.chest_item.mass_energy_converter.string.1": "For every 3% health loss, increase resistance by 1%",
   "item.chest_item.mass_energy_converter.string.2": "For every 2% health lost, increase damage by 1%",
+  "item.chest_item.skill.plague_spores": "Plague spores",
+  "item.chest_item.skill.plague_divine_power": "The power of the plague",
+  "item.chest_item.skill.terrible_potion": "terrible potion",
+  "item.chest_item.skill.decisively": "decision",
+  "item.chest_item.skill.therapeutic": "Doctor's will",
+  "item.chest_item.fission": "fission",
+  "item.chest_item.skill.xp": "xp",
+  "item.chest_item.skill.level": "level",
 
-"item.chest_item.qualitative_components": "qualitative components",
-  "item.chest_item.qualitative_components.string.0": "qualitative components",
+
+  "item.chest_item.skill.hyperplasia": "Biochemical enhancement of biology",
+
+  "item.chest_item.flesh_and_blood_gears": "Flesh and blood gears",
+
+  "item.chest_item.qualitative_components": "Qualitative components",
+  "item.chest_item.qualitative_components.string.0": "Qualitative components",
+
 "item.chest_item.speed": "limit reaction theory",
   "item.chest_item.speed.string.1": "Add 30% water, land and air speed and jump power",
   "item.chest_item.speed.string.2": "Wear 9 different biomimetic products....",

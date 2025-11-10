@@ -172,6 +172,19 @@ public class    InitItems {
             (resourceLocation)-> new MassEnergyConverter(new Item.Properties().stacksTo(1)));
 
 
+
+
+
+
+
+
+
+
+    public static final DeferredItem<Item> Fission_ = register("fission",
+            (resourceLocation)-> new Fission(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> FleshAndBloodGears_ = register("flesh_and_blood_gears",
+            (resourceLocation)-> new FleshAndBloodGears(new Item.Properties().stacksTo(1)));
+
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
     }
@@ -182,6 +195,11 @@ public class    InitItems {
                 .title(Component.translatable("itemGroup.chest_item"))
                 .icon(Items.CHEST::getDefaultInstance)
                 .displayItems((parameters, output) -> {
+
+                    output.accept(InitItems.Fission_);
+                    output.accept(InitItems.FleshAndBloodGears_);
+
+
                     output.accept(InitItems.ChaosSeven_);
                     output.accept(InitItems.God_blood);
                     output.accept(InitItems.Drug_Heal);
