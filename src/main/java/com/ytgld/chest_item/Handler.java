@@ -25,6 +25,7 @@ public class Handler {
                     (i, inventory, p_53126_) -> new ChestItemMenu(i,inventory,
                             iPlayer.chest_item$chestInventory().get(),2), Component.translatable("container.chest_item.chest")
             ));
+
         }
     }
     public static @Nullable ChestInventory getItem(Player player){

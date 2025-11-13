@@ -91,8 +91,33 @@ public abstract class MRender extends RenderType {
                         )).withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
                                 VertexFormat.Mode.QUADS)
                         .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
+        public static final RenderPipeline.Snippet whirlpoolBase =
+                RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
+                        .withVertexShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/whirlpool"))
+                        .withFragmentShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/whirlpool"))
+                        .withSampler("Sampler0")
+                        .withBlend(new BlendFunction(
+                                SourceFactor.SRC_ALPHA,
+                                DestFactor.ONE,
+                                SourceFactor.ONE,
+                                DestFactor.ZERO
+                        )).withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
+                                VertexFormat.Mode.QUADS)
+                        .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
 
-
+        public static RenderPipeline whirlpool(boolean lig) {
+            if (lig) {
+                return (RenderPipeline.builder(whirlpoolBase).withBlend(new BlendFunction(
+                                SourceFactor.SRC_ALPHA,
+                                DestFactor.ONE,
+                                SourceFactor.ONE,
+                                DestFactor.ZERO
+                        ))
+                        .withLocation("pipeline/whirlpool").build());
+            }
+            return (RenderPipeline.builder(whirlpoolBase).withBlend(BlendFunction.TRANSLUCENT)
+                    .withLocation("pipeline/whirlpool").build());
+        }
         public static RenderPipeline.Snippet snippet(float a) {
             return    RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
                     .withVertexShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color_slowness"))
