@@ -54,13 +54,7 @@ public class ScarHeart  extends ItemBase implements Meat {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.hyperplasia, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.ScarHeart_.asItem().getDescriptionId()),
-                7, AttributeModifier.Operation.ADD_VALUE));
-        modifiers.put(AttReg.hyperplasia_speed, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
-                InitItems.ScarHeart_.asItem().getDescriptionId()),
-                -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-        modifiers.put(AttReg.hyperplasia_stronger, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
-                InitItems.ScarHeart_.asItem().getDescriptionId()),
-                0.3, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                12, AttributeModifier.Operation.ADD_VALUE));
         return modifiers;
     }
     @Nullable

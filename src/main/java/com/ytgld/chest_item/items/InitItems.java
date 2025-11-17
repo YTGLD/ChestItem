@@ -1,10 +1,7 @@
 package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.items.black.CorruptionCrystal;
-import com.ytgld.chest_item.items.black.DryBones;
-import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
-import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
 import com.ytgld.chest_item.items.black.soul.*;
@@ -164,6 +161,12 @@ public class InitItems {
             (resourceLocation)-> new Fission(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> FleshAndBloodGears_ = register("flesh_and_blood_gears",
             (resourceLocation)-> new FleshAndBloodGears(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> LoneWolf_ = register("lone_wolf",
+            (resourceLocation)-> new LoneWolf(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> HardwoodTotemPole_ = register("hardwood_totem_pole",
+            (resourceLocation)-> new HardwoodTotemPole(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> DeathOmenStoneMonument_ = register("death_omen_stone_monument",
+            (resourceLocation)-> new DeathOmenStoneMonument(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -216,6 +219,8 @@ public class InitItems {
                     output.accept(InitItems.AlienationDiodes_);
                     output.accept(InitItems.QualitativeComponents_);
                     output.accept(InitItems.MassEnergyConverter_);
+                    output.accept(InitItems.LoneWolf_);
+                    output.accept(InitItems.HardwoodTotemPole_);
 
 
                     output.accept(InitItems.GiantHeart_);
@@ -229,6 +234,7 @@ public class InitItems {
                     output.accept(InitItems.LifeCoin_);
                     output.accept(InitItems.HeavyBlade_);
 
+                    output.accept(InitItems.DeathOmenStoneMonument_);
                     output.accept(InitItems.EvilThoughtsForgeDreams_);
                     output.accept(InitItems.DryBones_);
                     output.accept(InitItems.ShadowMint_);

@@ -3,6 +3,7 @@ package com.ytgld.chest_item.items.end;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.entity.Entitys;
+import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -17,11 +18,14 @@ import net.minecraft.world.item.component.TooltipDisplay;
 
 import java.util.function.Consumer;
 
-public class TheEndIsComing  extends ItemBase {
+public class TheEndIsComing  extends ItemBase implements ILight {
     public TheEndIsComing(Properties properties) {
         super(properties);
     }
-
+    @Override
+    public boolean isWhirlpool() {
+        return true;
+    }
     public static final String chestHasEndComing= "ChestHasEndComing";
     public static void event( Player player) {
         ChestInventory chestInventory = Handler.getItem(player);

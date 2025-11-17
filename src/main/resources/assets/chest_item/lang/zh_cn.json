@@ -386,7 +386,19 @@
   "item.chest_item.skill.plague_spores": "瘟疫孢子",
   "item.chest_item.skill.plague_divine_power": "瘟疫之力",
 
+  "item.chest_item.death_omen_stone_monument": "死兆石碑",
 
+  "item.chest_item.hardwood_totem_pole": "硬木图腾柱",
+  "item.chest_item.hardwood_totem_pole.string.1": "攻击有概率造成虚弱",
+  "item.chest_item.hardwood_totem_pole.string.2":"攻击有概率恢复生命值",
+  "item.chest_item.hardwood_totem_pole.string.3": "攻击有概率有概率获得力量",
+  "item.chest_item.hardwood_totem_pole.string.4":"受伤有概率获得抗性",
+  "item.chest_item.hardwood_totem_pole.string.5": "受伤有概率获得伤害吸收",
+  "item.chest_item.hardwood_totem_pole.string.6":"受伤有概率反弹伤害",
+
+
+  "item.chest_item.lone_wolf": "孤狼",
+  "item.chest_item.lone_wolf.string.1": "附近没有生物时速度提高15%",
   "item.chest_item.skill.decisively.text": "对满生命值的生物造成额外伤害：",
   "item.chest_item.skill.hyperplasia.text": "每点疤痕组织都会增加生命值：",
   "item.chest_item.skill.terrible_potion.text": "低于50%生命值时增加伤害和速度：",

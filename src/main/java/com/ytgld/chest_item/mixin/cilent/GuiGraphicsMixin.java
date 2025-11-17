@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.mixin.cilent;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
@@ -49,6 +50,8 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     @Shadow @Final private Matrix3x2fStack pose;
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
+
+    @Shadow public abstract void blit(ResourceLocation atlas, int x0, int y0, int x1, int y1, float u0, float u1, float v0, float v1);
 
     @Override
     public void chest_item$addW(ItemStack stack) {
@@ -397,7 +400,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     }
     @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void TheImprintOfTheSoulBlackLightHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
-        if (stack.getItem() instanceof ItemBlackShadow soul) {
+        if (stack.getItem() instanceof ItemBlackShadow soul && !(stack.getItem() instanceof ILight)) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             if (entity instanceof Player player) {
@@ -465,6 +468,37 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                                 "textures/shadow/black_3.png"),
                         x - size / 3, y - size / 3, 0, 0, size, size, size, size,
                         Light.ARGB.color((int) aFloat/2, rs, gs, bs));
+            }
+        }
+        if (stack.getItem() instanceof ItemBase base && stack.getItem() instanceof ILight light) {
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            float aFloat = 255;
+            int size = 48;
+            int color = base.color(stack);
+            int rs = (color >> 16) & 0xFF;
+            int gs = (color >> 8) & 0xFF;
+            int bs = color & 0xFF;
+            if (!light.isWhirlpool()) {
+                RenderPipeline renderPipeline = MRender.RenderPs.GUI_TEXTURED;
+
+                guiGraphics.blit(renderPipeline, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/big/black_2.png"),
+                        x - 96 / 3 - 8, y - 96 / 3 - 8,
+                        0, 0,
+                        96, 96, 96, 96,
+                        Light.ARGB.color((int) ((int) aFloat/2.5), rs, gs, bs));
+
+                guiGraphics.blit(renderPipeline, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/big/black_3.png"),
+                        x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                        Light.ARGB.color((int) aFloat/2, rs, gs, bs));
+            }else {
+                for (int i = 1; i < 3; i++) {
+                    guiGraphics.blit(MRender.RenderPs.whirlpool(true,1), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                    "textures/shadow/big/black_3.png"),
+                            x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                            Light.ARGB.color((int) aFloat/2, rs, gs, bs));
+                }
             }
         }
 

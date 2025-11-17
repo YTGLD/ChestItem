@@ -12,15 +12,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.function.Consumer;
-
-public class ItemBase extends Item implements Terror {
+public class ItemBase extends Item implements Terror{
     public ItemBase(Properties properties) {
         super(properties);
     }
@@ -32,7 +27,6 @@ public class ItemBase extends Item implements Terror {
         co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFCD853F)));
         return co;
     }
-
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255, 255, 0, 100);
