@@ -190,6 +190,11 @@ public class EndComing  extends TamableAnimal {
             }
 
         }
+        if ( target != null) {
+            if (currentPos.distanceTo(target.position()) > 30) {
+                this.setTarget(null);
+            }
+        }
         clear();
     }
    public boolean canLive = true;

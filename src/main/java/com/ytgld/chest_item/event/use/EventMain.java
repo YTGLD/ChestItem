@@ -171,7 +171,7 @@ public class EventMain {
         if (event.getEntity() instanceof LivingEntity living) {
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
             if (hyperplasia_stronger != null) {
-                int value = (int) hyperplasia_stronger.getValue();
+                float value = (int) hyperplasia_stronger.getValue();
                 float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
                 if (data > 0) {
                     int damage = (int) event.getNewDamage();
