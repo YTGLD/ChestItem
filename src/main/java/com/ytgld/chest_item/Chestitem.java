@@ -1,6 +1,7 @@
 package com.ytgld.chest_item;
 
 import com.ytgld.chest_item.effect.Effects;
+import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.EventHandler;
 import com.ytgld.chest_item.event.key.ChestNetworkHandler;
@@ -57,7 +58,7 @@ public class Chestitem {
         modEventBus.addListener(this::onGatherData);
         ChestMenuTypes.register.register(modEventBus);
         NeoForge.EVENT_BUS.register(new SkillEvent());
-
+        Entitys.REGISTRY.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
     }
 

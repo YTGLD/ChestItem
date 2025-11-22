@@ -24,6 +24,7 @@
     "cilent.ATabMixin",
     "cilent.GameRendererMixin",
     "cilent.GuiGraphicsMixin",
-    "cilent.GuiMixin"
+    "cilent.GuiMixin",
+    "cilent.LevelRendererMixin"
   ]
 }

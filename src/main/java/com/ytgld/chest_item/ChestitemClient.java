@@ -1,6 +1,9 @@
 package com.ytgld.chest_item;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.ytgld.chest_item.entity.Entitys;
+import com.ytgld.chest_item.entity.c.AttackEndComingRenderer;
+import com.ytgld.chest_item.entity.c.EndComingRenderer;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
@@ -21,6 +24,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
@@ -40,12 +44,20 @@ import java.util.concurrent.CompletableFuture;
 @Mod(value = Chestitem.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = Chestitem.MODID, value = Dist.CLIENT)
 public class ChestitemClient{
+
+    public static final ResourceLocation POST_Blood = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+            "shaders/post/entity_outline_blood.json");
     public ChestitemClient(ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
     @SubscribeEvent
     public static void regMenu(RegisterMenuScreensEvent event){
         event.register(ChestMenuTypes.GENERIC_12.get(), ChestMenuScreen::new);
+    }
+    @SubscribeEvent
+    public static void RegisterRenderPipelinesEvent(EntityRenderersEvent.RegisterRenderers event){
+        event.registerEntityRenderer(Entitys.AttackEndComing_.get(), AttackEndComingRenderer::new);
+        event.registerEntityRenderer(Entitys.EndComing_.get(), EndComingRenderer::new);
     }
     @SubscribeEvent
     public static void EntityRenderersEvent(RegisterShadersEvent event) {
@@ -58,6 +70,10 @@ public class ChestitemClient{
             event.registerShader(new ShaderInstance(event.getResourceProvider(),
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"position_tex_color_slowness"),
                     DefaultVertexFormat.POSITION_TEX_COLOR), MRender::setLiveShaderInstance_slowness);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(),
+
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"whirlpool"),
+                    DefaultVertexFormat.POSITION_TEX_COLOR), MRender::setWhirlpool);
 
         }catch (IOException exception){
             exception.printStackTrace();

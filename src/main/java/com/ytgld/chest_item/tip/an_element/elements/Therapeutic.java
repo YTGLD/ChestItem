@@ -3,7 +3,9 @@ package com.ytgld.chest_item.tip.an_element.elements;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
 import net.minecraft.core.Holder;
@@ -20,12 +22,20 @@ public class Therapeutic  extends SkillBase {
     public Therapeutic(){
 
     }
-    public static void pPlagueSpores(ItemStack stack, Player player){
+    public static void pPlagueSpores(ItemStackTickEvent event){
+        ChestInventory chestInventory = event.chestInventory;
+        Player player = event.player;
         if (!player.level().isClientSide()) {
-            if (SkillBase.isHasElement(stack, SkillList.pTherapeutic)) {
-                player.getAttributes().addTransientAttributeModifiers(modifyHealTherapeutic(stack, SkillList.pTherapeutic, player));
-            } else {
-                player.getAttributes().removeAttributeModifiers(modifyHealTherapeutic(stack, SkillList.pTherapeutic, player));
+            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                ItemStack stack = chestInventory.getItem(i);
+                if (!player.level().isClientSide()) {
+                    if (SkillBase.isHasElement(stack, SkillList.pTherapeutic)) {
+                        player.getAttributes().addTransientAttributeModifiers(modifyHealTherapeutic(stack, SkillList.pTherapeutic, player));
+                        break;
+                    } else {
+                        player.getAttributes().removeAttributeModifiers(modifyHealTherapeutic(stack, SkillList.pTherapeutic, player));
+                    }
+                }
             }
         }
     }
@@ -35,26 +45,34 @@ public class Therapeutic  extends SkillBase {
             Player player
     ){
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-        if (SkillBase.isHasElement(stack, SkillList.pTherapeutic)){
-            int lvl = SkillBase.getHasElementLevel(stack, SkillList.pTherapeutic);
-            lvl++;
-            float modifyHeal = 0;
-            if (player.getHealth() > player.getMaxHealth() * 0.5f){
-                modifyHeal = (lvl * 0.08f);
+        int lvl = SkillBase.getHasElementLevel(stack, SkillList.pTherapeutic);
+        lvl++;
+        float modifyHeal = 0;
+        if (player.getHealth() > player.getMaxHealth() * 0.5f){
+            modifyHeal = (lvl * SkillList.pTherapeutic.aneLvlForModify());
 
-                if (player.tickCount % 20 == 0){
-                    SkillBase.addXP(stack,therapeutic,1,600,10);
-                }
+            if (player.tickCount % 20 == 0){
+                SkillBase.addXP(stack,therapeutic,1,600,10);
             }
-            modifiers.put(AttReg.heal, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
-                    therapeutic.baneName()),
-                    modifyHeal, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         }
+        modifiers.put(AttReg.heal, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                therapeutic.baneName()),
+                modifyHeal, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         return modifiers;
     }
     @Override
     public String baneName() {
         return "therapeutic";
+    }
+
+    @Override
+    public boolean isPercentage() {
+        return true;
+    }
+
+    @Override
+    public float aneLvlForModify() {
+        return 0.08f;
     }
 }
 

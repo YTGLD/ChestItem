@@ -4,6 +4,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.MGuiGraphicsCI_Life;
+import com.ytgld.chest_item.renderer.MGuiGraphicsCI_LifeSlowness;
+import com.ytgld.chest_item.renderer.MRender;
+import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -59,34 +62,78 @@ public abstract class GuiMixin {
 
     }
     @Unique
-    private static void cI1_21_9$renderArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
-        float i = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+    private void cI1_21_9$drawA1234(int i,int x,GuiGraphics guiGraphics,int yy,
+                                    ResourceLocation a1,
+                                    ResourceLocation a2,
+                                    ResourceLocation a3,
+                                    ResourceLocation a4,
+                                    int aa,
+                                    int b,
+                                    int c,
+                                    int d,
+
+                                    int offset){
+        int a = 1;
         if (i > 0) {
-            RenderSystem.enableBlend();
-            int j = y - (heartRows - 1) * height - 10;
-
-            for(int k = 0; k < 10; ++k) {
-                int l = x + k * 8;
-                if (k * 2 + 1 < i) {
-                    MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                                    "textures/gui/hyperplasia_1.png"),
-                            l, j,
-                            0, 0, 12, 12, 12, 12,
-                            1, 1, 1, 1);
-                }
-                if (k * 2 + 1 == i) {
-                    MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                                    "textures/gui/hyperplasia_2.png"),
-                            l, j,
-                            0, 0, 12, 12, 12, 12,
-                            1, 1, 1, 1);
-                }
-
+            int xx = (x) + offset * 8- 1;
+            if (i > aa + 3) {
+                MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a1,
+                        9 + ((x) + (offset - 1) * 8- 1), yy, 0, 0, 9, 9, 9, 9, 1, 1, 1, a);
             }
-
-            RenderSystem.disableBlend();
+            if (i == aa) {
+                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a4, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+            }
+            if (i == b) {
+                MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a3, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+            }
+            if (i == c) {
+                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a2, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+            }
+            if (i == d) {
+                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a1, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+            }
         }
 
+    }
+
+    @Unique
+    private  void cI1_21_9$renderArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
+        float i = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+        if (i > 0) {
+            int a = 255;
+            int yy = y - (heartRows - 1) * height - 10;
+
+            ResourceLocation a1 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png");
+            ResourceLocation a2 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_2.png");
+            ResourceLocation a3 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_3.png");
+            ResourceLocation a4 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_4.png");
+
+
+            if (i <= 12) {
+                for (int offset = 0; offset < 3; offset++) {
+                    cI1_21_9$drawA1234((int) i, x, guiGraphics, yy, a1, a2, a3, a4,
+
+                            1 + offset * 4, 2 + offset * 4,
+                            3 + offset * 4, 4 + offset * 4,
+
+                            offset);
+                }
+            }else {
+                int s  = 255;
+                for (int j = 0; j < 3; j++) {
+                    s -= 60;
+                    MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a1,
+                            (x) + j * 8- 1, yy,
+                            0, 0, 9, 9, 9, 9,
+                           1,1,1,s/255f);
+                }
+
+                guiGraphics.drawString(Minecraft.getInstance().font,String.valueOf((int) i/4),(x) + 4 * 8- 3,yy ,
+                        Light.ARGB.color(255,255,100,100));
+            }
+
+
+        }
     }
 
     @Unique

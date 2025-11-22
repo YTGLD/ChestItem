@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.mixin.cilent;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -420,8 +421,40 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
                         rs, gs, bs,aFloat);
             }
         }
+        if (stack.getItem() instanceof ItemBase base && stack.getItem() instanceof ILight light) {
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            float aFloat = 255;
+            int size = 48;
+            int color = base.color(stack);
+            int as = ((color >> 24) & 0xFF) /255;
+            int rs = ((color >> 16) & 0xFF) /255;
+            int gs = ((color >> 8) & 0xFF) /255;
+            int bs = (color & 0xFF) /255;
+            aFloat /= 255;
 
-        if (stack.getItem() instanceof ItemBlackShadow soul) {
+            if (!light.isWhirlpool()) {
+
+                guiGraphics.blit( ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/big/black_2.png"),
+                        x - 96 / 3 - 8, y - 96 / 3 - 8,
+                        0, 0,
+                        96, 96, 96, 96,
+                        Light.ARGB.color(0, rs, gs, bs));
+
+                guiGraphics.blit( ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                "textures/shadow/big/black_3.png"),
+                        x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                        Light.ARGB.color(0, rs, gs, bs));
+            }else {
+                for (int i = 1; i < 3; i++) {
+                    MGuiGraphics.GUI_whirlpool.blit(guiGraphics, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                    "textures/shadow/big/black_3.png"),
+                            x - (float) size / 3, y - (float) size / 3, 0, 0, size, size, size, size,
+                            rs, gs, bs,aFloat);
+                }
+            }
+        }
+        if (stack.getItem() instanceof ItemBlackShadow soul && !(stack.getItem() instanceof ILight)) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             if (entity instanceof Player player) {

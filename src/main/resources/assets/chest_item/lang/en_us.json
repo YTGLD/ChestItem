@@ -7,7 +7,7 @@
   "event.chest_item.equip": "When placed in a magic box：",
   "chest_item.the_imprint_of_the_soul.1": "Treaty",
   "chest_item.the_imprint_of_the_soul.2": "Crazy Theory",
-  "chest_item.the_imprint_of_the_soul": "Eternal slave seal",
+    "chest_item.the_imprint_of_the_soul": "Eternal slave seal",
   "chest_item.the_soul": "Will",
   "chest_item.the_imprint_of_the_soul.can_not_remove": "It will become an indelible stain on you",
 
@@ -325,7 +325,12 @@
   "item.chest_item.skill.xp": "xp",
   "item.chest_item.skill.level": "level",
 
-
+"item.chest_item.skill.decisively.text": "Deal bonus damage to creatures with full health:",
+  "item.chest_item.skill.hyperplasia.text": "Each point of scar tissue increases health:",
+  "item.chest_item.skill.terrible_potion.text": "Increases damage and speed below 50% health:",
+  "item.chest_item.skill.therapeutic.text": "Increases healing above 50% health:",
+  "item.chest_item.skill.plague_spores.text": "Press the skill key to release spores:",
+  "item.chest_item.skill.plague_divine_power.text": "Attacks have a chance to inflict poison and deal additional damage to poisoned creatures:",
   "item.chest_item.skill.hyperplasia": "Biochemical enhancement of biology",
 
   "item.chest_item.flesh_and_blood_gears": "Flesh and blood gears",
@@ -356,5 +361,30 @@
   "item.chest_item.the_order_of_the_undead.string.5": "”But you need to pay attention. You're a complete undead now, you should know what you're going to do......“",
 "item.chest_item.the_order_of_the_undead.string.6": "immune partial type of treatment",
   "item.chest_item.the_order_of_the_undead.string.7": "You are often hungry",
-  "item.chest_item.the_order_of_the_undead.string.8": "Once burned, you will always burn"
+  "item.chest_item.the_order_of_the_undead.string.8": "Once burned, you will always burn",
+
+
+
+
+
+
+
+
+
+  "item.chest_item.death_omen_stone_monument": "死兆石碑",
+
+
+  "item.chest_item.hardwood_totem_pole": "硬木图腾柱",
+  "item.chest_item.hardwood_totem_pole.string.1": "攻击有概率造成虚弱",
+  "item.chest_item.hardwood_totem_pole.string.2":"攻击有概率恢复生命值",
+  "item.chest_item.hardwood_totem_pole.string.3": "攻击有概率有概率获得力量",
+  "item.chest_item.hardwood_totem_pole.string.4":"受伤有概率获得抗性",
+  "item.chest_item.hardwood_totem_pole.string.5": "受伤有概率获得伤害吸收",
+  "item.chest_item.hardwood_totem_pole.string.6":"受伤有概率反弹伤害",
+
+
+
+
+  "item.chest_item.lone_wolf": "孤狼",
+  "item.chest_item.lone_wolf.string.1": "附近没有生物时速度提高15%"
 }

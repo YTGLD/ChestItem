@@ -5,10 +5,7 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
-import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.ItemBase;
-import com.ytgld.chest_item.items.Meat;
+import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -40,7 +37,7 @@ import java.util.List;
  * 超过5点的伤害将转换成等数值的流血
  * <P>
  */
-public class GodApple extends ItemBase implements Meat {
+public class GodApple extends ItemBase implements Meat , ILight {
 
 
     public static final int TIME = 10 * 20;
@@ -160,6 +157,11 @@ public class GodApple extends ItemBase implements Meat {
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255,255,135,105);
+    }
+
+    @Override
+    public boolean isWhirlpool() {
+        return true;
     }
 }
 

@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -29,7 +30,7 @@ import java.util.List;
  * <p>
  * 生命值降低不会影响你的意志，反而会增加自身的稳定性
  */
-public class IronCube extends ItemBase {
+public class IronCube extends ItemBase implements ILight {
     public IronCube(Properties properties) {
         super(properties);
     }
@@ -88,5 +89,10 @@ public class IronCube extends ItemBase {
         tooltipAdder.add(Component.translatable("item.chest_item.iron_cube.string.1").withStyle(ChatFormatting.GOLD));
         tooltipAdder.add(Component.translatable("item.chest_item.iron_cube.string.2").withStyle(ChatFormatting.GOLD));
         tooltipAdder.add(Component.translatable("item.chest_item.iron_cube.string.3").withStyle(ChatFormatting.GOLD));
+    }
+
+    @Override
+    public boolean isWhirlpool() {
+        return true;
     }
 }

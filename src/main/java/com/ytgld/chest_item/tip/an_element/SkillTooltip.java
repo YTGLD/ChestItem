@@ -44,7 +44,6 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
     private int backgroundHeight() {
         return this.gridSizeY() * 32;
     }
-
     @Override
     public void renderImage(Font font, int x, int y, GuiGraphics guiGraphics) {
         int i = this.gridSizeX();

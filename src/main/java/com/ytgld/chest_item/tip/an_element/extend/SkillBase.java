@@ -13,6 +13,8 @@ import java.util.Map;
 public abstract class SkillBase {
     public static final String skillBaseXP = "SkillBaseXP";
     public abstract String baneName();
+    public abstract boolean isPercentage();
+    public abstract float aneLvlForModify();
     public ResourceLocation baneImage(){
         return ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                 baneName()
@@ -47,15 +49,12 @@ public abstract class SkillBase {
      */
 
     public static boolean isHasElement(ItemStack stack,SkillBase mustHasElement){
-        @Nullable CompoundTag compoundTag = stack.get(DataReg.tag);
-        if (stack.getItem() instanceof SkillList skillList){
-            if (compoundTag != null) {
-                Map<SkillBase, Integer> skillBaseIntegerMap =  skillList.element(stack);
-                if (skillBaseIntegerMap!=null) {
-                    for (SkillBase map : skillBaseIntegerMap.keySet()) {
-                        if (map == mustHasElement) {
-                            return true;
-                        }
+        if (stack.getItem() instanceof SkillList skillList) {
+            Map<SkillBase, Integer> skillBaseIntegerMap = skillList.element(stack);
+            if (skillBaseIntegerMap != null) {
+                for (SkillBase map : skillBaseIntegerMap.keySet()) {
+                    if (map == mustHasElement) {
+                        return true;
                     }
                 }
             }

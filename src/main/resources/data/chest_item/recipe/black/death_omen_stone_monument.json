@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item":"minecraft:crying_obsidian"},
+    "B": {"item":"chest_item:hardwood_totem_pole"}
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:death_omen_stone_monument"
+  }
+}

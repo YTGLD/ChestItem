@@ -7,10 +7,7 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
-import com.ytgld.chest_item.items.black.CorruptionCrystal;
-import com.ytgld.chest_item.items.black.DryBones;
-import com.ytgld.chest_item.items.black.EvilThoughtsForgeDreams;
-import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
@@ -160,12 +157,33 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
-        GodApple.event(event);
         ShadowShield(event);
+        GodApple.event(event);
         ShadowMint.hurtAttacker(event);
         MadnessTheory.attackEXP(event);
+        HardwoodTotemPole.tick(event);
     }
     public void ShadowShield (LivingDamageEvent.Pre event){
+        if (event.getEntity() instanceof LivingEntity living) {
+            AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
+            if (hyperplasia_stronger != null) {
+                float value = (int) hyperplasia_stronger.getValue();
+                float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                if (data > 0) {
+                    int damage = (int) event.getNewDamage();
+                    int newData = (int) (data - damage / value);
+                    if (newData > 0) {
+                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, (float)(newData));
+                        event.setNewDamage(0);
+                    } else {
+                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                        event.setNewDamage(damage - data);
+                    }
+                }else {
+                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                }
+            }
+        }
 
         if (event.getEntity() instanceof LivingEntity living) {
 
@@ -191,7 +209,7 @@ public class EventMain {
                 float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
                 if (data > 0) {
                     float damage = event.getNewDamage() ;
-                    float newData = data - damage / 4.5f / value;
+                    float newData = data - damage / 1.2f / value;
                     if (newData > 0) {
                         living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, (newData));
                         event.setNewDamage(0);
@@ -227,31 +245,6 @@ public class EventMain {
         Silent.hurtSilent_(event);
         ShieldEngine.LivingIncomingDamageEvent(event);
         MassEnergyConverter.LivingIncomingDamageEvent(event);
-
-
-
-
-        if (event.getEntity() instanceof LivingEntity living) {
-            AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
-            if (hyperplasia_stronger != null) {
-                float value = (float) hyperplasia_stronger.getValue();
-                float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
-                if (data > 0) {
-                    float damage = event.getAmount() ;
-                    float newData = data - damage / 2.25f / value;
-                    if (newData > 0) {
-                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, (newData));
-                        event.setAmount(0);
-                    } else {
-                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
-                        event.setAmount(damage - data);
-                    }
-                }else {
-                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
-                }
-            }
-        }
-
         if (event.getSource().getEntity() instanceof LivingEntity living){
             AttributeInstance instability = living.getAttribute(AttReg.instability);
             if (instability != null) {
@@ -321,9 +314,7 @@ public class EventMain {
         Silent.tick(event);
         CorruptionCrystal.tick(event);
         QualitativeComponents.tick(event);
-
-
-
+        DeathOmenStoneMonument.tick(event);
 
 
         LivingEntity living = event.player;
@@ -341,12 +332,9 @@ public class EventMain {
                 float sNumber = value - 1;
                 float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
 
-                if (living.tickCount % (time * 20) == 1) {
+                if (living.tickCount % (time * 7) == 1) {
                     if (data < sNumber) {
                         living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 1);
-                        if (ConfigC.config.hyperplasiaMusic.get()) {
-                            living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.AMBIENT, 0.6f, 0.6f);
-                        }
                     }
                 }
                 if (data < 0) {

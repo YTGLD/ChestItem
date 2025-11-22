@@ -56,22 +56,22 @@ public class Handler {
     private static void addSquare(VertexConsumer vertexConsumer, PoseStack.Pose poseStack, Vec3 up1, Vec3 up2, Vec3 down1, Vec3 down2, float alpha) {
         // 添加四个顶点来绘制一个矩形
         vertexConsumer.addVertex(poseStack, (float) up1.x, (float) up1.y, (float) up1.z)
-                .setColor(100, 100, 255, (int) (alpha * 255))
+                .setColor(255, 0, 0, (int) (alpha * 255))
                 .setUv2(240, 240)
                 .setNormal(poseStack,0, 0, 1);
 
         vertexConsumer.addVertex(poseStack, (float) down1.x, (float) down1.y, (float) down1.z)
-                .setColor(100, 100, 255, (int) (alpha * 255))
+                .setColor(255, 0, 0, (int) (alpha * 255))
                 .setUv2(240, 240)
                 .setNormal(poseStack,0, 0, 1);
 
         vertexConsumer.addVertex(poseStack, (float) down2.x, (float) down2.y, (float) down2.z)
-                .setColor(100, 100, 255, (int) (alpha * 255))
+                .setColor(255, 0, 0, (int) (alpha * 255))
                 .setUv2(240, 240)
                 .setNormal(poseStack,0, 0, 1);
 
         vertexConsumer.addVertex(poseStack, (float) up2.x, (float) up2.y, (float) up2.z)
-                .setColor(100, 100, 255, (int) (alpha * 255))
+                .setColor(255, 0, 0, (int) (alpha * 255))
                 .setUv2(240, 240)
                 .setNormal(poseStack,0, 0, 1);
     }
