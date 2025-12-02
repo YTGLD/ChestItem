@@ -1,9 +1,11 @@
 package com.ytgld.chest_item.mixin.cilent;
 
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.Terror;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
+import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -28,6 +30,8 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
     @Shadow @Final protected T menu;
     @Unique
     private List<Vec2> seekingImmortals$vec2 = new ArrayList<>();
+    @Unique
+    private Integer cI1_21_9$integerList = Light.ARGB.color(255,255,255,255);
 
     protected AbstractContainerScreenMixin(Component title) {
         super(title);
@@ -40,13 +44,17 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
             if (itemstack.getItem() instanceof ItemBase) {
                 if (!(itemstack.getItem() instanceof TheImprintOfTheSoul)) {
                     seekingImmortals$vec2.add(new Vec2(mouseX, mouseY));
+                    if (itemstack.getItem() instanceof Terror terror) {
+                        cI1_21_9$integerList = terror.color(itemstack);
+                    }
                 }
             }
-        }else {
-            seekingImmortals$vec2.clear();
         }
         if (!seekingImmortals$vec2.isEmpty()) {
             if (seekingImmortals$vec2.size() > 100) {
+                seekingImmortals$vec2.removeFirst();
+            }
+            if (itemstack.isEmpty()) {
                 seekingImmortals$vec2.removeFirst();
             }
         }
@@ -62,5 +70,9 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
     @Override
     public List<Vec2> chest_item$xy() {
         return seekingImmortals$vec2;
+    }
+    @Override
+    public int cI1_21_9$color() {
+        return cI1_21_9$integerList;
     }
 }

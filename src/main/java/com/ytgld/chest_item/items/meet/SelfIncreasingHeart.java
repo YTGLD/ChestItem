@@ -85,7 +85,7 @@ public class SelfIncreasingHeart extends ItemBase implements Meat,SkillList {
             }
         }
     }
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
         return attributeModifierMultimap();
@@ -108,7 +108,6 @@ public class SelfIncreasingHeart extends ItemBase implements Meat,SkillList {
         tooltipAdder.accept(Component.translatable("item.chest_item.self_increasing_heart.string.3").withStyle(ChatFormatting.GOLD));
 
     }
-    @org.jetbrains.annotations.Nullable
     @Override
     public Map<SkillBase, ResourceLocation> name() {
         Map<SkillBase, ResourceLocation> map = new HashMap<>();
@@ -123,7 +122,7 @@ public class SelfIncreasingHeart extends ItemBase implements Meat,SkillList {
         return map;
     }
 
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     @Override
     public Map<SkillBase, Integer> element(ItemStack stack) {
         Map<SkillBase, Integer> map = new HashMap<>();

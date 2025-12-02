@@ -118,20 +118,21 @@ public abstract class MRender extends RenderType {
             return (RenderPipeline.builder(whirlpoolBase(speed)).withBlend(BlendFunction.TRANSLUCENT)
                     .withLocation("pipeline/whirlpool").build());
         }
-        public static RenderPipeline.Snippet snippet(float a) {
+        public static RenderPipeline.Snippet snippet(float a,float offset) {
             return    RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
                     .withVertexShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color_slowness"))
                     .withFragmentShader(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color_slowness"))
                     .withSampler("Sampler0").withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
                             VertexFormat.Mode.QUADS).withBlend(BlendFunction.TRANSLUCENT)
                     .withShaderDefine("stronger", a)
+                    .withShaderDefine("offset", offset)
                     .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
         }
 
 
-        public static  RenderPipeline LightSlowness(boolean light,float stronger) {
+        public static  RenderPipeline LightSlowness(boolean light,float stronger,float offset) {
             if (light) {
-                return  (RenderPipeline.builder(snippet(stronger)).withBlend(new BlendFunction(
+                return  (RenderPipeline.builder(snippet(stronger,offset)).withBlend(new BlendFunction(
                                 SourceFactor.SRC_ALPHA,
                                 DestFactor.ONE,
                                 SourceFactor.ONE,
@@ -139,7 +140,7 @@ public abstract class MRender extends RenderType {
                         ))
                         .withLocation("pipeline/gui_textured_ci").build());
             }
-            return  (RenderPipeline.builder(snippet(stronger)).withBlend(BlendFunction.TRANSLUCENT)
+            return  (RenderPipeline.builder(snippet(stronger,offset)).withBlend(BlendFunction.TRANSLUCENT)
                     .withLocation("pipeline/gui_textured_ci").build());
         }
         public static final RenderPipeline GUI_TEXTURED =

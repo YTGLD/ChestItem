@@ -53,13 +53,14 @@ public abstract class GuiMixin {
 
     }
     @Unique
-    private  void cI1_21_9$renderShadowBlackArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
+    private void cI1_21_9$renderShadowBlackArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
         float i = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
         if (i > 0) {
-            int a;
-            a = 255;
+            int a = 255;
             int yy = y - (heartRows - 1) * height - 10;
-            for (int k = 0; k < 10; k++) {
+            int maxIcons = (int) Math.min(i, 3);
+
+            for (int k = 0; k < maxIcons; k++) {
                 int xx = (x + k * 8) - 1;
                 if (k * 2 + 1 < i) {
                     guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_CI, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
@@ -72,9 +73,14 @@ public abstract class GuiMixin {
                             xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
                 }
             }
+            if (i > 3){
+                guiGraphics.drawString(Minecraft.getInstance().font,String.valueOf((int) i),(x) + 4 * 8- 3,yy ,
+                        Light.ARGB.color(255,100,50,255));
+            }
 
         }
     }
+
 
     @Unique
     private void cI1_21_9$drawA1234(int i,int x,GuiGraphics guiGraphics,int yy,
@@ -92,20 +98,20 @@ public abstract class GuiMixin {
         if (i > 0) {
             int xx = (x) + offset * 8- 1;
             if (i > aa + 3) {
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F), a1,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F,10000), a1,
                         9 + ((x) + (offset - 1) * 8- 1), yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == aa) {
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F), a4, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F,2222), a4, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == b) {
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F), a3, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F,3333), a3, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == c) {
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F), a2, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F,4444), a2, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == d) {
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F), a1, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F,5555), a1, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
         }
 
@@ -115,7 +121,7 @@ public abstract class GuiMixin {
     private  void cI1_21_9$renderArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
         float i = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
         if (i > 0) {
-            int a = 255;
+
             int yy = y - (heartRows - 1) * height - 10;
 
             ResourceLocation a1 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png");
@@ -124,8 +130,8 @@ public abstract class GuiMixin {
             ResourceLocation a4 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_4.png");
 
 
-            if (i <= 12) {
-                for (int offset = 0; offset < 3; offset++) {
+            if (i <= 20) {
+                for (int offset = 0; offset < 5; offset++) {
                     cI1_21_9$drawA1234((int) i, x, guiGraphics, yy, a1, a2, a3, a4,
 
                             1 + offset * 4, 2 + offset * 4,
@@ -135,9 +141,8 @@ public abstract class GuiMixin {
                 }
             }else {
                 int s  = 255;
-                for (int j = 0; j < 3; j++) {
-                    s -= 60;
-                    guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F), a1,
+                for (int j = 0; j < 5; j++) {
+                    guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.125F,j*1000), a1,
                             (x) + j * 8- 1, yy,
                             0, 0, 9, 9, 9, 9,
                             Light.ARGB.color(s, 255, 255, 255));

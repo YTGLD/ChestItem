@@ -32,6 +32,7 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
+import java.util.UUID;
 import java.util.function.Function;
 
 @Mod(Chestitem.MODID)
@@ -53,6 +54,10 @@ public class Chestitem {
         NeoForge.EVENT_BUS.register(new EventMain());
         ChestMenuTypes.register.register(modEventBus);
 
+        for (int i = 0; i < 10; i++) {
+            System.out.println(UUID.randomUUID());
+
+        }
 
         NeoForge.EVENT_BUS.register(new SkillEvent());
 

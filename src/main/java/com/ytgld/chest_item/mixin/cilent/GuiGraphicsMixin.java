@@ -3,9 +3,9 @@ package com.ytgld.chest_item.mixin.cilent;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
+import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
-import com.ytgld.chest_item.other.IPlayer;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
@@ -19,8 +19,6 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +26,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
-import org.apache.logging.log4j.core.appender.rolling.action.IfNot;
 import org.joml.Matrix3x2fStack;
 import org.joml.Vector2ic;
 import org.spongepowered.asm.mixin.Final;
@@ -41,7 +38,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin implements IGuiGraphics {
@@ -53,49 +49,76 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
     @Shadow public abstract void blit(ResourceLocation atlas, int x0, int y0, int x1, int y1, float u0, float u1, float v0, float v1);
 
+    @Unique
+    ItemStack cI1_21_9$itemstack = ItemStack.EMPTY;
     @Override
     public void chest_item$addW(ItemStack stack) {
         GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
-        if (stack.getItem() instanceof Terror terror) {
-            guiGraphics.pose().pushMatrix();
-            if (this.minecraft.screen instanceof IAbstractContainerScreen iAbstractContainerScreen) {
-                List<Vec2> xy = iAbstractContainerScreen.chest_item$xy();
-                if (xy != null) {
-                    for (int i = 1; i < xy.size(); i++) {
-                        Vec2 prevPos = xy.get(i - 1);
-                        Vec2 currPos = xy.get(i);
-                        if (prevPos.x != 0 && prevPos.y != 0 && currPos.x != 0 && currPos.y != 0) {
-                            float alpha = (float) (i) / (xy.size());
-                            Vec2 adjustedPrevPos = new Vec2(prevPos.x, prevPos.y);
-                            Vec2 adjustedCurrPos = new Vec2(currPos.x, currPos.y);
-                            pose.pushMatrix();
-                            pose.translate(prevPos.x, prevPos.y);
+        if (stack.getItem() instanceof Terror){
+            cI1_21_9$itemstack = stack;
+        }
+        guiGraphics.pose().pushMatrix();
+        if (this.minecraft.screen instanceof IAbstractContainerScreen iAbstractContainerScreen) {
+            List<Vec2> xy = iAbstractContainerScreen.chest_item$xy();
+            if (xy != null) {
+                for (int i = 1; i < xy.size(); i++) {
+                    Vec2 prevPos = xy.get(i - 1);
+                    Vec2 currPos = xy.get(i);
+                    if (prevPos.x != 0 && prevPos.y != 0 && currPos.x != 0 && currPos.y != 0) {
+                        float alpha = (float) (i) / (xy.size());
+                        Vec2 adjustedPrevPos = new Vec2(prevPos.x, prevPos.y);
+                        Vec2 adjustedCurrPos = new Vec2(currPos.x, currPos.y);
+
+
+                        pose.pushMatrix();
+
+
+                        pose.translate(prevPos.x, prevPos.y);
+                        {
+                            //随机位置
+                            pose.translate((float) Math.sin(adjustedPrevPos.x) * 4, (float) Math.sin(adjustedCurrPos.y) * 4);
+                            //位置改变
+                            if (!adjustedPrevPos.equals(adjustedCurrPos)) {
+                                pose.translate(0, -43);
+                            }else {
+                                pose.translate(0, -4);
+                            }
                             pose.scale(alpha * 1.55f);
-                            pose.translate(-prevPos.x, -prevPos.y);
-
-                            int color = terror.color(stack);
-                            int as = (color >> 24) & 0xFF;
-                            int rs = (color >> 16) & 0xFF;
-                            int gs = (color >> 8) & 0xFF;
-                            int bs = color & 0xFF;
-
-
-                            new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha)))
-                                    .chest_item$blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/fire.png"),
-                                            (int) adjustedCurrPos.x - 8, (int) adjustedCurrPos.y - 8, 0, 0, 16, 16, 16, 16);
-
-                            new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha)))
-                                    .chest_item$blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/small_fire.png"),
-                                            (int) adjustedPrevPos.x - 8, (int) adjustedPrevPos.y - 8, 0, 0, 16, 16, 16, 16);
-
-                            pose.popMatrix();
-
+                            //上升
+                            if (!adjustedPrevPos.equals(adjustedCurrPos)) {
+                                pose.translate(0, (alpha) * 33);
+                            }else {
+                                pose.translate(0, (alpha) * 3);
+                            }
                         }
+
+                        pose.translate(-prevPos.x, -prevPos.y);
+
+                        int color = iAbstractContainerScreen.cI1_21_9$color();
+
+                        int as = (color >> 24) & 0xFF;
+                        int rs = (color >> 16) & 0xFF;
+                        int gs = (color >> 8) & 0xFF;
+                        int bs = color & 0xFF;
+
+
+                        new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha)))
+                                .chest_item$blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                                "textures/gui/tooltip/fire.png"),
+                                        (int) adjustedCurrPos.x - 8, (int) adjustedCurrPos.y - 8, 0, 0, 16, 16, 16, 16);
+
+                        new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha)))
+                                .chest_item$blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                                "textures/gui/tooltip/small_fire.png"),
+                                        (int) adjustedPrevPos.x - 8, (int) adjustedPrevPos.y - 8, 0, 0, 16, 16, 16, 16);
+
+                        pose.popMatrix();
+
                     }
                 }
             }
-            guiGraphics.pose().popMatrix();
         }
+        guiGraphics.pose().popMatrix();
     }
     @Inject(at = @At(value = "RETURN"),method = "renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/world/item/ItemStack;)V")
     public void ytgld$ClientTooltipPositioner(Font font, List<ClientTooltipComponent> components, int x, int y, ClientTooltipPositioner positioner, ResourceLocation background, ItemStack tooltipStack, CallbackInfo ci) {
@@ -268,7 +291,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int topLeftY = y - 3 - 9;
             guiGraphics.pose().pushMatrix();
             guiGraphics.pose().translate(0.0F, -2);
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f,1111),
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_0_0.png"), topLeftX, topLeftY, 0, 0, 64, 64, 64, 64);
             guiGraphics.pose().popMatrix();
@@ -278,7 +301,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int middleY = y - 3 - 14;
             guiGraphics.pose().pushMatrix();
             guiGraphics.pose().translate(0.0F, -7);
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f,2222),
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_middle_0.png"), middleX, middleY, 0, 0, 64, 64, 64, 64);
             guiGraphics.pose().popMatrix();
@@ -289,7 +312,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int topRightY = y - 3 - 9;
             guiGraphics.pose().pushMatrix();
             guiGraphics.pose().translate(0.0F, -2);
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f,3333),
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_0_1.png"), topRightX, topRightY, 0, 0, 64, 64, 64, 64);
             guiGraphics.pose().popMatrix();
@@ -299,7 +322,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int bottomLeftY = y + height + 3 - 48 + 4;
             guiGraphics.pose().pushMatrix();
             guiGraphics.pose().translate(0.0F, 4);
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f,4444),
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_1_0.png"), bottomLeftX, bottomLeftY, 0, 0, 64, 64, 64, 64);
             guiGraphics.pose().popMatrix();
@@ -309,7 +332,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int bottomRightY = y + height + 3 - 48 + 4;
             guiGraphics.pose().pushMatrix();
             guiGraphics.pose().translate(0.0F, 4);
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f),
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f,5555),
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_1_1.png"), bottomRightX, bottomRightY, 0, 0, 64, 64, 64, 64);
             guiGraphics.pose().popMatrix();
@@ -381,17 +404,17 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 int gs = (color >> 8) & 0xFF;
                 int bs = color & 0xFF;
 
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f), resourceLocation, x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f,1), resourceLocation, x - size / 3, y - size / 3, 0, 0, size, size, size, size,
                         Light.ARGB.color((int) aFloat / 2, rs, gs, bs));
 
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f,2), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                 "textures/shadow/black_2.png"),
                         x - 128 + 72 , y - 128 + 72,
                         0, 0,
                         128, 128, 128, 128,
                         Light.ARGB.color((int) aFloat, rs, gs, bs));
 
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f,3), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                 "textures/shadow/black_3.png"),
                         x - 96 / 3 - 8, y - 96 / 3 - 8, 0, 0, 96, 96, 96, 96,
                         Light.ARGB.color((int) aFloat, rs, gs, bs));
@@ -515,22 +538,22 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int gs = (color >> 8) & 0xFF;
             int bs = color & 0xFF;
 
-            guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.05f * (1.4f)), resourceLocation, x, y, 0, 0, 16, 16, 16, 16,
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.05f * (1.4f),1111), resourceLocation, x, y, 0, 0, 16, 16, 16, 16,
                     Light.ARGB.color(as, rs, gs - 20, bs - 30));
 
             if (ConfigC.config.RenderSoul.get()) {
 
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f)), resourceLocation, x, y, 0, 0, 17, 17, 17, 17,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f),2222), resourceLocation, x, y, 0, 0, 17, 17, 17, 17,
                         Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f)), resourceLocation, x - 1, y, 0, 0, 17, 17, 17, 17,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f),3333), resourceLocation, x - 1, y, 0, 0, 17, 17, 17, 17,
                         Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f)), resourceLocation, x, y - 1, 0, 0, 17, 17, 17, 17,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f),4444), resourceLocation, x, y - 1, 0, 0, 17, 17, 17, 17,
                         Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f)), resourceLocation, x - 1, y - 1, 0, 0, 17, 17, 17, 17,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f),5555), resourceLocation, x - 1, y - 1, 0, 0, 17, 17, 17, 17,
                         Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
 
 
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.05f), resourceLocation, x, y, 0, 0, 16, 16, 16, 16,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.05f,6666), resourceLocation, x, y, 0, 0, 16, 16, 16, 16,
                         Light.ARGB.color(as, rs, gs - 20, bs - 30));
 
             }

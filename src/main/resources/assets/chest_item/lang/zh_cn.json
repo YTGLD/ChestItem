@@ -60,7 +60,7 @@
 
   "item.chest_item.bone_head.string.0": "熟悉的形状，熟悉的味道",
   "item.chest_item.bone_head.string.1": "增加33%进食速度",
-  "item.chest_item.bone_head": "无厌之骸骨",
+    "item.chest_item.bone_head": "无厌之骸骨",
 
 
   "item.chest_item.conch.string.0": "为什么不听听这个海螺说的是什么呢",
@@ -222,7 +222,7 @@
   "item.chest_item.iron_cube.string.3": "你对防具的护甲有了极大的排斥",
 
   "item.chest_item.scar_heart": "疤痕组织",
-  "item.chest_item.scar_heart.string.0": "疮疤的增生——对不可能说“不”",
+  "item.chest_item.scar_heart.string.0": " ”",
   "item.chest_item.scar_heart.string.1": "你的疤痕组织进行了增生。从某种意义上说，它是你额外的生命",
   "item.chest_item.life_coin": "鲜活硬币",
   "item.chest_item.life_coin.string.0": "异变之财富",
@@ -338,7 +338,7 @@
 
   "item.chest_item.corruption_crystal": "腐化晶体",
   "item.chest_item.silent.string.3": "佩戴古老黄铜币并杀死超过300只生物...(反思你的行为，你身上的怨念已经凝聚成了实质)",
-  "item.chest_item.corruption_crystal.string.0": "另类的尝试",
+    "item.chest_item.corruption_crystal.string.0": "另类的尝试",
   "item.chest_item.corruption_crystal.string.2": "我尝试使用一种奇特的异界之石将它牢牢包裹，意外的是，生命水晶缓缓吸取了这些石头的能量",
   "item.chest_item.corruption_crystal.string.3": "当最后一块石头的能量被吸收，水晶似乎变成了一种...腐烂的状态？至少它闻起来是这样...",
   "item.chest_item.corruption_crystal.string.4": "它的能量似乎无穷无尽，仿佛它就是一方天地....",
@@ -404,5 +404,18 @@
   "item.chest_item.skill.terrible_potion.text": "低于50%生命值时增加伤害和速度：",
   "item.chest_item.skill.therapeutic.text": "高于50%生命值时增加治疗：",
   "item.chest_item.skill.plague_spores.text": "按下技能键释放孢子，等级决定半径：",
-  "item.chest_item.skill.plague_divine_power.text": "攻击有概率造成中毒，并对中毒生物造成额外伤害："
+  "item.chest_item.skill.plague_divine_power.text": "攻击有概率造成中毒，并对中毒生物造成额外伤害：",
+
+
+
+  "item.chest_item.skill.doomsday_judgment": "天启—末日审判",
+  "item.chest_item.skill.doomsday_judgment.text": "增加仿生血灵（末日降临）的伤害和攻击速度\n并且血珠不再受到距离和碰撞的影：",
+
+
+  "item.chest_item.skill.rotten": "腐烂",
+  "item.chest_item.skill.rotten.text": "对附近生物施加自身负面BUFF，半径：",
+
+
+  "item.chest_item.pod": "枯萎荚果",
+  "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 }

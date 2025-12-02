@@ -321,7 +321,6 @@ public class EventMain {
         LoneWolf.ItemStackTickEvent(event);
         DeathOmenStoneMonument.tick(event);
 
-
         LivingEntity living = event.player;
         {
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);

@@ -107,7 +107,6 @@ public class SkillEvent {
         Hyperplasia.pHyperplasia(event);
 
 
-
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
         if (!player.level().isClientSide()) {
@@ -118,6 +117,7 @@ public class SkillEvent {
                         stack.set(DataReg.tag,new CompoundTag());
                     }
                 }
+                Rotten.pRotten(player, stack);
             }
         }
     }

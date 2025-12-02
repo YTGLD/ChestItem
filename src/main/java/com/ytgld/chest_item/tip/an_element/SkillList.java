@@ -16,6 +16,8 @@ public interface SkillList {
     Therapeutic pTherapeutic = new Therapeutic();
     Decisively pDecisively = new Decisively();
     Hyperplasia pHyperplasia = new Hyperplasia();
+    DoomsdayJudgment pDoomsdayJudgment = new DoomsdayJudgment();
+    Rotten pRotten = new Rotten();
 
 
 
