@@ -18,7 +18,7 @@ void main() {
     float distance = length(diff); // 当前坐标到中心点的距离
 
     // 计算扭曲因子
-    float twistFactor = sin((GameTime * 3333) + distance * 30.0) * stronger; // 扭曲因子
+    float twistFactor = sin((GameTime * 3333) + distance * 30.0 + offset) * stronger; // 扭曲因子
 
     // 计算新的纹理坐标
     float angle = atan(diff.y, diff.x); // 当前坐标的极角
@@ -27,12 +27,11 @@ void main() {
 
     // 使用变形后的纹理坐标采样纹理
     vec4 color = texture(Sampler0, deformedTexCoord) * vertexColor;
-
     // 如果alpha为0，则丢弃片段
     if (color.a == 0.0) {
         discard;
     }
-
+    color.rgb += light;
     // 输出最终颜色
     fragColor = color ;
 }

@@ -79,14 +79,14 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             pose.translate((float) Math.sin(adjustedPrevPos.x) * 4, (float) Math.sin(adjustedCurrPos.y) * 4);
                             //位置改变
                             if (!adjustedPrevPos.equals(adjustedCurrPos)) {
-                                pose.translate(0, -43);
+                                pose.translate(0, -13);
                             }else {
                                 pose.translate(0, -4);
                             }
                             pose.scale(alpha * 1.55f);
                             //上升
                             if (!adjustedPrevPos.equals(adjustedCurrPos)) {
-                                pose.translate(0, (alpha) * 33);
+                                pose.translate(0, (alpha) * 10);
                             }else {
                                 pose.translate(0, (alpha) * 3);
                             }
@@ -102,7 +102,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         int bs = color & 0xFF;
 
 
-                        new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), rs, gs, (int) (bs * alpha)))
+                        new RendererFarm(pose, guiRenderState, Light.ARGB.color((int) (alpha * as), (int) (alpha * rs), (int) ((alpha) * gs), (int) (bs * alpha)))
                                 .chest_item$blit(MRender.RenderPs.GUI_TEXTURED, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                                 "textures/gui/tooltip/fire.png"),
                                         (int) adjustedCurrPos.x - 8, (int) adjustedCurrPos.y - 8, 0, 0, 16, 16, 16, 16);

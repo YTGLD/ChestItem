@@ -54,7 +54,7 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
             if (seekingImmortals$vec2.size() > 100) {
                 seekingImmortals$vec2.removeFirst();
             }
-            if (itemstack.isEmpty()) {
+            if (itemstack.isEmpty()|| !(itemstack.getItem() instanceof ItemBase)) {
                 seekingImmortals$vec2.removeFirst();
             }
         }

@@ -40,6 +40,8 @@ public class Chestitem {
     public static final String MODID = "chest_item";
     public static final ResourceLocation POST_BLACK = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
             "black");
+    public static final ResourceLocation POST_BLACK_CLOUD = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+            "clouds");
     public Chestitem(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::registerPayloadHandler);
         AttReg.REGISTRY.register(modEventBus);
@@ -54,10 +56,7 @@ public class Chestitem {
         NeoForge.EVENT_BUS.register(new EventMain());
         ChestMenuTypes.register.register(modEventBus);
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(UUID.randomUUID());
 
-        }
 
         NeoForge.EVENT_BUS.register(new SkillEvent());
 

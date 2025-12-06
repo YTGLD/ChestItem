@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
+import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -51,6 +52,9 @@ public class LifeCrystal extends ItemBase implements SkillList {
 
             modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Life_Crystal.asItem().getDescriptionId()),
                 10, AttributeModifier.Operation.ADD_VALUE));
+
+        modifiers.put(AttReg.hyperplasia, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Life_Crystal.asItem().getDescriptionId()),
+                4, AttributeModifier.Operation.ADD_VALUE));
 
         return modifiers;
     }
