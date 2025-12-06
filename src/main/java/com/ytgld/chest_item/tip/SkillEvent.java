@@ -101,6 +101,7 @@ public class SkillEvent {
                     if (stack.get(DataReg.tag) == null) {
                         stack.set(DataReg.tag,new CompoundTag());
                     }
+                    Rotten.pRotten(player, stack);
                 }
             }
         }

@@ -3,6 +3,7 @@ package com.ytgld.chest_item.tip.an_element;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.tip.an_element.extend.BlackSkill;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -69,7 +70,12 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
             SkillBase elt = resourceLocationMap.keySet().stream().toList().get(i);
             ResourceLocation resourceLocation1 = resourceLocationMap.get(elt);
             guiGraphics.blitSprite(resourceLocation1, x, y, 32, 32);
-            guiGraphics.blitSprite(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"frame"), x, y, 32, 32);
+            if (!(elt instanceof BlackSkill)) {
+                guiGraphics.blitSprite(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "frame"), x, y, 32, 32);
+            }else {
+                guiGraphics.blitSprite(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "frame_black"), x, y, 32, 32);
+
+            }
         }
         if (stringMap!=null) {
             SkillBase elt = stringMap.keySet().stream().toList().get(i);

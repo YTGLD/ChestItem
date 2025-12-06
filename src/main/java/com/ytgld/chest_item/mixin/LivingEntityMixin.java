@@ -1,7 +1,9 @@
 package com.ytgld.chest_item.mixin;
 
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.black.Pod;
 import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
+import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -19,7 +21,9 @@ public abstract class LivingEntityMixin {
     private void canBeAffected(MobEffectInstance effectInstance, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity entity = (LivingEntity) (Object) this ;
         if (entity instanceof Player player) {
+            ChaosSeven.canBeAffected(effectInstance,cir,player);
             TheOrderOfTheUndead.canHasEffect(player,effectInstance,cir);
+            Pod.pPod(effectInstance,cir,player);
         }
     }
     @Inject(method = "isInvertedHealAndHarm", at = @At(value = "RETURN"), cancellable = true)

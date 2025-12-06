@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.entity;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.tip.an_element.elements.DoomsdayJudgment;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -89,7 +90,7 @@ public class AttackEndComing extends ThrowableItemProjectile {
     public boolean canSee = true;
     public void attack(){
         Vec3 playerPos = this.position().add(0, 0.75, 0);
-        int range = 1;
+        int range = 2;
         if (canSee) {
             List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
             for (LivingEntity entity : entities) {
@@ -102,17 +103,23 @@ public class AttackEndComing extends ThrowableItemProjectile {
 
                                 if (entity instanceof OwnableEntity ownableEntity) {
                                     if (ownableEntity.getOwner() != null) {
-                                        if (ownableEntity.getOwner().is(this.getOwner())){
+                                        if (ownableEntity.getOwner().is(this.getOwner())) {
                                             canSee = false;
                                             return;
                                         }
                                     }
                                 }
-                                entity.hurt(this.getOwner().damageSources().playerAttack(player), (float) (damages + addDamgae + player.getMaxHealth() / 10 + player.getAttributeValue(Attributes.ATTACK_DAMAGE) / 10));
+                                float damageDoomsdayJudgment = (float) (damages + addDamgae + player.getMaxHealth() / 10 + player.getAttributeValue(Attributes.ATTACK_DAMAGE) / 10);
+                                damageDoomsdayJudgment *= DoomsdayJudgment.damageModify(player);
+                                entity.hurt(this.getOwner().damageSources().playerAttack(player), damageDoomsdayJudgment);
+                                DoomsdayJudgment.useSkill(this.getOwner());
                                 if (follow) {
-                                    this.level().addParticle(ParticleTypes.SONIC_BOOM,this.getX(),this.getY(),this.getZ(),0,0,0);
+                                    this.level().addParticle(ParticleTypes.SONIC_BOOM, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
                                 }
                                 canSee = false;
+                            }else {
+                                canSee = false;
+
                             }
                         }
                     }
@@ -127,7 +134,6 @@ public class AttackEndComing extends ThrowableItemProjectile {
         this.setNoGravity(true);
         this.noPhysics = true;
 
-        attack();
 
         if (canSee) {
             if (this.tickCount > 100) {
@@ -148,37 +154,47 @@ public class AttackEndComing extends ThrowableItemProjectile {
             if (target != null) {
                 if (follow) {
                     if (tickCount>10) {
-                        Vec3 targetPos = target.position().add(0, 1, 0);
-                        Vec3 currentPos = this.position();
-                        Vec3 direction = targetPos.subtract(currentPos).normalize();
+                        if (!DoomsdayJudgment.isHas(this.getOwner())) {
+                            Vec3 targetPos = target.position().add(0, 1, 0);
+                            Vec3 currentPos = this.position();
+                            Vec3 direction = targetPos.subtract(currentPos).normalize();
 
-                        // 获取当前运动方向
-                        Vec3 currentDirection = this.getDeltaMovement().normalize();
+                            // 获取当前运动方向
+                            Vec3 currentDirection = this.getDeltaMovement().normalize();
 
-                        // 计算目标方向与当前方向之间的夹角
-                        double angle = Math.acos(currentDirection.dot(direction)) * (180.0 / Math.PI);
+                            // 计算目标方向与当前方向之间的夹角
+                            double angle = Math.acos(currentDirection.dot(direction)) * (180.0 / Math.PI);
 
-                        // 如果夹角超过10度，则限制方向
-                        if (angle > 10) {
-                            // 计算旋转后的新方向
-                            double angleLimit = Math.toRadians(10); // 将10度转为弧度
+                            // 如果夹角超过10度，则限制方向
+                            if (angle > 10) {
+                                // 计算旋转后的新方向
+                                double angleLimit = Math.toRadians(10); // 将10度转为弧度
 
-                            // 根据正弦法则计算限制后的方向
-                            Vec3 limitedDirection = currentDirection.scale(Math.cos(angleLimit)) // 计算缩放因子
-                                    .add(direction.normalize().scale(Math.sin(angleLimit))); // 根据目标方向进行调整
+                                // 根据正弦法则计算限制后的方向
+                                Vec3 limitedDirection = currentDirection.scale(Math.cos(angleLimit)) // 计算缩放因子
+                                        .add(direction.normalize().scale(Math.sin(angleLimit))); // 根据目标方向进行调整
 
-                            this.setDeltaMovement(limitedDirection.x * (0.125f + s), limitedDirection.y * (0.125f + s), limitedDirection.z * (0.125f + s));
-                        } else {
-                            this.setDeltaMovement(direction.x * (0.125f + s), direction.y * (0.125f + s), direction.z * (0.125f + s));
+                                this.setDeltaMovement(limitedDirection.x * (0.125f + s), limitedDirection.y * (0.125f + s), limitedDirection.z * (0.125f + s));
+                            } else {
+                                this.setDeltaMovement(direction.x * (0.125f + s), direction.y * (0.125f + s), direction.z * (0.125f + s));
+                            }
+                        }else {
+                            Vec3 targetPos = target.position().add(0, 1, 0);
+                            this.setPos(targetPos);
                         }
                     }
-                }else if (this.tickCount <= 1) {
-                    Vec3 targetPos = target.position().add(0, 0.5, 0);
-                    Vec3 currentPos = this.position();
-                    Vec3 direction = targetPos.subtract(currentPos).normalize();
-                    this.lookAt(EntityAnchorArgument.Anchor.EYES,new Vec3(targetPos.x, targetPos.y, targetPos.z));
-                    this.lookAt(EntityAnchorArgument.Anchor.FEET,new Vec3(targetPos.x, targetPos.y, targetPos.z));
-                    this.setDeltaMovement(direction.x * (speeds + s), direction.y * (speeds + s), direction.z * (speeds + s));
+                }else if (this.tickCount == 2) {
+                    if (!DoomsdayJudgment.isHas(this.getOwner())) {
+                        Vec3 targetPos = target.position().add(0, 0.5, 0);
+                        Vec3 currentPos = this.position();
+                        Vec3 direction = targetPos.subtract(currentPos).normalize();
+                        this.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(targetPos.x, targetPos.y, targetPos.z));
+                        this.lookAt(EntityAnchorArgument.Anchor.FEET, new Vec3(targetPos.x, targetPos.y, targetPos.z));
+                        this.setDeltaMovement(direction.x * (speeds + s), direction.y * (speeds + s), direction.z * (speeds + s));
+                    }else {
+                        Vec3 targetPos = target.position().add(0, 1, 0);
+                        this.setPos(targetPos);
+                    }
                 }
             }
         }else {
@@ -199,6 +215,9 @@ public class AttackEndComing extends ThrowableItemProjectile {
             this.discard();
         }
         this.setNoGravity(true);
+
+
+        attack();
     }
     private void findNewTarget() {
 

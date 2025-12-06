@@ -18,7 +18,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class Entitys {
     public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Chestitem .MODID);
     public static final DeferredHolder<EntityType<?>, EntityType<EndComing>> EndComing_ = REGISTRY.register("end_coming",
-            ()-> EntityType.Builder.of(EndComing::new, MobCategory.MISC).sized(0.25f, 0.25f).clientTrackingRange(4).updateInterval(10).build("end_coming"));
+            ()-> EntityType.Builder.of(EndComing::new, MobCategory.MISC).sized(0.8f, 0.8f).clientTrackingRange(50).build("end_coming"));
 
 
     public static final DeferredHolder<EntityType<?>, EntityType<AttackEndComing>> AttackEndComing_ = REGISTRY.register("attack_end_coming", () ->

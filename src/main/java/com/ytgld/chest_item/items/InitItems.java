@@ -186,6 +186,15 @@ public class    InitItems {
     public static final DeferredItem<Item> DeathOmenStoneMonument_ = register("death_omen_stone_monument",
             (resourceLocation)-> new DeathOmenStoneMonument(new Item.Properties().stacksTo(1)));
 
+
+
+
+
+
+
+    public static final DeferredItem<Item> Pod_ = register("pod",
+            (resourceLocation)-> new Pod(new Item.Properties().stacksTo(1)));
+
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
     }
@@ -256,6 +265,7 @@ public class    InitItems {
                     output.accept(InitItems.DryBones_);
                     output.accept(InitItems.ShadowMint_);
                     output.accept(InitItems.CorruptionCrystal_);
+                    output.accept(InitItems.Pod_);
 
 
 

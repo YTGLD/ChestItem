@@ -63,13 +63,13 @@ public class AttackEndComingRenderer extends EntityRenderer<AttackEndComing> {
             float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
 
             Handler.renderBlood(matrices.last(), vertexConsumers.getBuffer(MRender.LIGHTNING), adjustedPrevPos, adjustedCurrPos, alpha,alpha/10f);
+            Handler.renderBlood(matrices.last(), vertexConsumers.getBuffer(MRender.LIGHTNING_Outline), adjustedPrevPos, adjustedCurrPos, alpha,alpha/10f);
         }
         matrices.popPose();
     }
 
 
     public void renderSphere1(@NotNull PoseStack matrices, @NotNull MultiBufferSource vertexConsumers, int light, float s) {
-
         {
             int stacks = 20; // 垂直方向的分割数
             int slices = 20; // 水平方向的分割数

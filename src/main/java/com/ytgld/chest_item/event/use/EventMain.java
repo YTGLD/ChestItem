@@ -157,36 +157,39 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
-        ShadowShield(event);
+        hyperplasiaShield(event);
         GodApple.event(event);
         ShadowMint.hurtAttacker(event);
         MadnessTheory.attackEXP(event);
         HardwoodTotemPole.tick(event);
     }
-    public void ShadowShield (LivingDamageEvent.Pre event){
+    public void hyperplasiaShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity living) {
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
             if (hyperplasia_stronger != null) {
-                float value = (int) hyperplasia_stronger.getValue();
+                float value = (float) hyperplasia_stronger.getValue();
                 float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
                 if (data > 0) {
-                    int damage = (int) event.getNewDamage();
-                    int newData = (int) (data - damage / value);
-                    if (newData > 0) {
-                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, (float)(newData));
-                        event.setNewDamage(0);
-                    } else {
-                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
-                        event.setNewDamage(damage - data);
+                    float damage = event.getNewDamage();
+                    int newData = (int) (data - 1 - ((int) (damage * 0.5f)));
+                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES,(float)newData);
+                    float modify = (float) Math.sqrt(value);
+                    if (modify < 0.3f) {
+                        modify = 0.3f;
                     }
-                }else {
+                    float newDamage = damage * (0.3f / modify);
+                    event.setNewDamage(newDamage);
+                } else {
                     living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
                 }
             }
         }
+    }
+
+
+    public void ShadowShield (LivingIncomingDamageEvent event){
 
         if (event.getEntity() instanceof LivingEntity living) {
-
             if (living instanceof Player player) {
                 ChestInventory chestInventory = Handler.getItem(player);
                 if (chestInventory != null) {
@@ -208,14 +211,14 @@ public class EventMain {
                 float value = (float) shadow_shield_stronger.getValue();
                 float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
                 if (data > 0) {
-                    float damage = event.getNewDamage() ;
+                    float damage = event.getAmount() ;
                     float newData = data - damage / 1.2f / value;
                     if (newData > 0) {
                         living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, (newData));
-                        event.setNewDamage(0);
+                        event.setAmount(0);
                     } else {
                         living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
-                        event.setNewDamage(damage - data);
+                        event.setAmount(damage - data);
                     }
                 }else {
                     living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
@@ -276,6 +279,7 @@ public class EventMain {
                 }
             }
         }
+        ShadowShield(event);
     }
     @SubscribeEvent
     public void LivingChangeTargetEvent(LivingChangeTargetEvent event){
@@ -315,7 +319,6 @@ public class EventMain {
         CorruptionCrystal.tick(event);
         QualitativeComponents.tick(event);
         DeathOmenStoneMonument.tick(event);
-
 
         LivingEntity living = event.player;
         {

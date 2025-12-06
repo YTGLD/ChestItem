@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item":"minecraft:crying_obsidian"},
+    "B": {"item":"minecraft:pitcher_pod"},
+    "C": {"item":"chest_item:condense_bone_cube"}
+  },
+  "pattern": [
+    "ACA",
+    "CBC",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:pod"
+  }
+}

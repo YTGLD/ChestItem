@@ -404,5 +404,18 @@
   "item.chest_item.skill.terrible_potion.text": "低于50%生命值时增加伤害和速度：",
   "item.chest_item.skill.therapeutic.text": "高于50%生命值时增加治疗：",
   "item.chest_item.skill.plague_spores.text": "按下技能键释放孢子，等级决定半径：",
-  "item.chest_item.skill.plague_divine_power.text": "攻击有概率造成中毒，并对中毒生物造成额外伤害："
+  "item.chest_item.skill.plague_divine_power.text": "攻击有概率造成中毒，并对中毒生物造成额外伤害：",
+
+
+
+  "item.chest_item.skill.doomsday_judgment": "天启—末日审判",
+  "item.chest_item.skill.doomsday_judgment.text": "增加仿生血灵（末日降临）的伤害和攻击速度\n并且血珠不再受到距离和碰撞的影：",
+
+
+  "item.chest_item.skill.rotten": "腐烂",
+  "item.chest_item.skill.rotten.text": "对附近生物施加自身负面BUFF，半径：",
+
+
+  "item.chest_item.pod": "枯萎荚果",
+  "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 }

@@ -65,50 +65,71 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
         return sprites;
     }
 
+    @Unique
+    ItemStack cI1_21_9$itemstack = ItemStack.EMPTY;
     @Override
     public void chest_item$addW(ItemStack stack) {
         GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
-        if (stack.getItem() instanceof Terror terror) {
-            guiGraphics.pose().pushPose();
-            if (this.minecraft.screen instanceof IAbstractContainerScreen iAbstractContainerScreen) {
-                List<Vec2> xy = iAbstractContainerScreen.chest_item$xy();
-                if (xy != null) {
-                    for (int i = 1; i < xy.size(); i++) {
-                        Vec2 prevPos = xy.get(i - 1);
-                        Vec2 currPos = xy.get(i);
-                        if (prevPos.x != 0 && prevPos.y != 0 && currPos.x != 0 && currPos.y != 0) {
-                            float alpha = (float) (i) / (xy.size());
-                            Vec2 adjustedPrevPos = new Vec2(prevPos.x, prevPos.y);
-                            Vec2 adjustedCurrPos = new Vec2(currPos.x, currPos.y);
-                            pose.pushPose();
-                            pose.translate(prevPos.x, prevPos.y,0);
+        if (stack.getItem() instanceof Terror){
+            cI1_21_9$itemstack = stack;
+        }
+        guiGraphics.pose().pushPose();
+        if (this.minecraft.screen instanceof IAbstractContainerScreen iAbstractContainerScreen) {
+            List<Vec2> xy = iAbstractContainerScreen.chest_item$xy();
+            if (xy != null) {
+                for (int i = 1; i < xy.size(); i++) {
+                    Vec2 prevPos = xy.get(i - 1);
+                    Vec2 currPos = xy.get(i);
+                    if (prevPos.x != 0 && prevPos.y != 0 && currPos.x != 0 && currPos.y != 0) {
+                        float alpha = (float) (i) / (xy.size());
+                        Vec2 adjustedPrevPos = new Vec2(prevPos.x, prevPos.y);
+                        Vec2 adjustedCurrPos = new Vec2(currPos.x, currPos.y);
+                        pose.pushPose();
+
+                        pose.translate(prevPos.x, prevPos.y,0);
+                        {
+                            //随机位置
+                            pose.translate((float) Math.sin(adjustedPrevPos.x) * 4, (float) Math.sin(adjustedCurrPos.y) * 4,0);
+                            //位置改变
+                            if (!adjustedPrevPos.equals(adjustedCurrPos)) {
+                                pose.translate(0, -13,0);
+                            }else {
+                                pose.translate(0, -4,0);
+                            }
                             pose.scale(alpha * 1.55f,alpha * 1.55f,alpha * 1.55f);
-                            pose.translate(-prevPos.x, -prevPos.y,0);
-
-                            int color = terror.color(stack);
-                            int rs = (color >> 16) & 0xFF;
-                            int gs = (color >> 8) & 0xFF;
-                            int bs = color & 0xFF;
-
-                            float r = rs / 255f;
-                            float g = gs / 255f;
-                            float b = bs / 255f;
-                            MGuiGraphics.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/fire.png"),
-                                    adjustedCurrPos.x - 12, adjustedCurrPos.y - 12,
-                                    0, 0, 24, 24, 24, 24,
-                                    r, g, b * alpha, alpha);
-                            MGuiGraphics.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/fire.png"),
-                                    adjustedPrevPos.x - 12, adjustedPrevPos.y - 12,
-                                    0, 0, 24, 24, 24, 24,
-                                    r, g, b * alpha, alpha);
-                            pose.popPose();
-
+                            //上升
+                            if (!adjustedPrevPos.equals(adjustedCurrPos)) {
+                                pose.translate(0, (alpha) * 10,0);
+                            }else {
+                                pose.translate(0, (alpha) * 3,0);
+                            }
                         }
+
+                        pose.translate(-prevPos.x, -prevPos.y,0);
+
+                        int color = iAbstractContainerScreen.cI1_21_9$color();
+                        int rs = (color >> 16) & 0xFF;
+                        int gs = (color >> 8) & 0xFF;
+                        int bs = color & 0xFF;
+
+                        float r = rs / 255f;
+                        float g = gs / 255f;
+                        float b = bs / 255f;
+                        MGuiGraphics.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/fire.png"),
+                                adjustedCurrPos.x - 12, adjustedCurrPos.y - 12,
+                                0, 0, 24, 24, 24, 24,
+                                r, g, b * alpha, alpha);
+                        MGuiGraphics.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/tooltip/fire.png"),
+                                adjustedPrevPos.x - 12, adjustedPrevPos.y - 12,
+                                0, 0, 24, 24, 24, 24,
+                                r, g, b * alpha, alpha);
+                        pose.popPose();
+
                     }
                 }
             }
-            guiGraphics.pose().popPose();
         }
+        guiGraphics.pose().popPose();
     }
     @Inject(at = @At(value = "RETURN"),method = "renderTooltipInternal(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;)V")
     public void moonstone$ClientTooltipPositioner(Font p_282675_, List<ClientTooltipComponent> p_282615_, int x, int y, ClientTooltipPositioner p_282442_, CallbackInfo ci) {

@@ -62,6 +62,7 @@ public class EndComingRenderer extends EntityRenderer<EndComing> {
             float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
 
             Handler.renderBlood(matrices.last(), vertexConsumers.getBuffer(MRender.LIGHTNING), adjustedPrevPos, adjustedCurrPos, alpha,alpha/3.3F);
+            Handler.renderBlood(matrices.last(), vertexConsumers.getBuffer(MRender.LIGHTNING_Outline), adjustedPrevPos, adjustedCurrPos, alpha,alpha/3.3F);
         }
         matrices.popPose();
     }

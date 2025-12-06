@@ -5,6 +5,7 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.tip.an_element.elements.DoomsdayJudgment;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -36,6 +37,7 @@ import java.util.Set;
 import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
 
 public class EndComing  extends TamableAnimal {
+
     public EndComing(EntityType<? extends EndComing> p_21803_, Level p_21804_) {
         super(p_21803_, p_21804_);
         this.setNoGravity(true);
@@ -130,7 +132,7 @@ public class EndComing  extends TamableAnimal {
             }
         }
 
-        float s = 5;
+        float s = DoomsdayJudgment.attackTime(this.getOwner());
         if (isHasEffectEnd()){
             s += 10;
         }

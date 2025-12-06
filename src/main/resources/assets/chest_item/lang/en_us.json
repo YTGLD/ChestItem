@@ -370,21 +370,25 @@
 
 
 
+"item.chest_item.death_omen_stone_monument": "death omen_stone_monument",
 
-  "item.chest_item.death_omen_stone_monument": "死兆石碑",
+"item.chest_item.hardwood_totem_pole": "hardwood totem pole",
+  "item.chest_item.hardwood_totem_pole.string.1": "Attacks have a chance to cause weakness",
+  "item.chest_item.hardwood_totem_pole.string.2":"Attacks have a chance to restore health",
+  "item.chest_item.hardwood_totem_pole.string.3": "Attack has a chance to gain strength",
+  "item.chest_item.hardwood_totem_pole.string.4":"Injury has a chance to gain resistance",
+  "item.chest_item.hardwood_totem_pole.string.5": "Damage absorption has a chance to be injured",
+  "item.chest_item.hardwood_totem_pole.string.6":"Injury has a probability of bounce damage",
 
+"item.chest_item.skill.doomsday_judgment": "apocalypse-doomsday_judgment",
+  "item.chest_item.skill.doomsday_judgment.text": "Increases the damage and attack speed of the Bionic Blood Spirit (Doomsday)\n and the Blood Orb is no longer affected by distance and collisions::",
 
-  "item.chest_item.hardwood_totem_pole": "硬木图腾柱",
-  "item.chest_item.hardwood_totem_pole.string.1": "攻击有概率造成虚弱",
-  "item.chest_item.hardwood_totem_pole.string.2":"攻击有概率恢复生命值",
-  "item.chest_item.hardwood_totem_pole.string.3": "攻击有概率有概率获得力量",
-  "item.chest_item.hardwood_totem_pole.string.4":"受伤有概率获得抗性",
-  "item.chest_item.hardwood_totem_pole.string.5": "受伤有概率获得伤害吸收",
-  "item.chest_item.hardwood_totem_pole.string.6":"受伤有概率反弹伤害",
+"item.chest_item.lone_wolf": "lone wolf",
+  "item.chest_item.lone_wolf.string.1": "15% faster when no creatures are nearby",
 
+"item.chest_item.skill.rotten": "rot",
+  "item.chest_item.skill.rotten.text": "Applies its own negative buff to nearby creatures, radius:",
 
-
-
-  "item.chest_item.lone_wolf": "孤狼",
-  "item.chest_item.lone_wolf.string.1": "附近没有生物时速度提高15%"
+"item.chest_item.pod": "wilted pod",
+  "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 }
