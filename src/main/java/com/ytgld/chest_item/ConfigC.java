@@ -19,9 +19,19 @@ public class ConfigC {
             RenderSoul =  BUILDER
                     .translation("chest_item.config.RenderSoul")
                     .define("RenderSoul", true);
+
+
+            RenderGUILight =  BUILDER
+                    .translation("chest_item.config.RenderGUILight")
+                    .define("RenderGUILight", true);
+            RenderItemTooltip =  BUILDER
+                    .translation("chest_item.config.RenderItemTooltip")
+                    .define("RenderItemTooltip", true);
         }
         BUILDER.pop();
     }
+    public final ModConfigSpec.BooleanValue RenderGUILight;
+    public final ModConfigSpec.BooleanValue RenderItemTooltip;
 
     public final ModConfigSpec.BooleanValue hyperplasiaMusic;
     public final ModConfigSpec.BooleanValue Render;

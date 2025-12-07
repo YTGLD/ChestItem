@@ -9,6 +9,8 @@ import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.*;
+import com.ytgld.chest_item.items.black.celestial.Blood;
+import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
@@ -166,6 +168,7 @@ public class EventMain {
         ShadowMint.hurtAttacker(event);
         MadnessTheory.attackEXP(event);
         HardwoodTotemPole.tick(event);
+        Blood.tick(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity living) {
@@ -324,6 +327,11 @@ public class EventMain {
         QualitativeComponents.tick(event);
         LoneWolf.ItemStackTickEvent(event);
         DeathOmenStoneMonument.tick(event);
+        Blood.tick(event);
+
+
+
+
 
         LivingEntity living = event.player;
         {
@@ -404,22 +412,42 @@ public class EventMain {
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
         if (event.getItemStack().getItem() instanceof ItemBase) {
-            if (event.getItemStack().getItem() instanceof ItemBlackShadow){
+
+
+            if (event.getItemStack().getItem() instanceof ItemBlackShadow) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(Style.EMPTY
                         .withColor(Light.ARGB.color(255, 255, 0, 100))));
+
+
                 if (event.getItemStack().getItem() instanceof TheImprintOfTheSoul soul) {
                     if (!soul.canRemove(event.getItemStack())) {
-                        if (event.getEntity() !=null && !event.getEntity().isCreative()) {
+                        if (event.getEntity() != null && !event.getEntity().isCreative()) {
                             event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove").withStyle(Style.EMPTY
                                     .withColor(Light.ARGB.color(255, 255, 20, 80))));
-                        }else {
+                        } else {
                             event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove_and").withStyle(Style.EMPTY
                                     .withColor(Light.ARGB.color(255, 255, 150, 0))));
                         }
                     }
                 }
-            }else {
+                if (event.getItemStack().getItem() instanceof TheCelestial celestial) {
+                    if (!celestial.canRemove(event.getItemStack())) {
+                        if (event.getEntity() != null && !event.getEntity().isCreative()) {
+                            event.getToolTip().add(1, Component.translatable("chest_item.celestial.can_not_remove").withStyle(Style.EMPTY
+                                    .withColor(Light.ARGB.color(255, 255, 20, 80))));
+                        } else {
+                            event.getToolTip().add(1, Component.translatable("chest_item.celestial.can_not_remove_creative").withStyle(Style.EMPTY
+                                    .withColor(Light.ARGB.color(255, 255, 150, 0))));
+                        }
+                    }
+                }
+
+
+
+            }
+            if (!(event.getItemStack().getItem() instanceof ItemBlackShadow)
+                    && !(event.getItemStack().getItem() instanceof TheCelestial)) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(ChatFormatting.GOLD));
             }
@@ -484,15 +512,23 @@ public class EventMain {
 
                         .add(LootItem.lootTableItem(InitItems.MAGIC_IRON)
                                 .when(LootItemRandomChanceCondition.randomChance(0.09f)))
+
                         .add(LootItem.lootTableItem(InitItems.SpeedHeart_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
                         .add(LootItem.lootTableItem(InitItems.Kaolinite_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
                         .add(LootItem.lootTableItem(InitItems.EyeBook_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
                         .add(LootItem.lootTableItem(InitItems.Fission_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
                         .add(LootItem.lootTableItem(InitItems.FleshAndBloodGears_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                        .add(LootItem.lootTableItem(InitItems.Blood_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
 

@@ -33,16 +33,19 @@ public abstract class PlayerMixin implements IPlayer {
     }
     @Inject(method = "tick", at = @At(value = "RETURN"))
     private void tick(CallbackInfo ci) {
+        Player player = (Player) (Object) this;
         if (!((Player) (Object) this).level().isClientSide()) {
-            if (((Player) (Object) this).hasContainerOpen()) {
-                if (((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) < 255) {
-                    ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, ((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) + 25);
-                }
-            } else {
-                if (((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) > 5) {
-                    ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, ((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) - 10);
-                }else {
-                    ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, 0f);
+            if (player.isAlive()) {
+                if (((Player) (Object) this).hasContainerOpen()) {
+                    if (((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) < 255) {
+                        ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, ((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) + 25);
+                    }
+                } else {
+                    if (((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) > 5) {
+                        ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, ((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) - 10);
+                    } else {
+                        ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, 0f);
+                    }
                 }
             }
         }

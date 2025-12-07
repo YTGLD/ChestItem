@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.mixin.cilent;
 
+import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.Terror;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
@@ -40,12 +41,14 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
     @Inject(at = @At(value = "RETURN"), method = "render")
     public void Lnet(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){
         ItemStack itemstack = this.menu.getCarried();
-        if (!itemstack.isEmpty()){
-            if (itemstack.getItem() instanceof ItemBase) {
-                if (!(itemstack.getItem() instanceof TheImprintOfTheSoul)) {
-                    seekingImmortals$vec2.add(new Vec2(mouseX, mouseY));
-                    if (itemstack.getItem() instanceof Terror terror) {
-                        cI1_21_9$integerList = terror.color(itemstack);
+        if (ConfigC.config.RenderGUILight.get()) {
+            if (!itemstack.isEmpty()) {
+                if (itemstack.getItem() instanceof ItemBase) {
+                    if (!(itemstack.getItem() instanceof TheImprintOfTheSoul)) {
+                        seekingImmortals$vec2.add(new Vec2(mouseX, mouseY));
+                        if (itemstack.getItem() instanceof Terror terror) {
+                            cI1_21_9$integerList = terror.color(itemstack);
+                        }
                     }
                 }
             }

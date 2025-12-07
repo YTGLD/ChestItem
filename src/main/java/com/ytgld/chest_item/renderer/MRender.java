@@ -165,6 +165,14 @@ public abstract class MRender extends RenderType {
                         ))
                         .withLocation("pipeline/gui_textured").build());
 
+        public static final RenderPipeline  TRANSLUCENT_PARTICLE = (RenderPipeline.builder(PARTICLE_SNIPPET).withLocation("pipeline/translucent_particle").
+                withBlend(new BlendFunction(
+                        SourceFactor.SRC_ALPHA,
+                        DestFactor.ONE,
+                        SourceFactor.ONE,
+                        DestFactor.ZERO
+                )).build());
+
         public static final RenderPipeline GUI_TEXTURED_CI =
                 (RenderPipeline.builder(GUI_TEXTURED_SNIPPET_CI).withBlend(new BlendFunction(
                                 SourceFactor.SRC_ALPHA,

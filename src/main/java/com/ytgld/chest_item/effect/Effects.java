@@ -14,5 +14,7 @@ public class Effects {
             Eye::new);
     public static final DeferredHolder<MobEffect,?> invulnerable  =EFFECT_DEFERRED_REGISTER.register("invulnerable",
             Invulnerable::new);
+    public static final DeferredHolder<MobEffect,?> Rage  =EFFECT_DEFERRED_REGISTER.register("rage",
+            Rage::new);
 
 }

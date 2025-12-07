@@ -27,8 +27,6 @@ public class AttReg {
     );
 
 
-
-
     public static final DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, Chestitem.MODID);
     public static final DeferredHolder<Attribute,?> heal = REGISTRY.register("heal",()->{
         return new RangedAttribute("attribute.name.chest_item.heal", 1, -1024, 1024).setSyncable(true);

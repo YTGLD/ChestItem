@@ -35,7 +35,7 @@ public abstract class GuiMixin {
             Profiler.get().push("hyperplasia");
             cI1_21_9$renderArmor(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 10, 1, 0, l);
             Profiler.get().pop();
-            if (i > 0) {
+            if (i > 0&&cI1_21_9$showAlpha > 0) {
                 this.leftHeight += 20;
             }
         }
@@ -45,7 +45,7 @@ public abstract class GuiMixin {
             Profiler.get().push("shadow_shield");
             cI1_21_9$renderShadowBlackArmor(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 10, 1, 0, l);
             Profiler.get().pop();
-            if (i > 0) {
+            if (i > 0&&cI1_21_9$showAlphaShadow > 0) {
                 this.leftHeight += 20;
             }
         }
@@ -70,7 +70,7 @@ public abstract class GuiMixin {
                 if (hurtTime <= 0) {
                     if (cI1_21_9$lightAmoutShadow >=1) {
                         if (cI1_21_9$showAlphaShadow > 0) {
-                            cI1_21_9$showAlphaShadow -= 2.5f;
+                            cI1_21_9$showAlphaShadow -= 2.55f;
                         }
                     }
                     cI1_21_9$lightAmoutShadow += 0.0125f;
@@ -81,7 +81,9 @@ public abstract class GuiMixin {
                 cI1_21_9$lightAmoutShadow = 0;
             }
             int alpha = (int) cI1_21_9$showAlphaShadow;
-
+            if (cI1_21_9$showAlphaShadow < 0) {
+                cI1_21_9$showAlphaShadow = 0;
+            }
 
 
             int yy = y - (heartRows - 1) * height - 10;
@@ -174,7 +176,9 @@ public abstract class GuiMixin {
             }
             int alpha = (int) cI1_21_9$showAlpha;
             float light = Math.min(0.45f,cI1_21_9$lightAmout);
-
+            if (cI1_21_9$showAlpha < 0) {
+                cI1_21_9$showAlpha = 0;
+            }
 
 
             int yy = y - (heartRows - 1) * height - 10;

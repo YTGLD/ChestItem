@@ -1,4 +1,26 @@
 {
+
+
+  "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
+  "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
+  "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
+  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+
+  "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
+  "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
+
+  "chest_item.celestial": "仙法",
+  "chest_item.celestial.1": "仙法·禁术",
+  "chest_item.celestial.can_not_remove": "此术法神通将永远与你左右",
+  "chest_item.celestial.can_not_remove_creative": "只有神的力量才能忘却该术法",
+  "item.chest_item.blood": "血魔解体",
+  "item.chest_item.blood.string.1": "按下技能键触发效果",
+  "item.chest_item.blood.string.2": "此时，生命值减少至1点，但是获得愤怒BUFF(最多叠加到5级)",
+  "item.chest_item.blood.string.3": "并且额外获得20%的生命窃取和30%的伤害提升",
+  "item.chest_item.blood.string.4": "每次攻击都会延长生命窃取和伤害提升的时长",
+
+
+
   "entity.chest_item.abyss_orb": "Abyssal ball",
   "entity.chest_item.end_spiral": "wormhole",
   "entity.chest_item.black_vex": "Dark annoyance",
@@ -115,6 +137,7 @@
 
   "effect.chest_item.increasing_meat": "Growth",
   "effect.chest_item.eye": "lightSensitive",
+  "effect.chest_item.rage": "rage",
   "effect.chest_item.invulnerable": "invincible",
 
   "item.chest_item.self_increasing_heart.string.0": "Self-increasing i, i self-decreasing",
@@ -236,11 +259,6 @@
   "item.chest_item.shadow_mint.string.0": "Shadow's Hymn",
   "item.chest_item.shadow_mint.string.1": "Shadow shield no longer blocks damage and explodes when taken and deals damage to the target",
   "item.chest_item.shadow_mint.string.2": "If this smash kills the target, restore 4 shadow shields and health",
-
-  "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
-  "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
-  "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
-  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
 
   "item.chest_item.mutation": "mutation",
 

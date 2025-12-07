@@ -15,6 +15,7 @@ import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.tip.SkillEvent;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import net.minecraft.resources.ResourceLocation;
@@ -40,8 +41,7 @@ public class Chestitem {
     public static final String MODID = "chest_item";
     public static final ResourceLocation POST_BLACK = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
             "black");
-    public static final ResourceLocation POST_BLACK_CLOUD = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-            "clouds");
+
     public Chestitem(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::registerPayloadHandler);
         AttReg.REGISTRY.register(modEventBus);
@@ -55,7 +55,7 @@ public class Chestitem {
         NeoForge.EVENT_BUS.register(new EventHandler());
         NeoForge.EVENT_BUS.register(new EventMain());
         ChestMenuTypes.register.register(modEventBus);
-
+        Particles.PARTICLE_TYPES.register(modEventBus);
 
 
         NeoForge.EVENT_BUS.register(new SkillEvent());

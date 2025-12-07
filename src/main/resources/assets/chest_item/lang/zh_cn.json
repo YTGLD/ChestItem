@@ -1,4 +1,20 @@
 {
+
+
+  "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
+  "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
+  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+  "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
+  "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
+
+  "chest_item.celestial": "仙法",
+  "chest_item.celestial.1": "仙法·禁术",
+  "chest_item.celestial.can_not_remove": "此术法神通将永远与你左右",
+  "chest_item.celestial.can_not_remove_creative": "只有神的力量才能忘却该术法",
+  "item.chest_item.blood": "血魔解体",
+
+
+
   "itemGroup.chest_item": "箱子里的小饰品",
 
   "entity.chest_item.abyss_orb": "深渊球",
@@ -129,6 +145,7 @@
   "effect.chest_item.increasing_meat": "增生",
   "effect.chest_item.invulnerable": "无敌",
   "effect.chest_item.eye": "光敏感",
+  "effect.chest_item.rage": "愤怒",
 
   "item.chest_item.self_increasing_heart.string.0": "自增i，i自减",
   "item.chest_item.self_increasing_heart.string.1": "食用食物获得临时生命值",
@@ -345,10 +362,6 @@
 
   "item.chest_item.devil_coins": "异魔硬币",
   "item.chest_item.devil_coins.string.1":"一枚诡异的硬币，上面刻着奇怪的纹路......",
-  "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
-  "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
-  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
-
   "item.chest_item.condense_bone_cube": "骨质凝块",
   "item.chest_item.condense_bone_cube.string.0": "骨质凝块",
 

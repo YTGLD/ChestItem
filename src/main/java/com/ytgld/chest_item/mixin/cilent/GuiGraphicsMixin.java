@@ -5,6 +5,7 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
@@ -122,6 +123,10 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     }
     @Inject(at = @At(value = "RETURN"),method = "renderTooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/world/item/ItemStack;)V")
     public void ytgld$ClientTooltipPositioner(Font font, List<ClientTooltipComponent> components, int x, int y, ClientTooltipPositioner positioner, ResourceLocation background, ItemStack tooltipStack, CallbackInfo ci) {
+        if (!ConfigC.config.RenderItemTooltip.get()){
+            return;
+        }
+
         if (tooltipStack.getItem() instanceof ItemBase)  {
             RenderTooltipEvent.Pre preEvent = ClientHooks.onRenderTooltipPre(tooltipStack,  (GuiGraphics) (Object) this, x, y, this.guiWidth(), this.guiHeight(), components, font, positioner);
             if (!preEvent.isCanceled()) {
@@ -370,26 +375,19 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                 "tooltip/bone/background"), i, j, k, l);
     }
-    @Unique
-    private  void chest_item$renderItemBlackShadowTooltipBackground_Chaos(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        int i = x - 3 - 9;
-        int j = y - 3 - 9;
-        int k = width + 3 + 3 + 18;
-        int l = height + 3 + 3 + 18;
-        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                "tooltip/black_shadow/chaos/frame"), i, j, k, l);
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                "tooltip/black_shadow/chaos/background"), i, j, k, l);
-    }
-
-
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void TheImprintOfTheSoulBlackLight(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (!ConfigC.config.RenderItemTooltip.get()){
+            return;
+        }
         if (stack.getItem() instanceof TheChaos soul) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             if (entity instanceof Player player) {
-                float aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                float aFloat = 0;
+                if (player.isAlive()) {
+                    aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                }
                 int size = 48;
                 if (aFloat > 255) {
                     aFloat = 255;
@@ -404,17 +402,17 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 int gs = (color >> 8) & 0xFF;
                 int bs = color & 0xFF;
 
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f,1), resourceLocation, x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f, 1), resourceLocation, x - size / 3, y - size / 3, 0, 0, size, size, size, size,
                         Light.ARGB.color((int) aFloat / 2, rs, gs, bs));
 
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f,2), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f, 2), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                 "textures/shadow/black_2.png"),
-                        x - 128 + 72 , y - 128 + 72,
+                        x - 128 + 72, y - 128 + 72,
                         0, 0,
                         128, 128, 128, 128,
                         Light.ARGB.color((int) aFloat, rs, gs, bs));
 
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f,3), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.1f, 3), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                 "textures/shadow/black_3.png"),
                         x - 96 / 3 - 8, y - 96 / 3 - 8, 0, 0, 96, 96, 96, 96,
                         Light.ARGB.color((int) aFloat, rs, gs, bs));
@@ -423,11 +421,17 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     }
     @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void TheImprintOfTheSoulBlackLightHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (!ConfigC.config.RenderItemTooltip.get()){
+            return;
+        }
         if (stack.getItem() instanceof ItemBlackShadow soul && !(stack.getItem() instanceof ILight)) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             if (entity instanceof Player player) {
-                float aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                float aFloat = 0;
+                if (player.isAlive()) {
+                    aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                }
                 int size = 48;
                 if (aFloat > 255) {
                     aFloat = 255;
@@ -437,7 +441,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 }
                 int color = soul.color(stack);
                 if (stack.getItem() instanceof TheImprintOfTheSoul theImprintOfTheSoul){
-                    color -= theImprintOfTheSoul.soulColor();
+                    color = theImprintOfTheSoul.soulColor();
                 }
                 int as = (color >> 24) & 0xFF;
                 int rs = (color >> 16) & 0xFF;
@@ -464,7 +468,10 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             if (entity instanceof Player player) {
-                float aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                float aFloat = 0;
+                if (player.isAlive()) {
+                    aFloat = player.getData(AttReg.black_shadowAttachmentType.get());
+                }
                 int size = 48;
                 if (aFloat > 255) {
                     aFloat = 255;
@@ -529,6 +536,18 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (stack.getItem() instanceof TheCelestial celestial){
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            ResourceLocation resourceLocation = celestial.img(stack);
+            int color = celestial.soulColor(stack);
+            int as = (color >> 24) & 0xFF;
+            int rs = (color >> 16) & 0xFF;
+            int gs = (color >> 8) & 0xFF;
+            int bs = color & 0xFF;
+            guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.08f,1111), resourceLocation, x, y, 0, 0, 16, 16, 16, 16,
+                    Light.ARGB.color(as, rs, gs, bs));
+
+        }
         if (stack.getItem() instanceof TheImprintOfTheSoul soul) {
             ResourceLocation resourceLocation = soul.resourceLocation();
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
@@ -541,22 +560,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.05f * (1.4f),1111), resourceLocation, x, y, 0, 0, 16, 16, 16, 16,
                     Light.ARGB.color(as, rs, gs - 20, bs - 30));
 
-            if (ConfigC.config.RenderSoul.get()) {
-
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f),2222), resourceLocation, x, y, 0, 0, 17, 17, 17, 17,
-                        Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f),3333), resourceLocation, x - 1, y, 0, 0, 17, 17, 17, 17,
-                        Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f),4444), resourceLocation, x, y - 1, 0, 0, 17, 17, 17, 17,
-                        Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.0575f * (1.4f),5555), resourceLocation, x - 1, y - 1, 0, 0, 17, 17, 17, 17,
-                        Light.ARGB.color((int) (as / 2.5f), rs, gs - 20, bs - 30));
-
-
-                guiGraphics.blit(MRender.RenderPs.LightSlowness(true, 0.05f,6666), resourceLocation, x, y, 0, 0, 16, 16, 16, 16,
-                        Light.ARGB.color(as, rs, gs - 20, bs - 30));
-
-            }
         }
     }
 }
