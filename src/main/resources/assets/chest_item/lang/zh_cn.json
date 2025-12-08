@@ -7,11 +7,32 @@
   "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
   "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
 
+
   "chest_item.celestial": "仙法",
   "chest_item.celestial.1": "仙法·禁术",
   "chest_item.celestial.can_not_remove": "此术法神通将永远与你左右",
   "chest_item.celestial.can_not_remove_creative": "只有神的力量才能忘却该术法",
+
   "item.chest_item.blood": "血魔解体",
+  "item.chest_item.blood.string.0": "边界感",
+  "item.chest_item.blood.string.1": "按下技能键触发效果",
+  "item.chest_item.blood.string.2": "此时，生命值减少至1点，但是获得愤怒BUFF(最多叠加到5级)",
+  "item.chest_item.blood.string.3": "并且额外获得20%的生命窃取和30%的伤害提升",
+  "item.chest_item.blood.string.4": "每次攻击都会延长生命窃取和伤害提升的时长",
+
+  "item.chest_item.chaos": "混沌体",
+  "item.chest_item.chaos.string.0": "混沌异种",
+  "item.chest_item.chaos.string.1": "+10%抗性",
+
+  "item.chest_item.sword": "剑体",
+  "item.chest_item.sword.string.0": "锻造剑骨",
+
+  "item.chest_item.samsara": "轮回道体",
+  "item.chest_item.samsara.string.0": "千转轮回",
+  "item.chest_item.samsara.string.1": "受伤有10%的概率规避伤害并反击",
+
+  "item.chest_item.nine_dome": "九转血魔体",
+  "item.chest_item.nine_dome.string.0": "血的战书",
 
 
 
@@ -325,6 +346,7 @@
 
 
   "item.chest_item.chaos_seven": "混沌七子",
+  "item.chest_item.chaos_seven.string.0": "月之石的一部分",
   "item.chest_item.chaos_seven.string.1": "传闻在混沌大战时期，有一尊混沌仙帝以一己之力击退万族，并为人族创建了各种的术法神通",
   "item.chest_item.chaos_seven.string.2":"...在混沌仙帝陨落之后，有七个人得到了它意志的认可，它们分别是：",
   "item.chest_item.chaos_seven.string.3": "窥眸",

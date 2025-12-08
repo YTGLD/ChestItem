@@ -9,8 +9,7 @@ import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.*;
-import com.ytgld.chest_item.items.black.celestial.Blood;
-import com.ytgld.chest_item.items.black.celestial.TheCelestial;
+import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
@@ -255,6 +254,8 @@ public class EventMain {
         Silent.hurtSilent_(event);
         ShieldEngine.LivingIncomingDamageEvent(event);
         MassEnergyConverter.LivingIncomingDamageEvent(event);
+        Samsara.event(event);
+        Chaos.event(event);
         if (event.getSource().getEntity() instanceof LivingEntity living){
             AttributeInstance instability = living.getAttribute(AttReg.instability);
             if (instability != null) {
@@ -328,8 +329,8 @@ public class EventMain {
         LoneWolf.ItemStackTickEvent(event);
         DeathOmenStoneMonument.tick(event);
         Blood.tick(event);
-
-
+        NineDome.tick(event);
+        Sword.tick(event);
 
 
 
@@ -528,10 +529,6 @@ public class EventMain {
                         .add(LootItem.lootTableItem(InitItems.FleshAndBloodGears_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
-                        .add(LootItem.lootTableItem(InitItems.Blood_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
-
 
                         .build());
 
@@ -617,6 +614,17 @@ public class EventMain {
                         .add(LootItem.lootTableItem(InitItems.FleshAndBloodGears_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
+
+                        .add(LootItem.lootTableItem(InitItems.Blood_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Chaos_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.NineDome_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Sword_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Samsara_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
 
 

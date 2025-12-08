@@ -2,7 +2,7 @@ package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.black.*;
-import com.ytgld.chest_item.items.black.celestial.Blood;
+import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
 import com.ytgld.chest_item.items.black.soul.*;
@@ -172,6 +172,14 @@ public class InitItems {
             (resourceLocation)-> new Pod(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
     public static final DeferredItem<Item> Blood_ = register("blood",
             (resourceLocation)-> new Blood(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Chaos_ = register("chaos",
+            (resourceLocation)-> new Chaos(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> NineDome_ = register("nine_dome",
+            (resourceLocation)-> new NineDome(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Sword_ = register("sword",
+            (resourceLocation)-> new Sword(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
+    public static final DeferredItem<Item> Samsara_ = register("samsara",
+            (resourceLocation)-> new Samsara(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -187,6 +195,10 @@ public class InitItems {
                     output.accept(InitItems.Fission_);
                     output.accept(InitItems.FleshAndBloodGears_);
                     output.accept(InitItems.Blood_);
+                    output.accept(InitItems.Chaos_);
+                    output.accept(InitItems.NineDome_);
+                    output.accept(InitItems.Sword_);
+                    output.accept(InitItems.Samsara_);
 
 
                     output.accept(InitItems.ChaosSeven_);

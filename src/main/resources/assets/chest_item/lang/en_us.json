@@ -4,23 +4,37 @@
   "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
   "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
   "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
-  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+"chest_item.config.RenderSoul": "Whether to render light effect items (Eternal Slave Seal, Treaty)",
 
-  "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
-  "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
+"chest_item.config.RenderGUILight": "render the tailing animation of the item",
+  "chest_item.config.RenderItemTooltip": "render mod's unique item background",
 
-  "chest_item.celestial": "仙法",
-  "chest_item.celestial.1": "仙法·禁术",
-  "chest_item.celestial.can_not_remove": "此术法神通将永远与你左右",
-  "chest_item.celestial.can_not_remove_creative": "只有神的力量才能忘却该术法",
-  "item.chest_item.blood": "血魔解体",
-  "item.chest_item.blood.string.1": "按下技能键触发效果",
-  "item.chest_item.blood.string.2": "此时，生命值减少至1点，但是获得愤怒BUFF(最多叠加到5级)",
-  "item.chest_item.blood.string.3": "并且额外获得20%的生命窃取和30%的伤害提升",
-  "item.chest_item.blood.string.4": "每次攻击都会延长生命窃取和伤害提升的时长",
+"chest_item.celestial": "immortal method",
+  "chest_item.celestial.1": "Immortal Method, Forbidden Technique",
+  "chest_item.celestial.can_not_remove": "This magical power will always be with you",
+  "chest_item.celestial.can_not_remove_creative": "Only the power of God can forget the spell",
+
+"item.chest_item.blood": "Blood Demon Disintegrates",
+  "item.chest_item.blood.string.0": "boundary sense",
+  "item.chest_item.blood.string.1": "Press the skill key to trigger the effect",
+  "item.chest_item.blood.string.2": "At this point, health is reduced to 1, but Rage BUFF is gained (stacks up to level 5)",
+  "item.chest_item.blood.string.3": "and gain an additional 20% Life Steal and 30% Damage Boost",
+  "item.chest_item.blood.string.4": "Each attack increases the duration of life steal and damage boost",
+
+"item.chest_item.chaos": "chaos body",
+  "item.chest_item.chaos.string.0": "Chaos Xeenomyo",
+  "item.chest_item.chaos.string.1": "+10% resistance",
+"item.chest_item.nine_dome": "Nine Turn Blood Demon Body",
+  "item.chest_item.nine_dome.string.0": "Bloody War Book",
 
 
+"item.chest_item.samsara": "reincarnation body",
+  "item.chest_item.samsara.string.0": "thousand rotations",
+  "item.chest_item.samsara.string.1": "There is a 10% chance of being injured to avoid damage and counterattack",
 
+
+  "item.chest_item.sword": "innate sword body",
+  "item.chest_item.sword.string.0": "forged sword bone",
   "entity.chest_item.abyss_orb": "Abyssal ball",
   "entity.chest_item.end_spiral": "wormhole",
   "entity.chest_item.black_vex": "Dark annoyance",
@@ -285,6 +299,7 @@
 
 
   "item.chest_item.chaos_seven": "Seven Sons of Chaos",
+  "item.chest_item.chaos_seven.string.0": "Part of the moon stone",
   "item.chest_item.chaos_seven.string.1": "It is rumored that during the Chaos War, there was a Chaos Immortal Emperor who single-handedly repelled all races and created various magical powers for the human race",
   "item.chest_item.chaos_seven.string.2":"... After the fall of the Chaos Immortal Emperor, seven people were recognized by its will, they were: ",
   "item.chest_item.chaos_seven.string.3": "peek",

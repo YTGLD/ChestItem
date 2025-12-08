@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/root",
+  "criteria": {
+    "blood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:blood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:blood"
+    },
+    "title": {
+      "translate": "item.chest_item.blood.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "blood"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
