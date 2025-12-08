@@ -17,7 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public class UndeadRune extends ItemBase {
+public class UndeadRune extends ItemBase implements IGold {
     public UndeadRune(Properties properties) {
         super(properties);
     }
@@ -46,11 +46,16 @@ public class UndeadRune extends ItemBase {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Undead_Rune.asItem().getDescriptionId()),
-                -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                -0.25f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         modifiers.put(Attributes.BLOCK_BREAK_SPEED, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Undead_Rune.asItem().getDescriptionId()),
                 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         return modifiers;
+    }
+
+    @Override
+    public int guiColor(ItemStack stack) {
+        return Light.ARGB.color(200,255,50,50);
     }
 
     @Override

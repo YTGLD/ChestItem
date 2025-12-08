@@ -15,7 +15,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import java.util.function.Consumer;
 
-public class StrongerStone extends ItemBase {
+public class StrongerStone extends ItemBase implements IGold {
     public StrongerStone(Properties properties) {
         super(properties);
     }

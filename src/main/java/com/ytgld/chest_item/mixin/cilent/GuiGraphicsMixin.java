@@ -562,4 +562,21 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
         }
     }
+
+    @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
+    public void IGUILight(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (stack.getItem() instanceof IGUILight iguiLight){
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            ResourceLocation resourceLocation = iguiLight.img();
+            int color = iguiLight.guiColor(stack);
+            int as = (color >> 24) & 0xFF;
+            int rs = (color >> 16) & 0xFF;
+            int gs = (color >> 8) & 0xFF;
+            int bs = color & 0xFF;
+            guiGraphics.blit(iguiLight.renderType(), resourceLocation, (int) (x+iguiLight.posOffset().x), (int) (y+iguiLight.posOffset().y),
+                    0, 0, 16, 16, 16, 16,
+                    Light.ARGB.color(as, rs, gs, bs));
+
+        }
+    }
 }

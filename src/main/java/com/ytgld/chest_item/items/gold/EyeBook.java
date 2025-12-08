@@ -16,7 +16,7 @@ import net.minecraft.world.item.component.TooltipDisplay;
 
 import java.util.function.Consumer;
 
-public class EyeBook  extends ItemBase {
+public class EyeBook  extends ItemBase implements IGold {
     public EyeBook(Properties properties) {
         super(properties);
     }

@@ -17,7 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public class SeparateRune extends ItemBase {
+public class SeparateRune extends ItemBase implements IGold {
     public SeparateRune(Properties properties) {
         super(properties);
     }
@@ -36,6 +36,7 @@ public class SeparateRune extends ItemBase {
             }
         }
     }
+
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
@@ -45,11 +46,15 @@ public class SeparateRune extends ItemBase {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.ARMOR, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Separate_Rune.asItem().getDescriptionId()),
-                -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                -0.25f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Separate_Rune.asItem().getDescriptionId()),
                 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         return modifiers;
+    }
+    @Override
+    public int guiColor(ItemStack stack) {
+        return Light.ARGB.color(200,255,50,50);
     }
     @Override
     public int color(ItemStack stack) {
