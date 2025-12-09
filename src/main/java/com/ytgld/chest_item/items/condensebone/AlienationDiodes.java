@@ -1,18 +1,23 @@
 package com.ytgld.chest_item.items.condensebone;
 
+import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.ItemBone;
 import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.renderer.light.GUILight;
+import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class AlienationDiodes extends ItemBone {
@@ -42,5 +47,36 @@ public class AlienationDiodes extends ItemBone {
         tooltipAdder.accept(Component.translatable("item.chest_item.alienation_diodes.string.1").withStyle(ChatFormatting.GOLD));
         tooltipAdder.accept(Component.translatable("item.chest_item.alienation_diodes.string.2").withStyle(ChatFormatting.GOLD));
     }
+    @Override
+    public GUILight guiLight() {
+        int max = 4;
+        Map<Integer,Integer> listGUIColor = new HashMap<>();
 
+        //蓝色
+        listGUIColor.put(0, Light.ARGB.color(100,80,120,255));
+        listGUIColor.put(1, Light.ARGB.color(100,80,120,255));
+        //绿色
+        listGUIColor.put(2, Light.ARGB.color(100,120,255,60));
+        listGUIColor.put(3, Light.ARGB.color(100,120,255,60));
+
+        Map<Integer, Vec2> listPosOffset = new HashMap<>();
+
+        //蓝色
+        listPosOffset.put(0, new Vec2(0,-4));
+        listPosOffset.put(1, new Vec2(4,0));
+        //绿色
+        listPosOffset.put(2, new Vec2(0,4));
+        listPosOffset.put(3, new Vec2(-4,0));
+
+
+
+        Map<Integer, ResourceLocation> listImg = new HashMap<>();
+
+        for (int i = 0; i < max; i++) {
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png");
+            listImg.put(i,resourceLocation);
+        }
+
+        return new GUILight(listGUIColor,listPosOffset,listImg,true,max);
+    }
 }

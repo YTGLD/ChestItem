@@ -2,7 +2,6 @@ package com.ytgld.chest_item.items.condensebone;
 
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.ItemBone;
 import com.ytgld.chest_item.other.ChestInventory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

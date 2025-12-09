@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.items;
 
 import com.google.common.collect.Multimap;
+import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;

@@ -6,7 +6,6 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.ItemBone;
 import com.ytgld.chest_item.other.ChestInventory;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;

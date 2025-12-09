@@ -3,14 +3,15 @@ package com.ytgld.chest_item.mixin.cilent;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
-import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
+import com.ytgld.chest_item.items.condensebone.ItemBone;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
+import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -39,6 +40,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin implements IGuiGraphics {
@@ -565,18 +567,44 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void IGUILight(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
         if (stack.getItem() instanceof IGUILight iguiLight){
-            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             ResourceLocation resourceLocation = iguiLight.img();
-            int color = iguiLight.guiColor(stack);
-            int as = (color >> 24) & 0xFF;
-            int rs = (color >> 16) & 0xFF;
-            int gs = (color >> 8) & 0xFF;
-            int bs = color & 0xFF;
-            guiGraphics.blit(iguiLight.renderType(), resourceLocation, (int) (x+iguiLight.posOffset().x), (int) (y+iguiLight.posOffset().y),
-                    0, 0, 16, 16, 16, 16,
-                    Light.ARGB.color(as, rs, gs, bs));
+            if (stack.getItem() instanceof IGUILightList ih) {
+                GUILight guiLight = ih.guiLight();
+                if (guiLight!=null) {
+                    if (guiLight.doLight()) {
+                        Map<Integer, Integer> colorList = guiLight.listGUIColor();
+                        Map<Integer, ResourceLocation> resourceLocationMap = guiLight.listImg();
+                        Map<Integer, Vec2> vec2Map = guiLight.listPosOffset();
 
+                        int number = guiLight.listNumber();
+
+                        for (int i = 0; i < number; i++) {
+                            Integer color = colorList.get(i);
+                            ResourceLocation img = resourceLocationMap.get(i);
+                            Vec2 posOffset = vec2Map.get(i);
+                            int as = (color >> 24) & 0xFF;
+                            int rs = (color >> 16) & 0xFF;
+                            int gs = (color >> 8) & 0xFF;
+                            int bs = color & 0xFF;
+
+                            guiGraphics.blit(iguiLight.renderType(), img, (int) (x + posOffset.x), (int) (y + posOffset.y),
+                                    0, 0, 16, 16, 16, 16,
+                                    Light.ARGB.color(as, rs, gs, bs));
+                        }
+                    }
+                }
+            }else {
+                int color = iguiLight.guiColor(stack);
+                int as = (color >> 24) & 0xFF;
+                int rs = (color >> 16) & 0xFF;
+                int gs = (color >> 8) & 0xFF;
+                int bs = color & 0xFF;
+                guiGraphics.blit(iguiLight.renderType(), resourceLocation, (int) (x + iguiLight.posOffset().x), (int) (y + iguiLight.posOffset().y),
+                        0, 0, 16, 16, 16, 16,
+                        Light.ARGB.color(as, rs, gs, bs));
+            }
         }
     }
 }

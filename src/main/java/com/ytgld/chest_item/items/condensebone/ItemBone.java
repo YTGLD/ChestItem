@@ -1,5 +1,8 @@
-package com.ytgld.chest_item.items;
+package com.ytgld.chest_item.items.condensebone;
 
+import com.ytgld.chest_item.items.IGUILightList;
+import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -12,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class ItemBone extends ItemBase{
+public class ItemBone extends ItemBase implements IGUILightList {
     public ItemBone(Properties properties) {
         super(properties);
     }
@@ -28,5 +31,10 @@ public class ItemBone extends ItemBase{
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255, 50, 255, 50);
+    }
+
+    @Override
+    public GUILight guiLight() {
+        return null;
     }
 }

@@ -33,7 +33,6 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
-import java.util.UUID;
 import java.util.function.Function;
 
 @Mod(Chestitem.MODID)

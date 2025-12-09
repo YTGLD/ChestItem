@@ -1,14 +1,10 @@
 package com.ytgld.chest_item.items.condensebone;
 
-import com.ytgld.chest_item.items.ItemBone;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
