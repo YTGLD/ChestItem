@@ -426,6 +426,16 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (!ConfigC.config.RenderItemTooltip.get()){
             return;
         }
+        if (stack.getItem() instanceof IGUILightList lightList){
+            if (lightList.guiLight()!=null) {
+                if (lightList.guiLight().doLight()) {
+                    return;
+                }
+            }
+        }
+        if (stack.getItem() instanceof IGUILight){
+            return;
+        }
         if (stack.getItem() instanceof ItemBlackShadow soul && !(stack.getItem() instanceof ILight)) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;

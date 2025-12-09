@@ -49,34 +49,34 @@ public class AlienationDiodes extends ItemBone {
     }
     @Override
     public GUILight guiLight() {
-        int max = 4;
+        int lightNumber = 4;
         Map<Integer,Integer> listGUIColor = new HashMap<>();
 
         //蓝色
-        listGUIColor.put(0, Light.ARGB.color(100,80,120,255));
-        listGUIColor.put(1, Light.ARGB.color(100,80,120,255));
+        listGUIColor.put(0, Light.ARGB.color(125,80,120,255));
+        listGUIColor.put(1, Light.ARGB.color(125,80,120,255));
         //绿色
-        listGUIColor.put(2, Light.ARGB.color(100,120,255,60));
-        listGUIColor.put(3, Light.ARGB.color(100,120,255,60));
+        listGUIColor.put(2, Light.ARGB.color(125,120,255,60));
+        listGUIColor.put(3, Light.ARGB.color(125,120,255,60));
 
         Map<Integer, Vec2> listPosOffset = new HashMap<>();
 
         //蓝色
-        listPosOffset.put(0, new Vec2(0,-4));
-        listPosOffset.put(1, new Vec2(4,0));
+        listPosOffset.put(0, new Vec2(0,-5));
+        listPosOffset.put(1, new Vec2(5,0));
         //绿色
-        listPosOffset.put(2, new Vec2(0,4));
-        listPosOffset.put(3, new Vec2(-4,0));
+        listPosOffset.put(2, new Vec2(0,5));
+        listPosOffset.put(3, new Vec2(-5,0));
 
 
 
         Map<Integer, ResourceLocation> listImg = new HashMap<>();
 
-        for (int i = 0; i < max; i++) {
+        for (int i = 0; i < lightNumber; i++) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png");
             listImg.put(i,resourceLocation);
         }
 
-        return new GUILight(listGUIColor,listPosOffset,listImg,true,max);
+        return new GUILight(listGUIColor,listPosOffset,listImg,true,lightNumber);
     }
 }
