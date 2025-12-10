@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/blood",
+  "criteria": {
+    "chaos_seven": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:chaos_seven"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:chaos_seven"
+    },
+    "title": {
+      "translate": "item.chest_item.chaos_seven.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "chaos_seven"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

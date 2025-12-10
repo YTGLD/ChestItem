@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/condense_bone_cube",
+  "criteria": {
+    "shield_engine": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:shield_engine"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:shield_engine"
+    },
+    "title": {
+      "translate": "item.chest_item.shield_engine.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "shield_engine"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

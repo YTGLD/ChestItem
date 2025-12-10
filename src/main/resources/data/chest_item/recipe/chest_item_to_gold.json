@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 10.0,
+  "group": "gold_ingot",
+  "ingredient": "#chest_item:chest_item",
+  "result": {
+    "id": "minecraft:gold_ingot"
+  }
+}

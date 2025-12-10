@@ -1,0 +1,456 @@
+{
+
+
+  "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
+  "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
+  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+  "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
+  "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
+
+
+  "chest_item.celestial": "仙法",
+  "chest_item.celestial.1": "仙法·禁术",
+  "chest_item.celestial.can_not_remove": "此术法神通将永远与你左右",
+  "chest_item.celestial.can_not_remove_creative": "只有神的力量才能忘却该术法",
+
+  "item.chest_item.blood": "血魔解体",
+  "item.chest_item.blood.string.0": "边界感",
+  "item.chest_item.blood.string.1": "按下技能键触发效果",
+  "item.chest_item.blood.string.2": "此时，生命值减少至1点，但是获得愤怒BUFF(最多叠加到5级)",
+  "item.chest_item.blood.string.3": "并且额外获得20%的生命窃取和30%的伤害提升",
+  "item.chest_item.blood.string.4": "每次攻击都会延长生命窃取和伤害提升的时长",
+
+  "item.chest_item.chaos": "混沌体",
+  "item.chest_item.chaos.string.0": "混沌异种",
+  "item.chest_item.chaos.string.1": "+10%抗性",
+
+  "item.chest_item.sword": "剑体",
+  "item.chest_item.sword.string.0": "锻造剑骨",
+
+  "item.chest_item.samsara": "轮回道体",
+  "item.chest_item.samsara.string.0": "千转轮回",
+  "item.chest_item.samsara.string.1": "受伤有10%的概率规避伤害并反击",
+
+  "item.chest_item.nine_dome": "九转血魔体",
+  "item.chest_item.nine_dome.string.0": "血的战书",
+
+
+
+  "itemGroup.chest_item": "箱子里的小饰品",
+
+  "entity.chest_item.abyss_orb": "深渊球",
+  "entity.chest_item.end_spiral": "虫洞",
+  "entity.chest_item.black_vex": "黑暗恼鬼",
+  "entity.chest_item.end_coming": "末日降临",
+  "entity.chest_item.attack_end_coming": "末日降临的球体",
+  "event.chest_item.equip": "放入神奇箱子内时：",
+  "chest_item.the_imprint_of_the_soul": "永恒奴印",
+  "chest_item.the_imprint_of_the_soul.2": "疯狂的理论",
+  "chest_item.the_imprint_of_the_soul.1": "条约",
+
+  "chest_item.the_imprint_of_the_soul.can_not_remove": "它将成为你人生中不可磨灭的污点",
+  "chest_item.the_imprint_of_the_soul.can_not_remove_and": "只有神的力量才能抹去这个奴印",
+  "chest_item.the_soul": "意志",
+  "chest_item.the_soul.give": "我感到我的灵魂与它有所联系......",
+  "chest_item.the_soul.give.1": "或许我该完成一些事情才能完全感应到它......",
+
+
+
+
+
+
+  "attribute.name.chest_item.heal": "治疗",
+  "attribute.name.chest_item.instability": "伤害不稳定性",
+  "attribute.name.chest_item.more_speed": "通用速度",
+  "attribute.name.chest_item.instability_low": "弱化风险",
+  "attribute.name.chest_item.hyperplasia": "疮疤增生最大值",
+  "attribute.name.chest_item.hyperplasia_speed": "疤痕组织治愈可能",
+  "attribute.name.chest_item.hyperplasia_stronger": "增生组织坚韧度",
+  "attribute.name.chest_item.shadow_shield": "幽影护盾",
+  "attribute.name.chest_item.shadow_shield_speed": "幽影护盾扩充速度",
+  "attribute.name.chest_item.shadow_shield_stronger": "幽影护盾稳固度",
+  "attribute.name.chest_item.looting": "抢夺",
+  "attribute.name.chest_item.fortune": "时运",
+
+  "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
+
+  "key.category.chest_item.chest": "箱子里的小饰品",
+  "key.chest_item.r": "打开神奇箱子",
+  "container.chest_item.chest": "神奇箱子",
+
+
+  "item.chest_item.god_blood.string.0": "无坚不摧，唯快不破",
+  "item.chest_item.god_blood.string.1": "攻击会附加缓慢效果",
+  "item.chest_item.god_blood.string.2":"增加10%速度",
+  "item.chest_item.god_blood.string.3": "增加10%攻速",
+  "item.chest_item.god_blood": "神速力",
+  "advancements.chest_item.god_blood.title": "超级速度",
+
+
+
+  "item.chest_item.drug_heal.string.0": "无以言表的续航能力",
+  "item.chest_item.drug_heal.string.1": "持续的生命恢复",
+  "item.chest_item.drug_heal.string.2": "增加5%生命值",
+  "item.chest_item.drug_heal": "治疗药壶",
+
+
+
+  "item.chest_item.bone_head.string.0": "熟悉的形状，熟悉的味道",
+  "item.chest_item.bone_head.string.1": "增加33%进食速度",
+    "item.chest_item.bone_head": "无厌之骸骨",
+
+
+  "item.chest_item.conch.string.0": "为什么不听听这个海螺说的是什么呢",
+  "item.chest_item.conch.string.1": "伤害造成范围效果",
+  "item.chest_item.conch": "闪电海螺",
+
+  "item.chest_item.stone.string.0": "坚如磐石",
+  "item.chest_item.stone.string.1": "增加5点击退抗性和一些防御值",
+  "item.chest_item.stone": "重石",
+
+  "item.chest_item.lead.string.0": "重量级选手",
+  "item.chest_item.lead.string.1": "每攻击3次，下一次攻击必定暴击",
+  "item.chest_item.lead": "恶意重铅",
+
+  "item.chest_item.knife.string.0": "命运齿轮的缓缓转动",
+  "item.chest_item.knife.string.1": "攻击加成在-10%到20%随机变化",
+  "item.chest_item.knife": "掩埋刀锋",
+
+
+  "item.chest_item.undead_rune.string.0": "矿工还是战士",
+  "item.chest_item.undead_rune.string.1": "减少50%生物触及距离",
+  "item.chest_item.undead_rune.string.2": "增加25%方块触及距离",
+  "item.chest_item.undead_rune": "亡灵符石-远望",
+
+  "item.chest_item.pain_rune.string.0": "魂魄的归来",
+  "item.chest_item.pain_rune.string.1": "减少50%生命值",
+  "item.chest_item.pain_rune.string.2": "增加25%攻速",
+  "item.chest_item.pain_rune": "痛苦符石-复苏",
+
+  "item.chest_item.separate_rune.string.0": "被撕裂的灵魂",
+  "item.chest_item.separate_rune.string.1": "减少50%护甲",
+  "item.chest_item.separate_rune.string.2": "增加25%伤害",
+  "item.chest_item.separate_rune": "割裂符石-战争",
+
+  "item.chest_item.armor_stone.string.0": "强壮的身体",
+  "item.chest_item.armor_stone.string.1": "增加5%抗性",
+  "item.chest_item.armor_stone": "黄金护卫",
+
+  "item.chest_item.stronger_stone.string.0": "锋利的宝剑",
+  "item.chest_item.stronger_stone.string.1": "增加10%伤害",
+  "item.chest_item.stronger_stone": "黄金战神",
+
+
+  "item.chest_item.life_stone.string.0": "复苏的花朵",
+  "item.chest_item.life_stone.string.1": "增加25%治疗",
+  "item.chest_item.life_stone": "黄金生命",
+
+  "item.chest_item.ring.string.0": "挖矿的小帮手",
+  "item.chest_item.ring.string.1": "急迫II",
+  "item.chest_item.ring": "矿工戒指",
+
+  "item.chest_item.heart.string.0": "永不停息的工作者",
+  "item.chest_item.heart.string.1": "增加50%饥饿值转换为生命值的速度",
+  "item.chest_item.heart": "仿生心脏",
+
+  "item.chest_item.meatball.string.0": "鸡肉味，嘎嘣脆",
+  "item.chest_item.meatball.string.1": "增加食物恢复的饥饿值和饱和度",
+  "item.chest_item.meatball": "肉球",
+
+  "item.chest_item.stomach.string.0": "我不叫喂",
+  "item.chest_item.stomach.string.1": "增加100%饥饿值转换为生命值的速度",
+  "item.chest_item.stomach.string.2": "饥饿值随时间缓慢恢复",
+  "item.chest_item.stomach.string.3": "食用食物反而会减少饥饿值",
+  "item.chest_item.stomach": "人造胃",
+
+  "effect.chest_item.increasing_meat": "增生",
+  "effect.chest_item.invulnerable": "无敌",
+  "effect.chest_item.eye": "光敏感",
+  "effect.chest_item.rage": "愤怒",
+
+  "item.chest_item.self_increasing_heart.string.0": "自增i，i自减",
+  "item.chest_item.self_increasing_heart.string.1": "食用食物获得临时生命值",
+  "item.chest_item.self_increasing_heart.string.2": "增加17%进食速度",
+  "item.chest_item.self_increasing_heart.string.3": "减少20%最大生命值",
+  "item.chest_item.self_increasing_heart": "自增心脏",
+
+  "advancements.chest_item.description": "获得这个物品",
+
+  "item.chest_item.gold_cheese.string.0": "超级奶酪，超级黄金",
+  "item.chest_item.gold_cheese.string.1": "黄金物品附魔时的属性得以提高",
+  "item.chest_item.gold_cheese.string.2": "极大提高黄金物品杀怪掉落的经验值",
+  "item.chest_item.gold_cheese.string.3": "杀死生物有概率掉落黄金(需要黄金工具)",
+  "item.chest_item.gold_cheese": "黄金奶酪",
+
+  "item.chest_item.space.string.0": "空间之力",
+  "item.chest_item.space.string.1": "按下技能键（C）召唤空间之门回到上一个死亡点",
+  "item.chest_item.space": "空间祖符",
+
+
+
+  "item.chest_item.vex_ring.string.0": "善良的人，善良的死去",
+  "item.chest_item.vex_ring.string.1": "杀死生物召唤黑暗恼鬼，他会拥有你主手的武器",
+  "item.chest_item.vex_ring.string.2": "注：黑暗恼鬼并不黑暗",
+  "item.chest_item.vex_ring": "天玄戒",
+
+  "item.chest_item.imitation_biomass.string.0": "emm...节省了一点栏位",
+  "item.chest_item.imitation_biomass.string.1": "与原先物品效果无法叠加",
+  "item.chest_item.imitation_biomass": "仿生物质",
+
+  "item.chest_item.battery.string.0": "箱子！箱子！我要箱子！",
+  "item.chest_item.battery.string.1": "每次打开战利品箱子会出现1~2个绿宝石",
+  "item.chest_item.battery.string.2": "每次打开战利品箱子都会给予100点经验值",
+  "item.chest_item.battery.string.3": "战利品的数量越多，经验值奖励越多",
+  "item.chest_item.battery.string.4": "累计获得经验值：",
+  "item.chest_item.battery": "充能电池",
+
+  "item.chest_item.magic_iron": "神秘金属板",
+
+  "item.chest_item.wind_knife.string.0": "老练之人的衰败",
+  "item.chest_item.wind_knife.string.1": "伤害在80%到150%之间随机变化",
+  "item.chest_item.wind_knife.string.2": "如果你有很多经验值，则消耗大量经验值换取最大加成的伤害",
+  "item.chest_item.wind_knife": "罡风刀环",
+
+  "item.chest_item.speed_heart.string.0": "第二次生命",
+  "item.chest_item.speed_heart.string.2": "每次食用食物都会根据营养来瞬间恢复生命值",
+  "item.chest_item.speed_heart": "钢铁之心",
+  "item.chest_item.kaolinite.string.0": "为什么这块石头可以吸收我的能量",
+  "item.chest_item.kaolinite.string.1": "吸收你的经验值来缓慢修复你的身着装备和手持物品",
+  "item.chest_item.kaolinite": "吸能高岭石",
+  "item.chest_item.nuclear_reaction.string.0": "刷怪塔即将启动",
+  "item.chest_item.nuclear_reaction.string.1": "增加25%经验掉落",
+  "item.chest_item.nuclear_reaction.string.2": "拾取经验球有25%的概率获得3倍经验",
+  "item.chest_item.nuclear_reaction.string.3": "快速吸取经验值",
+  "item.chest_item.nuclear_reaction": "经验核反应炉",
+
+  "item.chest_item.end_effect": "末日药水",
+  "item.chest_item.end_effect.string.0": "直视恐惧，让它们付出代价!",
+  "item.chest_item.end_effect.string.1": "仿生血灵将不计后果的攻击附近生物",
+  "item.chest_item.end_effect.string.2": "仿生血灵的伤害有所增加，但是射速明显降低",
+
+
+  "item.chest_item.giant_heart": "巨人之心",
+  "item.chest_item.giant_heart.string.0": "我是你最坚强的后盾!",
+  "item.chest_item.giant_heart.string.1": "增加20%抗性",
+  "item.chest_item.giant_heart.string.2": "增加100%食物变为生命值的速度",
+
+  "item.chest_item.eye_book": "长眼睛的书",
+  "item.chest_item.eye_book.string.0": "不要拉开那扇窗帘!",
+  "item.chest_item.eye_book.string.1": "夜视",
+
+
+  "item.chest_item.the_end_is_coming.string.0": "这不是我血灵大帝吗，怎么到这里当苦工了？",
+  "item.chest_item.the_end_is_coming.string.1": "召唤一个仿生血灵",
+  "item.chest_item.the_end_is_coming.string.2": "按下技能键召唤，再次按下则收回",
+  "item.chest_item.the_end_is_coming": "末日降临",
+  "item.chest_item.god_apple.string.0": "血祭血神",
+  "item.chest_item.god_apple.string.1": "最大生命值降低 25%",
+  "item.chest_item.god_apple.string.2": "减少生命恢复 by 40%",
+  "item.chest_item.god_apple.string.3": "你最多受到 5 点伤害",
+  "item.chest_item.god_apple.string.4": "超过 5 点的伤害将转换为相同数量的流血",
+  "item.chest_item.god_apple": "上帝的果实",
+
+  "item.chest_item.abnormal": "异常构造件",
+  "item.chest_item.complete": "完整构造件",
+
+  "item.chest_item.iron_cube": "坚韧立方体",
+  "item.chest_item.iron_cube.string.0": "坚韧不拔之人",
+  "item.chest_item.iron_cube.string.1": "伤害变得极度稳定，且输出能力有所增加",
+  "item.chest_item.iron_cube.string.2": "生命值降低不会影响你的意志，反而会增加自身的稳定性",
+  "item.chest_item.iron_cube.string.3": "你对防具的护甲有了极大的排斥",
+
+  "item.chest_item.scar_heart": "疤痕组织",
+  "item.chest_item.scar_heart.string.0": " ”",
+  "item.chest_item.scar_heart.string.1": "你的疤痕组织进行了增生。从某种意义上说，它是你额外的生命",
+  "item.chest_item.life_coin": "鲜活硬币",
+  "item.chest_item.life_coin.string.0": "异变之财富",
+
+  "item.chest_item.iron_heart": "不稳定脉冲器",
+  "item.chest_item.iron_heart.string.0": "看似胜券在握，实则慌的一批",
+  "item.chest_item.iron_heart.string.1": "伤害不稳定化，整体来说伤害有所提高",
+
+
+
+  "item.chest_item.heavy_blade": "天罡重刃",
+  "item.chest_item.heavy_blade.string.0": "自律的刀锋极为可怕",
+  "item.chest_item.heavy_blade.string.1": "每点增生组织提供1.5%的所有伤害加成（上限30%）",
+  "item.chest_item.heavy_blade.string.2":"每点护甲提供1%所有伤害加成（上限25%）",
+  "item.chest_item.heavy_blade.string.3": "每点饥饿值提供0.5%所有伤害加成（上限10%）",
+  "item.chest_item.heavy_blade.string.4":"默认减少20%所有伤害",
+
+  "advancements.chest_item.root.description": "然而这只是个箱子",
+  "advancements.chest_item.root.title": "箱子里的小饰品",
+  "item.chest_item.life_crystal.string.0": "超级生命力",
+  "item.chest_item.life_crystal.string.1": "增加10点最大生命值",
+  "item.chest_item.life_crystal": "生命水晶",
+
+  "item.chest_item.evil_thoughts_forge_dreams": "恶念锻梦",
+  "item.chest_item.evil_thoughts_forge_dreams.string.0": "失败的理论——探索未知",
+  "item.chest_item.evil_thoughts_forge_dreams.string.1": "将50%的增生组织转换成幽影护盾",
+
+  "item.chest_item.dry_bones": "腐枯尊骨",
+  "item.chest_item.dry_bones.string.0": "腐烂的头骨",
+  "item.chest_item.dry_bones.string.1": "幽影护盾恢复至100%时给予20%的伤害和攻速加成",
+  "item.chest_item.dry_bones.string.2": "增生组织恢复至100%时给予20%的护甲和速度加成",
+
+  "item.chest_item.shadow_mint": "幽影铸币",
+  "item.chest_item.shadow_mint.string.0": "暗影的赞歌",
+  "item.chest_item.shadow_mint.string.1": "幽影护盾不再可以抵挡伤害，且受到伤害时爆碎并对目标造成伤害",
+  "item.chest_item.shadow_mint.string.2": "若此次爆碎杀死了目标，则恢复4点幽影护盾和生命值",
+
+
+  "item.chest_item.the_order_of_the_undead": "亡者号令",
+  "item.chest_item.the_order_of_the_undead.string.1": "“种下奴印，你将不再是人类，而是我们亡灵一脉最好的伙伴......”",
+  "item.chest_item.the_order_of_the_undead.string.2": "免疫魔法伤害",
+  "item.chest_item.the_order_of_the_undead.string.3": "你所造成的非魔法伤害增加30%",
+  "item.chest_item.the_order_of_the_undead.string.4": "免疫所有的负面效果",
+  "item.chest_item.the_order_of_the_undead.string.9": "亡灵不再与你为敌",
+  "item.chest_item.the_order_of_the_undead.string.5": "“但是你要注意。你现在是一个彻头彻尾的亡灵，你应该知道你会怎么样......”",
+  "item.chest_item.the_order_of_the_undead.string.6": "免疫部分类型的治疗",
+  "item.chest_item.the_order_of_the_undead.string.7": "你时常感到饥饿，过度的饥饿会影响你的速度",
+  "item.chest_item.the_order_of_the_undead.string.8": "一旦燃烧，你将一直燃烧",
+
+  "item.chest_item.mutation": "异变",
+  "item.chest_item.mutation.string.1": "“传说中的人族也不过如此.....”",
+  "item.chest_item.mutation.string.2":"每少穿着一件装备护甲增加4点",
+  "item.chest_item.mutation.string.3": "若没有穿着装备，则抗性提高10%",
+  "item.chest_item.mutation.string.4":"减少30%受到的爆炸和灼烧伤害",
+
+  "item.chest_item.mutation.string.5": "“种下奴印，永生永世效忠我们异魔一族...”",
+  "item.chest_item.mutation.string.6":"身着装备自行瓦解",
+  "item.chest_item.mutation.string.7": "每穿着一件装备受到的伤害都会增加",
+  "item.chest_item.mutation.string.8":"受到的魔法伤害增加100%",
+  "item.chest_item.mutation.string.9": "在不佩戴任何防具，并且神奇箱子内只有一枚异魔硬币的情况下杀死凋零",
+
+  "item.chest_item.madness_theory": "癫狂理论",
+
+  "item.chest_item.madness_theory.string.1": "你说2+2不等于4？那等于几？",
+  "item.chest_item.madness_theory.string.2": "攻击生物有15%的概率掉落经验球，蕴含的经验是死亡时的20%",
+  "item.chest_item.madness_theory.string.3": "拾取经验球对附近的生物造成伤害",
+  "item.chest_item.madness_theory.string.4": "瞬间吸取大范围内的经验球",
+
+  "item.chest_item.madness_theory.string.5": "等于3！",
+  "item.chest_item.madness_theory.string.6": "掉落的经验球其蕴含的学识减半",
+  "item.chest_item.madness_theory.string.7": "你不再可以汲取经验球内的任何能量",
+
+  "item.chest_item.glutton": "饕餮诅咒",
+  "item.chest_item.glutton.string.1":"“你这种卑微的物种就应该做我们的奴隶”",
+  "item.chest_item.glutton.string.2":"极大提高进食速度",
+  "item.chest_item.glutton.string.3":"接近饱腹时获得额外生命值和伤害吸收",
+  "item.chest_item.glutton.string.4":"食用食物会瞬间恢复生命值",
+  "item.chest_item.glutton.string.5":"“这枚奴印是你唯一的出路”",
+  "item.chest_item.glutton.string.6":"饥饿值和饱和度不再可以恢复生命值",
+  "item.chest_item.glutton.string.7":"时刻感到异常的饥饿",
+  "item.chest_item.glutton.string.8":"饱腹时速度减少约25%",
+
+
+
+  "item.chest_item.chaos_seven": "混沌七子",
+  "item.chest_item.chaos_seven.string.0": "月之石的一部分",
+  "item.chest_item.chaos_seven.string.1": "传闻在混沌大战时期，有一尊混沌仙帝以一己之力击退万族，并为人族创建了各种的术法神通",
+  "item.chest_item.chaos_seven.string.2":"...在混沌仙帝陨落之后，有七个人得到了它意志的认可，它们分别是：",
+  "item.chest_item.chaos_seven.string.3": "窥眸",
+  "item.chest_item.chaos_seven.string.4":"死兆",
+  "item.chest_item.chaos_seven.string.5": "颠倒",
+  "item.chest_item.chaos_seven.string.6":"救赎",
+  "item.chest_item.chaos_seven.string.7": "愚者",
+  "item.chest_item.chaos_seven.string.8":"洞悉",
+  "item.chest_item.chaos_seven.string.9": "起始",
+  "item.chest_item.chaos_seven.string.10":"最终这七个人组建了一个辉煌无比的宗门——“月之石“并从混沌时代流传至今...",
+  "item.chest_item.chaos_seven.string.11": "在拥有7种负面BUFF的情况下杀死末影龙",
+
+  "item.chest_item.chaos_seven.string.12": "免疫黑暗，免疫失明",
+  "item.chest_item.chaos_seven.string.13":"增加百分之五十经验掉落",
+  "item.chest_item.chaos_seven.string.14": "增加五的伤害 生命 护甲",
+  "item.chest_item.chaos_seven.string.15":"复活时给予十秒无敌",
+  "item.chest_item.chaos_seven.string.16": "增加百分之五十治疗",
+  "item.chest_item.chaos_seven.string.17":"加一抢夺，加一时运",
+  "item.chest_item.chaos_seven.string.18": "生命值越低 各方面属性越高",
+
+  "item.chest_item.brass_coins": "黄铜币",
+  "item.chest_item.silent": "静置沉默",
+  "item.chest_item.silent.string.1": "静止时治疗增加50%",
+  "item.chest_item.silent.string.2": "静止时抗性增加25%",
+  "item.chest_item.speed": "极限反应论",
+  "item.chest_item.speed.string.1": "加30%水陆空三项速度和跳跃力量",
+  "item.chest_item.speed.string.2": "佩戴9个不同的仿生物品....",
+
+  "item.chest_item.corruption_crystal": "腐化晶体",
+  "item.chest_item.silent.string.3": "佩戴古老黄铜币并杀死超过300只生物...(反思你的行为，你身上的怨念已经凝聚成了实质)",
+    "item.chest_item.corruption_crystal.string.0": "另类的尝试",
+  "item.chest_item.corruption_crystal.string.2": "我尝试使用一种奇特的异界之石将它牢牢包裹，意外的是，生命水晶缓缓吸取了这些石头的能量",
+  "item.chest_item.corruption_crystal.string.3": "当最后一块石头的能量被吸收，水晶似乎变成了一种...腐烂的状态？至少它闻起来是这样...",
+  "item.chest_item.corruption_crystal.string.4": "它的能量似乎无穷无尽，仿佛它就是一方天地....",
+
+  "item.chest_item.devil_coins": "异魔硬币",
+  "item.chest_item.devil_coins.string.1":"一枚诡异的硬币，上面刻着奇怪的纹路......",
+  "item.chest_item.condense_bone_cube": "骨质凝块",
+  "item.chest_item.condense_bone_cube.string.0": "骨质凝块",
+
+  "item.chest_item.shield_engine": "盾御引擎",
+  "item.chest_item.shield_engine.string.0": "骨质的改变",
+  "item.chest_item.shield_engine.string.1": "每损失3%生命值加1%抗性",
+
+  "item.chest_item.alienation_diodes": "异化二极管",
+    "item.chest_item.alienation_diodes.string.0": "即兴反应",
+  "item.chest_item.alienation_diodes.string.1": "增加10%暴击伤害",
+  "item.chest_item.alienation_diodes.string.2": "造成暴击伤害时恢复生命值",
+
+  "item.chest_item.mass_energy_converter": "质能转换器",
+  "item.chest_item.mass_energy_converter.string.0": "质能方程式",
+  "item.chest_item.mass_energy_converter.string.1": "每损失3%生命值，增加1%抗性",
+  "item.chest_item.mass_energy_converter.string.2": "每损失2%生命值，增加1%伤害",
+
+
+  "item.chest_item.qualitative_components": "质化组件",
+  "item.chest_item.qualitative_components.string.0": "质化组件",
+
+
+  "chest_item.configuration.MusicAndRender": "渲染和音效",
+  "item.chest_item.fission": "裂变体",
+  "item.chest_item.skill.xp": "经验值",
+  "item.chest_item.skill.level": "等级",
+  "item.chest_item.flesh_and_blood_gears": "血肉齿轮",
+
+
+
+  "item.chest_item.skill.decisively": "决断",
+  "item.chest_item.skill.hyperplasia": "生化增生物",
+  "item.chest_item.skill.terrible_potion": "可怕的药剂",
+  "item.chest_item.skill.therapeutic": "医者意志",
+  "item.chest_item.skill.plague_spores": "瘟疫孢子",
+  "item.chest_item.skill.plague_divine_power": "瘟疫之力",
+
+  "item.chest_item.death_omen_stone_monument": "死兆石碑",
+
+  "item.chest_item.hardwood_totem_pole": "硬木图腾柱",
+  "item.chest_item.hardwood_totem_pole.string.1": "攻击有概率造成虚弱",
+  "item.chest_item.hardwood_totem_pole.string.2":"攻击有概率恢复生命值",
+  "item.chest_item.hardwood_totem_pole.string.3": "攻击有概率有概率获得力量",
+  "item.chest_item.hardwood_totem_pole.string.4":"受伤有概率获得抗性",
+  "item.chest_item.hardwood_totem_pole.string.5": "受伤有概率获得伤害吸收",
+  "item.chest_item.hardwood_totem_pole.string.6":"受伤有概率反弹伤害",
+
+
+  "item.chest_item.lone_wolf": "孤狼",
+  "item.chest_item.lone_wolf.string.1": "附近没有生物时速度提高15%",
+  "item.chest_item.skill.decisively.text": "对满生命值的生物造成额外伤害：",
+  "item.chest_item.skill.hyperplasia.text": "每点疤痕组织都会增加生命值：",
+  "item.chest_item.skill.terrible_potion.text": "低于50%生命值时增加伤害和速度：",
+  "item.chest_item.skill.therapeutic.text": "高于50%生命值时增加治疗：",
+  "item.chest_item.skill.plague_spores.text": "按下技能键释放孢子，等级决定半径：",
+  "item.chest_item.skill.plague_divine_power.text": "攻击有概率造成中毒，并对中毒生物造成额外伤害：",
+
+
+
+  "item.chest_item.skill.doomsday_judgment": "天启—末日审判",
+  "item.chest_item.skill.doomsday_judgment.text": "增加仿生血灵（末日降临）的伤害和攻击速度\n并且血珠不再受到距离和碰撞的影：",
+
+
+  "item.chest_item.skill.rotten": "腐烂",
+  "item.chest_item.skill.rotten.text": "对附近生物施加自身负面BUFF，半径：",
+
+
+  "item.chest_item.pod": "枯萎荚果",
+  "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
+}

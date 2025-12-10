@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/armor_stone",
+  "criteria": {
+    "conch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:conch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:conch"
+    },
+    "title": {
+      "translate": "item.chest_item.conch.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "conch"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/root",
+  "criteria": {
+    "battery": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:battery"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:battery"
+    },
+    "title": {
+      "translate": "item.chest_item.battery.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "battery"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
