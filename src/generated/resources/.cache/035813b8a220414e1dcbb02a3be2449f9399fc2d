@@ -1,4 +1,5 @@
-// 1.21.11	2025-12-10T13:00:59.4776104	Tags for minecraft:item mod id chest_item
+// 1.21.11	2025-12-11T19:58:23.9249353	Tags for minecraft:item mod id chest_item
+89e53a8ab6ecdcb26a48f9bca5a5b572f8a94d28 data/chest_item/tags/item/celestial.json
 b5a89b77ec9b96300bdb91348fd13dad9dcd8f02 data/chest_item/tags/item/chest_item.json
 d7ac2454946c094ad593ad7d9cddfeadf70af3b8 data/chest_item/tags/item/chest_item_bone.json
 ef0bf5a97083f07eb981be19198187f0e0d60a33 data/chest_item/tags/item/chest_item_iron.json

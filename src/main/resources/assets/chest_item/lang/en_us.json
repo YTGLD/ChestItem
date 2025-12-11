@@ -63,6 +63,8 @@
   "attribute.name.chest_item.shadow_shield_stronger": "Shadow shield stability",
   "attribute.name.chest_item.looting": "looting",
   "attribute.name.chest_item.fortune": "fortune",
+  "attribute.name.chest_item.chaos_armor": "Erodes Armor",
+  "attribute.name.chest_item.chaos_armor_damage": "Armor crushing damage",
 
   "itemGroup.chest_item": "Trinkets in the chest",
 
@@ -416,7 +418,17 @@
 "item.chest_item.skill.doomsday_judgment": "apocalypse-doomsday_judgment",
   "item.chest_item.skill.doomsday_judgment.text": "Increases the damage and attack speed of the Bionic Blood Spirit (Doomsday)\n and the Blood Orb is no longer affected by distance and collisions::",
 
-"item.chest_item.lone_wolf": "lone wolf",
+"item.chest_item.chaos_constructor": "Chaos Constructor",
+  "item.chest_item.chaos_constructor.string.1": "“I fuse the 'resentment merger' composed of 'them' into many things...“",
+  "item.chest_item.chaos_constructor.string.2": "But this time it didn't evolve into another substance like the life crystal before, but I seem to have found some clues.”",
+  "item.chest_item.chaos_constructor.string.3": "These 'Resentment Mergers' produced some peculiar purple substance when they splashed onto my clothes... They keep getting more and more, like scars that grow biosis.",
+  "item.chest_item.chaos_constructor.string.4": "That's a bold idea - why not transfer them to cosmetics? Well, it's really ridiculous and not very connected",
+  "item.chest_item.chaos_constructor.string.5": "”.... After the 42nd attempt, I seem to get the result I want - the shield engine is currently the only carrier that can hold this substance",
+  "item.chest_item.chaos_constructor.string.6": "I'm excited to name this eerie fusion mechanic 'Chaos Constructor' because it's a big step out of the Shadow bottleneck!",
+  "item.chest_item.chaos_constructor.string.7": "Gradually increases resistance when taking damage in a row",
+  "item.chest_item.chaos_constructor.string.8": "1% boost at a time, but not more than 30%",
+
+  "item.chest_item.lone_wolf": "lone wolf",
   "item.chest_item.lone_wolf.string.1": "15% faster when no creatures are nearby",
 
 "item.chest_item.skill.rotten": "rot",

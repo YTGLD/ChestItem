@@ -51,7 +51,20 @@ public abstract class GuiMixin {
         }
     }
 
-
+    @Inject(at = @At("RETURN"), method = "renderFoodLevel")
+    private void renderFoodLevel(GuiGraphics p_283143_, CallbackInfo ci) {
+        Player player = this.getCameraPlayer();
+        if (player != null) {
+            float i = player.getData(AttReg.chaosWinds);
+            int l = p_283143_.guiWidth() / 2 + 10;
+            Profiler.get().push("chaos_winds");
+            cI1_21_9$render_chaosWinds(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 10, 1, 0, l);
+            Profiler.get().pop();
+            if (i > 0&&cI1_21_9$showAlpha_chaosWinds > 0) {
+                this.leftHeight += 20;
+            }
+        }
+    }
 
     @Unique
     private float cI1_21_9$showAlphaShadow = 255;
@@ -212,5 +225,122 @@ public abstract class GuiMixin {
 
 
         }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Unique
+    private float cI1_21_9$showAlpha_chaosWinds = 255;
+    @Unique
+    private float cI1_21_9$lightAmout_chaosWinds = 0;
+
+    @Unique
+    private  void cI1_21_9$render_chaosWinds(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
+        float i = player.getData(AttReg.chaosWinds);
+        if (i > 0) {
+            int hurtTime = player.hurtTime;
+            if (hurtTime > 0) {
+                cI1_21_9$showAlpha_chaosWinds = 255;
+            }
+            if (i>=player.getAttributeValue(AttReg.chaos_armor) - 1){
+                if (hurtTime <= 0) {
+                    if (cI1_21_9$lightAmout_chaosWinds >=0.45f) {
+                        if (cI1_21_9$showAlpha_chaosWinds > 0) {
+                            cI1_21_9$showAlpha_chaosWinds -= 2.5f;
+                        }
+                    }else {
+                        cI1_21_9$lightAmout_chaosWinds += 0.0125f;
+                    }
+                }else {
+                    cI1_21_9$lightAmout_chaosWinds = 0;
+                }
+            }else {
+                cI1_21_9$lightAmout_chaosWinds = 0;
+            }
+            int alpha = (int) cI1_21_9$showAlpha_chaosWinds;
+            float light = Math.min(0.45f,cI1_21_9$lightAmout_chaosWinds);
+            if (cI1_21_9$showAlpha_chaosWinds < 0) {
+                cI1_21_9$showAlpha_chaosWinds = 0;
+            }
+
+
+            int yy = y - (heartRows - 1) * height - 10;
+
+            Identifier a1 = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/chaos_wind_1.png");
+            Identifier a2 = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/chaos_wind_2.png");
+            Identifier a3 = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/chaos_wind_3.png");
+            Identifier a4 = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/chaos_wind_4.png");
+
+
+            if (i <= 20) {
+                for (int offset = 0; offset < 5; offset++) {
+                    cI1_21_9$drawA1234Chaos((int) i, x, guiGraphics, yy, a1, a2, a3, a4,
+
+                            1 + offset * 4, 2 + offset * 4,
+                            3 + offset * 4, 4 + offset * 4,
+
+                            offset,alpha,light);
+                }
+            }else {
+                for (int j = 0; j < 5; j++) {
+                    guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.08f,i*1000,light), a1,
+                            (x) + j * 8- 1, yy,
+                            0, 0, 9, 9, 9, 9,
+                            Light.ARGB.color(alpha, 255, 255, 255));
+                }
+
+                guiGraphics.drawString(Minecraft.getInstance().font,String.valueOf((int) i/4),(x) + 6 * 8- 3,yy ,
+                        Light.ARGB.color(alpha,200,50,200));
+            }
+
+
+        }
+    }
+    @Unique
+    private void cI1_21_9$drawA1234Chaos(int i,int x,GuiGraphics guiGraphics,int yy,
+                                    Identifier a1,
+                                    Identifier a2,
+                                    Identifier a3,
+                                    Identifier a4,
+                                    int aa,
+                                    int b,
+                                    int c,
+                                    int d,
+
+                                    int offset,int a,float light
+    ){
+        if (i > 0) {
+            int xx = (x) + offset * 8- 1;
+            if (i > aa + 3) {
+                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,10000,light), a1,
+                        9 + ((x) + (offset - 1) * 8- 1), yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+            }
+            if (i == aa) {
+                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,2222,light), a4, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+            }
+            if (i == b) {
+                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,3333,light), a3, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+            }
+            if (i == c) {
+                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,4444,light), a2, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+            }
+            if (i == d) {
+                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,5555,light), a1, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+            }
+        }
+
     }
 }

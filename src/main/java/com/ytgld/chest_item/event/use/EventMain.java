@@ -151,15 +151,17 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
+        ChaosShield(event);
         hyperplasiaShield(event);
         GodApple.event(event);
         ShadowMint.hurtAttacker(event);
         MadnessTheory.attackEXP(event);
         HardwoodTotemPole.tick(event);
         Blood.tick(event);
+        ChaosConstructor.hurtOfBlood(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
-        if (event.getEntity() instanceof LivingEntity living) {
+            if (event.getEntity() instanceof Player living) {
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
             if (hyperplasia_stronger != null) {
                 float value = (float) hyperplasia_stronger.getValue();
@@ -180,11 +182,37 @@ public class EventMain {
             }
         }
     }
+    public void ChaosShield (LivingDamageEvent.Pre event) {
+        if (event.getEntity() instanceof Player living) {
+            float data = living.getData(AttReg.chaosWinds);
+            float damageChaos = (float) living.getAttributeValue(AttReg.chaos_armor_damage);
+            float damageChaosBase = (float) living.getAttributeValue(AttReg.chaos_armor);
 
+            if (data > 0) {
+                float damage = event.getNewDamage();
+                float newData = data - damage;
+                if (newData > 0) {
+                    living.setData(AttReg.chaosWinds, (newData));
+                    event.setNewDamage(0);
+                } else {
+                    if (damage > damageChaosBase * 0.4f) {
+                        if (event.getSource().getEntity() instanceof LivingEntity entity) {
+                            float doDamage = event.getNewDamage() * damageChaos;
+                            entity.hurt(entity.damageSources().magic(),doDamage);
+                        }
+                    }
+                    living.setData(AttReg.chaosWinds, 0f);
+                    event.setNewDamage(damage - data);
+                }
+            } else {
+                living.setData(AttReg.chaosWinds, 0f);
+            }
+        }
+    }
 
     public void ShadowShield (LivingIncomingDamageEvent event){
 
-        if (event.getEntity() instanceof LivingEntity living) {
+        if (event.getEntity() instanceof Player living) {
             if (living instanceof Player player) {
                 ChestInventory chestInventory = Handler.getItem(player);
                 if (chestInventory != null) {
@@ -320,8 +348,8 @@ public class EventMain {
         Blood.tick(event);
         NineDome.tick(event);
         Sword.tick(event);
-
-
+        ChaosConstructor.tickAttrib(event);
+        ChaosConstructor.tick(event);
 
         LivingEntity living = event.player;
         {
@@ -345,6 +373,25 @@ public class EventMain {
                 }
                 if (data < 0) {
                     living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                }
+            }
+        }
+        {
+            AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
+            if (attributeInstance != null ) {
+                float time = (float) (100);
+
+                float value = (float) attributeInstance.getValue();
+                float sNumber = value - 1;
+                float data = living.getData(AttReg.chaosWinds);
+
+                if (living.tickCount % (time) == 1) {
+                    if (data < sNumber) {
+                        living.setData(AttReg.chaosWinds, data + 1);
+                    }
+                }
+                if (data < 0) {
+                    living.setData(AttReg.chaosWinds, 0f);
                 }
             }
         }

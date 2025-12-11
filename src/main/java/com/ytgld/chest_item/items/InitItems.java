@@ -180,6 +180,8 @@ public class InitItems {
             (Identifier)-> new Sword(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> Samsara_ = register("samsara",
             (Identifier)-> new Samsara(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> ChaosConstructor_ = register("chaos_constructor",
+            (Identifier)-> new ChaosConstructor(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -258,6 +260,7 @@ public class InitItems {
                     output.accept(InitItems.ShadowMint_);
                     output.accept(InitItems.CorruptionCrystal_);
                     output.accept(InitItems.Pod_);
+                    output.accept(InitItems.ChaosConstructor_);
 
 
 
@@ -281,6 +284,7 @@ public class InitItems {
 
         public static final TagKey<@NotNull Item> chestItem = createTag("chest_item");
         public static final TagKey<@NotNull Item> chestItem_iron = createTag("chest_item_iron");
+        public static final TagKey<@NotNull Item> celestial = createTag("celestial");
         public static final TagKey<@NotNull Item> chestItemMeat = createTag("chest_item_meat");
         public static final TagKey<@NotNull Item> chestItemBone = createTag("chest_item_bone");
 
@@ -290,6 +294,18 @@ public class InitItems {
 
         @Override
         protected void addTags(HolderLookup.@NotNull Provider provider) {
+
+            tag(celestial).add(
+                    Blood_.asItem(),
+                    Chaos_.asItem(),
+                    Sword_.asItem(),
+                    Samsara_.asItem(),
+
+
+
+                    NineDome_.asItem()
+            );
+
             tag(chestItemBone).add(
                     DryBones_.asItem(),
                     ShieldEngine_.asItem(),

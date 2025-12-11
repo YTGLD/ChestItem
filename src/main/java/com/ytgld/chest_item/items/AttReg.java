@@ -81,6 +81,29 @@ public class AttReg {
     public static final DeferredHolder<Attribute,?> shadow_shield_stronger = REGISTRY.register("shadow_shield_stronger",()->{
         return new RangedAttribute("attribute.name.chest_item.shadow_shield_stronger", 1, -1024, 1024).setSyncable(true);
     });
+
+       /**
+     * 混沌理论：
+     * <p>
+     *侵蚀装甲
+     */
+    public static final DeferredHolder<Attribute,?> chaos_armor = REGISTRY.register("chaos_armor",()->{
+        return new RangedAttribute("attribute.name.chest_item.chaos_armor", 1, -1024, 1024).setSyncable(true);
+    });
+    /**
+     * 混沌理论：
+     * <p>
+     *侵蚀装甲崩碎时造成的伤害，默认为100%
+     */
+    public static final DeferredHolder<Attribute,?> chaos_armor_damage = REGISTRY.register("chaos_armor_damage",()->{
+        return new RangedAttribute("attribute.name.chest_item.chaos_armor_damage", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final Supplier<AttachmentType<Float>> chaosWinds = ATTACHMENT_TYPES.register(
+            "chaos_wind", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf(
+                    "chaos_wind")).build()
+    );
+
+
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER , AttReg.heal,1);
@@ -95,6 +118,8 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.more_speed,1);
         event.add(EntityType.PLAYER , AttReg.looting,0);
         event.add(EntityType.PLAYER , AttReg.fortune,0);
+        event.add(EntityType.PLAYER , AttReg.chaos_armor,1);
+        event.add(EntityType.PLAYER , AttReg.chaos_armor_damage,1);
 
     }
 }
