@@ -1,4 +1,20 @@
 {
+
+
+  "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
+  "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
+  "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
+  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+
+  "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
+  "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
+
+
+
+
+
+
+
   "entity.chest_item.abyss_orb": "Abyssal ball",
   "entity.chest_item.end_spiral": "wormhole",
   "entity.chest_item.black_vex": "Dark annoyance",
@@ -236,11 +252,6 @@
   "item.chest_item.shadow_mint.string.0": "Shadow's Hymn",
   "item.chest_item.shadow_mint.string.1": "Shadow shield no longer blocks damage and explodes when taken and deals damage to the target",
   "item.chest_item.shadow_mint.string.2": "If this smash kills the target, restore 4 shadow shields and health",
-
-  "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
-  "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
-  "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
-  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
 
   "item.chest_item.mutation": "mutation",
 

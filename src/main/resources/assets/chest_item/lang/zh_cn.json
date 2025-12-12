@@ -1,4 +1,13 @@
 {
+
+
+  "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
+  "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
+  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+  "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
+  "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
+
+
   "itemGroup.chest_item": "箱子里的小饰品",
 
   "entity.chest_item.abyss_orb": "深渊球",
@@ -60,7 +69,7 @@
 
   "item.chest_item.bone_head.string.0": "熟悉的形状，熟悉的味道",
   "item.chest_item.bone_head.string.1": "增加33%进食速度",
-  "item.chest_item.bone_head": "无厌之骸骨",
+    "item.chest_item.bone_head": "无厌之骸骨",
 
 
   "item.chest_item.conch.string.0": "为什么不听听这个海螺说的是什么呢",
@@ -222,7 +231,7 @@
   "item.chest_item.iron_cube.string.3": "你对防具的护甲有了极大的排斥",
 
   "item.chest_item.scar_heart": "疤痕组织",
-  "item.chest_item.scar_heart.string.0": "疮疤的增生——对不可能说“不”",
+  "item.chest_item.scar_heart.string.0": " ”",
   "item.chest_item.scar_heart.string.1": "你的疤痕组织进行了增生。从某种意义上说，它是你额外的生命",
   "item.chest_item.life_coin": "鲜活硬币",
   "item.chest_item.life_coin.string.0": "异变之财富",
@@ -338,17 +347,13 @@
 
   "item.chest_item.corruption_crystal": "腐化晶体",
   "item.chest_item.silent.string.3": "佩戴古老黄铜币并杀死超过300只生物...(反思你的行为，你身上的怨念已经凝聚成了实质)",
-  "item.chest_item.corruption_crystal.string.0": "另类的尝试",
+    "item.chest_item.corruption_crystal.string.0": "另类的尝试",
   "item.chest_item.corruption_crystal.string.2": "我尝试使用一种奇特的异界之石将它牢牢包裹，意外的是，生命水晶缓缓吸取了这些石头的能量",
   "item.chest_item.corruption_crystal.string.3": "当最后一块石头的能量被吸收，水晶似乎变成了一种...腐烂的状态？至少它闻起来是这样...",
   "item.chest_item.corruption_crystal.string.4": "它的能量似乎无穷无尽，仿佛它就是一方天地....",
 
   "item.chest_item.devil_coins": "异魔硬币",
   "item.chest_item.devil_coins.string.1":"一枚诡异的硬币，上面刻着奇怪的纹路......",
-  "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
-  "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
-  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
-
   "item.chest_item.condense_bone_cube": "骨质凝块",
   "item.chest_item.condense_bone_cube.string.0": "骨质凝块",
 

@@ -45,7 +45,7 @@ public abstract class GuiMixin {
             this.minecraft.getProfiler().push("hyperplasia");
             cI1_21_9$renderArmor(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 10, 1, 0, l);
             this.minecraft.getProfiler().pop();
-            if (i > 0) {
+            if (i > 0&&cI1_21_9$showAlpha > 0) {
                 this.leftHeight += 20;
             }
         }
@@ -55,7 +55,7 @@ public abstract class GuiMixin {
             this.minecraft.getProfiler().push("shadow_shield");
             cI1_21_9$renderShadowBlackArmor(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 20, 1, 0, l);
             this.minecraft.getProfiler().pop();
-            if (i > 0) {
+            if (i > 0&&cI1_21_9$showAlphaShadow > 0) {
                 this.leftHeight += 20;
             }
         }
@@ -128,7 +128,9 @@ public abstract class GuiMixin {
                 return;
             }
             float light = Math.min(0.45f,cI1_21_9$lightAmout);
-
+            if (cI1_21_9$showAlpha < 0) {
+                cI1_21_9$showAlpha = 0;
+            }
             int yy = y - (heartRows - 1) * height - 10;
 
             ResourceLocation a1 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png");
@@ -194,7 +196,9 @@ public abstract class GuiMixin {
             if (alpha <= 0) {
                 return;
             }
-
+            if (cI1_21_9$showAlphaShadow < 0) {
+                cI1_21_9$showAlphaShadow = 0;
+            }
             RenderSystem.enableBlend();
             int j = y - (heartRows - 1) * height - 10;
             int maxIcons = (int) Math.min(i, 3);

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.renderer.*;
@@ -133,6 +134,9 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
     }
     @Inject(at = @At(value = "RETURN"),method = "renderTooltipInternal(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;)V")
     public void moonstone$ClientTooltipPositioner(Font p_282675_, List<ClientTooltipComponent> p_282615_, int x, int y, ClientTooltipPositioner p_282442_, CallbackInfo ci) {
+        if (!ConfigC.config.RenderItemTooltip.get()){
+            return;
+        }
         if (tooltipStack.getItem() instanceof ItemBase) {
             RenderTooltipEvent.Pre preEvent = ClientHooks.onRenderTooltipPre(this.tooltipStack, (GuiGraphics) (Object) this, x, y, guiWidth(), guiHeight(), p_282615_, p_282675_, p_282442_);
 
@@ -363,6 +367,9 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
     }
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void TheImprintOfTheSoulBlackLight(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (!ConfigC.config.RenderItemTooltip.get()){
+            return;
+        }
         if (stack.getItem() instanceof TheChaos soul) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
@@ -403,6 +410,9 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
     }
     @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void TheImprintOfTheSoulBlackLightHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (!ConfigC.config.RenderItemTooltip.get()){
+            return;
+        }
         if (stack.getItem() instanceof ItemBone bone) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;

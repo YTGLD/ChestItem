@@ -16,9 +16,20 @@ public class ConfigC {
             Render =  BUILDER
                     .translation("chest_item.config.Render")
                     .define("Render", true);
+
+
+            RenderGUILight =  BUILDER
+                    .translation("chest_item.config.RenderGUILight")
+                    .define("RenderGUILight", true);
+            RenderItemTooltip =  BUILDER
+                    .translation("chest_item.config.RenderItemTooltip")
+                    .define("RenderItemTooltip", true);
         }
         BUILDER.pop();
     }
+
+    public final ModConfigSpec.BooleanValue RenderGUILight;
+    public final ModConfigSpec.BooleanValue RenderItemTooltip;
 
     public final ModConfigSpec.BooleanValue hyperplasiaMusic;
     public final ModConfigSpec.BooleanValue Render;
