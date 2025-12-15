@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
@@ -34,7 +35,7 @@ public class ItemBone extends ItemBase implements IGUILightList {
     }
 
     @Override
-    public GUILight guiLight() {
+    public GUILight guiLight(LivingEntity entity) {
         return null;
     }
 }

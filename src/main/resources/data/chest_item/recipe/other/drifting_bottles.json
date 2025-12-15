@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:ghast_tear",
+    "B": "minecraft:glass",
+    "C": "#minecraft:logs",
+    "D": "chest_item:magic_iron"
+  },
+  "pattern": [
+    "DCD",
+    "BAB",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:drifting_bottles"
+  }
+}

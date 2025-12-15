@@ -72,6 +72,8 @@
   "attribute.name.chest_item.looting": "抢夺",
   "attribute.name.chest_item.fortune": "时运",
   "attribute.name.chest_item.chaos_armor": "侵蚀装甲",
+  "attribute.name.chest_item.chaos_armor_speed": "侵蚀装甲恢复时间",
+  "attribute.name.chest_item.chaos_armor_min": "侵蚀装甲爆碎阈值",
   "attribute.name.chest_item.chaos_armor_damage": "装甲爆碎伤害",
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
@@ -449,6 +451,13 @@
   "item.chest_item.skill.doomsday_judgment.text": "增加仿生血灵（末日降临）的伤害和攻击速度\n并且血珠不再受到距离和碰撞的影：",
 
 
+  "item.chest_item.drifting_bottles": "漂流瓶",
+  "item.chest_item.drifting_bottles.string.1": "在水中不易下沉",
+  "item.chest_item.drifting_bottles.string.2": "“如果您捡到了这个瓶子，请将它交给‘Y博士’，他在T市的九号研究基地中”",
+  "item.chest_item.drifting_bottles.string.3": "“......Y博士，对不起，承载着您一切研究成果的船只在一场巨大的风暴中不幸遇难”",
+  "item.chest_item.drifting_bottles.string.4": "“我们没能保护好这些宝贵的资料，也希望Y博士您能通知我们的家人办理我们的后事”",
+  "item.chest_item.drifting_bottles.string.5": "“此次出海船员均为5号部，遇难名单：编号-0035，编号-0165，编号-0071......”",
+
   "item.chest_item.skill.rotten": "腐烂",
   "item.chest_item.skill.rotten.text": "对附近生物施加自身负面BUFF，半径：",
 
@@ -462,6 +471,11 @@
   "item.chest_item.chaos_constructor.string.7": "连续受到伤害时逐渐提高抗性",
   "item.chest_item.chaos_constructor.string.8": "每次提升1%，但不超过30%",
 
+  "item.chest_item.defeat_the_army": "破军",
+
+  "item.chest_item.erosion_tokens": "侵蚀令牌",
+  "item.chest_item.erosion_tokens.string.1": "侵蚀装甲爆碎时造成范围伤害",
+  "item.chest_item.defeat_the_army.string.1": "损失生命值带来大量加成",
 
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"

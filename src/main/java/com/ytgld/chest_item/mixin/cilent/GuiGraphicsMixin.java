@@ -427,8 +427,8 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             return;
         }
         if (stack.getItem() instanceof IGUILightList lightList){
-            if (lightList.guiLight()!=null) {
-                if (lightList.guiLight().doLight()) {
+            if (lightList.guiLight(entity)!=null) {
+                if (lightList.guiLight(entity).doLight()) {
                     return;
                 }
             }
@@ -581,7 +581,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (stack.getItem() instanceof IGUILight iguiLight){
             Identifier Identifier = iguiLight.img();
             if (stack.getItem() instanceof IGUILightList ih) {
-                GUILight guiLight = ih.guiLight();
+                GUILight guiLight = ih.guiLight(entity);
                 if (guiLight!=null) {
                     if (guiLight.doLight()) {
                         Map<Integer, Integer> colorList = guiLight.listGUIColor();

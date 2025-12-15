@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
@@ -47,6 +48,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
@@ -195,10 +198,28 @@ public class EventMain {
                     living.setData(AttReg.chaosWinds, (newData));
                     event.setNewDamage(0);
                 } else {
-                    if (damage > damageChaosBase * 0.4f) {
+                    float minModify = (float) living.getAttributeValue(AttReg.chaos_armor_min);
+                    if (damage > damageChaosBase * 0.4f * minModify) {
                         if (event.getSource().getEntity() instanceof LivingEntity entity) {
                             float doDamage = event.getNewDamage() * damageChaos;
-                            entity.hurt(entity.damageSources().magic(),doDamage);
+                            if (Handler.has(living,InitItems.ErosionTokens_.asItem())){
+                                Vec3 playerPos = living.position();
+                                int range = 8;
+                                List<LivingEntity> livingEntities = living.level().getEntitiesOfClass(LivingEntity.class,
+                                        new AABB(playerPos.x - range, playerPos.y - range,
+                                                playerPos.z - range, playerPos.x + range,
+                                                playerPos.y + range, playerPos.z + range));
+                                for (LivingEntity e : livingEntities){
+                                    if (!e.is(living)){
+                                        if (!(e instanceof Player)){
+                                            e.hurt(entity.damageSources().magic(), doDamage);
+                                        }
+                                    }
+                                }
+
+                            }else {
+                                entity.hurt(entity.damageSources().magic(), doDamage);
+                            }
                         }
                     }
                     living.setData(AttReg.chaosWinds, 0f);
@@ -350,6 +371,9 @@ public class EventMain {
         Sword.tick(event);
         ChaosConstructor.tickAttrib(event);
         ChaosConstructor.tick(event);
+        DriftingBottles.tick(event);
+        DefeatTheArmy.tick(event);
+        ErosionTokens.tick(event);
 
         LivingEntity living = event.player;
         {
@@ -379,13 +403,18 @@ public class EventMain {
         {
             AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
             if (attributeInstance != null ) {
-                float time = (float) (100);
+                float timeModify = (float) living.getAttributeValue(AttReg.chaos_armor_speed);
 
+                int doTime = (int) (100 * timeModify);
+
+                if (doTime < 10) {
+                    doTime = 10;
+                }
                 float value = (float) attributeInstance.getValue();
                 float sNumber = value - 1;
                 float data = living.getData(AttReg.chaosWinds);
 
-                if (living.tickCount % (time) == 1) {
+                if (living.tickCount % doTime == 1) {
                     if (data < sNumber) {
                         living.setData(AttReg.chaosWinds, data + 1);
                     }
@@ -494,6 +523,22 @@ public class EventMain {
     public void ItemTooltipEventASD(LootTableLoadEvent event) {
 
         LootTable table = event.getTable();
+
+        if (event.getName().toString().contains("chests/")){
+            if (event.getName().toString().contains("underwater")
+                    || event.getName().toString().contains("shipwreck")){
+                table.addPool(LootPool.lootPool().name(Chestitem.MODID + "underwater")
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(InitItems.DriftingBottles_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.02f)))
+
+
+
+
+
+                        .build());
+            }
+        }
         if (event.getName().toString().contains("chests/")){
             if (event.getName().toString().contains("trial_chambers")){
                 table.addPool(LootPool.lootPool().name(Chestitem.MODID + "trial_chambers")
@@ -583,7 +628,6 @@ public class EventMain {
         if (event.getName().toString().contains("chests/")) {
             if (event.getName().toString().contains("dungeon")
                     ||event.getName().toString().contains("mineshaft")
-                    ||event.getName().toString().contains("ocean")
                     ||event.getName().toString().contains("bastion")
                     ||event.getName().toString().contains("treasure")
                     ||event.getName().toString().contains("ancient")) {

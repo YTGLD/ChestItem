@@ -13,11 +13,25 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
 public class Handler {
+    public static boolean has(Player player, Item item){
+        ChestInventory chestInventory= getItem(player);
+        if (chestInventory != null) {
+            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                ItemStack stack= chestInventory.getItem(i);
+                if (stack.is(item)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public static void openItemChest(Player player){
         if (player instanceof IPlayer iPlayer) {
             player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.CHEST_OPEN, SoundSource.AMBIENT,1,1);

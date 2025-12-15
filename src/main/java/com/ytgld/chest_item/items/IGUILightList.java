@@ -6,11 +6,12 @@ import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
 
 public interface IGUILightList extends IGUILight{
-    GUILight guiLight();
+    GUILight guiLight(LivingEntity entity);
     default Vec2 posOffset(){
         return new Vec2(0,0);
     };

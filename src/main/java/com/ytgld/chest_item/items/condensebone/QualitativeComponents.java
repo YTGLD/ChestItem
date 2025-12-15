@@ -11,6 +11,7 @@ import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -56,7 +57,7 @@ public class QualitativeComponents extends ItemBone {
 
 
     @Override
-    public GUILight guiLight() {
+    public GUILight guiLight(LivingEntity entity) {
         int lightNumber = 4;
         Map<Integer,Integer> listGUIColor = new HashMap<>();
         listGUIColor.put(0,Light.ARGB.color(100,120,255,80));

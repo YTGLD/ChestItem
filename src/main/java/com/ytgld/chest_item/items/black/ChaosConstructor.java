@@ -20,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -46,7 +47,7 @@ import java.util.function.Consumer;
  */
 public class ChaosConstructor extends ItemBlackShadow  implements IGUILightList {
     @Override
-    public GUILight guiLight() {
+    public GUILight guiLight(LivingEntity entity) {
         int lightNumber = 5;
         Map<Integer,Integer> listGUIColor = new HashMap<>();
         listGUIColor.put(0, Light.ARGB.color(60,255,100,150));

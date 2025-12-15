@@ -182,6 +182,12 @@ public class InitItems {
             (Identifier)-> new Samsara(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> ChaosConstructor_ = register("chaos_constructor",
             (Identifier)-> new ChaosConstructor(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> DriftingBottles_ = register("drifting_bottles",
+            (Identifier)-> new DriftingBottles(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> DefeatTheArmy_ = register("defeat_the_army",
+            (Identifier)-> new DefeatTheArmy(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> ErosionTokens_ = register("erosion_tokens",
+            (Identifier)-> new ErosionTokens(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -201,9 +207,12 @@ public class InitItems {
                     output.accept(InitItems.NineDome_);
                     output.accept(InitItems.Sword_);
                     output.accept(InitItems.Samsara_);
-
-
                     output.accept(InitItems.ChaosSeven_);
+
+
+
+
+                    output.accept(InitItems.DriftingBottles_);
                     output.accept(InitItems.God_blood);
                     output.accept(InitItems.Drug_Heal);
                     output.accept(InitItems.Life_Crystal);
@@ -261,6 +270,8 @@ public class InitItems {
                     output.accept(InitItems.CorruptionCrystal_);
                     output.accept(InitItems.Pod_);
                     output.accept(InitItems.ChaosConstructor_);
+                    output.accept(InitItems.DefeatTheArmy_);
+                    output.accept(InitItems.ErosionTokens_);
 
 
 
@@ -342,6 +353,7 @@ public class InitItems {
                     .add(DevilCoins_.asItem())
                     .add(Knife_.asItem())
                     .add(Lead_.asItem())
+                    .add(DriftingBottles_.asItem())
                     .add(WindKnife_.asItem());
 
             tag(chestItem)
@@ -363,8 +375,7 @@ public class InitItems {
                     .add(InitItems.Kaolinite_.asItem())
                     .add(InitItems.EndEffect_.asItem())
                     .add(InitItems.EyeBook_.asItem())
-                    .add(InitItems.BrassCoins_.asItem())
-                    .add(InitItems.HeavyBlade_.asItem());
+                    .add(InitItems.BrassCoins_.asItem());
         }
         private static TagKey<@NotNull Item> createTag(String name) {
             return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Chestitem.MODID, name));

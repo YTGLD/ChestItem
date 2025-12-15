@@ -9,6 +9,7 @@ import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -48,7 +49,7 @@ public class AlienationDiodes extends ItemBone {
         tooltipAdder.accept(Component.translatable("item.chest_item.alienation_diodes.string.2").withStyle(ChatFormatting.GOLD));
     }
     @Override
-    public GUILight guiLight() {
+    public GUILight guiLight(LivingEntity entity) {
         int lightNumber = 4;
         Map<Integer,Integer> listGUIColor = new HashMap<>();
 
