@@ -8,6 +8,34 @@
   "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
 
 
+  "chest_item.celestial": "仙法",
+  "chest_item.celestial.1": "仙法·禁术",
+  "chest_item.celestial.can_not_remove": "此术法神通将永远与你左右",
+  "chest_item.celestial.can_not_remove_creative": "只有神的力量才能忘却该术法",
+
+  "item.chest_item.blood": "血魔解体",
+  "item.chest_item.blood.string.0": "边界感",
+  "item.chest_item.blood.string.1": "按下技能键触发效果",
+  "item.chest_item.blood.string.2": "此时，生命值减少至1点，但是获得愤怒BUFF(最多叠加到5级)",
+  "item.chest_item.blood.string.3": "并且额外获得20%的生命窃取和30%的伤害提升",
+  "item.chest_item.blood.string.4": "每次攻击都会延长生命窃取和伤害提升的时长",
+
+  "item.chest_item.chaos": "混沌体",
+  "item.chest_item.chaos.string.0": "混沌异种",
+  "item.chest_item.chaos.string.1": "+10%抗性",
+
+  "item.chest_item.sword": "剑体",
+  "item.chest_item.sword.string.0": "锻造剑骨",
+
+  "item.chest_item.samsara": "轮回道体",
+  "item.chest_item.samsara.string.0": "千转轮回",
+  "item.chest_item.samsara.string.1": "受伤有10%的概率规避伤害并反击",
+
+  "item.chest_item.nine_dome": "九转血魔体",
+  "item.chest_item.nine_dome.string.0": "血的战书",
+
+
+
   "itemGroup.chest_item": "箱子里的小饰品",
 
   "entity.chest_item.abyss_orb": "深渊球",
@@ -43,6 +71,8 @@
   "attribute.name.chest_item.shadow_shield_stronger": "幽影护盾稳固度",
   "attribute.name.chest_item.looting": "抢夺",
   "attribute.name.chest_item.fortune": "时运",
+  "attribute.name.chest_item.chaos_armor": "侵蚀装甲",
+  "attribute.name.chest_item.chaos_armor_damage": "装甲爆碎伤害",
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
 
@@ -138,6 +168,7 @@
   "effect.chest_item.increasing_meat": "增生",
   "effect.chest_item.invulnerable": "无敌",
   "effect.chest_item.eye": "光敏感",
+  "effect.chest_item.rage": "愤怒",
 
   "item.chest_item.self_increasing_heart.string.0": "自增i，i自减",
   "item.chest_item.self_increasing_heart.string.1": "食用食物获得临时生命值",
@@ -317,6 +348,7 @@
 
 
   "item.chest_item.chaos_seven": "混沌七子",
+  "item.chest_item.chaos_seven.string.0": "月之石的一部分",
   "item.chest_item.chaos_seven.string.1": "传闻在混沌大战时期，有一尊混沌仙帝以一己之力击退万族，并为人族创建了各种的术法神通",
   "item.chest_item.chaos_seven.string.2":"...在混沌仙帝陨落之后，有七个人得到了它意志的认可，它们分别是：",
   "item.chest_item.chaos_seven.string.3": "窥眸",
@@ -359,10 +391,10 @@
 
   "item.chest_item.shield_engine": "盾御引擎",
   "item.chest_item.shield_engine.string.0": "骨质的改变",
-  "item.chest_item.shield_engine.string.1": "生命值低于每损失3%生命值加1%抗性",
+  "item.chest_item.shield_engine.string.1": "每损失3%生命值加1%抗性",
 
   "item.chest_item.alienation_diodes": "异化二极管",
-  "item.chest_item.alienation_diodes.string.0": "即兴反应",
+    "item.chest_item.alienation_diodes.string.0": "即兴反应",
   "item.chest_item.alienation_diodes.string.1": "增加10%暴击伤害",
   "item.chest_item.alienation_diodes.string.2": "造成暴击伤害时恢复生命值",
 
@@ -419,6 +451,16 @@
 
   "item.chest_item.skill.rotten": "腐烂",
   "item.chest_item.skill.rotten.text": "对附近生物施加自身负面BUFF，半径：",
+
+  "item.chest_item.chaos_constructor": "混沌构造器",
+  "item.chest_item.chaos_constructor.string.1": "“我将‘它们’所组成的‘怨念合并体’融合到很多东西里....”",
+  "item.chest_item.chaos_constructor.string.2": "不过这次没有像之前生命水晶那样演变成另一种物质，但是我似乎发现了一些端倪。“",
+  "item.chest_item.chaos_constructor.string.3": "”这些‘怨念合并体’在溅落到我的衣物上时产生了一些奇特的紫色物质...它们不断变多，就像疮疤增生物那样“",
+  "item.chest_item.chaos_constructor.string.4": "”这是一个大胆的想法——为什么不将它们转移到饰品里呢？好吧，这确实很荒谬而且没什么联系“",
+  "item.chest_item.chaos_constructor.string.5": "”....第42次尝试后，我似乎得到的了我想要的结果——盾御引擎是目前唯一一个可以容纳这种物质的载体“",
+  "item.chest_item.chaos_constructor.string.6": "”我将这台诡异的融合机械体命名为‘混沌构造件’......我很兴奋，因为这是迈出幽影瓶颈的一大步！”",
+  "item.chest_item.chaos_constructor.string.7": "连续受到伤害时逐渐提高抗性",
+  "item.chest_item.chaos_constructor.string.8": "每次提升1%，但不超过30%",
 
 
   "item.chest_item.pod": "枯萎荚果",

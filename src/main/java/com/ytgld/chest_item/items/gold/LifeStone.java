@@ -14,7 +14,7 @@ import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 
 import java.util.List;
 
-public class LifeStone  extends ItemBase {
+public class LifeStone  extends ItemBase implements IGold {
     public LifeStone(Properties properties) {
         super(properties);
     }

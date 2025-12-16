@@ -8,6 +8,7 @@ import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.*;
+import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
@@ -103,7 +104,7 @@ public class EventMain {
                             stack,
                             attributesTooltip::add,
                             attributes,
-                            AttributeTooltipContext.of(player, context, context.flag()));
+                            AttributeTooltipContext.of(player, context,  context.flag()));
                     Component blackShadow = Component.translatable("event.chest_item.equip")
                             .withStyle(Style.EMPTY.withColor(Light.ARGB.color(255, 255, 0, 100)));
 
@@ -157,14 +158,17 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
+        ChaosShield(event);
         hyperplasiaShield(event);
         GodApple.event(event);
         ShadowMint.hurtAttacker(event);
         MadnessTheory.attackEXP(event);
         HardwoodTotemPole.tick(event);
+        Blood.tick(event);
+        ChaosConstructor.hurtOfBlood(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
-        if (event.getEntity() instanceof LivingEntity living) {
+        if (event.getEntity() instanceof Player living) {
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
             if (hyperplasia_stronger != null) {
                 float value = (float) hyperplasia_stronger.getValue();
@@ -185,11 +189,37 @@ public class EventMain {
             }
         }
     }
+    public void ChaosShield (LivingDamageEvent.Pre event) {
+        if (event.getEntity() instanceof Player living) {
+            float data = living.getData(AttReg.chaosWinds);
+            float damageChaos = (float) living.getAttributeValue(AttReg.chaos_armor_damage);
+            float damageChaosBase = (float) living.getAttributeValue(AttReg.chaos_armor);
 
+            if (data > 0) {
+                float damage = event.getNewDamage();
+                float newData = data - damage;
+                if (newData > 0) {
+                    living.setData(AttReg.chaosWinds, (newData));
+                    event.setNewDamage(0);
+                } else {
+                    if (damage > damageChaosBase * 0.4f) {
+                        if (event.getSource().getEntity() instanceof LivingEntity entity) {
+                            float doDamage = event.getNewDamage() * damageChaos;
+                            entity.hurt(entity.damageSources().magic(),doDamage);
+                        }
+                    }
+                    living.setData(AttReg.chaosWinds, 0f);
+                    event.setNewDamage(damage - data);
+                }
+            } else {
+                living.setData(AttReg.chaosWinds, 0f);
+            }
+        }
+    }
 
     public void ShadowShield (LivingIncomingDamageEvent event){
 
-        if (event.getEntity() instanceof LivingEntity living) {
+        if (event.getEntity() instanceof Player living) {
             if (living instanceof Player player) {
                 ChestInventory chestInventory = Handler.getItem(player);
                 if (chestInventory != null) {
@@ -248,6 +278,8 @@ public class EventMain {
         Silent.hurtSilent_(event);
         ShieldEngine.LivingIncomingDamageEvent(event);
         MassEnergyConverter.LivingIncomingDamageEvent(event);
+        Samsara.event(event);
+        Chaos.event(event);
         if (event.getSource().getEntity() instanceof LivingEntity living){
             AttributeInstance instability = living.getAttribute(AttReg.instability);
             if (instability != null) {
@@ -319,6 +351,11 @@ public class EventMain {
         CorruptionCrystal.tick(event);
         QualitativeComponents.tick(event);
         DeathOmenStoneMonument.tick(event);
+        Blood.tick(event);
+        NineDome.tick(event);
+        Sword.tick(event);
+        ChaosConstructor.tickAttrib(event);
+        ChaosConstructor.tick(event);
 
         LivingEntity living = event.player;
         {
@@ -342,6 +379,25 @@ public class EventMain {
                 }
                 if (data < 0) {
                     living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                }
+            }
+        }
+        {
+            AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
+            if (attributeInstance != null ) {
+                float time = (float) (100);
+
+                float value = (float) attributeInstance.getValue();
+                float sNumber = value - 1;
+                float data = living.getData(AttReg.chaosWinds);
+
+                if (living.tickCount % (time) == 1) {
+                    if (data < sNumber) {
+                        living.setData(AttReg.chaosWinds, data + 1);
+                    }
+                }
+                if (data < 0) {
+                    living.setData(AttReg.chaosWinds, 0f);
                 }
             }
         }
@@ -399,22 +455,42 @@ public class EventMain {
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
         if (event.getItemStack().getItem() instanceof ItemBase) {
-            if (event.getItemStack().getItem() instanceof ItemBlackShadow){
+
+
+            if (event.getItemStack().getItem() instanceof ItemBlackShadow) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(Style.EMPTY
                         .withColor(Light.ARGB.color(255, 255, 0, 100))));
+
+
                 if (event.getItemStack().getItem() instanceof TheImprintOfTheSoul soul) {
                     if (!soul.canRemove(event.getItemStack())) {
-                        if (event.getEntity() !=null && !event.getEntity().isCreative()) {
+                        if (event.getEntity() != null && !event.getEntity().isCreative()) {
                             event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove").withStyle(Style.EMPTY
                                     .withColor(Light.ARGB.color(255, 255, 20, 80))));
-                        }else {
+                        } else {
                             event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove_and").withStyle(Style.EMPTY
                                     .withColor(Light.ARGB.color(255, 255, 150, 0))));
                         }
                     }
                 }
-            }else {
+                if (event.getItemStack().getItem() instanceof TheCelestial celestial) {
+                    if (!celestial.canRemove(event.getItemStack())) {
+                        if (event.getEntity() != null && !event.getEntity().isCreative()) {
+                            event.getToolTip().add(1, Component.translatable("chest_item.celestial.can_not_remove").withStyle(Style.EMPTY
+                                    .withColor(Light.ARGB.color(255, 255, 20, 80))));
+                        } else {
+                            event.getToolTip().add(1, Component.translatable("chest_item.celestial.can_not_remove_creative").withStyle(Style.EMPTY
+                                    .withColor(Light.ARGB.color(255, 255, 150, 0))));
+                        }
+                    }
+                }
+
+
+
+            }
+            if (!(event.getItemStack().getItem() instanceof ItemBlackShadow)
+                    && !(event.getItemStack().getItem() instanceof TheCelestial)) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(ChatFormatting.GOLD));
             }
@@ -479,17 +555,21 @@ public class EventMain {
 
                         .add(LootItem.lootTableItem(InitItems.MAGIC_IRON)
                                 .when(LootItemRandomChanceCondition.randomChance(0.09f)))
+
                         .add(LootItem.lootTableItem(InitItems.SpeedHeart_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
                         .add(LootItem.lootTableItem(InitItems.Kaolinite_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
                         .add(LootItem.lootTableItem(InitItems.EyeBook_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
                         .add(LootItem.lootTableItem(InitItems.Fission_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
                         .add(LootItem.lootTableItem(InitItems.FleshAndBloodGears_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
 
 
                         .build());
@@ -576,6 +656,17 @@ public class EventMain {
                         .add(LootItem.lootTableItem(InitItems.FleshAndBloodGears_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
+
+                        .add(LootItem.lootTableItem(InitItems.Blood_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Chaos_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.NineDome_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Sword_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.Samsara_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
 
 

@@ -14,7 +14,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import java.util.List;
 
-public class ArmorStone extends ItemBase {
+public class ArmorStone extends ItemBase implements IGold {
     public ArmorStone(Properties properties) {
         super(properties);
     }

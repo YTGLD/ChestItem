@@ -2,6 +2,7 @@ package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.black.*;
+import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
 import com.ytgld.chest_item.items.black.soul.*;
@@ -187,6 +188,18 @@ public class    InitItems {
             (resourceLocation)-> new DeathOmenStoneMonument(new Item.Properties().stacksTo(1)));
 
 
+    public static final DeferredItem<@NotNull Item> Blood_ = register("blood",
+            (Identifier)-> new Blood(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> Chaos_ = register("chaos",
+            (Identifier)-> new Chaos(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> NineDome_ = register("nine_dome",
+            (Identifier)-> new NineDome(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> Sword_ = register("sword",
+            (Identifier)-> new Sword(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> Samsara_ = register("samsara",
+            (Identifier)-> new Samsara(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> ChaosConstructor_ = register("chaos_constructor",
+            (Identifier)-> new ChaosConstructor(new Item.Properties().stacksTo(1)));
 
 
 
@@ -208,6 +221,11 @@ public class    InitItems {
 
                     output.accept(InitItems.Fission_);
                     output.accept(InitItems.FleshAndBloodGears_);
+                    output.accept(InitItems.Blood_);
+                    output.accept(InitItems.Chaos_);
+                    output.accept(InitItems.NineDome_);
+                    output.accept(InitItems.Sword_);
+                    output.accept(InitItems.Samsara_);
 
 
                     output.accept(InitItems.ChaosSeven_);
@@ -266,6 +284,7 @@ public class    InitItems {
                     output.accept(InitItems.ShadowMint_);
                     output.accept(InitItems.CorruptionCrystal_);
                     output.accept(InitItems.Pod_);
+                    output.accept(InitItems.ChaosConstructor_);
 
 
 
@@ -291,6 +310,7 @@ public class    InitItems {
         public static final TagKey<Item> chestItem_iron = createTag("chest_item_iron");
         public static final TagKey<Item> chestItemMeat = createTag("chest_item_meat");
         public static final TagKey<Item> chestItemBone = createTag("chest_item_bone");
+        public static final TagKey<@NotNull Item> celestial = createTag("celestial");
 
         public TagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, ExistingFileHelper existingFileHelper) {
             super(output, lookupProvider, blockTagProvider, Chestitem.MODID, existingFileHelper);
@@ -306,7 +326,16 @@ public class    InitItems {
                     MassEnergyConverter_.asItem(),
                     Bone_Head.asItem()
             );
+            tag(celestial).add(
+                    Blood_.asItem(),
+                    Chaos_.asItem(),
+                    Sword_.asItem(),
+                    Samsara_.asItem(),
 
+
+
+                    NineDome_.asItem()
+            );
 
 
 

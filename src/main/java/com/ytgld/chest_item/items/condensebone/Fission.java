@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.items.condensebone;
 
-import com.ytgld.chest_item.items.ItemBone;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;

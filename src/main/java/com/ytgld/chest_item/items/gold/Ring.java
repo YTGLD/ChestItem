@@ -12,10 +12,11 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.phys.Vec2;
 
 import java.util.List;
 
-public class Ring extends ItemBase {
+public class Ring extends ItemBase implements IGold {
     public Ring(Properties properties) {
         super(properties);
     }
@@ -42,6 +43,20 @@ public class Ring extends ItemBase {
         tooltipAdder.add(Component.literal(""));
         tooltipAdder.add(Component.translatable("item.chest_item.ring.string.1").withStyle(ChatFormatting.GOLD));
     }
+
+
+
+
+    @Override
+    public Vec2 posOffset() {
+        return new Vec2(4,4);
+    }
+
+    @Override
+    public int guiColor(ItemStack stack) {
+        return Light.ARGB.color(255,50,120,255);
+    }
+
 
     @Override
     public int color(ItemStack stack) {

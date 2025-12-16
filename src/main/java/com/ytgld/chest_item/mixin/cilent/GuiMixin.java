@@ -59,21 +59,35 @@ public abstract class GuiMixin {
                 this.leftHeight += 20;
             }
         }
-
     }
+    @Inject(at = @At("RETURN"), method = "renderFoodLevel")
+    private void renderFoodLevel(GuiGraphics p_283143_, CallbackInfo ci) {
+        Player player = this.getCameraPlayer();
+        if (player != null) {
+            float i = player.getData(AttReg.chaosWinds);
+            int l = p_283143_.guiWidth() / 2 + 10;
+            this.minecraft.getProfiler().push("chaos_winds");
+            cI1_21_9$render_chaosWinds(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 10, 1, 0, l);
+            this.minecraft.getProfiler().pop();
+            if (i > 0&&cI1_21_9$showAlpha_chaosWinds > 0) {
+                this.leftHeight += 20;
+            }
+        }
+    }
+
     @Unique
     private void cI1_21_9$drawA1234(int i,int x,GuiGraphics guiGraphics,int yy,
-                                    ResourceLocation a1,
-                                    ResourceLocation a2,
-                                    ResourceLocation a3,
-                                    ResourceLocation a4,
-                                    int aa,
-                                    int b,
-                                    int c,
-                                    int d,
+                                         ResourceLocation a1,
+                                         ResourceLocation a2,
+                                         ResourceLocation a3,
+                                         ResourceLocation a4,
+                                         int aa,
+                                         int b,
+                                         int c,
+                                         int d,
 
-                                    int offset){
-        int a = 1;
+                                         int offset,float a,float light
+    ){
         if (i > 0) {
             int xx = (x) + offset * 8- 1;
             if (i > aa + 3) {
@@ -93,7 +107,6 @@ public abstract class GuiMixin {
                 MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a1, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
             }
         }
-
     }
     @Unique
     private float cI1_21_9$showAlpha = 255;
@@ -102,7 +115,8 @@ public abstract class GuiMixin {
 
     @Unique
     private  void cI1_21_9$renderArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
-        float i = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+        float is = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+        int i = (int) is;
         if (i > 0) {
             int hurtTime = player.hurtTime;
             if (hurtTime > 0) {
@@ -123,14 +137,13 @@ public abstract class GuiMixin {
             }else {
                 cI1_21_9$lightAmout = 0;
             }
-            int alpha = (int) cI1_21_9$showAlpha;
-            if (alpha <= 0) {
-                return;
-            }
+            float alpha = cI1_21_9$showAlpha;
             float light = Math.min(0.45f,cI1_21_9$lightAmout);
             if (cI1_21_9$showAlpha < 0) {
                 cI1_21_9$showAlpha = 0;
             }
+
+
             int yy = y - (heartRows - 1) * height - 10;
 
             ResourceLocation a1 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/hyperplasia_1.png");
@@ -146,18 +159,18 @@ public abstract class GuiMixin {
                             1 + offset * 4, 2 + offset * 4,
                             3 + offset * 4, 4 + offset * 4,
 
-                            offset);
+                            offset,alpha/255f,light);
                 }
             }else {
                 for (int j = 0; j < 5; j++) {
                     MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a1,
                             (x) + j * 8- 1, yy,
                             0, 0, 9, 9, 9, 9,
-                           1,1,1,alpha/255f);
+                            1,1,1,alpha/255f);
                 }
 
                 guiGraphics.drawString(Minecraft.getInstance().font,String.valueOf((int) i/4),(x) + 6 * 8- 3,yy ,
-                        Light.ARGB.color(alpha,255,100,100));
+                        Light.ARGB.color((int) alpha,255,100,100));
             }
 
 
@@ -172,7 +185,8 @@ public abstract class GuiMixin {
 
     @Unique
     private void cI1_21_9$renderShadowBlackArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
-        float i = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+        float is = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+        int i = (int) is;
         if (i > 0) {
             int hurtTime = player.hurtTime;
             if (hurtTime > 0) {
@@ -229,5 +243,115 @@ public abstract class GuiMixin {
             RenderSystem.disableBlend();
         }
 
+    }
+
+
+
+
+
+
+
+
+
+    @Unique
+    private float cI1_21_9$showAlpha_chaosWinds = 255;
+    @Unique
+    private float cI1_21_9$lightAmout_chaosWinds = 0;
+
+    @Unique
+    private  void cI1_21_9$render_chaosWinds(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
+        float is = player.getData(AttReg.chaosWinds);
+        int i = (int) is;
+        if (i > 0) {
+            int hurtTime = player.hurtTime;
+            if (hurtTime > 0) {
+                cI1_21_9$showAlpha_chaosWinds = 255;
+            }
+            if (i>=player.getAttributeValue(AttReg.chaos_armor) - 1){
+                if (hurtTime <= 0) {
+                    if (cI1_21_9$lightAmout_chaosWinds >=0.45f) {
+                        if (cI1_21_9$showAlpha_chaosWinds > 0) {
+                            cI1_21_9$showAlpha_chaosWinds -= 2.5f;
+                        }
+                    }else {
+                        cI1_21_9$lightAmout_chaosWinds += 0.0125f;
+                    }
+                }else {
+                    cI1_21_9$lightAmout_chaosWinds = 0;
+                }
+            }else {
+                cI1_21_9$lightAmout_chaosWinds = 0;
+            }
+            float alpha = cI1_21_9$showAlpha_chaosWinds;
+            float light = Math.min(0.45f,cI1_21_9$lightAmout_chaosWinds);
+            if (cI1_21_9$showAlpha_chaosWinds < 0) {
+                cI1_21_9$showAlpha_chaosWinds = 0;
+            }
+
+
+            int yy = y - (heartRows - 1) * height - 10;
+
+            ResourceLocation a1 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/chaos_wind_1.png");
+            ResourceLocation a2 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/chaos_wind_2.png");
+            ResourceLocation a3 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/chaos_wind_3.png");
+            ResourceLocation a4 = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/chaos_wind_4.png");
+
+
+            if (i <= 20) {
+                for (int offset = 0; offset < 5; offset++) {
+                    cI1_21_9$drawA1234Chaos((int) i, x, guiGraphics, yy, a1, a2, a3, a4,
+
+                            1 + offset * 4, 2 + offset * 4,
+                            3 + offset * 4, 4 + offset * 4,
+
+                            offset,alpha/255f,light);
+                }
+            }else {
+                for (int j = 0; j < 5; j++) {
+                    MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a1,
+                            (x) + j * 8- 1, yy,
+                            0, 0, 9, 9, 9, 9,
+                            1,1,1,alpha/255f);
+                }
+
+                guiGraphics.drawString(Minecraft.getInstance().font,String.valueOf((int) i/4),(x) + 6 * 8- 3,yy ,
+                        Light.ARGB.color((int) alpha,200,50,200));
+            }
+
+
+        }
+    }
+    @Unique
+    private void cI1_21_9$drawA1234Chaos(int i,int x,GuiGraphics guiGraphics,int yy,
+                                         ResourceLocation a1,
+                                         ResourceLocation a2,
+                                         ResourceLocation a3,
+                                         ResourceLocation a4,
+                                         int aa,
+                                         int b,
+                                         int c,
+                                         int d,
+
+                                         int offset,float a,float light
+    ){
+        if (i > 0) {
+            int xx = (x) + offset * 8- 1;
+            if (i > aa + 3) {
+                MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a1,
+                        9 + ((x) + (offset - 1) * 8- 1), yy, 0, 0, 9, 9, 9, 9, 1, 1, 1, a);
+            }
+            if (i == aa) {
+                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a4, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+            }
+            if (i == b) {
+                MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a3, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+            }
+            if (i == c) {
+                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a2, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+            }
+            if (i == d) {
+                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a1, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+            }
+        }
     }
 }

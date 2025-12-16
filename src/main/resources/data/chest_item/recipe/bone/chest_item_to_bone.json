@@ -3,7 +3,7 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 1.0,
-  "ingredient": {"tag": "#chest_item:chest_item_bone"},
+  "ingredient": {"tag": "chest_item:chest_item_bone"},
   "result": {
     "id": "minecraft:bone_block"
   }

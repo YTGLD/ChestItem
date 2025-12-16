@@ -4,17 +4,37 @@
   "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
   "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
   "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
-  "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
+"chest_item.config.RenderSoul": "Whether to render light effect items (Eternal Slave Seal, Treaty)",
 
-  "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
-  "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
+"chest_item.config.RenderGUILight": "render the tailing animation of the item",
+  "chest_item.config.RenderItemTooltip": "render mod's unique item background",
+
+"chest_item.celestial": "immortal method",
+  "chest_item.celestial.1": "Immortal Method, Forbidden Technique",
+  "chest_item.celestial.can_not_remove": "This magical power will always be with you",
+  "chest_item.celestial.can_not_remove_creative": "Only the power of God can forget the spell",
+
+"item.chest_item.blood": "Blood Demon Disintegrates",
+  "item.chest_item.blood.string.0": "boundary sense",
+  "item.chest_item.blood.string.1": "Press the skill key to trigger the effect",
+  "item.chest_item.blood.string.2": "At this point, health is reduced to 1, but Rage BUFF is gained (stacks up to level 5)",
+  "item.chest_item.blood.string.3": "and gain an additional 20% Life Steal and 30% Damage Boost",
+  "item.chest_item.blood.string.4": "Each attack increases the duration of life steal and damage boost",
+
+"item.chest_item.chaos": "chaos body",
+  "item.chest_item.chaos.string.0": "Chaos Xeenomyo",
+  "item.chest_item.chaos.string.1": "+10% resistance",
+"item.chest_item.nine_dome": "Nine Turn Blood Demon Body",
+  "item.chest_item.nine_dome.string.0": "Bloody War Book",
 
 
+"item.chest_item.samsara": "reincarnation body",
+  "item.chest_item.samsara.string.0": "thousand rotations",
+  "item.chest_item.samsara.string.1": "There is a 10% chance of being injured to avoid damage and counterattack",
 
 
-
-
-
+  "item.chest_item.sword": "innate sword body",
+  "item.chest_item.sword.string.0": "forged sword bone",
   "entity.chest_item.abyss_orb": "Abyssal ball",
   "entity.chest_item.end_spiral": "wormhole",
   "entity.chest_item.black_vex": "Dark annoyance",
@@ -43,6 +63,8 @@
   "attribute.name.chest_item.shadow_shield_stronger": "Shadow shield stability",
   "attribute.name.chest_item.looting": "looting",
   "attribute.name.chest_item.fortune": "fortune",
+  "attribute.name.chest_item.chaos_armor": "Erodes Armor",
+  "attribute.name.chest_item.chaos_armor_damage": "Armor crushing damage",
 
   "itemGroup.chest_item": "Trinkets in the chest",
 
@@ -131,6 +153,7 @@
 
   "effect.chest_item.increasing_meat": "Growth",
   "effect.chest_item.eye": "lightSensitive",
+  "effect.chest_item.rage": "rage",
   "effect.chest_item.invulnerable": "invincible",
 
   "item.chest_item.self_increasing_heart.string.0": "Self-increasing i, i self-decreasing",
@@ -278,6 +301,7 @@
 
 
   "item.chest_item.chaos_seven": "Seven Sons of Chaos",
+  "item.chest_item.chaos_seven.string.0": "Part of the moon stone",
   "item.chest_item.chaos_seven.string.1": "It is rumored that during the Chaos War, there was a Chaos Immortal Emperor who single-handedly repelled all races and created various magical powers for the human race",
   "item.chest_item.chaos_seven.string.2":"... After the fall of the Chaos Immortal Emperor, seven people were recognized by its will, they were: ",
   "item.chest_item.chaos_seven.string.3": "peek",
@@ -394,7 +418,17 @@
 "item.chest_item.skill.doomsday_judgment": "apocalypse-doomsday_judgment",
   "item.chest_item.skill.doomsday_judgment.text": "Increases the damage and attack speed of the Bionic Blood Spirit (Doomsday)\n and the Blood Orb is no longer affected by distance and collisions::",
 
-"item.chest_item.lone_wolf": "lone wolf",
+"item.chest_item.chaos_constructor": "Chaos Constructor",
+  "item.chest_item.chaos_constructor.string.1": "“I fuse the 'resentment merger' composed of 'them' into many things...“",
+  "item.chest_item.chaos_constructor.string.2": "But this time it didn't evolve into another substance like the life crystal before, but I seem to have found some clues.”",
+  "item.chest_item.chaos_constructor.string.3": "These 'Resentment Mergers' produced some peculiar purple substance when they splashed onto my clothes... They keep getting more and more, like scars that grow biosis.",
+  "item.chest_item.chaos_constructor.string.4": "That's a bold idea - why not transfer them to cosmetics? Well, it's really ridiculous and not very connected",
+  "item.chest_item.chaos_constructor.string.5": "”.... After the 42nd attempt, I seem to get the result I want - the shield engine is currently the only carrier that can hold this substance",
+  "item.chest_item.chaos_constructor.string.6": "I'm excited to name this eerie fusion mechanic 'Chaos Constructor' because it's a big step out of the Shadow bottleneck!",
+  "item.chest_item.chaos_constructor.string.7": "Gradually increases resistance when taking damage in a row",
+  "item.chest_item.chaos_constructor.string.8": "1% boost at a time, but not more than 30%",
+
+  "item.chest_item.lone_wolf": "lone wolf",
   "item.chest_item.lone_wolf.string.1": "15% faster when no creatures are nearby",
 
 "item.chest_item.skill.rotten": "rot",

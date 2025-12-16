@@ -1,27 +1,23 @@
 package com.ytgld.chest_item.mixin.cilent;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
+import com.ytgld.chest_item.items.condensebone.ItemBone;
 import com.ytgld.chest_item.renderer.*;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
+import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.metadata.gui.GuiSpriteScaling;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -30,8 +26,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
-import org.joml.Matrix3x2fStack;
-import org.joml.Matrix4f;
 import org.joml.Vector2ic;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,9 +36,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
+import java.util.Map;
 
 @Mixin(GuiGraphics.class)
-public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
+public abstract class GuiGraphicsMixin implements IGuiGraphics {
     @Shadow @Final private Minecraft minecraft;
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
@@ -60,11 +55,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
     @Shadow @Final private GuiSpriteManager sprites;
 
     @Shadow @Final private PoseStack pose;
-
-    @Override
-    public GuiSpriteManager cI1_21_1$sprites() {
-        return sprites;
-    }
 
     @Unique
     ItemStack cI1_21_9$itemstack = ItemStack.EMPTY;
@@ -413,6 +403,16 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
         if (!ConfigC.config.RenderItemTooltip.get()){
             return;
         }
+        if (stack.getItem() instanceof IGUILightList lightList){
+            if (lightList.guiLight()!=null) {
+                if (lightList.guiLight().doLight()) {
+                    return;
+                }
+            }
+        }
+        if (stack.getItem() instanceof IGUILight){
+            return;
+        }
         if (stack.getItem() instanceof ItemBone bone) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
@@ -499,7 +499,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
                 }
                 int color = soul.color(stack);
                 if (stack.getItem() instanceof TheImprintOfTheSoul theImprintOfTheSoul){
-                    color -= theImprintOfTheSoul.soulColor();
+                    color = theImprintOfTheSoul.soulColor();
                 }
                 int as = ((color >> 24) & 0xFF) /255;
                 int rs = ((color >> 16) & 0xFF) /255;
@@ -531,6 +531,34 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
 
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (stack.getItem() instanceof IGUILightList lightList){
+            if (lightList.guiLight()!=null) {
+                if (lightList.guiLight().doLight()) {
+                    return;
+                }
+            }
+        }
+        if (stack.getItem() instanceof IGUILight){
+            return;
+        }
+        if (stack.getItem() instanceof TheCelestial celestial){
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            ResourceLocation Identifier = celestial.img(stack);
+            int color = celestial.soulColor(stack);
+            int as = (color >> 24) & 0xFF;
+            int rs = (color >> 16) & 0xFF;
+            int gs = (color >> 8) & 0xFF;
+            int bs = color & 0xFF;
+
+            float r = rs / 255f;
+            float g = gs / 255f;
+            float b = bs / 255f;
+
+            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,Identifier, x, y,
+                    0, 0,16,16,16,16,
+                    r,g,b,1);
+
+        }
         if (stack.getItem() instanceof TheImprintOfTheSoul soul){
             ResourceLocation resourceLocation = soul.resourceLocation();
             GuiGraphics guiGraphics =(GuiGraphics) (Object) this;
@@ -562,4 +590,47 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics, IGUI {
 
         }
     }
+//    @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
+//    public void IGUILight(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+//        GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+//        if (stack.getItem() instanceof IGUILight iguiLight){
+//            ResourceLocation Identifier = iguiLight.img();
+//            if (stack.getItem() instanceof IGUILightList ih) {
+//                GUILight guiLight = ih.guiLight();
+//                if (guiLight!=null) {
+//                    if (guiLight.doLight()) {
+//                        Map<Integer, Integer> colorList = guiLight.listGUIColor();
+//                        Map<Integer, ResourceLocation> IdentifierMap = guiLight.listImg();
+//                        Map<Integer, Vec2> vec2Map = guiLight.listPosOffset();
+//
+//                        int number = guiLight.listNumber();
+//
+//                        for (int i = 0; i < number; i++) {
+//                            Integer color = colorList.get(i);
+//                            ResourceLocation img = IdentifierMap.get(i);
+//                            Vec2 posOffset = vec2Map.get(i);
+//                            float as =( (color >> 24) & 0xFF)/255f;
+//                            float rs =( (color >> 16) & 0xFF)/255f;
+//                            float gs =( (color >> 8) & 0xFF)/255f;
+//                            float bs =( color & 0xFF)/255f;
+//                            MGuiGraphics.blit(guiGraphics, img,
+//                                    (int) (x + posOffset.x), (int) (y + posOffset.y),
+//                                    0, 0, 16, 16, 16, 16,
+//                                    rs, gs, bs,as);
+//                        }
+//                    }
+//                }
+//            }else {
+//                int color = iguiLight.guiColor(stack);
+//                float as =( (color >> 24) & 0xFF)/255f;
+//                float rs =( (color >> 16) & 0xFF)/255f;
+//                float gs =( (color >> 8) & 0xFF)/255f;
+//                float bs =( color & 0xFF)/255f;
+//                MGuiGraphics.blit(guiGraphics, Identifier,
+//                        (int) (x + iguiLight.posOffset().x), (int) (y + iguiLight.posOffset().y),
+//                        0, 0, 16, 16, 16, 16,
+//                        rs, gs, bs,as);
+//            }
+//        }
+//    }
 }

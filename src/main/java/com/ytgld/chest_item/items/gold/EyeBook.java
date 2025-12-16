@@ -15,7 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public class EyeBook  extends ItemBase {
+public class EyeBook  extends ItemBase implements IGold {
     public EyeBook(Properties properties) {
         super(properties);
     }
