@@ -65,6 +65,8 @@
   "attribute.name.chest_item.fortune": "fortune",
   "attribute.name.chest_item.chaos_armor": "Erodes Armor",
   "attribute.name.chest_item.chaos_armor_damage": "Armor crushing damage",
+  "attribute.name.chest_item.chaos_armor_speed": "Erosion armor recovery time",
+  "attribute.name.chest_item.chaos_armor_min": "Erosion armor Breakdown threshold",
 
   "itemGroup.chest_item": "Trinkets in the chest",
 
@@ -428,8 +430,21 @@
   "item.chest_item.chaos_constructor.string.7": "Gradually increases resistance when taking damage in a row",
   "item.chest_item.chaos_constructor.string.8": "1% boost at a time, but not more than 30%",
 
+  "item.chest_item.drifting_bottles": "Drifting bottles",
+  "item.chest_item.drifting_bottles.string.1": "It is not easy to sink in water",
+  "item.chest_item.drifting_bottles.string.2": "“If you find this bottle, give it to 'Dr. Y', who is at Research Base Nine in T City”",
+  "item.chest_item.drifting_bottles.string.3": "“...... Dr. Y, I'm sorry, but the ship carrying all your research was tragically killed in a huge storm”",
+  "item.chest_item.drifting_bottles.string.4": "“We have not been able to protect these valuable information, and we hope that Dr. Y will inform our family to handle our funeral”",
+  "item.chest_item.drifting_bottles.string.5": "“The crew members who went to sea this time are all No. 5 Division, and the list of victims: No. -0035, No. -0165, No. -0071......",
+
   "item.chest_item.lone_wolf": "lone wolf",
   "item.chest_item.lone_wolf.string.1": "15% faster when no creatures are nearby",
+
+  "item.chest_item.erosion_tokens": "Erosion tokens",
+  "item.chest_item.erosion_tokens.string.1": "Erode armor when it explodes, deals area damage",
+  "item.chest_item.defeat_the_army.string.1": "Loss of health brings a large bonus",
+
+  "item.chest_item.defeat_the_army": "Defeat the army",
 
 "item.chest_item.skill.rotten": "rot",
   "item.chest_item.skill.rotten.text": "Applies its own negative buff to nearby creatures, radius:",

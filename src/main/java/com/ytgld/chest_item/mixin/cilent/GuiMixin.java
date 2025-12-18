@@ -36,6 +36,8 @@ public abstract class GuiMixin {
     @Final
     private Minecraft minecraft;
 
+    @Shadow public int rightHeight;
+
     @Inject(at = @At("RETURN"), method = "renderArmorLevel")
     private void renderArmorLevel(GuiGraphics p_283143_, CallbackInfo ci) {
         Player player = this.getCameraPlayer();
@@ -67,10 +69,10 @@ public abstract class GuiMixin {
             float i = player.getData(AttReg.chaosWinds);
             int l = p_283143_.guiWidth() / 2 + 10;
             this.minecraft.getProfiler().push("chaos_winds");
-            cI1_21_9$render_chaosWinds(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 10, 1, 0, l);
+            cI1_21_9$render_chaosWinds(p_283143_, player, p_283143_.guiHeight() - this.rightHeight + 10, 1, 0, l);
             this.minecraft.getProfiler().pop();
             if (i > 0&&cI1_21_9$showAlpha_chaosWinds > 0) {
-                this.leftHeight += 20;
+                this.rightHeight += 10;
             }
         }
     }
