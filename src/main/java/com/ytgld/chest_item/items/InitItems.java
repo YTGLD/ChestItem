@@ -208,6 +208,8 @@ public class    InitItems {
             (Identifier)-> new DefeatTheArmy(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<@NotNull Item> ErosionTokens_ = register("erosion_tokens",
             (Identifier)-> new ErosionTokens(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> OneEyedSpider_ = register("one_eye_spider",
+            (Identifier)-> new OneEyedSpider(new Item.Properties().stacksTo(1)));
 
 
 
@@ -296,6 +298,7 @@ public class    InitItems {
                     output.accept(InitItems.ChaosConstructor_);
                     output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.ErosionTokens_);
+                    output.accept(InitItems.OneEyedSpider_);
 
 
 

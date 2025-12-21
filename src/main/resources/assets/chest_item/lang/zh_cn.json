@@ -470,6 +470,11 @@
   "item.chest_item.chaos_constructor.string.6": "”我将这台诡异的融合机械体命名为‘混沌构造件’......我很兴奋，因为这是迈出幽影瓶颈的一大步！”",
   "item.chest_item.chaos_constructor.string.7": "连续受到伤害时逐渐提高抗性",
   "item.chest_item.chaos_constructor.string.8": "每次提升1%，但不超过30%",
+  "item.chest_item.one_eye_spider": "独眼蜘蛛",
+  "item.chest_item.one_eye_spider.string.1": "每吃下一个从未尝试过的食物都会增加你的部分属性",
+  "item.chest_item.one_eye_spider.string.2": "最大生命值",
+  "item.chest_item.one_eye_spider.string.3": "护甲",
+  "item.chest_item.one_eye_spider.string.4": "移动速度",
 
   "item.chest_item.defeat_the_army": "破军",
 

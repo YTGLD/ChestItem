@@ -13,6 +13,7 @@ import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.tip.SkillEvent;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import net.minecraft.core.HolderLookup;
@@ -58,6 +59,7 @@ public class Chestitem {
         modEventBus.addListener(this::onGatherData);
         ChestMenuTypes.register.register(modEventBus);
         NeoForge.EVENT_BUS.register(new SkillEvent());
+        Particles.PARTICLE_TYPES.register(modEventBus);
         Entitys.REGISTRY.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
     }

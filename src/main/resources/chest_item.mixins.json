@@ -8,6 +8,7 @@
     "EntityMixin",
     "ExperienceOrbMixin",
     "FoodDataMixin",
+    "ItemStackMixin",
     "LivingEntityMixin",
     "PlayerMixin",
     "ServerPlayerMixin"

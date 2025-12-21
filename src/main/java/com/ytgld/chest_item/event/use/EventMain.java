@@ -379,6 +379,7 @@ public class EventMain {
         DriftingBottles.tick(event);
         DefeatTheArmy.tick(event);
         ErosionTokens.tick(event);
+        OneEyedSpider.tick(event);
 
         LivingEntity living = event.player;
         {

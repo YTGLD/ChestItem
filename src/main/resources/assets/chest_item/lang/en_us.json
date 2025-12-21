@@ -436,6 +436,11 @@
   "item.chest_item.drifting_bottles.string.3": "“...... Dr. Y, I'm sorry, but the ship carrying all your research was tragically killed in a huge storm”",
   "item.chest_item.drifting_bottles.string.4": "“We have not been able to protect these valuable information, and we hope that Dr. Y will inform our family to handle our funeral”",
   "item.chest_item.drifting_bottles.string.5": "“The crew members who went to sea this time are all No. 5 Division, and the list of victims: No. -0035, No. -0165, No. -0071......",
+  "item.chest_item.one_eye_spider": "One-eyed spider",
+  "item.chest_item.one_eye_spider.string.1": "Each time you eat a food you've never tried will increase some of your attributes",
+  "item.chest_item.one_eye_spider.string.2": "Maximum health",
+  "item.chest_item.one_eye_spider.string.3": "ARMOR",
+  "item.chest_item.one_eye_spider.string.4": "Movement speed",
 
   "item.chest_item.lone_wolf": "lone wolf",
   "item.chest_item.lone_wolf.string.1": "15% faster when no creatures are nearby",
