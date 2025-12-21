@@ -444,6 +444,11 @@
 
   "item.chest_item.lone_wolf": "lone wolf",
   "item.chest_item.lone_wolf.string.1": "15% faster when no creatures are nearby",
+"item.chest_item.the_bell": "The Bell of the End",
+  "item.chest_item.the_bell.string.1": "Inflicts on creatures within 16 tiles when HP drops below 50%",
+  "item.chest_item.the_bell.string.2": "Damage based on 100% of its maximum health, 50% of attack attributes, and 50% of armor",
+  "item.chest_item.the_bell.string.3": "and causes knock-off",
+  "item.chest_item.the_bell.string.4": "cooldown for 300 seconds",
 
   "item.chest_item.erosion_tokens": "Erosion tokens",
   "item.chest_item.erosion_tokens.string.1": "Erode armor when it explodes, deals area damage",

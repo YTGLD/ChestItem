@@ -28,9 +28,6 @@ import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -44,7 +41,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -57,10 +53,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.client.event.GatherSkippedAttributeTooltipsEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.common.util.AttributeUtil;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
@@ -71,7 +65,6 @@ import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 public class EventMain {
     public static int time = 0;
@@ -380,6 +373,7 @@ public class EventMain {
         DefeatTheArmy.tick(event);
         ErosionTokens.tick(event);
         OneEyedSpider.tick(event);
+        TheBell.ItemStackTickEvent(event);
 
         LivingEntity living = event.player;
         {
@@ -531,6 +525,17 @@ public class EventMain {
         LootTable table = event.getTable();
 
         if (event.getName().toString().contains("chests/")){
+            if (event.getName().toString().contains("city")
+                    || event.getName().toString().contains("end")){
+
+                table.addPool(LootPool.lootPool().name(Chestitem.MODID + "city_or_end")
+                        .setRolls(ConstantValue.exactly(1))
+
+                        .add(LootItem.lootTableItem(InitItems.TheBell_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                        .build());
+            }
             if (event.getName().toString().contains("underwater")
                     || event.getName().toString().contains("shipwreck")){
                 table.addPool(LootPool.lootPool().name(Chestitem.MODID + "underwater")

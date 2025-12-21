@@ -477,6 +477,12 @@
   "item.chest_item.one_eye_spider.string.4": "移动速度",
 
   "item.chest_item.defeat_the_army": "破军",
+  "item.chest_item.the_bell": "末路震钟",
+  "item.chest_item.the_bell.string.1": "生命值低于50%时对16格内生物造成",
+  "item.chest_item.the_bell.string.2": "基于自身100%最大生命值，50%攻击属性，50%护甲的伤害",
+  "item.chest_item.the_bell.string.3": "并且造成击飞",
+  "item.chest_item.the_bell.string.4": "冷却300秒",
+
 
   "item.chest_item.erosion_tokens": "侵蚀令牌",
   "item.chest_item.erosion_tokens.string.1": "侵蚀装甲爆碎时造成范围伤害",

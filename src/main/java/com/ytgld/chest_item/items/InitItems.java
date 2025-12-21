@@ -23,7 +23,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -210,6 +209,9 @@ public class    InitItems {
             (Identifier)-> new ErosionTokens(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<@NotNull Item> OneEyedSpider_ = register("one_eye_spider",
             (Identifier)-> new OneEyedSpider(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> TheBell_ = register("the_bell",
+            (Identifier)-> new TheBell(new Item.Properties().stacksTo(1)));
+
 
 
 
@@ -311,6 +313,7 @@ public class    InitItems {
                     output.accept(InitItems.Glutton_);
                     output.accept(InitItems.Speed_);
                     output.accept(InitItems.Silent_);
+                    output.accept(InitItems.TheBell_);
 
 
                 }).build());
