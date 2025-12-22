@@ -188,6 +188,10 @@ public class InitItems {
             (Identifier)-> new DefeatTheArmy(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> ErosionTokens_ = register("erosion_tokens",
             (Identifier)-> new ErosionTokens(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> Test_ = register("test",
+            (Identifier)-> new Test(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> OneEyedSpider_ = register("one_eye_spider",
+            (Identifier)-> new OneEyedSpider(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -199,6 +203,7 @@ public class InitItems {
                 .title(Component.translatable("itemGroup.chest_item"))
                 .icon(Items.CHEST::getDefaultInstance)
                 .displayItems((parameters, output) -> {
+                    output.accept(InitItems.Test_);
 
                     output.accept(InitItems.Fission_);
                     output.accept(InitItems.FleshAndBloodGears_);
@@ -272,6 +277,7 @@ public class InitItems {
                     output.accept(InitItems.ChaosConstructor_);
                     output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.ErosionTokens_);
+                    output.accept(InitItems.OneEyedSpider_);
 
 
 

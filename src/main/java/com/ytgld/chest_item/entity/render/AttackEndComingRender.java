@@ -40,6 +40,8 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
     @Override
     public void submit(AttackEndComingRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraRenderState) {
         HandlerClient.showOutline = true;
+        HandlerClient.doPass = true;
+
         AttackEndComing entity = renderState.entity;
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
         double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());
@@ -107,8 +109,8 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
     }
 
     public void renderSphere1(@NotNull PoseStack.Pose matrices, @NotNull VertexConsumer vertexConsumer, int light, float a ) {
-        int stacks = 10; // 垂直方向的分割数
-        int slices = 10; // 水平方向的分割数
+        int stacks = 20; // 垂直方向的分割数
+        int slices = 20; // 水平方向的分割数
         for (int i = 0; i < stacks; ++i) {
             float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);
             float phi1 = (float) Math.PI * ((i + 1) / (float) stacks);
@@ -130,10 +132,10 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
                 float y3 = a * (float) Math.cos(phi1);
                 float z3 = a * (float) Math.sin(phi1) * (float) Math.sin(theta0);
 
-                vertexConsumer.addVertex(matrices, x0, y0, z0).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-                vertexConsumer.addVertex(matrices, x1, y1, z1).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-                vertexConsumer.addVertex(matrices, x2, y2, z2).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-                vertexConsumer.addVertex(matrices, x3, y3, z3).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
+                vertexConsumer.addVertex(matrices, x0, y0, z0).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(255,255).setNormal(matrices,1, 0, 0);
+                vertexConsumer.addVertex(matrices, x1, y1, z1).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(255,255).setNormal(matrices,1, 0, 0);
+                vertexConsumer.addVertex(matrices, x2, y2, z2).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(255,255).setNormal(matrices,1, 0, 0);
+                vertexConsumer.addVertex(matrices, x3, y3, z3).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(255,255).setNormal(matrices,1, 0, 0);
             }
         }
     }

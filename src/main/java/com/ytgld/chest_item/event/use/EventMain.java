@@ -146,6 +146,7 @@ public class EventMain {
         Mutation.die(event);
         ChaosSeven.die(event);
         BrassCoins.die(event);
+        Test.die(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
@@ -162,6 +163,7 @@ public class EventMain {
         HardwoodTotemPole.tick(event);
         Blood.tick(event);
         ChaosConstructor.hurtOfBlood(event);
+        Test.die(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
             if (event.getEntity() instanceof Player living) {
@@ -374,6 +376,7 @@ public class EventMain {
         DriftingBottles.tick(event);
         DefeatTheArmy.tick(event);
         ErosionTokens.tick(event);
+        OneEyedSpider.tick(event);
 
         LivingEntity living = event.player;
         {

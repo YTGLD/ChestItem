@@ -30,12 +30,12 @@
                     {
                         "name": "BlurDir",
                         "type": "vec2",
-                        "value": [ 8.0, 0.0 ]
+                        "value": [ 5.0, 0.0 ]
                     },
                     {
                         "name": "Radius",
                         "type": "float",
-                        "value": 8.0
+                        "value": 5.0
                     }
                 ]
             }
@@ -56,12 +56,12 @@
                     {
                         "name": "BlurDir",
                         "type": "vec2",
-                        "value": [ 0.0, 8.0 ]
+                        "value": [ 0.0, 5.0 ]
                     },
                     {
                         "name": "Radius",
                         "type": "float",
-                        "value": 8.0
+                        "value": 5.0
                     }
                 ]
             }
@@ -80,7 +80,7 @@
                     {
                         "name": "ColorModulate",
                         "type": "vec4",
-                        "value": [ 1.0, 1.0, 1.0, 0.8 ]
+                        "value": [ 1.0, 1.0, 1.0, 1.0 ]
                     }
                 ]
             },

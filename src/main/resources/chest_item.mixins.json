@@ -8,6 +8,7 @@
     "EntityMixin",
     "ExperienceOrbMixin",
     "FoodDataMixin",
+    "ItemStackMixin",
     "LivingEntityMixin",
     "PlayerMixin",
     "ServerPlayerMixin"
@@ -24,6 +25,7 @@
     "cilent.ATabMixin",
     "cilent.GuiGraphicsMixin",
     "cilent.GuiMixin",
+    "cilent.ParticleEngineMixin",
     "outline.BlackMixin"
   ]
 }

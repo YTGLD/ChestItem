@@ -268,20 +268,6 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
         }
 
 
-        private boolean isMoon(LivingEntity living){
-            if (living != null){
-                if (living instanceof OwnableEntity entity) {
-                    if (entity.getOwner() != null && this.getOwner() != null) {
-                        if (entity.getOwner().is(this.getOwner())){
-                            return false;
-                        }
-                    }
-                }
-                Identifier entity = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType());
-                return !entity.getNamespace().equals(Chestitem.MODID);
-            }
-            return  true;
-        }
         private void playRemoveOneSound(Entity p_186343_) {
             p_186343_.playSound(SoundEvents.WARDEN_HEARTBEAT, 0.8F, 0.8F + p_186343_.level().getRandom().nextFloat() * 0.4F);
         }

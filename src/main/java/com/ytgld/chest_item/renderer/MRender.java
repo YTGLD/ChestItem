@@ -24,6 +24,7 @@ import java.util.function.Function;
 import static com.mojang.blaze3d.pipeline.BlendFunction.OVERLAY;
 import static net.minecraft.client.renderer.RenderPipelines.*;
 import static net.minecraft.client.renderer.rendertype.OutputTarget.ITEM_ENTITY_TARGET;
+import static net.minecraft.client.renderer.rendertype.OutputTarget.WEATHER_TARGET;
 
 public abstract class MRender {
 
@@ -41,13 +42,26 @@ public abstract class MRender {
     public static RenderType red(boolean isOutline){
         return endBlack(isOutline);
     }
+    public static RenderType colorOutline(boolean isOutline){
+        if (isOutline){
+            return RenderType.create(
+                    "lightning", RenderSetup.builder(RenderPipelines.LIGHTNING)
+                            .setOutputTarget(outline2).sortOnUpload().createRenderSetup()
+            );
+        }
+        return RenderType.create(
+                "lightning",
+                RenderSetup.builder(RenderPipelines.LIGHTNING)
+                        .sortOnUpload().createRenderSetup());
+
+    }
     public static RenderType endBlack(boolean isOutline){
         if (isOutline){
             return RenderType.create(
                     "end_gateway",
                     RenderSetup.builder(RenderPs.BACK).setOutputTarget(outline2)
-                            .withTexture("Sampler0", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"))
-                            .withTexture("Sampler1", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"))
+                            .withTexture("Sampler0", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
+                            .withTexture("Sampler1", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
                             .createRenderSetup());
         }
         return RenderType.create(
@@ -146,7 +160,8 @@ public abstract class MRender {
                         ))
                         .withLocation("pipeline/gui_textured").build());
 
-        public static final RenderPipeline  TRANSLUCENT_PARTICLE = (RenderPipeline.builder(PARTICLE_SNIPPET).withLocation("pipeline/translucent_particle").
+        public static final RenderPipeline  TRANSLUCENT_PARTICLE = (RenderPipeline.builder(PARTICLE_SNIPPET)
+                .withLocation("pipeline/translucent_particle").
                 withBlend(new BlendFunction(
                         SourceFactor.SRC_ALPHA,
                         DestFactor.ONE,

@@ -23,6 +23,9 @@ public class Entitys {
     public static final DeferredHolder<EntityType<?>, EntityType<AttackEndComing>> AttackEndComing_ = REGISTRY.register("attack_end_coming", () ->
             EntityType.Builder.of(AttackEndComing::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
                     Identifier.fromNamespaceAndPath(Chestitem.MODID, "attack_end_coming"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<SmallSun>> SmallSun_ = REGISTRY.register("small_sun", () ->
+            EntityType.Builder.of(SmallSun::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "small_sun"))));
 
 
 

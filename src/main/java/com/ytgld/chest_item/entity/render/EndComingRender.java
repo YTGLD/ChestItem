@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-public class EndComingRender extends EntityRenderer<EndComing, EndComingRenderState> {
+public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComingRenderState> {
     public EndComingRender(EntityRendererProvider.Context p_173917_) {
         super(p_173917_);
     }
@@ -35,7 +35,7 @@ public class EndComingRender extends EntityRenderer<EndComing, EndComingRenderSt
     @Override
     public void submit(EndComingRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraRenderState) {
         HandlerClient.showOutline = true;
-
+        HandlerClient.doPass = true;
 
         EndComing entity = renderState.entity;
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
@@ -54,7 +54,7 @@ public class EndComingRender extends EntityRenderer<EndComing, EndComingRenderSt
             renderSphere1(pose, bufferSource, 0,0.35f);
         });
         collector.submitCustomGeometry(poseStack,MRender.red(false),(pose, bufferSource) -> {
-            renderSphere1(pose, bufferSource, 100,0.35f);
+            renderSphere1(pose, bufferSource, 255,0.35f);
         });
 
 

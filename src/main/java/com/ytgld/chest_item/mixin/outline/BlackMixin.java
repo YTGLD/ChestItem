@@ -112,12 +112,18 @@ public abstract class BlackMixin implements MFramebufferBlack {
 
     @Inject(method = "addMainPass", at = @At(value = "RETURN"))
     private void renderMains(FrameGraphBuilder frameGraphBuilder, Frustum p_366590_, Matrix4f p_362420_, GpuBufferSlice p_418185_, boolean p_363964_, LevelRenderState p_451509_, DeltaTracker p_360931_, ProfilerFiller p_362234_, CallbackInfo ci) {
+        if (!ConfigC.config.Render.get()){
+            return;
+        }
         int i = this.minecraft.getMainRenderTarget().width;
         int j = this.minecraft.getMainRenderTarget().height;
 
         PostChain postchain1 = this.minecraft.getShaderManager().getPostChain(Chestitem.POST_BLACK, Set.of(BlackFramebufferSets.MAIN,BlackFramebufferSets.ENTITY_OUTLINE));
         if (postchain1 != null) {
-            postchain1.addToFrame(frameGraphBuilder, i, j, this.chest_item$defaultFramebufferSets_black);
+            if (HandlerClient.doPass) {
+                postchain1.addToFrame(frameGraphBuilder, i, j, this.chest_item$defaultFramebufferSets_black);
+                HandlerClient.doPass = false;
+            }
         }
     }
 

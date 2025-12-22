@@ -47,14 +47,7 @@ public class Battery extends ItemBase {
                         ItemStack stack = chestInventory.getItem(i);
                         CompoundTag compoundTag = stack.get(DataReg.tag);
                         if (stack.is(InitItems.Battery_)) {
-                            List<ItemStack> itemStacks = new ArrayList<>();
-                            for (int j = 0; j < objectArrayList.size(); j++) {
-                                if (!objectArrayList.get(i).isEmpty()) {
-                                    itemStacks.add(objectArrayList.get(i));
-                                }
-                            }
-                            objectArrayList.add(new ItemStack(Items.EMERALD,Mth.nextInt(RandomSource.create(),1,2)));
-                            float xpAdd = itemStacks.size();
+                            float xpAdd = objectArrayList.size();
                             float xp =100f;
                             player.giveExperiencePoints((int) (xp+xpAdd));
                             if (compoundTag != null) {
@@ -75,7 +68,6 @@ public class Battery extends ItemBase {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
         tooltipAdder.accept(Component.translatable("item.chest_item.battery.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.battery.string.1").withStyle(ChatFormatting.GOLD));
         tooltipAdder.accept(Component.translatable("item.chest_item.battery.string.2").withStyle(ChatFormatting.GOLD));
         tooltipAdder.accept(Component.translatable("item.chest_item.battery.string.3").withStyle(ChatFormatting.GOLD));
         tooltipAdder.accept(Component.literal(""));
