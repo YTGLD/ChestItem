@@ -361,6 +361,7 @@
   "item.chest_item.fission": "fission",
   "item.chest_item.skill.xp": "xp",
   "item.chest_item.skill.level": "level",
+  "item.chest_item.skill.level.max": "It's full",
 
 "item.chest_item.skill.decisively.text": "Deal bonus damage to creatures with full health:",
   "item.chest_item.skill.hyperplasia.text": "Each point of scar tissue increases health:",
@@ -369,7 +370,8 @@
   "item.chest_item.skill.plague_spores.text": "Press the skill key to release spores:",
   "item.chest_item.skill.plague_divine_power.text": "Attacks have a chance to inflict poison and deal additional damage to poisoned creatures:",
   "item.chest_item.skill.hyperplasia": "Biochemical enhancement of biology",
-
+"item.chest_item.skill.rotten": "rot",
+  "item.chest_item.skill.rotten.text": "Attacks have the potential to deal 50% additional damage, probability:",
   "item.chest_item.flesh_and_blood_gears": "Flesh and blood gears",
 
   "item.chest_item.qualitative_components": "Qualitative components",
@@ -442,6 +444,18 @@
   "item.chest_item.one_eye_spider.string.3": "ARMOR",
   "item.chest_item.one_eye_spider.string.4": "Movement speed",
 
+  "item.chest_item.the_bell": "The Bell of the End",
+  "item.chest_item.the_bell.string.1": "Inflicts on creatures within 16 tiles when HP drops below 50%",
+  "item.chest_item.the_bell.string.2": "Damage based on 100% of its maximum health, 50% of attack attributes, and 50% of armor",
+  "item.chest_item.the_bell.string.3": "and causes knock-off",
+  "item.chest_item.the_bell.string.4": "cooldown for 300 seconds",
+
+"item.chest_item.bloody_belt": "bloody belt",
+  "item.chest_item.bloody_belt.string.1": "Killing a creature stores the creature's blood in a belt",
+  "item.chest_item.bloody_belt.string.2": "Automatically attack the target when a nearby hostile creature wants to work against you",
+  "item.chest_item.bloody_belt.string.3": "Deals damage and restores health after hitting the target",
+  "item.chest_item.bloody_belt.string.4": "Automatically increases health for nearby allies",
+
   "item.chest_item.lone_wolf": "lone wolf",
   "item.chest_item.lone_wolf.string.1": "15% faster when no creatures are nearby",
 
@@ -450,9 +464,6 @@
   "item.chest_item.defeat_the_army.string.1": "Loss of health brings a large bonus",
 
   "item.chest_item.defeat_the_army": "Defeat the army",
-
-"item.chest_item.skill.rotten": "rot",
-  "item.chest_item.skill.rotten.text": "Applies its own negative buff to nearby creatures, radius:",
 
 "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"

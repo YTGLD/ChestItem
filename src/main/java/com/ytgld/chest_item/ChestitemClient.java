@@ -1,43 +1,36 @@
 package com.ytgld.chest_item;
 
-import com.ibm.icu.text.MessagePattern;
-import com.mojang.blaze3d.pipeline.RenderTarget;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.ytgld.chest_item.event.Keys;
-import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.MRender;
-import com.ytgld.chest_item.renderer.RendererFarm;
+import com.ytgld.chest_item.renderer.model.IAvatarRenderState;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
 import com.ytgld.chest_item.renderer.particle.IParticleEngine;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
+import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.particle.ParticleGroup;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.rendertype.RenderType;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.entity.Avatar;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.RenderTypeGroup;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Queue;
-import java.util.function.Consumer;
 
 @Mod(value = Chestitem.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = Chestitem.MODID, value = Dist.CLIENT)
@@ -48,6 +41,60 @@ public class ChestitemClient{
     @SubscribeEvent
     public static void regMenu(RegisterMenuScreensEvent event){
         event.register(ChestMenuTypes.GENERIC_12.get(), ChestMenuScreen::new);
+    }
+    @SubscribeEvent
+    public static <T extends Avatar & ClientAvatarEntity> void regMenu(RenderPlayerEvent.Pre<T> event){
+        if (event.getRenderState() instanceof IAvatarRenderState iAvatarRenderState) {
+            Avatar avatar = iAvatarRenderState.ci$Avatar().get();
+            if (avatar instanceof Player living) {
+                int value = (int)((float)living.getData(AttReg.attachmentTypeBLOOD_Model));
+                event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(),MRender.colorOutline(false),(pose,var)-> {
+                    float s = 0;
+                    if (value > 0) {
+                        s +=0.1f;
+                    }
+                    if (value > 1) {
+                        s +=0.1f;
+                    }
+                    if (value > 2) {
+                        s +=0.1f;
+                    }
+                    if (value > 3) {
+                        s +=0.1f;
+                    }
+                    if (value > 4) {
+                        s +=0.1f;
+                    }
+                    HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
+                            new Vec3(0, 2.25+s, 0),
+                            s, var);
+                }
+            );
+                HandlerClient.doPass = true;
+                HandlerClient.showOutline = true;
+                event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(),MRender.colorOutline(true),(pose,var)->{
+                    float s = 0;
+                    if (value > 0) {
+                        s +=0.1f;
+                    }
+                    if (value > 1) {
+                        s +=0.1f;
+                    }
+                    if (value > 2) {
+                        s +=0.1f;
+                    }
+                    if (value > 3) {
+                        s +=0.1f;
+                    }
+                    if (value > 4) {
+                        s +=0.1f;
+                    }
+                    HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
+                            new Vec3(0, 2.25+s, 0),
+                            s, var);
+                });
+            }
+        }
     }
     public static Queue<?> iterateParticles(Map<ParticleRenderType, ParticleGroup<?>> map) {
         for (ParticleRenderType renderType : map.keySet()){

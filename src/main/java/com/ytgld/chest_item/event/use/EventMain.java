@@ -4,7 +4,6 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.Handler;
-import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
@@ -62,6 +61,7 @@ import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEnchantItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.ArrayList;
@@ -145,8 +145,8 @@ public class EventMain {
     public void LivingDeathEvent(LivingDeathEvent event){
         Mutation.die(event);
         ChaosSeven.die(event);
+        BloodyBelt.die(event);
         BrassCoins.die(event);
-        Test.die(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
@@ -163,7 +163,6 @@ public class EventMain {
         HardwoodTotemPole.tick(event);
         Blood.tick(event);
         ChaosConstructor.hurtOfBlood(event);
-        Test.die(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
             if (event.getEntity() instanceof Player living) {
@@ -334,6 +333,20 @@ public class EventMain {
         TheOrderOfTheUndead.LivingChangeTargetEvent(event);
     }
     @SubscribeEvent
+    public void LivingChangeTargetEvent(EntityTickEvent.Pre event){
+        if (event.getEntity() instanceof Player player) {
+            if (!player.level().isClientSide()) {
+                if (player.tickCount % 300 == 0) {
+                    int s = (int) (float) player.getData(AttReg.attachmentTypeBLOOD_Model);
+                    if (s > 0) {
+                        player.setData(AttReg.attachmentTypeBLOOD_Model, s - 1f);
+                    }
+                }
+            }
+        }
+
+    }
+    @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
         GodBlood.tick(event);
         DrugHeal.tick(event);
@@ -377,8 +390,10 @@ public class EventMain {
         DefeatTheArmy.tick(event);
         ErosionTokens.tick(event);
         OneEyedSpider.tick(event);
-
+        TheBell.ItemStackTickEvent(event);
+        BloodyBelt.tick(event);
         LivingEntity living = event.player;
+
         {
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
             AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
@@ -534,10 +549,18 @@ public class EventMain {
                         .setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(InitItems.DriftingBottles_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.02f)))
+                        .build());
+            }
+            if (event.getName().toString().contains("city")
+                    || event.getName().toString().contains("end")){
 
+                table.addPool(LootPool.lootPool().name(Chestitem.MODID + "city_or_end")
+                        .setRolls(ConstantValue.exactly(1))
 
-
-
+                        .add(LootItem.lootTableItem(InitItems.TheBell_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.BloodyBelt_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
                         .build());
             }

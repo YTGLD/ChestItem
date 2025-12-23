@@ -61,7 +61,7 @@ public class TerriblePotion extends SkillBase {
             modifySpeedAndDamage = (lvl * SkillList.pTerriblePotion.aneLvlForModify());
 
             if (player.tickCount % 20 == 0){
-                SkillBase.addXP(stack,terriblePotion,1,400,10);
+                SkillBase.addXP(stack,terriblePotion,1,400,SkillList.pTerriblePotion.levelMax());
             }
         }
         modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
@@ -86,6 +86,11 @@ public class TerriblePotion extends SkillBase {
     @Override
     public float aneLvlForModify() {
         return 0.05f;
+    }
+
+    @Override
+    public int levelMax() {
+        return 10;
     }
 }
 

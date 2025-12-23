@@ -192,6 +192,10 @@ public class InitItems {
             (Identifier)-> new Test(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> OneEyedSpider_ = register("one_eye_spider",
             (Identifier)-> new OneEyedSpider(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> TheBell_ = register("the_bell",
+            (Identifier)-> new TheBell(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> BloodyBelt_ = register("bloody_belt",
+            (Identifier)-> new BloodyBelt(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -216,7 +220,7 @@ public class InitItems {
 
 
 
-
+                    output.accept(InitItems.TheBell_);
                     output.accept(InitItems.DriftingBottles_);
                     output.accept(InitItems.God_blood);
                     output.accept(InitItems.Drug_Heal);
@@ -278,6 +282,7 @@ public class InitItems {
                     output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.ErosionTokens_);
                     output.accept(InitItems.OneEyedSpider_);
+                    output.accept(InitItems.BloodyBelt_);
 
 
 

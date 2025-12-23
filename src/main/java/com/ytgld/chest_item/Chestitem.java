@@ -2,10 +2,10 @@ package com.ytgld.chest_item;
 
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
-import com.ytgld.chest_item.entity.SmallSun;
+import com.ytgld.chest_item.entity.UnstableSpheres;
 import com.ytgld.chest_item.entity.render.AttackEndComingRender;
 import com.ytgld.chest_item.entity.render.EndComingRender;
-import com.ytgld.chest_item.entity.render.SmallSunRender;
+import com.ytgld.chest_item.entity.render.UnstableSpheresRender;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.EventHandler;
 import com.ytgld.chest_item.event.key.ChestNetworkHandler;
@@ -77,7 +77,7 @@ public class Chestitem {
         public static void RegisterRenderPipelinesEvent(EntityRenderersEvent.RegisterRenderers event){
             event.registerEntityRenderer(Entitys.AttackEndComing_.get(), AttackEndComingRender::new);
             event.registerEntityRenderer(Entitys.EndComing_.get(), EndComingRender::new);
-            event.registerEntityRenderer(Entitys.SmallSun_.get(), SmallSunRender::new);
+            event.registerEntityRenderer(Entitys.UnstableSpheres_.get(), UnstableSpheresRender::new);
         }
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent evt) {

@@ -110,7 +110,10 @@ public class AttReg {
                     "chaos_wind")).build()
     );
 
-
+    public static final Supplier<AttachmentType<Float>> attachmentTypeBLOOD_Model = ATTACHMENT_TYPES.register(
+            "blood", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf(
+                    "blood")).build()
+    );
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER , AttReg.heal,1);

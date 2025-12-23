@@ -16,6 +16,7 @@ public abstract class SkillBase {
     public abstract String baneName();
     public abstract boolean isPercentage();
     public abstract float aneLvlForModify();
+    public abstract int levelMax();
     public Identifier baneImage(){
         return Identifier.fromNamespaceAndPath(Chestitem.MODID,
                 baneName()

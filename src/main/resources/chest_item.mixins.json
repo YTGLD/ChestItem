@@ -23,6 +23,8 @@
     "cilent.AbstractContainerScreenMixin",
     "cilent.AdvancementWidgetMixin",
     "cilent.ATabMixin",
+    "cilent.AvatarRendererMixin",
+    "cilent.AvatarRenderStateMixin",
     "cilent.GuiGraphicsMixin",
     "cilent.GuiMixin",
     "cilent.ParticleEngineMixin",

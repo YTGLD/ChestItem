@@ -69,6 +69,11 @@ public class Hyperplasia extends SkillBase {
     public float aneLvlForModify() {
         return 2.5F;
     }
+
+    @Override
+    public int levelMax() {
+        return 1;
+    }
 }
 
 
