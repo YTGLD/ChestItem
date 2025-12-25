@@ -38,6 +38,7 @@
 
   "itemGroup.chest_item": "箱子里的小饰品",
 
+  "entity.chest_item.unstable_spheres": "未知",
   "entity.chest_item.abyss_orb": "深渊球",
   "entity.chest_item.end_spiral": "虫洞",
   "entity.chest_item.black_vex": "黑暗恼鬼",
@@ -415,7 +416,7 @@
   "item.chest_item.skill.xp": "经验值",
   "item.chest_item.skill.level": "等级",
   "item.chest_item.flesh_and_blood_gears": "血肉齿轮",
-  "item.chest_item.skill.level.max": "满级了",
+  "item.chest_item.skill.level.max": "（满级）",
 
   "item.chest_item.skill.rotten": "腐烂",
   "item.chest_item.skill.rotten.text": "攻击有可能造成额外50%的伤害，概率：",

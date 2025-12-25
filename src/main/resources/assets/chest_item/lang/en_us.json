@@ -35,6 +35,7 @@
 
   "item.chest_item.sword": "innate sword body",
   "item.chest_item.sword.string.0": "forged sword bone",
+  "entity.chest_item.unstable_spheres": "UnKnow",
   "entity.chest_item.abyss_orb": "Abyssal ball",
   "entity.chest_item.end_spiral": "wormhole",
   "entity.chest_item.black_vex": "Dark annoyance",
@@ -361,7 +362,7 @@
   "item.chest_item.fission": "fission",
   "item.chest_item.skill.xp": "xp",
   "item.chest_item.skill.level": "level",
-  "item.chest_item.skill.level.max": "It's full",
+  "item.chest_item.skill.level.max": "（It's full）",
 
 "item.chest_item.skill.decisively.text": "Deal bonus damage to creatures with full health:",
   "item.chest_item.skill.hyperplasia.text": "Each point of scar tissue increases health:",

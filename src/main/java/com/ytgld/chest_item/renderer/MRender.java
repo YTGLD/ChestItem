@@ -8,6 +8,7 @@ import com.mojang.blaze3d.platform.SourceFactor;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.renderer.outline.ILevelRendererWarped;
 import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -38,7 +39,20 @@ public abstract class MRender {
         }
         return Minecraft.getInstance().getMainRenderTarget();
     });
-
+    public static final OutputTarget warped = new OutputTarget("warped", () -> {
+        LevelRenderer rendertarget = Minecraft.getInstance().levelRenderer;
+        if (rendertarget instanceof ILevelRendererWarped levelRendererWarped){
+            if (levelRendererWarped.chest_item$WarpedMixin()!=null) {
+                levelRendererWarped.chest_item$WarpedMixin().copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
+                return levelRendererWarped.chest_item$WarpedMixin();
+            }
+        }
+        return Minecraft.getInstance().getMainRenderTarget();
+    });
+    public static RenderType warped(){
+        return RenderType.create("warpeds",
+                RenderSetup.builder(RenderPipelines.LIGHTNING).setOutputTarget(warped).sortOnUpload().createRenderSetup());
+    }
     public static RenderType red(boolean isOutline){
         return endBlack(isOutline);
     }

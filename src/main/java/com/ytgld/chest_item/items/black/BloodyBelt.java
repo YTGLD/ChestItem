@@ -51,7 +51,7 @@ public class BloodyBelt extends ItemBlackShadow implements IGUILightList , Skill
                     if (stack.is(InitItems.BloodyBelt_)) {
                         int s = (int) (float) player.getData(AttReg.attachmentTypeBLOOD_Model);
                         if (Mth.nextInt(RandomSource.create(), 1, 100) <= 50) {
-                            if (s < 5) {
+                            if (s < 8) {
                                 player.setData(AttReg.attachmentTypeBLOOD_Model, s + 1f);
                                 break;
                             }

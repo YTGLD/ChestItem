@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.entity;
 
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
@@ -108,7 +109,7 @@ public class UnstableSpheres extends ThrowableItemProjectile {
                        if (target instanceof OwnableEntity ownableEntity) {
                            if (ownableEntity.getOwner() != null) {
                                if (ownableEntity.getOwner().is(player)) {
-                                   target.heal(4);
+                                   target.heal(((float) (player.getAttributeValue(Attributes.MAX_HEALTH) * 0.1f))+2);
                                    canSee = false;
                                }
                            }
@@ -118,7 +119,7 @@ public class UnstableSpheres extends ThrowableItemProjectile {
                            if (targeting.getTarget() != null) {
                                if (targeting.getTarget().is(player)) {
                                    target.hurt(target.damageSources().playerAttack(player),5);
-                                   player.heal(2);
+                                   player.heal((player.getHealth() * 0.01f) + 1);
                                    target.invulnerableTime = 0;
                                    canSee = false;
                                }

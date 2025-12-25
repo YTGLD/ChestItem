@@ -10,12 +10,19 @@ import org.jetbrains.annotations.Nullable;
 public class BlackFramebufferSets implements PostChain.TargetBundle  {
 
     public  ResourceHandle<RenderTarget> entityOutlineFramebuffer;
+    public  ResourceHandle<RenderTarget> WarpedFramebuffer;
+
+
+
     public  ResourceHandle<RenderTarget> mainFramebuffer = ResourceHandle.invalid();
     public static final Identifier MAIN =Identifier.fromNamespaceAndPath(Chestitem.MODID,"main");
     public static final Identifier ENTITY_OUTLINE = Identifier.fromNamespaceAndPath(Chestitem.MODID,"black");
+    public static final Identifier WARPED = Identifier.fromNamespaceAndPath(Chestitem.MODID,"warped");
     @Override
     public ResourceHandle<RenderTarget> getOrThrow(Identifier id) {
-        if (id .equals(ENTITY_OUTLINE) ) {
+        if (id .equals(WARPED) ) {
+            return WarpedFramebuffer;
+        }else if (id .equals(ENTITY_OUTLINE) ) {
             return entityOutlineFramebuffer;
         }else if (id.equals(MAIN)){
             return mainFramebuffer;
@@ -26,7 +33,9 @@ public class BlackFramebufferSets implements PostChain.TargetBundle  {
 
     @Override
     public void replace(Identifier id, ResourceHandle<RenderTarget> framebuffer) {
-        if (id.equals(ENTITY_OUTLINE) ) {
+        if (id.equals(WARPED) ) {
+            WarpedFramebuffer = framebuffer;
+        }else if (id.equals(ENTITY_OUTLINE) ) {
             entityOutlineFramebuffer = framebuffer;
         }else if (id.equals(MAIN)){
             mainFramebuffer = framebuffer;
@@ -38,7 +47,9 @@ public class BlackFramebufferSets implements PostChain.TargetBundle  {
     @Nullable
     @Override
     public ResourceHandle<RenderTarget> get(Identifier id) {
-        if (id .equals(ENTITY_OUTLINE) ) {
+        if (id .equals(WARPED) ) {
+            return WarpedFramebuffer;
+        }else if (id .equals(ENTITY_OUTLINE) ) {
             return entityOutlineFramebuffer;
         }else if (id.equals(MAIN)){
             return mainFramebuffer;

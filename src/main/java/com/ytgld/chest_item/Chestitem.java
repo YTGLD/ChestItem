@@ -42,6 +42,8 @@ public class Chestitem {
     public static final String MODID = "chest_item";
     public static final Identifier POST_BLACK = Identifier.fromNamespaceAndPath(Chestitem.MODID,
             "black");
+    public static final Identifier warpedPOST = Identifier.fromNamespaceAndPath(Chestitem.MODID,
+            "warped");
 
     public Chestitem(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::registerPayloadHandler);

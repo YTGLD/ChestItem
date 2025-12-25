@@ -11,6 +11,15 @@ public class HandlerClient {
     public static boolean showOutline = false;
     public static boolean doPass = false;
 
+
+    public static boolean showOutlineWarped = false;
+    public static boolean doPassWarped = false;
+
+
+
+
+
+
     public static void renderBlood(PoseStack.Pose matrices,
                                    float speed,
                                    Vec3 vec3,

@@ -49,22 +49,7 @@ public class ChestitemClient{
             if (avatar instanceof Player living) {
                 int value = (int)((float)living.getData(AttReg.attachmentTypeBLOOD_Model));
                 event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(),MRender.colorOutline(false),(pose,var)-> {
-                    float s = 0;
-                    if (value > 0) {
-                        s +=0.1f;
-                    }
-                    if (value > 1) {
-                        s +=0.1f;
-                    }
-                    if (value > 2) {
-                        s +=0.1f;
-                    }
-                    if (value > 3) {
-                        s +=0.1f;
-                    }
-                    if (value > 4) {
-                        s +=0.1f;
-                    }
+                    float s = value * 0.1f;
                     HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
                             new Vec3(0, 2.25+s, 0),
                             s, var);
@@ -73,22 +58,7 @@ public class ChestitemClient{
                 HandlerClient.doPass = true;
                 HandlerClient.showOutline = true;
                 event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(),MRender.colorOutline(true),(pose,var)->{
-                    float s = 0;
-                    if (value > 0) {
-                        s +=0.1f;
-                    }
-                    if (value > 1) {
-                        s +=0.1f;
-                    }
-                    if (value > 2) {
-                        s +=0.1f;
-                    }
-                    if (value > 3) {
-                        s +=0.1f;
-                    }
-                    if (value > 4) {
-                        s +=0.1f;
-                    }
+                    float s = value * 0.1f;
                     HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
                             new Vec3(0, 2.25+s, 0),
                             s, var);
@@ -114,11 +84,9 @@ public class ChestitemClient{
                     if (q != null) {
                         for (Object o : q){
                             if (o instanceof ColorPart colorPart) {
-                                HandlerClient.showOutline = true;
-                                HandlerClient.doPass = true;
                                 var offset = colorPart.getPos().subtract(event.getLevelRenderState().cameraRenderState.pos);
                                 event.getPoseStack().pushPose();
-                                RenderType renderType = MRender.colorOutline(true);
+                                RenderType renderType = MRender.colorOutline(false);
                                 VertexConsumer consumer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(renderType);
                                 event.getPoseStack().translate(offset.x, offset.y, offset.z);
 
