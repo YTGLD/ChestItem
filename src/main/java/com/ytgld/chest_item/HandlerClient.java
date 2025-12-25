@@ -2,7 +2,6 @@ package com.ytgld.chest_item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +11,7 @@ public class HandlerClient {
     public static boolean doPass = false;
 
 
-    public static boolean showOutlineWarped = false;
+    public static boolean showRenderWarped = false;
     public static boolean doPassWarped = false;
 
 

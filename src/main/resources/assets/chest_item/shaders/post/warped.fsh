@@ -21,7 +21,7 @@ void main() {
     vec2 sampleStep = oneTexel * BlurDir;
 
     // 引入时间变量，假设时间变量是从外部传入的uniform变量
-    float time = (GameTime * 2000); // Time是一个外部传入的uniform变量，你需要在你的程序中定义并更新它
+    float time = (GameTime * 3333); // Time是一个外部传入的uniform变量，你需要在你的程序中定义并更新它
 
     float sigma = 8.0;
     float rcpFactor = 1.0 / (sqrt(2.0 * 3.141592653589793) * sigma);

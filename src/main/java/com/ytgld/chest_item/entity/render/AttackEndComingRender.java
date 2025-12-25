@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.entity.AttackEndComing;
+import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.entity.state.AttackEndComingRenderState;
 import com.ytgld.chest_item.renderer.MRender;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -49,30 +50,25 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
 
-        if (entity.follow) {
-            collector.submitCustomGeometry(poseStack,MRender.red(true),(pose, bufferSource) -> {
-                setT(pose, entity, bufferSource);
-            });
-            collector.submitCustomGeometry(poseStack,MRender.red(false),(pose, bufferSource) -> {
-                setT(pose, entity, bufferSource);
-            });
-        }else {
-            collector.submitCustomGeometry(poseStack,MRender.endBlack(true),(pose, bufferSource) -> {
+        if (!entity.getTags().contains(EndComing.isTrial)) {
+            collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
                 setT2(pose, entity, bufferSource);
             });
-            collector.submitCustomGeometry(poseStack,MRender.endBlack(false),(pose, bufferSource) -> {
+            collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
                 setT2(pose, entity, bufferSource);
             });
         }
 
 
         if (entity.canSee) {
-            collector.submitCustomGeometry(poseStack,MRender.red(true),(pose, bufferSource) -> {
-                renderSphere1(pose, bufferSource, 0,0.15f);
-            });
-            collector.submitCustomGeometry(poseStack,MRender.red(false),(pose, bufferSource) -> {
-                renderSphere1(pose, bufferSource, 0,0.15f);
-            });
+            if (!entity.getTags().contains(EndComing.isTrial)) {
+                collector.submitCustomGeometry(poseStack, MRender.red(true), (pose, bufferSource) -> {
+                    renderSphere1(pose, bufferSource, 0, 0.15f);
+                });
+                collector.submitCustomGeometry(poseStack, MRender.red(false), (pose, bufferSource) -> {
+                    renderSphere1(pose, bufferSource, 0, 0.15f);
+                });
+            }
         }
         poseStack.popPose();
     }

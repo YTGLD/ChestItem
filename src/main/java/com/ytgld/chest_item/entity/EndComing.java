@@ -1,21 +1,22 @@
 package com.ytgld.chest_item.entity;
 
-import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
-import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.elements.DoomsdayJudgment;
-import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -40,6 +41,7 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
 
     public class EndComing  extends TamableAnimal {
 
+        public static final String  isTrial = "isTrial";
         public EndComing(EntityType<? extends EndComing> p_21803_, Level p_21804_) {
             super(p_21803_, p_21804_);
             this.setNoGravity(true);
@@ -89,6 +91,28 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
         @Override
         public void tick() {
             super.tick();
+            if (this.getOwner() instanceof Player player) {
+                if (player.hasEffect(MobEffects.TRIAL_OMEN)||player.hasEffect(MobEffects.BAD_OMEN)||player.hasEffect(MobEffects.RAID_OMEN)) {
+                    if (this.addTag(isTrial)) {
+                        if (this.level() instanceof ServerLevel level) {
+                            level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 50, 2, 2, 2, 0.2f);
+                        }
+                        this.level().playSound(null, player.blockPosition(), SoundEvents.TRIAL_SPAWNER_OMINOUS_ACTIVATE, SoundSource.AMBIENT, 1, 1);
+                    }
+                } else {
+                    this.removeTag(isTrial);
+                }
+                if (this.getTags().contains(isTrial)) {
+                    if (!player.level().isClientSide()) {
+                        player.addEffect(new MobEffectInstance(MobEffects.SPEED, 100, 2,false,false));
+                        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 100, 1,false,false));
+                        player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 100, 0,false,false));
+                        player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 100, 1,false,false));
+                        player.addEffect(new MobEffectInstance(MobEffects.HASTE, 100, 2,false,false));
+                    }
+                }
+            }
+
             this.setNoGravity(true);
             dis();
 
@@ -142,32 +166,33 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
             if (s < 1) {
                 s = 1;
             }
-            if (this.getOwner()!= null &&this.getOwner() instanceof Player &&this.getTarget()!=null){
-                if (this.tickCount % (int) s == 0) {
-                    AttackEndComing attackBlood = new AttackEndComing(Entitys.AttackEndComing_.get(), this.level());
-                    attackBlood.setTarget(this.getTarget());
-                    if (isHasEffectEnd()){
-                        attackBlood.damages += 3;
+            if (!this.getTags().contains(isTrial)) {
+                if (this.getOwner() != null && this.getOwner() instanceof Player && this.getTarget() != null) {
+                    if (this.tickCount % (int) s == 0) {
+                        AttackEndComing attackBlood = new AttackEndComing(Entitys.AttackEndComing_.get(), this.level());
+                        attackBlood.setTarget(this.getTarget());
+                        if (isHasEffectEnd()) {
+                            attackBlood.damages += 3;
+                        }
+                        attackBlood.setPos(this.position());
+                        attackBlood.setOwner(this.getOwner());
+                        attackBlood.follow = false;
+                        this.level().addFreshEntity(attackBlood);
+                        playRemoveOneSound(this);
                     }
-                    attackBlood.setPos(this.position());
-                    attackBlood.setOwner(this.getOwner());
-                    attackBlood.follow = false;
-                    this.level().addFreshEntity(attackBlood);
-                    playRemoveOneSound(this);
-
-                }
-                if (this.tickCount % s*2 == 0) {
-                    AttackEndComing attackBlood = new AttackEndComing(Entitys.AttackEndComing_.get(), this.level());
-                    attackBlood.setTarget(this.getTarget());
-                    if (isHasEffectEnd()){
-                        attackBlood.damages += 5;
+                    if (this.tickCount % s * 2 == 0) {
+                        AttackEndComing attackBlood = new AttackEndComing(Entitys.AttackEndComing_.get(), this.level());
+                        attackBlood.setTarget(this.getTarget());
+                        if (isHasEffectEnd()) {
+                            attackBlood.damages += 5;
+                        }
+                        attackBlood.setPos(this.position());
+                        attackBlood.setOwner(this.getOwner());
+                        attackBlood.follow = true;
+                        attackBlood.setDeltaMovement(new Vec3(Mth.nextFloat(RandomSource.create(), -0.5f, 0.5f), Mth.nextFloat(RandomSource.create(), -0.5f, 0.5f), Mth.nextFloat(RandomSource.create(), -0.5f, 0.5f)));
+                        this.level().addFreshEntity(attackBlood);
+                        playRemoveOneSound(this);
                     }
-                    attackBlood.setPos(this.position());
-                    attackBlood.setOwner(this.getOwner());
-                    attackBlood.follow = true;
-                    attackBlood.setDeltaMovement(new Vec3(Mth.nextFloat(RandomSource.create(),-0.5f,0.5f),Mth.nextFloat(RandomSource.create(),-0.5f,0.5f),Mth.nextFloat(RandomSource.create(),-0.5f,0.5f)));
-                    this.level().addFreshEntity(attackBlood);
-                    playRemoveOneSound(this);
                 }
             }
             if (this.getOwner()!= null&&this.getOwner() instanceof Player player) {
