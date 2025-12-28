@@ -348,7 +348,7 @@ public class EventMain {
     }
     @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
-        GodBlood.tick(event);
+
         DrugHeal.tick(event);
         LifeCrystal.tick(event);
         Stone.tick(event);

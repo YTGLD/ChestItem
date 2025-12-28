@@ -32,10 +32,13 @@ public class ChestSlot extends Slot {
     }
     @Override
     public boolean mayPickup(Player player) {
+        ItemStack itemstack = this.getItem();
+        if (player instanceof IPlayer iPlayer) {
+            iPlayer.cI1_21_11$onRemoveItem(itemstack);
+        }
         if (player.isCreative()) {
             return true;
         }
-        ItemStack itemstack = this.getItem();
         if (itemstack.getItem() instanceof TheImprintOfTheSoul soul){
             return soul.canRemove(itemstack);
         }
