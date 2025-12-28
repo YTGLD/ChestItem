@@ -1,5 +1,7 @@
 {
 
+  "chest_item.config.doEndComingUp": "It is possible to turn Doomsday into a ghost state when using some items",
+  "chest_item.configuration.Common": "Conventional",
 
   "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
   "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",

@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.entity;
 
+import com.ytgld.chest_item.Config;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -91,28 +92,31 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
         @Override
         public void tick() {
             super.tick();
-            if (this.getOwner() instanceof Player player) {
-                if (player.hasEffect(MobEffects.TRIAL_OMEN)||player.hasEffect(MobEffects.BAD_OMEN)||player.hasEffect(MobEffects.RAID_OMEN)) {
-                    if (this.addTag(isTrial)) {
-                        if (this.level() instanceof ServerLevel level) {
-                            level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 50, 2, 2, 2, 0.2f);
+            if (Config.config.doEndComingUp.get()) {
+                if (this.getOwner() instanceof Player player) {
+                    if (player.hasEffect(MobEffects.TRIAL_OMEN) || player.hasEffect(MobEffects.BAD_OMEN) || player.hasEffect(MobEffects.RAID_OMEN)) {
+                        if (Config.config.doEndComingUp.get()) {
+                            if (this.addTag(isTrial)) {
+                                if (this.level() instanceof ServerLevel level) {
+                                    level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 50, 2, 2, 2, 0.2f);
+                                }
+                                this.level().playSound(null, player.blockPosition(), SoundEvents.TRIAL_SPAWNER_OMINOUS_ACTIVATE, SoundSource.AMBIENT, 1, 1);
+                            }
                         }
-                        this.level().playSound(null, player.blockPosition(), SoundEvents.TRIAL_SPAWNER_OMINOUS_ACTIVATE, SoundSource.AMBIENT, 1, 1);
+                    } else {
+                        this.removeTag(isTrial);
                     }
-                } else {
-                    this.removeTag(isTrial);
-                }
-                if (this.getTags().contains(isTrial)) {
-                    if (!player.level().isClientSide()) {
-                        player.addEffect(new MobEffectInstance(MobEffects.SPEED, 100, 2,false,false));
-                        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 100, 1,false,false));
-                        player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 100, 0,false,false));
-                        player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 100, 1,false,false));
-                        player.addEffect(new MobEffectInstance(MobEffects.HASTE, 100, 2,false,false));
+                    if (this.getTags().contains(isTrial)) {
+                        if (!player.level().isClientSide()) {
+                            player.addEffect(new MobEffectInstance(MobEffects.SPEED, 100, 2, false, false));
+                            player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 100, 1, false, false));
+                            player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 100, 0, false, false));
+                            player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 100, 1, false, false));
+                            player.addEffect(new MobEffectInstance(MobEffects.HASTE, 100, 2, false, false));
+                        }
                     }
                 }
             }
-
             this.setNoGravity(true);
             dis();
 

@@ -64,6 +64,7 @@ public class Chestitem {
         NeoForge.EVENT_BUS.register(new SkillEvent());
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.fc);
     }
     private void registerPayloadHandler(final RegisterPayloadHandlersEvent evt) {
         ChestNetworkHandler.register(evt.registrar("1.0"));

@@ -6,6 +6,8 @@
   "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
   "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
   "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
+  "chest_item.config.doEndComingUp": "可以在使用一些物品时让末日降临变为幽灵状态",
+  "chest_item.configuration.Common": "常规",
 
 
   "chest_item.celestial": "仙法",
