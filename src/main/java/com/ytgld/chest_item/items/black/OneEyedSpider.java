@@ -64,20 +64,9 @@ public class OneEyedSpider extends ItemBlackShadow implements IGUILightList {
             }
         }
     }
-    public static void tick(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.OneEyedSpider_)) {
-                    player.getAttributes().addTransientAttributeModifiers(getAttributeModifiers(stack));
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(getAttributeModifiers(stack));
-                }
-            }
-        }
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        return getAttributeModifiers(stack);
     }
     public static Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(ItemStack stack) {
         Multimap<Holder<Attribute>, AttributeModifier> attributeModifiers = HashMultimap.create();

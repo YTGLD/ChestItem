@@ -69,24 +69,12 @@ public class ShadowMint extends ItemBlackShadow {
             }
         }
     }
-    public static void ItemStackTickEvent(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (player!=null) {
-            if (!player.level().isClientSide()) {
-                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                    ItemStack stack = chestInventory.getItem(i);
-                    if (stack.is(InitItems.ShadowMint_)) {
-                        player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap());
-                        break;
-                    } else {
-                        player.getAttributes().removeAttributeModifiers(attributeModifierMultimap());
-                    }
-                }
-            }
-        }
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        return attributeModifierMultimap();
     }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
+    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
+ {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.shadow_shield, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.ShadowMint_.asItem().getDescriptionId()+"aaaaaa"),

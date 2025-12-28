@@ -24,7 +24,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
@@ -132,22 +131,11 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILightList 
             }
         }
     }
-    public static void tickAttrib(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.ChaosConstructor_)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
-                }
-            }
-        }
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        return attributeModifierMultimap();
     }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
+    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.chaos_armor, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.ChaosConstructor_.asItem().getDescriptionId()),
@@ -178,6 +166,6 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILightList 
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
+        return attributeModifierMultimap();
     }
 }

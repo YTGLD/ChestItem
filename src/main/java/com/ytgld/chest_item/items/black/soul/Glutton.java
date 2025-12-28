@@ -98,6 +98,10 @@ public class Glutton extends TheImprintOfTheSoul {
             }
         }
     }
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        return attributeModifierMultimap(player);
+    }
     public static void  attrib(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
@@ -106,16 +110,12 @@ public class Glutton extends TheImprintOfTheSoul {
                 for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                     ItemStack stack = chestInventory.getItem(i);
                     if (stack.is(InitItems.Glutton_)) {
-                        player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
                         if (player.tickCount % 200 == 1) {
                             if (!player.getCooldowns().isOnCooldown(stack)) {
                                 player.getFoodData().eat(-1, 0.5f);
                             }
                         }
-
                         break;
-                    } else {
-                        player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
                     }
                 }
             }

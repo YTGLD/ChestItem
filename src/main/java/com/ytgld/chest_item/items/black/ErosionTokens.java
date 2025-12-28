@@ -39,22 +39,12 @@ public class ErosionTokens extends ItemBlackShadow implements IGUILightList {
     }
 
 
-    public static void tick(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.ErosionTokens_)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap());
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap());
-                }
-            }
-        }
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        return attributeModifierMultimap();
     }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
+    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
+ {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.chaos_armor_min, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.ErosionTokens_.asItem().getDescriptionId()),

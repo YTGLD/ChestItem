@@ -133,17 +133,15 @@ public class ChaosSeven extends TheChaos{
                             compoundTag.putInt(uDead, 0);
                         }
                     }
-
-
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(stack));
                     break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(stack));
                 }
             }
         }
     }
-
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        return attributeModifierMultimap(stack);
+    }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(ItemStack stack) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 

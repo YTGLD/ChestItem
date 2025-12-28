@@ -30,20 +30,9 @@ public class DefeatTheArmy extends ItemBlackShadow  {
         super(properties);
     }
 
-    public static void tick(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.DefeatTheArmy_)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
-                }
-            }
-        }
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        return attributeModifierMultimap(player);
     }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();

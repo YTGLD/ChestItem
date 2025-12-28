@@ -39,22 +39,9 @@ public class LoneWolf extends ItemBase {
     public LoneWolf(Properties properties) {
         super(properties);
     }
-    public static void ItemStackTickEvent(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (player!=null) {
-            if (!player.level().isClientSide()) {
-                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                    ItemStack stack = chestInventory.getItem(i);
-                    if (stack.is(InitItems.LoneWolf_)) {
-                        player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
-                        break;
-                    } else {
-                        player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
-                    }
-                }
-            }
-        }
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        return attributeModifierMultimap(player);
     }
     public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();

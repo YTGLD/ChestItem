@@ -61,7 +61,8 @@ public class  GodBlood extends ItemBase implements IGUILight {
         return attributeModifierMultimap();
     }
 
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
+    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
+ {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.God_blood.asItem().getDescriptionId()),
                 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
