@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.mixin.cilent;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.MRender;
@@ -7,6 +8,7 @@ import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.world.entity.player.Player;
@@ -107,12 +109,12 @@ public abstract class GuiMixin {
             for (int k = 0; k < maxIcons; k++) {
                 int xx = (x + k * 8) - 1;
                 if (k * 2 + 1 < i) {
-                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_CI, Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, Identifier.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/gui/shadow_black_1.png"),
                             xx, yy, 0, 0, 11, 11, 11, 11, Light.ARGB.color(alpha, 255, 255, 255));
                 }
                 if (k * 2 + 1 == i) {
-                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_CI, Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, Identifier.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/gui/shadow_black_2.png"),
                             xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
                 }
@@ -142,20 +144,20 @@ public abstract class GuiMixin {
         if (i > 0) {
             int xx = (x) + offset * 8- 1;
             if (i > aa + 3) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.125F,10000,light), a1,
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a1,
                         9 + ((x) + (offset - 1) * 8- 1), yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == aa) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.125F,2222,light), a4, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a4, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == b) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.125F,3333,light), a3, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a3, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == c) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.125F,4444,light), a2, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a2, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == d) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.125F,5555,light), a1, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a1, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
         }
 
@@ -215,7 +217,7 @@ public abstract class GuiMixin {
                 }
             }else {
                 for (int j = 0; j < 5; j++) {
-                    guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.08f,i*1000,light), a1,
+                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a1,
                             (x) + j * 8- 1, yy,
                             0, 0, 9, 9, 9, 9,
                             Light.ARGB.color(alpha, 255, 255, 255));
@@ -298,7 +300,7 @@ public abstract class GuiMixin {
                 }
             }else {
                 for (int j = 0; j < 5; j++) {
-                    guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.08f,i*1000,light), a1,
+                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a1,
                             (x) + j * 8- 1, yy,
                             0, 0, 9, 9, 9, 9,
                             Light.ARGB.color(alpha, 255, 255, 255));
@@ -327,20 +329,20 @@ public abstract class GuiMixin {
         if (i > 0) {
             int xx = (x) + offset * 8- 1;
             if (i > aa + 3) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,10000,light), a1,
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a1,
                         9 + ((x) + (offset - 1) * 8- 1), yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == aa) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,2222,light), a4, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a4, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == b) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,3333,light), a3, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a3, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == c) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,4444,light), a2, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a2, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
             if (i == d) {
-                guiGraphics.blit(MRender.RenderPs.LightSlownessHasLight(false, 0.05f,5555,light), a1, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, a1, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(a, 255, 255, 255));
             }
         }
 

@@ -27,7 +27,7 @@ void main() {
     vec4 color = texture(Sampler0, deformedTexCoord) * vertexColor;
 
     // 如果alpha为0，则丢弃片段
-    if (color.a == 0.0) {
+if (color.a <= 0.0) {
         discard;
     }
 

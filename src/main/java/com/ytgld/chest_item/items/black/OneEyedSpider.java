@@ -70,37 +70,38 @@ public class OneEyedSpider extends ItemBlackShadow implements IGUILightList {
     }
     public static Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(ItemStack stack) {
         Multimap<Holder<Attribute>, AttributeModifier> attributeModifiers = HashMultimap.create();
-        CompoundTag compoundTag = stack.get(DataReg.tag);
-        float sa = 0;
-        if (compoundTag!=null) {
-            int size = compoundTag.size();
-            sa = (float) Math.sqrt(size);
+        if (stack.is(InitItems.OneEyedSpider_)) {
+            CompoundTag compoundTag = stack.get(DataReg.tag);
+            float sa = 0;
+            if (compoundTag != null) {
+                int size = compoundTag.size();
+                sa = (float) Math.sqrt(size);
+            }
+            attributeModifiers.put(AttReg.hyperplasia, new AttributeModifier(
+                    Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    sa * 2, AttributeModifier.Operation.ADD_VALUE));
+
+            attributeModifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(
+                    Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    sa * 3.5 / 2, AttributeModifier.Operation.ADD_VALUE));
+
+            attributeModifiers.put(Attributes.ARMOR, new AttributeModifier(
+                    Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    sa * 2.7 / 2, AttributeModifier.Operation.ADD_VALUE));
+
+            attributeModifiers.put(AttReg.heal, new AttributeModifier(
+                    Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    (sa * 6.75) / 100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+
+            attributeModifiers.put(AttReg.hyperplasia_stronger, new AttributeModifier(
+                    Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    (sa * 4.75) / 100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+
+            attributeModifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(
+                    Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    (sa * 8) / 100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         }
-        attributeModifiers.put(AttReg.hyperplasia   , new AttributeModifier(
-                Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                sa*2, AttributeModifier.Operation.ADD_VALUE));
-
-        attributeModifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(
-                Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                sa*3.5/2, AttributeModifier.Operation.ADD_VALUE));
-
-        attributeModifiers.put(Attributes.ARMOR, new AttributeModifier(
-                Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                sa*2.7/2, AttributeModifier.Operation.ADD_VALUE));
-
-        attributeModifiers.put(AttReg.heal, new AttributeModifier(
-                Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                (sa*6.75)/100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
-        attributeModifiers.put(AttReg.hyperplasia_stronger, new AttributeModifier(
-                Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                (sa*4.75)/100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
-        attributeModifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(
-                Identifier.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                (sa*8)/100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         return attributeModifiers;
-
     }
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {

@@ -142,7 +142,7 @@ public class ChaosSeven extends TheChaos{
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
         return attributeModifierMultimap(stack);
     }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(ItemStack stack) {
+    public Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(ItemStack stack) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(Identifier.parse("aaa"+Chestitem.MODID +
@@ -168,33 +168,33 @@ public class ChaosSeven extends TheChaos{
 
 
 
-        CompoundTag compoundTag = stack.get(DataReg.tag);
-        if (compoundTag != null) {
-            int lvl = compoundTag.getIntOr(uDead,0);
-            float heal = 0.85f / 333f * lvl;
-            float speed = 0.8f / 333f * lvl;
-            float damage = 0.75f / 333f * lvl;
-            float attSpeed = 0.5f / 333f * lvl;
-            float armor = 0.35f / 333f * lvl;
+        if (stack.is(this)) {
+            CompoundTag compoundTag = stack.get(DataReg.tag);
+            if (compoundTag != null) {
+                int lvl = compoundTag.getIntOr(uDead, 0);
+                float heal = 0.85f / 333f * lvl;
+                float speed = 0.8f / 333f * lvl;
+                float damage = 0.75f / 333f * lvl;
+                float attSpeed = 0.5f / 333f * lvl;
+                float armor = 0.35f / 333f * lvl;
 
 
-            modifiers.put(AttReg.heal, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                    InitItems.ChaosSeven_.asItem().getDescriptionId()),
-                    heal, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-            modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                    InitItems.ChaosSeven_.asItem().getDescriptionId()),
-                    speed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-            modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                    InitItems.ChaosSeven_.asItem().getDescriptionId()),
-                    damage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-            modifiers.put(Attributes.ATTACK_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                    InitItems.ChaosSeven_.asItem().getDescriptionId()),
-                    attSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-            modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                    InitItems.ChaosSeven_.asItem().getDescriptionId()),
-                    armor, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
-
+                modifiers.put(AttReg.heal, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                        InitItems.ChaosSeven_.asItem().getDescriptionId()),
+                        heal, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                        InitItems.ChaosSeven_.asItem().getDescriptionId()),
+                        speed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                        InitItems.ChaosSeven_.asItem().getDescriptionId()),
+                        damage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                modifiers.put(Attributes.ATTACK_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                        InitItems.ChaosSeven_.asItem().getDescriptionId()),
+                        attSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                        InitItems.ChaosSeven_.asItem().getDescriptionId()),
+                        armor, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+            }
         }
         return modifiers;
     }

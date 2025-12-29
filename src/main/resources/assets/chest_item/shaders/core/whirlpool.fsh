@@ -30,7 +30,7 @@ void main() {
     rotatedTexCoord += center;
 
     vec4 color = texture(Sampler0, rotatedTexCoord) * vertexColor;
-    if (color.a == 0.0) {
+if (color.a <= 0.0) {
         discard;
     }
     fragColor = color;

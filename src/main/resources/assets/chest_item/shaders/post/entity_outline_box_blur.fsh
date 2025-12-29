@@ -26,7 +26,7 @@ void main() {
     vec4 blurred = vec4(0.0);
     float weightSum = 0.0;
     float radius = 8.0;
-    for (float a = -radius; a <= radius; a += 0.05) {
+    for (float a = -radius; a <= radius; a += 1) {
         float weight = rcpFactor * exp(-(a * a) / (2.0 * sigma * sigma));
         blurred += texture(InSampler, texCoord + sampleStep * a) * weight;
         weightSum += weight;

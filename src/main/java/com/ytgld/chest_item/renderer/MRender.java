@@ -86,6 +86,15 @@ public abstract class MRender {
                         .createRenderSetup());
     }
     public static class RenderPs {
+        public static final RenderPipeline.Snippet GUI_SNIPPET = RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET)
+                .withVertexShader("core/gui").withFragmentShader("core/gui")
+                .withBlend(BlendFunction.TRANSLUCENT)
+                .withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
+                        VertexFormat.Mode.QUADS)
+                .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
+        ;
+        public static RenderPipeline  GUI = (RenderPipeline.builder(GUI_SNIPPET)
+                .withLocation("pipeline/gui").build());
 
         public static final RenderPipeline.Snippet GUI_TEXTURED_SNIPPET_CI =
                 RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)

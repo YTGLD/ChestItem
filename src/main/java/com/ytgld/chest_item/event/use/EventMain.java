@@ -340,6 +340,8 @@ public class EventMain {
                     int s = (int) (float) player.getData(AttReg.attachmentTypeBLOOD_Model);
                     if (s > 0) {
                         player.setData(AttReg.attachmentTypeBLOOD_Model, s - 1f);
+                    }else {
+                        player.setData(AttReg.attachmentTypeBLOOD_Model, 0f);
                     }
                 }
             }
