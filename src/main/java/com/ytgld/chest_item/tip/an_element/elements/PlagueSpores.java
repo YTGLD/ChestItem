@@ -55,7 +55,7 @@ public class PlagueSpores extends SkillBase {
                                 }
 
 
-                                SkillBase.addXP(stack, SkillList.pPlagueSpores, 1, 10,10);
+                                SkillBase.addXP(stack, SkillList.pPlagueSpores, 1, 10,SkillList.pPlagueSpores.levelMax());
                                 player.getCooldowns().addCooldown(stack.getItem(),lvl * 10 + 200);
                                 break;
                             }
@@ -78,5 +78,10 @@ public class PlagueSpores extends SkillBase {
     @Override
     public float aneLvlForModify() {
         return 1;
+    }
+
+    @Override
+    public int levelMax() {
+        return 10;
     }
 }

@@ -52,7 +52,7 @@ public class Therapeutic  extends SkillBase {
             modifyHeal = (lvl * SkillList.pTherapeutic.aneLvlForModify());
 
             if (player.tickCount % 20 == 0){
-                SkillBase.addXP(stack,therapeutic,1,600,10);
+                SkillBase.addXP(stack,therapeutic,1,600,SkillList.pTherapeutic.levelMax());
             }
         }
         modifiers.put(AttReg.heal, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
@@ -73,6 +73,11 @@ public class Therapeutic  extends SkillBase {
     @Override
     public float aneLvlForModify() {
         return 0.08f;
+    }
+
+    @Override
+    public int levelMax() {
+        return 10;
     }
 }
 

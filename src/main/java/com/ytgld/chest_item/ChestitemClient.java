@@ -33,6 +33,8 @@ import java.util.Queue;
 @EventBusSubscriber(modid = Chestitem.MODID, value = Dist.CLIENT)
 public class ChestitemClient{
 
+    public static final ResourceLocation Warped = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+            "shaders/post/warped.json");
     public static final ResourceLocation POST_Blood = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
             "shaders/post/entity_outline_blood.json");
     public ChestitemClient(ModContainer container) {

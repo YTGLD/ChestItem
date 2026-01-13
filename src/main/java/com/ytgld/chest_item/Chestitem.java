@@ -37,6 +37,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
@@ -62,6 +63,11 @@ public class Chestitem {
         Particles.PARTICLE_TYPES.register(modEventBus);
         Entitys.REGISTRY.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.fc);
+
+        for (int i = 0; i < 100; i++) {
+            System.out.println(UUID.randomUUID());
+        }
     }
 
     public void onGatherData(GatherDataEvent event) {

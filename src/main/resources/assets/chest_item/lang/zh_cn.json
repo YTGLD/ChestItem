@@ -6,6 +6,8 @@
   "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",
   "chest_item.config.RenderGUILight": "渲染物品的拖尾动画",
   "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
+  "chest_item.config.doEndComingUp": "可以在使用一些物品时让末日降临变为幽灵状态",
+  "chest_item.configuration.Common": "常规",
 
 
   "chest_item.celestial": "仙法",
@@ -38,6 +40,7 @@
 
   "itemGroup.chest_item": "箱子里的小饰品",
 
+  "entity.chest_item.unstable_spheres": "未知",
   "entity.chest_item.abyss_orb": "深渊球",
   "entity.chest_item.end_spiral": "虫洞",
   "entity.chest_item.black_vex": "黑暗恼鬼",
@@ -415,6 +418,10 @@
   "item.chest_item.skill.xp": "经验值",
   "item.chest_item.skill.level": "等级",
   "item.chest_item.flesh_and_blood_gears": "血肉齿轮",
+  "item.chest_item.skill.level.max": "（满级）",
+
+  "item.chest_item.skill.rotten": "腐烂",
+  "item.chest_item.skill.rotten.text": "攻击有可能造成额外50%的伤害，概率：",
 
 
 
@@ -457,10 +464,6 @@
   "item.chest_item.drifting_bottles.string.3": "“......Y博士，对不起，承载着您一切研究成果的船只在一场巨大的风暴中不幸遇难”",
   "item.chest_item.drifting_bottles.string.4": "“我们没能保护好这些宝贵的资料，也希望Y博士您能通知我们的家人办理我们的后事”",
   "item.chest_item.drifting_bottles.string.5": "“此次出海船员均为5号部，遇难名单：编号-0035，编号-0165，编号-0071......”",
-
-  "item.chest_item.skill.rotten": "腐烂",
-  "item.chest_item.skill.rotten.text": "对附近生物施加自身负面BUFF，半径：",
-
   "item.chest_item.chaos_constructor": "混沌构造器",
   "item.chest_item.chaos_constructor.string.1": "“我将‘它们’所组成的‘怨念合并体’融合到很多东西里....”",
   "item.chest_item.chaos_constructor.string.2": "不过这次没有像之前生命水晶那样演变成另一种物质，但是我似乎发现了一些端倪。“",
@@ -476,13 +479,19 @@
   "item.chest_item.one_eye_spider.string.3": "护甲",
   "item.chest_item.one_eye_spider.string.4": "移动速度",
 
-  "item.chest_item.defeat_the_army": "破军",
   "item.chest_item.the_bell": "末路震钟",
   "item.chest_item.the_bell.string.1": "生命值低于50%时对16格内生物造成",
   "item.chest_item.the_bell.string.2": "基于自身100%最大生命值，50%攻击属性，50%护甲的伤害",
   "item.chest_item.the_bell.string.3": "并且造成击飞",
   "item.chest_item.the_bell.string.4": "冷却300秒",
 
+  "item.chest_item.bloody_belt": "血浴腰带",
+  "item.chest_item.bloody_belt.string.1": "杀死生物将生物的血液存储在腰带当中",
+  "item.chest_item.bloody_belt.string.2": "当附近有敌对生物想要对你不利时自动攻击目标",
+  "item.chest_item.bloody_belt.string.3": "击中目标后造成伤害和恢复自身生命值",
+  "item.chest_item.bloody_belt.string.4": "自动为附近的盟友增加生命值",
+
+  "item.chest_item.defeat_the_army": "破军",
 
   "item.chest_item.erosion_tokens": "侵蚀令牌",
   "item.chest_item.erosion_tokens.string.1": "侵蚀装甲爆碎时造成范围伤害",

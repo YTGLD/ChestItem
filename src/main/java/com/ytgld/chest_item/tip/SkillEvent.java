@@ -63,6 +63,7 @@ public class SkillEvent {
     }
     @SubscribeEvent
     public void LivingIncomingDamageEvent(LivingDamageEvent.Pre event){
+        Rotten.pRotten(event);
         if (event.getSource().getEntity() instanceof Player player) {
             if (!player.level().isClientSide()) {
                 ChestInventory chestInventory = Handler.getItem(player);
@@ -91,7 +92,6 @@ public class SkillEvent {
         Hyperplasia.pHyperplasia(event);
 
 
-
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
         if (!player.level().isClientSide()) {
@@ -101,7 +101,6 @@ public class SkillEvent {
                     if (stack.get(DataReg.tag) == null) {
                         stack.set(DataReg.tag,new CompoundTag());
                     }
-                    Rotten.pRotten(player, stack);
                 }
             }
         }

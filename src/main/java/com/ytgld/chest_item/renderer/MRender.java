@@ -7,6 +7,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.ChestitemClient;
+import com.ytgld.chest_item.renderer.i.IlevelRender;
+import com.ytgld.chest_item.renderer.i.IlevelRenderWarped;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
@@ -42,10 +44,21 @@ public abstract class MRender extends RenderType {
     });
 
     protected static final OutputStateShard setOutputState = new OutputStateShard("set", () -> {
-        RenderTarget target = MoonPost.getRenderTargetFor(ChestitemClient.POST_Blood);
-        if (target != null) {
-            target.copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
-            target.bindWrite(false);
+        if (Minecraft.getInstance().levelRenderer instanceof IlevelRender ilevelRender) {
+            if (ilevelRender.cI1_21_1$entityTarget() != null) {
+                ilevelRender.cI1_21_1$entityTarget() .copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
+                ilevelRender.cI1_21_1$entityTarget() .bindWrite(false);
+            }
+        }
+    }, () -> {
+        Minecraft.getInstance().getMainRenderTarget().bindWrite(false);
+    });
+    protected static final OutputStateShard wWarped = new OutputStateShard("warped", () -> {
+        if (Minecraft.getInstance().levelRenderer instanceof IlevelRenderWarped ilevelRender) {
+            if (ilevelRender.cI1_21_1$entityTargetWarped() != null) {
+                ilevelRender.cI1_21_1$entityTargetWarped() .copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
+                ilevelRender.cI1_21_1$entityTargetWarped() .bindWrite(false);
+            }
         }
     }, () -> {
         Minecraft.getInstance().getMainRenderTarget().bindWrite(false);
@@ -63,6 +76,12 @@ public abstract class MRender extends RenderType {
             RenderType.CompositeState.builder().setShaderState(RENDERTYPE_LIGHTNING_SHADER)
                     .setWriteMaskState(COLOR_DEPTH_WRITE).setTransparencyState(UNIFIED_TRANSPARENCY_STATE)
                     .setOutputState(setOutputState).createCompositeState(false));
+    public static RenderType renderTypeWarped = create("warped",
+            DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS,
+            1536, false, true,
+            RenderType.CompositeState.builder().setShaderState(RENDERTYPE_LIGHTNING_SHADER)
+                    .setWriteMaskState(COLOR_DEPTH_WRITE).setTransparencyState(UNIFIED_TRANSPARENCY_STATE)
+                    .setOutputState(wWarped).createCompositeState(false));
 
     private static ShaderInstance liveShaderInstance;
     private static ShaderInstance liveShaderInstance_slowness;

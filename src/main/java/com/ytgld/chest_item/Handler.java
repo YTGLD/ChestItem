@@ -89,5 +89,4 @@ public class Handler {
                 .setUv2(240, 240)
                 .setNormal(poseStack,0, 0, 1);
     }
-
 }

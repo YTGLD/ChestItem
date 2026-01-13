@@ -3,12 +3,11 @@ package com.ytgld.chest_item.entity.c;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.ChestitemClient;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.entity.AttackEndComing;
 import com.ytgld.chest_item.renderer.MRender;
-import com.ytgld.chest_item.renderer.MoonPost;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -33,8 +32,9 @@ public class AttackEndComingRenderer extends EntityRenderer<AttackEndComing> {
     public void render(AttackEndComing entity, float p_114486_, float p_114487_, PoseStack poseStack, MultiBufferSource bufferSource, int p_114490_) {
         super.render(entity, p_114486_, p_114487_, poseStack, bufferSource, p_114490_);
         if (ConfigC.config.Render.get()) {
-            MoonPost.renderEffectForNextTick(ChestitemClient.POST_Blood);
+            HandlerClient.showOutline = true;
         }
+
         double x = Mth.lerp(p_114487_, entity.xOld, entity.getX());
         double y = Mth.lerp(p_114487_, entity.yOld, entity.getY());
         double z = Mth.lerp(p_114487_, entity.zOld, entity.getZ());

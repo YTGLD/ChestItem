@@ -86,9 +86,15 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
             SkillBase elt = map.keySet().stream().toList().get(i);
             int number = map.get(elt);
             number++;
-            guiGraphics.drawString(font, Component.translatable("item.chest_item.skill.level").append(": ").append(Component.translatable("enchantment.level."+number)),
-                    x+35, y+10, itemBase.color(stack), false);
-
+            if (number >= elt.levelMax()){
+                guiGraphics.drawString(font, Component.translatable("item.chest_item.skill.level").append(": ")
+                                .append(Component.translatable("enchantment.level." + number)
+                                        .append(Component.translatable("item.chest_item.skill.level.max"))),
+                        x + 35, y + 10, itemBase.color(stack), false);
+            }else {
+                guiGraphics.drawString(font, Component.translatable("item.chest_item.skill.level").append(": ").append(Component.translatable("enchantment.level." + number)),
+                        x + 35, y + 10, itemBase.color(stack), false);
+            }
             String baneName = elt.baneName();
             String mixinName = baneName + SkillBase.skillBaseXP;
             int sx = 0;
