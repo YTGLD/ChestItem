@@ -112,28 +112,12 @@ public class GodApple extends ItemBase implements Meat , ILight {
             }
         }
     }
-
-    public static void event2(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.God_Apple)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap());
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap());
-                }
-            }
-        }
-    }
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
+        return doAttribute(stack, player);
     }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.God_Apple.asItem().getDescriptionId()),

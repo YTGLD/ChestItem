@@ -94,22 +94,7 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
             }
         }
     }
-    public static void tickAttrib(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.ChaosConstructor_)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
-                }
-            }
-        }
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.chaos_armor, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.ChaosConstructor_.asItem().getDescriptionId()),
@@ -140,7 +125,7 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
+        return doAttribute(stack, player);
     }
 
     @Override

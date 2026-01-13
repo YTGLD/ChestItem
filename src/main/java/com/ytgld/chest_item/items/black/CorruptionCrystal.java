@@ -30,22 +30,7 @@ public class CorruptionCrystal extends ItemBlackShadow {
     public CorruptionCrystal(Properties properties) {
         super(properties);
     }
-    public static void tick(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.CorruptionCrystal_)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap());
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap());
-                }
-            }
-        }
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
@@ -69,7 +54,7 @@ public class CorruptionCrystal extends ItemBlackShadow {
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
+        return doAttribute(stack, player);
     }
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipAdder, TooltipFlag flag) {

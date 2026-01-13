@@ -69,8 +69,6 @@ public class Mutation extends TheImprintOfTheSoul {
                 for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                     ItemStack stack = chestInventory.getItem(i);
                     if (stack.is(InitItems.Mutation_)) {
-                        player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
-
                         if (player.getItemBySlot(EquipmentSlot.HEAD).getMaxDamage() != 0) {
                             player.getItemBySlot(EquipmentSlot.HEAD).hurtAndBreak(1,player,EquipmentSlot.HEAD);
                         }
@@ -86,8 +84,6 @@ public class Mutation extends TheImprintOfTheSoul {
 
 
                         break;
-                    } else {
-                        player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
                     }
                 }
             }
@@ -142,7 +138,7 @@ public class Mutation extends TheImprintOfTheSoul {
         }
     }
 
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         float armor = 0;
         if (player.getItemBySlot(EquipmentSlot.HEAD).isEmpty()){
@@ -264,7 +260,7 @@ public class Mutation extends TheImprintOfTheSoul {
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
+        return doAttribute(stack, player);
     }
     @Override
     public ResourceLocation resourceLocation() {

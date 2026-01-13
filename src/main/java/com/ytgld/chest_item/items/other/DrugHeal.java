@@ -42,23 +42,14 @@ public class DrugHeal  extends ItemBase {
                     }
                 }
             }
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.Drug_Heal)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap());
-                    break;
-                }else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap());
-                }
-            }
         }
     }
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
+        return doAttribute(stack, player);
     }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Drug_Heal.asItem().getDescriptionId()),

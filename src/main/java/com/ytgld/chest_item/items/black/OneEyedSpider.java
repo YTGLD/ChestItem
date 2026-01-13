@@ -56,55 +56,40 @@ public class OneEyedSpider extends ItemBlackShadow {
         }
     }
 
-    public static void tick(ItemStackTickEvent event) {
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.OneEyedSpider_)) {
-                    player.getAttributes().addTransientAttributeModifiers(getAttributeModifiers(stack));
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(getAttributeModifiers(stack));
-                }
-            }
-        }
-    }
-
-    public static Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(ItemStack stack) {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> attributeModifiers = HashMultimap.create();
-        CompoundTag compoundTag = stack.get(DataReg.tag);
-        float sa = 0;
-        if (compoundTag != null) {
-            int size = compoundTag.size();
-            sa = (float) Math.sqrt(size);
+        if (stack.is(InitItems.OneEyedSpider_)) {
+            CompoundTag compoundTag = stack.get(DataReg.tag);
+            float sa = 0;
+            if (compoundTag != null) {
+                int size = compoundTag.size();
+                sa = (float) Math.sqrt(size);
+            }
+            attributeModifiers.put(AttReg.hyperplasia, new AttributeModifier(
+                    ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    sa * 2, AttributeModifier.Operation.ADD_VALUE));
+
+            attributeModifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(
+                    ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    sa * 3.5 / 2, AttributeModifier.Operation.ADD_VALUE));
+
+            attributeModifiers.put(Attributes.ARMOR, new AttributeModifier(
+                    ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    sa * 2.7 / 2, AttributeModifier.Operation.ADD_VALUE));
+
+            attributeModifiers.put(AttReg.heal, new AttributeModifier(
+                    ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    (sa * 6.75) / 100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+
+            attributeModifiers.put(AttReg.hyperplasia_stronger, new AttributeModifier(
+                    ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    (sa * 4.75) / 100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+
+            attributeModifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(
+                    ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
+                    (sa * 8) / 100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         }
-        attributeModifiers.put(AttReg.hyperplasia, new AttributeModifier(
-                ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                sa * 2, AttributeModifier.Operation.ADD_VALUE));
-
-        attributeModifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(
-                ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                sa * 3.5 / 2, AttributeModifier.Operation.ADD_VALUE));
-
-        attributeModifiers.put(Attributes.ARMOR, new AttributeModifier(
-                ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                sa * 2.7 / 2, AttributeModifier.Operation.ADD_VALUE));
-
-        attributeModifiers.put(AttReg.heal, new AttributeModifier(
-                ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                (sa * 6.75) / 100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
-        attributeModifiers.put(AttReg.hyperplasia_stronger, new AttributeModifier(
-                ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                (sa * 4.75) / 100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
-        attributeModifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(
-                ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),
-                (sa * 8) / 100f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         return attributeModifiers;
-
     }
 
     @Override

@@ -27,22 +27,7 @@ public class ErosionTokens extends ItemBlackShadow {
     public ErosionTokens(Properties properties) {
         super(properties);
     }
-    public static void tick(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.ErosionTokens_)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap());
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap());
-                }
-            }
-        }
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.chaos_armor_min, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.ErosionTokens_.asItem().getDescriptionId()),
@@ -53,7 +38,7 @@ public class ErosionTokens extends ItemBlackShadow {
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
+        return doAttribute(stack, player);
     }
 
 

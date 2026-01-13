@@ -45,23 +45,7 @@ public class Speed extends TheSoul {
     public static void tick(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
-
-
-
         give(chestInventory,player);
-
-
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.Speed_)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap());
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap());
-                }
-            }
-        }
     }
     public static void give(ChestInventory chestInventory,Player player){
         Set<Item> set = new HashSet<>();
@@ -112,9 +96,9 @@ public class Speed extends TheSoul {
         if (stack.get(DataReg.tag)==null){
             return HashMultimap.create();
         }
-        return attributeModifierMultimap();
+        return doAttribute(stack, player);
     }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
             modifiers.put(Attributes.JUMP_STRENGTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +

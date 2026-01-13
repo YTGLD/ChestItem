@@ -332,48 +332,24 @@ public class EventMain {
     }
     @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
-        GodBlood.tick(event);
         DrugHeal.tick(event);
-        LifeCrystal.tick(event);
-        Stone.tick(event);
         Ring.tick(event);
-        SeparateRune.tick(event);
-        PainRune.tick(event);
-        UndeadRune.tick(event);
         Stomach.tick(event);
-        SelfIncreasingHeart.tick(event);
         GodApple.event(event);
         Kaolinite.event(event);
-        GodApple.event2(event);
         EyeBook.tick(event);
-        IronHeart.tick(event);
-        IronCube.ItemStackTickEvent(event);
-        ScarHeart.tick(event);
-        LifeCoin.tick(event);
-        EvilThoughtsForgeDreams.ItemStackTickEvent(event);
-        DryBones.ItemStackTickEvent(event);
-        ShadowMint.ItemStackTickEvent(event);
         TheOrderOfTheUndead.hunger(event);
-        TheOrderOfTheUndead.attrib(event);
         Mutation.attrib(event);
         MadnessTheory.expOrb(event);
         Glutton.attrib(event);
         Speed.tick(event);
         ChaosSeven.tick(event);
         Silent.tick(event);
-        CorruptionCrystal.tick(event);
-        QualitativeComponents.tick(event);
-        DeathOmenStoneMonument.tick(event);
         Blood.tick(event);
-        NineDome.tick(event);
-        Sword.tick(event);
-        ChaosConstructor.tickAttrib(event);
         ChaosConstructor.tick(event);
-        DriftingBottles.tick(event);
-        DefeatTheArmy.tick(event);
-        ErosionTokens.tick(event);
-        OneEyedSpider.tick(event);
         TheBell.ItemStackTickEvent(event);
+
+
 
         LivingEntity living = event.player;
         {

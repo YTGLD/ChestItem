@@ -165,24 +165,7 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
             }
         }
     }
-    public static void  attrib(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (player!=null) {
-            if (!player.level().isClientSide()) {
-                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                    ItemStack stack = chestInventory.getItem(i);
-                    if (stack.is(InitItems.TheOrderOfTheUndead_)) {
-                        player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
-                        break;
-                    } else {
-                        player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
-                    }
-                }
-            }
-        }
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         float a = 20 - player.getFoodData().getFoodLevel();
@@ -202,7 +185,7 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
+        return doAttribute(stack, player);
     }
 
     @Override

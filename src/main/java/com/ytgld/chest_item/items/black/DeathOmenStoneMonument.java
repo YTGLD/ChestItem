@@ -23,22 +23,7 @@ public class DeathOmenStoneMonument extends ItemBlackShadow  implements ILight {
     public DeathOmenStoneMonument(Properties properties) {
         super(properties);
     }
-    public static void tick(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.DeathOmenStoneMonument_)) {
-                    player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap());
-                    break;
-                } else {
-                    player.getAttributes().removeAttributeModifiers(attributeModifierMultimap());
-                }
-            }
-        }
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(AttReg.shadow_shield_speed, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
@@ -65,7 +50,7 @@ public class DeathOmenStoneMonument extends ItemBlackShadow  implements ILight {
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player, ItemStack stack) {
-        return attributeModifierMultimap();
+        return doAttribute(stack, player);
     }
     @Override
     public int color(ItemStack stack) {

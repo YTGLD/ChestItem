@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.items;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
@@ -26,6 +27,9 @@ public class ItemBase extends Item implements Terror {
         MutableComponent co = component.copy();
         co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFCD853F)));
         return co;
+    }
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player){
+        return HashMultimap.create();
     }
     @Override
     public int color(ItemStack stack) {

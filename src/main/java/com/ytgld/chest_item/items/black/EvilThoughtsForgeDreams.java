@@ -37,24 +37,8 @@ public class EvilThoughtsForgeDreams extends ItemBlackShadow {
     public EvilThoughtsForgeDreams(Properties properties) {
         super(properties);
     }
-    public static void ItemStackTickEvent(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (player!=null) {
-            if (!player.level().isClientSide()) {
-                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                    ItemStack stack = chestInventory.getItem(i);
-                    if (stack.is(InitItems.EvilThoughtsForgeDreams_)) {
-                        player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
-                        break;
-                    } else {
-                        player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
-                    }
-                }
-            }
-        }
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
+    
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         float bs = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
         modifiers.put(AttReg.shadow_shield, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
@@ -75,7 +59,7 @@ public class EvilThoughtsForgeDreams extends ItemBlackShadow {
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
+        return doAttribute(stack,player);
     }
 
     @Override

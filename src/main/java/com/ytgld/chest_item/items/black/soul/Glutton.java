@@ -105,7 +105,6 @@ public class Glutton extends TheImprintOfTheSoul {
                 for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                     ItemStack stack = chestInventory.getItem(i);
                     if (stack.is(InitItems.Glutton_)) {
-                        player.getAttributes().addTransientAttributeModifiers(attributeModifierMultimap(player));
                         if (player.tickCount % 200 == 1) {
                             if (!player.getCooldowns().isOnCooldown(stack.getItem())) {
                                 player.getFoodData().eat(-1, 0.5f);
@@ -113,14 +112,12 @@ public class Glutton extends TheImprintOfTheSoul {
                         }
 
                         break;
-                    } else {
-                        player.getAttributes().removeAttributeModifiers(attributeModifierMultimap(player));
                     }
                 }
             }
         }
     }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         float hunger = 0;
         float speed = 0;
@@ -147,7 +144,7 @@ public class Glutton extends TheImprintOfTheSoul {
 
     @Override
     public @Nullable Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
+        return doAttribute(stack,player);
     }
 
     @Override
