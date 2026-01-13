@@ -90,26 +90,30 @@ public class BloodyBelt extends ItemBlackShadow implements IGUILightList , Skill
                                         if (living instanceof OwnableEntity ownableEntity) {
                                             if (ownableEntity.getOwner() != null) {
                                                 if (ownableEntity.getOwner().is(player)) {
-                                                    UnstableSpheres unstableSpheres = new UnstableSpheres(Entitys.UnstableSpheres_.get(), player.level());
-                                                    unstableSpheres.isAttack = false;
-                                                    unstableSpheres.setOwner(player);
-                                                    unstableSpheres.setTarget(living);
-                                                    unstableSpheres.setPos(playerPos.add(0,2-ss+off,0));
-                                                    player.level().addFreshEntity(unstableSpheres);
-                                                    return;
+                                                    if (Handler.chestEntity(living,player)) {
+                                                        UnstableSpheres unstableSpheres = new UnstableSpheres(Entitys.UnstableSpheres_.get(), player.level());
+                                                        unstableSpheres.isAttack = false;
+                                                        unstableSpheres.setOwner(player);
+                                                        unstableSpheres.setTarget(living);
+                                                        unstableSpheres.setPos(playerPos.add(0, 2 - ss + off, 0));
+                                                        player.level().addFreshEntity(unstableSpheres);
+                                                        return;
+                                                    }
                                                 }
                                             }
                                         }
                                         if (living instanceof Targeting targeting) {
                                             if (targeting.getTarget() != null) {
                                                 if (targeting.getTarget().is(player)) {
-                                                    UnstableSpheres unstableSpheres = new UnstableSpheres(Entitys.UnstableSpheres_.get(), player.level());
-                                                    unstableSpheres.setOwner(player);
-                                                    unstableSpheres.isAttack = true;
-                                                    unstableSpheres.setTarget(living);
-                                                    unstableSpheres.setPos(playerPos.add(0,2-ss+off,0));
-                                                    player.level().addFreshEntity(unstableSpheres);
-                                                    return;
+                                                    if (Handler.chestEntity(living,player)) {
+                                                        UnstableSpheres unstableSpheres = new UnstableSpheres(Entitys.UnstableSpheres_.get(), player.level());
+                                                        unstableSpheres.setOwner(player);
+                                                        unstableSpheres.isAttack = true;
+                                                        unstableSpheres.setTarget(living);
+                                                        unstableSpheres.setPos(playerPos.add(0, 2 - ss + off, 0));
+                                                        player.level().addFreshEntity(unstableSpheres);
+                                                        return;
+                                                    }
                                                 }
                                             }
                                         }

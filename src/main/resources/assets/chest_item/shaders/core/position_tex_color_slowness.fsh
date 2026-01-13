@@ -1,7 +1,5 @@
 #version 330
 
-#moj_import <minecraft:fog.glsl>
-#moj_import <minecraft:matrix.glsl>
 #moj_import <minecraft:globals.glsl>
 
 

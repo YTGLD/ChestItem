@@ -8,6 +8,7 @@ import com.mojang.blaze3d.platform.SourceFactor;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.renderer.outline.ILevelRendererWarped;
 import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.client.Minecraft;
@@ -86,29 +87,6 @@ public abstract class MRender {
                         .createRenderSetup());
     }
     public static class RenderPs {
-        public static final RenderPipeline.Snippet GUI_SNIPPET = RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET)
-                .withVertexShader("core/gui").withFragmentShader("core/gui")
-                .withBlend(BlendFunction.TRANSLUCENT)
-                .withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
-                        VertexFormat.Mode.QUADS)
-                .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
-        ;
-        public static RenderPipeline  GUI = (RenderPipeline.builder(GUI_SNIPPET)
-                .withLocation("pipeline/gui").build());
-
-        public static final RenderPipeline.Snippet GUI_TEXTURED_SNIPPET_CI =
-                RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
-                        .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color"))
-                        .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID, "core/position_tex_color"))
-                        .withSampler("Sampler0")
-                        .withBlend(new BlendFunction(
-                                SourceFactor.SRC_ALPHA,
-                                DestFactor.ONE,
-                                SourceFactor.ONE,
-                                DestFactor.ZERO
-                        )).withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR,
-                                VertexFormat.Mode.QUADS)
-                        .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
         public static RenderPipeline.Snippet whirlpoolBase (float speed) {
             return RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
                     .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID, "core/whirlpool"))
@@ -131,10 +109,10 @@ public abstract class MRender {
                                 SourceFactor.ONE,
                                 DestFactor.ZERO
                         ))
-                        .withLocation("pipeline/whirlpool").build());
+                        .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/whirlpool")).build());
             }
             return (RenderPipeline.builder(whirlpoolBase(speed)).withBlend(BlendFunction.TRANSLUCENT)
-                    .withLocation("pipeline/whirlpool").build());
+                    .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/whirlpool")).build());
         }
         public static RenderPipeline.Snippet snippet(float a,float offset,float light) {
             return    RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
@@ -147,20 +125,6 @@ public abstract class MRender {
                     .withShaderDefine("light", light)
                     .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet();
         }
-
-        public static  RenderPipeline LightSlownessHasLight(boolean light,float stronger,float offset,float lightAmout){
-            if (light) {
-                return  (RenderPipeline.builder(snippet(stronger,offset,lightAmout)).withBlend(new BlendFunction(
-                                SourceFactor.SRC_ALPHA,
-                                DestFactor.ONE,
-                                SourceFactor.ONE,
-                                DestFactor.ZERO
-                        ))
-                        .withLocation("pipeline/gui_textured_ci").build());
-            }
-            return  (RenderPipeline.builder(snippet(stronger,offset,lightAmout)).withBlend(BlendFunction.TRANSLUCENT)
-                    .withLocation("pipeline/gui_textured_ci").build());
-        }
         public static  RenderPipeline LightSlowness(boolean light,float stronger,float offset) {
             if (light) {
                 return  (RenderPipeline.builder(snippet(stronger,offset,0)).withBlend(new BlendFunction(
@@ -169,10 +133,10 @@ public abstract class MRender {
                                 SourceFactor.ONE,
                                 DestFactor.ZERO
                         ))
-                        .withLocation("pipeline/gui_textured_ci").build());
+                        .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/gui_textured_ci")).build());
             }
             return  (RenderPipeline.builder(snippet(stronger,offset,0)).withBlend(BlendFunction.TRANSLUCENT)
-                    .withLocation("pipeline/gui_textured_ci").build());
+                    .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/gui_textured_ci")).build());
         }
         public static final RenderPipeline GUI_TEXTURED =
                 (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).withBlend(new BlendFunction(
@@ -181,27 +145,17 @@ public abstract class MRender {
                                 SourceFactor.ONE,
                                 DestFactor.ZERO
                         ))
-                        .withLocation("pipeline/gui_textured").build());
+                        .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/gui_textured")).build());
 
         public static final RenderPipeline  TRANSLUCENT_PARTICLE = (RenderPipeline.builder(PARTICLE_SNIPPET)
-                .withLocation("pipeline/translucent_particle").
+                .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/translucent_particle")).
                 withBlend(new BlendFunction(
                         SourceFactor.SRC_ALPHA,
                         DestFactor.ONE,
                         SourceFactor.ONE,
                         DestFactor.ZERO
                 )).build());
-
-        public static final RenderPipeline GUI_TEXTURED_CI =
-                (RenderPipeline.builder(GUI_TEXTURED_SNIPPET_CI).withBlend(new BlendFunction(
-                                SourceFactor.SRC_ALPHA,
-                                DestFactor.ONE,
-                                SourceFactor.ONE,
-                                DestFactor.ZERO
-                        ))
-                        .withLocation("pipeline/gui_textured_ci").build());
-
-        public static final RenderPipeline ENTITY_OUTLINE_BLIT = RenderPipeline.builder().withLocation("pipeline/entity_outline_blit")
+        public static final RenderPipeline ENTITY_OUTLINE_BLIT = RenderPipeline.builder().withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/entity_outline_blit"))
                 .withVertexShader("core/screenquad").withFragmentShader("core/blit_screen").withSampler("InSampler"
                 ).withBlend(new BlendFunction(
                         SourceFactor.SRC_ALPHA,
@@ -222,7 +176,7 @@ public abstract class MRender {
                         .withSampler("Sampler0")
                         .withVertexFormat(DefaultVertexFormat.POSITION,
                                 VertexFormat.Mode.QUADS).buildSnippet())
-                .withLocation("pipeline/end_gateway").withBlend(new BlendFunction(
+                .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/end_gateway")).withBlend(new BlendFunction(
                         SourceFactor.SRC_ALPHA,
                         DestFactor.ONE,
                         SourceFactor.ONE,
@@ -238,7 +192,7 @@ public abstract class MRender {
                                 .withSampler("Sampler0")
                                 .withVertexFormat(DefaultVertexFormat.POSITION,
                                         VertexFormat.Mode.QUADS).buildSnippet())
-                .withLocation("pipeline/end_gateway").withBlend(BlendFunction.TRANSLUCENT)
+                .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/end_gateway")).withBlend(BlendFunction.TRANSLUCENT)
                 .withShaderDefine("PORTAL_LAYERS", 16)
                 .withCull(false)
                 .build());

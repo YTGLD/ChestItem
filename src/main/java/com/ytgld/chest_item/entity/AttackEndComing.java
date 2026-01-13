@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.entity;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.tip.an_element.elements.DoomsdayJudgment;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleTypes;
@@ -239,7 +240,8 @@ public class AttackEndComing extends ThrowableItemProjectile {
                 }
             }
         }
-
-        this.target = closestEntity;
+        if (Handler.chestEntity(closestEntity,this.getOwner())){
+            this.target = closestEntity;
+        }
     }
 }

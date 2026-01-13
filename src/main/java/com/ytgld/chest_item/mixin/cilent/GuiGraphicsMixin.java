@@ -528,23 +528,24 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         x - 96 / 3 - 8, y - 96 / 3 - 8,
                         0, 0,
                         96, 96, 96, 96,
-                        Light.ARGB.color((int) ((int) aFloat/2.5), rs, gs, bs));
+                        Light.ARGB.color((int) ((int) aFloat / 2.5), rs, gs, bs));
 
                 guiGraphics.blit(renderPipeline, Identifier.fromNamespaceAndPath(Chestitem.MODID,
                                 "textures/shadow/big/black_3.png"),
                         x - size / 3, y - size / 3, 0, 0, size, size, size, size,
-                        Light.ARGB.color((int) aFloat/2, rs, gs, bs));
-            }else {
+                        Light.ARGB.color((int) aFloat / 2, rs, gs, bs));
+            } else {
                 for (int i = 1; i < 3; i++) {
-                    guiGraphics.blit(MRender.RenderPs.whirlpool(true,1), Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                    guiGraphics.blit(MRender.RenderPs.whirlpool(true, 1), Identifier.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/shadow/big/black_3.png"),
                             x - size / 3, y - size / 3, 0, 0, size, size, size, size,
-                            Light.ARGB.color((int) aFloat/2, rs, gs, bs));
+                            Light.ARGB.color((int) aFloat / 2, rs, gs, bs));
                 }
             }
         }
-
     }
+    @Unique
+    private int cI1_21_11$time;
 
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {

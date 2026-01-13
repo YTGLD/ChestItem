@@ -44,27 +44,24 @@ public class ChestitemClient{
     }
     @SubscribeEvent
     public static <T extends Avatar & ClientAvatarEntity> void regMenu(RenderPlayerEvent.Pre<T> event) {
-        if (event.getRenderState() instanceof IAvatarRenderState iAvatarRenderState) {
-            Avatar avatar = iAvatarRenderState.ci$Avatar().get();
-            if (avatar instanceof Player living) {
-                int value = (int) ((float) living.getData(AttReg.attachmentTypeBLOOD_Model));
-                if (value>0) {
-                    HandlerClient.doPass = true;
-                    HandlerClient.showOutline = true;
-                    event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(), MRender.colorOutline(false), (pose, var) -> {
-                                float s = value * 0.1f;
-                                HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
-                                        new Vec3(0, 2.25 + s, 0),
-                                        s, var);
-                            }
-                    );
-                    event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(), MRender.colorOutline(true), (pose, var) -> {
-                        float s = value * 0.1f;
-                        HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
-                                new Vec3(0, 2.25 + s, 0),
-                                s, var);
-                    });
-                }
+        if (Minecraft.getInstance().player instanceof Player living) {
+            int value = (int) ((float) living.getData(AttReg.attachmentTypeBLOOD_Model));
+            if (value>0) {
+                HandlerClient.doPass = true;
+                HandlerClient.showOutline = true;
+                event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(), MRender.colorOutline(false), (pose, var) -> {
+                            float s = value * 0.1f;
+                            HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
+                                    new Vec3(0, 2.25 + s, 0),
+                                    s, var);
+                        }
+                );
+                event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(), MRender.colorOutline(true), (pose, var) -> {
+                    float s = value * 0.1f;
+                    HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
+                            new Vec3(0, 2.25 + s, 0),
+                            s, var);
+                });
             }
         }
     }

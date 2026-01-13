@@ -202,7 +202,9 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
                 if (!isHasEffectEnd()) {
                     if (look(player.level(), player) instanceof LivingEntity living) {
                         if (!living.is(this)) {
-                            this.setTarget(living);
+                            if (Handler.chestEntity(living,this.getOwner())) {
+                                this.setTarget(living);
+                            }
                         }
                     } else {
                         this.setTarget(null);
@@ -214,7 +216,9 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
                     for (LivingEntity living : entities) {
                         if (this.getTarget() == null) {
                             if (living != player&& !(living instanceof EndComing)) {
-                                this.setTarget(living);
+                                if (Handler.chestEntity(living,this.getOwner())) {
+                                    this.setTarget(living);
+                                }
                             }
                         }
                     }

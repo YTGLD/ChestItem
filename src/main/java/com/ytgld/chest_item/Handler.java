@@ -6,10 +6,15 @@ import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.ChestItemMenu;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.IPlayer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -48,6 +53,31 @@ public class Handler {
         }
         return null;
     }
+    public static boolean chestEntity(LivingEntity living, Entity owner){
+        if (living != null){
+            if (living instanceof OwnableEntity entity) {
+                if (entity.getOwner() != null && owner != null) {
+                    if (entity.getOwner().is(owner)){
+                        return false;
+                    }
+                }
+            }
+            Identifier entity = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType());
+            if (entity.getNamespace().equals(Chestitem.MODID)) {
+                return false;
+            }
+        }
+        return  true;
+    }
+
+
+
+
+
+
+
+
+
     public static void renderBlood(PoseStack.Pose poseStack, VertexConsumer vertexConsumer, Vec3 start, Vec3 end, float a, float r) {
         int segmentCount = 16; // 圆柱横向细分数
 
