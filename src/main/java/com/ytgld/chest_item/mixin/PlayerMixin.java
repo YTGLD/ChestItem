@@ -41,8 +41,43 @@ public class PlayerMixin implements IPlayer {
         compound.put("ChestItems", this.chest_item$chestInventory.get().createTag(player.registryAccess()));
 
     }
+
+
+
     @Unique
-    private Map<ItemStack, Multimap<Holder<Attribute>, AttributeModifier>> cI1_21_1$attributeCache = new HashMap<>();
+    private Map<ItemStack, Multimap<Holder<Attribute>, AttributeModifier>> cI1_21_11$attributeCache = new HashMap<>();
+
+
+    @Unique
+    private void cI1_21_11$updateAttribute() {
+        Player player = (Player) (Object) this;
+        ChestInventory inventory = Handler.getItem(player);
+        if (inventory != null) {
+            for (int i = 0; i < inventory.getContainerSize(); i++) {
+                ItemStack stack = inventory.getItem(i);
+                if (stack.getItem() instanceof ItemBase itemBase) {
+                    Multimap<Holder<Attribute>, AttributeModifier> doAttribute = itemBase.doAttribute(stack, player);
+                    cI1_21_11$attributeCache.getOrDefault(stack, HashMultimap.create()).forEach((attributeHolder, attributeModifier)->{
+                        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+                        modifiers.put(attributeHolder,attributeModifier);
+                        player.getAttributes().removeAttributeModifiers(modifiers);
+                    });
+                    player.getAttributes().addTransientAttributeModifiers(doAttribute);
+
+                    cI1_21_11$attributeCache.put(stack, doAttribute);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void cI1_21_11$onRemoveItem(ItemStack itemStack) {
+        Player player = (Player) (Object) this;
+        Multimap<Holder<Attribute>, AttributeModifier> attributeModifiers = cI1_21_11$attributeCache.remove(itemStack);
+        if (attributeModifiers != null) {
+            player.getAttributes().removeAttributeModifiers(attributeModifiers);
+        }
+    }
 
     @Inject(method = "tick", at = @At(value = "RETURN"))
     private void tick(CallbackInfo ci) {
@@ -64,28 +99,6 @@ public class PlayerMixin implements IPlayer {
             }
         }
     }
-    @Unique
-    private void cI1_21_11$updateAttribute() {
-        Player player = (Player) (Object) this;
-        ChestInventory inventory = Handler.getItem(player);
-        if (inventory != null) {
-            for (int i = 0; i < inventory.getContainerSize(); i++) {
-                ItemStack stack = inventory.getItem(i);
-                if (stack.getItem() instanceof ItemBase itemBase) {
-                    Multimap<Holder<Attribute>, AttributeModifier> doAttribute = itemBase.doAttribute(stack, player);
-                    cI1_21_1$attributeCache.getOrDefault(stack, HashMultimap.create()).forEach((attributeHolder, attributeModifier)->{
-                        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-                        modifiers.put(attributeHolder,attributeModifier);
-                        player.getAttributes().removeAttributeModifiers(modifiers);
-                    });
-                    player.getAttributes().addTransientAttributeModifiers(doAttribute);
-
-                    cI1_21_1$attributeCache.put(stack, doAttribute);
-                }
-            }
-        }
-    }
-
     @Override
     public AtomicReference<ChestInventory> chest_item$chestInventory() {
         return chest_item$chestInventory;

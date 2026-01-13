@@ -573,21 +573,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x, y, 0, 0,16,16,16,16,
                     r,g,b-0.2f,1);
-
-            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x, y, 0, 0,18,18,18,18,
-                    r,g-0.1f,b,1/2.5f);
-            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x-2, y, 0, 0,18,18,18,18,
-                    r,g-0.1f,b,1/2.5f);
-            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x, y-2, 0, 0,18,18,18,18,
-                    r,g,b-0.1f,1/2.5f);
-            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x-2, y-2, 0, 0,18,18,18,18,
-                    r-0.1f,g,b,1/2.5f);
-
-
-            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x, y, 0, 0,16,16,16,16,
-                    r,g-0.2f,b,1);
-
-
         }
     }
 //    @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
