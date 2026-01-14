@@ -7,6 +7,7 @@ import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
+import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -23,6 +24,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -212,6 +214,12 @@ public class    InitItems {
     public static final DeferredItem<@NotNull Item> TheBell_ = register("the_bell",
             (Identifier)-> new TheBell(new Item.Properties().stacksTo(1)));
 
+    public static final DeferredItem<@NotNull Item> Complementary_ = register("complementary",
+            (Identifier)-> new Complementary(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<@NotNull Item> FissionEmblem_ = register("fission_emblem",
+            (Identifier)-> new FissionEmblem(new Item.Properties().stacksTo(1)));
+
 
 
 
@@ -230,6 +238,7 @@ public class    InitItems {
                 .displayItems((parameters, output) -> {
 
                     output.accept(InitItems.Fission_);
+                    output.accept(InitItems.FissionEmblem_);
                     output.accept(InitItems.FleshAndBloodGears_);
                     output.accept(InitItems.Blood_);
                     output.accept(InitItems.Chaos_);
@@ -314,6 +323,7 @@ public class    InitItems {
                     output.accept(InitItems.Speed_);
                     output.accept(InitItems.Silent_);
                     output.accept(InitItems.TheBell_);
+                    output.accept(InitItems.Complementary_);
 
 
                 }).build());

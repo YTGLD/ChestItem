@@ -467,7 +467,21 @@
   "item.chest_item.defeat_the_army.string.1": "Loss of health brings a large bonus",
 
   "item.chest_item.defeat_the_army": "Defeat the army",
+"item.chest_item.complementary": "complementary",
 
-"item.chest_item.pod": "wilted pod",
+"item.chest_item.complementary.string.1": "If the actual damage caused is less than 80% of the panel",
+  "item.chest_item.complementary.string.2": "then force correction to 100%",
+
+"item.chest_item.complementary.string.3": "If the actual damage is greater than 100% of the damage of the panel",
+  "item.chest_item.complementary.string.4": "then reduced to 80% of the panel",
+"item.chest_item.fission_emblem": "emblem of fission",
+  "item.chest_item.fission_emblem.string.1": "Increases damage taken by 10% for creatures within 10 tiles",
+  "item.chest_item.fission_emblem.string.2": "Damage taken exceeds 10% of maximum health",
+  "item.chest_item.fission_emblem.string.3": "Increases the base stats of this accessory by 105% for 20 seconds",
+  "item.chest_item.fission_emblem.string.4": "Damage taken exceeds 25% of maximum health",
+  "item.chest_item.fission_emblem.string.5": "Increases damage by 25% for 10 seconds",
+
+
+  "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 }

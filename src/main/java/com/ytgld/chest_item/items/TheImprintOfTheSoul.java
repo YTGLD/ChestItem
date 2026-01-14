@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.items;
 
+import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -9,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class TheImprintOfTheSoul extends ItemBlackShadow{
+public abstract class TheImprintOfTheSoul extends ItemBlackShadow implements NotLight {
     public TheImprintOfTheSoul(Properties properties) {
         super(properties);
     }

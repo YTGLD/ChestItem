@@ -5,6 +5,7 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
+import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
 import com.ytgld.chest_item.renderer.*;
@@ -403,6 +404,9 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (!ConfigC.config.RenderItemTooltip.get()){
             return;
         }
+        if (stack.getItem() instanceof NotLight) {
+            return;
+        }
         if (stack.getItem() instanceof IGUILightList lightList){
             if (lightList.guiLight()!=null) {
                 if (lightList.guiLight().doLight()) {
@@ -575,47 +579,4 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     r,g,b-0.2f,1);
         }
     }
-//    @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
-//    public void IGUILight(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
-//        GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
-//        if (stack.getItem() instanceof IGUILight iguiLight){
-//            ResourceLocation Identifier = iguiLight.img();
-//            if (stack.getItem() instanceof IGUILightList ih) {
-//                GUILight guiLight = ih.guiLight();
-//                if (guiLight!=null) {
-//                    if (guiLight.doLight()) {
-//                        Map<Integer, Integer> colorList = guiLight.listGUIColor();
-//                        Map<Integer, ResourceLocation> IdentifierMap = guiLight.listImg();
-//                        Map<Integer, Vec2> vec2Map = guiLight.listPosOffset();
-//
-//                        int number = guiLight.listNumber();
-//
-//                        for (int i = 0; i < number; i++) {
-//                            Integer color = colorList.get(i);
-//                            ResourceLocation img = IdentifierMap.get(i);
-//                            Vec2 posOffset = vec2Map.get(i);
-//                            float as =( (color >> 24) & 0xFF)/255f;
-//                            float rs =( (color >> 16) & 0xFF)/255f;
-//                            float gs =( (color >> 8) & 0xFF)/255f;
-//                            float bs =( color & 0xFF)/255f;
-//                            MGuiGraphics.blit(guiGraphics, img,
-//                                    (int) (x + posOffset.x), (int) (y + posOffset.y),
-//                                    0, 0, 16, 16, 16, 16,
-//                                    rs, gs, bs,as);
-//                        }
-//                    }
-//                }
-//            }else {
-//                int color = iguiLight.guiColor(stack);
-//                float as =( (color >> 24) & 0xFF)/255f;
-//                float rs =( (color >> 16) & 0xFF)/255f;
-//                float gs =( (color >> 8) & 0xFF)/255f;
-//                float bs =( color & 0xFF)/255f;
-//                MGuiGraphics.blit(guiGraphics, Identifier,
-//                        (int) (x + iguiLight.posOffset().x), (int) (y + iguiLight.posOffset().y),
-//                        0, 0, 16, 16, 16, 16,
-//                        rs, gs, bs,as);
-//            }
-//        }
-//    }
 }

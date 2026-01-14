@@ -12,6 +12,7 @@ import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
+import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -61,6 +62,7 @@ import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEnchantItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.ArrayList;
@@ -153,6 +155,7 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
+        Complementary.damage(event);
         ChaosShield(event);
         hyperplasiaShield(event);
         GodApple.event(event);
@@ -161,6 +164,9 @@ public class EventMain {
         HardwoodTotemPole.tick(event);
         Blood.tick(event);
         ChaosConstructor.hurtOfBlood(event);
+        FissionEmblem.hurt(event);
+        FissionEmblem.attack(event);
+        FissionEmblem.scAttack(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player living) {
@@ -332,6 +338,7 @@ public class EventMain {
     }
     @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
+
         DrugHeal.tick(event);
         Ring.tick(event);
         Stomach.tick(event);
@@ -348,10 +355,9 @@ public class EventMain {
         Blood.tick(event);
         ChaosConstructor.tick(event);
         TheBell.ItemStackTickEvent(event);
-
-
-
+        FissionEmblem.tick(event);
         LivingEntity living = event.player;
+
         {
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
             AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
@@ -501,6 +507,14 @@ public class EventMain {
         LootTable table = event.getTable();
 
         if (event.getName().toString().contains("chests/")){
+            if (event.getName().toString().contains("underwater")
+                    || event.getName().toString().contains("shipwreck")){
+                table.addPool(LootPool.lootPool().name(Chestitem.MODID + "underwater")
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(InitItems.DriftingBottles_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.02f)))
+                        .build());
+            }
             if (event.getName().toString().contains("city")
                     || event.getName().toString().contains("end")){
 
@@ -509,20 +523,6 @@ public class EventMain {
 
                         .add(LootItem.lootTableItem(InitItems.TheBell_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
-                        .build());
-            }
-            if (event.getName().toString().contains("underwater")
-                    || event.getName().toString().contains("shipwreck")){
-                table.addPool(LootPool.lootPool().name(Chestitem.MODID + "underwater")
-                        .setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(InitItems.DriftingBottles_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.02f)))
-
-
-
-
-
                         .build());
             }
         }
@@ -532,6 +532,10 @@ public class EventMain {
 
                         .setRolls(ConstantValue.exactly(1))
 
+                        .add(LootItem.lootTableItem(InitItems.Complementary_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.FissionEmblem_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
                         .add(LootItem.lootTableItem(InitItems.Life_Crystal)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
                         .add(LootItem.lootTableItem(InitItems.God_blood)

@@ -287,12 +287,6 @@ public class ChaosSeven extends TheChaos{
             }
         }
     }
-
-    @Override
-    public boolean canRemove(ItemStack stack) {
-        return false;
-    }
-
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {

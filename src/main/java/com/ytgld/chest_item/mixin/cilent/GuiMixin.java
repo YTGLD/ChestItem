@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.MGuiGraphicsCI_Life;
-import com.ytgld.chest_item.renderer.MGuiGraphicsCI_LifeSlowness;
+import com.ytgld.chest_item.renderer.MGuiGraphics;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
@@ -93,20 +93,20 @@ public abstract class GuiMixin {
         if (i > 0) {
             int xx = (x) + offset * 8- 1;
             if (i > aa + 3) {
-                MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a1,
+                MGuiGraphics.blit(guiGraphics, a1,
                         9 + ((x) + (offset - 1) * 8- 1), yy, 0, 0, 9, 9, 9, 9, 1, 1, 1, a);
             }
             if (i == aa) {
-                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a4, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+                MGuiGraphics.blit( guiGraphics,a4, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
             }
             if (i == b) {
-                MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a3, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+                MGuiGraphics.blit(guiGraphics, a3, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
             }
             if (i == c) {
-                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a2, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+                MGuiGraphics.blit( guiGraphics,a2, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
             }
             if (i == d) {
-                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a1, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+                MGuiGraphics.blit( guiGraphics,a1, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
             }
         }
     }
@@ -165,7 +165,7 @@ public abstract class GuiMixin {
                 }
             }else {
                 for (int j = 0; j < 5; j++) {
-                    MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a1,
+                    MGuiGraphics.blit(guiGraphics, a1,
                             (x) + j * 8- 1, yy,
                             0, 0, 9, 9, 9, 9,
                             1,1,1,alpha/255f);
@@ -310,7 +310,7 @@ public abstract class GuiMixin {
                 }
             }else {
                 for (int j = 0; j < 5; j++) {
-                    MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a1,
+                    MGuiGraphics.blit(guiGraphics, a1,
                             (x) + j * 8- 1, yy,
                             0, 0, 9, 9, 9, 9,
                             1,1,1,alpha/255f);
@@ -339,20 +339,20 @@ public abstract class GuiMixin {
         if (i > 0) {
             int xx = (x) + offset * 8- 1;
             if (i > aa + 3) {
-                MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a1,
+                MGuiGraphics.blit(guiGraphics, a1,
                         9 + ((x) + (offset - 1) * 8- 1), yy, 0, 0, 9, 9, 9, 9, 1, 1, 1, a);
             }
             if (i == aa) {
-                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a4, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+                MGuiGraphics.blit( guiGraphics,a4, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
             }
             if (i == b) {
-                MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, a3, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+                MGuiGraphics.blit(guiGraphics, a3, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
             }
             if (i == c) {
-                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a2, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+                MGuiGraphics.blit( guiGraphics,a2, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
             }
             if (i == d) {
-                MGuiGraphicsCI_LifeSlowness.blit( guiGraphics,a1, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
+                MGuiGraphics.blit( guiGraphics,a1, xx, yy, 0, 0, 9, 9, 9, 9,1, 1,1,a);
             }
         }
     }

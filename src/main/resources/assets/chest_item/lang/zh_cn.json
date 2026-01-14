@@ -497,6 +497,27 @@
   "item.chest_item.erosion_tokens.string.1": "侵蚀装甲爆碎时造成范围伤害",
   "item.chest_item.defeat_the_army.string.1": "损失生命值带来大量加成",
 
+  "item.chest_item.complementary": "互补",
+
+  "item.chest_item.complementary.string.1": "若造成的实际伤害低于面板的80%",
+  "item.chest_item.complementary.string.2": "则强制修正为100%",
+
+  "item.chest_item.complementary.string.3": "如果实际伤害大于面板伤害的100%",
+  "item.chest_item.complementary.string.4": "则减少至面板的80%",
+
+
+
+
+  "item.chest_item.fission_emblem": "裂变之徽",
+  "item.chest_item.fission_emblem.string.1": "使10格内生物提升10%承受伤害",
+  "item.chest_item.fission_emblem.string.2": "受到的伤害超过了10%最大生命值",
+  "item.chest_item.fission_emblem.string.3": "则此饰品基础属性提升105%，持续20秒",
+  "item.chest_item.fission_emblem.string.4": "受到的伤害超过了25%最大生命值",
+  "item.chest_item.fission_emblem.string.5": "则伤害提升25%，持续10秒",
+
+
+
+
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 }

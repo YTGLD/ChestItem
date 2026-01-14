@@ -129,11 +129,6 @@ public class Speed extends TheSoul {
     }
 
     @Override
-    public boolean canRemove(ItemStack stack) {
-        return false;
-    }
-
-    @Override
     public int soulColor() {
         return Light.ARGB.color(255,255,100,100);
     }
