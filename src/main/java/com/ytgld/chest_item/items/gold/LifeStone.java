@@ -43,10 +43,13 @@ public class LifeStone  extends ItemBase implements IGold {
         tooltipAdder.accept(Component.literal(""));
         tooltipAdder.accept(Component.translatable("item.chest_item.life_stone.string.1").withStyle(ChatFormatting.GOLD));
     }
-
+    @Override
+    public int guiColor(ItemStack stack) {
+        return Light.ARGB.color(40,255,255,20);
+    }
     @Override
     public int color(ItemStack stack) {
-        return Light.ARGB.color(255,255,255,20);
+        return Light.ARGB.color(255,180,180,20);
     }
 }
 

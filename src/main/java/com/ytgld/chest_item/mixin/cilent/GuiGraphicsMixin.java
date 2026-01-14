@@ -5,6 +5,7 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
+import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
 import com.ytgld.chest_item.renderer.MRender;
@@ -426,6 +427,9 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (!ConfigC.config.RenderItemTooltip.get()){
             return;
         }
+        if (stack.getItem() instanceof NotLight) {
+            return;
+        }
         if (stack.getItem() instanceof IGUILightList lightList){
             if (lightList.guiLight(entity)!=null) {
                 if (lightList.guiLight(entity).doLight()) {
@@ -492,6 +496,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     return;
                 }
                 int color = bone.color(stack);
+                int as = (color >> 24) & 0xFF;
                 int rs = (color >> 16) & 0xFF;
                 int gs = (color >> 8) & 0xFF;
                 int bs = color & 0xFF;

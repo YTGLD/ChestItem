@@ -7,6 +7,7 @@ import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
+import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.blood.LifeCrystal;
@@ -196,6 +197,8 @@ public class InitItems {
             (Identifier)-> new TheBell(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> BloodyBelt_ = register("bloody_belt",
             (Identifier)-> new BloodyBelt(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> Complementary_ = register("complementary",
+            (Identifier)-> new Complementary(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -295,6 +298,7 @@ public class InitItems {
                     output.accept(InitItems.Glutton_);
                     output.accept(InitItems.Speed_);
                     output.accept(InitItems.Silent_);
+                    output.accept(InitItems.Complementary_);
 
 
                 }).build());

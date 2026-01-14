@@ -17,7 +17,7 @@ public interface IGold extends IGUILight {
 
     @Override
     default int guiColor(ItemStack stack){
-        return Light.ARGB.color(150,255,255,100);
+        return Light.ARGB.color(255,255,255,100);
     };
 
     @Override

@@ -54,6 +54,11 @@ public class ArmorStone extends ItemBase implements IGold {
     public int color(ItemStack stack) {
         return Light.ARGB.color(255,255,255,20);
     }
+
+    @Override
+    public int guiColor(ItemStack stack) {
+        return Light.ARGB.color(40,255,255,20);
+    }
 }
 
 

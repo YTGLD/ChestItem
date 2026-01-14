@@ -40,7 +40,7 @@ public abstract class PlayerMixin implements IPlayer {
         this.chest_item$chestInventory.get().storeAsSlots(p_421801_.list("ChestItems", ItemStackWithSlot.CODEC));
     }
     @Unique
-    private Map<ItemStack, Multimap<Holder<Attribute>, AttributeModifier>> attributeCache = new HashMap<>();
+    private Map<ItemStack, Multimap<Holder<Attribute>, AttributeModifier>> cI1_21_11$attributeCache = new HashMap<>();
 
 
     @Unique
@@ -52,14 +52,14 @@ public abstract class PlayerMixin implements IPlayer {
                 ItemStack stack = inventory.getItem(i);
                 if (stack.getItem() instanceof ItemBase itemBase) {
                     Multimap<Holder<Attribute>, AttributeModifier> doAttribute = itemBase.doAttribute(stack, player);
-                    attributeCache.getOrDefault(stack, HashMultimap.create()).forEach((attributeHolder,attributeModifier)->{
+                    cI1_21_11$attributeCache.getOrDefault(stack, HashMultimap.create()).forEach((attributeHolder, attributeModifier)->{
                         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
                         modifiers.put(attributeHolder,attributeModifier);
                         player.getAttributes().removeAttributeModifiers(modifiers);
                     });
                     player.getAttributes().addTransientAttributeModifiers(doAttribute);
 
-                    attributeCache.put(stack, doAttribute);
+                    cI1_21_11$attributeCache.put(stack, doAttribute);
                 }
             }
         }
@@ -68,7 +68,7 @@ public abstract class PlayerMixin implements IPlayer {
     @Override
     public void cI1_21_11$onRemoveItem(ItemStack itemStack) {
         Player player = (Player) (Object) this;
-        Multimap<Holder<Attribute>, AttributeModifier> attributeModifiers = attributeCache.remove(itemStack);
+        Multimap<Holder<Attribute>, AttributeModifier> attributeModifiers = cI1_21_11$attributeCache.remove(itemStack);
         if (attributeModifiers != null) {
             player.getAttributes().removeAttributeModifiers(attributeModifiers);
         }

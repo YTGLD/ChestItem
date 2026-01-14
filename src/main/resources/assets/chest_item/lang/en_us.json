@@ -468,6 +468,27 @@
 
   "item.chest_item.defeat_the_army": "Defeat the army",
 
+  "item.chest_item.complementary": "互补",
+
+  "item.chest_item.complementary.string.1": "若造成的实际伤害低于面板的80%",
+  "item.chest_item.complementary.string.2": "则强制修正为100%",
+
+  "item.chest_item.complementary.string.3": "如果实际伤害大于面板伤害的100%",
+  "item.chest_item.complementary.string.4": "则减少至面板的80%",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "item.chest_item.pod": "wilted pod",
-  "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
+  "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"
 }
