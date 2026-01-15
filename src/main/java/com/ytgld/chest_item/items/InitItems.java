@@ -199,6 +199,12 @@ public class InitItems {
             (Identifier)-> new BloodyBelt(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> Complementary_ = register("complementary",
             (Identifier)-> new Complementary(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> BloodyDeath_ = register("bloody_death",
+            (Identifier)-> new BloodyDeath(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> NormalConstructs_ = register("normal_constructs",
+            (Identifier)-> new NormalConstructs(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> FissionEmblem_ = register("fission_emblem",
+            (Identifier)-> new FissionEmblem(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -211,6 +217,8 @@ public class InitItems {
                 .icon(Items.CHEST::getDefaultInstance)
                 .displayItems((parameters, output) -> {
                     output.accept(InitItems.Test_);
+
+                    output.accept(InitItems.FissionEmblem_);
 
                     output.accept(InitItems.Fission_);
                     output.accept(InitItems.FleshAndBloodGears_);
@@ -264,6 +272,9 @@ public class InitItems {
                     output.accept(InitItems.HardwoodTotemPole_);
 
 
+
+
+
                     output.accept(InitItems.GiantHeart_);
                     output.accept(InitItems.ImitationBiomass_);
                     output.accept(InitItems.Heart_);
@@ -274,6 +285,9 @@ public class InitItems {
                     output.accept(InitItems.ScarHeart_);
                     output.accept(InitItems.LifeCoin_);
                     output.accept(InitItems.HeavyBlade_);
+
+
+
 
                     output.accept(InitItems.DeathOmenStoneMonument_);
                     output.accept(InitItems.EvilThoughtsForgeDreams_);

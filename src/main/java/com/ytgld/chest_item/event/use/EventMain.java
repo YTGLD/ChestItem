@@ -165,6 +165,9 @@ public class EventMain {
         HardwoodTotemPole.tick(event);
         Blood.tick(event);
         ChaosConstructor.hurtOfBlood(event);
+        FissionEmblem.hurt(event);
+        FissionEmblem.attack(event);
+        FissionEmblem.scAttack(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
             if (event.getEntity() instanceof Player living) {
@@ -370,6 +373,7 @@ public class EventMain {
         ChaosConstructor.tick(event);
         TheBell.ItemStackTickEvent(event);
         BloodyBelt.tick(event);
+        FissionEmblem.tick(event);
         LivingEntity living = event.player;
 
         {
@@ -549,6 +553,10 @@ public class EventMain {
 
                         .setRolls(ConstantValue.exactly(1))
 
+                        .add(LootItem.lootTableItem(InitItems.Complementary_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                        .add(LootItem.lootTableItem(InitItems.FissionEmblem_)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
                         .add(LootItem.lootTableItem(InitItems.Life_Crystal)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
                         .add(LootItem.lootTableItem(InitItems.God_blood)

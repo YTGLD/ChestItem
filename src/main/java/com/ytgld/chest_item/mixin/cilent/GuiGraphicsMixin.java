@@ -45,22 +45,16 @@ import java.util.Map;
 
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin implements IGuiGraphics {
-    @Shadow @Final private Minecraft minecraft;
-    @Shadow @Final private GuiRenderState guiRenderState;
+    @Shadow @Final
+    Minecraft minecraft;
+    @Shadow @Final
+    GuiRenderState guiRenderState;
     @Shadow @Final private Matrix3x2fStack pose;
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
-
-    @Shadow public abstract void blit(Identifier atlas, int x0, int y0, int x1, int y1, float u0, float u1, float v0, float v1);
-
-    @Unique
-    ItemStack cI1_21_9$itemstack = ItemStack.EMPTY;
     @Override
     public void chest_item$addW(ItemStack stack) {
         GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
-        if (stack.getItem() instanceof Terror){
-            cI1_21_9$itemstack = stack;
-        }
         guiGraphics.pose().pushMatrix();
         if (this.minecraft.screen instanceof IAbstractContainerScreen iAbstractContainerScreen) {
             List<Vec2> xy = iAbstractContainerScreen.chest_item$xy();
@@ -427,9 +421,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (!ConfigC.config.RenderItemTooltip.get()){
             return;
         }
-        if (stack.getItem() instanceof NotLight) {
-            return;
-        }
+
         if (stack.getItem() instanceof IGUILightList lightList){
             if (lightList.guiLight(entity)!=null) {
                 if (lightList.guiLight(entity).doLight()) {
@@ -437,7 +429,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 }
             }
         }
-        if (stack.getItem() instanceof IGUILight){
+        if (stack.getItem() instanceof NotLight ){
             return;
         }
         if (stack.getItem() instanceof ItemBlackShadow soul && !(stack.getItem() instanceof ILight)) {

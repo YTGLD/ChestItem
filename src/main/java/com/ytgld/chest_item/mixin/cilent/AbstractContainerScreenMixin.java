@@ -39,7 +39,7 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
     }
 
     @Inject(at = @At(value = "RETURN"), method = "render")
-    public void Lnet(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){
+    public void LnetHEADHEADHEAD(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){
         ItemStack itemstack = this.menu.getCarried();
         if (ConfigC.config.RenderGUILight.get()) {
             if (!itemstack.isEmpty()) {
@@ -64,7 +64,7 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
 
     }
     @Inject(at = @At(value = "HEAD"), method = "render")
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){
+    public void renderHEAD(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){
         ItemStack itemstack = this.menu.getCarried();
         if (guiGraphics instanceof IGuiGraphics iGuiGraphics) {
             iGuiGraphics.chest_item$addW(itemstack);

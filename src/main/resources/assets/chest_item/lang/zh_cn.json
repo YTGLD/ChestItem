@@ -504,6 +504,17 @@
 
   "item.chest_item.complementary.string.3": "如果实际伤害大于面板伤害的100%",
   "item.chest_item.complementary.string.4": "则减少至面板的80%",
+  "item.chest_item.normal_constructs": "常态构造件",
+  "item.chest_item.bloody_death": "血殇",
+
+
+
+  "item.chest_item.fission_emblem": "裂变之徽",
+  "item.chest_item.fission_emblem.string.1": "使10格内生物提升10%承受伤害",
+  "item.chest_item.fission_emblem.string.2": "受到的伤害超过了10%最大生命值",
+  "item.chest_item.fission_emblem.string.3": "则此饰品基础属性提升105%，持续20秒",
+  "item.chest_item.fission_emblem.string.4": "受到的伤害超过了25%最大生命值",
+  "item.chest_item.fission_emblem.string.5": "则伤害提升25%，持续10秒",
 
 
 
