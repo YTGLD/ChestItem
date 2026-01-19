@@ -12,8 +12,6 @@ import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +25,6 @@ import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 import java.io.IOException;
-import java.util.Queue;
 
 @Mod(value = Chestitem.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = Chestitem.MODID, value = Dist.CLIENT)

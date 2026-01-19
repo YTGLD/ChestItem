@@ -22,6 +22,7 @@ public class EnchantedCountIncreaseFunctionMixin {
     @Shadow
     @Final
     private Holder<Enchantment> enchantment;
+
     @ModifyVariable(method = "run", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getEnchantmentLevel(Lnet/minecraft/core/Holder;Lnet/minecraft/world/entity/LivingEntity;)I", ordinal = 0), index = 5)
     private int curios$applyEnchantBonus(int enchantmentLevel, ItemStack stack,
                                          LootContext lootContext) {

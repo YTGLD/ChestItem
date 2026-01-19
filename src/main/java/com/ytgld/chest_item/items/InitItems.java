@@ -216,7 +216,6 @@ public class    InitItems {
 
     public static final DeferredItem<@NotNull Item> Complementary_ = register("complementary",
             (Identifier)-> new Complementary(new Item.Properties().stacksTo(1)));
-
     public static final DeferredItem<@NotNull Item> FissionEmblem_ = register("fission_emblem",
             (Identifier)-> new FissionEmblem(new Item.Properties().stacksTo(1)));
 
