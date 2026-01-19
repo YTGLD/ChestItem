@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.mixin.cilent;
 
+import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
@@ -42,6 +44,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED_SNIPPET;
 
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin implements IGuiGraphics {
@@ -432,6 +436,9 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (stack.getItem() instanceof NotLight ){
             return;
         }
+        if (stack.getItem() instanceof IBlackLight ){
+            return;
+        }
         if (stack.getItem() instanceof ItemBlackShadow soul && !(stack.getItem() instanceof ILight)) {
             Identifier identifier = Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
@@ -538,6 +545,102 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             x - size / 3, y - size / 3, 0, 0, size, size, size, size,
                             Light.ARGB.color((int) aFloat / 2, rs, gs, bs));
                 }
+            }
+        }
+    }
+    @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
+    public void TheBlackHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (!ConfigC.config.RenderItemTooltip.get()){
+            return;
+        }
+
+        if (stack.getItem() instanceof IGUILightList lightList){
+            if (lightList.guiLight(entity)!=null) {
+                if (lightList.guiLight(entity).doLight()) {
+                    return;
+                }
+            }
+        }
+        if (stack.getItem() instanceof NotLight ){
+            return;
+        }
+        if (stack.getItem() instanceof IBlackLight) {
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+
+            {
+                Identifier fire = Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                        "textures/gui/tooltip/fire_black.png");
+                float alpha = (float) (50 * Math.sin((entity.tickCount + seed)));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                        x - 8, y - 8, 0, 0,
+                        32, 32, 32, 32,
+                        Light.ARGB.color((int) (200 + alpha), 20, 0, 10));
+
+                float alpha1 = (float) (50 * Math.sin((entity.tickCount + seed) / 2f));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                        x - 8, y - 8, 0, 0,
+                        32, 32, 32, 32,
+                        Light.ARGB.color(-((int) (200 + alpha1)), 20, 0, 10));
+
+
+                float alpha2 = (float) (50 * Math.sin((entity.tickCount + seed) * 2f));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                        x - 8, y - 8, 0, 0,
+                        32, 32, 32, 32,
+                        Light.ARGB.color(-((int) (200 + alpha2)), 20, 0, 10));
+
+                float alpha3 = (float) (10 * Math.sin((entity.tickCount + seed) /4F));
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                        x - 8, y - 8, 0, 0,
+                        32, 32, 32, 32,
+                        Light.ARGB.color(-((int) (240 + alpha3)), 20, 0, 10));
+
+            }
+
+            {
+                Identifier fire = Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                        "textures/shadow/ci_star.png");
+
+                pose.pushMatrix();
+                pose.translate(8,8);
+                {
+                    float alphaOffset = (float) (10 * Math.sin(((entity.tickCount + seed))/10f));
+                    pose.pushMatrix();
+                    pose.translate(x, y);
+                    pose.rotate(entity.tickCount / 25f);
+                    pose.translate(-x, -y);
+                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                            x - 16, y - 16, 0, 0,
+                            32, 32, 32, 32,
+                            Light.ARGB.color((int) (60 + alphaOffset*2), 20, 0, 25));
+                    pose.popMatrix();
+                    {
+                        for (int i = 0; i < 4; i++) {
+                            pose.pushMatrix();
+                            pose.translate(x, y);
+                            pose.rotate((entity.tickCount + i * 40F) / 25f);
+                            pose.translate(-x, -y);
+                            guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                                    x - 16, y - 16, 0, 0,
+                                    32, 32, 32, 32,
+                                    Light.ARGB.color((int) (40 +alphaOffset), 20, 0, 25));
+                            pose.popMatrix();
+                        }
+                        for (int i = 0; i < 4; i++) {
+                            pose.pushMatrix();
+                            pose.translate(x, y);
+                            pose.rotate((entity.tickCount - i * 40F) / 25f);
+                            pose.translate(-x, -y);
+                            guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                                    x - 16, y - 16, 0, 0,
+                                    32, 32, 32, 32,
+                                    Light.ARGB.color((int) (40 +alphaOffset), 20, 5, 25));
+                            pose.popMatrix();
+                        }
+                    }
+                }
+
+                pose.popMatrix();
             }
         }
     }

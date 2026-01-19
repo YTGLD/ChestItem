@@ -441,9 +441,6 @@ public class EventMain {
                 if (living.tickCount % (int)time == 1) {
                     if (data < sNumber) {
                         living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, data + 1);
-                        if (ConfigC.config.hyperplasiaMusic.get()) {
-                            living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.WARDEN_HEARTBEAT, SoundSource.AMBIENT, 0.8f, 0.8f);
-                        }
                     }
                 }
                 if (data < 0) {

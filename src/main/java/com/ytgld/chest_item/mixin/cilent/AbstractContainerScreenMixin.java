@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.mixin.cilent;
 
 import com.ytgld.chest_item.ConfigC;
+import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.Terror;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
@@ -44,7 +45,7 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
         if (ConfigC.config.RenderGUILight.get()) {
             if (!itemstack.isEmpty()) {
                 if (itemstack.getItem() instanceof ItemBase) {
-                    if (!(itemstack.getItem() instanceof TheImprintOfTheSoul)) {
+                    if (!(itemstack.getItem() instanceof TheImprintOfTheSoul)&&!(itemstack.getItem() instanceof IBlackLight)) {
                         seekingImmortals$vec2.add(new Vec2(mouseX, mouseY));
                         if (itemstack.getItem() instanceof Terror terror) {
                             cI1_21_9$integerList = terror.color(itemstack);

@@ -147,6 +147,10 @@ public abstract class MRender {
                         ))
                         .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/gui_textured")).build());
 
+        public static final RenderPipeline GUI_TEXTURED_BLACK_BlendFunction =
+                (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).withBlend(BlendFunction.TRANSLUCENT)
+                        .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/gui_textured")).build());
+
         public static final RenderPipeline  TRANSLUCENT_PARTICLE = (RenderPipeline.builder(PARTICLE_SNIPPET)
                 .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/translucent_particle")).
                 withBlend(new BlendFunction(
