@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
@@ -180,7 +181,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 this.pose.popPose();
             }
             if (tooltipStack.getItem() instanceof ItemBlackShadow) {
-                if (tooltipStack.getItem() instanceof TheChaos){
+                if (tooltipStack.getItem() instanceof TheChaos||tooltipStack.getItem() instanceof ITheChaos){
                     this.pose.pushPose();
                     si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphics) (Object) this, l, i1, i, j, 400);
                     this.pose.popPose();
@@ -232,7 +233,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int bottomLeftX = x - 3 - 9 ;
             int bottomLeftY = y + height + 3 - 48 + 4;
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate(0.0F, 4,0);
+            guiGraphics.pose().translate(0.0F, -2,0);
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_1_0.png"), bottomLeftX, bottomLeftY, 0, 0,64, 64, 64, 64,1,1,1,1);

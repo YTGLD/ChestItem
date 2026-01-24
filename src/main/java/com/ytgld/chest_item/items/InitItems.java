@@ -219,6 +219,8 @@ public class    InitItems {
     public static final DeferredItem<@NotNull Item> FissionEmblem_ = register("fission_emblem",
             (Identifier)-> new FissionEmblem(new Item.Properties().stacksTo(1)));
 
+    public static final DeferredItem<@NotNull Item> Warmaker_ = register("warmaker",
+            (Identifier)-> new Warmaker(new Item.Properties().stacksTo(1)));
 
 
 
@@ -309,6 +311,7 @@ public class    InitItems {
                     output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.ErosionTokens_);
                     output.accept(InitItems.OneEyedSpider_);
+                    output.accept(InitItems.Warmaker_);
 
 
 

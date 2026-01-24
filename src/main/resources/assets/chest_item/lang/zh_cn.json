@@ -504,8 +504,24 @@
 
   "item.chest_item.complementary.string.3": "如果实际伤害大于面板伤害的100%",
   "item.chest_item.complementary.string.4": "则减少至面板的80%",
+  "item.chest_item.normal_constructs": "常态构造件",
+  "item.chest_item.bloody_death": "血殇",
 
 
+  "item.chest_item.warmaker": "战争缔造者",
+  "item.chest_item.warmaker.string.0":"杀戮的诅咒将在 %d 秒后降临...",
+  "item.chest_item.warmaker.string.1": "“用生灵的血液填满虚无之海”",
+  "item.chest_item.warmaker.string.2":"“让混沌的莲花再次绽放......”",
+
+  "item.chest_item.warmaker.string.3": "至多受到50%自身最大生命的伤害",
+  "item.chest_item.warmaker.string.4":"造成伤害附加10%自身最大生命的伤害",
+  "item.chest_item.warmaker.string.5": "若攻击的实际伤害低于面板的90%",
+  "item.chest_item.warmaker.string.5_1": "则强制造成100%的面板伤害",
+  "item.chest_item.warmaker.string.6":"杀死生物造成的超额伤害永久转换成额外生命",
+  "item.chest_item.warmaker.string.7": "每杀死1个生物都会永久增加自身的生命上限，侵蚀装甲和装甲爆碎伤害",
+  "item.chest_item.warmaker.string.8":"若超过10分钟未能击杀生物",
+  "item.chest_item.warmaker.string.8_1":"则每秒强制扣除4点生命值，直到濒死",
+  "item.chest_item.warmaker.string.9": "侵蚀装甲爆碎时永久减少生命上限，侵蚀装甲和装甲爆碎伤害",
 
 
   "item.chest_item.fission_emblem": "裂变之徽",
@@ -514,7 +530,6 @@
   "item.chest_item.fission_emblem.string.3": "则此饰品基础属性提升105%，持续20秒",
   "item.chest_item.fission_emblem.string.4": "受到的伤害超过了25%最大生命值",
   "item.chest_item.fission_emblem.string.5": "则伤害提升25%，持续10秒",
-
 
 
 

@@ -474,7 +474,25 @@
 
 "item.chest_item.complementary.string.3": "If the actual damage is greater than 100% of the damage of the panel",
   "item.chest_item.complementary.string.4": "then reduced to 80% of the panel",
-"item.chest_item.fission_emblem": "emblem of fission",
+
+  "item.chest_item.bloody_death": "Bloody death",
+  "item.chest_item.normal_constructs": "Normal Constructs",
+
+  "item.chest_item.warmaker": "Warmaker",
+  "item.chest_item.warmaker.string.0":"Time remaining：",
+  "item.chest_item.warmaker.string.1": "“Fill the sea of nothingness with the blood of living beings”",
+  "item.chest_item.warmaker.string.2":"“Let the lotus flower of chaos bloom again......”",
+"item.chest_item.warmaker.string.3": "Take up to 50% of your maximum health",
+  "item.chest_item.warmaker.string.4": "Damage dealt by 10% of its maximum health",
+  "item.chest_item.warmaker.string.5": "If the actual damage of the attack is less than 90% of the panel",
+  "item.chest_item.warmaker.string.5_1": "Forces 100% panel damage to be dealt",
+  "item.chest_item.warmaker.string.6":"Excess damage from killing creatures is permanently converted to extra life",
+  "item.chest_item.warmaker.string.7": "Each creature killed permanently increases its health limit, eroding armor and armor crushing damage",
+  "item.chest_item.warmaker.string.8":"If a creature is not killed for more than 10 minutes",
+  "item.chest_item.warmaker.string.8_1":"Then 4 health points per second will be forcibly deducted until near death",
+  "item.chest_item.warmaker.string.9": "Permanently reduces maximum health when eroding armor and eroding armor shatter damage",
+
+  "item.chest_item.fission_emblem": "emblem of fission",
   "item.chest_item.fission_emblem.string.1": "Increases damage taken by 10% for creatures within 10 tiles",
   "item.chest_item.fission_emblem.string.2": "Damage taken exceeds 10% of maximum health",
   "item.chest_item.fission_emblem.string.3": "Increases the base stats of this accessory by 105% for 20 seconds",
@@ -482,6 +500,7 @@
   "item.chest_item.fission_emblem.string.5": "Increases damage by 25% for 10 seconds",
 
 
-  "item.chest_item.pod": "wilted pod",
-  "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
+
+"item.chest_item.pod": "wilted pod",
+  "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"
 }

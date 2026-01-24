@@ -147,6 +147,7 @@ public class EventMain {
         Mutation.die(event);
         ChaosSeven.die(event);
         BrassCoins.die(event);
+        Warmaker.die(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
@@ -167,6 +168,7 @@ public class EventMain {
         FissionEmblem.hurt(event);
         FissionEmblem.attack(event);
         FissionEmblem.scAttack(event);
+        Warmaker.hurt(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player living) {
@@ -356,6 +358,8 @@ public class EventMain {
         ChaosConstructor.tick(event);
         TheBell.ItemStackTickEvent(event);
         FissionEmblem.tick(event);
+        Warmaker.tick(event);
+
         LivingEntity living = event.player;
 
         {
@@ -423,9 +427,6 @@ public class EventMain {
                 if (living.tickCount % (int)time == 1) {
                     if (data < sNumber) {
                         living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, data + 1);
-                        if (ConfigC.config.hyperplasiaMusic.get()) {
-                            living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.WARDEN_HEARTBEAT, SoundSource.AMBIENT, 0.8f, 0.8f);
-                        }
                     }
                 }
                 if (data < 0) {
