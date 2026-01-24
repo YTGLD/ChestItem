@@ -205,6 +205,8 @@ public class InitItems {
             (Identifier)-> new NormalConstructs(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> FissionEmblem_ = register("fission_emblem",
             (Identifier)-> new FissionEmblem(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> Warmaker_ = register("warmaker",
+            (Identifier)-> new Warmaker(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -300,6 +302,7 @@ public class InitItems {
                     output.accept(InitItems.ErosionTokens_);
                     output.accept(InitItems.OneEyedSpider_);
                     output.accept(InitItems.BloodyBelt_);
+                    output.accept(InitItems.Warmaker_);
 
 
 

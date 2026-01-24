@@ -148,6 +148,7 @@ public class EventMain {
         ChaosSeven.die(event);
         BloodyBelt.die(event);
         BrassCoins.die(event);
+        Warmaker.die(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
@@ -168,6 +169,7 @@ public class EventMain {
         FissionEmblem.hurt(event);
         FissionEmblem.attack(event);
         FissionEmblem.scAttack(event);
+        Warmaker.hurt(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
             if (event.getEntity() instanceof Player living) {
@@ -374,6 +376,7 @@ public class EventMain {
         TheBell.ItemStackTickEvent(event);
         BloodyBelt.tick(event);
         FissionEmblem.tick(event);
+        Warmaker.tick(event);
         LivingEntity living = event.player;
 
         {

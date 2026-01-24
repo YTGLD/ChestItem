@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
@@ -163,7 +164,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     this.pose.popMatrix();
                 }
                 if (tooltipStack.getItem()instanceof ItemBlackShadow){
-                    if (tooltipStack.getItem() instanceof TheChaos){
+                    if (tooltipStack.getItem() instanceof TheChaos  || tooltipStack.getItem() instanceof ITheChaos){
                         this.pose.pushMatrix();
                         si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphics) (Object) this, l, i1, i, j, 400);
                         this.pose.popMatrix();
@@ -327,7 +328,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int bottomLeftX = x - 3 - 9 ;
             int bottomLeftY = y + height + 3 - 48 + 4;
             guiGraphics.pose().pushMatrix();
-            guiGraphics.pose().translate(0.0F, 4);
+            guiGraphics.pose().translate(0.0F, -2);
             guiGraphics.blit(MRender.RenderPs.LightSlowness(false, 0.02f,4444),
                     Identifier.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_1_0.png"), bottomLeftX, bottomLeftY, 0, 0, 64, 64, 64, 64);
@@ -554,6 +555,9 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             return;
         }
 
+        if (entity == null) {
+            return;
+        }
         if (stack.getItem() instanceof IGUILightList lightList){
             if (lightList.guiLight(entity)!=null) {
                 if (lightList.guiLight(entity).doLight()) {
