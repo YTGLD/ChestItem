@@ -57,17 +57,14 @@ public class HardwoodTotemPole  extends ItemBase implements ILight {
 
                                 if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
                                     living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS,200,0));
-                                    player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.ARROW_HIT_PLAYER, SoundSource.AMBIENT,1,1);
                                 }
 
                                 if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
                                     player.addEffect(new MobEffectInstance(MobEffects.STRENGTH,200,0));
-                                    player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.ARROW_HIT_PLAYER, SoundSource.AMBIENT,1,1);
                                 }
 
                                 if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
                                     player.heal(2);
-                                    player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.ARROW_HIT_PLAYER, SoundSource.AMBIENT,1,1);
                                 }
                                 break;
                             }
@@ -87,18 +84,15 @@ public class HardwoodTotemPole  extends ItemBase implements ILight {
 
                                 if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
                                     player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE,100,0));
-                                    player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.ARROW_HIT_PLAYER, SoundSource.AMBIENT,1,1);
                                 }
 
                                 if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
                                     player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION,100,0));
-                                    player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.ARROW_HIT_PLAYER, SoundSource.AMBIENT,1,1);
                                 }
 
 
                                 if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
                                     living.hurt(living.damageSources().playerAttack(player), (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE)*0/33F);
-                                    player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.ARROW_HIT_PLAYER, SoundSource.AMBIENT,1,1);
                                 }
                                 break;
                             }

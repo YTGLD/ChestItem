@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.black;
+package com.ytgld.chest_item.items.black.chaos_item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -10,10 +10,10 @@ import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
+import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -70,7 +70,7 @@ import java.util.function.Consumer;
  * <p>
  * 	+10% 伤害
  */
-public class Warmaker extends ItemBlackShadow implements IBlackLight ,ITheChaos{
+public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos {
 
     public static final String healthStringFloat ="healthStringFloat";
     public static final String killIntString ="killIntString";
@@ -186,15 +186,7 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight ,ITheChaos{
             }
         }
     }
-    public int colorText(){
-        int s = (int) (100 * Math.sin(EventMain.time / 20f / 4f));
-        int f = (int) (100 * Math.sin(EventMain.time / 40f / 4f));
-        int c = (int) (20 * Math.sin(EventMain.time / 60f / 4f));
-        if (c<0) {
-            c = 0;
-        }
-        return Light.ARGB.color(230 + c,255, 55 + f/2, 105 + s);
-    }
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);

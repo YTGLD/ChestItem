@@ -505,6 +505,23 @@
   "advancements.chest_item.lead_of_enlightenment": "The bloom of the flower of the way",
   "item.chest_item.lead_of_enlightenment.string.0": "The ancient seal gradually loosened...",
   "item.chest_item.lead_of_enlightenment.string.1": "Can be used to unlock the following items：",
+"item.chest_item.chaos_fortress": "Chaos Fortress",
+  "advancements.chest_item.chaos_fortress": "endless pain",
+  "item.chest_item.chaos_fortress.string.0": "The will of the lead of enlightenment is calling, take it, and bear the suffering of this world to create this supreme power",
+  "item.chest_item.chaos_fortress.string.1": "The flower of the path is gradually withering....",
+  "item.chest_item.chaos_fortress.string.2": "But it is difficult to resist the blooming of flowers in nine days",
+  "item.chest_item.chaos_fortress.string.3": "Increases resistance by 15%",
+  "item.chest_item.chaos_fortress.string.4": "Gain 55% Erosion Armor based on Armor Value",
+  "item.chest_item.chaos_fortress.string.5": "Kill a creature to restore 10% of erosion armor",
+  "item.chest_item.chaos_fortress.string.6": "Deals 80% Void damage based on self-eroding armor to attackers when taking damage",
+  "item.chest_item.chaos_fortress.string.7": "5% chance to become invincible for 3 seconds when attacked",
+  "item.chest_item.chaos_fortress.string.8": "Negates damage below 2",
+  "item.chest_item.chaos_fortress.string.9": "Creatures full of life reduce your damage by 20%",
+  "item.chest_item.chaos_fortress.string.10":"The totem of immortality cannot work on you",
+  "item.chest_item.chaos_fortress.string.11": "Increases magic damage taken by 400%",
+  "item.chest_item.chaos_fortress.string.12":"Erosion armor is difficult to recover naturally",
+
+
 
   "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"

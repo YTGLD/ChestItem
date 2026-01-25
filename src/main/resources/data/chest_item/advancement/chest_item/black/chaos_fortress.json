@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/black/lead_of_enlightenment",
+  "criteria": {
+    "chaos_fortress": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:chaos_fortress"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "item.chest_item.chaos_fortress.string.0"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:chaos_fortress"
+    },
+    "title": {
+      "translate": "advancements.chest_item.chaos_fortress"
+    }
+  },
+  "requirements": [
+    [
+      "chaos_fortress"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

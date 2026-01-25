@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import java.util.function.Consumer;
@@ -23,9 +24,37 @@ import java.util.function.Consumer;
 public class LeadOfEnlightenment extends ItemBlackShadow implements IBlackLight {
 
     public static final String killWarmaker = "killWarmaker";
+    public static final String hurtGiveChaosFortress = "hurtGiveChaosFortress";
 
     public LeadOfEnlightenment(Properties properties) {
         super(properties);
+    }
+    public static void die(LivingDamageEvent.Pre event){
+        if (event.getEntity() instanceof Player player){
+            ChestInventory chestInventory = Handler.getItem(player);
+            if (Handler.has(player, InitItems.ChaosFortress_.asItem())) {
+                return;
+            }
+            if (chestInventory != null) {
+                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                    ItemStack stack = chestInventory.getItem(i);
+                    if (stack.is(InitItems.LeadOfEnlightenment_)) {
+                        CompoundTag component = stack.get(DataReg.tag);
+                        if (isTrue(stack, 15000,hurtGiveChaosFortress)) {
+                            player.level().playSound(null,player.blockPosition(), SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.AMBIENT);
+                            chestInventory.setItem(i,new ItemStack(InitItems.ChaosFortress_.asItem()));
+                        }
+                        if (component != null) {
+                            component.putInt(hurtGiveChaosFortress,
+                                    (int) (component.getIntOr(hurtGiveChaosFortress,0)+ event.getNewDamage()));
+                            return;
+                        }else {
+                            stack.set(DataReg.tag,new CompoundTag());
+                        }
+                    }
+                }
+            }
+        }
     }
     public static void die(LivingDeathEvent event){
         if (event.getSource().getEntity() instanceof Player player){

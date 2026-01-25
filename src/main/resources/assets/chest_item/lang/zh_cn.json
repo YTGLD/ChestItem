@@ -538,6 +538,22 @@
   "item.chest_item.warmaker.string.9": "侵蚀装甲爆碎时永久减少生命上限，侵蚀装甲和装甲爆碎伤害",
 
 
+  "item.chest_item.chaos_fortress": "混沌要塞之护",
+  "advancements.chest_item.chaos_fortress": "无尽的痛苦",
+  "item.chest_item.chaos_fortress.string.0": "启明之铅的意志正在召唤，带上它，承受这世间的痛苦方可造就这无上之力",
+  "item.chest_item.chaos_fortress.string.1": "合道之花渐凋零...",
+  "item.chest_item.chaos_fortress.string.2": "难抵九天百花娇...",
+  "item.chest_item.chaos_fortress.string.3": "增加30%的抗性",
+  "item.chest_item.chaos_fortress.string.4":"获得55%基于护甲值的侵蚀装甲",
+  "item.chest_item.chaos_fortress.string.5": "杀死生物恢复10%的侵蚀装甲",
+  "item.chest_item.chaos_fortress.string.6":"受到伤害时对攻击者造成80%基于自身侵蚀装甲的虚空伤害",
+  "item.chest_item.chaos_fortress.string.7": "被攻击时有5%的概率获得3秒无敌",
+  "item.chest_item.chaos_fortress.string.8":"无效化低于2点的伤害",
+  "item.chest_item.chaos_fortress.string.9": "满生命的生物对你的伤害降低20%",
+  "item.chest_item.chaos_fortress.string.10":"不死图腾无法对你生效",
+  "item.chest_item.chaos_fortress.string.11": "受到的魔法伤害提高400%",
+  "item.chest_item.chaos_fortress.string.12":"侵蚀装甲难以自然恢复",
+
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 }
