@@ -508,11 +508,25 @@
   "item.chest_item.bloody_death": "血殇",
 
 
+
+  "item.chest_item.fission_emblem": "裂变之徽",
+  "item.chest_item.fission_emblem.string.1": "使10格内生物提升10%承受伤害",
+  "item.chest_item.fission_emblem.string.2": "受到的伤害超过了10%最大生命值",
+  "item.chest_item.fission_emblem.string.3": "则此饰品基础属性提升105%，持续20秒",
+  "item.chest_item.fission_emblem.string.4": "受到的伤害超过了25%最大生命值",
+  "item.chest_item.fission_emblem.string.5": "则伤害提升25%，持续10秒",
+
+  "item.chest_item.lead_of_enlightenment": "启明之铅",
+  "advancements.chest_item.lead_of_enlightenment": "合道之花的绽放",
+  "item.chest_item.lead_of_enlightenment.string.0": "远古的封印渐渐松动...",
+  "item.chest_item.lead_of_enlightenment.string.1": "可用于解锁下列物品：",
+
   "item.chest_item.warmaker": "战争缔造者",
-  "item.chest_item.warmaker.string.0":"杀戮的诅咒将在 %d 秒后降临...",
+  "advancements.chest_item.warmaker": "虚妄血海",
+  "item.chest_item.warmaker.string.0": "启明之铅的封印已松动，佩戴上它，攒齐足够的杀戮意志即可开启那扇通往未知的门户....",
+  "item.chest_item.warmaker.string.0_1":"杀戮的诅咒将在 %d 秒后降临...",
   "item.chest_item.warmaker.string.1": "“用生灵的血液填满虚无之海”",
   "item.chest_item.warmaker.string.2":"“让混沌的莲花再次绽放......”",
-
   "item.chest_item.warmaker.string.3": "至多受到50%自身最大生命的伤害",
   "item.chest_item.warmaker.string.4":"造成伤害附加10%自身最大生命的伤害",
   "item.chest_item.warmaker.string.5": "若攻击的实际伤害低于面板的90%",
@@ -522,15 +536,6 @@
   "item.chest_item.warmaker.string.8":"若超过10分钟未能击杀生物",
   "item.chest_item.warmaker.string.8_1":"则每秒强制扣除4点生命值，直到濒死",
   "item.chest_item.warmaker.string.9": "侵蚀装甲爆碎时永久减少生命上限，侵蚀装甲和装甲爆碎伤害",
-
-
-  "item.chest_item.fission_emblem": "裂变之徽",
-  "item.chest_item.fission_emblem.string.1": "使10格内生物提升10%承受伤害",
-  "item.chest_item.fission_emblem.string.2": "受到的伤害超过了10%最大生命值",
-  "item.chest_item.fission_emblem.string.3": "则此饰品基础属性提升105%，持续20秒",
-  "item.chest_item.fission_emblem.string.4": "受到的伤害超过了25%最大生命值",
-  "item.chest_item.fission_emblem.string.5": "则伤害提升25%，持续10秒",
-
 
 
   "item.chest_item.pod": "枯萎荚果",

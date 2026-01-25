@@ -13,6 +13,7 @@ import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -200,24 +201,25 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight ,ITheChaos{
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (compoundTag != null) {
             int s = compoundTag.getIntOr(notKillTimeInt,0);
-            tooltipAdder.accept((Component.translatable("item.chest_item.warmaker.string.0",s)).withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,255,0,0))));
+            tooltipAdder.accept((Component.translatable("item.chest_item.warmaker.string.0_1",s)).withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,255,0,0))));
             tooltipAdder.accept(Component.literal(""));
-        }
-        if (!flag.hasShiftDown()) {
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+            if (!flag.hasShiftDown()) {
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+            }else {
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.5_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.accept(Component.literal(""));
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.accept(Component.literal(""));
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.8_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            }
         }else {
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.5_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.literal(""));
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.literal(""));
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.8_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-//        tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.9").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipAdder.accept((Component.translatable("item.chest_item.warmaker.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
         }
     }
     @Override

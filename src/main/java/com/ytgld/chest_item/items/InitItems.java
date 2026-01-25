@@ -5,6 +5,7 @@ import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
+import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
@@ -207,6 +208,8 @@ public class InitItems {
             (Identifier)-> new FissionEmblem(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> Warmaker_ = register("warmaker",
             (Identifier)-> new Warmaker(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> LeadOfEnlightenment_ = register("lead_of_enlightenment",
+            (Identifier)-> new LeadOfEnlightenment(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -298,11 +301,12 @@ public class InitItems {
                     output.accept(InitItems.CorruptionCrystal_);
                     output.accept(InitItems.Pod_);
                     output.accept(InitItems.ChaosConstructor_);
-                    output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.ErosionTokens_);
                     output.accept(InitItems.OneEyedSpider_);
                     output.accept(InitItems.BloodyBelt_);
+                    output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.Warmaker_);
+                    output.accept(InitItems.LeadOfEnlightenment_);
 
 
 

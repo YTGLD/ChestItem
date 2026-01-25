@@ -10,6 +10,7 @@ import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
+import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
@@ -149,6 +150,7 @@ public class EventMain {
         BloodyBelt.die(event);
         BrassCoins.die(event);
         Warmaker.die(event);
+        LeadOfEnlightenment.die(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){

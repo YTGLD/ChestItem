@@ -479,7 +479,9 @@
   "item.chest_item.normal_constructs": "Normal Constructs",
 
   "item.chest_item.warmaker": "Warmaker",
-  "item.chest_item.warmaker.string.0":"Time remaining：",
+  "advancements.chest_item.warmaker": "The seal of the Qiming Divine Lead has been loosened, and the main thing is to gather enough will to kill to open the unknown portal....",
+  "item.chest_item.warmaker.string.0": "A sea of false blood",
+  "item.chest_item.warmaker.string.0_1":"Time remaining：",
   "item.chest_item.warmaker.string.1": "“Fill the sea of nothingness with the blood of living beings”",
   "item.chest_item.warmaker.string.2":"“Let the lotus flower of chaos bloom again......”",
 "item.chest_item.warmaker.string.3": "Take up to 50% of your maximum health",
@@ -499,8 +501,11 @@
   "item.chest_item.fission_emblem.string.4": "Damage taken exceeds 25% of maximum health",
   "item.chest_item.fission_emblem.string.5": "Increases damage by 25% for 10 seconds",
 
+  "item.chest_item.lead_of_enlightenment": "Lead of enlightenment",
+  "advancements.chest_item.lead_of_enlightenment": "The bloom of the flower of the way",
+  "item.chest_item.lead_of_enlightenment.string.0": "The ancient seal gradually loosened...",
+  "item.chest_item.lead_of_enlightenment.string.1": "Can be used to unlock the following items：",
 
-
-"item.chest_item.pod": "wilted pod",
+  "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"
 }
