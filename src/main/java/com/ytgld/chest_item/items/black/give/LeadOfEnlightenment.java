@@ -83,14 +83,6 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements IBlackLight 
         }
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
-
-        tooltipAdder.accept(Component.translatable("item.chest_item.lead_of_enlightenment.string.1").append(":").withStyle(ChatFormatting.GRAY));
-        tooltipAdder.accept(Component.translatable("item.chest_item.warmaker").withStyle(ChatFormatting.GRAY));
-    }
-
     private static boolean isTrue (ItemStack target, int max, String tag){
         CompoundTag component = target.get(DataReg.tag);
         if (component != null) {

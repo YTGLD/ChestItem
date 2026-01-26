@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
@@ -214,6 +215,9 @@ public class InitItems {
             (Identifier)-> new LeadOfEnlightenment(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> ChaosFortress_ = register("chaos_fortress",
             (Identifier)-> new ChaosFortress(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<@NotNull Item> OwnerLead_ = register("owner_lead",
+            (Identifier)-> new OwnerLead(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
