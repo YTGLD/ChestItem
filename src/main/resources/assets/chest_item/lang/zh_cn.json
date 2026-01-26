@@ -554,6 +554,8 @@
   "item.chest_item.chaos_fortress.string.11": "受到的魔法伤害提高400%",
   "item.chest_item.chaos_fortress.string.12":"侵蚀装甲难以自然恢复",
 
+  "item.chest_item.owner_lead": "创世者的礼物",
+
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 }

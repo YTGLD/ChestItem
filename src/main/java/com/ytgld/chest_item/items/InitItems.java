@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
@@ -27,6 +28,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -229,6 +231,8 @@ public class    InitItems {
     public static final DeferredItem<@NotNull Item> ChaosFortress_ = register("chaos_fortress",
             (Identifier)-> new ChaosFortress(new Item.Properties().stacksTo(1)));
 
+    public static final DeferredItem<@NotNull Item> OwnerLead_ = register("owner_lead",
+            (Identifier)-> new OwnerLead(new Item.Properties().stacksTo(1)));
 
 
     public static final DeferredItem<Item> Pod_ = register("pod",

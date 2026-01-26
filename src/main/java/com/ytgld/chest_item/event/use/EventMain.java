@@ -3,6 +3,7 @@ package com.ytgld.chest_item.event.use;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
@@ -24,9 +25,11 @@ import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -54,17 +57,37 @@ import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEnchantItemEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
+import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class EventMain {
+
+    public Set<UUID> setUUID = new HashSet<>();
+    @SubscribeEvent
+    public void setUUIDPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
+        setUUID.add(UUID.fromString("3cc7f94f-5dfc-46a2-9fa3-6be4f46d0cba"));
+        setUUID.add(UUID.fromString("081c4a0e-d3d6-4a5b-9dec-3c03c92cdc8e"));
+        setUUID.add(UUID.fromString("00000000-0000-3005-998f-5030997cf9c8"));
+        setUUID.add(UUID.fromString("70f68910-6833-401b-988b-30ceeb675b60"));
+        setUUID.add(UUID.fromString("5939a1ab-6e04-4511-af2e-2817cdda3089"));
+        setUUID.add(UUID.fromString("66b8e3c0-c0f9-47ec-b016-aaa61d112c76"));
+
+        Player player = event.getEntity();
+        if (setUUID.contains(player.getUUID())) {
+            if (!player.getTags().contains(OwnerLead.name)) {
+                ItemStack stack = InitItems.OwnerLead_.get().getDefaultInstance();
+                CompoundTag compoundTag = new CompoundTag();
+                compoundTag.putString(OwnerLead.name, player.getDisplayName().getString());
+                stack.set(DataReg.tag,compoundTag);
+                player.addItem(stack);
+                player.addTag(OwnerLead.name);
+            }
+        }
+    }
+
     public static int time = 0;
     @SubscribeEvent
     public void ItemTooltipEvent(LevelTickEvent.Pre event){
