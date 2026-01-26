@@ -3,8 +3,11 @@ package com.ytgld.chest_item.items;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
+import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
+import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
+import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
@@ -24,7 +27,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -221,6 +223,11 @@ public class    InitItems {
 
     public static final DeferredItem<@NotNull Item> Warmaker_ = register("warmaker",
             (Identifier)-> new Warmaker(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> LeadOfEnlightenment_ = register("lead_of_enlightenment",
+            (Identifier)-> new LeadOfEnlightenment(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<@NotNull Item> ChaosFortress_ = register("chaos_fortress",
+            (Identifier)-> new ChaosFortress(new Item.Properties().stacksTo(1)));
 
 
 
@@ -237,9 +244,9 @@ public class    InitItems {
                 .title(Component.translatable("itemGroup.chest_item"))
                 .icon(Items.CHEST::getDefaultInstance)
                 .displayItems((parameters, output) -> {
+                    output.accept(InitItems.FissionEmblem_);
 
                     output.accept(InitItems.Fission_);
-                    output.accept(InitItems.FissionEmblem_);
                     output.accept(InitItems.FleshAndBloodGears_);
                     output.accept(InitItems.Blood_);
                     output.accept(InitItems.Chaos_);
@@ -250,7 +257,7 @@ public class    InitItems {
 
 
 
-
+                    output.accept(InitItems.TheBell_);
                     output.accept(InitItems.DriftingBottles_);
                     output.accept(InitItems.God_blood);
                     output.accept(InitItems.Drug_Heal);
@@ -290,6 +297,9 @@ public class    InitItems {
                     output.accept(InitItems.HardwoodTotemPole_);
 
 
+
+
+
                     output.accept(InitItems.GiantHeart_);
                     output.accept(InitItems.ImitationBiomass_);
                     output.accept(InitItems.Heart_);
@@ -301,6 +311,9 @@ public class    InitItems {
                     output.accept(InitItems.LifeCoin_);
                     output.accept(InitItems.HeavyBlade_);
 
+
+
+
                     output.accept(InitItems.DeathOmenStoneMonument_);
                     output.accept(InitItems.EvilThoughtsForgeDreams_);
                     output.accept(InitItems.DryBones_);
@@ -308,10 +321,12 @@ public class    InitItems {
                     output.accept(InitItems.CorruptionCrystal_);
                     output.accept(InitItems.Pod_);
                     output.accept(InitItems.ChaosConstructor_);
-                    output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.ErosionTokens_);
                     output.accept(InitItems.OneEyedSpider_);
+                    output.accept(InitItems.LeadOfEnlightenment_);
+                    output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.Warmaker_);
+                    output.accept(InitItems.ChaosFortress_);
 
 
 
@@ -324,7 +339,6 @@ public class    InitItems {
                     output.accept(InitItems.Glutton_);
                     output.accept(InitItems.Speed_);
                     output.accept(InitItems.Silent_);
-                    output.accept(InitItems.TheBell_);
                     output.accept(InitItems.Complementary_);
 
 

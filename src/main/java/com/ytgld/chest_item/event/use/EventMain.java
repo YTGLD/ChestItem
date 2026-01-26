@@ -2,27 +2,25 @@ package com.ytgld.chest_item.event.use;
 
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
+import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
+import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
+import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
 import com.ytgld.chest_item.items.blood.BoneHead;
 import com.ytgld.chest_item.items.blood.GodBlood;
-import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
-import com.ytgld.chest_item.items.condensebone.QualitativeComponents;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
 import com.ytgld.chest_item.items.gold.*;
-import com.ytgld.chest_item.items.iron.IronCube;
-import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -33,8 +31,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -148,11 +144,17 @@ public class EventMain {
         ChaosSeven.die(event);
         BrassCoins.die(event);
         Warmaker.die(event);
+        LeadOfEnlightenment.die(event);
+        ChaosFortress.killArmor(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
         Lead.event(event);
         AlienationDiodes.CriticalHitEvent(event);
+    }
+    @SubscribeEvent
+    public  void dieTotem(LivingUseTotemEvent event) {
+        ChaosFortress.dieTotem(event);
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
@@ -169,6 +171,8 @@ public class EventMain {
         FissionEmblem.attack(event);
         FissionEmblem.scAttack(event);
         Warmaker.hurt(event);
+        ChaosFortress.hurtRes(event);
+        LeadOfEnlightenment.die(event);
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player living) {
@@ -301,6 +305,8 @@ public class EventMain {
         MassEnergyConverter.LivingIncomingDamageEvent(event);
         Samsara.event(event);
         Chaos.event(event);
+        ChaosFortress.hurtBy2(event);
+
         if (event.getSource().getEntity() instanceof LivingEntity living){
             AttributeInstance instability = living.getAttribute(AttReg.instability);
             if (instability != null) {

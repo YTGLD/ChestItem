@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.mixin;
 
 import com.ytgld.chest_item.effect.Effects;
+import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
 import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -20,6 +21,7 @@ public abstract class EntityMixin {
                 cir.setReturnValue(true);
             }
             TheOrderOfTheUndead.immMagic(player,damageSource,cir);
+            ChaosFortress.isInvulnerableToBase(player,damageSource,cir);
         }
     }
 }

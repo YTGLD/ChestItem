@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.black;
+package com.ytgld.chest_item.items.black.chaos_item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -10,6 +10,7 @@ import com.ytgld.chest_item.items.AttReg;
 
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
+import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -33,7 +34,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  *战争缔造者
@@ -69,7 +69,7 @@ import java.util.function.Consumer;
  * <p>
  * 	+10% 伤害
  */
-public class Warmaker extends ItemBlackShadow implements ITheChaos{
+public class Warmaker extends ItemBlackShadow implements ITheChaos {
 
     public static final String healthStringFloat ="healthStringFloat";
     public static final String killIntString ="killIntString";
@@ -184,15 +184,6 @@ public class Warmaker extends ItemBlackShadow implements ITheChaos{
                 event.setNewDamage(event.getNewDamage() + damage);
             }
         }
-    }
-    public int colorText(){
-        int s = (int) (100 * Math.sin(EventMain.time / 20f / 4f));
-        int f = (int) (100 * Math.sin(EventMain.time / 40f / 4f));
-        int c = (int) (20 * Math.sin(EventMain.time / 60f / 4f));
-        if (c<0) {
-            c = 0;
-        }
-        return Light.ARGB.color(230 + c,255, 55 + f/2, 105 + s);
     }
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipAdder, TooltipFlag flag) {

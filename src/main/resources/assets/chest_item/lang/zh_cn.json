@@ -508,11 +508,25 @@
   "item.chest_item.bloody_death": "血殇",
 
 
+
+  "item.chest_item.fission_emblem": "裂变之徽",
+  "item.chest_item.fission_emblem.string.1": "使10格内生物提升10%承受伤害",
+  "item.chest_item.fission_emblem.string.2": "受到的伤害超过了10%最大生命值",
+  "item.chest_item.fission_emblem.string.3": "则此饰品基础属性提升105%，持续20秒",
+  "item.chest_item.fission_emblem.string.4": "受到的伤害超过了25%最大生命值",
+  "item.chest_item.fission_emblem.string.5": "则伤害提升25%，持续10秒",
+
+  "item.chest_item.lead_of_enlightenment": "启明之铅",
+  "advancements.chest_item.lead_of_enlightenment": "合道之花的绽放",
+  "item.chest_item.lead_of_enlightenment.string.0": "远古的封印渐渐松动...",
+  "item.chest_item.lead_of_enlightenment.string.1": "可用于解锁下列物品：",
+
   "item.chest_item.warmaker": "战争缔造者",
-  "item.chest_item.warmaker.string.0":"杀戮的诅咒将在 %d 秒后降临...",
+  "advancements.chest_item.warmaker": "虚妄血海",
+  "item.chest_item.warmaker.string.0": "启明之铅的封印已松动，佩戴上它，攒齐足够的杀戮意志即可开启那扇通往未知的门户....",
+  "item.chest_item.warmaker.string.0_1":"杀戮的诅咒将在 %d 秒后降临...",
   "item.chest_item.warmaker.string.1": "“用生灵的血液填满虚无之海”",
   "item.chest_item.warmaker.string.2":"“让混沌的莲花再次绽放......”",
-
   "item.chest_item.warmaker.string.3": "至多受到50%自身最大生命的伤害",
   "item.chest_item.warmaker.string.4":"造成伤害附加10%自身最大生命的伤害",
   "item.chest_item.warmaker.string.5": "若攻击的实际伤害低于面板的90%",
@@ -524,14 +538,21 @@
   "item.chest_item.warmaker.string.9": "侵蚀装甲爆碎时永久减少生命上限，侵蚀装甲和装甲爆碎伤害",
 
 
-  "item.chest_item.fission_emblem": "裂变之徽",
-  "item.chest_item.fission_emblem.string.1": "使10格内生物提升10%承受伤害",
-  "item.chest_item.fission_emblem.string.2": "受到的伤害超过了10%最大生命值",
-  "item.chest_item.fission_emblem.string.3": "则此饰品基础属性提升105%，持续20秒",
-  "item.chest_item.fission_emblem.string.4": "受到的伤害超过了25%最大生命值",
-  "item.chest_item.fission_emblem.string.5": "则伤害提升25%，持续10秒",
-
-
+  "item.chest_item.chaos_fortress": "混沌要塞之护",
+  "advancements.chest_item.chaos_fortress": "无尽的痛苦",
+  "item.chest_item.chaos_fortress.string.0": "启明之铅的意志正在召唤，带上它，承受这世间的痛苦方可造就这无上之力",
+  "item.chest_item.chaos_fortress.string.1": "合道之花渐凋零...",
+  "item.chest_item.chaos_fortress.string.2": "难抵九天百花娇...",
+  "item.chest_item.chaos_fortress.string.3": "增加30%的抗性",
+  "item.chest_item.chaos_fortress.string.4":"获得55%基于护甲值的侵蚀装甲",
+  "item.chest_item.chaos_fortress.string.5": "杀死生物恢复10%的侵蚀装甲",
+  "item.chest_item.chaos_fortress.string.6":"受到伤害时对攻击者造成80%基于自身侵蚀装甲的虚空伤害",
+  "item.chest_item.chaos_fortress.string.7": "被攻击时有5%的概率获得3秒无敌",
+  "item.chest_item.chaos_fortress.string.8":"无效化低于2点的伤害",
+  "item.chest_item.chaos_fortress.string.9": "满生命的生物对你的伤害降低20%",
+  "item.chest_item.chaos_fortress.string.10":"不死图腾无法对你生效",
+  "item.chest_item.chaos_fortress.string.11": "受到的魔法伤害提高400%",
+  "item.chest_item.chaos_fortress.string.12":"侵蚀装甲难以自然恢复",
 
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
