@@ -521,6 +521,7 @@
   "item.chest_item.chaos_fortress.string.11": "Increases magic damage taken by 400%",
   "item.chest_item.chaos_fortress.string.12":"Erosion armor is difficult to recover naturally",
 
+  "chest_item.config.chaosFortress": "Requirements for obtaining the Protection of the Chaos Fortress",
   "item.chest_item.owner_lead": "owner lead",
 
 

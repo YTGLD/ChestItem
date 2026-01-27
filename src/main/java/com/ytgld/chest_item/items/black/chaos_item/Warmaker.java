@@ -107,9 +107,15 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos
                                 tag.putInt(notKillTimeInt, tag.getIntOr(notKillTimeInt, 0) - 1);
                                 break;
                             }else {
-                                if (player.getHealth() > 10) {
-                                    player.setHealth(player.getHealth() - 4);
-                                    break;
+
+                                float damage = getCurseDamage(stack);
+                                if (player.getHealth() > 1) {
+                                    if (player.getHealth() > damage) {
+                                        player.setHealth(player.getHealth() - damage);
+                                        break;
+                                    }else {
+                                        player.setHealth(1);
+                                    }
                                 }
                             }
                         } else {
@@ -132,7 +138,7 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos
                             //每杀死1个生物都会永久增加自身的生命上限，侵蚀装甲和装甲爆碎伤害
                             if (tag != null) {
                                 tag.putFloat(killIntString,tag.getFloatOr(killIntString,0)+1);
-                                tag.putInt(notKillTimeInt,notKillTime);
+                                tag.putInt(notKillTimeInt,getCurseTime(stack));
                                 break;
                             }else {
                                 stack.set(DataReg.tag,new CompoundTag());
@@ -186,7 +192,28 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos
             }
         }
     }
-
+    public static float getCurseDamage(ItemStack stack){
+        CompoundTag compoundTag = stack.get(DataReg.tag);
+        if (compoundTag != null) {
+            float s = compoundTag.getIntOr(killIntString,0);
+            return (float) Math.sqrt(s) + 4;
+        }
+        return 4;
+    }
+    public static int getCurseTime(ItemStack stack){
+        CompoundTag compoundTag = stack.get(DataReg.tag);
+        if (compoundTag != null) {
+            //1000个生物就是1000秒
+            int s = compoundTag.getIntOr(killIntString,0);
+            //1000个生物就是500秒
+            int l =  s / 2;
+            if (l < 5) {
+                l = 5;
+            }
+            return notKillTime - l;
+        }
+        return notKillTime;
+    }
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
@@ -208,7 +235,7 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos
                 tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.accept(Component.literal(""));
                 tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.8_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.8_1",getCurseDamage(stack)).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
             }
         }else {
             tooltipAdder.accept((Component.translatable("item.chest_item.warmaker.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
@@ -261,7 +288,7 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos
             if (addHealth > 20) {
                 addHealth = 20;
             }
-            health += (sq * 2) + addHealth;
+            health += (sq * 1.1f) + addHealth;
         }
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(Identifier.parse(Chestitem.MODID +

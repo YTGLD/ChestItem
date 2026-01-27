@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.items.black.give;
 
+import com.ytgld.chest_item.Config;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.InitItems;
@@ -40,7 +41,7 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements IBlackLight 
                     ItemStack stack = chestInventory.getItem(i);
                     if (stack.is(InitItems.LeadOfEnlightenment_)) {
                         CompoundTag component = stack.get(DataReg.tag);
-                        if (isTrue(stack, 15000,hurtGiveChaosFortress)) {
+                        if (isTrue(stack, Config.config.chaosFortress.get(),hurtGiveChaosFortress)) {
                             player.level().playSound(null,player.blockPosition(), SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.AMBIENT);
                             chestInventory.setItem(i,new ItemStack(InitItems.ChaosFortress_.asItem()));
                         }

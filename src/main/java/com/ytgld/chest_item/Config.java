@@ -13,8 +13,12 @@ public class Config {
             doEndComingUp =  BUILDER
                     .translation("chest_item.config.doEndComingUp")
                     .define("doEndComingUp", true);
+            chaosFortress =  BUILDER
+                    .translation("chest_item.config.chaosFortress")
+                    .defineInRange("chaosFortress", 5000,1,Integer.MAX_VALUE);
         }
         BUILDER.pop();
     }
     public final ModConfigSpec.BooleanValue doEndComingUp;
+    public final ModConfigSpec.IntValue chaosFortress;
 }
