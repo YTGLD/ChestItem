@@ -555,6 +555,7 @@
   "item.chest_item.chaos_fortress.string.12":"侵蚀装甲难以自然恢复",
 
   "item.chest_item.owner_lead": "创世者的礼物",
+  "chest_item.config.chaosFortress": "混沌要塞之护的获取要求",
 
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"

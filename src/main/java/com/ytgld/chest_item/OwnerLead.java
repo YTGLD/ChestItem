@@ -2,6 +2,7 @@ package com.ytgld.chest_item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.DataReg;
@@ -47,6 +48,10 @@ public class OwnerLead extends ItemBase {
                 0.08F, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.OwnerLead_.asItem().getDescriptionId()),
                 4, AttributeModifier.Operation.ADD_VALUE));
+        modifiers.put(AttReg.fortune, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.OwnerLead_.asItem().getDescriptionId()),
+                1, AttributeModifier.Operation.ADD_VALUE));
+        modifiers.put(AttReg.looting, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.OwnerLead_.asItem().getDescriptionId()),
+                1, AttributeModifier.Operation.ADD_VALUE));
 
         return modifiers;
     }

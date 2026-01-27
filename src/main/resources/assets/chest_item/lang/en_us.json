@@ -522,7 +522,7 @@
   "item.chest_item.chaos_fortress.string.12":"Erosion armor is difficult to recover naturally",
 
   "item.chest_item.owner_lead": "owner lead",
-
+  "chest_item.config.chaosFortress": "Requirements for obtaining the Protection of the Chaos Fortress",
 
   "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"
