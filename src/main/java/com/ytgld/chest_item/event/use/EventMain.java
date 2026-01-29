@@ -36,10 +36,13 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -86,6 +89,26 @@ public class EventMain {
             }
         }
     }
+    @SubscribeEvent
+    public void LivingDropsEvent(LivingDropsEvent event){
+        if (event.getSource().getEntity() instanceof Player player) {
+            if (event.getEntity() instanceof LivingEntity living) {
+                float att = (float) player.getAttributeValue(AttReg.malicious_plunder);
+                Collection<ItemEntity> drop = event.getDrops();
+                List<ItemEntity> add = new ArrayList<>(drop);
+                int number = (int) att;
+                number-=1;
+                if (number > 0) {
+                    for (int i = 0; i < number; i++) {
+                        int mth = new Random().nextInt(add.size());
+                        drop.add(add.get(mth));
+                    }
+                }
+            }
+        }
+    }
+
+
     public static int time = 0;
     @SubscribeEvent
     public void ItemTooltipEvent(LevelTickEvent.Pre event){
@@ -195,6 +218,30 @@ public class EventMain {
         Warmaker.hurt(event);
         ChaosFortress.hurtRes(event);
         LeadOfEnlightenment.die(event);
+
+        //降低受到的魔法和虚空伤害，并将受到的对应伤害转换成临时的攻击伤害
+        if (event.getEntity() instanceof Player player) {
+            float malicious = (float) player.getAttributeValue(AttReg.malicious_transformation);
+            float res = malicious - 1;
+            if (res > 0) {
+                if (res > 1) {
+                    res = 1;
+                }
+                if (event.getSource().is(DamageTypes.MAGIC) || event.getSource().is(DamageTypes.DRY_OUT)){
+                    event.setNewDamage(event.getNewDamage() * (1 - res));
+
+                    float damage = event.getNewDamage();
+                    float end = player.getData(AttReg.maliciousTransformationDamage) + damage;
+                    float att = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+                    player.setData(AttReg.maliciousTransformationDamage, Math.min(end, att));
+                }
+            }
+        }
+        if (event.getSource().getEntity() instanceof Player player){
+            float data = player.getData(AttReg.maliciousTransformationDamage);
+            event.setNewDamage(event.getNewDamage() + data);
+            player.setData(AttReg.maliciousTransformationDamage,0f);
+        }
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
             if (event.getEntity() instanceof Player living) {
@@ -405,7 +452,6 @@ public class EventMain {
         FissionEmblem.tick(event);
         Warmaker.tick(event);
         LivingEntity living = event.player;
-
         {
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
             AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);

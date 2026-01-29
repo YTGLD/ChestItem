@@ -78,6 +78,10 @@
   "attribute.name.chest_item.chaos_armor_speed": "侵蚀装甲恢复时间",
   "attribute.name.chest_item.chaos_armor_min": "侵蚀装甲爆碎阈值",
   "attribute.name.chest_item.chaos_armor_damage": "装甲爆碎伤害",
+  "attribute.name.chest_item.malicious_transformation": "恶意转化",
+  "attribute.name.chest_item.malicious_plunder": "恶念掠夺",
+  "attribute.name.chest_item.chaos_consciousness": "混沌意识",
+
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
 

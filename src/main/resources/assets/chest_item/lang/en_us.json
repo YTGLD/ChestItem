@@ -70,6 +70,11 @@
   "attribute.name.chest_item.chaos_armor_damage": "Armor crushing damage",
   "attribute.name.chest_item.chaos_armor_speed": "Erosion armor recovery time",
   "attribute.name.chest_item.chaos_armor_min": "Erosion armor Breakdown threshold",
+  "attribute.name.chest_item.malicious_transformation": "malicious transformation",
+  "attribute.name.chest_item.malicious_plunder": "malicious plunder",
+  "attribute.name.chest_item.chaos_consciousness": "chaos_consciousness",
+
+
 
   "itemGroup.chest_item": "Trinkets in the chest",
 

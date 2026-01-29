@@ -109,11 +109,31 @@ public class AttReg {
             "chaos_wind", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf(
                     "chaos_wind")).build()
     );
-
     public static final Supplier<AttachmentType<Float>> attachmentTypeBLOOD_Model = ATTACHMENT_TYPES.register(
             "blood", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf(
                     "blood")).build()
     );
+
+
+
+    /**
+     * 恶意的探究
+     */
+    public static final DeferredHolder<Attribute,?> malicious_transformation = REGISTRY.register("malicious_transformation",()->{
+        return new RangedAttribute("attribute.name.chest_item.malicious_transformation", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final Supplier<AttachmentType<Float>> maliciousTransformationDamage = ATTACHMENT_TYPES.register(
+            "malicious_transformation_attachment", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf(
+                    "malicious_transformation_attachment")).build()
+    );
+    public static final DeferredHolder<Attribute,?> malicious_plunder = REGISTRY.register("malicious_plunder",()->{
+        return new RangedAttribute("attribute.name.chest_item.malicious_plunder", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final DeferredHolder<Attribute,?> chaos_consciousness = REGISTRY.register("chaos_consciousness",()->{
+        return new RangedAttribute("attribute.name.chest_item.chaos_consciousness", 1, -1024, 1024).setSyncable(true);
+    });
+
+
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER , AttReg.heal,1);
@@ -132,6 +152,9 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.chaos_armor_damage,1);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_speed,1);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_min,1);
+        event.add(EntityType.PLAYER , AttReg.malicious_transformation,1);
+        event.add(EntityType.PLAYER , AttReg.malicious_plunder,1);
+        event.add(EntityType.PLAYER , AttReg.chaos_consciousness,1);
 
     }
 }

@@ -15,8 +15,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.particle.ParticleGroup;
 import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.world.entity.Avatar;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
@@ -37,6 +39,16 @@ import java.util.Queue;
 public class ChestitemClient{
     public ChestitemClient(ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+    }
+    @SubscribeEvent
+    public static void registerFactories(ViewportEvent.RenderFog event) {
+        if (event.getCamera().entity() instanceof Player player){
+            float number = (float) player.getAttributeValue(AttReg.chaos_consciousness);
+            if (number > 0) {
+                event.setFarPlaneDistance(event.getFarPlaneDistance() * number);
+                event.setNearPlaneDistance(event.getNearPlaneDistance() * number);
+            }
+        }
     }
     @SubscribeEvent
     public static void regMenu(RegisterMenuScreensEvent event){
