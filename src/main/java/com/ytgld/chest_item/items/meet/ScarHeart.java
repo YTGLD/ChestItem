@@ -31,7 +31,11 @@ public class ScarHeart  extends ItemBase implements Meat {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+        modifiers.put(AttReg.hyperplasia, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.ScarHeart_.asItem().getDescriptionId()),
+                12, AttributeModifier.Operation.ADD_VALUE));
+        return modifiers;
     }
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
@@ -39,17 +43,5 @@ public class ScarHeart  extends ItemBase implements Meat {
         tooltipAdder.accept(Component.translatable("item.chest_item.scar_heart.string.1").withStyle(ChatFormatting.GOLD));
 
     }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-        modifiers.put(AttReg.hyperplasia, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.ScarHeart_.asItem().getDescriptionId()),
-                12, AttributeModifier.Operation.ADD_VALUE));
-        return modifiers;
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
-    }
+
 }

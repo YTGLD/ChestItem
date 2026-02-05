@@ -42,10 +42,7 @@ public class EvilThoughtsForgeDreams extends ItemBlackShadow {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap(player);
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         float bs = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
         modifiers.put(AttReg.shadow_shield, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.EvilThoughtsForgeDreams_.asItem().getDescriptionId()),
@@ -60,14 +57,6 @@ public class EvilThoughtsForgeDreams extends ItemBlackShadow {
                 0.4, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         return modifiers;
     }
-
-
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
-    }
-
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);

@@ -140,10 +140,7 @@ public class ChaosSeven extends TheChaos{
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap(stack);
-    }
-    public Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(ItemStack stack) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(Identifier.parse("aaa"+Chestitem.MODID +
                 InitItems.ChaosSeven_.asItem().getDescriptionId()),
@@ -299,14 +296,6 @@ public class ChaosSeven extends TheChaos{
         return false;
     }
 
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        if (stack.get(DataReg.tag)==null){
-            return HashMultimap.create();
-        }
-        return attributeModifierMultimap(stack);
-    }
     @Override
     public Identifier Identifier() {
         return Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/soul/chaos_seven.png");

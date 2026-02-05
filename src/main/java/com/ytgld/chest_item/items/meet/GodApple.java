@@ -119,16 +119,7 @@ public class GodApple extends ItemBase implements Meat , ILight {
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.God_Apple.asItem().getDescriptionId()),
                 -0.25, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));

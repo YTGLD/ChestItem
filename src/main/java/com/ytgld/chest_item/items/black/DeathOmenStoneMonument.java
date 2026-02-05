@@ -25,11 +25,7 @@ public class DeathOmenStoneMonument extends ItemBlackShadow  implements ILight {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
 
         modifiers.put(AttReg.shadow_shield_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.DeathOmenStoneMonument_.asItem().getDescriptionId()),
@@ -51,11 +47,6 @@ public class DeathOmenStoneMonument extends ItemBlackShadow  implements ILight {
                 InitItems.DeathOmenStoneMonument_.asItem().getDescriptionId()),
                 -0.9, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         return modifiers;
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player, ItemStack stack) {
-        return attributeModifierMultimap();
     }
     @Override
     public int color(ItemStack stack) {

@@ -25,7 +25,7 @@ public class DoomsdayJudgment extends SkillBase implements BlackSkill {
                         ItemStack stack = chestInventory.getItem(i);
                         if (!stack.isEmpty()) {
                             if (SkillBase.isHasElement(stack, SkillList.pDoomsdayJudgment)) {
-                                SkillBase.addXP(stack, SkillList.pDoomsdayJudgment, 1, 100, SkillList.pDoomsdayJudgment.levelMax());
+                                SkillBase.addXP(stack, SkillList.pDoomsdayJudgment, 1, 100, SkillList.pDoomsdayJudgment.levelMax(stack));
                             }
                         }
                     }
@@ -110,7 +110,7 @@ public class DoomsdayJudgment extends SkillBase implements BlackSkill {
     }
 
     @Override
-    public int levelMax() {
+    public int levelMax(ItemStack stack) {
         return 5;
     }
 }

@@ -65,7 +65,25 @@ public class Mutation extends TheImprintOfTheSoul {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap(player);
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+        float armor = 0;
+        if (player.getItemBySlot(EquipmentSlot.HEAD).isEmpty()){
+            armor += 4;
+        }
+        if (player.getItemBySlot(EquipmentSlot.CHEST).isEmpty()){
+            armor += 4;
+        }
+        if (player.getItemBySlot(EquipmentSlot.LEGS).isEmpty()){
+            armor += 4;
+        }
+        if (player.getItemBySlot(EquipmentSlot.FEET).isEmpty()){
+            armor += 4;
+        }
+
+        modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.Mutation_.asItem().getDescriptionId()),
+                armor, AttributeModifier.Operation.ADD_VALUE));
+        return modifiers;
     }
     public static void  attrib(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
@@ -142,27 +160,6 @@ public class Mutation extends TheImprintOfTheSoul {
         }
     }
 
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-        float armor = 0;
-        if (player.getItemBySlot(EquipmentSlot.HEAD).isEmpty()){
-            armor += 4;
-        }
-        if (player.getItemBySlot(EquipmentSlot.CHEST).isEmpty()){
-            armor += 4;
-        }
-        if (player.getItemBySlot(EquipmentSlot.LEGS).isEmpty()){
-            armor += 4;
-        }
-        if (player.getItemBySlot(EquipmentSlot.FEET).isEmpty()){
-            armor += 4;
-        }
-
-        modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.Mutation_.asItem().getDescriptionId()),
-                armor, AttributeModifier.Operation.ADD_VALUE));
-        return modifiers;
-    }
 
     public static boolean notEq(Player player){
         if (player.getItemBySlot(EquipmentSlot.HEAD).isEmpty()){
@@ -261,11 +258,6 @@ public class Mutation extends TheImprintOfTheSoul {
 
             }
         }
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
     }
     @Override
     public Identifier Identifier() {

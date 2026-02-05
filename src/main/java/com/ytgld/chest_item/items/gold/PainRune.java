@@ -23,16 +23,7 @@ public class PainRune extends ItemBase implements IGold {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.Pain_Rune.asItem().getDescriptionId()),
                 -0.25f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
@@ -41,6 +32,7 @@ public class PainRune extends ItemBase implements IGold {
 
         return modifiers;
     }
+
     @Override
     public int guiColor(ItemStack stack) {
         return Light.ARGB.color(200,255,50,50);

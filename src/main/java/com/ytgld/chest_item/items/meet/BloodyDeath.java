@@ -32,9 +32,9 @@ import org.jetbrains.annotations.Nullable;
     public BloodyDeath(Properties properties) {
         super(properties);
     }
-
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         modifiers.put(AttReg.heal, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.God_Apple.asItem().getDescriptionId()),
                 -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         modifiers.put(AttReg.hyperplasia, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.God_Apple.asItem().getDescriptionId()),
@@ -43,14 +43,5 @@ import org.jetbrains.annotations.Nullable;
                 -0.35, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
         return modifiers;
-    }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
     }
 }

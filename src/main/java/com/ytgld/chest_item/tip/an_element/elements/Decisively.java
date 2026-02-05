@@ -26,7 +26,7 @@ public class Decisively extends SkillBase {
                             lvl ++;
                             event.setNewDamage(event.getNewDamage() * (1+(lvl*SkillList.pDecisively.aneLvlForModify())));
 
-                            SkillBase.addXP(stack, SkillList.pDecisively, 1, 30, SkillList.pDecisively.levelMax());
+                            SkillBase.addXP(stack, SkillList.pDecisively, 1, 30, SkillList.pDecisively.levelMax(stack));
 
 
 
@@ -52,7 +52,7 @@ public class Decisively extends SkillBase {
     }
 
     @Override
-    public int levelMax() {
+    public int levelMax(ItemStack stack) {
         return 3;
     }
 }

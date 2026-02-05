@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.items.other;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
@@ -24,9 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class FissionEmblem extends ItemBase {
@@ -131,11 +128,7 @@ public class FissionEmblem extends ItemBase {
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap(stack);
-    }
-
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(ItemStack stack) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         float damage = 2;
         float armor = 0.05f;
         float maxH = 0.1f;
@@ -166,6 +159,7 @@ public class FissionEmblem extends ItemBase {
         return modifiers;
     }
 
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         if (flag.hasShiftDown()) {
@@ -180,9 +174,5 @@ public class FissionEmblem extends ItemBase {
         }else  {
             tooltipAdder.accept(Component.translatable("key.keyboard.left.shift").withStyle(ChatFormatting.YELLOW));
         }
-    }
-
-    public @Nullable Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player, ItemStack stack) {
-        return attributeModifierMultimap(stack);
     }
 }

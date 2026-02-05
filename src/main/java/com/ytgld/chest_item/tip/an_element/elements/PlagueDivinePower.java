@@ -41,7 +41,7 @@ public class PlagueDivinePower  extends SkillBase {
                         if (living.hasEffect(MobEffects.POISON)) {
                             event.setNewDamage(event.getNewDamage() * 1.2f);
                         }
-                        SkillBase.addXP(stack, SkillList.pPlagueDivinePower, 1, 100, SkillList.pPlagueDivinePower.levelMax());
+                        SkillBase.addXP(stack, SkillList.pPlagueDivinePower, 1, 100, SkillList.pPlagueDivinePower.levelMax(stack));
                     }
                 }
             }
@@ -65,7 +65,7 @@ public class PlagueDivinePower  extends SkillBase {
     }
 
     @Override
-    public int levelMax() {
+    public int levelMax(ItemStack stack) {
         return 10;
     }
 }

@@ -34,10 +34,7 @@ public class DryBones extends ItemBlackShadow {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap(player);
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         float hyperplasia = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
         float shadow_shield = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
         float a =0;
@@ -80,13 +77,6 @@ public class DryBones extends ItemBlackShadow {
                 InitItems.DryBones_.asItem().getDescriptionId()),
                 f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         return modifiers;
-    }
-
-
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
     }
 
     @Override

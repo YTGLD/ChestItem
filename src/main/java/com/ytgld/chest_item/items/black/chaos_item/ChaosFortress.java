@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.items.black.chaos_item;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
@@ -8,7 +7,6 @@ import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
-import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -33,7 +31,6 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Consumer;
@@ -141,10 +138,7 @@ public class ChaosFortress extends ItemBlackShadow implements IBlackLight, ITheC
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap(player);
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         //获得55%基于护甲值的侵蚀装甲
         int armor = (int) (player.getArmorValue() * 0.55f);
         modifiers.put(AttReg.chaos_armor, new AttributeModifier(Identifier.parse(Chestitem.MODID +
@@ -191,11 +185,6 @@ public class ChaosFortress extends ItemBlackShadow implements IBlackLight, ITheC
         }else {
             tooltipAdder.accept((Component.translatable("item.chest_item.chaos_fortress.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
         }
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
     }
 
 }

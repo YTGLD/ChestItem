@@ -37,7 +37,7 @@ public class Rotten extends SkillBase implements BlackSkill {
 
                             if (Mth.nextInt(RandomSource.create(),0,100) < lv) {
                                 event.setNewDamage(event.getNewDamage()*1.5f);
-                                SkillBase.addXP(stack, SkillList.pRotten, 1, 20, SkillList.pRotten.levelMax());
+                                SkillBase.addXP(stack, SkillList.pRotten, 1, 20, SkillList.pRotten.levelMax(stack));
                                 break;
                             }
                         }
@@ -63,7 +63,7 @@ public class Rotten extends SkillBase implements BlackSkill {
     }
 
     @Override
-    public int levelMax() {
+    public int levelMax(ItemStack stack) {
         return 6;
     }
 }

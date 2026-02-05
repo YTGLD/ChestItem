@@ -100,29 +100,7 @@ public class Glutton extends TheImprintOfTheSoul {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap(player);
-    }
-    public static void  attrib(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (player!=null) {
-            if (!player.level().isClientSide()) {
-                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                    ItemStack stack = chestInventory.getItem(i);
-                    if (stack.is(InitItems.Glutton_)) {
-                        if (player.tickCount % 200 == 1) {
-                            if (!player.getCooldowns().isOnCooldown(stack)) {
-                                player.getFoodData().eat(-1, 0.5f);
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         float hunger = 0;
         float speed = 0;
         if (player.getFoodData().getFoodLevel() > 12) {
@@ -145,12 +123,25 @@ public class Glutton extends TheImprintOfTheSoul {
                 hunger, AttributeModifier.Operation.ADD_VALUE));
         return modifiers;
     }
-
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
+    public static void  attrib(ItemStackTickEvent event){
+        ChestInventory chestInventory = event.chestInventory;
+        Player player = event.player;
+        if (player!=null) {
+            if (!player.level().isClientSide()) {
+                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                    ItemStack stack = chestInventory.getItem(i);
+                    if (stack.is(InitItems.Glutton_)) {
+                        if (player.tickCount % 200 == 1) {
+                            if (!player.getCooldowns().isOnCooldown(stack)) {
+                                player.getFoodData().eat(-1, 0.5f);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
     }
-
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);

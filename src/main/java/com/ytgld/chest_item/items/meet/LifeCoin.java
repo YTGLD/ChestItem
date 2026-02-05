@@ -23,11 +23,7 @@ public class LifeCoin  extends ItemBase implements Meat {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         modifiers.put(AttReg.hyperplasia, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.LifeCoin_.asItem().getDescriptionId()),
                 1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
@@ -35,11 +31,6 @@ public class LifeCoin  extends ItemBase implements Meat {
                 InitItems.LifeCoin_.asItem().getDescriptionId()),
                 -0.3, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         return modifiers;
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
     }
 }
 

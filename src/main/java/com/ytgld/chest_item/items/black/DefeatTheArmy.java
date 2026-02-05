@@ -33,10 +33,7 @@ public class DefeatTheArmy extends ItemBlackShadow implements IBlackLight {
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap(player);
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
 
         float lv = player.getHealth() / player.getMaxHealth();
         lv *= 100;
@@ -82,11 +79,6 @@ public class DefeatTheArmy extends ItemBlackShadow implements IBlackLight {
         tooltipAdder.accept(Component.translatable("item.chest_item.defeat_the_army.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
     }
 
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
-    }
 
     @Override
     public int color(ItemStack stack) {

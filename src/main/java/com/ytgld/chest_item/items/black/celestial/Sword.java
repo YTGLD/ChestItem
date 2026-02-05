@@ -22,12 +22,7 @@ public class Sword  extends TheCelestial{
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
 
         modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.Sword_.asItem().getDescriptionId()),
@@ -37,12 +32,6 @@ public class Sword  extends TheCelestial{
                 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         return modifiers;
-    }
-
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
     }
 
     @Override

@@ -71,7 +71,7 @@ public class Hyperplasia extends SkillBase {
     }
 
     @Override
-    public int levelMax() {
+    public int levelMax(ItemStack stack) {
         return 1;
     }
 }

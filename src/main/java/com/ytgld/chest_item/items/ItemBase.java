@@ -2,9 +2,12 @@ package com.ytgld.chest_item.items;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.ytgld.chest_item.items.black.chaos_item.RunawayLining;
+import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -14,6 +17,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +34,9 @@ public class ItemBase extends Item implements Terror{
         return co;
     }
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player){
-        return HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap = HashMultimap.create();
+        RunawayLining.addMap(attributeModifierMultimap, player, stack);
+        return attributeModifierMultimap;
     }
     @Override
     public int color(ItemStack stack) {
@@ -39,6 +45,6 @@ public class ItemBase extends Item implements Terror{
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return null;
+        return doAttribute(stack, player);
     }
 }

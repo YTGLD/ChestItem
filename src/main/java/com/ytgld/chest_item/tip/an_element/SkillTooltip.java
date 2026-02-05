@@ -87,7 +87,7 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
             SkillBase elt = map.keySet().stream().toList().get(i);
             int number = map.get(elt);
             number++;
-            if (number >= elt.levelMax()){
+            if (number >= elt.levelMax(stack)){
                 guiGraphics.drawString(font, Component.translatable("item.chest_item.skill.level").append(": ")
                                 .append(Component.translatable("enchantment.level." + number)
                                         .append(Component.translatable("item.chest_item.skill.level.max"))),

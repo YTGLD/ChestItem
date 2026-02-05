@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.tip.an_element.extend;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +17,7 @@ public abstract class SkillBase {
     public abstract String baneName();
     public abstract boolean isPercentage();
     public abstract float aneLvlForModify();
-    public abstract int levelMax();
+    public abstract int levelMax(ItemStack stack);
     public Identifier baneImage(){
         return Identifier.fromNamespaceAndPath(Chestitem.MODID,
                 baneName()
@@ -73,7 +74,9 @@ public abstract class SkillBase {
     public static int getHasElementLevel(ItemStack stack,SkillBase mustHasElement){
         @Nullable CompoundTag compoundTag = stack.get(DataReg.tag);
         if (compoundTag != null) {
-            return compoundTag.getIntOr(mustHasElement.baneName(), 0);
+            int lvl = compoundTag.getIntOr(mustHasElement.baneName(), 0);
+            lvl += compoundTag.getBooleanOr(IBlackLight.blackName,false) ? 1 : 0;
+            return lvl;
         }
         return 0;
     }

@@ -29,11 +29,7 @@ public class IronHeart  extends ItemBase {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         modifiers.put(AttReg.instability, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.IronHeart_.asItem().getDescriptionId()),
                 0.3, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
@@ -47,10 +43,4 @@ public class IronHeart  extends ItemBase {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
         tooltipAdder.accept(Component.translatable("item.chest_item.iron_heart.string.1").withStyle(ChatFormatting.GOLD));
     }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
-    }
-
 }

@@ -53,7 +53,18 @@ public class Speed  extends TheImprintOfTheSoul {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+        modifiers.put(Attributes.JUMP_STRENGTH, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.Speed_.asItem().getDescriptionId()),
+                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        modifiers.put(AttReg.more_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.Speed_.asItem().getDescriptionId()),
+                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        modifiers.put(Attributes.SAFE_FALL_DISTANCE, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.Speed_.asItem().getDescriptionId()),
+                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+
+        return modifiers;
     }
     public static void give(ChestInventory chestInventory,Player player){
         Set<Item> set = new HashSet<>();
@@ -97,30 +108,6 @@ public class Speed  extends TheImprintOfTheSoul {
 
             }
         }
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        if (stack.get(DataReg.tag)==null){
-            return HashMultimap.create();
-        }
-        return attributeModifierMultimap();
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-
-            modifiers.put(Attributes.JUMP_STRENGTH, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.Speed_.asItem().getDescriptionId()),
-                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-        modifiers.put(AttReg.more_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.Speed_.asItem().getDescriptionId()),
-                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-        modifiers.put(Attributes.SAFE_FALL_DISTANCE, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.Speed_.asItem().getDescriptionId()),
-                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-
-        return modifiers;
     }
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {

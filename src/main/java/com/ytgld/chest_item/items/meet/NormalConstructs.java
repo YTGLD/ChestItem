@@ -29,10 +29,10 @@ public class NormalConstructs extends ItemBase implements Meat {
     public NormalConstructs(Properties properties) {
         super(properties);
     }
-
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap() {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-         modifiers.put(AttReg.hyperplasia_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.God_Apple.asItem().getDescriptionId()),
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+        modifiers.put(AttReg.hyperplasia_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.God_Apple.asItem().getDescriptionId()),
                 -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         modifiers.put(AttReg.shadow_shield_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.God_Apple.asItem().getDescriptionId()),
                 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
@@ -40,14 +40,5 @@ public class NormalConstructs extends ItemBase implements Meat {
                 -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
         return modifiers;
-    }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
     }
 }

@@ -529,6 +529,14 @@
   "chest_item.config.chaosFortress": "Requirements for obtaining the Protection of the Chaos Fortress",
   "item.chest_item.owner_lead": "owner lead",
 
+  "item.chest_item.runaway_lining": "失控衬件",
+  "item.chest_item.runaway_lining.string.0": "将事物推向永恒的极端以达到所谓的和平...",
+  "item.chest_item.runaway_lining.string.1": "强化所有的饰品，每件饰品额外给予：",
+  "item.chest_item.runaway_lining.string.3": "5%生命值",
+  "item.chest_item.runaway_lining.string.4": "3%攻速",
+  "item.chest_item.runaway_lining.string.5": "2%伤害",
+  "item.chest_item.runaway_lining.string.2": "佩戴时永久强化下列饰品：",
+
 
   "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"

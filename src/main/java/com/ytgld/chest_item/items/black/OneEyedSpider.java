@@ -66,10 +66,7 @@ public class OneEyedSpider extends ItemBlackShadow implements IGUILightList {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return getAttributeModifiers(stack);
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(ItemStack stack) {
-        Multimap<Holder<Attribute>, AttributeModifier> attributeModifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> attributeModifiers = super.doAttribute(stack,player);
         if (stack.is(InitItems.OneEyedSpider_)) {
             CompoundTag compoundTag = stack.get(DataReg.tag);
             float sa = 0;

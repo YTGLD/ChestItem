@@ -41,10 +41,7 @@ public class LoneWolf extends ItemBase {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap(player);
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         float apply = 0;
         if (isNOt(player)){
             apply = 0.15f;
@@ -55,7 +52,6 @@ public class LoneWolf extends ItemBase {
                 apply, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         return modifiers;
     }
-
     public static boolean isNOt(LivingEntity me){
         Vec3 playerPos = me.position();
         int range = 4;
@@ -67,12 +63,6 @@ public class LoneWolf extends ItemBase {
             }
         }
         return integers.isEmpty();
-    }
-
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap(player);
     }
 
     @Override

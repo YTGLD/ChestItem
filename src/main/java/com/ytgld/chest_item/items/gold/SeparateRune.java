@@ -23,17 +23,7 @@ public class SeparateRune extends ItemBase implements IGold {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
 
         modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.Separate_Rune.asItem().getDescriptionId()),
                 -0.25f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));

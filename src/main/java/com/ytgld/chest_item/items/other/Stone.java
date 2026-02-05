@@ -25,16 +25,7 @@ public class Stone extends ItemBase {
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        return attributeModifierMultimap();
-    }
-    @Nullable
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return attributeModifierMultimap();
-    }
-    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap()
- {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
         modifiers.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.Stone_.asItem().getDescriptionId()),
                 5, AttributeModifier.Operation.ADD_VALUE));
         modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.Stone_.asItem().getDescriptionId()),
@@ -43,7 +34,6 @@ public class Stone extends ItemBase {
                 2, AttributeModifier.Operation.ADD_VALUE));
         return modifiers;
     }
-
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255,255,255,0);

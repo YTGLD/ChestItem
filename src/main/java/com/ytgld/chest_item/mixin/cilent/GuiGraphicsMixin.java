@@ -1,16 +1,15 @@
 package com.ytgld.chest_item.mixin.cilent;
 
-import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
-import com.ytgld.chest_item.items.black.ITheChaos;
+import com.ytgld.chest_item.items.black.chaos_item.ITheChaos;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
+import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
@@ -24,6 +23,7 @@ import net.minecraft.client.gui.render.state.GuiRenderState;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -45,8 +45,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import static net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED_SNIPPET;
 
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin implements IGuiGraphics {
@@ -440,6 +438,12 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (stack.getItem() instanceof IBlackLight ){
             return;
         }
+        CompoundTag tag = stack.get(DataReg.tag);
+        if (tag!= null) {
+            if (tag.getBooleanOr(IBlackLight.blackName,false)) {
+                return;
+            }
+        }
         if (stack.getItem() instanceof ItemBlackShadow soul && !(stack.getItem() instanceof ILight)) {
             Identifier identifier = Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/shadow/black.png");
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
@@ -551,24 +555,31 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     }
     @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void TheBlackHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
-        if (!ConfigC.config.RenderItemTooltip.get()){
+        if (!ConfigC.config.RenderItemTooltip.get()) {
             return;
         }
 
         if (entity == null) {
             return;
         }
-        if (stack.getItem() instanceof IGUILightList lightList){
-            if (lightList.guiLight(entity)!=null) {
+        if (stack.getItem() instanceof IGUILightList lightList) {
+            if (lightList.guiLight(entity) != null) {
                 if (lightList.guiLight(entity).doLight()) {
                     return;
                 }
             }
         }
-        if (stack.getItem() instanceof NotLight ){
+        if (stack.getItem() instanceof NotLight) {
             return;
         }
-        if (stack.getItem() instanceof IBlackLight) {
+        boolean canDo = false;
+        CompoundTag tag = stack.get(DataReg.tag);
+        if (tag != null) {
+            if (tag.getBooleanOr(IBlackLight.blackName, false)){
+                canDo = true;
+            }
+        }
+        if ((stack.getItem() instanceof IBlackLight)  || canDo) {
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
 
             {
