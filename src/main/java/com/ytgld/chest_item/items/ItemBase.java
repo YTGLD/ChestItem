@@ -30,7 +30,15 @@ public class ItemBase extends Item implements Terror{
     public @NotNull Component getName(@NotNull ItemStack stack) {
         Component component = super.getName(stack);
         MutableComponent co = component.copy();
-        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFCD853F)));
+        int c = 0XFFCD853F;
+        CompoundTag tag = stack.get(DataReg.tag);
+        if (tag != null) {
+            if (tag.getBooleanOr(IBlackLight.blackName, false)){
+                c = 0xffff0000;
+                co = Component.translatable("chest_item.attribute").append(component.copy());
+            }
+        }
+        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(c)));
         return co;
     }
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player){

@@ -37,6 +37,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -56,6 +57,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.common.util.AttributeUtil;
@@ -232,7 +234,6 @@ public class EventMain {
         BrassCoins.die(event);
         Warmaker.die(event);
         LeadOfEnlightenment.die(event);
-        RunawayLining.die(event);
         ChaosFortress.killArmor(event);
     }
     @SubscribeEvent
@@ -243,6 +244,8 @@ public class EventMain {
     @SubscribeEvent
     public  void dieTotem(LivingUseTotemEvent event) {
         ChaosFortress.dieTotem(event);
+        RunawayLining.die(event);
+
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
@@ -841,5 +844,4 @@ public class EventMain {
 
         }
     }
-
 }

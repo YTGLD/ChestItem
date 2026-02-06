@@ -7,7 +7,7 @@
   "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
   "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
 "chest_item.config.RenderSoul": "Whether to render light effect items (Eternal Slave Seal, Treaty)",
-
+  "chest_item.attribute": "Eroded ",
 "chest_item.config.RenderGUILight": "render the tailing animation of the item",
   "chest_item.config.RenderItemTooltip": "render mod's unique item background",
 
@@ -530,7 +530,7 @@
   "item.chest_item.owner_lead": "owner lead",
 "item.chest_item.runaway_lining": "runaway lining",
   "item.chest_item.runaway_lining.string.0": "Pushing things to the extreme of eternity to achieve so-called peace...",
-  "item.chest_item.runaway_lining.string.1": "Possibility to add random attributes and abilities to the wearable item upon death",
+  "item.chest_item.runaway_lining.string.1": "Triggering the Undead Totem has the potential to add random attributes to the wearing item",
   "item.chest_item.runaway_lining.string.3": "The higher the luck value, the better the attribute",
   "item.chest_item.runaway_lining.string.4": "Attributes may be negative or positive",
   "item.chest_item.runaway_lining.string.5": "Place the Runaway Lining in the first slot of the Divine Chest",

@@ -8,6 +8,7 @@
   "chest_item.config.RenderItemTooltip": "渲染模组独特的物品背景版",
   "chest_item.config.doEndComingUp": "可以在使用一些物品时让末日降临变为幽灵状态",
   "chest_item.configuration.Common": "常规",
+  "chest_item.attribute": "被侵蚀的",
 
   "event.chest_item.equip.black": "这件物品被混沌施加了：",
 
@@ -563,7 +564,7 @@
 
   "item.chest_item.runaway_lining": "失控衬件",
   "item.chest_item.runaway_lining.string.0": "将事物推向永恒的极端以达到所谓的和平...",
-  "item.chest_item.runaway_lining.string.1": "死亡时有可能为佩戴物品添加随机属性",
+  "item.chest_item.runaway_lining.string.1": "触发不死图腾有可能为佩戴物品添加随机属性",
   "item.chest_item.runaway_lining.string.3": "幸运值越高，属性越好",
   "item.chest_item.runaway_lining.string.4": "属性可能是负数，也可能是正数",
   "item.chest_item.runaway_lining.string.5": "请将“失控衬件”放入神神奇箱子的第一个栏位",

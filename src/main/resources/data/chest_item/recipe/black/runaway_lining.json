@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:obsidian",
+    "B": "chest_item:lead_of_enlightenment",
+    "C": "minecraft:silence_armor_trim_smithing_template",
+    "D": "minecraft:complementary"
+  },
+  "pattern": [
+    "AAA",
+    "CBD",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:runaway_lining"
+  }
+}

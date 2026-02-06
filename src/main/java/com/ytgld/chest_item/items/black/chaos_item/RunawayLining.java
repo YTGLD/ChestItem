@@ -28,6 +28,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -53,6 +54,7 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (compoundTag != null) {
             tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF0000))));
+            tooltipAdder.accept(Component.literal(""));
             if (!flag.hasShiftDown()) {
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
                 tooltipAdder.accept(Component.translatable("key.keyboard.left.shift").withStyle(ChatFormatting.GOLD));
@@ -62,7 +64,6 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
                 tooltipAdder.accept(Component.literal(""));
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-
                 tooltipAdder.accept(Component.translatable("item.chest_item.bloody_belt").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
                 tooltipAdder.accept(Component.translatable("item.chest_item.corruption_crystal").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
                 tooltipAdder.accept(Component.translatable("item.chest_item.evil_thoughts_forge_dreams").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
@@ -71,7 +72,6 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
                 tooltipAdder.accept(Component.translatable("chest_item.the_imprint_of_the_soul").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
                 tooltipAdder.accept(Component.translatable("chest_item.the_imprint_of_the_soul.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
                 tooltipAdder.accept(Component.translatable("chest_item.celestial").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-
             }
         }else {
             tooltipAdder.accept((Component.translatable("item.chest_item.runaway_lining.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
@@ -90,7 +90,8 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
     public static final float max =  0.35f;
     public static final String lock =  "LockSting";
 
-    public static void die(LivingDeathEvent event){
+
+    public static void die(LivingUseTotemEvent event){
         if (event.getEntity() instanceof Player player){
             if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
                 ChestInventory chestInventory = Handler.getItem(player);

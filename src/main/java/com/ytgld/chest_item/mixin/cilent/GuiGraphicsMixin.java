@@ -3,6 +3,7 @@ package com.ytgld.chest_item.mixin.cilent;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
+import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.chaos_item.ITheChaos;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
@@ -25,6 +26,8 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositione
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -144,6 +147,13 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         i = k;
                     }
                 }
+                boolean canDo = false;
+                CompoundTag tag = tooltipStack.get(DataReg.tag);
+                if (tag != null) {
+                    if (tag.getBooleanOr(IBlackLight.blackName, false)){
+                        canDo = true;
+                    }
+                }
                 Vector2ic vector2ic = positioner.positionTooltip(this.guiWidth(), this.guiHeight(), x, y, i, j);
                 int l = vector2ic.x();
                 int i1 = vector2ic.y();
@@ -152,7 +162,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     chest_item$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
                 }else if (tooltipStack.getItem() instanceof ItemBone){
                     chest_item$renderItemBoneTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
-                }else {
+                }else if (!canDo){
                     chest_item$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
                 }
                 this.pose.popMatrix();
@@ -172,8 +182,22 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         this.pose.popMatrix();
                     }
                 }
+
+                if (canDo) {
+                    this.pose.pushMatrix();
+                    chest_item$renderTooltipBackground_red((GuiGraphics) (Object) this, l, i1, i, j);
+                    this.pose.popMatrix();
+                }
             }
         }
+    }
+    @Unique
+    private  void chest_item$renderTooltipBackground_red(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        int i = x - 3 - 9;
+        int j = y - 3 - 9;
+        int k = width + 3 + 3 + 18;
+        int l = height + 3 + 3 + 18;
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,Identifier.fromNamespaceAndPath(Chestitem.MODID,"tooltip/red"), i, j, k, l);
     }
     @Unique
     public void si1_21_4$renderTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
