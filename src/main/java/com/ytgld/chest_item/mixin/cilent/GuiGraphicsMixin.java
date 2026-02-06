@@ -172,7 +172,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         this.pose.popMatrix();
                     }
                 }
-
             }
         }
     }
@@ -560,16 +559,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         }
 
         if (entity == null) {
-            return;
-        }
-        if (stack.getItem() instanceof IGUILightList lightList) {
-            if (lightList.guiLight(entity) != null) {
-                if (lightList.guiLight(entity).doLight()) {
-                    return;
-                }
-            }
-        }
-        if (stack.getItem() instanceof NotLight) {
             return;
         }
         boolean canDo = false;

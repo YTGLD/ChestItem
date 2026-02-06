@@ -9,6 +9,7 @@
   "chest_item.config.doEndComingUp": "可以在使用一些物品时让末日降临变为幽灵状态",
   "chest_item.configuration.Common": "常规",
 
+  "event.chest_item.equip.black": "这件物品被混沌施加了：",
 
   "chest_item.celestial": "仙法",
   "chest_item.celestial.1": "仙法·禁术",
@@ -559,6 +560,18 @@
   "item.chest_item.chaos_fortress.string.12":"侵蚀装甲难以自然恢复",
   "item.chest_item.owner_lead": "创世者的礼物",
   "chest_item.config.chaosFortress": "混沌要塞之护的获取要求",
+
+  "item.chest_item.runaway_lining": "失控衬件",
+  "item.chest_item.runaway_lining.string.0": "将事物推向永恒的极端以达到所谓的和平...",
+  "item.chest_item.runaway_lining.string.1": "死亡时有可能为佩戴物品添加随机属性",
+  "item.chest_item.runaway_lining.string.3": "幸运值越高，属性越好",
+  "item.chest_item.runaway_lining.string.4": "属性可能是负数，也可能是正数",
+  "item.chest_item.runaway_lining.string.5": "请将“失控衬件”放入神神奇箱子的第一个栏位",
+
+  "item.chest_item.runaway_lining.string.2": "佩戴时永久强化下列饰品：",
+  "chest_item.config.RunawayLiningMin": "失控衬件的混沌施加最小值",
+  "chest_item.config.RunawayLiningMax": "失控衬件的混沌施加最大值",
+  "chest_item.config.listRunawayLining": "属性黑名单",
 
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"

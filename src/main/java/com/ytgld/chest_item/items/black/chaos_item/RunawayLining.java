@@ -1,18 +1,25 @@
 package com.ytgld.chest_item.items.black.chaos_item;
 
 import com.google.common.collect.Multimap;
+import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.Config;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
+import com.ytgld.chest_item.other.AttributeDataType;
+import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -20,8 +27,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheChaos{
@@ -40,6 +52,7 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (compoundTag != null) {
+            tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF0000))));
             if (!flag.hasShiftDown()) {
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
                 tooltipAdder.accept(Component.translatable("key.keyboard.left.shift").withStyle(ChatFormatting.GOLD));
@@ -47,7 +60,6 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
                 tooltipAdder.accept(Component.literal(""));
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
 
@@ -69,19 +81,98 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
     public static Identifier identifier(ItemStack stack) {
         return Identifier.parse("runaway_lining_string:" + stack.getItem().getDescriptionId());
     }
+    public static Identifier identifierAdd(ItemStack stack) {
+        return Identifier.parse("runaway_lining_string_add:" + stack.getItem().getDescriptionId());
+    }
 
+
+    public static final float min = -0.15f;
+    public static final float max =  0.35f;
+    public static final String lock =  "LockSting";
+
+    public static void die(LivingDeathEvent event){
+        if (event.getEntity() instanceof Player player){
+            if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
+                ChestInventory chestInventory = Handler.getItem(player);
+                if (chestInventory != null) {
+                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                        ItemStack stack = chestInventory.getItem(i);
+                        if (!stack.is(InitItems.RunawayLining_)){
+                            AttributeDataType attributeDataType = stack.get(DataReg.attributeType);
+                            AttributeDataType doIt = new AttributeDataType(List.of());
+
+                            CompoundTag compoundTag = stack.get(DataReg.tag);
+
+                            if (compoundTag == null) {
+                                stack.set(DataReg.tag,new CompoundTag());
+                            }
+
+                            if (compoundTag != null){
+                                if (compoundTag.getBooleanOr(lock,false)){
+                                    continue;
+                                }
+                            }
+                            if (attributeDataType == null) {
+                                AttributeDataType attribute = addAttributeType(player,stack,doIt);
+                                stack.set(DataReg.attributeType,attribute);
+                            }
+                            if (compoundTag != null) {
+                                compoundTag.putBoolean(lock,true);
+                                compoundTag.putBoolean(IBlackLight.blackName,true);
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static float addNumber( RandomSource create,Player player){
+        float add = Mth.nextFloat(create, (float) (double)Config.config.RunawayLiningMin.get(),(float) (double)Config.config.RunawayLiningMax.get());
+        float sqrtLuck = (float) Math.sqrt(player.getLuck());
+        if (sqrtLuck > 4) {
+            sqrtLuck = 4;
+        }
+        sqrtLuck /= 20;
+        add += sqrtLuck;
+        return add;
+    }
+    public static AttributeDataType addAttributeType(
+            Player player,ItemStack stack,
+            AttributeDataType attributeDataType){
+
+        Optional<Holder.Reference<Attribute>> optional =
+                BuiltInRegistries.ATTRIBUTE.get(RandomSource.create().nextInt(BuiltInRegistries.ATTRIBUTE.size()));
+        Optional<Holder.Reference<Attribute>> optional1 =
+                BuiltInRegistries.ATTRIBUTE.get(RandomSource.create().nextInt(BuiltInRegistries.ATTRIBUTE.size()));
+        Optional<Holder.Reference<Attribute>> optional2 =
+                BuiltInRegistries.ATTRIBUTE.get(RandomSource.create().nextInt(BuiltInRegistries.ATTRIBUTE.size()));
+        if (optional.isPresent() && optional1.isPresent() && optional2.isPresent()) {
+            if (optional.get().getKey()!=null && optional1.get().getKey()!=null && optional2.get().getKey()!=null){
+                return attributeDataType.builder().add(optional.get(),
+                              new AttributeModifier(Identifier.parse(
+                                Chestitem.MODID + "_" + "runaway_lining_string" + "_"+
+                                stack.getItem().getDescriptionId()+"_" +"1"
+                                ), addNumber(RandomSource.create(),player), AttributeModifier.Operation.ADD_MULTIPLIED_BASE))
+                      .add(optional1.get(),
+                              new AttributeModifier(Identifier.parse(
+                              Chestitem.MODID + "_" + "runaway_lining_string" + "_"+
+                                      stack.getItem().getDescriptionId()+"_" +"2"
+                              ), addNumber(RandomSource.create(),player), AttributeModifier.Operation.ADD_MULTIPLIED_BASE))
+                      .add(optional2.get(),
+                              new AttributeModifier(Identifier.parse(
+                              Chestitem.MODID + "_" + "runaway_lining_string" + "_"+
+                                      stack.getItem().getDescriptionId()+"_" +"3"
+                              ), addNumber(RandomSource.create(),player), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)).build();
+            }
+        }
+        return new AttributeDataType(List.of());
+    }
 
     public static void addMap(Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap, Player player , ItemStack stack){
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
-
-            attributeModifierMultimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(identifier(stack),
-                    0.03, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-            attributeModifierMultimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(identifier(stack),
-                    0.02, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-            attributeModifierMultimap.put(Attributes.MAX_HEALTH, new AttributeModifier(identifier(stack),
-                    0.05, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
             if (stack.is(InitItems.BloodyBelt_)
                     || stack.is(InitItems.CorruptionCrystal_)
                     || stack.is(InitItems.EvilThoughtsForgeDreams_)

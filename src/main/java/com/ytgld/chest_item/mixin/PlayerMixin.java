@@ -5,7 +5,9 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.other.AttributeDataType;
 import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.other.IPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.ItemStackWithSlot;
@@ -52,6 +54,13 @@ public abstract class PlayerMixin implements IPlayer {
                 ItemStack stack = inventory.getItem(i);
                 if (stack.getItem() instanceof ItemBase itemBase) {
                     Multimap<Holder<Attribute>, AttributeModifier> doAttribute = itemBase.doAttribute(stack, player);
+                    AttributeDataType attributeDataType = stack.get(DataReg.attributeType);
+                    if (attributeDataType!=null) {
+                        for (AttributeDataType.Entry entry :attributeDataType.modifiers()){
+                            doAttribute.put(entry.attribute(),entry.modifier());
+                        }
+                    }
+
                     cI1_21_11$attributeCache.getOrDefault(stack, HashMultimap.create()).forEach((attributeHolder, attributeModifier)->{
                         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
                         modifiers.put(attributeHolder,attributeModifier);

@@ -10,6 +10,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class DataReg {
     public static final DeferredRegister<DataComponentType<?>> REGISTRY = DeferredRegister.create(BuiltInRegistries.DATA_COMPONENT_TYPE, Chestitem.MODID);
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<AttributeDataType>> attributeType =
+            REGISTRY.register("attribute",()-> DataComponentType.<AttributeDataType>builder().persistent(AttributeDataType.CODEC).build());
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> tag =
             REGISTRY.register("tag",()-> DataComponentType.<CompoundTag>builder().persistent(CompoundTag.CODEC).build());
 }

@@ -2,7 +2,7 @@
 
   "chest_item.config.doEndComingUp": "It is possible to turn Doomsday into a ghost state when using some items",
   "chest_item.configuration.Common": "Conventional",
-
+  "event.chest_item.equip.black": "This item was applied by Chaos：",
   "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
   "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
   "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
@@ -528,16 +528,17 @@
 
   "chest_item.config.chaosFortress": "Requirements for obtaining the Protection of the Chaos Fortress",
   "item.chest_item.owner_lead": "owner lead",
+"item.chest_item.runaway_lining": "runaway lining",
+  "item.chest_item.runaway_lining.string.0": "Pushing things to the extreme of eternity to achieve so-called peace...",
+  "item.chest_item.runaway_lining.string.1": "Possibility to add random attributes and abilities to the wearable item upon death",
+  "item.chest_item.runaway_lining.string.3": "The higher the luck value, the better the attribute",
+  "item.chest_item.runaway_lining.string.4": "Attributes may be negative or positive",
+  "item.chest_item.runaway_lining.string.5": "Place the Runaway Lining in the first slot of the Divine Chest",
 
-  "item.chest_item.runaway_lining": "失控衬件",
-  "item.chest_item.runaway_lining.string.0": "将事物推向永恒的极端以达到所谓的和平...",
-  "item.chest_item.runaway_lining.string.1": "强化所有的饰品，每件饰品额外给予：",
-  "item.chest_item.runaway_lining.string.3": "5%生命值",
-  "item.chest_item.runaway_lining.string.4": "3%攻速",
-  "item.chest_item.runaway_lining.string.5": "2%伤害",
-  "item.chest_item.runaway_lining.string.2": "佩戴时永久强化下列饰品：",
-
-
+"item.chest_item.runaway_lining.string.2": "Permanently enhances the following accessories when worn:",
+  "chest_item.config.RunawayLiningMin": "Chaos imposes minimum value for runaway lining",
+  "chest_item.config.RunawayLiningMax": "Chaos applies maximum value for runaway lining",
+  "chest_item.config.listRunawayLining": "Attribute blacklist",
   "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"
 }

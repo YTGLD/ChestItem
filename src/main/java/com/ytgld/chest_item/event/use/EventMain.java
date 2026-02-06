@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.event.use;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
@@ -10,6 +11,7 @@ import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
+import com.ytgld.chest_item.items.black.chaos_item.RunawayLining;
 import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
@@ -24,6 +26,7 @@ import com.ytgld.chest_item.items.condensebone.ShieldEngine;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
+import com.ytgld.chest_item.other.AttributeDataType;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -130,7 +133,7 @@ public class EventMain {
         if (player!=null) {
             if (stack.getItem() instanceof Terror terror) {
                 Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player,stack);
-                if (attributes != null) {
+                if (attributes != null && !attributes.isEmpty()) {
                     attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
                     evt.addTooltipLines(Component.empty());
                     if (!(stack.getItem() instanceof ItemBlackShadow)) {
@@ -156,6 +159,45 @@ public class EventMain {
                         } else {
                             evt.addTooltipLines(component);
                         }
+                    }
+                }
+            }
+        }
+    }
+    @SubscribeEvent
+    public void BlackRl(AddAttributeTooltipsEvent evt){
+        AttributeTooltipContext context = evt.getContext();
+        ItemStack stack = evt.getStack();
+        GatherSkippedAttributeTooltipsEvent skipped =
+                NeoForge.EVENT_BUS.post(new GatherSkippedAttributeTooltipsEvent(stack, context));
+
+        if (skipped.isSkippingAll()) {
+            return;
+        }
+        List<Component> attributesTooltip = new ArrayList<>();
+        Player player = context.player();
+        if (player!=null) {
+            AttributeDataType attributeDataType = stack.get(DataReg.attributeType);
+            if (attributeDataType != null) {
+                Multimap<Holder<Attribute>, AttributeModifier> attributes = HashMultimap.create();
+                for (AttributeDataType.Entry modifiers : attributeDataType.modifiers()){
+                    attributes.put(modifiers.attribute(),modifiers.modifier());
+                }
+                if (!attributes.isEmpty()) {
+                    attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
+                    evt.addTooltipLines(Component.empty());
+                    attributesTooltip.add(Component.translatable("event.chest_item.equip.black")
+                            .withStyle(Style.EMPTY.withColor(Light.ARGB.color(255, 255, 0, 0))));
+                    AttributeUtil.applyTextFor(
+                            stack,
+                            attributesTooltip::add,
+                            attributes,
+                            AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
+
+                    for (Component component : attributesTooltip) {
+                        MutableComponent co = component.copy();
+                        co.setStyle(Style.EMPTY.withColor(Light.ARGB.color(255, 255, 0, 50)));
+                        evt.addTooltipLines(co);
                     }
                 }
             }
@@ -190,6 +232,7 @@ public class EventMain {
         BrassCoins.die(event);
         Warmaker.die(event);
         LeadOfEnlightenment.die(event);
+        RunawayLining.die(event);
         ChaosFortress.killArmor(event);
     }
     @SubscribeEvent
