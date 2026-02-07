@@ -18,23 +18,25 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheChaos{
@@ -81,48 +83,74 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
     public static Identifier identifier(ItemStack stack) {
         return Identifier.parse("runaway_lining_string:" + stack.getItem().getDescriptionId());
     }
-    public static Identifier identifierAdd(ItemStack stack) {
-        return Identifier.parse("runaway_lining_string_add:" + stack.getItem().getDescriptionId());
-    }
 
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        if (player.level().isClientSide()) {
+            CompoundTag compoundTag = stack.get(DataReg.tag);
+            if (compoundTag != null) {
+                compoundTag.putInt(clientTime, compoundTag.getIntOr(clientTime,0)-1);
+            }
+        }
+        return super.doAttribute(stack, player);
+    }
 
     public static final float min = -0.15f;
     public static final float max =  0.35f;
     public static final String lock =  "LockSting";
 
+    public static final String clientTime = "clientTime";
+    @Override
+    public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
+        if (other.is(Items.TOTEM_OF_UNDYING.asItem())) {
+            die(player);
+            player.level().playSound(null,player.blockPosition(), SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.AMBIENT,1,1);
+            CompoundTag compoundTag = stack.get(DataReg.tag);
+            if (compoundTag == null) {
+                stack.set(DataReg.tag, new CompoundTag());
+            }
+            if (player.level().isClientSide()) {
+                if (compoundTag != null) {
+                    compoundTag.putInt(clientTime, 100);
+                }
+            }
+            other.shrink(1);
+            return true;
+        }
 
-    public static void die(LivingUseTotemEvent event){
-        if (event.getEntity() instanceof Player player){
-            if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
-                ChestInventory chestInventory = Handler.getItem(player);
-                if (chestInventory != null) {
-                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                        ItemStack stack = chestInventory.getItem(i);
-                        if (!stack.is(InitItems.RunawayLining_)){
-                            AttributeDataType attributeDataType = stack.get(DataReg.attributeType);
-                            AttributeDataType doIt = new AttributeDataType(List.of());
+        return false;
+    }
 
-                            CompoundTag compoundTag = stack.get(DataReg.tag);
+    public static void die(Player player){
+        if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
+            ChestInventory chestInventory = Handler.getItem(player);
+            if (chestInventory != null) {
+                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                    ItemStack stack = chestInventory.getItem(i);
+                    if (!stack.is(InitItems.RunawayLining_) && !stack.isEmpty()){
+                        AttributeDataType attributeDataType = stack.get(DataReg.attributeType);
+                        AttributeDataType doIt = new AttributeDataType(List.of());
 
-                            if (compoundTag == null) {
-                                stack.set(DataReg.tag,new CompoundTag());
-                            }
+                        CompoundTag compoundTag = stack.get(DataReg.tag);
 
-                            if (compoundTag != null){
-                                if (compoundTag.getBooleanOr(lock,false)){
-                                    continue;
-                                }
-                            }
-                            if (attributeDataType == null) {
-                                AttributeDataType attribute = addAttributeType(player,stack,doIt);
-                                stack.set(DataReg.attributeType,attribute);
-                            }
-                            if (compoundTag != null) {
-                                compoundTag.putBoolean(lock,true);
-                                compoundTag.putBoolean(IBlackLight.blackName,true);
-                            }
-                            break;
+                        if (compoundTag == null) {
+                            stack.set(DataReg.tag,new CompoundTag());
                         }
+
+                        if (compoundTag != null){
+                            if (compoundTag.getBooleanOr(lock,false)){
+                                continue;
+                            }
+                        }
+                        if (attributeDataType == null) {
+                            AttributeDataType attribute = addAttributeType(player,stack,doIt);
+                            stack.set(DataReg.attributeType,attribute);
+                        }
+                        if (compoundTag != null) {
+                            compoundTag.putBoolean(lock,true);
+                            compoundTag.putBoolean(IBlackLight.blackName,true);
+                        }
+                        break;
                     }
                 }
             }

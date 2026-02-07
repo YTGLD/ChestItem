@@ -244,8 +244,6 @@ public class EventMain {
     @SubscribeEvent
     public  void dieTotem(LivingUseTotemEvent event) {
         ChaosFortress.dieTotem(event);
-        RunawayLining.die(event);
-
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){

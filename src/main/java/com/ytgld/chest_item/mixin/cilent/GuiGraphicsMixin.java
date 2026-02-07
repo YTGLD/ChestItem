@@ -7,6 +7,7 @@ import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.chaos_item.ITheChaos;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
+import com.ytgld.chest_item.items.black.chaos_item.RunawayLining;
 import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
@@ -158,31 +159,32 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 int l = vector2ic.x();
                 int i1 = vector2ic.y();
                 this.pose.pushMatrix();
-                if (tooltipStack.getItem()instanceof ItemBlackShadow){
-                    chest_item$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
-                }else if (tooltipStack.getItem() instanceof ItemBone){
-                    chest_item$renderItemBoneTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
-                }else if (!canDo){
-                    chest_item$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
-                }
-                this.pose.popMatrix();
-                if (tooltipStack.getItem()instanceof Meat){
-                    this.pose.pushMatrix();
-                    si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j,400);
+                if (!canDo) {
+                    if (tooltipStack.getItem() instanceof ItemBlackShadow) {
+                        chest_item$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
+                    } else if (tooltipStack.getItem() instanceof ItemBone) {
+                        chest_item$renderItemBoneTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
+                    } else if (!canDo) {
+                        chest_item$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
+                    }
                     this.pose.popMatrix();
-                }
-                if (tooltipStack.getItem()instanceof ItemBlackShadow){
-                    if (tooltipStack.getItem() instanceof TheChaos  || tooltipStack.getItem() instanceof ITheChaos){
+                    if (tooltipStack.getItem() instanceof Meat) {
                         this.pose.pushMatrix();
-                        si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphics) (Object) this, l, i1, i, j, 400);
-                        this.pose.popMatrix();
-                    }else {
-                        this.pose.pushMatrix();
-                        si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                        si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
                         this.pose.popMatrix();
                     }
+                    if (tooltipStack.getItem() instanceof ItemBlackShadow) {
+                        if (tooltipStack.getItem() instanceof TheChaos || tooltipStack.getItem() instanceof ITheChaos) {
+                            this.pose.pushMatrix();
+                            si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                            this.pose.popMatrix();
+                        } else {
+                            this.pose.pushMatrix();
+                            si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                            this.pose.popMatrix();
+                        }
+                    }
                 }
-
                 if (canDo) {
                     this.pose.pushMatrix();
                     chest_item$renderTooltipBackground_red((GuiGraphics) (Object) this, l, i1, i, j);
@@ -198,6 +200,8 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         int k = width + 3 + 3 + 18;
         int l = height + 3 + 3 + 18;
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,Identifier.fromNamespaceAndPath(Chestitem.MODID,"tooltip/red"), i, j, k, l);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                "tooltip/background"), i, j, k, l);
     }
     @Unique
     public void si1_21_4$renderTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
