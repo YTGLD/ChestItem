@@ -244,6 +244,7 @@ public class EventMain {
     @SubscribeEvent
     public  void dieTotem(LivingUseTotemEvent event) {
         ChaosFortress.dieTotem(event);
+        RunawayLining.dieTotem(event);
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
@@ -475,7 +476,18 @@ public class EventMain {
     }
     @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
-
+        {
+            ChestInventory chestInventory = event.chestInventory;
+            Player player = event.player;
+            if (!player.level().isClientSide()) {
+                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                    ItemStack stack = chestInventory.getItem(i);
+                    if (stack.get(DataReg.tag) == null) {
+                        stack.set(DataReg.tag, new CompoundTag());
+                    }
+                }
+            }
+        }
         DrugHeal.tick(event);
         Ring.tick(event);
         Stomach.tick(event);

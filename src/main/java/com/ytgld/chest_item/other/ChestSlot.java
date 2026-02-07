@@ -25,9 +25,6 @@ public class ChestSlot extends Slot {
                 if (stack.getItem() instanceof TheImprintOfTheSoul) {
                     return false;
                 }
-                if (stack.get(DataReg.tag) == null) {
-                    stack.set(DataReg.tag,new CompoundTag());
-                }
                 return true;
             }else {
                 return false;

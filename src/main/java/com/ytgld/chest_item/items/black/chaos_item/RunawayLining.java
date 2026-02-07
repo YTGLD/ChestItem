@@ -33,6 +33,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -83,44 +84,25 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
     public static Identifier identifier(ItemStack stack) {
         return Identifier.parse("runaway_lining_string:" + stack.getItem().getDescriptionId());
     }
-
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        if (player.level().isClientSide()) {
-            CompoundTag compoundTag = stack.get(DataReg.tag);
-            if (compoundTag != null) {
-                compoundTag.putInt(clientTime, compoundTag.getIntOr(clientTime,0)-1);
-            }
-        }
-        return super.doAttribute(stack, player);
-    }
-
     public static final float min = -0.15f;
     public static final float max =  0.35f;
     public static final String lock =  "LockSting";
-
-    public static final String clientTime = "clientTime";
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
         if (other.is(Items.TOTEM_OF_UNDYING.asItem())) {
             die(player);
             player.level().playSound(null,player.blockPosition(), SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.AMBIENT,1,1);
-            CompoundTag compoundTag = stack.get(DataReg.tag);
-            if (compoundTag == null) {
-                stack.set(DataReg.tag, new CompoundTag());
-            }
-            if (player.level().isClientSide()) {
-                if (compoundTag != null) {
-                    compoundTag.putInt(clientTime, 100);
-                }
-            }
             other.shrink(1);
             return true;
         }
 
         return false;
     }
-
+    public static  void dieTotem(LivingUseTotemEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            die(player);
+        }
+    }
     public static void die(Player player){
         if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
             ChestInventory chestInventory = Handler.getItem(player);

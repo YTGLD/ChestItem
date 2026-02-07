@@ -21,10 +21,10 @@ public class Config {
 
             RunawayLiningMin =  BUILDER
                     .translation("chest_item.config.RunawayLiningMin")
-                    .defineInRange("RunawayLiningMin", 0.1F,0,Integer.MAX_VALUE);
+                    .defineInRange("RunawayLiningMin", -0.1F,0,Integer.MAX_VALUE);
             RunawayLiningMax =  BUILDER
                     .translation("chest_item.config.RunawayLiningMax")
-                    .defineInRange("RunawayLiningMax", 0.2,0,Integer.MAX_VALUE);
+                    .defineInRange("RunawayLiningMax", 0.25,0,Integer.MAX_VALUE);
 
         }
         BUILDER.pop();

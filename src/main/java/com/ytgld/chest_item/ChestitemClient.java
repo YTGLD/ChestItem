@@ -41,10 +41,10 @@ public class ChestitemClient{
             float number = (float) player.getAttributeValue(AttReg.chaos_consciousness);
             if (number > 0) {
                 event.setFarPlaneDistance(event.getFarPlaneDistance() * number);
-                event.setNearPlaneDistance(event.getNearPlaneDistance() * number);
             }
         }
     }
+
     @SubscribeEvent
     public static void regMenu(RegisterMenuScreensEvent event){
         event.register(ChestMenuTypes.GENERIC_12.get(), ChestMenuScreen::new);

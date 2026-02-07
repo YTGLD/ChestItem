@@ -32,7 +32,6 @@ public class ItemBone extends ItemBase implements IGUILightList {
         if (tag != null) {
             if (tag.getBooleanOr(IBlackLight.blackName, false)){
                 c = 0xffff0000;
-                co = Component.translatable("chest_item.attribute").append(component.copy());
             }
         }
         co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(c)));
