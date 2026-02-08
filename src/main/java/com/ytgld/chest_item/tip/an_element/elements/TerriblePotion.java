@@ -59,7 +59,7 @@ public class TerriblePotion extends SkillBase {
         lvl++;
         float modifySpeedAndDamage = 0;
         if (player.getHealth() <= player.getMaxHealth() * 0.5f){
-            modifySpeedAndDamage = (lvl * SkillList.pTerriblePotion.aneLvlForModify());
+            modifySpeedAndDamage = (lvl * SkillList.pTerriblePotion.aneLvlForModify(stack));
 
             if (player.tickCount % 20 == 0){
                 SkillBase.addXP(stack,terriblePotion,1,400,SkillList.pTerriblePotion.levelMax(stack));
@@ -85,8 +85,8 @@ public class TerriblePotion extends SkillBase {
     }
 
     @Override
-    public float aneLvlForModify() {
-        return 0.05f;
+    public float aneLvlForModify(ItemStack stack) {
+        return Handler.isBlackAddPower(stack,1.25f) *   0.05f;
     }
 
     @Override

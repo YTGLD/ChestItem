@@ -32,7 +32,7 @@ public class Rotten extends SkillBase implements BlackSkill {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         if (SkillBase.isHasElement(stack, SkillList.pRotten)) {
-                            float lv =(1 + (SkillBase.getHasElementLevel(stack, SkillList.pRotten))) * SkillList.pRotten.aneLvlForModify();
+                            float lv =(1 + (SkillBase.getHasElementLevel(stack, SkillList.pRotten))) * SkillList.pRotten.aneLvlForModify(stack);
                             lv*= 100;
 
                             if (Mth.nextInt(RandomSource.create(),0,100) < lv) {
@@ -58,8 +58,8 @@ public class Rotten extends SkillBase implements BlackSkill {
     }
 
     @Override
-    public float aneLvlForModify() {
-        return 0.06f;
+    public float aneLvlForModify(ItemStack stack) {
+        return Handler.isBlackAddPower(stack,1.25f) *   0.06f;
     }
 
     @Override

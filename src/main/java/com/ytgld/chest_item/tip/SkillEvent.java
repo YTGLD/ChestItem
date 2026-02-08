@@ -54,7 +54,7 @@ public class SkillEvent {
                         String text = base.baneName();
                         int lvl = SkillBase.getHasElementLevel(stack,base);
                         lvl++;
-                        float s = lvl * base.aneLvlForModify();
+                        float s = lvl * base.aneLvlForModify(stack);
                         String  p = "";
                         if (base.isPercentage()) {
                             p = "%";

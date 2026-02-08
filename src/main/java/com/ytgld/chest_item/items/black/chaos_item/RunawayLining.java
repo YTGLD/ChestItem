@@ -63,8 +63,6 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
                 tooltipAdder.accept(Component.translatable("key.keyboard.left.shift").withStyle(ChatFormatting.GOLD));
             }else {
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
                 tooltipAdder.accept(Component.literal(""));
                 tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.accept(Component.translatable("item.chest_item.bloody_belt").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));

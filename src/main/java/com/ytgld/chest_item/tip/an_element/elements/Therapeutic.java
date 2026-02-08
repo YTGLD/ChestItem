@@ -50,7 +50,7 @@ public class Therapeutic  extends SkillBase {
         lvl++;
         float modifyHeal = 0;
         if (player.getHealth() > player.getMaxHealth() * 0.5f){
-            modifyHeal = (lvl * SkillList.pTherapeutic.aneLvlForModify());
+            modifyHeal = (lvl * SkillList.pTherapeutic.aneLvlForModify(stack));
 
             if (player.tickCount % 20 == 0){
                 SkillBase.addXP(stack,therapeutic,1,600,SkillList.pTherapeutic.levelMax(stack));
@@ -72,8 +72,8 @@ public class Therapeutic  extends SkillBase {
     }
 
     @Override
-    public float aneLvlForModify() {
-        return 0.08f;
+    public float aneLvlForModify(ItemStack stack) {
+        return Handler.isBlackAddPower(stack,1.25f) *   0.08f;
     }
 
     @Override

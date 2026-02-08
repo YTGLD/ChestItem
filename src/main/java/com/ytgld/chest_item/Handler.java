@@ -68,16 +68,13 @@ public class Handler {
         }
         return  true;
     }
-    public static int isBlackAddPower(ItemStack stack,int add ){
+    public static float isBlackAddPower(ItemStack stack,float add ){
         if (isBlackChaos(stack)){
             return add ;
         }
         return 1;
     }
     public static int blackLevel(ItemStack stack,int add ,int def){
-        if (isBlackChaos(stack)){
-            return add + def ;
-        }
         return def;
     }
     public static boolean isBlackChaos(ItemStack stack){

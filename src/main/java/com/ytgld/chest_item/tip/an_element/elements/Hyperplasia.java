@@ -49,7 +49,7 @@ public class Hyperplasia extends SkillBase {
             Player player
     ) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-        float modify = SkillList.pHyperplasia.aneLvlForModify();
+        float modify = SkillList.pHyperplasia.aneLvlForModify(stack);
         int s = (int) (float) player.getData(AttReg.hyperplasiaATTACHMENT_TYPES.get());
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 terriblePotion.baneName()),
@@ -67,8 +67,8 @@ public class Hyperplasia extends SkillBase {
     }
 
     @Override
-    public float aneLvlForModify() {
-        return 2.5F;
+    public float aneLvlForModify(ItemStack stack) {
+        return Handler.isBlackAddPower(stack,1.25f) *   2.5F;
     }
 
     @Override

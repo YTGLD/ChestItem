@@ -60,8 +60,8 @@ public class PlagueDivinePower  extends SkillBase {
     }
 
     @Override
-    public float aneLvlForModify() {
-        return 0.1f;
+    public float aneLvlForModify(ItemStack stack) {
+        return Handler.isBlackAddPower(stack,1.25f) *   0.1f;
     }
 
     @Override

@@ -71,6 +71,10 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
         Map<SkillBase, Identifier> IdentifierMap = element.name();
         Map<SkillBase, Integer> map = element.element(stack);
         Map<SkillBase, Component> stringMap = element.tooltip();
+        int color = itemBase.color(stack);
+        if (Handler.isBlackChaos(stack)) {
+            color = 0xffff0000;
+        }
         if (map!=null) {
             SkillBase elt = map.keySet().stream().toList().get(i);
             int number = map.get(elt);
@@ -80,10 +84,10 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
                 guiGraphics.drawString(font, Component.translatable("item.chest_item.skill.level").append(": ")
                                 .append(Component.translatable("enchantment.level." + number)
                                         .append(Component.translatable("item.chest_item.skill.level.max"))),
-                        x + 35, y + 10, itemBase.color(stack), false);
+                        x + 35, y + 10, color, false);
             }else {
                 guiGraphics.drawString(font, Component.translatable("item.chest_item.skill.level").append(": ").append(Component.translatable("enchantment.level." + number)),
-                        x + 35, y + 10, itemBase.color(stack), false);
+                        x + 35, y + 10, color, false);
             }
             String baneName = elt.baneName();
             String mixinName = baneName + SkillBase.skillBaseXP;
@@ -92,7 +96,7 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
             if (compoundTag!=null) {
                 sx = compoundTag.getIntOr(mixinName, 0);
             }
-            guiGraphics.drawString(font, Component.translatable( "item.chest_item.skill.xp").append(": ").append(String.valueOf(sx)), x+35, y+20,itemBase.color(stack) , false);
+            guiGraphics.drawString(font, Component.translatable( "item.chest_item.skill.xp").append(": ").append(String.valueOf(sx)), x+35, y+20,color , false);
 
         }
         if (IdentifierMap!=null) {
@@ -123,7 +127,7 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
         if (stringMap!=null) {
             SkillBase elt = stringMap.keySet().stream().toList().get(i);
             Component component= stringMap.get(elt);
-            guiGraphics.drawString(font, component, x+35, y, itemBase.color(stack), false);
+            guiGraphics.drawString(font, component, x+35, y, color, false);
         }
     }
 

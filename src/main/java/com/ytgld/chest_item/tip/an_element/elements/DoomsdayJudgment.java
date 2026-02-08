@@ -45,7 +45,7 @@ public class DoomsdayJudgment extends SkillBase implements BlackSkill {
                         if (SkillBase.isHasElement(stack,SkillList.pDoomsdayJudgment)){
                             float l = 5f;
                             int lvl = SkillBase.getHasElementLevel(stack,SkillList.pDoomsdayJudgment);
-                            float apply = SkillList.pDoomsdayJudgment.aneLvlForModify();
+                            float apply = SkillList.pDoomsdayJudgment.aneLvlForModify(stack);
                             float doIt = lvl * apply;
                             return (int) (l * (1 - doIt));
                         }
@@ -66,7 +66,7 @@ public class DoomsdayJudgment extends SkillBase implements BlackSkill {
                         if (SkillBase.isHasElement(stack,SkillList.pDoomsdayJudgment)){
                             float l = 1f;
                             int lvl = SkillBase.getHasElementLevel(stack,SkillList.pDoomsdayJudgment);
-                            float apply = SkillList.pDoomsdayJudgment.aneLvlForModify();
+                            float apply = SkillList.pDoomsdayJudgment.aneLvlForModify(stack);
 
                             float doIt = lvl * apply;
                             return l * (1 + doIt);
@@ -105,8 +105,8 @@ public class DoomsdayJudgment extends SkillBase implements BlackSkill {
     }
 
     @Override
-    public float aneLvlForModify() {
-        return 0.08f;
+    public float aneLvlForModify(ItemStack stack) {
+        return Handler.isBlackAddPower(stack,1.25f) *   0.08f;
     }
 
     @Override

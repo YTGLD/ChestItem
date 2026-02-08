@@ -76,8 +76,8 @@ public class PlagueSpores extends SkillBase {
     }
 
     @Override
-    public float aneLvlForModify() {
-        return 1;
+    public float aneLvlForModify(ItemStack stack) {
+        return Handler.isBlackAddPower(stack,1.25f) *   1;
     }
 
     @Override

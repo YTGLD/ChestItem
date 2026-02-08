@@ -17,7 +17,7 @@ public abstract class SkillBase {
     public static final String skillBaseXP = "SkillBaseXP";
     public abstract String baneName();
     public abstract boolean isPercentage();
-    public abstract float aneLvlForModify();
+    public abstract float aneLvlForModify(ItemStack stack);
     public abstract int levelMax(ItemStack stack);
     public Identifier baneImage(){
         return Identifier.fromNamespaceAndPath(Chestitem.MODID,
@@ -77,9 +77,6 @@ public abstract class SkillBase {
         if (compoundTag != null) {
             int lvl = compoundTag.getIntOr(mustHasElement.baneName(), 0);
             lvl += compoundTag.getBooleanOr(IBlackLight.blackName,false) ? 1 : 0;
-            if (Handler.isBlackChaos(stack)) {
-                lvl+=1;
-            }
             return lvl;
         }
         return 0;

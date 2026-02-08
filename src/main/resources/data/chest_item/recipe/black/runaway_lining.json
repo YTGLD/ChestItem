@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "minecraft:obsidian",
+    "A": "minecraft:end_stone",
     "B": "chest_item:lead_of_enlightenment",
     "C": "minecraft:silence_armor_trim_smithing_template",
     "D": "minecraft:nether_star"
