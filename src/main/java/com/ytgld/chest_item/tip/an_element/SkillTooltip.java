@@ -1,8 +1,13 @@
 package com.ytgld.chest_item.tip.an_element;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.renderer.MRender;
+import com.ytgld.chest_item.renderer.RendererFarm;
+import com.ytgld.chest_item.renderer.i.IGuiGraphics;
+import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.tip.an_element.extend.BlackSkill;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
 import net.minecraft.client.gui.Font;
@@ -66,27 +71,11 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
         Map<SkillBase, Identifier> IdentifierMap = element.name();
         Map<SkillBase, Integer> map = element.element(stack);
         Map<SkillBase, Component> stringMap = element.tooltip();
-
-        if (IdentifierMap!=null) {
-            SkillBase elt = IdentifierMap.keySet().stream().toList().get(i);
-            Identifier Identifier1 = IdentifierMap.get(elt);
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,Identifier1, x, y, 32, 32);
-            if (!(elt instanceof BlackSkill)) {
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath(Chestitem.MODID, "frame"), x, y, 32, 32);
-            }else {
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath(Chestitem.MODID, "frame_black"), x, y, 32, 32);
-
-            }
-        }
-        if (stringMap!=null) {
-            SkillBase elt = stringMap.keySet().stream().toList().get(i);
-            Component component= stringMap.get(elt);
-            guiGraphics.drawString(font, component, x+35, y, itemBase.color(stack), false);
-        }
         if (map!=null) {
             SkillBase elt = map.keySet().stream().toList().get(i);
             int number = map.get(elt);
             number++;
+
             if (number >= elt.levelMax(stack)){
                 guiGraphics.drawString(font, Component.translatable("item.chest_item.skill.level").append(": ")
                                 .append(Component.translatable("enchantment.level." + number)
@@ -105,6 +94,36 @@ public class SkillTooltip implements ClientTooltipComponent, TooltipComponent {
             }
             guiGraphics.drawString(font, Component.translatable( "item.chest_item.skill.xp").append(": ").append(String.valueOf(sx)), x+35, y+20,itemBase.color(stack) , false);
 
+        }
+        if (IdentifierMap!=null) {
+            SkillBase elt = IdentifierMap.keySet().stream().toList().get(i);
+            Identifier Identifier1 = IdentifierMap.get(elt);
+            if (Handler.isBlackChaos(stack)) {
+                if (guiGraphics instanceof IGuiGraphics iGuiGraphics) {
+                    new RendererFarm(guiGraphics.pose(), iGuiGraphics.cI1_21_11$guiRenderState(), 0xffff8080)
+                            .chest_item$blit(MRender.RenderPs.LightSlowness(false,0.1f,10), Identifier.fromNamespaceAndPath(Identifier1.getNamespace(),
+                                            "textures/gui/sprites/"+Identifier1.getPath()+".png"),
+                                    x, y, 0, 0, 32, 32, 32, 32);
+                }
+            }else {
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Identifier1, x, y, 32, 32);
+            }
+
+            if (!Handler.isBlackChaos(stack)) {
+                if (!(elt instanceof BlackSkill)) {
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath(Chestitem.MODID, "frame"), x, y, 32, 32);
+                } else {
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath(Chestitem.MODID, "frame_black"), x, y, 32, 32);
+                }
+            }else {
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                        "frame_chaos"), x, y, 32, 32);
+            }
+        }
+        if (stringMap!=null) {
+            SkillBase elt = stringMap.keySet().stream().toList().get(i);
+            Component component= stringMap.get(elt);
+            guiGraphics.drawString(font, component, x+35, y, itemBase.color(stack), false);
         }
     }
 

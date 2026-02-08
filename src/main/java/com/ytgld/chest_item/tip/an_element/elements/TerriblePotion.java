@@ -3,6 +3,7 @@ package com.ytgld.chest_item.tip.an_element.elements;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.tip.an_element.SkillList;
@@ -90,7 +91,8 @@ public class TerriblePotion extends SkillBase {
 
     @Override
     public int levelMax(ItemStack stack) {
-        return 10;
+        return Handler.blackLevel(stack,0 , 10);
+
     }
 }
 

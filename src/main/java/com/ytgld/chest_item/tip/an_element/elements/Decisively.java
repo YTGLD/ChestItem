@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.tip.an_element.elements;
 
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
 import net.minecraft.world.entity.LivingEntity;
@@ -53,6 +54,6 @@ public class Decisively extends SkillBase {
 
     @Override
     public int levelMax(ItemStack stack) {
-        return 3;
+        return Handler.blackLevel(stack,2 , 3);
     }
 }

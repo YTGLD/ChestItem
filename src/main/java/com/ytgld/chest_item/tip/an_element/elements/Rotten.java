@@ -64,6 +64,7 @@ public class Rotten extends SkillBase implements BlackSkill {
 
     @Override
     public int levelMax(ItemStack stack) {
-        return 6;
+        return Handler.blackLevel(stack,2 , 6);
+
     }
 }

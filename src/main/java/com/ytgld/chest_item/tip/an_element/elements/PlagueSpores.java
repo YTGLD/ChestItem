@@ -82,6 +82,7 @@ public class PlagueSpores extends SkillBase {
 
     @Override
     public int levelMax(ItemStack stack) {
-        return 10;
+        return Handler.blackLevel(stack,0 , 10);
+
     }
 }

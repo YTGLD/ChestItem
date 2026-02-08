@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.tip.an_element.extend;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.tip.an_element.SkillList;
@@ -76,6 +77,9 @@ public abstract class SkillBase {
         if (compoundTag != null) {
             int lvl = compoundTag.getIntOr(mustHasElement.baneName(), 0);
             lvl += compoundTag.getBooleanOr(IBlackLight.blackName,false) ? 1 : 0;
+            if (Handler.isBlackChaos(stack)) {
+                lvl+=1;
+            }
             return lvl;
         }
         return 0;

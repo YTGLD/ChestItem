@@ -5,4 +5,5 @@ import net.minecraft.world.item.ItemStack;
 
 public interface IGuiGraphics {
     void chest_item$addW(ItemStack stack);
+    GuiRenderState cI1_21_11$guiRenderState();
 }

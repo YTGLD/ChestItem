@@ -111,7 +111,7 @@ public class DoomsdayJudgment extends SkillBase implements BlackSkill {
 
     @Override
     public int levelMax(ItemStack stack) {
-        return 5;
+        return Handler.blackLevel(stack,2 , 5);
     }
 }
 

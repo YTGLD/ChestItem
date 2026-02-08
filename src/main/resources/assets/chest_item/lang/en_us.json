@@ -78,7 +78,7 @@
 
   "itemGroup.chest_item": "Trinkets in the chest",
 
-  "item.chest_item.chest": "Can be placed inside the magic chest, press the bind key to open",
+  "item.chest_item.chest": "You can put it in the magic box and press the '%d' key to open it",
 
   "key.category.chest_item.chest": "Trinkets in the chest",
   "key.chest_item.r": "Open magic chest",

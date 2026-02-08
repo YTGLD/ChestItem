@@ -1,4 +1,5 @@
 {
+  "item.chest_item.chest": "可以放入神奇箱子内，按下‘%d’键打开",
 
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
@@ -85,7 +86,6 @@
   "attribute.name.chest_item.chaos_consciousness": "混沌意识",
 
 
-  "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
 
   "key.category.chest_item.chest": "箱子里的小饰品",
   "key.chest_item.r": "打开神奇箱子",

@@ -2,11 +2,10 @@ package com.ytgld.chest_item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.ytgld.chest_item.other.ChestInventory;
-import com.ytgld.chest_item.other.ChestItemMenu;
-import com.ytgld.chest_item.other.ChestMenuTypes;
-import com.ytgld.chest_item.other.IPlayer;
+import com.ytgld.chest_item.items.IBlackLight;
+import com.ytgld.chest_item.other.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
@@ -69,8 +68,25 @@ public class Handler {
         }
         return  true;
     }
-
-
+    public static int isBlackAddPower(ItemStack stack,int add ){
+        if (isBlackChaos(stack)){
+            return add ;
+        }
+        return 1;
+    }
+    public static int blackLevel(ItemStack stack,int add ,int def){
+        if (isBlackChaos(stack)){
+            return add + def ;
+        }
+        return def;
+    }
+    public static boolean isBlackChaos(ItemStack stack){
+        CompoundTag tag = stack.get(DataReg.tag);
+        if (tag != null) {
+            return tag.getBooleanOr(IBlackLight.blackName, false);
+        }
+        return false;
+    }
 
 
 

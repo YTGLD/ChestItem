@@ -5,7 +5,7 @@
     "A": "minecraft:obsidian",
     "B": "chest_item:lead_of_enlightenment",
     "C": "minecraft:silence_armor_trim_smithing_template",
-    "D": "chest_item:complementary"
+    "D": "minecraft:nether_star"
   },
   "pattern": [
     "AAA",

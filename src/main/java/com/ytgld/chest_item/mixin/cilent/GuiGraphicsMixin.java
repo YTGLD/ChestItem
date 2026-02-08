@@ -3,6 +3,7 @@ package com.ytgld.chest_item.mixin.cilent;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.chaos_item.ITheChaos;
@@ -59,6 +60,12 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     @Shadow @Final private Matrix3x2fStack pose;
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
+
+    @Override
+    public GuiRenderState cI1_21_11$guiRenderState() {
+        return guiRenderState;
+    }
+
     @Override
     public void chest_item$addW(ItemStack stack) {
         GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
@@ -148,23 +155,16 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         i = k;
                     }
                 }
-                boolean canDo = false;
-                CompoundTag tag = tooltipStack.get(DataReg.tag);
-                if (tag != null) {
-                    if (tag.getBooleanOr(IBlackLight.blackName, false)){
-                        canDo = true;
-                    }
-                }
                 Vector2ic vector2ic = positioner.positionTooltip(this.guiWidth(), this.guiHeight(), x, y, i, j);
                 int l = vector2ic.x();
                 int i1 = vector2ic.y();
                 this.pose.pushMatrix();
-                if (!canDo) {
+                if (!Handler.isBlackChaos(tooltipStack)) {
                     if (tooltipStack.getItem() instanceof ItemBlackShadow) {
                         chest_item$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
                     } else if (tooltipStack.getItem() instanceof ItemBone) {
                         chest_item$renderItemBoneTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
-                    } else if (!canDo) {
+                    } else if (!Handler.isBlackChaos(tooltipStack)) {
                         chest_item$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j);
                     }
                     this.pose.popMatrix();
@@ -185,7 +185,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         }
                     }
                 }
-                if (canDo) {
+                if (Handler.isBlackChaos(tooltipStack)) {
                     this.pose.pushMatrix();
                     chest_item$renderTooltipBackground_red((GuiGraphics) (Object) this, l, i1, i, j);
                     this.pose.popMatrix();
@@ -589,16 +589,8 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (entity == null) {
             return;
         }
-        boolean canDo = false;
-        CompoundTag tag = stack.get(DataReg.tag);
-        if (tag != null) {
-            if (tag.getBooleanOr(IBlackLight.blackName, false)){
-                canDo = true;
-            }
-        }
-        if ((stack.getItem() instanceof IBlackLight)  || canDo) {
+        if ((stack.getItem() instanceof IBlackLight)  || Handler.isBlackChaos(stack)) {
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
-
             {
                 Identifier fire = Identifier.fromNamespaceAndPath(Chestitem.MODID,
                         "textures/gui/tooltip/fire_black.png");
