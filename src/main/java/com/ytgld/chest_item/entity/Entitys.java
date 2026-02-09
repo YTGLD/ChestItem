@@ -7,6 +7,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ambient.Bat;
+import net.minecraft.world.entity.animal.golem.IronGolem;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -26,10 +27,14 @@ public class Entitys {
     public static final DeferredHolder<EntityType<?>, EntityType<UnstableSpheres>> UnstableSpheres_ = REGISTRY.register("unstable_spheres", () ->
             EntityType.Builder.of(UnstableSpheres::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
                     Identifier.fromNamespaceAndPath(Chestitem.MODID, "unstable_spheres"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<LaserColumn>> LaserColumn_ = REGISTRY.register("laser_column", () ->
+            EntityType.Builder.of(LaserColumn::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(200).build(ResourceKey.create(Registries.ENTITY_TYPE,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "laser_column"))));
 
 
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeCreationEvent event){
         event.put(Entitys.EndComing_.get(), Bat.createAttributes().build());
+        event.put(Entitys.LaserColumn_.get(), IronGolem.createAttributes().build());
     }
 }

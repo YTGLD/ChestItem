@@ -5,6 +5,7 @@ import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.UnstableSpheres;
 import com.ytgld.chest_item.entity.render.AttackEndComingRender;
 import com.ytgld.chest_item.entity.render.EndComingRender;
+import com.ytgld.chest_item.entity.render.LaserColumnRender;
 import com.ytgld.chest_item.entity.render.UnstableSpheresRender;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.EventHandler;
@@ -81,6 +82,7 @@ public class Chestitem {
             event.registerEntityRenderer(Entitys.AttackEndComing_.get(), AttackEndComingRender::new);
             event.registerEntityRenderer(Entitys.EndComing_.get(), EndComingRender::new);
             event.registerEntityRenderer(Entitys.UnstableSpheres_.get(), UnstableSpheresRender::new);
+            event.registerEntityRenderer(Entitys.LaserColumn_.get(), LaserColumnRender::new);
         }
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent evt) {

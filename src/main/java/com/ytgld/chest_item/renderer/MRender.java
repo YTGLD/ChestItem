@@ -60,7 +60,10 @@ public abstract class MRender {
     public static RenderType colorOutline(boolean isOutline){
         if (isOutline){
             return RenderType.create(
-                    "lightning", RenderSetup.builder(RenderPipelines.LIGHTNING)
+                    "lightning", RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
+                                    .withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
+                                    .withBlend(BlendFunction.LIGHTNING).withVertexFormat(DefaultVertexFormat.POSITION_COLOR,
+                                            VertexFormat.Mode.QUADS).withCull(false).build())
                             .setOutputTarget(outline2).sortOnUpload().createRenderSetup()
             );
         }
