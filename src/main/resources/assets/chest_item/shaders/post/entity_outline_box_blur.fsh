@@ -1,5 +1,4 @@
 #version 330
-#moj_import <minecraft:globals.glsl>
 
 layout(std140) uniform SamplerInfo {
     vec2 OutSize;
@@ -38,7 +37,7 @@ void main() {
         float distance = length(diff);
 
         // 扭曲因子
-        float twistFactor = sin((GameTime * 3333) + distance * 30.0) * 0.0033; // 扭曲因子
+        float twistFactor = sin((1 * 3333) + distance * 30.0) * 0.0033; // 扭曲因子
 
         float angle = atan(diff.y, diff.x);
         float newAngle = angle + twistFactor;

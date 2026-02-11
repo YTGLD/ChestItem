@@ -590,6 +590,7 @@ public class EventMain {
         SelfIncreasingHeart.tick(event);
         SpeedHeart.eat(event);
         Glutton.eatFinish(event);
+        OneEyedSpider.hurtOfBlood(event);
     }
     @SubscribeEvent
     public void LivingExperienceDropEvent(LivingExperienceDropEvent event) {

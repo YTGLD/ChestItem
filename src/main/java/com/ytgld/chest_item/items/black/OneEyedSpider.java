@@ -30,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.phys.Vec2;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,8 +41,8 @@ public class OneEyedSpider extends ItemBlackShadow implements IGUILightList {
         super(properties);
     }
 
-    public static void hurtOfBlood(ItemStack food , LivingEntity entity){
-        if (entity instanceof Player player) {
+    public static void hurtOfBlood(LivingEntityUseItemEvent.Finish event){
+        if (event.getEntity() instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
             if (chestInventory != null) {
                 if (!player.level().isClientSide()) {
@@ -50,7 +51,7 @@ public class OneEyedSpider extends ItemBlackShadow implements IGUILightList {
                         if (stack.is(InitItems.OneEyedSpider_)) {
                             CompoundTag compoundTag = stack.get(DataReg.tag);
                             if (compoundTag != null) {
-                                String string = BuiltInRegistries.ITEM.getKey(food.getItem()).toString();
+                                String string = BuiltInRegistries.ITEM.getKey(event.getItem().getItem()).toString();
                                 if (!compoundTag.getBooleanOr(string, false)) {
                                     compoundTag.putBoolean(string, true);
                                     break;

@@ -12,11 +12,4 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
-    @Inject(method = "finishUsingItem", at = @At(value = "RETURN"))
-    private void finishUsingItem(Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir) {
-        ItemStack stack = (ItemStack) (Object) this ;
-        if (stack.get(DataComponents.FOOD) != null) {
-            OneEyedSpider.hurtOfBlood(stack,livingEntity);
-        }
-    }
 }

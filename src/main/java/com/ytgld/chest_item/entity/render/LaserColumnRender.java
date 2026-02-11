@@ -43,7 +43,16 @@ public class LaserColumnRender extends EntityRenderer<LaserColumn, LaserColumnRe
         HandlerClient.showOutline = true;
         HandlerClient.doPass = true;
         int posOffset  = 0;
+        float s =600 -  entity.tickCount;
+        float ss = Math.min(40,s);
+        ss /= 40f;
+        float timeC = ss;
 
+
+        float a =entity.tickCount;
+        float c = Math.min(10,a);
+        c /= 10f;
+        float time=  c;
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
         double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
@@ -52,13 +61,14 @@ public class LaserColumnRender extends EntityRenderer<LaserColumn, LaserColumnRe
         poseStack.translate(entity.getX() - x, entity.getY() - y , entity.getZ() - z);
         nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
             pose.translate(0, 40 + posOffset, 0);
-            pose.scale(1, 20, 1);
+            pose.scale(1* time * timeC, 20, 1* time * timeC);
             renderSphere1(pose, bufferSource, 100, 3.25f, Light.ARGB.color(255,100,50,255));
         });
         nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
-            pose.scale(2, 0.2f, 2);
-            renderSphere1(pose, bufferSource, 100, 3, Light.ARGB.color(255,255,100,0));
+            pose.scale(2* time * timeC, 0.2f, 2* time * timeC);
+            renderSphere1(pose, bufferSource, 100, 3, Light.ARGB.color(100,255,100,0));
         });
+
         poseStack.popPose();
         for (int i = 0; i < 8; i++) {
             poseStack.pushPose();
@@ -66,8 +76,13 @@ public class LaserColumnRender extends EntityRenderer<LaserColumn, LaserColumnRe
             poseStack.translate(entity.getX() - x, entity.getY() - y, entity.getZ() - z);
             nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
                 pose.translate(4, 25+ posOffset, 0);
-                pose.scale(1, 50, 1);
-                renderSphere1(pose, bufferSource, 100, 0.8f, Light.ARGB.color(255,50,100,255));
+                pose.scale(1* time * timeC, 50, 1* time * timeC);
+                renderSphere1(pose, bufferSource, 100, 0.8f, Light.ARGB.color(255,15,35,200));
+            });
+            nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+                pose.translate(4, 0, 0);
+                pose.scale(2* time * timeC, 1, 2* time * timeC);
+                renderSphere1(pose, bufferSource, 100, 1, Light.ARGB.color(255,150,0,150));
             });
             poseStack.popPose();
         }

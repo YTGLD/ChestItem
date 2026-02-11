@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.animal.golem.IronGolem;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -35,6 +36,6 @@ public class Entitys {
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeCreationEvent event){
         event.put(Entitys.EndComing_.get(), Bat.createAttributes().build());
-        event.put(Entitys.LaserColumn_.get(), IronGolem.createAttributes().build());
+        event.put(Entitys.LaserColumn_.get(), Zombie.createAttributes().build());
     }
 }
