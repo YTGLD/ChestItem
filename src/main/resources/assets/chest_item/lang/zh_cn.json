@@ -1,5 +1,6 @@
 {
   "item.chest_item.chest": "可以放入神奇箱子内，按下‘%d’键打开",
+  "item.chest_item.skill": "可以按下‘%d’键触发技能",
 
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",

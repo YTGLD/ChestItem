@@ -1,0 +1,12 @@
+{
+  "laser_column": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:laser_column",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.sound_1"
+  }
+}

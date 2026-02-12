@@ -4,27 +4,19 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.ytgld.chest_item.HandlerClient;
-import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.entity.LaserColumn;
 import com.ytgld.chest_item.entity.state.LaserColumnRenderState;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public class LaserColumnRender extends EntityRenderer<LaserColumn, LaserColumnRenderState> {
@@ -56,37 +48,103 @@ public class LaserColumnRender extends EntityRenderer<LaserColumn, LaserColumnRe
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
         double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
-        poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees((entity.tickCount + (renderState.partialTick * 4) * 4)));
-        poseStack.translate(entity.getX() - x, entity.getY() - y , entity.getZ() - z);
         nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
-            pose.translate(0, 40 + posOffset, 0);
-            pose.scale(1* time * timeC, 20, 1* time * timeC);
-            renderSphere1(pose, bufferSource, 100, 3.25f, Light.ARGB.color(255,100,50,255));
+            setT2(pose, entity,bufferSource);
         });
-        nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
-            pose.scale(2* time * timeC, 0.2f, 2* time * timeC);
-            renderSphere1(pose, bufferSource, 100, 3, Light.ARGB.color(100,255,100,0));
-        });
-
-        poseStack.popPose();
-        for (int i = 0; i < 8; i++) {
+        if (entity.canSee) {
             poseStack.pushPose();
-            poseStack.mulPose(Axis.YP.rotationDegrees(entity.tickCount * 4 + (i * 45)));
+            poseStack.mulPose(Axis.YP.rotationDegrees((entity.tickCount + (renderState.partialTick * 4) * 4)));
             poseStack.translate(entity.getX() - x, entity.getY() - y, entity.getZ() - z);
             nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
-                pose.translate(4, 25+ posOffset, 0);
-                pose.scale(1* time * timeC, 50, 1* time * timeC);
-                renderSphere1(pose, bufferSource, 100, 0.8f, Light.ARGB.color(255,15,35,200));
+                pose.translate(0, 40 + posOffset, 0);
+                pose.scale(1 * time * timeC, 20, 1 * time * timeC);
+                renderSphere1(pose, bufferSource, 100, 3.25f, Light.ARGB.color(255, 100, 50, 255));
             });
             nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
-                pose.translate(4, 0, 0);
-                pose.scale(2* time * timeC, 1, 2* time * timeC);
-                renderSphere1(pose, bufferSource, 100, 1, Light.ARGB.color(255,150,0,150));
+                pose.scale(2 * time * timeC, 0.2f, 2 * time * timeC);
+                renderSphere1(pose, bufferSource, 100, 3, Light.ARGB.color(100, 255, 100, 0));
             });
             poseStack.popPose();
         }
+        if (entity.canSee) {
+            for (int i = 0; i < 8; i++) {
+                poseStack.pushPose();
+                poseStack.mulPose(Axis.YP.rotationDegrees(entity.tickCount * 4 + (i * 45)));
+                poseStack.translate(entity.getX() - x, entity.getY() - y, entity.getZ() - z);
+                nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+                    pose.translate(4, 25 + posOffset, 0);
+                    pose.scale(1 * time * timeC, 50, 1 * time * timeC);
+                    renderSphere1(pose, bufferSource, 100, 0.8f, Light.ARGB.color(255, 15, 35, 200));
+                });
+                nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+                    pose.translate(4, 0, 0);
+                    pose.scale(2 * time * timeC, 1, 2 * time * timeC);
+                    renderSphere1(pose, bufferSource, 100, 1, Light.ARGB.color(255, 150, 0, 150));
+                });
+                poseStack.popPose();
+            }
+        }
     }
+    private void setT2(PoseStack.Pose matrices,
+                       LaserColumn entity,
+                       VertexConsumer vertexConsumers)
+    {
+        for (int i = 1; i < entity.getTrailPositions().size(); i++){
+            Vec3 prevPos = entity.getTrailPositions().get(i - 1);
+            Vec3 currPos = entity.getTrailPositions().get(i);
+            Vec3 adjustedPrevPos = new Vec3(prevPos.x - entity.getX(), prevPos.y - entity.getY() , prevPos.z - entity.getZ());
+            Vec3 adjustedCurrPos = new Vec3(currPos.x - entity.getX(), currPos.y - entity.getY(), currPos.z - entity.getZ());
+            float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
+            renderBlood(Light.ARGB.color((int) (255*alpha),255, (int) (100*alpha),0),matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, Math.max(255,alpha),6 * alpha);
+            renderBlood(Light.ARGB.color((int) (255*alpha),255, (int) (100*alpha),0),matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, Math.max(255,alpha),6 * alpha);
+        }
+    }
+
+    public static void renderBlood(int color, PoseStack.Pose poseStack, VertexConsumer vertexConsumer, Vec3 start, Vec3 end, float alpha, float r) {
+        int segmentCount = 16;
+
+        for (int i = 0; i < segmentCount; i++) {
+            double angle1 = (2 * Math.PI * i) / segmentCount;
+            double angle2 = (2 * Math.PI * (i + 1)) / segmentCount;
+
+            double x1 = Math.cos(angle1) * r;
+            double z1 = Math.sin(angle1) * r;
+            double x2 = Math.cos(angle2) * r;
+            double z2 = Math.sin(angle2) * r;
+
+            Vec3 up1 = start.add(x1, 0, z1);
+            Vec3 up2 = start.add(x2, 0, z2);
+
+            Vec3 down1 = end.add(x1, 0, z1);
+            Vec3 down2 = end.add(x2, 0, z2);
+
+            addSquare(color, vertexConsumer, poseStack, up1, up2, down1, down2, alpha);
+        }
+    }
+
+    private static void addSquare(int color ,VertexConsumer vertexConsumer, PoseStack.Pose poseStack, Vec3 up1, Vec3 up2, Vec3 down1, Vec3 down2, float alpha) {
+        // 添加四个顶点来绘制一个矩形
+        vertexConsumer.addVertex(poseStack, (float) up1.x, (float) up1.y, (float) up1.z)
+                .setColor(color)
+                .setUv2(255, 255)
+                .setNormal(poseStack,0, 0, 1);
+
+        vertexConsumer.addVertex(poseStack, (float) down1.x, (float) down1.y, (float) down1.z)
+                .setColor(color)
+                .setUv2(255, 255)
+                .setNormal(poseStack,0, 0, 1);
+
+        vertexConsumer.addVertex(poseStack, (float) down2.x, (float) down2.y, (float) down2.z)
+                .setColor(color)
+                .setUv2(255, 255)
+                .setNormal(poseStack,0, 0, 1);
+
+        vertexConsumer.addVertex(poseStack, (float) up2.x, (float) up2.y, (float) up2.z)
+                .setColor(color)
+                .setUv2(255, 255)
+                .setNormal(poseStack,0, 0, 1);
+    }
+
     public void renderSphere1(@NotNull PoseStack.Pose matrices, @NotNull VertexConsumer vertexConsumer, int light, float s ,int color) {
         int stacks = 25; // 垂直方向的分割数
         int slices = 25; // 水平方向的分割数

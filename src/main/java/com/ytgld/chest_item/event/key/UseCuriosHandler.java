@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.event.key;
 
+import com.ytgld.chest_item.items.black.Test;
 import com.ytgld.chest_item.items.black.celestial.Blood;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
 import com.ytgld.chest_item.tip.SkillEvent;
@@ -22,7 +23,7 @@ public class UseCuriosHandler {
                 TheEndIsComing.event(player);
                 PlagueSpores.useSkill(player);
                 Blood.onKeyIsDown(player);
-
+                Test.onKeyIsDown(player);
             });
         }
     }

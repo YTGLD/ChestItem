@@ -80,6 +80,7 @@
   "itemGroup.chest_item": "Trinkets in the chest",
 
   "item.chest_item.chest": "You can put it in the magic box and press the '%d' key to open it",
+  "item.chest_item.skill": "You can press the '%d' key to trigger the skill",
 
   "key.category.chest_item.chest": "Trinkets in the chest",
   "key.chest_item.r": "Open magic chest",

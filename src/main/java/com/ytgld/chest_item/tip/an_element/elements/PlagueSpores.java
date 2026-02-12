@@ -2,6 +2,7 @@ package com.ytgld.chest_item.tip.an_element.elements;
 
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.items.SkillItem;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.tip.an_element.SkillList;
@@ -21,7 +22,7 @@ import java.util.List;
  * 按下技能按键对附近生物造成中毒
  *
  */
-public class PlagueSpores extends SkillBase {
+public class PlagueSpores extends SkillBase implements SkillItem {
     public PlagueSpores(){
 
     }

@@ -19,6 +19,8 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
+import com.ytgld.chest_item.sounds.CISoundDefinitionsProvider;
+import com.ytgld.chest_item.sounds.Sounds;
 import com.ytgld.chest_item.tip.SkillEvent;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import net.minecraft.resources.Identifier;
@@ -34,6 +36,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 import java.util.function.Function;
@@ -60,7 +63,7 @@ public class Chestitem {
         NeoForge.EVENT_BUS.register(new EventMain());
         ChestMenuTypes.register.register(modEventBus);
         Particles.PARTICLE_TYPES.register(modEventBus);
-
+        Sounds.REGISTRY.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(new SkillEvent());
 
@@ -76,6 +79,10 @@ public class Chestitem {
         @SubscribeEvent
         public static void RegisterClientTooltipComponentFactoriesEvent(RegisterClientTooltipComponentFactoriesEvent event){
             event.register(SkillTooltip.class, Function.identity());
+        }
+        @SubscribeEvent // on the mod event bus
+        public static void gatherData(GatherDataEvent.Client event) {
+            event.createProvider(CISoundDefinitionsProvider::new);
         }
         @SubscribeEvent
         public static void RegisterRenderPipelinesEvent(EntityRenderersEvent.RegisterRenderers event){

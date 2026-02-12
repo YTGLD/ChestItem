@@ -6,6 +6,7 @@ import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.SkillItem;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.ChatFormatting;
@@ -18,7 +19,7 @@ import net.minecraft.world.item.component.TooltipDisplay;
 
 import java.util.function.Consumer;
 
-public class TheEndIsComing  extends ItemBase implements ILight {
+public class TheEndIsComing  extends ItemBase implements ILight , SkillItem {
     public TheEndIsComing(Properties properties) {
         super(properties);
     }
