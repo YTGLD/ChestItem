@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.mixin.cilent;
 
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
 import com.ytgld.chest_item.items.*;
@@ -20,6 +21,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

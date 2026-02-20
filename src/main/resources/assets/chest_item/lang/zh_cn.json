@@ -1,4 +1,5 @@
 {
+  "item.chest_item.chest": "可以放入神奇箱子内，按下‘%d’键打开",
 
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
@@ -79,7 +80,6 @@
   "attribute.name.chest_item.chaos_armor_min": "侵蚀装甲爆碎阈值",
   "attribute.name.chest_item.chaos_armor_damage": "装甲爆碎伤害",
 
-  "item.chest_item.chest": "可以放入神奇箱子内，按下绑定键打开",
 
   "key.category.chest_item.chest": "箱子里的小饰品",
   "key.chest_item.r": "打开神奇箱子",
@@ -534,7 +534,7 @@
   "item.chest_item.warmaker.string.6":"杀死生物造成的超额伤害永久转换成额外生命",
   "item.chest_item.warmaker.string.7": "每杀死1个生物都会永久增加自身的生命上限，侵蚀装甲和装甲爆碎伤害",
   "item.chest_item.warmaker.string.8":"若超过10分钟未能击杀生物",
-  "item.chest_item.warmaker.string.8_1":"则每秒强制扣除4点生命值，直到濒死",
+  "item.chest_item.warmaker.string.8_1":"则每秒强制扣除%d点生命值，直到濒死",
   "item.chest_item.warmaker.string.9": "侵蚀装甲爆碎时永久减少生命上限，侵蚀装甲和装甲爆碎伤害",
 
 

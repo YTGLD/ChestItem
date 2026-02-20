@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.OwnerLead;
+import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
@@ -494,7 +495,7 @@ public class EventMain {
 
             if (event.getItemStack().getItem() instanceof ItemBlackShadow) {
                 event.getToolTip().add(1, Component.literal(""));
-                event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(Style.EMPTY
+                event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
                         .withColor(Light.ARGB.color(255, 255, 0, 100))));
 
 
@@ -527,7 +528,7 @@ public class EventMain {
             if (!(event.getItemStack().getItem() instanceof ItemBlackShadow)
                     && !(event.getItemStack().getItem() instanceof TheCelestial)) {
                 event.getToolTip().add(1, Component.literal(""));
-                event.getToolTip().add(1, Component.translatable("item.chest_item.chest").withStyle(ChatFormatting.GOLD));
+                event.getToolTip().add(1, Component.translatable("item.chest_item.chest", Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
             }
         }
     }
