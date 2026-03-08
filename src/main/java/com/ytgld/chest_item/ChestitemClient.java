@@ -10,6 +10,7 @@ import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
+import com.ytgld.chest_item.renderer.particle.FireBlock;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
@@ -49,6 +50,7 @@ public class ChestitemClient{
     @SubscribeEvent
     public static void registerFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(Particles.colorPart.get(), ColorPart.Provider::new);
+        event.registerSpriteSet(Particles.FireBlock_.get(), FireBlock.Provider::new);
     }
     @SubscribeEvent
     public static void AfterParticles(RenderLevelStageEvent event){

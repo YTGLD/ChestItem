@@ -179,17 +179,17 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             this.pose.popPose();
             if (tooltipStack.getItem() instanceof Meat) {
                 this.pose.pushPose();
-                si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 1000);
                 this.pose.popPose();
             }
             if (tooltipStack.getItem() instanceof ItemBlackShadow) {
                 if (tooltipStack.getItem() instanceof TheChaos||tooltipStack.getItem() instanceof ITheChaos){
                     this.pose.pushPose();
-                    si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                    si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphics) (Object) this, l, i1, i, j, 1000);
                     this.pose.popPose();
                 }else {
                     this.pose.pushPose();
-                    si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
+                    si1_21_4$renderItemBlackShadowTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 1000);
                     this.pose.popPose();
                 }
             }
@@ -204,7 +204,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int topLeftX = x - 3 - 9 + 3;
             int topLeftY = y - 3 - 9;
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate(0.0F, -2,0);
+            guiGraphics.pose().translate(0.0F, -2,z);
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_0_0.png"), topLeftX, topLeftY, 0, 0, 64, 64, 64, 64,1,1,1,1);
@@ -214,7 +214,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int middleX = x + (width - 48) / 2;
             int middleY = y - 3 - 14;
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate(0.0F, -7,0);
+            guiGraphics.pose().translate(0.0F, -7,z);
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_middle_0.png"), middleX, middleY, 0, 0,64, 64, 64, 64,1,1,1,1);
@@ -225,7 +225,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int topRightX = x + width + 3 - 48 + 6;
             int topRightY = y - 3 - 9;
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate(0.0F, -2,0);
+            guiGraphics.pose().translate(0.0F, -2,z);
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_0_1.png"), topRightX, topRightY, 0, 0,64, 64, 64, 64,1,1,1,1);
@@ -235,7 +235,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int bottomLeftX = x - 3 - 9 ;
             int bottomLeftY = y + height + 3 - 48 + 4;
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate(0.0F, -2,0);
+            guiGraphics.pose().translate(0.0F, -2,z);
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_1_0.png"), bottomLeftX, bottomLeftY, 0, 0,64, 64, 64, 64,1,1,1,1);
@@ -245,7 +245,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int bottomRightX = x + width + 3 - 48 + 6;
             int bottomRightY = y + height + 3 - 48 + 4;
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate(0.0F, 4,0);
+            guiGraphics.pose().translate(0.0F, 4,z);
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                             "textures/gui/tooltip/chaos/tool_1_1.png"), bottomRightX, bottomRightY, 0, 0,64, 64, 64, 64,1,1,1,1);
@@ -259,17 +259,17 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         int topLeftX = x - 3 - 9+2;
         int topLeftY = y - 3 - 9;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, -2,0);
-        guiGraphics.blitSprite(
+        guiGraphics.pose().translate(0.0F, -2,z);
+        MGuiGraphics.blit(guiGraphics,
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "tooltip/tool_0_0"), 48, 48,  0, 0, topLeftX, topLeftY, 48, 48);
+                        "textures/gui/tooltip/tool_0_0.png"), topLeftX, topLeftY, 0, 0,48, 48, 48, 48,1,1,1,1);
         guiGraphics.pose().popPose();
 
         // 中间位置
         int middleX = x + (width - 48) / 2;
         int middleY = y - 3 - 6;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, -7,0);
+        guiGraphics.pose().translate(0.0F, -7,z);
         guiGraphics.blitSprite(
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                         "tooltip/tool_middle_0"),48,48, 0, 0,  middleX, middleY, 48, 48);
@@ -280,30 +280,31 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         int topRightX = x + width + 3 - 48+6;
         int topRightY = y - 3 - 9;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, -2,0);
-        guiGraphics.blitSprite(
+        guiGraphics.pose().translate(0.0F, -2,z);
+        MGuiGraphics.blit(guiGraphics,
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "tooltip/tool_0_1"), 48, 48, 0, 0, topRightX, topRightY, 48, 48);
+                        "textures/gui/tooltip/tool_0_1.png"), topRightX, topRightY, 0, 0,48, 48, 48, 48,1,1,1,1);
         guiGraphics.pose().popPose();
 
         // 左下角
         int bottomLeftX = x - 3 - 9 + 2;
         int bottomLeftY = y + height + 3 - 48 + 4;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, 4,0);
-        guiGraphics.blitSprite(
+        guiGraphics.pose().translate(0.0F, 4,z);
+
+        MGuiGraphics.blit(guiGraphics,
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "tooltip/tool_1_0"),48, 48,0, 0, bottomLeftX, bottomLeftY, 48, 48);
+                        "textures/gui/tooltip/tool_1_0.png"), bottomLeftX, bottomLeftY, 0, 0,48, 48, 48, 48,1,1,1,1);
         guiGraphics.pose().popPose();
 
         // 右下角
         int bottomRightX = x + width + 3 - 48 + 6;
         int bottomRightY = y + height + 3 - 48 + 4;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, 4,0);
-        guiGraphics.blitSprite(
+        guiGraphics.pose().translate(0.0F, 4,z);
+        MGuiGraphics.blit(guiGraphics,
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "tooltip/tool_1_1"),48, 48, 0, 0, bottomRightX, bottomRightY, 48, 48);
+                        "textures/gui/tooltip/tool_1_1.png"), bottomRightX, bottomRightY, 0, 0,48, 48, 48, 48,1,1,1,1);
         guiGraphics.pose().popPose();
     }
     @Unique
@@ -312,17 +313,18 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         int topLeftX = x - 3 - 9+2;
         int topLeftY = y - 3 - 9;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, -2,0);
-        guiGraphics.blitSprite(
+        guiGraphics.pose().translate(0.0F, -2,z);
+        MGuiGraphics.blit(guiGraphics,
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "tooltip/black_shadow/tool_0_0"), 48, 48,  0, 0, topLeftX, topLeftY, 48, 48);
+                        "textures/gui/tooltip/black_shadow/tool_0_0.png"), topLeftX, topLeftY, 0, 0,48, 48, 48, 48,1,1,1,1);
+
         guiGraphics.pose().popPose();
 
         // 中间位置
         int middleX = x + (width - 48) / 2;
         int middleY = y - 3 - 6;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, -7,0);
+        guiGraphics.pose().translate(0.0F, -7,z);
         guiGraphics.blitSprite(
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                         "tooltip/black_shadow/tool_middle_0"),48,48, 0, 0,  middleX, middleY, 48, 48);
@@ -333,30 +335,31 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         int topRightX = x + width + 3 - 48+6;
         int topRightY = y - 3 - 9;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, -2,0);
-        guiGraphics.blitSprite(
+        guiGraphics.pose().translate(0.0F, -2,z);
+        MGuiGraphics.blit(guiGraphics,
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "tooltip/black_shadow/tool_0_1"), 48, 48, 0, 0, topRightX, topRightY, 48, 48);
+                        "textures/gui/tooltip/black_shadow/tool_0_1.png"), topRightX, topRightY, 0, 0,48, 48, 48, 48,1,1,1,1);
         guiGraphics.pose().popPose();
 
         // 左下角
         int bottomLeftX = x - 3 - 9 + 2;
         int bottomLeftY = y + height + 3 - 48 + 4;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, 4,0);
-        guiGraphics.blitSprite(
+        guiGraphics.pose().translate(0.0F, 4,z);
+        MGuiGraphics.blit(guiGraphics,
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "tooltip/black_shadow/tool_1_0"),48, 48,0, 0, bottomLeftX, bottomLeftY, 48, 48);
+                        "textures/gui/tooltip/black_shadow/tool_1_0.png"), bottomLeftX, bottomLeftY, 0, 0,48, 48, 48, 48,1,1,1,1);
         guiGraphics.pose().popPose();
 
         // 右下角
         int bottomRightX = x + width + 3 - 48 + 6;
         int bottomRightY = y + height + 3 - 48 + 4;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0.0F, 4,0);
-        guiGraphics.blitSprite(
+        guiGraphics.pose().translate(0.0F, 4,z);
+        MGuiGraphics.blit(guiGraphics,
                 ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "tooltip/black_shadow/tool_1_1"),48, 48, 0, 0, bottomRightX, bottomRightY, 48, 48);
+                        "textures/gui/tooltip/black_shadow/tool_1_1.png"), bottomRightX, bottomRightY, 0, 0,48, 48, 48, 48,1,1,1,1);
+
         guiGraphics.pose().popPose();
     }
     @Inject(at = @At(value = "RETURN"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
@@ -404,6 +407,9 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
     }
     @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void TheImprintOfTheSoulBlackLightHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (true) {
+            return;
+        }
         if (!ConfigC.config.RenderItemTooltip.get()){
             return;
         }
