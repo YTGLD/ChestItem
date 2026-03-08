@@ -615,9 +615,10 @@ public class EventMain {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest", Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
                         .withColor(Light.ARGB.color(255, 255, 0, 100))));
-                event.getToolTip().add(1, Component.translatable("item.chest_item.skill", Keys.KEY_MAPPING_LAZY_C.getKey().getDisplayName()).withStyle(Style.EMPTY
-                        .withColor(Light.ARGB.color(255, 255, 0, 100))));
-
+                if (event.getItemStack().getItem() instanceof SkillItem) {
+                    event.getToolTip().add(1, Component.translatable("item.chest_item.skill", Keys.KEY_MAPPING_LAZY_C.getKey().getDisplayName()).withStyle(Style.EMPTY
+                            .withColor(Light.ARGB.color(255, 255, 0, 100))));
+                }
                 if (event.getItemStack().getItem() instanceof TheImprintOfTheSoul soul) {
                     if (!soul.canRemove(event.getItemStack())) {
                         if (event.getEntity() != null && !event.getEntity().isCreative()) {

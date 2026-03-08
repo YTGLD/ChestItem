@@ -3,6 +3,7 @@ package com.ytgld.chest_item.entity;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -97,6 +98,12 @@ public class LaserColumn extends TamableAnimal {
         super.tick();
         if (tickCount > maxLiveTime) {
             canSee = false;
+        }
+        placeFire(position(),0,0,this);
+        if (this.tickCount % 5 == 1) {
+            if (this.level() instanceof ServerLevel level) {
+                level.sendParticles(Particles.FireBlock_.get(), getX(), getY(), getZ(), 10, 3, 0, 3, 0);
+            }
         }
         if (!canSee) {
             live--;

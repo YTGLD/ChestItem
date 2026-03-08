@@ -7,6 +7,7 @@ import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
+import com.ytgld.chest_item.renderer.particle.FireBlock;
 import com.ytgld.chest_item.renderer.particle.IParticleEngine;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.client.Minecraft;
@@ -72,19 +73,11 @@ public class ChestitemClient{
             }
         }
     }
-    public static Queue<?> iterateParticles(Map<ParticleRenderType, ParticleGroup<?>> map) {
-        for (ParticleRenderType renderType : map.keySet()) {
-            if (renderType != ParticleRenderType.NO_RENDER) {
-                ParticleGroup<?> particleGroup = map.get(renderType);
-                return particleGroup.getAll();
-            }
-        }
-        return null;
-    }
 
     @SubscribeEvent
     public static void registerFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(Particles.colorPart.get(), ColorPart.Provider::new);
+        event.registerSpriteSet(Particles.FireBlock_.get(), FireBlock.Provider::new);
     }
     @SubscribeEvent
     public static void RegisterKeyMappingsEvent(RegisterKeyMappingsEvent event){

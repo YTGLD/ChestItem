@@ -8,25 +8,17 @@ import com.mojang.blaze3d.platform.SourceFactor;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.renderer.outline.ILevelRendererWarped;
 import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.blockentity.AbstractEndPortalRenderer;
 import net.minecraft.client.renderer.rendertype.OutputTarget;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.Util;
 
-import java.util.function.Function;
-
-import static com.mojang.blaze3d.pipeline.BlendFunction.OVERLAY;
 import static net.minecraft.client.renderer.RenderPipelines.*;
-import static net.minecraft.client.renderer.rendertype.OutputTarget.ITEM_ENTITY_TARGET;
-import static net.minecraft.client.renderer.rendertype.OutputTarget.WEATHER_TARGET;
 
 public abstract class MRender {
 
@@ -90,6 +82,9 @@ public abstract class MRender {
                         .createRenderSetup());
     }
     public static class RenderPs {
+
+        public static RenderPipeline part =   RenderPipeline.builder(PARTICLE_SNIPPET).withCull(false).withLocation("pipeline/translucent_particle")
+                        .withBlend(BlendFunction.TRANSLUCENT).build();
         public static RenderPipeline.Snippet whirlpoolBase (float speed) {
             return RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET, FOG_SNIPPET, GLOBALS_SNIPPET)
                     .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID, "core/whirlpool"))
