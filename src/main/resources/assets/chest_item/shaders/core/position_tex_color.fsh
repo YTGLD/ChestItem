@@ -18,7 +18,7 @@ void main() {
     float distance = length(diff); // 当前坐标到中心点的距离
 
     // 计算扭曲因子
-    float twistFactor = sin((GameTime * 5000) + distance * 30.0) * 0.135; // 扭曲因子
+    float twistFactor = sin((GameTime * 5000) + distance * 30.0) * 0.25; // 扭曲因子
 
     // 计算新的纹理坐标
     float angle = atan(diff.y, diff.x); // 当前坐标的极角

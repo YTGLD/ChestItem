@@ -8,6 +8,7 @@ import com.ytgld.chest_item.entity.c.AttackEndComingRenderer;
 import com.ytgld.chest_item.entity.c.EndComingRenderer;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
+import com.ytgld.chest_item.renderer.CIStateShardsHasBlack;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
 import com.ytgld.chest_item.renderer.particle.FireBlock;
@@ -77,6 +78,9 @@ public class ChestitemClient{
     @SubscribeEvent
     public static void EntityRenderersEvent(RegisterShadersEvent event) {
         try {
+            event.registerShader(new ShaderInstance(event.getResourceProvider(),
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"position_tex_color_black"),
+                    DefaultVertexFormat.POSITION_TEX_COLOR), CIStateShardsHasBlack::setHasBlock);
 
             event.registerShader(new ShaderInstance(event.getResourceProvider(),
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"position_tex_color"),

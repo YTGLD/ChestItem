@@ -1,4 +1,6 @@
 package com.ytgld.chest_item.items.black;
 
-public interface ITheChaos  {
+import com.ytgld.chest_item.items.IBlackLight;
+
+public interface ITheChaos extends IBlackLight {
 }

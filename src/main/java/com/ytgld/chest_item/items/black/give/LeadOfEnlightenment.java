@@ -5,6 +5,7 @@ import com.ytgld.chest_item.Handler;
 
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
+import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +17,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import org.checkerframework.checker.units.qual.C;
 
-public class LeadOfEnlightenment extends ItemBlackShadow {
+public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
 
     public static final String killWarmaker = "killWarmaker";
     public static final String hurtGiveChaosFortress = "hurtGiveChaosFortress";

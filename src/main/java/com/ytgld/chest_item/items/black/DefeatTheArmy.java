@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class DefeatTheArmy extends ItemBlackShadow  {
+public class DefeatTheArmy extends ItemBlackShadow implements IBlackLight {
     public DefeatTheArmy(Properties properties) {
         super(properties);
     }

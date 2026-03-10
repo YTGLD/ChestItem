@@ -24,7 +24,7 @@ public class MGuiGraphics {
 
     private static void blit(GuiGraphics guiGraphics, ResourceLocation texture, float startX, float endX, float startY, float endY, float zLevel, float u0, float u1, float v0, float v1, float r, float g, float b, float a) {
         RenderSystem.setShaderTexture(0, texture);
-        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        RenderSystem.setShader(CIStateShardsHasBlack::getHasBlock);
         RenderSystem.enableBlend();
         RenderSystem.blendFuncSeparate(
                 GlStateManager.SourceFactor.SRC_ALPHA,

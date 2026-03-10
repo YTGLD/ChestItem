@@ -1,9 +1,11 @@
 package com.ytgld.chest_item.mixin.cilent;
 
 import com.ytgld.chest_item.ConfigC;
+import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.Terror;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
+import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -11,6 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -39,20 +42,9 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
     }
 
     @Inject(at = @At(value = "RETURN"), method = "render")
-    public void Lnet(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){
+    public void LnetHEADHEADHEAD(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){
         ItemStack itemstack = this.menu.getCarried();
-        if (ConfigC.config.RenderGUILight.get()) {
-            if (!itemstack.isEmpty()) {
-                if (itemstack.getItem() instanceof ItemBase) {
-                    if (!(itemstack.getItem() instanceof TheImprintOfTheSoul)) {
-                        seekingImmortals$vec2.add(new Vec2(mouseX, mouseY));
-                        if (itemstack.getItem() instanceof Terror terror) {
-                            cI1_21_9$integerList = terror.color(itemstack);
-                        }
-                    }
-                }
-            }
-        }
+        cI1_21_11$addTar(mouseX, mouseY);
         if (!seekingImmortals$vec2.isEmpty()) {
             if (seekingImmortals$vec2.size() > 100) {
                 seekingImmortals$vec2.removeFirst();
@@ -61,7 +53,22 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
                 seekingImmortals$vec2.removeFirst();
             }
         }
-
+    }
+    @Unique
+    public void cI1_21_11$addTar(int mouseX, int mouseY){
+        ItemStack itemstack = this.menu.getCarried();
+        if (ConfigC.config.RenderGUILight.get()) {
+            if (!itemstack.isEmpty()) {
+                if (itemstack.getItem() instanceof ItemBase) {
+                    if (!(itemstack.getItem() instanceof TheImprintOfTheSoul)&&!(itemstack.getItem() instanceof IBlackLight)) {
+                        seekingImmortals$vec2.add(new Vec2(mouseX, mouseY));
+                        if (itemstack.getItem() instanceof Terror terror) {
+                            cI1_21_9$integerList = terror.color(itemstack);
+                        }
+                    }
+                }
+            }
+        }
     }
     @Inject(at = @At(value = "RETURN"), method = "render")
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){

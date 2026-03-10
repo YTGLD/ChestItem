@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
@@ -423,7 +424,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 }
             }
         }
-        if (stack.getItem() instanceof IGUILight){
+        if (stack.getItem() instanceof IGUILight || stack.getItem() instanceof IBlackLight){
             return;
         }
         if (stack.getItem() instanceof ItemBone bone) {
@@ -551,12 +552,12 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 }
             }
         }
-        if (stack.getItem() instanceof IGUILight){
+        if (stack.getItem() instanceof IGUILight || stack.getItem() instanceof IBlackLight){
             return;
         }
         if (stack.getItem() instanceof TheCelestial celestial){
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
-            ResourceLocation Identifier = celestial.img(stack);
+            ResourceLocation ResourceLocation = celestial.img(stack);
             int color = celestial.soulColor(stack);
             int as = (color >> 24) & 0xFF;
             int rs = (color >> 16) & 0xFF;
@@ -567,7 +568,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             float g = gs / 255f;
             float b = bs / 255f;
 
-            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,Identifier, x, y,
+            MGuiGraphicsCI_LifeSlowness.blit(guiGraphics, ResourceLocation, x, y,
                     0, 0,16,16,16,16,
                     r,g,b,1);
 
@@ -586,6 +587,103 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
             MGuiGraphicsCI_LifeSlowness.blit(guiGraphics,resourceLocation, x, y, 0, 0,16,16,16,16,
                     r,g,b-0.2f,1);
+        }
+    }
+    @Inject(at = @At(value = "HEAD"),method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
+    public void TheBlackHEAD(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        if (!ConfigC.config.RenderItemTooltip.get()) {
+            return;
+        }
+
+        if (entity == null) {
+            return;
+        }
+        if ((stack.getItem() instanceof IBlackLight)) {
+            GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+            {
+                ResourceLocation fire = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "textures/gui/tooltip/fire_black.png");
+                float alpha = (float) (50 * Math.sin((entity.tickCount / 3f + seed)));
+                pose.pushPose();
+                pose.translate(8,8,0);
+
+                CIStateShardsHasBlack.blit(guiGraphics,fire,
+                        x-16, y-16,
+                        0, 0, 32,32,32,32,
+                        20/255f, 0, 10/255f,(50 + alpha)/255f);
+
+
+                float alpha1 = (float) (50 * Math.sin((entity.tickCount / 3f + seed) / 2f));
+                CIStateShardsHasBlack.blit(guiGraphics,fire,
+                        x-16, y-16,
+                        0, 0, 32,32,32,32,
+                        20/255f, 0, 10/255f,(50 + alpha1)/255f);
+
+
+
+                float alpha2 = (float) (50 * Math.sin((entity.tickCount / 3f + seed) * 2f));
+                CIStateShardsHasBlack.blit(guiGraphics,fire,
+                        x-16, y-16,
+                        0, 0, 32,32,32,32,
+                        20/255f, 0, 10/255f,(50 + alpha2)/255f);
+
+                float alpha3 = (float) (10 * Math.sin((entity.tickCount / 3f + seed) /4F));
+                CIStateShardsHasBlack.blit(guiGraphics,fire,
+                        x-16, y-16, 0, 0,
+                        32,32,32,32,
+                        20/255f, 0, 10/255f,(50 + alpha3)/255f);
+
+                pose.popPose();
+            }
+
+            {
+                ResourceLocation fire = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "textures/shadow/ci_star.png");
+
+                pose.pushPose();
+                pose.translate(8,8,0);
+                {
+                    float alphaOffset = (float) (10 * Math.sin(((entity.tickCount + seed))));
+                    pose.pushPose();
+                    pose.translate(x, y,0);
+                    pose.mulPose(Axis.ZP.rotationDegrees(entity.tickCount * 10f));
+                    pose.translate(-x, -y,0);
+                    CIStateShardsHasBlack.blit(guiGraphics,fire,
+                            x - 16, y - 16, 0, 0,
+                            32,32,32,32,
+                            20/255f, 0, 25/255f,(60 + alphaOffset*2)/255f);
+
+
+
+                    pose.popPose();
+                    {
+                        for (int i = 0; i < 4; i++) {
+                            pose.pushPose();
+                            pose.translate(x, y,0);
+                            pose.mulPose(Axis.ZP.rotationDegrees((entity.tickCount + i * 40F) ));
+                            pose.translate(-x, -y,0);
+                            CIStateShardsHasBlack.blit(guiGraphics,fire,
+                                    x - 16, y - 16, 0, 0,
+                                    32,32,32,32,
+                                    20/255f, 0, 25/255f,(40 + alphaOffset)/255f);
+                            pose.popPose();
+                        }
+                        for (int i = 0; i < 4; i++) {
+                            pose.pushPose();
+                            pose.translate(x, y,0);
+                            pose.mulPose(Axis.ZP.rotationDegrees((entity.tickCount - i * 40F)));
+                            pose.translate(-x, -y,0);
+                            CIStateShardsHasBlack.blit(guiGraphics,fire,
+                                    x - 16, y - 16, 0, 0,
+                                    32,32,32,32,
+                                    20/255f, 5/255f, 25/255f,(40 + alphaOffset)/255f);
+                            pose.popPose();
+                        }
+                    }
+                }
+
+                pose.popPose();
+            }
         }
     }
 }
