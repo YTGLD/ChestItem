@@ -17,9 +17,15 @@ public class CISoundDefinitionsProvider extends SoundDefinitionsProvider {
                                 .stream(true)
                                 .preload(false)
                 )
-                // 设定副标题。
                 .subtitle("sound.chest_item.sound_1")
-                // 可以替换。
+                .replace(true)
+        );
+        add(Sounds.Heart, SoundDefinition.definition()
+                .with(sound("chest_item:heart",SoundDefinition.SoundType.SOUND)
+                        .stream(true)
+                        .preload(false)
+                )
+                .subtitle("sound.chest_item.heart")
                 .replace(true)
         );
     }

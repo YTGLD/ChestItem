@@ -133,7 +133,23 @@ public class AttReg {
         return new RangedAttribute("attribute.name.chest_item.chaos_consciousness", 1, -1024, 1024).setSyncable(true);
     });
 
+    /**
+     * 疮疤的最终奥义——利用伤痛
+     */
+    public static final DeferredHolder<Attribute,?> painShield_number = REGISTRY.register("pain_shield_number",()->{
+        return new RangedAttribute("attribute.name.chest_item.pain_shield_number", 0, -1024, 1024).setSyncable(true);
+    });
+    public static final DeferredHolder<Attribute,?>  painShield_speed = REGISTRY.register("pain_shield_speed",()->{
+        return new RangedAttribute("attribute.name.chest_item.pain_shield_speed", 1, -1024, 1024).setSyncable(true);
+    });
 
+    public static final DeferredHolder<Attribute,?>  painShield_res = REGISTRY.register("pain_shield_res",()->{
+        return new RangedAttribute("attribute.name.chest_item.pain_shield_res", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final Supplier<AttachmentType<Float>> painShield = ATTACHMENT_TYPES.register(
+            "pain_shield", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf(
+                    "pain_shield")).build()
+    );
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER , AttReg.heal,1);
@@ -155,6 +171,10 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.malicious_transformation,1);
         event.add(EntityType.PLAYER , AttReg.malicious_plunder,1);
         event.add(EntityType.PLAYER , AttReg.chaos_consciousness,1);
+
+        event.add(EntityType.PLAYER , AttReg.painShield_number,0);
+        event.add(EntityType.PLAYER , AttReg.painShield_res,1);
+        event.add(EntityType.PLAYER , AttReg.painShield_speed,1);
 
     }
 }

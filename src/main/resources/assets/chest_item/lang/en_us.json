@@ -75,6 +75,11 @@
   "attribute.name.chest_item.malicious_plunder": "malicious plunder",
   "attribute.name.chest_item.chaos_consciousness": "chaos_consciousness",
 
+  "attribute.name.chest_item.pain_shield_number": "Trauma capacity",
+  "attribute.name.chest_item.pain_shield_speed": "Speed of trauma healing",
+  "attribute.name.chest_item.pain_shield_res": "Trauma intensity",
+  "sound.chest_item.heart" : "Scar: heartbeat",
+
 
 
   "itemGroup.chest_item": "Trinkets in the chest",
@@ -166,6 +171,7 @@
   "effect.chest_item.increasing_meat": "Growth",
   "effect.chest_item.eye": "lightSensitive",
   "effect.chest_item.rage": "rage",
+  "effect.chest_item.pain": "pain",
   "effect.chest_item.invulnerable": "invincible",
 
   "item.chest_item.self_increasing_heart.string.0": "Self-increasing i, i self-decreasing",

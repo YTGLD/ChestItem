@@ -87,6 +87,10 @@
   "attribute.name.chest_item.malicious_plunder": "恶念掠夺",
   "attribute.name.chest_item.chaos_consciousness": "混沌意识",
 
+  "attribute.name.chest_item.pain_shield_number": "创伤容量",
+  "attribute.name.chest_item.pain_shield_speed": "创伤治愈速度",
+  "attribute.name.chest_item.pain_shield_res": "创伤力度",
+  "sound.chest_item.heart" : "疮疤之痕：心跳",
 
 
   "key.category.chest_item.chest": "箱子里的小饰品",
@@ -182,6 +186,7 @@
   "effect.chest_item.invulnerable": "无敌",
   "effect.chest_item.eye": "光敏感",
   "effect.chest_item.rage": "愤怒",
+  "effect.chest_item.pain": "痛楚",
 
   "item.chest_item.self_increasing_heart.string.0": "自增i，i自减",
   "item.chest_item.self_increasing_heart.string.1": "食用食物获得临时生命值",

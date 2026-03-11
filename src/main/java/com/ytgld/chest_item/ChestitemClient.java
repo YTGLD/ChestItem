@@ -6,6 +6,7 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.MRender;
+import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
 import com.ytgld.chest_item.renderer.particle.FireBlock;
 import com.ytgld.chest_item.renderer.particle.IParticleEngine;
@@ -14,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.particle.ParticleGroup;
 import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -25,6 +27,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.Map;
@@ -45,7 +48,15 @@ public class ChestitemClient{
             }
         }
     }
-
+    @SubscribeEvent
+    public static void clientTickEvent(ClientTickEvent.Pre event) {
+        ShieldRenderHandler.tick(event);
+    }
+    @SubscribeEvent
+    public static void registerOverlays(RegisterGuiLayersEvent event) {
+        event.registerAbove(VanillaGuiLayers.AIR_LEVEL, Identifier.fromNamespaceAndPath(Chestitem.MODID,"pain_shield"),
+                (guiGraphics,tracker)->ShieldRenderHandler.renderShield(guiGraphics));
+    }
     @SubscribeEvent
     public static void regMenu(RegisterMenuScreensEvent event){
         event.register(ChestMenuTypes.GENERIC_12.get(), ChestMenuScreen::new);

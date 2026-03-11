@@ -1,4 +1,14 @@
 {
+  "heart": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:heart",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.heart"
+  },
   "laser_column": {
     "replace": true,
     "sounds": [

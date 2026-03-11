@@ -18,5 +18,8 @@ public class Sounds {
             "laser_column",
             SoundEvent::createVariableRangeEvent
     );
-
+    public static final Holder<SoundEvent> Heart = REGISTRY.register(
+            "heart",
+            SoundEvent::createVariableRangeEvent
+    );
 }
