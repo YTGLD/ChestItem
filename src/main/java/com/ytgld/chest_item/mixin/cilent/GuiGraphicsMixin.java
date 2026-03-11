@@ -1,5 +1,7 @@
 package com.ytgld.chest_item.mixin.cilent;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
@@ -23,6 +25,7 @@ import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -42,6 +45,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin implements IGuiGraphics {
@@ -598,6 +602,24 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (entity == null) {
             return;
         }
+        float r = 20;
+        float g = 0;
+        float b = 10;
+        CIStateShardsHasBlack.CIFunc ciFunc =
+                new CIStateShardsHasBlack.CIFunc(
+                        GlStateManager.SourceFactor.SRC_ALPHA,
+                        GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                        GlStateManager.SourceFactor.ONE,
+                        GlStateManager.DestFactor.ZERO
+                );
+        float a = 50;
+        if (stack.getItem() instanceof IBlackLight iBlackLight) {
+            r = iBlackLight.colorBlack().r();
+            g = iBlackLight.colorBlack().g();
+            b = iBlackLight.colorBlack().b();
+            ciFunc = iBlackLight.colorBlack().ciFunc();
+            a = iBlackLight.colorBlack().a();
+        }
         if ((stack.getItem() instanceof IBlackLight)) {
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             {
@@ -607,31 +629,31 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 pose.pushPose();
                 pose.translate(8,8,0);
 
-                CIStateShardsHasBlack.blit(guiGraphics,fire,
+                new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
                         x-16, y-16,
                         0, 0, 32,32,32,32,
-                        20/255f, 0, 10/255f,(50 + alpha)/255f);
+                        r/255f, g, b/255f,(a + alpha)/255f);
 
 
                 float alpha1 = (float) (50 * Math.sin((entity.tickCount / 3f + seed) / 2f));
-                CIStateShardsHasBlack.blit(guiGraphics,fire,
+                new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
                         x-16, y-16,
                         0, 0, 32,32,32,32,
-                        20/255f, 0, 10/255f,(50 + alpha1)/255f);
+                        r/255f, g, b/255f,(a + alpha1)/255f);
 
 
 
                 float alpha2 = (float) (50 * Math.sin((entity.tickCount / 3f + seed) * 2f));
-                CIStateShardsHasBlack.blit(guiGraphics,fire,
+                new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
                         x-16, y-16,
                         0, 0, 32,32,32,32,
-                        20/255f, 0, 10/255f,(50 + alpha2)/255f);
+                        r/255f, g, b/255f,(a + alpha2)/255f);
 
                 float alpha3 = (float) (10 * Math.sin((entity.tickCount / 3f + seed) /4F));
-                CIStateShardsHasBlack.blit(guiGraphics,fire,
+                new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
                         x-16, y-16, 0, 0,
                         32,32,32,32,
-                        20/255f, 0, 10/255f,(50 + alpha3)/255f);
+                        r/255f, g, b/255f,(a + alpha3)/255f);
 
                 pose.popPose();
             }
@@ -648,10 +670,10 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     pose.translate(x, y,0);
                     pose.mulPose(Axis.ZP.rotationDegrees(entity.tickCount * 10f));
                     pose.translate(-x, -y,0);
-                    CIStateShardsHasBlack.blit(guiGraphics,fire,
+                    new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
                             x - 16, y - 16, 0, 0,
                             32,32,32,32,
-                            20/255f, 0, 25/255f,(60 + alphaOffset*2)/255f);
+                            r/255f, g, b/255f,(a + alphaOffset*2)/255f);
 
 
 
@@ -662,10 +684,10 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             pose.translate(x, y,0);
                             pose.mulPose(Axis.ZP.rotationDegrees((entity.tickCount + i * 40F) ));
                             pose.translate(-x, -y,0);
-                            CIStateShardsHasBlack.blit(guiGraphics,fire,
+                            new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
                                     x - 16, y - 16, 0, 0,
                                     32,32,32,32,
-                                    20/255f, 0, 25/255f,(40 + alphaOffset)/255f);
+                                    r/255f, g, b/255f,(a + alphaOffset)/255f);
                             pose.popPose();
                         }
                         for (int i = 0; i < 4; i++) {
@@ -673,10 +695,10 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             pose.translate(x, y,0);
                             pose.mulPose(Axis.ZP.rotationDegrees((entity.tickCount - i * 40F)));
                             pose.translate(-x, -y,0);
-                            CIStateShardsHasBlack.blit(guiGraphics,fire,
+                            new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
                                     x - 16, y - 16, 0, 0,
                                     32,32,32,32,
-                                    20/255f, 5/255f, 25/255f,(40 + alphaOffset)/255f);
+                                    r/255f, g/255f, b/255f,(a + alphaOffset)/255f);
                             pose.popPose();
                         }
                     }

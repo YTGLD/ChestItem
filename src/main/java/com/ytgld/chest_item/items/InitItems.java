@@ -234,6 +234,9 @@ public class    InitItems {
     public static final DeferredItem<@NotNull Item> OwnerLead_ = register("owner_lead",
             (Identifier)-> new OwnerLead(new Item.Properties().stacksTo(1)));
 
+    public static final DeferredItem<@NotNull Item> ActualSuffering_ = register("actual_suffering",
+            (Identifier)-> new ActualSuffering(new Item.Properties().stacksTo(1)));
+
 
     public static final DeferredItem<Item> Pod_ = register("pod",
             (resourceLocation)-> new Pod(new Item.Properties().stacksTo(1)));
@@ -331,6 +334,7 @@ public class    InitItems {
                     output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.Warmaker_);
                     output.accept(InitItems.ChaosFortress_);
+                    output.accept(InitItems.ActualSuffering_);
 
 
 

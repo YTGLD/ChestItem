@@ -155,29 +155,36 @@ public class ShieldRenderHandler {
     public static void thepainShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player player) {
             AttributeInstance stronger = player.getAttribute(AttReg.painShield_number);
+            AttributeInstance number = player.getAttribute(AttReg.painShield_number);
             float base = 0.15f;
             float minDamage = 0.3f;
-            if (stronger != null) {
+            if (stronger != null && number != null) {
                 float value = (float) stronger.getValue();
+                float theNumber = (float) number.getValue();
                 float data = player.getData(AttReg.painShield);
                 if (data > 0) {
                     float damage = event.getNewDamage();
-                    int newData = (int) (data - 1 - ((int) (damage * 0.5f)));
+                    float newData = data - 0.25f - (damage * 0.1f);
                     player.setData(AttReg.painShield,(float)newData);
                     float modify = (float) Math.sqrt(value) * 1.25f;
                     if (modify < minDamage) {
                         modify = minDamage;
                     }
                     float newDamage = damage * (base / modify);
-                    if (data > 3) {
+                    float x = 3;
+                    x -= (float) Math.sqrt(value);
+                    if (x < 1) {
+                        x = 1;
+                    }
+                    if (data > x) {
                         if (event.getSource().getEntity() instanceof LivingEntity living1) {
                             living1.hurt(living1.damageSources().playerAttack(player),
                                     (float) (newDamage
                                             + player.getAttributeValue(Attributes.MAX_HEALTH) * 0.75f
                                             + player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 3));
                         }
-                        int timeMeet = 1200;
-                        int maxMeet = 9;
+                        int timeMeet = (int) (1200 * Math.sqrt(Math.sqrt(theNumber)));
+                        int maxMeet = (int) (7 + theNumber / 5);
 
                         player.addEffect(new MobEffectInstance(Effects.Pain,timeMeet,0));
                         @Nullable MobEffectInstance mobEffectInstance = player.getEffect(Effects.Pain);
@@ -231,6 +238,11 @@ public class ShieldRenderHandler {
                             player.setData(AttReg.chaosWinds, 0f);
                         }
                     }
+                }else {
+                    player.setData(AttReg.chaosWinds, 0f);
+                    player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                    player.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+
                 }
             }
         }

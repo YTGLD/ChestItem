@@ -13,8 +13,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 public class ItemBase extends Item implements Terror {
     public ItemBase(Properties properties) {
@@ -31,6 +35,15 @@ public class ItemBase extends Item implements Terror {
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player){
         return HashMultimap.create();
     }
+    public void text(ItemStack stack, List<Component> tooltipAdder, TooltipFlag flag){
+
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipAdder, TooltipFlag flag) {
+        text(stack, tooltipAdder, flag);
+    }
+
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255, 255, 0, 100);
@@ -38,6 +51,6 @@ public class ItemBase extends Item implements Terror {
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
-        return null;
+        return doAttribute(stack, player);
     }
 }

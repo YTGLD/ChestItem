@@ -1,14 +1,13 @@
 {
-  "item.chest_item.chest": "You can put it in the magic box and press the '%d' key to open it",
 
   "chest_item.config.doEndComingUp": "It is possible to turn Doomsday into a ghost state when using some items",
   "chest_item.configuration.Common": "Conventional",
-
+  "event.chest_item.equip.black": "This item was applied by Chaos：",
   "chest_item.config.Render": "Render glowing effects such as Bionic Blood Spirit",
   "chest_item.config.hyperplasiaMusic": "Whether to enable the sound effect when tissue growth is enabled, it is on by default",
   "chest_item.configuration.MusicAndRender": "RenderingAndSoundEffects",
 "chest_item.config.RenderSoul": "Whether to render light effect items (Eternal Slave Seal, Treaty)",
-
+  "chest_item.attribute": "Eroded ",
 "chest_item.config.RenderGUILight": "render the tailing animation of the item",
   "chest_item.config.RenderItemTooltip": "render mod's unique item background",
 
@@ -44,6 +43,7 @@
   "entity.chest_item.black_vex": "Dark annoyance",
   "entity.chest_item.end_coming": "The end is coming",
   "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
+  "entity.chest_item.laser_column": "???",
   "event.chest_item.equip": "When placed in a magic box：",
   "chest_item.the_imprint_of_the_soul.1": "Treaty",
   "chest_item.the_imprint_of_the_soul.2": "Crazy Theory",
@@ -71,13 +71,23 @@
   "attribute.name.chest_item.chaos_armor_damage": "Armor crushing damage",
   "attribute.name.chest_item.chaos_armor_speed": "Erosion armor recovery time",
   "attribute.name.chest_item.chaos_armor_min": "Erosion armor Breakdown threshold",
+  "attribute.name.chest_item.malicious_transformation": "malicious transformation",
+  "attribute.name.chest_item.malicious_plunder": "malicious plunder",
+  "attribute.name.chest_item.chaos_consciousness": "chaos_consciousness",
+"attribute.name.chest_item.pain_shield_number": "trauma capacity",
+  "attribute.name.chest_item.pain_shield_number.desc": "Affected the maximum degree of scar scar, and also affected the effect level of scar scar",
+  "attribute.name.chest_item.pain_shield_speed": "trauma healing speed",
+  "attribute.name.chest_item.pain_shield_speed.desc": "Affected the growth rate of scar scars",
+  "attribute.name.chest_item.pain_shield_res": "trauma intensity",
+  "attribute.name.chest_item.pain_shield_res.desc": "Affects the degree of pain and incurability of scar scars, and reduces the threshold for pain effect",
+  "sound.chest_item.heart" : "Scar: heartbeat",
 
-  "attribute.name.chest_item.pain_shield_number": "Trauma capacity",
-  "attribute.name.chest_item.pain_shield_speed": "Speed of trauma healing",
-  "attribute.name.chest_item.pain_shield_res": "Trauma intensity",
+
+
   "itemGroup.chest_item": "Trinkets in the chest",
-  "sound.chest_item.sound_1" : "Scar: heartbeat",
 
+  "item.chest_item.chest": "You can put it in the magic box and press the '%d' key to open it",
+  "item.chest_item.skill": "You can press the '%d' key to trigger the skill",
 
   "key.category.chest_item.chest": "Trinkets in the chest",
   "key.chest_item.r": "Open magic chest",
@@ -163,8 +173,8 @@
   "effect.chest_item.increasing_meat": "Growth",
   "effect.chest_item.eye": "lightSensitive",
   "effect.chest_item.rage": "rage",
-  "effect.chest_item.invulnerable": "invincible",
   "effect.chest_item.pain": "pain",
+  "effect.chest_item.invulnerable": "invincible",
 
   "item.chest_item.self_increasing_heart.string.0": "Self-increasing i, i self-decreasing",
   "item.chest_item.self_increasing_heart.string.1": "Eating food restores temporary health",
@@ -526,9 +536,20 @@
   "item.chest_item.chaos_fortress.string.11": "Increases magic damage taken by 400%",
   "item.chest_item.chaos_fortress.string.12":"Erosion armor is difficult to recover naturally",
 
-  "item.chest_item.owner_lead": "owner lead",
+  "item.chest_item.actual_suffering": "Substantive pain",
+  "item.chest_item.actual_suffering.string.0": "Gain pain by absorbing other shields",
+  "item.chest_item.actual_suffering.string.1": "Pain brings great bonuses and defenses",
   "chest_item.config.chaosFortress": "Requirements for obtaining the Protection of the Chaos Fortress",
+  "item.chest_item.owner_lead": "owner lead",
+"item.chest_item.runaway_lining": "runaway lining",
+  "item.chest_item.runaway_lining.string.0": "Pushing things to the extreme of eternity to achieve so-called peace...",
+  "item.chest_item.runaway_lining.string.1": "Triggering the Undead Totem has the potential to add random attributes to the wearing item",
+  "item.chest_item.runaway_lining.string.5": "Place the Runaway Lining in the first slot of the Divine Chest",
 
+"item.chest_item.runaway_lining.string.2": "Permanently enhances the following accessories when worn:",
+  "chest_item.config.RunawayLiningMin": "Chaos imposes minimum value for runaway lining",
+  "chest_item.config.RunawayLiningMax": "Chaos applies maximum value for runaway lining",
+  "chest_item.config.listRunawayLining": "Attribute blacklist",
   "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"
 }

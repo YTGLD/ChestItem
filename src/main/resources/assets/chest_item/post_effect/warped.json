@@ -1,0 +1,90 @@
+{
+    "targets": {
+        "swap": {}
+    },
+    "passes": [
+        {
+            "vertex_shader": "chest_item:core/screenquad",
+            "fragment_shader": "chest_item:post/entity_warped",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "chest_item:warped"
+                }
+            ],
+            "output": "swap"
+        },
+        {
+            "vertex_shader": "chest_item:core/screenquad",
+            "fragment_shader": "chest_item:post/warped",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "swap",
+                    "bilinear": true
+                }
+            ],
+            "output": "chest_item:warped",
+            "uniforms": {
+                "BlurConfig": [
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [ 4.0, 0.0 ]
+                    },
+                    {
+                        "name": "Radius",
+                        "type": "float",
+                        "value": 5.0
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "chest_item:core/screenquad",
+            "fragment_shader": "chest_item:post/warped",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "chest_item:warped",
+                    "bilinear": true
+                }
+            ],
+            "output": "swap",
+            "uniforms": {
+                "BlurConfig": [
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [ 0.0, 4.0 ]
+                    },
+                    {
+                        "name": "Radius",
+                        "type": "float",
+                        "value": 5.0
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "chest_item:core/screenquad",
+            "fragment_shader": "chest_item:post/blit",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "swap"
+                }
+            ],
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [ 1.0, 1.0, 1.0, 1.0 ]
+                    }
+                ]
+            },
+            "output": "chest_item:warped"
+        }
+    ]
+}
