@@ -17,9 +17,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Consumer;
 
 public class ItemBase extends Item implements Terror{
     public ItemBase(Properties properties) {
@@ -46,6 +50,15 @@ public class ItemBase extends Item implements Terror{
         RunawayLining.addMap(attributeModifierMultimap, player, stack);
         return attributeModifierMultimap;
     }
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
+
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
+        text(stack, tooltipAdder, flag);
+    }
+
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255, 255, 0, 100);

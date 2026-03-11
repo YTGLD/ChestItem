@@ -38,8 +38,7 @@ public class ScarHeart  extends ItemBase implements Meat {
         return modifiers;
     }
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
         tooltipAdder.accept(Component.translatable("item.chest_item.scar_heart.string.1").withStyle(ChatFormatting.GOLD));
 
     }

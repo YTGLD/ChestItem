@@ -161,7 +161,11 @@ public class EventMain {
                             co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80EE82EE)));
                             evt.addTooltipLines(co);
                         } else {
-                            evt.addTooltipLines(component);
+                            MutableComponent co = component.copy();
+                            if (stack.getItem() instanceof ITextColor iTextColor) {
+                                co.setStyle(Style.EMPTY.withColor(iTextColor.colorText()));
+                            }
+                            evt.addTooltipLines(co);
                         }
                     }
                 }

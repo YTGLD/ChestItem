@@ -52,8 +52,7 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
         return co;
     }
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (compoundTag != null) {
             tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF0000))));

@@ -186,8 +186,7 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
         tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));

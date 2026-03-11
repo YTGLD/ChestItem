@@ -211,8 +211,7 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos
         return notKillTime;
     }
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (compoundTag != null) {
             int s = compoundTag.getIntOr(notKillTimeInt,0);

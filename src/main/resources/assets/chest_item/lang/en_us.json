@@ -74,10 +74,12 @@
   "attribute.name.chest_item.malicious_transformation": "malicious transformation",
   "attribute.name.chest_item.malicious_plunder": "malicious plunder",
   "attribute.name.chest_item.chaos_consciousness": "chaos_consciousness",
-
-  "attribute.name.chest_item.pain_shield_number": "Trauma capacity",
-  "attribute.name.chest_item.pain_shield_speed": "Speed of trauma healing",
-  "attribute.name.chest_item.pain_shield_res": "Trauma intensity",
+"attribute.name.chest_item.pain_shield_number": "trauma capacity",
+  "attribute.name.chest_item.pain_shield_number.desc": "Affected the maximum degree of scar scar, and also affected the effect level of scar scar",
+  "attribute.name.chest_item.pain_shield_speed": "trauma healing speed",
+  "attribute.name.chest_item.pain_shield_speed.desc": "Affected the growth rate of scar scars",
+  "attribute.name.chest_item.pain_shield_res": "trauma intensity",
+  "attribute.name.chest_item.pain_shield_res.desc": "Affects the degree of pain and incurability of scar scars, and reduces the threshold for pain effect",
   "sound.chest_item.heart" : "Scar: heartbeat",
 
 
@@ -534,6 +536,9 @@
   "item.chest_item.chaos_fortress.string.11": "Increases magic damage taken by 400%",
   "item.chest_item.chaos_fortress.string.12":"Erosion armor is difficult to recover naturally",
 
+  "item.chest_item.actual_suffering": "Substantive pain",
+  "item.chest_item.actual_suffering.string.0": "Gain pain by absorbing other shields",
+  "item.chest_item.actual_suffering.string.1": "Pain brings great bonuses and defenses",
   "chest_item.config.chaosFortress": "Requirements for obtaining the Protection of the Chaos Fortress",
   "item.chest_item.owner_lead": "owner lead",
 "item.chest_item.runaway_lining": "runaway lining",

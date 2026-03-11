@@ -88,8 +88,11 @@
   "attribute.name.chest_item.chaos_consciousness": "混沌意识",
 
   "attribute.name.chest_item.pain_shield_number": "创伤容量",
-  "attribute.name.chest_item.pain_shield_speed": "创伤治愈速度",
+  "attribute.name.chest_item.pain_shield_number.desc": "影响了疮疤之痕的最大程度，也影响了疮疤之痕的效果等级",
+  "attribute.name.chest_item.pain_shield_speed": "创伤增加速度",
+  "attribute.name.chest_item.pain_shield_speed.desc": "影响了疮疤之痕的成长速度",
   "attribute.name.chest_item.pain_shield_res": "创伤力度",
+  "attribute.name.chest_item.pain_shield_res.desc": "影响了疮疤之痕的痛苦与难以根治的程度，并会降低痛楚效果的阈值",
   "sound.chest_item.heart" : "疮疤之痕：心跳",
 
 
@@ -568,6 +571,10 @@
   "item.chest_item.chaos_fortress.string.12":"侵蚀装甲难以自然恢复",
   "item.chest_item.owner_lead": "创世者的礼物",
   "chest_item.config.chaosFortress": "混沌要塞之护的获取要求",
+
+  "item.chest_item.actual_suffering": "实质之痛苦",
+  "item.chest_item.actual_suffering.string.0": "通过吸收其他护盾来获得伤痛",
+  "item.chest_item.actual_suffering.string.1": "伤痛会带来极大的加成和防御",
 
   "item.chest_item.runaway_lining": "失控衬件",
   "item.chest_item.runaway_lining.string.0": "将事物推向永恒的极端以达到所谓的和平...",

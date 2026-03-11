@@ -220,6 +220,8 @@ public class InitItems {
             (Identifier)-> new OwnerLead(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> RunawayLining_ = register("runaway_lining",
             (Identifier)-> new RunawayLining(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> ActualSuffering_ = register("actual_suffering",
+            (Identifier)-> new ActualSuffering(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
@@ -319,6 +321,7 @@ public class InitItems {
                     output.accept(InitItems.Warmaker_);
                     output.accept(InitItems.ChaosFortress_);
                     output.accept(InitItems.RunawayLining_);
+                    output.accept(InitItems.ActualSuffering_);
 
 
 
@@ -387,6 +390,7 @@ public class InitItems {
                     .add(Meat_Ball.asItem())
                     .add(ScarHeart_.asItem())
                     .add(Self_Increasing_Heart.asItem())
+                    .add(ActualSuffering_.asItem())
                     .add(Stomach_.asItem());
 
 

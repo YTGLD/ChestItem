@@ -102,8 +102,7 @@ public class OneEyedSpider extends ItemBlackShadow implements IGUILightList {
         return attributeModifiers;
     }
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
         tooltipAdder.accept(Component.translatable("item.chest_item.one_eye_spider.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         tooltipAdder.accept(Component.literal(""));
         CompoundTag compoundTag = stack.get(DataReg.tag);

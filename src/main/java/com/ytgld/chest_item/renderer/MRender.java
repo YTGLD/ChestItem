@@ -137,7 +137,12 @@ public abstract class MRender {
                     .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/gui_textured_ci")).build());
         }
         public static final RenderPipeline GUI_TEXTURED =
-                (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).withBlend(new BlendFunction(
+                (RenderPipeline.builder(RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET)
+                                .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/ci_position_tex_color"))
+                                .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/ci_position_tex_color"))
+                                .withSampler("Sampler0").withBlend(BlendFunction.TRANSLUCENT)
+                                .withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS)
+                                .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST).buildSnippet()).withBlend(new BlendFunction(
                                 SourceFactor.SRC_ALPHA,
                                 DestFactor.ONE,
                                 SourceFactor.ONE,

@@ -39,8 +39,7 @@ public class IronHeart  extends ItemBase {
         return modifiers;
     }
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
         tooltipAdder.accept(Component.translatable("item.chest_item.iron_heart.string.1").withStyle(ChatFormatting.GOLD));
     }
 }

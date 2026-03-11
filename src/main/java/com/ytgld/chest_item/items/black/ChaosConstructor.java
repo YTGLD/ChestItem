@@ -144,8 +144,7 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILightList 
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
         if (flag.hasShiftDown()) {
             tooltipAdder.accept(Component.translatable("item.chest_item.chaos_constructor.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80ff5ACD))));
             tooltipAdder.accept(Component.translatable("item.chest_item.chaos_constructor.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80ff5ACD))));

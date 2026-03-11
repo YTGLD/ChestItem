@@ -55,8 +55,7 @@ public class CorruptionCrystal  extends ItemBlackShadow {
         return modifiers;
     }
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
         if (flag.hasShiftDown()) {
             tooltipAdder.accept(Component.translatable("item.chest_item.corruption_crystal.string.2").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
             tooltipAdder.accept(Component.translatable("item.chest_item.corruption_crystal.string.3").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));

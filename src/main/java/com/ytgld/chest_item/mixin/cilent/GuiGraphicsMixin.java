@@ -571,12 +571,12 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         x - size / 3, y - size / 3, 0, 0, size, size, size, size,
                         Light.ARGB.color((int) aFloat / 2, rs, gs, bs));
             } else {
-                for (int i = 1; i < 3; i++) {
-                    guiGraphics.blit(MRender.RenderPs.whirlpool(true, 1), Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                                    "textures/shadow/big/black_3.png"),
-                            x - size / 3, y - size / 3, 0, 0, size, size, size, size,
-                            Light.ARGB.color((int) aFloat / 2, rs, gs, bs));
-                }
+//                for (int i = 1; i < 3; i++) {
+//                    guiGraphics.blit(MRender.RenderPs.whirlpool(true, 1), Identifier.fromNamespaceAndPath(Chestitem.MODID,
+//                                    "textures/shadow/big/black_3.png"),
+//                            x - size / 3, y - size / 3, 0, 0, size, size, size, size,
+//                            Light.ARGB.color((int) aFloat / 2, rs, gs, bs));
+//                }
             }
         }
     }
@@ -589,35 +589,50 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (entity == null) {
             return;
         }
+        int r = 20;
+        int g = 0;
+        int b = 10;
+        RenderPipeline renderPipeline = MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction;
+        int a = 200;
+
+        if (stack.getItem() instanceof IBlackLight iBlackLight) {
+            r = iBlackLight.colorBlack().r();
+            g = iBlackLight.colorBlack().g();
+            b = iBlackLight.colorBlack().b();
+            renderPipeline = iBlackLight.colorBlack().renderPipeline();
+            a = iBlackLight.colorBlack().a();
+        }
         if ((stack.getItem() instanceof IBlackLight)  || Handler.isBlackChaos(stack)) {
+
+
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             {
                 Identifier fire = Identifier.fromNamespaceAndPath(Chestitem.MODID,
                         "textures/gui/tooltip/fire_black.png");
                 float alpha = (float) (50 * Math.sin((entity.tickCount + seed)));
-                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                guiGraphics.blit(renderPipeline, fire,
                         x - 8, y - 8, 0, 0,
                         32, 32, 32, 32,
-                        Light.ARGB.color((int) (200 + alpha), 20, 0, 10));
+                        Light.ARGB.color((int) (a + alpha), r, g, b));
 
                 float alpha1 = (float) (50 * Math.sin((entity.tickCount + seed) / 2f));
-                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                guiGraphics.blit(renderPipeline, fire,
                         x - 8, y - 8, 0, 0,
                         32, 32, 32, 32,
-                        Light.ARGB.color(-((int) (200 + alpha1)), 20, 0, 10));
+                        Light.ARGB.color(-((int) (a + alpha1)), r, g, b));
 
 
                 float alpha2 = (float) (50 * Math.sin((entity.tickCount + seed) * 2f));
-                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                guiGraphics.blit(renderPipeline, fire,
                         x - 8, y - 8, 0, 0,
                         32, 32, 32, 32,
-                        Light.ARGB.color(-((int) (200 + alpha2)), 20, 0, 10));
+                        Light.ARGB.color(-((int) (a + alpha2)), r, g, b));
 
                 float alpha3 = (float) (10 * Math.sin((entity.tickCount + seed) /4F));
-                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                guiGraphics.blit(renderPipeline, fire,
                         x - 8, y - 8, 0, 0,
                         32, 32, 32, 32,
-                        Light.ARGB.color(-((int) (240 + alpha3)), 20, 0, 10));
+                        Light.ARGB.color(-((int) (a + alpha3)), r, g, b));
 
             }
 
@@ -633,10 +648,10 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     pose.translate(x, y);
                     pose.rotate(entity.tickCount / 25f);
                     pose.translate(-x, -y);
-                    guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                    guiGraphics.blit(renderPipeline, fire,
                             x - 16, y - 16, 0, 0,
                             32, 32, 32, 32,
-                            Light.ARGB.color((int) (60 + alphaOffset*2), 20, 0, 25));
+                            Light.ARGB.color((int) (a / 5f + alphaOffset*2), r, g, b));
                     pose.popMatrix();
                     {
                         for (int i = 0; i < 4; i++) {
@@ -644,10 +659,10 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             pose.translate(x, y);
                             pose.rotate((entity.tickCount + i * 40F) / 25f);
                             pose.translate(-x, -y);
-                            guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                            guiGraphics.blit(renderPipeline, fire,
                                     x - 16, y - 16, 0, 0,
                                     32, 32, 32, 32,
-                                    Light.ARGB.color((int) (40 +alphaOffset), 20, 0, 25));
+                                    Light.ARGB.color((int) (a / 5f +alphaOffset), r, g, b));
                             pose.popMatrix();
                         }
                         for (int i = 0; i < 4; i++) {
@@ -655,10 +670,10 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             pose.translate(x, y);
                             pose.rotate((entity.tickCount - i * 40F) / 25f);
                             pose.translate(-x, -y);
-                            guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, fire,
+                            guiGraphics.blit(renderPipeline, fire,
                                     x - 16, y - 16, 0, 0,
                                     32, 32, 32, 32,
-                                    Light.ARGB.color((int) (40 +alphaOffset), 20, 5, 25));
+                                    Light.ARGB.color((int) (a / 5f +alphaOffset), r, g, b));
                             pose.popMatrix();
                         }
                     }

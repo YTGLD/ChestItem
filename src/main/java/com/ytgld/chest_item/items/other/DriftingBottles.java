@@ -59,8 +59,7 @@ public class DriftingBottles extends ItemBase {
         return modifiers;
     }
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
         if (flag.hasShiftDown()) {
             tooltipAdder.accept(Component.translatable("item.chest_item.drifting_bottles.string.2").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80DAA520))));
             tooltipAdder.accept(Component.literal(""));
