@@ -27,6 +27,7 @@ import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -182,6 +183,7 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
+        ShieldRenderHandler.thepainShield(event);
         Complementary.damage(event);
         ChaosShield(event);
         hyperplasiaShield(event);
@@ -392,7 +394,10 @@ public class EventMain {
 
         LivingEntity living = event.player;
 
-        {
+        ShieldRenderHandler.tickShield(living);
+
+
+        if (ShieldRenderHandler.canHeal(living)){
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
             AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
 
@@ -416,7 +421,7 @@ public class EventMain {
                 }
             }
         }
-        {
+        if (ShieldRenderHandler.canHeal(living)){
             AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
             if (attributeInstance != null ) {
                 float timeModify = (float) living.getAttributeValue(AttReg.chaos_armor_speed);
@@ -440,7 +445,7 @@ public class EventMain {
                 }
             }
         }
-        {
+        if (ShieldRenderHandler.canHeal(living)) {
             AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
             AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
 

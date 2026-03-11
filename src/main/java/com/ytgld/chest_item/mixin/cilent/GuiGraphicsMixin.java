@@ -492,7 +492,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         Light.ARGB.color(0, rs, gs, bs));
             }else {
                 for (int i = 1; i < 3; i++) {
-                    MGuiGraphics.GUI_whirlpool.blit(guiGraphics, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                     new MGuiGraphics.GUI(MRender::whirlpool,true).blit(guiGraphics, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/shadow/big/black_3.png"),
                             x - (float) size / 3, y - (float) size / 3, 0, 0, size, size, size, size,
                             rs, gs, bs,aFloat);

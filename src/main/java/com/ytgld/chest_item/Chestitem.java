@@ -14,6 +14,8 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
+import com.ytgld.chest_item.sounds.CISoundDefinitionsProvider;
+import com.ytgld.chest_item.sounds.Sounds;
 import com.ytgld.chest_item.tip.SkillEvent;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import net.minecraft.core.HolderLookup;
@@ -64,10 +66,7 @@ public class Chestitem {
         Entitys.REGISTRY.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.fc);
-
-        for (int i = 0; i < 100; i++) {
-            System.out.println(UUID.randomUUID());
-        }
+        Sounds.REGISTRY.register(modEventBus);
     }
 
     public void onGatherData(GatherDataEvent event) {
@@ -79,7 +78,10 @@ public class Chestitem {
         Chestitem.BlockTagsProviderCO blockTags = new Chestitem.BlockTagsProviderCO(packOutput, lookupProvider, existingFileHelper);
         gen.addProvider(event.includeServer(), blockTags);
         gen.addProvider(event.includeServer(), new InitItems.TagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
-
+        gen.addProvider(
+                event.includeClient(),
+                new CISoundDefinitionsProvider(packOutput, existingFileHelper)
+        );
     }
     private void registerPayloadHandler(final RegisterPayloadHandlersEvent evt) {
         ChestNetworkHandler.register(evt.registrar("1.0"));

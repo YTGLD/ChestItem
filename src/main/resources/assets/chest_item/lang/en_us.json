@@ -72,7 +72,11 @@
   "attribute.name.chest_item.chaos_armor_speed": "Erosion armor recovery time",
   "attribute.name.chest_item.chaos_armor_min": "Erosion armor Breakdown threshold",
 
+  "attribute.name.chest_item.pain_shield_number": "Trauma capacity",
+  "attribute.name.chest_item.pain_shield_speed": "Speed of trauma healing",
+  "attribute.name.chest_item.pain_shield_res": "Trauma intensity",
   "itemGroup.chest_item": "Trinkets in the chest",
+  "sound.chest_item.sound_1" : "Scar: heartbeat",
 
 
   "key.category.chest_item.chest": "Trinkets in the chest",
@@ -160,6 +164,7 @@
   "effect.chest_item.eye": "lightSensitive",
   "effect.chest_item.rage": "rage",
   "effect.chest_item.invulnerable": "invincible",
+  "effect.chest_item.pain": "pain",
 
   "item.chest_item.self_increasing_heart.string.0": "Self-increasing i, i self-decreasing",
   "item.chest_item.self_increasing_heart.string.1": "Eating food restores temporary health",

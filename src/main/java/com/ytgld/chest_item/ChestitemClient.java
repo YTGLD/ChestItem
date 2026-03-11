@@ -10,6 +10,7 @@ import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.CIStateShardsHasBlack;
 import com.ytgld.chest_item.renderer.MRender;
+import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
 import com.ytgld.chest_item.renderer.particle.FireBlock;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
@@ -25,6 +26,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.io.IOException;
 
@@ -74,7 +76,15 @@ public class ChestitemClient{
             poseStack.popPose();
         }
     }
-
+    @SubscribeEvent
+    public static void registerOverlays(RegisterGuiLayersEvent event) {
+        event.registerAbove(VanillaGuiLayers.AIR_LEVEL, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"pain_shield"),
+                (guiGraphics,tracker)->ShieldRenderHandler.renderShield(guiGraphics));
+    }
+    @SubscribeEvent
+    public static void clientTickEvent(ClientTickEvent.Pre event) {
+        ShieldRenderHandler.tick(event);
+    }
     @SubscribeEvent
     public static void EntityRenderersEvent(RegisterShadersEvent event) {
         try {
