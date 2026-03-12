@@ -18,7 +18,7 @@ public class CISoundDefinitionsProvider extends SoundDefinitionsProvider {
                                 .stream(true)
                                 .preload(false)
                 )
-                .subtitle("sound.chest_item.sound_1")
+                .subtitle("sound.chest_item.heart")
                 .replace(true)
         );
     }

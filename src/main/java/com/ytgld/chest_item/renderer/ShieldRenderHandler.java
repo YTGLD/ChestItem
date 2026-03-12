@@ -180,8 +180,8 @@ public class ShieldRenderHandler {
                         if (event.getSource().getEntity() instanceof LivingEntity living1) {
                             living1.hurt(living1.damageSources().playerAttack(player),
                                     (float) (newDamage
-                                            + player.getAttributeValue(Attributes.MAX_HEALTH) * 0.75f
-                                            + player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 3));
+                                            + player.getAttributeValue(Attributes.MAX_HEALTH) * 0.15f
+                                            + player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.75f));
                         }
                         int timeMeet = (int) (1200 * Math.sqrt(Math.sqrt(theNumber)));
                         int maxMeet = (int) (7 + theNumber / 5);
@@ -201,7 +201,7 @@ public class ShieldRenderHandler {
                     }else {
                         event.setNewDamage(newDamage);
                     }
-                    player.level().playSound(null, player.blockPosition(), Sounds.Heart.value(), SoundSource.PLAYERS, 1, 1);
+                    player.level().playSound(null, player.blockPosition(), Sounds.Heart.value(), SoundSource.PLAYERS, 1.5f, 1);
                     aFloat = 1;
                     aFloatCool = 40;
                 } else {
