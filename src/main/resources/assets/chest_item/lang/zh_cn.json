@@ -3,6 +3,15 @@
   "item.chest_item.skill": "可以按下‘%d’键触发技能",
   "chest_item.memory": "你已经记住它了",
   "chest_item.memory.name": "记忆",
+  "item.chest_item.memory.string.1": "喝下它，就记住了它",
+  "item.chest_item.memory.string.2": "无法用正常手段忘却它",
+
+  "item.chest_item.bluster": "瓶子",
+  "item.chest_item.bluster.string.1": "伤害和受伤会永久增加100%",
+  "item.chest_item.bluster_tooltip": "嫉灭",
+  "item.chest_item.bluster_tooltip.string.0": "咆哮，恐惧于那愤怒的咆哮",
+  "item.chest_item.bluster_tooltip.string.1": "受到伤害增加100%",
+  "item.chest_item.bluster_tooltip.string.2": "造成的伤害增加100%",
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",

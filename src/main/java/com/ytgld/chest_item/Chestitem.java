@@ -11,6 +11,7 @@ import com.ytgld.chest_item.event.loot.Loots;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.memory.MemoryEvent;
 import com.ytgld.chest_item.items.memory.MemoryItems;import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
 import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
@@ -72,6 +73,7 @@ public class Chestitem {
         Sounds.REGISTRY.register(modEventBus);
         TheMemoryDataHandler.ATTACHMENT_TYPES.register(modEventBus);
         MemoryItems.ITEMS.register(modEventBus);
+        NeoForge.EVENT_BUS.register(new MemoryEvent());
 
         NeoForge.EVENT_BUS.addListener(PlayerEvent.Clone.class, event -> {
             if (event.isWasDeath() && event.getOriginal().hasData(TheMemoryDataHandler.mStringSetData)) {
