@@ -88,6 +88,7 @@
 
   "item.chest_item.chest": "You can put it in the magic box and press the '%d' key to open it",
   "item.chest_item.skill": "You can press the '%d' key to trigger the skill",
+  "chest_item.memory": "You have memorized it",
 
   "key.category.chest_item.chest": "Trinkets in the chest",
   "key.chest_item.r": "Open magic chest",
@@ -545,6 +546,11 @@
   "item.chest_item.runaway_lining.string.0": "Pushing things to the extreme of eternity to achieve so-called peace...",
   "item.chest_item.runaway_lining.string.1": "Triggering the Undead Totem has the potential to add random attributes to the wearing item",
   "item.chest_item.runaway_lining.string.5": "Place the Runaway Lining in the first slot of the Divine Chest",
+
+  "item.chest_item.nluster_tooltip": "咆哮",
+  "item.chest_item.nluster_tooltip.string.0": "咆哮，恐惧于那愤怒的咆哮",
+  "item.chest_item.nluster_tooltip.string.1": "受到伤害增加100%",
+  "item.chest_item.nluster_tooltip.string.2": "造成的伤害增加100%",
 
 "item.chest_item.runaway_lining.string.2": "Permanently enhances the following accessories when worn:",
   "chest_item.config.RunawayLiningMin": "Chaos imposes minimum value for runaway lining",

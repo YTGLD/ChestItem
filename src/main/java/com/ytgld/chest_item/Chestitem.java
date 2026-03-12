@@ -11,7 +11,8 @@ import com.ytgld.chest_item.event.loot.Loots;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.other.ChestMenuTypes;
+import com.ytgld.chest_item.items.memory.MemoryItems;import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
+import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.sounds.CISoundDefinitionsProvider;
@@ -21,6 +22,7 @@ import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -36,6 +38,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,6 +70,17 @@ public class Chestitem {
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.fc);
         Sounds.REGISTRY.register(modEventBus);
+        TheMemoryDataHandler.ATTACHMENT_TYPES.register(modEventBus);
+        MemoryItems.ITEMS.register(modEventBus);
+
+        NeoForge.EVENT_BUS.addListener(PlayerEvent.Clone.class, event -> {
+            if (event.isWasDeath() && event.getOriginal().hasData(TheMemoryDataHandler.mStringSetData)) {
+                event.getEntity().getData(TheMemoryDataHandler.mStringSetData).clear();
+                event.getEntity().getData(TheMemoryDataHandler.mStringSetData)
+                        .addAll(event.getOriginal().getData(TheMemoryDataHandler.mStringSetData))
+               ;
+            }
+        });
     }
 
     public void onGatherData(GatherDataEvent event) {
@@ -105,6 +119,7 @@ public class Chestitem {
         @SubscribeEvent
         public static void RegisterClientTooltipComponentFactoriesEvent(RegisterClientTooltipComponentFactoriesEvent event){
             event.register(SkillTooltip.class, Function.identity());
+            event.register(BigTooltip.class, Function.identity());
         }
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent evt) {
