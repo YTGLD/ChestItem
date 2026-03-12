@@ -13,6 +13,7 @@ import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
+import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.renderer.*;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
@@ -136,7 +137,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (!ConfigC.config.RenderItemTooltip.get()){
             return;
         }
-        if (tooltipStack.getItem() instanceof ItemBase) {
+        if (tooltipStack.getItem() instanceof ItemBase || tooltipStack.getItem() instanceof MemoryBase.BaseTooltip) {
             RenderTooltipEvent.Pre preEvent = ClientHooks.onRenderTooltipPre(this.tooltipStack, (GuiGraphics) (Object) this, x, y, guiWidth(), guiHeight(), p_282615_, p_282675_, p_282442_);
 
             int i = 0;
@@ -161,25 +162,36 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             int i1 = vector2ic.y();
             this.pose.pushPose();
             RenderTooltipEvent.Color colorEvent = ClientHooks.onRenderTooltipColor(this.tooltipStack, (GuiGraphics) (Object) this, l, i1, preEvent.getFont(), p_282615_);
-            if (tooltipStack.getItem() instanceof ItemBlackShadow) {
+            if (!(tooltipStack.getItem() instanceof MemoryBase.BaseTooltip)) {
+                if (tooltipStack.getItem() instanceof ItemBlackShadow) {
+                    TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
+                            Light.ARGB.color(0, 72 / 3, 61 / 3, 139 / 3),
+                            Light.ARGB.color(0, 72 / 3, 61 / 3, 139 / 3),
+                            Light.ARGB.color(255, 106, 90, 205),
+                            Light.ARGB.color(255, 72, 61, 139));
+
+                } else if (tooltipStack.getItem() instanceof ItemBone) {
+                    TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
+                            Light.ARGB.color(0, 0, 10, 33),
+                            Light.ARGB.color(0, 0, 10, 33),
+                            Light.ARGB.color(255, 50, 255, 20),
+                            Light.ARGB.color(255, 50, 50, 100));
+                } else {
+                    TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
+                            Light.ARGB.color(0, 218, 165, 32),
+                            Light.ARGB.color(0, 218, 165, 32),
+                            Light.ARGB.color(255, 218, 165, 32),
+                            Light.ARGB.color(255, 219, 112, 147));
+                }
+            }else {
+                this.pose.pushPose();
+                si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphics) (Object) this, l, i1, i, j, 1000);
                 TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
-                        Light.ARGB.color(0, 72/3,61/3,139/3),
-                        Light.ARGB.color(0, 72/3,61/3,139/3),
+                        Light.ARGB.color(0, 72 / 3, 61 / 3, 139 / 3),
+                        Light.ARGB.color(0, 72 / 3, 61 / 3, 139 / 3),
                         Light.ARGB.color(255, 106, 90, 205),
                         Light.ARGB.color(255, 72, 61, 139));
-
-            } else if (tooltipStack.getItem() instanceof ItemBone){
-                TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
-                        Light.ARGB.color(0, 0, 10, 33),
-                        Light.ARGB.color(0, 0, 10, 33),
-                        Light.ARGB.color(255, 50, 255, 20),
-                        Light.ARGB.color(255, 50, 50, 100));
-            }else {
-                TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
-                        Light.ARGB.color(0, 218, 165, 32),
-                        Light.ARGB.color(0, 218, 165, 32),
-                        Light.ARGB.color(255, 218, 165, 32),
-                        Light.ARGB.color(255, 219, 112, 147));
+                this.pose.popPose();
             }
             this.pose.popPose();
             if (tooltipStack.getItem() instanceof Meat) {
