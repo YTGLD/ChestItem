@@ -34,17 +34,16 @@ public class Bluster extends MemoryBase{
 
         @Override
         public int color() {
-            return Light.ARGB.color(255,255,100,100);
+            return Light.ARGB.color(255,255,0,100);
         }
         @Override
         public void doText(ItemStack stack, List<Component> tooltipComponents) {
-            tooltipComponents.add(Component.translatable("item.chest_item.nluster_tooltip.string.0").setStyle(Style.EMPTY.withColor(color())));
-            tooltipComponents.add(Component.translatable("item.chest_item.nluster_tooltip.string.1").setStyle(Style.EMPTY.withColor(color())));
-            tooltipComponents.add(Component.translatable("item.chest_item.nluster_tooltip.string.2").setStyle(Style.EMPTY.withColor(color())));
+            tooltipComponents.add(Component.translatable("item.chest_item.bluster_tooltip.string.1").setStyle(Style.EMPTY.withColor(color())));
+            tooltipComponents.add(Component.translatable("item.chest_item.bluster_tooltip.string.2").setStyle(Style.EMPTY.withColor(color())));
         }
         @Override
         public Component doTextOne() {
-            return Component.translatable("item.chest_item.nluster_tooltip.string.0").setStyle(Style.EMPTY.withColor(color()));
+            return Component.translatable("item.chest_item.bluster_tooltip.string.0").setStyle(Style.EMPTY.withColor(color()));
         }
     }
 }

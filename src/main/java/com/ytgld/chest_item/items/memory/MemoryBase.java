@@ -1,11 +1,13 @@
 package com.ytgld.chest_item.items.memory;
 
-import com.ytgld.chest_item.items.IBlackLight;import com.ytgld.chest_item.items.black.ITheChaos;import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;
+import com.ytgld.chest_item.items.IBlackLight;
+import com.ytgld.chest_item.items.black.ITheChaos;import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;
 import com.ytgld.chest_item.renderer.light.Light;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;import net.minecraft.network.chat.Style;import net.minecraft.network.chat.TextColor;import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,7 +16,6 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -33,7 +34,6 @@ public abstract class MemoryBase extends Item {
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 32;
-
     }
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
@@ -67,22 +67,16 @@ public abstract class MemoryBase extends Item {
 
         }
     }
-    public static ItemStack getMemoryItem(Player player){
+    public static ItemStack getMemoryItem(Player player) {
         Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
-        for (String string : strings){
+        for (String string : strings) {
             String[] parts = string.split(":");
-            Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(parts[0],parts[1]));
+            Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(parts[0], parts[1]));
             return item.getDefaultInstance();
         }
         return ItemStack.EMPTY;
     }
-
-
     public record MemoryString (String  path ,String name){}
-
-
-
-
     public static abstract class BaseTooltip extends Item implements IBlackLight,ITheChaos {
         public BaseTooltip(Properties properties) {
             super(properties);
@@ -96,8 +90,12 @@ public abstract class MemoryBase extends Item {
         public Component getName(ItemStack stack) {
             Component component = super.getName(stack);
             MutableComponent co = component.copy();
-            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(color())));
-            return co;
+            co.setStyle(Style.EMPTY.withColor(color()));
+            MutableComponent soul = Component
+                    .translatable("chest_item.memory.name");
+            return soul.append(Component.literal("<"))
+                    .append(co)
+                    .append(Component.literal(">"));
         }
         @Override
         public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
