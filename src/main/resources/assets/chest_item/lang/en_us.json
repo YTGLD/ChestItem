@@ -92,6 +92,7 @@
   "chest_item.memory.name": "Memory",
   "item.chest_item.memory.string.1": "Drink it and remember it",
   "item.chest_item.memory.string.2": "It is impossible to forget it by normal means",
+  "attribute.name.max_memory.heal": "Maximum number of faiths",
 
   "item.chest_item.contradiction": "bottle",
   "item.chest_item.contradiction.string.1": "Abandon Shadow and gain damage reduction",

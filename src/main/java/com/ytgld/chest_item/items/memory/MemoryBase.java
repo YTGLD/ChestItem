@@ -53,18 +53,18 @@ public abstract class MemoryBase extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) {
-            if (!player.hasData(TheMemoryDataHandler.mStringSetData)){
-                player.setData(TheMemoryDataHandler.mStringSetData,new HashSet<>());
+            if (!player.hasData(TheMemoryDataHandler.mStringSetData)) {
+                player.setData(TheMemoryDataHandler.mStringSetData, new HashSet<>());
             }
             Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
-            strings.add(nameSResourceLocation().toString());
-            if (!strings.add(nameSResourceLocation().toString())){
-                player.displayClientMessage(Component.translatable("chest_item.memory"),false);
-            }else {
-                addMemory(player);
-                stack.shrink(1);
+            addMemory(player);
+            if (strings.contains(nameSResourceLocation().toString())) {
+                if (!level.isClientSide) {
+                    player.displayClientMessage(Component.translatable("chest_item.memory"), false);
+                }
             }
         }
+        stack.shrink(1);
         return super.finishUsingItem(stack, level, livingEntity);
     }
     @Override
@@ -76,14 +76,21 @@ public abstract class MemoryBase extends Item {
         return ResourceLocation.fromNamespaceAndPath(memoryName().path,memoryName().name);
     }
     private int max(Player player){
-        return 2;
+        return (int) (player.getAttributeValue(MemoryAttreg.maxMemory));
     }
 
     private void addMemory(Player player){
         Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
-        if (strings .size() < max(player)){
+        List<Integer> integers = new ArrayList<>();
+        for (String ignored : strings){
+            integers.add(1);
+        }
+        int  s = 0;
+        for (Integer ignored : integers){
+            s++;
+        }
+        if (s < max(player)){
             strings.add(nameSResourceLocation().toString());
-
         }
     }
     public static List<ItemStack> getMemoryItem(Player player) {

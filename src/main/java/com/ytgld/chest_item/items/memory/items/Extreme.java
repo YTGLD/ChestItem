@@ -65,7 +65,7 @@ public class Extreme extends MemoryBase {
         public static void expDrop(LivingExperienceDropEvent event){
             if (event.getAttackingPlayer() instanceof Player player) {
                 if (MemoryBase.hasMemory(player, "chest_item:extreme_tooltip")) {
-                    float v = 2;
+                    float v = 3;
                     float lv = player.getHealth() / player.getMaxHealth();
                     lv *= 100;
                     float now = (int) (lv);

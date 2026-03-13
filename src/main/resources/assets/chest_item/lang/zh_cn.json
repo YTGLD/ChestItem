@@ -5,6 +5,8 @@
   "chest_item.memory.name": "信仰",
   "item.chest_item.memory.string.1": "喝下它，就记住了它",
   "item.chest_item.memory.string.2": "无法用正常手段忘却它",
+  "attribute.name.max_memory.heal": "最大信仰数",
+
 
   "item.chest_item.contradiction": "瓶子",
   "item.chest_item.contradiction.string.1": "舍弃幽影，获得伤害减免",
@@ -26,8 +28,9 @@
   "item.chest_item.extreme.string.1": "经验掉落增加，但生命值降低会减少经验掉落",
   "item.chest_item.extreme_tooltip": "极端",
   "item.chest_item.extreme_tooltip.string.0": "将灵魂永堕于沉沦之海",
-  "item.chest_item.extreme_tooltip.string.1": "增加100%经验掉落",
+  "item.chest_item.extreme_tooltip.string.1": "增加200%经验掉落",
   "item.chest_item.extreme_tooltip.string.2": "自身生命值将影响经验的整体掉落量",
+
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
