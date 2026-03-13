@@ -93,6 +93,13 @@
   "item.chest_item.memory.string.1": "Drink it and remember it",
   "item.chest_item.memory.string.2": "It is impossible to forget it by normal means",
 
+  "item.chest_item.contradiction": "bottle",
+  "item.chest_item.contradiction.string.1": "Abandon Shadow and gain damage reduction",
+  "item.chest_item.contradiction_tooltip": "contradiction",
+  "item.chest_item.contradiction_tooltip.string.0": "Bring the broken shadow back to the top of Chaos",
+  "item.chest_item.contradiction_tooltip.string.1": "Gain damage reduction based on the maximum Shadow Shield capacity",
+  "item.chest_item.contradiction_tooltip.string.2": "Shadow Shield cannot be restored naturally",
+
 
   "key.category.chest_item.chest": "Trinkets in the chest",
   "key.chest_item.r": "Open magic chest",

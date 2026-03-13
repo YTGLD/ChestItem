@@ -17,10 +17,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public abstract class MemoryBase extends Item {
     public MemoryBase(Properties properties) {
@@ -78,7 +75,7 @@ public abstract class MemoryBase extends Item {
     private ResourceLocation nameSResourceLocation (){
         return ResourceLocation.fromNamespaceAndPath(memoryName().path,memoryName().name);
     }
-    private int max (Player player){
+    private int max(Player player){
         return 2;
     }
 
@@ -89,14 +86,15 @@ public abstract class MemoryBase extends Item {
 
         }
     }
-    public static ItemStack getMemoryItem(Player player) {
+    public static List<ItemStack> getMemoryItem(Player player) {
         Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
+        List<ItemStack> list = new ArrayList<>();
         for (String string : strings) {
             String[] parts = string.split(":");
             Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(parts[0], parts[1]));
-            return item.getDefaultInstance();
+            list.add(item.getDefaultInstance());
         }
-        return ItemStack.EMPTY;
+        return list;
     }
     public abstract Item name();
 

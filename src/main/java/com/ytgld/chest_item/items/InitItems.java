@@ -22,13 +22,13 @@ import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
+import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -251,7 +251,8 @@ public class    InitItems {
                 .title(Component.translatable("itemGroup.chest_item"))
                 .icon(Items.CHEST::getDefaultInstance)
                 .displayItems((parameters, output) -> {
-                    output.accept(InitItems.FissionEmblem_);
+                    output.accept(MemoryItems.Bluster_);
+                    output.accept(MemoryItems.Contradiction_);
 
                     output.accept(InitItems.Fission_);
                     output.accept(InitItems.FleshAndBloodGears_);
@@ -261,6 +262,7 @@ public class    InitItems {
                     output.accept(InitItems.Sword_);
                     output.accept(InitItems.Samsara_);
                     output.accept(InitItems.ChaosSeven_);
+                    output.accept(InitItems.FissionEmblem_);
 
 
 

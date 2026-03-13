@@ -215,6 +215,9 @@ public class ShieldRenderHandler {
             AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
             AttributeInstance speed = player.getAttribute(AttReg.painShield_speed);
             if (maxShield != null && speed != null) {
+                if (maxShield.getValue() <= 0) {
+                    return;
+                }
                 Supplier<AttachmentType<Float>> supplier = AttReg.painShield;
                 if (player.getData(supplier) <= maxShield.getValue()) {
                     {

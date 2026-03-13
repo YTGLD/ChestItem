@@ -35,12 +35,12 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
 
         for (int i = 0; i < strings.size(); i++) {
             int guiLeft = (this.width - this.imageWidth) / 2 - 20;
-            int guiTop = (this.height - this.imageHeight) / 2 + 10 * i;
-            guiGraphics.renderItem(MemoryBase.getMemoryItem(player), guiLeft, guiTop);
+            int guiTop = (this.height - this.imageHeight) / 2 + 20 * i;
+            guiGraphics.renderItem(MemoryBase.getMemoryItem(player).get(i), guiLeft, guiTop);
             int appleSize = 16;
             if (mouseX >= guiLeft && mouseX < guiLeft + appleSize &&
                     mouseY >= guiTop && mouseY < guiTop + appleSize) {
-                guiGraphics.renderTooltip(this.font, MemoryBase.getMemoryItem(player), mouseX, mouseY);
+                guiGraphics.renderTooltip(this.font, MemoryBase.getMemoryItem(player).get(i), mouseX, mouseY);
             }
         }
     }

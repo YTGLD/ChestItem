@@ -2,9 +2,17 @@
   "item.chest_item.chest": "可以放入神奇箱子内，按下‘%d’键打开",
   "item.chest_item.skill": "可以按下‘%d’键触发技能",
   "chest_item.memory": "你已经记住它了",
-  "chest_item.memory.name": "记忆",
+  "chest_item.memory.name": "信仰",
   "item.chest_item.memory.string.1": "喝下它，就记住了它",
   "item.chest_item.memory.string.2": "无法用正常手段忘却它",
+
+  "item.chest_item.contradiction": "瓶子",
+  "item.chest_item.contradiction.string.1": "舍弃幽影，获得伤害减免",
+  "item.chest_item.contradiction_tooltip": "矛盾",
+  "item.chest_item.contradiction_tooltip.string.0": "将残破的幽影带回混沌之巅",
+  "item.chest_item.contradiction_tooltip.string.1": "获得基于最大幽影护盾容量的伤害减免",
+  "item.chest_item.contradiction_tooltip.string.2": "幽影护盾无法自然恢复",
+
 
   "item.chest_item.bluster": "瓶子",
   "item.chest_item.bluster.string.1": "伤害和受伤会永久增加100%",

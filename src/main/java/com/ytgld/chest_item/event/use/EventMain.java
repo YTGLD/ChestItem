@@ -24,6 +24,7 @@ import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
+import com.ytgld.chest_item.items.memory.items.Contradiction;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
@@ -322,6 +323,7 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingIncomingDamageEvent(LivingIncomingDamageEvent event){
+        Contradiction.ContradictionTooltip.damageRes(event);
         Knife.event(event);
         ArmorStone.tick(event);
         StrongerStone.tick(event);
@@ -449,7 +451,7 @@ public class EventMain {
                 }
             }
         }
-        if (ShieldRenderHandler.canHeal(living)) {
+        if (ShieldRenderHandler.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
             AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
             AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
 
