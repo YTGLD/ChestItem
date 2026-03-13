@@ -253,6 +253,7 @@ public class    InitItems {
                 .displayItems((parameters, output) -> {
                     output.accept(MemoryItems.Bluster_);
                     output.accept(MemoryItems.Contradiction_);
+                    output.accept(MemoryItems.Extreme_);
 
                     output.accept(InitItems.Fission_);
                     output.accept(InitItems.FleshAndBloodGears_);

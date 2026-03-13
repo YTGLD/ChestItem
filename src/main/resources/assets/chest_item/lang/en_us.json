@@ -565,6 +565,13 @@
   "item.chest_item.bluster_tooltip.string.1": "Increases damage taken by 100%",
   "item.chest_item.bluster_tooltip.string.2": "Increases damage dealt by 100%",
 
+ "item.chest_item.extreme": "bottle",
+  "item.chest_item.extreme.string.1": "Experience drops increase, but health reductions reduce experience drops",
+  "item.chest_item.extreme_tooltip": "extreme",
+  "item.chest_item.extreme_tooltip.string.0": "Forever in the sunken sea",
+  "item.chest_item.extreme_tooltip.string.1": "Increases experience drops by 100%",
+  "item.chest_item.extreme_tooltip.string.2": "Self-health will affect the overall drop amount of experience",
+
 "item.chest_item.runaway_lining.string.2": "Permanently enhances the following accessories when worn:",
   "chest_item.config.RunawayLiningMin": "Chaos imposes minimum value for runaway lining",
   "chest_item.config.RunawayLiningMax": "Chaos applies maximum value for runaway lining",

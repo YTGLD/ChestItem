@@ -25,6 +25,7 @@ import com.ytgld.chest_item.items.condensebone.ShieldEngine;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
+import com.ytgld.chest_item.items.memory.items.Extreme;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
@@ -487,8 +488,10 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LivingExperienceDropEvent(LivingExperienceDropEvent event) {
+        Extreme.ExtremeTooltip.expDrop(event);
         GoldCheese.event(event);
         NuclearReaction.event(event);
+
     }
     @SubscribeEvent
     public void PlayerEnchantItemEvent(PlayerEnchantItemEvent event) {
