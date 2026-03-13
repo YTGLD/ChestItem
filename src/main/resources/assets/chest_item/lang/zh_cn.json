@@ -32,6 +32,14 @@
   "item.chest_item.extreme_tooltip.string.2": "自身生命值将影响经验的整体掉落量",
 
 
+  "item.chest_item.forever_curtain": "瓶子",
+  "item.chest_item.forever_curtain.string.1": "创伤增加且自然恢复，但击碎创伤之痕时清除痛楚效果",
+  "item.chest_item.forever_curtain_tooltip": "永幕",
+  "item.chest_item.forever_curtain_tooltip.string.0": "将肉体跪服于赎罪之山下",
+  "item.chest_item.forever_curtain_tooltip.string.1": "获得10点创伤，创伤可自行增长",
+  "item.chest_item.forever_curtain_tooltip.string.2": "创伤被抹去时同时忘却痛楚",
+
+
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
   "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",

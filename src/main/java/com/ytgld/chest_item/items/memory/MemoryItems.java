@@ -4,6 +4,7 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.memory.items.Bluster;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
 import com.ytgld.chest_item.items.memory.items.Extreme;
+import com.ytgld.chest_item.items.memory.items.ForeverCurtain;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -27,6 +28,11 @@ public class MemoryItems {
             (resourceLocation)-> new Extreme(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> ExtremeTooltip_ = register("extreme_tooltip",
             (resourceLocation)-> new Extreme.ExtremeTooltip(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> ForeverCurtain_ = register("forever_curtain",
+            (resourceLocation)-> new ForeverCurtain(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> ForeverCurtainTooltip_ = register("forever_curtain_tooltip",
+            (resourceLocation)-> new ForeverCurtain.ForeverCurtainTooltip(new Item.Properties().stacksTo(1)));
 
 
 
