@@ -39,17 +39,6 @@ public class ActualSuffering extends ItemBase implements Meat, IBlackLight , ITe
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
         var attribute  =super.doAttribute(stack, player);
-        attribute.put(AttReg.shadow_shield,
-                new AttributeModifier(ResourceLocation.parse(this.getDescriptionId()),
-                        4, AttributeModifier.Operation.ADD_VALUE));
-        attribute.put(AttReg.hyperplasia,
-                new AttributeModifier(ResourceLocation.parse(this.getDescriptionId()),
-                        4, AttributeModifier.Operation.ADD_VALUE));
-        attribute.put(AttReg.chaos_armor,
-                new AttributeModifier(ResourceLocation.parse(this.getDescriptionId()),
-                        4, AttributeModifier.Operation.ADD_VALUE));
-
-
         attribute.put(AttReg.painShield_number,
                 new AttributeModifier(ResourceLocation.parse(this.getDescriptionId()),
                         10, AttributeModifier.Operation.ADD_VALUE));

@@ -1,10 +1,7 @@
 package com.ytgld.chest_item.items.memory;
 
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.items.memory.items.Bluster;
-import com.ytgld.chest_item.items.memory.items.Contradiction;
-import com.ytgld.chest_item.items.memory.items.Extreme;
-import com.ytgld.chest_item.items.memory.items.ForeverCurtain;
+import com.ytgld.chest_item.items.memory.items.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -34,6 +31,12 @@ public class MemoryItems {
     public static final DeferredItem<Item> ForeverCurtainTooltip_ = register("forever_curtain_tooltip",
             (resourceLocation)-> new ForeverCurtain.ForeverCurtainTooltip(new Item.Properties().stacksTo(1)));
 
+
+
+    public static final DeferredItem<Item> Martyrdom_ = register("martyrdom",
+            (resourceLocation)-> new Martyrdom(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MartyrdomTooltip_ = register("martyrdom_tooltip",
+            (resourceLocation)-> new Martyrdom.MartyrdomTooltip(new Item.Properties().stacksTo(1)));
 
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {

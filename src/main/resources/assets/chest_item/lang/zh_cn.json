@@ -32,6 +32,14 @@
   "item.chest_item.extreme_tooltip.string.2": "自身生命值将影响经验的整体掉落量",
 
 
+  "item.chest_item.martyrdom": "瓶子",
+  "item.chest_item.martyrdom.string.1": "强化爆炸，收获爆炸掉落物，但是受到的爆炸伤害增加",
+  "item.chest_item.martyrdom_tooltip": "殉爆",
+  "item.chest_item.martyrdom_tooltip.string.0": "为吾献身即便是尔等无上的荣耀",
+  "item.chest_item.martyrdom_tooltip.string.1": "增加爆炸效果，并自动收集爆炸掉落物",
+  "item.chest_item.martyrdom_tooltip.string.2": "受到的爆炸伤害极为致命",
+
+
   "item.chest_item.forever_curtain": "瓶子",
   "item.chest_item.forever_curtain.string.1": "创伤增加且自然恢复，但击碎创伤之痕时清除痛楚效果",
   "item.chest_item.forever_curtain_tooltip": "永幕",
