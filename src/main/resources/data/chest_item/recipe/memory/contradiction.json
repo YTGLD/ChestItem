@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item":"chest_item:drifting_bottles"},
+
+    "B": {"item":"minecraft:obsidian"},
+    "C": {"item":"chest_item:evil_thoughts_forge_dreams"},
+    "D": {"item":"chest_item:heart"},
+    "E": {"item":"chest_item:shadow_mint"}
+  },
+  "pattern": [
+    "BBB",
+    "BAB",
+    "CDE"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:contradiction"
+  }
+}

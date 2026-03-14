@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item":"chest_item:drifting_bottles"},
+    "B": {"item":"minecraft:sculk_catalyst"},
+    "C": {"item":"minecraft:experience_bottle"}
+  },
+  "pattern": [
+    "BCB",
+    "CAC",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:extreme"
+  }
+}

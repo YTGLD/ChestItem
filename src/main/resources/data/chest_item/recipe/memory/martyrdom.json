@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item":"chest_item:drifting_bottles"},
+    "B": {"item": "minecraft:tnt"},
+    "C": {"item":"minecraft:nether_star"}
+  },
+  "pattern": [
+    "BBB",
+    "BAB",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:martyrdom"
+  }
+}
