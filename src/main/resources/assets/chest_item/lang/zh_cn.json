@@ -47,6 +47,20 @@
   "item.chest_item.forever_curtain_tooltip.string.1": "获得10点创伤，创伤可自行增长",
   "item.chest_item.forever_curtain_tooltip.string.2": "创伤被抹去时同时忘却痛楚",
 
+  "item.chest_item.peace": "瓶子",
+  "item.chest_item.peace.string.1": "以伤害代价换取所有生物的和平对待",
+  "item.chest_item.peace_tooltip": "和平",
+  "item.chest_item.peace_tooltip.string.0": "一花一世界，一岁一枯荣",
+  "item.chest_item.peace_tooltip.string.1": "所有都生物不会主动攻击你",
+  "item.chest_item.peace_tooltip.string.2": "伤害降低30%",
+
+  "item.chest_item.war": "瓶子",
+  "item.chest_item.war.string.1": "以抗性代价换取受击时的愤怒一击",
+  "item.chest_item.war_tooltip": "战争",
+  "item.chest_item.war_tooltip.string.0": "愤怒，那不可遏制的愤怒",
+  "item.chest_item.war_tooltip.string.1": "受到攻击会积攒70%同等怒气并转换为下一击的伤害",
+  "item.chest_item.war_tooltip.string.2": "受到的伤害增加50%",
+
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",

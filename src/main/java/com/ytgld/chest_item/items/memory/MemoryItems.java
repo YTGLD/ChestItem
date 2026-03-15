@@ -39,6 +39,19 @@ public class MemoryItems {
             (resourceLocation)-> new Martyrdom.MartyrdomTooltip(new Item.Properties().stacksTo(1)));
 
 
+    public static final DeferredItem<Item> Peace_ = register("peace",
+            (resourceLocation)-> new Peace(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> PeaceTooltip_ = register("peace_tooltip",
+            (resourceLocation)-> new Peace.PeaceTooltip(new Item.Properties().stacksTo(1)));
+
+
+
+    public static final DeferredItem<Item> War_ = register("war",
+            (resourceLocation)-> new War(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> WarTooltip_ = register("war_tooltip",
+            (resourceLocation)-> new War.WarTooltip(new Item.Properties().stacksTo(1)));
+
+
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
     }

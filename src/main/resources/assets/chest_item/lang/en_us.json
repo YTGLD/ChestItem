@@ -581,6 +581,13 @@
   "item.chest_item.forever_curtain_tooltip.string.2": "Forget the pain while the trauma is erased",
 
 
+  "item.chest_item.peace": "bottle",
+  "item.chest_item.peace.string.1": "In exchange for the peaceful treatment of all living beings at the cost of damage",
+  "item.chest_item.peace_tooltip": "peace",
+  "item.chest_item.peace_tooltip.string.0": "One flower, one world, one year and one withering",
+  "item.chest_item.peace_tooltip.string.1": "All creatures will not actively attack you",
+  "item.chest_item.peace_tooltip.string.2": "Damage reduced by 30%",
+
  "item.chest_item.martyrdom": "bottle",
   "item.chest_item.martyrdom.string.1": "Strengthens explosion, harvests explosive drops, but takes increased explosion damage",
   "item.chest_item.martyrdom_tooltip": "martyrdom",
@@ -589,6 +596,12 @@
   "item.chest_item.martyrdom_tooltip.string.2": "Extremely lethal explosion damage",
 
 
+"item.chest_item.war": "bottle",
+  "item.chest_item.war.string.1": "Rage Strike on Attack at the cost of resistance",
+  "item.chest_item.war_tooltip": "war",
+  "item.chest_item.war_tooltip.string.0": "Wrath, the unquenchable rage",
+  "item.chest_item.war_tooltip.string.1": "Attacks accumulate rage and convert damage to the next hit",
+  "item.chest_item.war_tooltip.string.2": "Increases damage taken by 50%",
 
   "item.chest_item.runaway_lining.string.2": "Permanently enhances the following accessories when worn:",
   "chest_item.config.RunawayLiningMin": "Chaos imposes minimum value for runaway lining",
