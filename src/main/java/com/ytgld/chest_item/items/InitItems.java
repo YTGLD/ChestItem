@@ -258,6 +258,7 @@ public class    InitItems {
                     output.accept(MemoryItems.Martyrdom_);
                     output.accept(MemoryItems.Peace_);
                     output.accept(MemoryItems.War_);
+                    output.accept(MemoryItems.TheFox_);
 
                     output.accept(InitItems.Fission_);
                     output.accept(InitItems.FleshAndBloodGears_);

@@ -19,6 +19,7 @@ public class MemoryEvent {
     @SubscribeEvent
     public  void tick(EntityTickEvent.Post event){
         ForeverCurtain.ForeverCurtainTooltip.tick(event);
+        TheFox.TheFoxTooltip.tick(event);
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){

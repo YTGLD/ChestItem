@@ -62,6 +62,14 @@
   "item.chest_item.war_tooltip.string.2": "受到的伤害增加50%",
 
 
+  "item.chest_item.the_fox": "瓶子",
+  "item.chest_item.the_fox.string.1": "高生命值带来加成，低生命值带来负面",
+  "item.chest_item.the_fox_tooltip": "狐假虎威",
+  "item.chest_item.the_fox_tooltip.string.0": "遮蔽天机，隐瞒大道的代价",
+  "item.chest_item.the_fox_tooltip.string.1": "大量属性会随着生命值的提高而变高",
+  "item.chest_item.the_fox_tooltip.string.2": "大量属性会随着生命值会随着生命值降低而边少",
+
+
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",
   "chest_item.config.hyperplasiaMusic": "是否启用组织增生时的音效，默认为开启",
   "chest_item.config.RenderSoul": "是否渲染光效物品（永恒奴印，条约）",

@@ -52,6 +52,13 @@ public class MemoryItems {
             (resourceLocation)-> new War.WarTooltip(new Item.Properties().stacksTo(1)));
 
 
+
+    public static final DeferredItem<Item> TheFox_ = register("the_fox",
+            (resourceLocation)-> new TheFox(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> TheFoxTooltip_ = register("the_fox_tooltip",
+            (resourceLocation)-> new TheFox.TheFoxTooltip(new Item.Properties().stacksTo(1)));
+
+
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
     }

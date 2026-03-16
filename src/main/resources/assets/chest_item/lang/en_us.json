@@ -595,7 +595,12 @@
   "item.chest_item.martyrdom_tooltip.string.1": "Increases explosion effect and automatically collects explosive drops",
   "item.chest_item.martyrdom_tooltip.string.2": "Extremely lethal explosion damage",
 
-
+"item.chest_item.the_fox": "bottle",
+  "item.chest_item.the_fox.string.1": "High health brings bonuses, low health brings negatives",
+  "item.chest_item.the_fox_tooltip": "fox fake tiger power",
+  "item.chest_item.the_fox_tooltip.string.0": "The price of obscuring the heavens and hiding the road",
+  "item.chest_item.the_fox_tooltip.string.1": "A large number of attributes increase with increased health",
+  "item.chest_item.the_fox_tooltip.string.2": "A large number of attributes will decrease as health decreases",
 "item.chest_item.war": "bottle",
   "item.chest_item.war.string.1": "Rage Strike on Attack at the cost of resistance",
   "item.chest_item.war_tooltip": "war",
