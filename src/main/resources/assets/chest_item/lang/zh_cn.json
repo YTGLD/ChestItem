@@ -67,7 +67,7 @@
   "item.chest_item.the_fox_tooltip": "狐假虎威",
   "item.chest_item.the_fox_tooltip.string.0": "遮蔽天机，隐瞒大道的代价",
   "item.chest_item.the_fox_tooltip.string.1": "大量属性会随着生命值的提高而变高",
-  "item.chest_item.the_fox_tooltip.string.2": "大量属性会随着生命值会随着生命值降低而边少",
+  "item.chest_item.the_fox_tooltip.string.2": "大量属性会随着生命值的降低而变少",
 
 
   "chest_item.config.Render": "渲染如“仿生血灵”之类的发光特效",

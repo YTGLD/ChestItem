@@ -4,12 +4,13 @@
   "key": {
     "A": {"item":"chest_item:drifting_bottles"},
     "B": {"tag": "minecraft:meat"},
-    "C": {"item":"chest_item:heart"}
+    "C": {"item":"chest_item:heart"},
+    "D": {"item":"chest_item:flesh_and_blood_gears"}
   },
   "pattern": [
     "BCB",
     "CAC",
-    "BCB"
+    "BDB"
   ],
   "result": {
     "count": 1,
