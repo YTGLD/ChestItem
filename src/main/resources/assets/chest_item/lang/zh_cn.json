@@ -1,4 +1,10 @@
 {
+
+  "chest_item.config.BoneHead": "额外的吃东西速度",
+  "chest_item.configuration.BoneHead": "无厌之骸骨",
+
+
+
   "item.chest_item.chest": "可以放入神奇箱子内，按下‘%d’键打开",
   "item.chest_item.skill": "可以按下‘%d’键触发技能",
   "chest_item.memory": "你已经记住它了",
@@ -185,7 +191,7 @@
 
 
   "item.chest_item.bone_head.string.0": "熟悉的形状，熟悉的味道",
-  "item.chest_item.bone_head.string.1": "增加33%进食速度",
+  "item.chest_item.bone_head.string.1": "增加%d%%进食速度",
     "item.chest_item.bone_head": "无厌之骸骨",
 
 

@@ -1,5 +1,6 @@
 package com.ytgld.chest_item;
 
+import com.ytgld.chest_item.config.ModLanguageProvider;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.event.Keys;
@@ -26,7 +27,6 @@ import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -46,7 +46,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
@@ -96,6 +95,7 @@ public class Chestitem {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         Chestitem.BlockTagsProviderCO blockTags = new Chestitem.BlockTagsProviderCO(packOutput, lookupProvider, existingFileHelper);
+        gen.addProvider(event.includeClient(),new ModLanguageProvider(packOutput));
         gen.addProvider(event.includeServer(), blockTags);
         gen.addProvider(event.includeServer(), new InitItems.TagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
         gen.addProvider(

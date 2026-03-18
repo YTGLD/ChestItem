@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.blood;
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -16,6 +18,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +42,7 @@ public class BoneHead extends ItemBase implements SkillList{
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.Bone_Head)) {
                             if (event.getItem().getUseAnimation() == UseAnim.EAT){
-                                event.setDuration((int) (event.getDuration()*0.66f));
+                                event.setDuration((int) (event.getDuration()*ConfigItem.doubleValue1.getAsDouble()));
                                 break;
                             }
                         }
@@ -55,7 +58,7 @@ public class BoneHead extends ItemBase implements SkillList{
         super.appendHoverText(stack, context, tooltipAdder, flag);
         tooltipAdder.add(Component.translatable("item.chest_item.bone_head.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.add(Component.literal(""));
-        tooltipAdder.add(Component.translatable("item.chest_item.bone_head.string.1").withStyle(ChatFormatting.GOLD));
+        tooltipAdder.add(Component.translatable("item.chest_item.bone_head.string.1",ConfigItem.doubleValue1.getAsDouble()  * 100f).withStyle(ChatFormatting.GOLD));
     } @Nullable
     @Override
     public Map<SkillBase, ResourceLocation> name() {
@@ -88,4 +91,24 @@ public class BoneHead extends ItemBase implements SkillList{
     public int color(ItemStack stack) {
         return Light.ARGB.color(255,100,185,185);
     }
+
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue doubleValue1 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("BoneHead");
+            doubleValue1 =  builder.translation("chest_item.config.BoneHead")
+                    .defineInRange("eat",0.66,0,1);
+            builder.pop();
+        }
+
+        @Override
+        public CIString theLanguageProvider() {
+            return new CIString("BoneHead",
+                    "无厌之骸骨","额外的吃东西速度");
+        }
+
+    }
+
 }

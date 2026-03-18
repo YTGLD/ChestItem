@@ -1,5 +1,8 @@
 package com.ytgld.chest_item;
 
+import com.ytgld.chest_item.config.ConfigPluginFinder;
+import com.ytgld.chest_item.config.RegisterItemConfig;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -7,17 +10,23 @@ public class Config {
     private static final Pair<Config, ModConfigSpec> BUILDER = new ModConfigSpec.Builder().configure(Config::new);
     public static Config config = BUILDER.getKey();
     public static ModConfigSpec fc = BUILDER.getRight();
-    public Config(ModConfigSpec.Builder BUILDER){
-        BUILDER.push("Common");
+
+    public Config(ModConfigSpec.Builder builder){
+
+        builder.push("Common");
         {
-            doEndComingUp =  BUILDER
+            doEndComingUp =  builder
                     .translation("chest_item.config.doEndComingUp")
                     .define("doEndComingUp", true);
-            chaosFortress =  BUILDER
+            chaosFortress =  builder
                     .translation("chest_item.config.chaosFortress")
                     .defineInRange("chaosFortress", 5000,1,Integer.MAX_VALUE);
+
+            for (RegisterItemConfig registerItemConfig : ConfigPluginFinder.getModPlugins()){
+                registerItemConfig.config(builder);
+            }
         }
-        BUILDER.pop();
+        builder.pop();
     }
     public final ModConfigSpec.BooleanValue doEndComingUp;
     public final ModConfigSpec.IntValue chaosFortress;
