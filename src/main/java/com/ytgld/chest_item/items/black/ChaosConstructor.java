@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.IGUILight;
@@ -24,6 +26,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.Vec2;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,6 +43,30 @@ import java.util.List;
  */
 public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
     public static final String leadHurtSize = "leadHurtSize";
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.IntValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("ChaosConstructor");
+            intValue =  builder.translation("chest_item.config.ChaosConstructor")
+                    .defineInRange("number",30,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.ChaosConstructor2")
+                    .defineInRange("number2",20f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("ChaosConstructor",
+                            "混沌构件","最大抗性"),
+                    new CIString("ChaosConstructor2",
+                            "混沌构件2","侵蚀装甲")
+            );
+        }
+    }
 
     public ChaosConstructor(Properties properties) {
         super(properties);
@@ -56,7 +83,7 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
                             CompoundTag compoundTag = stack.get(DataReg.tag);
                             if (compoundTag != null) {
 
-                                if (compoundTag.getInt(leadHurtSize) < 30) {
+                                if (compoundTag.getInt(leadHurtSize) < ConfigItem.intValue.get().intValue()) {
                                     compoundTag.putInt(leadHurtSize,compoundTag.getInt(leadHurtSize)+1);
                                 }
                                 float s =((float)(compoundTag.getInt(leadHurtSize))*0.01f);
@@ -98,7 +125,7 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.chaos_armor, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.ChaosConstructor_.asItem().getDescriptionId()),
-                20, AttributeModifier.Operation.ADD_VALUE));
+                ConfigItem.intValue2.get().floatValue(), AttributeModifier.Operation.ADD_VALUE));
         modifiers.put(AttReg.chaos_armor_damage, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.ChaosConstructor_.asItem().getDescriptionId()),
                 0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
@@ -110,7 +137,7 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
         super.appendHoverText(stack, context, tooltipAdder, flag);
         if (flag.hasShiftDown()) {
             tooltipAdder.add(Component.translatable("item.chest_item.chaos_constructor.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80ff5ACD))));
-            tooltipAdder.add(Component.translatable("item.chest_item.chaos_constructor.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80ff5ACD))));
+            tooltipAdder.add(Component.translatable("item.chest_item.chaos_constructor.string.8",ConfigItem.intValue.getAsInt()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80ff5ACD))));
         }else {
             tooltipAdder.add(Component.translatable("options.key.hold").append(Component.translatable("key.keyboard.left.shift")).withStyle(ChatFormatting.GOLD));
             tooltipAdder.add(Component.literal(""));

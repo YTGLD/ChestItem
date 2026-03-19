@@ -1,5 +1,7 @@
 package com.ytgld.chest_item.items.gold;
 
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.Vec2;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
 
@@ -20,7 +23,23 @@ public class Ring extends ItemBase implements IGold {
     public Ring(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.IntValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Ring");
+            intValue =  builder.translation("chest_item.config.Ring")
+                    .defineInRange("number",1,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(new CIString("Ring",
+                    "矿工戒指","药水等级"));
+        }
+    }
     public static void tick(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
@@ -29,7 +48,7 @@ public class Ring extends ItemBase implements IGold {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.is(InitItems.Ring_)) {
                     if (player.tickCount % 80 == 0) {
-                        player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 100, 1, false, false), player);
+                        player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 100, ConfigItem.intValue.getAsInt(), false, false), player);
                         break;
                     }
                 }

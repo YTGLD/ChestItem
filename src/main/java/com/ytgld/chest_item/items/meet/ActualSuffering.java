@@ -2,6 +2,8 @@ package com.ytgld.chest_item.items.meet;
 
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.renderer.CIStateShardsHasBlack;
 import net.minecraft.ChatFormatting;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
 
@@ -27,7 +30,23 @@ public class ActualSuffering extends ItemBase implements Meat, IBlackLight , ITe
     public ActualSuffering(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("ActualSuffering");
+            intValue =  builder.translation("chest_item.config.ActualSuffering")
+                    .defineInRange("number",10f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(new CIString("ActualSuffering",
+                    "实质之痛苦","最大创伤之痕"));
+        }
+    }
 
     @Override
     public void text(ItemStack stack, List<Component> tooltipAdder, TooltipFlag flag) {
@@ -41,7 +60,7 @@ public class ActualSuffering extends ItemBase implements Meat, IBlackLight , ITe
         var attribute  =super.doAttribute(stack, player);
         attribute.put(AttReg.painShield_number,
                 new AttributeModifier(ResourceLocation.parse(this.getDescriptionId()),
-                        10, AttributeModifier.Operation.ADD_VALUE));
+                        ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_VALUE));
         attribute.put(AttReg.painShield_res,
                 new AttributeModifier(ResourceLocation.parse(this.getDescriptionId()),
                         0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));

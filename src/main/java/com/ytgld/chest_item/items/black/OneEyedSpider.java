@@ -3,6 +3,8 @@ package com.ytgld.chest_item.items.black;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
@@ -23,6 +25,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
 
@@ -30,7 +33,25 @@ public class OneEyedSpider extends ItemBlackShadow {
     public OneEyedSpider(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("OneEyedSpider");
+            intValue =  builder.translation("chest_item.config.OneEyedSpider")
+                    .defineInRange("number",1f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("OneEyedSpider",
+                            "独眼蜘蛛","属性倍率")
+            );
+        }
+    }
     public static void hurtOfBlood(ItemStack food, LivingEntity entity) {
         if (entity instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
@@ -63,7 +84,7 @@ public class OneEyedSpider extends ItemBlackShadow {
             float sa = 0;
             if (compoundTag != null) {
                 int size = compoundTag.size();
-                sa = (float) Math.sqrt(size);
+                sa = (float) Math.sqrt(size)  * ConfigItem.intValue.get().floatValue();
             }
             attributeModifiers.put(AttReg.hyperplasia, new AttributeModifier(
                     ResourceLocation.parse(InitItems.OneEyedSpider_.asItem().getDescriptionId()),

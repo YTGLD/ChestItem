@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,7 +41,25 @@ import java.util.List;
  * <P>
  */
 public class GodApple extends ItemBase implements Meat , ILight {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("GodApple");
+            intValue =  builder.translation("chest_item.config.GodApple")
+                    .defineInRange("number",5f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("GodApple",
+                            "上帝的果实","最大伤害")
+            );
+        }
+    }
 
     public static final int TIME = 10 * 20;
 
@@ -60,11 +81,11 @@ public class GodApple extends ItemBase implements Meat , ILight {
                             if (stack.is(InitItems.God_Apple.get())) {
                                 CompoundTag compoundTag = stack.get(DataReg.tag);
                                 if (compoundTag != null) {
-                                    float s = event.getNewDamage() - 5;
-                                    if (s > 5) {
+                                    float s = event.getNewDamage() - ConfigItem.intValue.get().floatValue();
+                                    if (s > ConfigItem.intValue.get().floatValue()) {
                                         compoundTag.putFloat(bloodDamage, compoundTag.getFloat(bloodDamage) + s);
                                         compoundTag.putInt(bloodTime, TIME);
-                                        event.setNewDamage(5);
+                                        event.setNewDamage(ConfigItem.intValue.get().floatValue());
                                         break;
                                     }
                                 }
@@ -132,8 +153,8 @@ public class GodApple extends ItemBase implements Meat , ILight {
         super.appendHoverText(stack, context, tooltipAdder, flag);
         tooltipAdder.add(Component.translatable("item.chest_item.god_apple.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.add(Component.literal(""));
-        tooltipAdder.add(Component.translatable("item.chest_item.god_apple.string.3").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.add(Component.translatable("item.chest_item.god_apple.string.4").withStyle(ChatFormatting.GOLD));
+        tooltipAdder.add(Component.translatable("item.chest_item.god_apple.string.3",ConfigItem.intValue.get().floatValue()).withStyle(ChatFormatting.GOLD));
+        tooltipAdder.add(Component.translatable("item.chest_item.god_apple.string.4",ConfigItem.intValue.get().floatValue()).withStyle(ChatFormatting.GOLD));
 
     }
 

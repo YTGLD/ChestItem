@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
@@ -28,6 +30,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,7 +44,30 @@ public class SelfIncreasingHeart extends ItemBase implements Meat ,SkillList{
     public SelfIncreasingHeart(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.IntValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("SelfIncreasingHeart");
+            intValue =  builder.translation("chest_item.config.SelfIncreasingHeart")
+                    .defineInRange("number",9,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.SelfIncreasingHeart2")
+                    .defineInRange("number2",0.2f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("SelfIncreasingHeart",
+                            "自增心脏","最大BUFF等级"),
+                    new CIString("SelfIncreasingHeart2",
+                            "自增心脏2","减少的生命值数值")
+            );
+        }
+    }
     public static void tick(LivingEntityUseItemEvent.Finish event) {
         LivingEntity living = event.getEntity();
         if (living instanceof Player player) {
@@ -55,10 +81,14 @@ public class SelfIncreasingHeart extends ItemBase implements Meat ,SkillList{
                                 player.addEffect(new MobEffectInstance(Effects.IncreasingMeat_,1800,0));
                                 @Nullable MobEffectInstance mobEffectInstance = player.getEffect(Effects.IncreasingMeat_);
                                 if (mobEffectInstance != null) {
-                                    if (mobEffectInstance.getAmplifier()<9) {
-                                        player.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration()+1800, mobEffectInstance.getAmplifier() + 1,false,false));
+                                    if (mobEffectInstance.getAmplifier()<ConfigItem.intValue.getAsInt()) {
+                                        player.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(),
+                                                mobEffectInstance.getDuration()+1800,
+                                                mobEffectInstance.getAmplifier() + 1,
+                                                false,false));
                                     }else {
-                                        player.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(),18000, 10,false,false));
+                                        player.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(),18000,
+                                                ConfigItem.intValue.getAsInt() + 1,false,false));
                                     }
                                     break;
                                 }
@@ -78,7 +108,7 @@ public class SelfIncreasingHeart extends ItemBase implements Meat ,SkillList{
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Self_Increasing_Heart.asItem().getDescriptionId()),
-                -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                -ConfigItem.intValue2.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
         return modifiers;
     }

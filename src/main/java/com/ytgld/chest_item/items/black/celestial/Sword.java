@@ -3,6 +3,8 @@ package com.ytgld.chest_item.items.black.celestial;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -14,22 +16,41 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class Sword  extends TheCelestial{
     public Sword(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Sword");
+            intValue =  builder.translation("chest_item.config.Sword")
+                    .defineInRange("number",0.2f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(new CIString("Sword",
+                    "剑体","属性"));
+        }
+    }
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.Sword_.asItem().getDescriptionId()),
-                0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         modifiers.put(Attributes.ATTACK_SPEED, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.Sword_.asItem().getDescriptionId()),
-                0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         return modifiers;
     }

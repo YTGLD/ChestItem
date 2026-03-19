@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.other;
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -12,11 +14,29 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 
 import java.util.List;
 
 public class Lead  extends ItemBase {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.IntValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Lead");
+            intValue =  builder.translation("chest_item.config.Lead")
+                    .defineInRange("number",3,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(new CIString("Lead",
+                    "恶意重铅","暴击需要的攻击次数"));
+        }
+    }
     public Lead(Properties properties) {
         super(properties);
     }
@@ -33,7 +53,7 @@ public class Lead  extends ItemBase {
                         CompoundTag compoundTag = stack.get(DataReg.tag);
                         if (compoundTag!=null){
                             compoundTag.putInt(lead, compoundTag.getInt(lead) + 1);
-                            if (compoundTag.getInt(lead)>=3){
+                            if (compoundTag.getInt(lead)>=ConfigItem.intValue.getAsInt()){
                                 event.setDisableSweep(false);
                                 event.setCriticalHit(true);
                                 event.setDamageMultiplier(event.getDamageMultiplier()*1.5f);
@@ -52,7 +72,7 @@ public class Lead  extends ItemBase {
         super.appendHoverText(stack, context, tooltipAdder, flag);
         tooltipAdder.add(Component.translatable("item.chest_item.lead.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.add(Component.literal(""));
-        tooltipAdder.add(Component.translatable("item.chest_item.lead.string.1").withStyle(ChatFormatting.GOLD));
+        tooltipAdder.add(Component.translatable("item.chest_item.lead.string.1",ConfigItem.intValue.getAsInt()).withStyle(ChatFormatting.GOLD));
 
         }
     @Override

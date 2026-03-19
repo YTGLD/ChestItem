@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.other;
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -14,7 +16,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import java.util.List;
 
@@ -29,6 +31,30 @@ import java.util.List;
  */
 
 public class WindKnife extends ItemBase {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("WindKnife");
+            intValue =  builder.translation("chest_item.config.WindKnife")
+                    .defineInRange("number",0.8f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.WindKnife2")
+                    .defineInRange("number2",1.5f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("WindKnife",
+                            "罡风刀环","最小伤害"),
+                    new CIString("WindKnife2",
+                            "罡风刀环2","最大伤害")
+            );
+        }
+    }
     public WindKnife(Properties properties) {
         super(properties);
     }
@@ -40,7 +66,7 @@ public class WindKnife extends ItemBase {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.WindKnife_.get())) {
-                            float damage = Mth.nextFloat(RandomSource.create(),0.8f,1.5f);
+                            float damage = Mth.nextFloat(RandomSource.create(),ConfigItem.intValue.get().floatValue(),ConfigItem.intValue2.get().floatValue());
                             if (player.experienceLevel>10){
                                 event.setAmount(event.getAmount()*1.5f);
                                 player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.ARROW_HIT_PLAYER, SoundSource.AMBIENT,1,1);
@@ -60,7 +86,7 @@ public class WindKnife extends ItemBase {
         super.appendHoverText(stack, context, tooltipAdder, flag);
         tooltipAdder.add(Component.translatable("item.chest_item.wind_knife.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.add(Component.literal(""));
-        tooltipAdder.add(Component.translatable("item.chest_item.wind_knife.string.1").withStyle(ChatFormatting.GOLD));
+        tooltipAdder.add(Component.translatable("item.chest_item.wind_knife.string.1",ConfigItem.intValue.get().floatValue(),ConfigItem.intValue2.get().floatValue()).withStyle(ChatFormatting.GOLD));
         tooltipAdder.add(Component.translatable("item.chest_item.wind_knife.string.2").withStyle(ChatFormatting.GOLD));
 
     }

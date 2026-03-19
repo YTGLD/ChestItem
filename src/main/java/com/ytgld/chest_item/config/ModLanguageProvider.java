@@ -15,9 +15,10 @@ public class ModLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         for (RegisterItemConfig registerItemConfig : ConfigPluginFinder.getModPlugins()){
-            RegisterItemConfig.CIString theLanguageProvider = registerItemConfig.theLanguageProvider();
-            add("chest_item.configuration."+theLanguageProvider.path(),theLanguageProvider.doIt());
-            add("chest_item.config."+theLanguageProvider.path(),theLanguageProvider.doName());
+            for (RegisterItemConfig.CIString theLanguageProvider : registerItemConfig.theLanguageProvider()) {
+                add("chest_item.configuration." + theLanguageProvider.path(), theLanguageProvider.doIt());
+                add("chest_item.config." + theLanguageProvider.path(), theLanguageProvider.doName());
+            }
         }
     }
 }

@@ -3,6 +3,8 @@ package com.ytgld.chest_item.items.blood;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
@@ -21,10 +23,12 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -32,11 +36,28 @@ public class LifeCrystal extends ItemBase implements SkillList{
     public LifeCrystal(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("LifeCrystal");
+            intValue =  builder.translation("chest_item.config.LifeCrystal")
+                    .defineInRange("number",10f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(new CIString("LifeCrystal",
+                    "生命水晶","生命值"));
+        }
+    }
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
             modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Life_Crystal.asItem().getDescriptionId()),
-                10, AttributeModifier.Operation.ADD_VALUE));
+                    ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_VALUE));
 
         modifiers.put(AttReg.hyperplasia, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.Life_Crystal.asItem().getDescriptionId()),
                 4, AttributeModifier.Operation.ADD_VALUE));

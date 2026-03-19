@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
@@ -26,6 +28,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
@@ -69,6 +72,35 @@ public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
     public ChaosFortress(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        public static ModConfigSpec.DoubleValue intValue3 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("ChaosFortress");
+            intValue =  builder.translation("chest_item.config.ChaosFortress")
+                    .defineInRange("number",2f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.ChaosFortress2")
+                    .defineInRange("number2",5f,0,Integer.MAX_VALUE);
+            intValue3 =  builder.translation("chest_item.config.ChaosFortress2")
+                    .defineInRange("number3",0.7f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("ChaosFortress",
+                            "混沌要塞之护","免疫低于这个值的伤害"),
+                    new CIString("ChaosFortress2",
+                            "混沌要塞之护2","增加的魔法伤害"),
+                    new CIString("ChaosFortress3",
+                            "混沌要塞之护3","伤害倍率")
+            );
+        }
+    }
     public static void isInvulnerableToBase(Player player,
                                             DamageSource damageSource,
                                             CallbackInfoReturnable<Boolean> cir) {
@@ -90,7 +122,7 @@ public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
         //无效化低于2点的伤害
         if (event.getEntity() instanceof Player player) {
             if (Handler.has(player, InitItems.ChaosFortress_.asItem())) {
-                if (event.getAmount() < 2) {
+                if (event.getAmount() < ConfigItem.intValue.get().floatValue()) {
                     event.setCanceled(true);
                 }
             }
@@ -101,7 +133,7 @@ public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
         if (event.getEntity() instanceof Player player) {
             if (Handler.has(player, InitItems.ChaosFortress_.asItem())) {
                 //增加15%的抗性
-                event.setNewDamage(event.getNewDamage() *  (1 - 0.3f));
+                event.setNewDamage(event.getNewDamage() *  ConfigItem.intValue3.get().floatValue());
                 //被攻击时有5%的概率获得3秒无敌
                 if (Mth.nextInt(RandomSource.create(), 0, 100) <= 5) {
                     player.getCooldowns().addCooldown(InitItems.ChaosFortress_.asItem(),60);
@@ -114,7 +146,7 @@ public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
                 float damage = player.getData(AttReg.chaosWinds) * 0.8f + 5;
                 //受到的魔法伤害提高400%
                 if (event.getSource().is(DamageTypes.MAGIC)) {
-                    event.setNewDamage(event.getNewDamage() * 5);
+                    event.setNewDamage(event.getNewDamage() * ConfigItem.intValue2.get().floatValue());
                 }
                 if (event.getSource().getEntity() instanceof LivingEntity entity) {
                     entity.hurt(entity.damageSources().dryOut(),damage);
@@ -173,18 +205,18 @@ public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
                 tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
                 tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
             }else {
-                tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.3",ConfigItem.intValue3.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.add(Component.literal(""));
                 tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.add(Component.literal(""));
-                tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.8",ConfigItem.intValue.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.9").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.add(Component.literal(""));
                 tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.10").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.11").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.11",ConfigItem.intValue2.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipAdder.add(Component.translatable("item.chest_item.chaos_fortress.string.12").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
             }
         }else {

@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
@@ -28,6 +30,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import org.jetbrains.annotations.NotNull;
@@ -76,7 +79,25 @@ public class Warmaker extends ItemBlackShadow implements ITheChaos {
     public static final String notKillTimeInt ="notKillTimeInt";
     public static final int notKillTime =10*60;
     public static final String applyKillTimeBoolean ="applyKillTimeBoolean";
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Warmaker");
+            intValue =  builder.translation("chest_item.config.Warmaker")
+                    .defineInRange("number",1F,1,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Warmaker",
+                            "战争缔造者","最低生命值")
+            );
+        }
+    }
     public Warmaker(Properties properties) {
         super(properties);
     }
@@ -108,12 +129,12 @@ public class Warmaker extends ItemBlackShadow implements ITheChaos {
                             }else {
 
                                 float damage = getCurseDamage(stack);
-                                if (player.getHealth() > 1) {
+                                if (player.getHealth() > ConfigItem.intValue.get().floatValue()) {
                                     if (player.getHealth() > damage) {
                                         player.setHealth(player.getHealth() - damage);
                                         break;
                                     }else {
-                                        player.setHealth(1);
+                                        player.setHealth(ConfigItem.intValue.get().floatValue());
                                     }
                                 }
                             }

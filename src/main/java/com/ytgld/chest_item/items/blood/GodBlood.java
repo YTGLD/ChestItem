@@ -3,6 +3,8 @@ package com.ytgld.chest_item.items.blood;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.IGUILight;
@@ -24,6 +26,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.Vec2;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,6 +44,30 @@ public class  GodBlood extends ItemBase implements IGUILight {
     public GodBlood(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.IntValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("GodBlood");
+            intValue =  builder.translation("chest_item.config.GodBlood")
+                    .defineInRange("number",0.1f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.GodBlood2")
+                    .defineInRange("number2",100,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("GodBlood",
+                            "神速力","基础加成"),
+                    new CIString("GodBlood2",
+                            "神速力2","缓慢时间（施加）")
+            );
+        }
+    }
     public static void attack(ItemStackAttackEvent event){
         LivingIncomingDamageEvent livingIncomingDamageEvent = event.event;
         Player player = event.player;
@@ -50,7 +77,7 @@ public class  GodBlood extends ItemBase implements IGUILight {
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.is(InitItems.God_blood)) {
-                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1), player);
+                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ConfigItem.intValue2.get().intValue(), 1), player);
                 }
             }
         }
@@ -60,9 +87,9 @@ public class  GodBlood extends ItemBase implements IGUILight {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.God_blood.asItem().getDescriptionId()),
-                0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         modifiers.put(Attributes.ATTACK_SPEED, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID + InitItems.God_blood.asItem().getDescriptionId()),
-                0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         return modifiers;
     }

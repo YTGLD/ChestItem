@@ -104,9 +104,9 @@ public class BoneHead extends ItemBase implements SkillList{
         }
 
         @Override
-        public CIString theLanguageProvider() {
-            return new CIString("BoneHead",
-                    "无厌之骸骨","额外的吃东西速度");
+        public List<CIString> theLanguageProvider() {
+            return List.of( new CIString("BoneHead",
+                    "无厌之骸骨","额外的吃东西速度"));
         }
 
     }

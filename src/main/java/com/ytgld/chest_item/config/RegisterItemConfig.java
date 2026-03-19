@@ -2,9 +2,11 @@ package com.ytgld.chest_item.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.util.List;
+
 public interface RegisterItemConfig {
     void config(ModConfigSpec.Builder builder);
-    CIString theLanguageProvider();
+    List<CIString> theLanguageProvider();
 
     record CIString(String path, String  doIt,String doName){
 
