@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
@@ -27,6 +29,7 @@ import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import org.jetbrains.annotations.Nullable;
@@ -60,7 +63,30 @@ public class Mutation extends TheImprintOfTheSoul {
     public Mutation(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Mutation");
+            intValue =  builder.translation("chest_item.config.Mutation")
+                    .defineInRange("number",0.1f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.Mutation2")
+                    .defineInRange("number2",0.3f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Mutation",
+                            "异变","抗性"),
+                    new CIString("Mutation2",
+                            "异变2","抵御的相关伤害")
+            );
+        }
+    }
     public static void  attrib(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
@@ -120,7 +146,7 @@ public class Mutation extends TheImprintOfTheSoul {
                             event.setAmount(event.getAmount()*(1+DAMAGE+magic));
 
                             if (notEq(player)) {
-                                event.setAmount(event.getAmount()*0.9f);
+                                event.setAmount(event.getAmount() * (1 - ConfigItem.intValue.get().intValue()));
                             }
                             if (event.getSource().is(DamageTypes.IN_FIRE)||
                                     event.getSource().is(DamageTypes.ON_FIRE)||
@@ -128,7 +154,7 @@ public class Mutation extends TheImprintOfTheSoul {
                                     event.getSource().is(DamageTypes.LAVA)||
                                     event.getSource().is(DamageTypes.EXPLOSION)||
                                     event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {
-                                event.setAmount(event.getAmount()*0.7f);
+                                event.setAmount(event.getAmount()*(1 - ConfigItem.intValue2.get().floatValue()));
                             }
                             break;
                         }
@@ -184,8 +210,8 @@ public class Mutation extends TheImprintOfTheSoul {
         }else {
             tooltipComponents.add(Component.translatable("item.chest_item.mutation.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
             tooltipComponents.add(Component.translatable("item.chest_item.mutation.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipComponents.add(Component.translatable("item.chest_item.mutation.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipComponents.add(Component.translatable("item.chest_item.mutation.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.add(Component.translatable("item.chest_item.mutation.string.3" , 100 *  ConfigItem.intValue.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.add(Component.translatable("item.chest_item.mutation.string.4" , 100 *  ConfigItem.intValue2.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
             tooltipComponents.add(Component.literal(""));
             tooltipComponents.add(Component.translatable("item.chest_item.mutation.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
             tooltipComponents.add(Component.translatable("item.chest_item.mutation.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));

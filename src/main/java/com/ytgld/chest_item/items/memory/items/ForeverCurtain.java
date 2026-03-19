@@ -3,6 +3,8 @@ package com.ytgld.chest_item.items.memory.items;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
@@ -22,6 +24,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.List;
@@ -37,6 +40,25 @@ import java.util.function.Supplier;
  * 创伤被抹去时同时忘却痛楚
  */
 public class ForeverCurtain extends MemoryBase {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("ForeverCurtain");
+            intValue =  builder.translation("chest_item.config.ForeverCurtain")
+                    .defineInRange("number",10f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("ForeverCurtain",
+                            "信仰永幕","创伤数值")
+            );
+        }
+    }
     public ForeverCurtain(Properties properties) {
         super(properties);
     }
@@ -65,7 +87,7 @@ public class ForeverCurtain extends MemoryBase {
         }
         @Override
         public void doText(ItemStack stack, List<Component> tooltipComponents) {
-            tooltipComponents.add(Component.translatable("item.chest_item.forever_curtain_tooltip.string.1").setStyle(Style.EMPTY.withColor(color())));
+            tooltipComponents.add(Component.translatable("item.chest_item.forever_curtain_tooltip.string.1",ConfigItem.intValue.get().floatValue()).setStyle(Style.EMPTY.withColor(color())));
             tooltipComponents.add(Component.translatable("item.chest_item.forever_curtain_tooltip.string.2").setStyle(Style.EMPTY.withColor(color())));
         }
         @Override
@@ -106,7 +128,7 @@ public class ForeverCurtain extends MemoryBase {
             Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
             modifiers.put(AttReg.painShield_number, new AttributeModifier(resourceLocation,
-                    10, AttributeModifier.Operation.ADD_VALUE));
+                    ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_VALUE));
 
             return modifiers;
         }

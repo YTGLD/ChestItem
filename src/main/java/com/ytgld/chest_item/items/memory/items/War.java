@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.memory.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -12,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
@@ -27,6 +30,30 @@ import java.util.List;
  * 受到的伤害增加50%
  */
 public class War extends MemoryBase {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("War");
+            intValue =  builder.translation("chest_item.config.War")
+                    .defineInRange("number",1.5f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.War2")
+                    .defineInRange("number2",0.7f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("War",
+                            "信仰战争","受到伤害倍率"),
+                    new CIString("War2",
+                            "信仰战争2","攻击转化倍率")
+            );
+        }
+    }
     public War(Properties properties) {
         super(properties);
     }
@@ -55,8 +82,8 @@ public class War extends MemoryBase {
         }
         @Override
         public void doText(ItemStack stack, List<Component> tooltipComponents) {
-            tooltipComponents.add(Component.translatable("item.chest_item.war_tooltip.string.1").setStyle(Style.EMPTY.withColor(color())));
-            tooltipComponents.add(Component.translatable("item.chest_item.war_tooltip.string.2").setStyle(Style.EMPTY.withColor(color())));
+            tooltipComponents.add(Component.translatable("item.chest_item.war_tooltip.string.1" ,100 *  ConfigItem.intValue2.get().floatValue()).setStyle(Style.EMPTY.withColor(color())));
+            tooltipComponents.add(Component.translatable("item.chest_item.war_tooltip.string.2" ,100 *  ConfigItem.intValue.get().floatValue() - 100).setStyle(Style.EMPTY.withColor(color())));
         }
         @Override
         public Component doTextOne() {
@@ -66,10 +93,10 @@ public class War extends MemoryBase {
         public static void damagePre(LivingDamageEvent.Pre event) {
             if (event.getEntity() instanceof Player player) {
                 if (MemoryBase.hasMemory(player, "chest_item:war_tooltip")) {
-                    event.setNewDamage(event.getNewDamage() * 1.5f);
+                    event.setNewDamage(event.getNewDamage() * ConfigItem.intValue.get().floatValue());
                     if (event.getSource().getEntity() instanceof LivingEntity) {
                         CompoundTag compoundTag = player.getPersistentData();
-                        compoundTag.putFloat(damageAddBoost, compoundTag.getFloat(damageAddBoost)+event.getNewDamage() * 0.7f);
+                        compoundTag.putFloat(damageAddBoost, compoundTag.getFloat(damageAddBoost)+event.getNewDamage() * ConfigItem.intValue2.get().floatValue());
                     }
                 }
             }

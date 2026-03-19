@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.memory.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.MemoryItems;
@@ -12,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import java.util.List;
@@ -29,7 +32,30 @@ public class Contradiction extends MemoryBase {
     public Contradiction(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Contradiction");
+            intValue =  builder.translation("chest_item.config.Contradiction")
+                    .defineInRange("number",0.1f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.Contradiction2")
+                    .defineInRange("number2",10f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Contradiction",
+                            "信仰矛盾","每个盾给予的抗性"),
+                    new CIString("Contradiction2",
+                            "信仰矛盾2","最大抗性上限")
+            );
+        }
+    }
     @Override
     public MemoryString memoryName() {
         return new MemoryString(Chestitem.MODID,"contradiction_tooltip");
@@ -70,9 +96,9 @@ public class Contradiction extends MemoryBase {
             if (event.getEntity() instanceof Player player) {
                 if (MemoryBase.hasMemory(player, "chest_item:contradiction_tooltip")) {
                     float value = (float) player.getAttributeValue(AttReg.shadow_shield);
-                    value /= 10;
-                    if (value > 10) {
-                        value = 10;
+                    value *= ConfigItem.intValue.get().floatValue();
+                    if (value > ConfigItem.intValue2.get().floatValue()) {
+                        value = ConfigItem.intValue2.get().floatValue();
                     }
                     float end = event.getAmount() - value;
                     if (end <= 0){

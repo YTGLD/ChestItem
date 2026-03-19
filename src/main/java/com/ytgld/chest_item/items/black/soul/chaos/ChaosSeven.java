@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
@@ -28,6 +30,7 @@ import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
 import org.jetbrains.annotations.Nullable;
@@ -63,7 +66,25 @@ public class ChaosSeven extends TheChaos{
     public ChaosSeven(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("ChaosSeven");
+            intValue =  builder.translation("chest_item.config.ChaosSeven")
+                    .defineInRange("number",1f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("ChaosSeven",
+                            "混沌七子","属性倍率")
+            );
+        }
+    }
     @Override
     public boolean isChaos() {
         return true;
@@ -166,11 +187,11 @@ public class ChaosSeven extends TheChaos{
             CompoundTag compoundTag = stack.get(DataReg.tag);
             if (compoundTag != null) {
                 int lvl = compoundTag.getInt(uDead);
-                float heal = 0.85f / 333f * lvl;
-                float speed = 0.8f / 333f * lvl;
-                float damage = 0.75f / 333f * lvl;
-                float attSpeed = 0.5f / 333f * lvl;
-                float armor = 0.35f / 333f * lvl;
+                float heal = 0.85f / 333f * lvl * ConfigItem.intValue.get().floatValue();
+                float speed = 0.8f / 333f * lvl * ConfigItem.intValue.get().floatValue();
+                float damage = 0.75f / 333f * lvl * ConfigItem.intValue.get().floatValue();
+                float attSpeed = 0.5f / 333f * lvl * ConfigItem.intValue.get().floatValue();
+                float armor = 0.35f / 333f * lvl * ConfigItem.intValue.get().floatValue();
 
 
                 modifiers.put(AttReg.heal, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +

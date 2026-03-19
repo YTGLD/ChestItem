@@ -3,6 +3,8 @@ package com.ytgld.chest_item.items.other;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
@@ -20,6 +22,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,7 +32,25 @@ public class DriftingBottles extends ItemBase {
     public DriftingBottles(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("DriftingBottles");
+            intValue =  builder.translation("chest_item.config.DriftingBottles")
+                    .defineInRange("number",1.0f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("DriftingBottles",
+                            "漂流瓶","游泳速度")
+            );
+        }
+    }
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player, ItemStack stack) {
@@ -53,7 +74,7 @@ public class DriftingBottles extends ItemBase {
 
         modifiers.put(NeoForgeMod.SWIM_SPEED, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.DriftingBottles_.asItem().getDescriptionId()),
-                1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
 
         modifiers.put(Attributes.OXYGEN_BONUS, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +

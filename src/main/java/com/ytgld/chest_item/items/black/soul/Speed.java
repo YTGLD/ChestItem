@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
@@ -27,6 +29,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -37,7 +40,30 @@ public class Speed extends TheSoul {
     public Speed(Item.Properties properties) {
         super(properties);
     }
-    
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Speed");
+            intValue =  builder.translation("chest_item.config.Speed")
+                    .defineInRange("number",0.3f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.Speed2")
+                    .defineInRange("number2",0.3f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Speed",
+                            "极限反应论","速度"),
+                    new CIString("Speed2",
+                            "极限反应论2","跳跃力量")
+            );
+        }
+    }
     @Override
     public ResourceLocation resourceLocation() {
         return ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/soul/speed.png");
@@ -103,13 +129,13 @@ public class Speed extends TheSoul {
 
             modifiers.put(Attributes.JUMP_STRENGTH, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.Speed_.asItem().getDescriptionId()),
-                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                    ConfigItem.intValue2.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         modifiers.put(AttReg.more_speed, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.Speed_.asItem().getDescriptionId()),
-                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         modifiers.put(Attributes.SAFE_FALL_DISTANCE, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.Speed_.asItem().getDescriptionId()),
-                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                ConfigItem.intValue2.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
         return modifiers;
     }
@@ -121,7 +147,7 @@ public class Speed extends TheSoul {
             tooltipComponents.add(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
             tooltipComponents.add(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
             tooltipComponents.add(Component.literal(""));
-            tooltipComponents.add(Component.translatable("item.chest_item.speed.string.2").withStyle(ChatFormatting.GOLD));
+            tooltipComponents.add(Component.translatable("item.chest_item.speed.string.2",100 * ConfigItem.intValue.get().floatValue()).withStyle(ChatFormatting.GOLD));
 
         }else {
             tooltipComponents.add(Component.translatable("item.chest_item.speed.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));

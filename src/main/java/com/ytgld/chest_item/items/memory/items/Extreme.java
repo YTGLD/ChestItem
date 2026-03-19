@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.memory.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.MemoryItems;
@@ -12,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
@@ -30,7 +33,25 @@ public class Extreme extends MemoryBase {
     public Extreme(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Extreme");
+            intValue =  builder.translation("chest_item.config.Extreme")
+                    .defineInRange("number",3f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Extreme",
+                            "信仰极端","经验倍率")
+            );
+        }
+    }
     @Override
     public MemoryString memoryName() {
         return new MemoryString(Chestitem.MODID,"extreme_tooltip");
@@ -65,7 +86,7 @@ public class Extreme extends MemoryBase {
         public static void expDrop(LivingExperienceDropEvent event){
             if (event.getAttackingPlayer() instanceof Player player) {
                 if (MemoryBase.hasMemory(player, "chest_item:extreme_tooltip")) {
-                    float v = 3;
+                    float v = ConfigItem.intValue.get().intValue();
                     float lv = player.getHealth() / player.getMaxHealth();
                     lv *= 100;
                     float now = (int) (lv);

@@ -3,6 +3,8 @@ package com.ytgld.chest_item.items.memory.items;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.memory.MemoryBase;
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.List;
@@ -37,6 +40,30 @@ import java.util.function.Supplier;
  *
  */
 public class TheFox extends MemoryBase {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.BooleanValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("TheFox");
+            intValue =  builder.translation("chest_item.config.TheFox")
+                    .defineInRange("number",1f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.TheFox2")
+                    .define("number2",true);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("TheFox",
+                            "信仰虎威","属性倍率"),
+                    new CIString("TheFox2",
+                            "信仰虎威2","启用实体尺寸")
+            );
+        }
+    }
     public TheFox(Properties properties) {
         super(properties);
     }
@@ -95,14 +122,17 @@ public class TheFox extends MemoryBase {
                 now = 0;
             }
             now /= 100f;
-            float damage = (now * 0.4f  * 2f)- 0.4f;
-            float speed = (now * 0.35f  * 2f)- 0.35f;
-            float attackSpeed = (now * 0.3f  * 2f)- 0.3f;
-            float armor = (now * 0.25f  * 2f)- 0.25f;
-            float heal = (now * 0.2f  * 2f)- 0.2f;
+            float damage = ((now * 0.4f  * 2f)- 0.4f) * ConfigItem.intValue.get().floatValue();
+            float speed = ((now * 0.35f  * 2f)- 0.35f) * ConfigItem.intValue.get().floatValue();
+            float attackSpeed = ((now * 0.3f  * 2f)- 0.3f) * ConfigItem.intValue.get().floatValue();
+            float armor = ((now * 0.25f  * 2f)- 0.25f) * ConfigItem.intValue.get().floatValue();
+            float heal = ((now * 0.2f  * 2f)- 0.2f) * ConfigItem.intValue.get().floatValue();
 
             float size = (now * 0.7f * 2f) - 0.7f;
             if (size > 0) {
+                size = 0;
+            }
+            if (!ConfigItem.intValue2.get()) {
                 size = 0;
             }
 

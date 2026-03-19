@@ -112,7 +112,7 @@ public class EventMain {
         if (player!=null) {
             if (stack.getItem() instanceof Terror terror) {
                 Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player,stack);
-                if (attributes != null) {
+                if (attributes != null && !attributes.isEmpty()) {
                     attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
                     evt.addTooltipLines(Component.empty());
                     if (!(stack.getItem() instanceof ItemBlackShadow)) {

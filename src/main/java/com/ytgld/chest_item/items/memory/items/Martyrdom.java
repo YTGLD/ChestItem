@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.memory.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.TraceableEntity;import net.minecraft.world.ent
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 
@@ -28,6 +31,31 @@ import java.util.List;
  */
 
 public class Martyrdom extends MemoryBase {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Martyrdom");
+            intValue =  builder.translation("chest_item.config.Martyrdom")
+                    .defineInRange("number",3f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.Martyrdom2")
+                    .defineInRange("number2",1.85f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Martyrdom",
+                            "信仰殉爆","额外受到爆炸伤害"),
+                    new CIString("Martyrdom2",
+                            "信仰殉爆2","爆炸增加倍率")
+            );
+        }
+    }
+
     public Martyrdom(Properties properties) {
         super(properties);
     }
@@ -66,7 +94,7 @@ public class Martyrdom extends MemoryBase {
         public static float boom(Entity source ,float radius){
             if (source instanceof TraceableEntity traceableEntity&& traceableEntity.getOwner() instanceof Player player){
                 if (MemoryBase.hasMemory(player,"chest_item:martyrdom_tooltip")){
-                    return radius * 1.85F;
+                    return radius * ConfigItem.intValue2.get().floatValue();
                 }
             }
             return radius;
@@ -86,7 +114,7 @@ public class Martyrdom extends MemoryBase {
             if (event.getEntity() instanceof Player player) {
                 if (event.getSource().is(DamageTypes.EXPLOSION)||event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {
                     if (MemoryBase.hasMemory(player, "chest_item:martyrdom_tooltip")) {
-                        event.setNewDamage(event.getNewDamage() * 3);
+                        event.setNewDamage(event.getNewDamage() * ConfigItem.intValue.get().floatValue());
                     }
                 }
             }
