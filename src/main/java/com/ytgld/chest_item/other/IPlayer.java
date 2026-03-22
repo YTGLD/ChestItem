@@ -2,7 +2,6 @@ package com.ytgld.chest_item.other;
 
 import net.minecraft.world.item.ItemStack;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public interface IPlayer {

@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.other;
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
@@ -8,8 +10,6 @@ import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,11 +19,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 /**
  * 硬木图腾柱
@@ -41,7 +40,26 @@ import java.util.function.Consumer;
  * <p>
  * 受伤有概率反弹伤害
  */
-public class HardwoodTotemPole  extends ItemBase implements ILight {
+public class HardwoodTotemPole extends ItemBase implements ILight {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.IntValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("HardwoodTotemPole");
+            intValue =  builder.translation("chest_item.config.HardwoodTotemPole")
+                    .defineInRange("number",15,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("HardwoodTotemPole",
+                            "硬木图腾柱","触发概率")
+            );
+        }
+    }
     public HardwoodTotemPole(Properties properties) {
         super(properties);
     }
@@ -55,15 +73,15 @@ public class HardwoodTotemPole  extends ItemBase implements ILight {
                         if (stack.is(InitItems.HardwoodTotemPole_)) {
                             if (event.getEntity() instanceof LivingEntity living) {
 
-                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
+                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= ConfigItem.intValue.get().intValue()) {
                                     living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS,200,0));
                                 }
 
-                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
+                                    if (Mth.nextInt(RandomSource.create(), 1, 100) <= ConfigItem.intValue.get().intValue()) {
                                     player.addEffect(new MobEffectInstance(MobEffects.STRENGTH,200,0));
                                 }
 
-                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
+                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= ConfigItem.intValue.get().intValue()) {
                                     player.heal(2);
                                 }
                                 break;
@@ -82,16 +100,16 @@ public class HardwoodTotemPole  extends ItemBase implements ILight {
                         if (stack.is(InitItems.HardwoodTotemPole_)) {
                             if (event.getSource().getEntity() instanceof LivingEntity living) {
 
-                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
+                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= ConfigItem.intValue.get().intValue()) {
                                     player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE,100,0));
                                 }
 
-                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
+                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= ConfigItem.intValue.get().intValue()) {
                                     player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION,100,0));
                                 }
 
 
-                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= 15) {
+                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= ConfigItem.intValue.get().intValue()) {
                                     living.hurt(living.damageSources().playerAttack(player), (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE)*0/33F);
                                 }
                                 break;
@@ -103,13 +121,13 @@ public class HardwoodTotemPole  extends ItemBase implements ILight {
         }
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.1").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.2").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.3").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.4").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.5").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.6").withStyle(ChatFormatting.GOLD));
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.1").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.2").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.3").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.4").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.5").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.hardwood_totem_pole.string.6").withStyle(ChatFormatting.GOLD));
     }
     @Override
     public int color(ItemStack stack) {

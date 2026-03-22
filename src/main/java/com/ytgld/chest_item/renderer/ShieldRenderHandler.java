@@ -161,7 +161,7 @@ public class ShieldRenderHandler {
                 float data = player.getData(AttReg.painShield);
                 if (data > 0) {
                     float damage = event.getNewDamage();
-                    float newData = data - 0.25f - (damage * 0.1f);
+                    float newData = data - 0.5f - (damage * 0.2f);
                     player.setData(AttReg.painShield,(float)newData);
                     float modify = (float) Math.sqrt(value) * 1.25f;
                     if (modify < minDamage) {
@@ -173,7 +173,7 @@ public class ShieldRenderHandler {
                     if (x < 1) {
                         x = 1;
                     }
-                    if (data > x) {
+                    if (data > 4+x) {
                         if (event.getSource().getEntity() instanceof LivingEntity living1) {
                             living1.hurt(living1.damageSources().playerAttack(player),
                                     (float) (newDamage
@@ -198,7 +198,7 @@ public class ShieldRenderHandler {
                     }else {
                         event.setNewDamage(newDamage);
                     }
-                    player.level().playSound(null, player.blockPosition(), Sounds.Heart.value(), SoundSource.PLAYERS, 1, 1);
+                    player.level().playSound(null, player.blockPosition(), Sounds.Heart.value(), SoundSource.PLAYERS, 1.5f, 1);
                     aFloat = 1;
                     aFloatCool = 40;
                 } else {
@@ -212,6 +212,9 @@ public class ShieldRenderHandler {
             AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
             AttributeInstance speed = player.getAttribute(AttReg.painShield_speed);
             if (maxShield != null && speed != null) {
+                if (maxShield.getValue() <= 0) {
+                    return;
+                }
                 Supplier<AttachmentType<Float>> supplier = AttReg.painShield;
                 if (player.getData(supplier) <= maxShield.getValue()) {
                     {

@@ -2,6 +2,8 @@ package com.ytgld.chest_item.items.black.celestial;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -19,17 +21,33 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class Samsara extends TheCelestial{
 
     public Samsara(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.IntValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Samsara");
+            intValue =  builder.translation("chest_item.config.Samsara")
+                    .defineInRange("number",10,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(new CIString("Samsara",
+                    "轮回道体","免伤概率"));
+        }
+    }
     public static void event(LivingIncomingDamageEvent event) {
         if (event.getEntity() instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
@@ -38,7 +56,7 @@ public class Samsara extends TheCelestial{
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.Samsara_)) {
-                            if (Mth.nextInt(RandomSource.create(),0,100) <= 10){
+                            if (Mth.nextInt(RandomSource.create(),0,100) <= ConfigItem.intValue.get().intValue()){
                                 if (event.getSource().getEntity() instanceof LivingEntity living) {
                                     living.hurt(living.damageSources().magic(), (float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE)*0.8));
                                 }
@@ -51,11 +69,10 @@ public class Samsara extends TheCelestial{
             }
         }
     }
-    @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.samsara.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
 
-     }
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.samsara.string.1",ConfigItem.intValue.getAsInt()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+    }
     @Override
     public Identifier img(ItemStack stack) {
         return Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/soul/celestial/samsara.png");

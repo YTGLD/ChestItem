@@ -32,7 +32,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,29 +51,29 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
         return co;
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
+    public void text(ItemStack stack,Consumer<Component> tooltipComponents,TooltipFlag flag){
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (compoundTag != null) {
-            tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF0000))));
-            tooltipAdder.accept(Component.literal(""));
+            tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF0000))));
+            tooltipComponents.accept(Component.literal(""));
             if (!flag.hasShiftDown()) {
-                tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
-                tooltipAdder.accept(Component.translatable("key.keyboard.left.shift").withStyle(ChatFormatting.GOLD));
+                tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+                tooltipComponents.accept(Component.translatable("key.keyboard.left.shift").withStyle(ChatFormatting.GOLD));
             }else {
-                tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.literal(""));
-                tooltipAdder.accept(Component.translatable("item.chest_item.runaway_lining.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.bloody_belt").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.corruption_crystal").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.evil_thoughts_forge_dreams").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.death_omen_stone_monument").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.dry_bones").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipAdder.accept(Component.translatable("chest_item.the_imprint_of_the_soul").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipAdder.accept(Component.translatable("chest_item.the_imprint_of_the_soul.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipAdder.accept(Component.translatable("chest_item.celestial").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.literal(""));
+                tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.bloody_belt").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.corruption_crystal").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.evil_thoughts_forge_dreams").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.death_omen_stone_monument").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.dry_bones").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+                tooltipComponents.accept(Component.translatable("chest_item.the_imprint_of_the_soul").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+                tooltipComponents.accept(Component.translatable("chest_item.the_imprint_of_the_soul.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+                tooltipComponents.accept(Component.translatable("chest_item.celestial").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
             }
         }else {
-            tooltipAdder.accept((Component.translatable("item.chest_item.runaway_lining.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+            tooltipComponents.accept((Component.translatable("item.chest_item.runaway_lining.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
         }
     }
 

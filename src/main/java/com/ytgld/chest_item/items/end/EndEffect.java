@@ -10,14 +10,12 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  *仿生血灵将不计后果的攻击附近生物
@@ -30,13 +28,12 @@ public class EndEffect   extends ItemBase implements SkillList{
     }
 
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.end_effect.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.end_effect.string.1").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.end_effect.string.2").withStyle(ChatFormatting.GOLD));
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.end_effect.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.end_effect.string.1").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.end_effect.string.2").withStyle(ChatFormatting.GOLD));
     }
-
     @Override
     public Map<SkillBase, Identifier> name() {
         Map<SkillBase, Identifier> map = new HashMap<>();

@@ -4,32 +4,23 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
-import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.other.ChestInventory;
-import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Consumer;
 
 public class ShadowMint extends ItemBlackShadow {
 
@@ -57,8 +48,6 @@ public class ShadowMint extends ItemBlackShadow {
                                         player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, shadow_shield + 4);
                                         player.heal(4);
                                     }
-
-                                    living.level().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.CREAKING_AMBIENT, SoundSource.AMBIENT, 1, 1);
                                     player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, shadow_shield - 1);
                                     break;
                                 }
@@ -69,9 +58,8 @@ public class ShadowMint extends ItemBlackShadow {
             }
         }
     }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.shadow_shield, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.ShadowMint_.asItem().getDescriptionId()+"aaaaaa"),
                 10, AttributeModifier.Operation.ADD_VALUE));
@@ -84,14 +72,16 @@ public class ShadowMint extends ItemBlackShadow {
         return modifiers;
     }
 
+
+    @Nullable
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.shadow_mint.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.shadow_mint.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
+        return doAttribute(stack, player);
     }
-    @Override
-    public int color(ItemStack stack) {
-        return Light.ARGB.color(255, 100, 255, 255);
+
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.shadow_mint.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.shadow_mint.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
     }
 }
 

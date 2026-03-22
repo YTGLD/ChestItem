@@ -3,12 +3,9 @@ package com.ytgld.chest_item.items.black;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
-import com.ytgld.chest_item.other.ChestInventory;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -16,11 +13,9 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -40,9 +35,9 @@ public class EvilThoughtsForgeDreams extends ItemBlackShadow {
     public EvilThoughtsForgeDreams(Properties properties) {
         super(properties);
     }
-    @Override
+    
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         float bs = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
         modifiers.put(AttReg.shadow_shield, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.EvilThoughtsForgeDreams_.asItem().getDescriptionId()),
@@ -57,8 +52,18 @@ public class EvilThoughtsForgeDreams extends ItemBlackShadow {
                 0.4, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         return modifiers;
     }
+
+
+    @Nullable
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.evil_thoughts_forge_dreams.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
+        return doAttribute(stack,player);
     }
+
+    @Override
+    public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.evil_thoughts_forge_dreams.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+    }
+
+
 }

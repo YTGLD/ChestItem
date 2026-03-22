@@ -1,11 +1,8 @@
 package com.ytgld.chest_item.tip.an_element.elements;
 
 import com.ytgld.chest_item.Handler;
-import com.ytgld.chest_item.other.ChestInventory;
-import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;

@@ -12,9 +12,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
-
-import java.util.function.Consumer;
 
 public class EyeBook  extends ItemBase implements IGold {
     public EyeBook(Properties properties) {
@@ -34,10 +31,10 @@ public class EyeBook  extends ItemBase implements IGold {
         }
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.eye_book.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.eye_book.string.1").withStyle(ChatFormatting.GOLD));
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.eye_book.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.eye_book.string.1").withStyle(ChatFormatting.GOLD));
     }
 
     @Override

@@ -3,12 +3,11 @@ package com.ytgld.chest_item.items.black;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
-import com.ytgld.chest_item.other.ChestInventory;
-import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -21,20 +20,43 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class DryBones extends ItemBlackShadow {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("DryBones");
+            intValue =  builder.translation("chest_item.config.DryBones")
+                    .defineInRange("number",0.2f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.DryBones2")
+                    .defineInRange("number2",0.2f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("DryBones",
+                            "腐枯尊骨","伤害和攻速"),
+                    new CIString("DryBones2",
+                            "腐枯尊骨2","护甲和速度")
+            );
+        }
+    }
 
     public DryBones(Properties properties) {
         super(properties);
     }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         float hyperplasia = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
         float shadow_shield = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
         float a =0;
@@ -50,15 +72,15 @@ public class DryBones extends ItemBlackShadow {
 
             if (hyperplasia >= hV){
                 if (hyperplasia!=0 && hV != 0) {
-                    a = 0.2f;
-                    s = 0.2f;
+                    a = ConfigItem.intValue2.get().floatValue();
+                    s = ConfigItem.intValue2.get().floatValue();
                 }
             }
 
             if (shadow_shield >= vS){
                 if (shadow_shield!=0 && vS != 0) {
-                    d = 0.2f;
-                    f = 0.2f;
+                    d = ConfigItem.intValue.get().floatValue();
+                    f = ConfigItem.intValue.get().floatValue();
                 }
             }
         }
@@ -79,14 +101,15 @@ public class DryBones extends ItemBlackShadow {
         return modifiers;
     }
 
+
+    @Nullable
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.dry_bones.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.dry_bones.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
+        return doAttribute(stack,player);
     }
 
-    @Override
-    public int color(ItemStack stack) {
-        return Light.ARGB.color(255, 255, 40, 255);
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.dry_bones.string.1",ConfigItem.intValue.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.dry_bones.string.2",ConfigItem.intValue2.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
     }
 }

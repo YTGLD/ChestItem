@@ -19,7 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -52,10 +51,10 @@ public class OwnerLead extends ItemBase {
         return modifiers;
     }
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         CompoundTag compoundTag =stack.get(DataReg.tag);
         if (compoundTag!=null) {
-            tooltipAdder.accept(Component.literal(compoundTag.getStringOr(name,"null")).append(Component.literal("的礼物！").withStyle(ChatFormatting.GOLD)));
+            tooltipComponents.accept(Component.literal(compoundTag.getStringOr(name,"null")).append(Component.literal("的礼物！").withStyle(ChatFormatting.GOLD)));
         }
     }
 }

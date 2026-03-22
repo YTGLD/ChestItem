@@ -6,7 +6,6 @@ import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
-import com.ytgld.chest_item.items.SkillItem;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.ChatFormatting;
@@ -15,18 +14,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 
-import java.util.function.Consumer;
-
-public class TheEndIsComing  extends ItemBase implements ILight , SkillItem {
+public class TheEndIsComing extends ItemBase implements ILight {
     public TheEndIsComing(Properties properties) {
         super(properties);
     }
-    @Override
-    public boolean isWhirlpool() {
-        return true;
-    }
+
     public static final String chestHasEndComing= "ChestHasEndComing";
     public static void event( Player player) {
         ChestInventory chestInventory = Handler.getItem(player);
@@ -56,10 +49,15 @@ public class TheEndIsComing  extends ItemBase implements ILight , SkillItem {
         }
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_end_is_coming.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_end_is_coming.string.1").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_end_is_coming.string.2").withStyle(ChatFormatting.GOLD));
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_end_is_coming.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_end_is_coming.string.1").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_end_is_coming.string.2").withStyle(ChatFormatting.GOLD));
+    }
+
+    @Override
+    public boolean isWhirlpool() {
+        return true;
     }
 }

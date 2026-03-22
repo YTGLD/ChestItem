@@ -4,11 +4,13 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
-import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -20,20 +22,18 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import oshi.driver.mac.net.NetStat;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 /**
  * 亡者号令
@@ -59,7 +59,30 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
     public TheOrderOfTheUndead(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.IntValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("TheOrderOfTheUndead");
+            intValue =  builder.translation("chest_item.config.TheOrderOfTheUndead")
+                    .defineInRange("number",1.3f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.TheOrderOfTheUndead2")
+                    .defineInRange("number2",400,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("TheOrderOfTheUndead",
+                            "亡者号令","伤害（物理）"),
+                    new CIString("TheOrderOfTheUndead2",
+                            "亡者号令2","饥饿速度")
+            );
+        }
+    }
     public static void notMagicDamage(LivingIncomingDamageEvent event){
         if (event.getSource().getEntity() instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
@@ -69,7 +92,7 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.TheOrderOfTheUndead_)) {
                             if (!event.getSource().is(DamageTypes.MAGIC)) {
-                                event.setAmount(event.getAmount() * 1.3f);
+                                event.setAmount(event.getAmount() * ConfigItem.intValue.get().floatValue());
                                 break;
                             }
                         }
@@ -159,7 +182,7 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
                         if (player.getRemainingFireTicks() > 0) {
                             player.setRemainingFireTicks(100);
                         }
-                        if (player.tickCount % 400 == 1) {
+                        if (player.tickCount % ConfigItem.intValue2.get().intValue() == 1) {
                             player.getFoodData().eat(-1, -0.5f);
                         }
                         break;
@@ -168,9 +191,8 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
             }
         }
     }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         float a = 20 - player.getFoodData().getFoodLevel();
 
@@ -185,18 +207,26 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
         return modifiers;
     }
 
+
+    @Nullable
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.9").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
+        return doAttribute(stack, player);
+    }
+
+    @Override
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+    
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.3",100 *ConfigItem.intValue.get().floatValue() - 100f).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.9").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_order_of_the_undead.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
     }
 
     @Override
@@ -206,6 +236,6 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
 
     @Override
     public int soulColor() {
-        return 0XFF6A5ACD;
+        return Light.ARGB.color(255,255,0,255);
     }
 }

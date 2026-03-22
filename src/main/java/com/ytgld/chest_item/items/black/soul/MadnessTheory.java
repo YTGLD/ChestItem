@@ -20,7 +20,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -28,7 +27,6 @@ import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  *
@@ -151,15 +149,16 @@ public class MadnessTheory extends TheImprintOfTheSoul {
         }
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.madness_theory.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.madness_theory.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.madness_theory.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.madness_theory.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.madness_theory.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.madness_theory.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.madness_theory.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+    
+        tooltipComponents.accept(Component.translatable("item.chest_item.madness_theory.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.translatable("item.chest_item.madness_theory.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.madness_theory.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.madness_theory.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.madness_theory.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.translatable("item.chest_item.madness_theory.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.madness_theory.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
     }
     @Override
     public Identifier Identifier() {
@@ -168,6 +167,6 @@ public class MadnessTheory extends TheImprintOfTheSoul {
 
     @Override
     public int soulColor() {
-        return Light.ARGB.color(255,150 ,100 ,255);
+        return Light.ARGB.color(255,200 ,100 ,255);
     }
 }

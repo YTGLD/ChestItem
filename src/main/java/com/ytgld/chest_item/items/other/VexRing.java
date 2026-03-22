@@ -6,10 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-
-import java.util.function.Consumer;
 
 public class VexRing extends ItemBase {
 
@@ -21,11 +18,11 @@ public class VexRing extends ItemBase {
 
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.vex_ring.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.vex_ring.string.1").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.vex_ring.string.1").withStyle(ChatFormatting.GOLD));
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.vex_ring.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.vex_ring.string.1").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.vex_ring.string.1").withStyle(ChatFormatting.GOLD));
     }
 
     @Override

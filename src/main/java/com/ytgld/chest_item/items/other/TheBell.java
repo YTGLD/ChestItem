@@ -1,10 +1,11 @@
 package com.ytgld.chest_item.items.other;
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
-import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -14,12 +15,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  *末路震钟
@@ -38,6 +38,24 @@ import java.util.function.Consumer;
 
  */
 public class TheBell extends ItemBase {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.IntValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("TheBell");
+            intValue = builder.translation("chest_item.config.TheBell")
+                    .defineInRange("time",300,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of( new CIString("TheBell",
+                    "末路震钟","冷却时间"));
+        }
+
+    }
     public TheBell(Properties properties) {
         super(properties);
     }
@@ -53,9 +71,8 @@ public class TheBell extends ItemBase {
                         List<LivingEntity> livingEntities = player.level().getEntitiesOfClass(LivingEntity.class, new AABB(
                                 playerPos.x - range, playerPos.y - range, playerPos.z - range,
                                 playerPos.x + range, playerPos.y + range, playerPos.z + range));
-                        for (int i = 0; i < 5; i++) {
-                            player.level().playSound(null, player.blockPosition(), SoundEvents.BELL_BLOCK, SoundSource.AMBIENT, 1, 1);
-                        }
+                        player.level().playSound(null, player.blockPosition(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.AMBIENT, 1, 1);
+                        player.level().playSound(null, player.blockPosition(), SoundEvents.BELL_BLOCK, SoundSource.AMBIENT, 1, 1);
                         for (LivingEntity living : livingEntities) {
                             if (!living.is(player)) {
                                 float damage = (float) (player.getAttributeValue(Attributes.MAX_HEALTH)
@@ -65,24 +82,16 @@ public class TheBell extends ItemBase {
                                 living.setDeltaMovement(0, 1, 0);
                             }
                         }
-                        player.getCooldowns().addCooldown(InitItems.TheBell_.asItem().getDefaultInstance(), 300 * 20);
+                        player.getCooldowns().addCooldown(InitItems.TheBell_.asItem().getDefaultInstance(), ConfigItem.intValue.getAsInt() * 20);
                     }
                 }
             }
         }
     }
-
-    @Override
-    public int color(ItemStack stack) {
-        return Light.ARGB.color(255,120,130,150);
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_bell.string.1").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_bell.string.2").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_bell.string.3").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.the_bell.string.4",ConfigItem.intValue.getAsInt()).withStyle(ChatFormatting.GOLD));
     }
-
-    @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_bell.string.1").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_bell.string.2").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_bell.string.3").withStyle(ChatFormatting.GOLD));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_bell.string.4").withStyle(ChatFormatting.GOLD));
-    }
-
 }

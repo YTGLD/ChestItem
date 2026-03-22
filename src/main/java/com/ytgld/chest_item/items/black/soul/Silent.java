@@ -2,9 +2,10 @@ package com.ytgld.chest_item.items.black.soul;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -18,21 +19,42 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class Silent extends TheImprintOfTheSoul {
     public Silent(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Silent");
+            intValue =  builder.translation("chest_item.config.Silent")
+                    .defineInRange("number",0.75f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.Silent2")
+                    .defineInRange("number2",1.5f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Silent",
+                            "静止沉默","抗性倍率"),
+                    new CIString("Silent2",
+                            "静止沉默2","治疗")
+            );
+        }
+    }
     public static void hurtSilent_(LivingIncomingDamageEvent event){
         if (event.getEntity() instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);
@@ -42,7 +64,7 @@ public class Silent extends TheImprintOfTheSoul {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.Silent_)) {
                             if (player.getDeltaMovement().length() <= 0.1){
-                                event.setAmount(event.getAmount() * 0.75f);
+                                event.setAmount(event.getAmount() * ConfigItem.intValue.get().floatValue());
                                 break;
                             }
                         }
@@ -60,7 +82,7 @@ public class Silent extends TheImprintOfTheSoul {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.Silent_)) {
                             if (player.getDeltaMovement().length() <= 0.1){
-                                event.setAmount(event.getAmount() * 1.5f);
+                                event.setAmount(event.getAmount() * ConfigItem.intValue2.get().floatValue());
                                 break;
                             }
                         }
@@ -70,16 +92,16 @@ public class Silent extends TheImprintOfTheSoul {
         }
     }
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
         if (stack.get(DataReg.tag)==null){
-            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.literal(""));
-            tooltipAdder.accept(Component.translatable("item.chest_item.silent.string.3").withStyle(ChatFormatting.GOLD));
+            tooltipComponents.accept(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.literal(""));
+            tooltipComponents.accept(Component.translatable("item.chest_item.silent.string.3").withStyle(ChatFormatting.GOLD));
 
         }else {
-            tooltipAdder.accept(Component.translatable("item.chest_item.silent.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.silent.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.silent.string.1",100f * ConfigItem.intValue.get().floatValue() -100f).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.silent.string.2",100 - 100f * ConfigItem.intValue.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         }
     }
 

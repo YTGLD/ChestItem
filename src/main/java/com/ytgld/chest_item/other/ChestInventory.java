@@ -3,7 +3,6 @@ package com.ytgld.chest_item.other;
 import com.ytgld.chest_item.items.ItemBase;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
 import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.ContainerUser;

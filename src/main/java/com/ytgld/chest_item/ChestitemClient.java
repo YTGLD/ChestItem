@@ -1,6 +1,7 @@
 package com.ytgld.chest_item;
 
 import com.ytgld.chest_item.event.Keys;
+import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
@@ -9,12 +10,9 @@ import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
 import com.ytgld.chest_item.renderer.particle.FireBlock;
-import com.ytgld.chest_item.renderer.particle.IParticleEngine;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.ClientAvatarEntity;
-import net.minecraft.client.particle.ParticleGroup;
-import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.player.Player;
@@ -30,15 +28,17 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-import java.util.Map;
-import java.util.Queue;
-
 @Mod(value = Chestitem.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = Chestitem.MODID, value = Dist.CLIENT)
 public class ChestitemClient{
     public ChestitemClient(ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
+    @SubscribeEvent
+    public static void ItemTooltipEvent(ClientTickEvent.Pre event){
+        EventMain.time++;
+    }
+
     @SubscribeEvent
     public static void registerFactories(ViewportEvent.RenderFog event) {
         if (event.getCamera().entity() instanceof Player player){

@@ -5,7 +5,6 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.renderer.light.Light;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -14,10 +13,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-
-import java.util.function.Consumer;
 
 /**
  * 互补（条约）
@@ -50,21 +46,20 @@ public class Complementary extends TheImprintOfTheSoul {
             }
         }
     }
-    @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.complementary.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.complementary.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.complementary.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.complementary.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
 
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.complementary.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.complementary.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.complementary.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.complementary.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
 
     }
+
     @Override
     public boolean canRemove(ItemStack stack) {
         return true;
     }
-
     @Override
     public Identifier Identifier() {
         return Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/soul/complementary.png");
@@ -72,6 +67,6 @@ public class Complementary extends TheImprintOfTheSoul {
 
     @Override
     public int soulColor() {
-        return Light.ARGB.color(255,100,100,100);
+        return Light.ARGB.color(255,200,100,200);
     }
 }

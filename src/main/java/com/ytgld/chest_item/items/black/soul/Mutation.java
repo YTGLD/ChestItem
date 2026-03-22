@@ -4,9 +4,10 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
@@ -28,14 +29,13 @@ import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  *
@@ -63,27 +63,29 @@ public class Mutation extends TheImprintOfTheSoul {
     public Mutation(Properties properties) {
         super(properties);
     }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
-        float armor = 0;
-        if (player.getItemBySlot(EquipmentSlot.HEAD).isEmpty()){
-            armor += 4;
-        }
-        if (player.getItemBySlot(EquipmentSlot.CHEST).isEmpty()){
-            armor += 4;
-        }
-        if (player.getItemBySlot(EquipmentSlot.LEGS).isEmpty()){
-            armor += 4;
-        }
-        if (player.getItemBySlot(EquipmentSlot.FEET).isEmpty()){
-            armor += 4;
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Mutation");
+            intValue =  builder.translation("chest_item.config.Mutation")
+                    .defineInRange("number",0.1f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.Mutation2")
+                    .defineInRange("number2",0.3f,0,Integer.MAX_VALUE);
+            builder.pop();
         }
 
-        modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.Mutation_.asItem().getDescriptionId()),
-                armor, AttributeModifier.Operation.ADD_VALUE));
-        return modifiers;
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Mutation",
+                            "异变","抗性"),
+                    new CIString("Mutation2",
+                            "异变2","抵御的相关伤害")
+            );
+        }
     }
     public static void  attrib(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
@@ -105,6 +107,8 @@ public class Mutation extends TheImprintOfTheSoul {
                         if (player.getItemBySlot(EquipmentSlot.FEET).getMaxDamage() != 0) {
                             player.getItemBySlot(EquipmentSlot.FEET).hurtAndBreak(1,player,EquipmentSlot.FEET);
                         }
+
+
                         break;
                     }
                 }
@@ -142,7 +146,7 @@ public class Mutation extends TheImprintOfTheSoul {
                             event.setAmount(event.getAmount()*(1+DAMAGE+magic));
 
                             if (notEq(player)) {
-                                event.setAmount(event.getAmount()*0.9f);
+                                event.setAmount(event.getAmount() * (1 - ConfigItem.intValue.get().intValue()));
                             }
                             if (event.getSource().is(DamageTypes.IN_FIRE)||
                                     event.getSource().is(DamageTypes.ON_FIRE)||
@@ -150,7 +154,7 @@ public class Mutation extends TheImprintOfTheSoul {
                                     event.getSource().is(DamageTypes.LAVA)||
                                     event.getSource().is(DamageTypes.EXPLOSION)||
                                     event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {
-                                event.setAmount(event.getAmount()*0.7f);
+                                event.setAmount(event.getAmount()*(1 - ConfigItem.intValue2.get().floatValue()));
                             }
                             break;
                         }
@@ -160,6 +164,27 @@ public class Mutation extends TheImprintOfTheSoul {
         }
     }
 
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+        float armor = 0;
+        if (player.getItemBySlot(EquipmentSlot.HEAD).isEmpty()){
+            armor += 4;
+        }
+        if (player.getItemBySlot(EquipmentSlot.CHEST).isEmpty()){
+            armor += 4;
+        }
+        if (player.getItemBySlot(EquipmentSlot.LEGS).isEmpty()){
+            armor += 4;
+        }
+        if (player.getItemBySlot(EquipmentSlot.FEET).isEmpty()){
+            armor += 4;
+        }
+
+        modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.Mutation_.asItem().getDescriptionId()),
+                armor, AttributeModifier.Operation.ADD_VALUE));
+        return modifiers;
+    }
 
     public static boolean notEq(Player player){
         if (player.getItemBySlot(EquipmentSlot.HEAD).isEmpty()){
@@ -173,25 +198,25 @@ public class Mutation extends TheImprintOfTheSoul {
         }
         return false;
     }
-
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+    
         if (stack.get(DataReg.tag)==null){
-            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.literal(""));
-            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.9").withStyle(ChatFormatting.GOLD));
+            tooltipComponents.accept(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.literal(""));
+            tooltipComponents.accept(Component.translatable("item.chest_item.mutation.string.9").withStyle(ChatFormatting.GOLD));
 
         }else {
-            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
-            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.literal(""));
-            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
-            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.mutation.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.mutation.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+            tooltipComponents.accept(Component.translatable("item.chest_item.mutation.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.mutation.string.3" , 100 *  ConfigItem.intValue.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.mutation.string.4" , 100 *  ConfigItem.intValue2.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.literal(""));
+            tooltipComponents.accept(Component.translatable("item.chest_item.mutation.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
+            tooltipComponents.accept(Component.translatable("item.chest_item.mutation.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.mutation.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.mutation.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
         }
     }
 
@@ -258,6 +283,11 @@ public class Mutation extends TheImprintOfTheSoul {
             }
         }
     }
+    @Nullable
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
+        return doAttribute(stack, player);
+    }
     @Override
     public Identifier Identifier() {
         return Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/soul/mutation.png");
@@ -265,6 +295,6 @@ public class Mutation extends TheImprintOfTheSoul {
 
     @Override
     public int soulColor() {
-        return Light.ARGB.color(255,100,255,100);
+        return Light.ARGB.color(255,0,255,255);
     }
 }

@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.other;
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -12,13 +14,35 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class Knife extends ItemBase {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue doubleValue ;
+        public static ModConfigSpec.DoubleValue doubleValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Knife");
+            doubleValue =  builder.translation("chest_item.config.Knife")
+                    .defineInRange("number_max",1.2f,0,Integer.MAX_VALUE);
+            doubleValue2 =  builder.translation("chest_item.config.Knife2")
+                    .defineInRange("number_min",0.9f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of( new CIString("Knife",
+                            "掩埋刀锋","最大伤害"),
+                    new CIString("Knife2",
+                            "掩埋刀锋2","最小伤害"));
+        }
+
+    }
     public Knife(Properties properties) {
         super(properties);
     }
@@ -31,7 +55,7 @@ public class Knife extends ItemBase {
                     for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.is(InitItems.Knife_)) {
-                            event.setAmount(event.getAmount()*Mth.nextFloat(RandomSource.create(),0.9f,1.2f));
+                            event.setAmount(event.getAmount()*Mth.nextFloat(RandomSource.create(), (float) ConfigItem.doubleValue2.getAsDouble(), (float) ConfigItem.doubleValue.getAsDouble()));
                         }
                     }
                 }
@@ -39,10 +63,10 @@ public class Knife extends ItemBase {
         }
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.knife.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.knife.string.1").withStyle(ChatFormatting.GOLD));
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.knife.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.knife.string.1").withStyle(ChatFormatting.GOLD));
 
     }
 

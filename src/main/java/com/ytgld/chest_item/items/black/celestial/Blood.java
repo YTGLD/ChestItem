@@ -5,7 +5,6 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.SkillItem;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -21,13 +20,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 import javax.annotation.Nullable;
-import java.util.function.Consumer;
 
-public class Blood extends TheCelestial implements SkillItem {
+public class Blood extends TheCelestial{
     public Blood(Properties properties) {
         super(properties);
     }
@@ -47,7 +44,7 @@ public class Blood extends TheCelestial implements SkillItem {
                             stack.set(DataReg.tag,new CompoundTag());
                         }
                         if (compoundTag!=null) {
-                            if (!player.getCooldowns().isOnCooldown(stack)) {
+                            if (!player.getCooldowns().isOnCooldown(stack.getItem().getDefaultInstance())) {
                                 compoundTag.putInt(time, maxTime);
                                 player.setHealth(1);
                                 player.addEffect(new MobEffectInstance(Effects.Rage,maxTime,0));
@@ -65,7 +62,7 @@ public class Blood extends TheCelestial implements SkillItem {
                                         player.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(),maxTime*5, 4,false,false));
                                     }
                                 }
-                                player.getCooldowns().addCooldown(stack, 300);
+                                player.getCooldowns().addCooldown(stack.getItem().getDefaultInstance(), 300);
                                 break;
                             }
                         }
@@ -87,7 +84,7 @@ public class Blood extends TheCelestial implements SkillItem {
                                 stack.set(DataReg.tag, new CompoundTag());
                             }
                             if (compoundTag != null) {
-                                if (compoundTag.getIntOr(time, 0) > 0) {
+                                if (compoundTag.getIntOr(time,0) > 0) {
                                     event.setNewDamage(event.getNewDamage()*1.3f);
                                     player.heal(event.getNewDamage() * 0.2f);
                                     compoundTag.putInt(time,compoundTag.getIntOr(time,0)+20);
@@ -113,7 +110,7 @@ public class Blood extends TheCelestial implements SkillItem {
                                 stack.set(DataReg.tag, new CompoundTag());
                             }
                             if (compoundTag != null) {
-                                if (compoundTag.getIntOr(time, 0) > 0) {
+                                if (compoundTag.getIntOr(time,0) > 0) {
                                     compoundTag.putInt(time,compoundTag.getIntOr(time,0)-1);
                                     break;
                                 }
@@ -124,12 +121,12 @@ public class Blood extends TheCelestial implements SkillItem {
             }
         }
     }
-    @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.blood.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.blood.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.blood.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.blood.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+       tooltipComponents.accept(Component.translatable("item.chest_item.blood.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+       tooltipComponents.accept(Component.translatable("item.chest_item.blood.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+       tooltipComponents.accept(Component.translatable("item.chest_item.blood.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+       tooltipComponents.accept(Component.translatable("item.chest_item.blood.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
     }
     @Override
     public Identifier img(ItemStack stack) {

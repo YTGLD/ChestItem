@@ -1,12 +1,10 @@
 package com.ytgld.chest_item.tip.an_element.extend;
 
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;

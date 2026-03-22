@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
@@ -25,21 +27,18 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
-import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Consumer;
 
 
 /**
@@ -68,6 +67,30 @@ public class ChaosSeven extends TheChaos{
         super(properties);
     }
 
+    @Override
+    public Identifier Identifier() {
+        return Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/soul/chaos_seven.png");
+    }
+
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("ChaosSeven");
+            intValue =  builder.translation("chest_item.config.ChaosSeven")
+                    .defineInRange("number",1f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("ChaosSeven",
+                            "混沌七子","属性倍率")
+            );
+        }
+    }
     @Override
     public boolean isChaos() {
         return true;
@@ -129,18 +152,19 @@ public class ChaosSeven extends TheChaos{
                     int now = (int) (100 - (lv));
                     if (compoundTag != null) {
                         compoundTag.putInt(uDead, now);
-                        if (compoundTag.getIntOr(uDead, 0) <= 0) {
+                        if (compoundTag.getIntOr(uDead,0) <= 0) {
                             compoundTag.putInt(uDead, 0);
                         }
                     }
+
                     break;
                 }
             }
         }
     }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(Identifier.parse("aaa"+Chestitem.MODID +
                 InitItems.ChaosSeven_.asItem().getDescriptionId()),
@@ -168,12 +192,12 @@ public class ChaosSeven extends TheChaos{
         if (stack.is(this)) {
             CompoundTag compoundTag = stack.get(DataReg.tag);
             if (compoundTag != null) {
-                int lvl = compoundTag.getIntOr(uDead, 0);
-                float heal = 0.85f / 333f * lvl;
-                float speed = 0.8f / 333f * lvl;
-                float damage = 0.75f / 333f * lvl;
-                float attSpeed = 0.5f / 333f * lvl;
-                float armor = 0.35f / 333f * lvl;
+                int lvl = compoundTag.getIntOr(uDead,0);
+                float heal = 0.85f / 333f * lvl * ConfigItem.intValue.get().floatValue();
+                float speed = 0.8f / 333f * lvl * ConfigItem.intValue.get().floatValue();
+                float damage = 0.75f / 333f * lvl * ConfigItem.intValue.get().floatValue();
+                float attSpeed = 0.5f / 333f * lvl * ConfigItem.intValue.get().floatValue();
+                float armor = 0.35f / 333f * lvl * ConfigItem.intValue.get().floatValue();
 
 
                 modifiers.put(AttReg.heal, new AttributeModifier(Identifier.parse(Chestitem.MODID +
@@ -197,35 +221,35 @@ public class ChaosSeven extends TheChaos{
     }
 
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
         if (stack.get(DataReg.tag)==null){
-            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.literal(""));
+            tooltipComponents.accept(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.literal(""));
             if (flag.hasShiftDown()) {
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.1").withStyle(ChatFormatting.GRAY));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.2").withStyle(ChatFormatting.GRAY));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.3").withStyle(ChatFormatting.GRAY));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.4").withStyle(ChatFormatting.GRAY));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.5").withStyle(ChatFormatting.GRAY));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.6").withStyle(ChatFormatting.GRAY));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.7").withStyle(ChatFormatting.GRAY));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.8").withStyle(ChatFormatting.GRAY));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.9").withStyle(ChatFormatting.GRAY));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.10").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.1").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.2").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.3").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.4").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.5").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.6").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.7").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.8").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.9").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.10").withStyle(ChatFormatting.GRAY));
             }else  {
-                tooltipAdder.accept(Component.translatable("options.key.hold").append(Component.translatable("key.keyboard.left.shift")).withStyle(ChatFormatting.GOLD));
+                tooltipComponents.accept(Component.translatable("options.key.hold").append(Component.translatable("key.keyboard.left.shift")).withStyle(ChatFormatting.GOLD));
             }
-            tooltipAdder.accept(Component.literal(""));
-            tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.11").withStyle(ChatFormatting.GOLD));
+            tooltipComponents.accept(Component.literal(""));
+            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.11").withStyle(ChatFormatting.GOLD));
         }else {
-            tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.12").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.13").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.14").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.15").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.16").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.17").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("item.chest_item.chaos_seven.string.18").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.12").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.13").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.14").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.15").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.16").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.17").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_seven.string.18").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         }
     }
 
@@ -289,16 +313,13 @@ public class ChaosSeven extends TheChaos{
             }
         }
     }
-
+    @Nullable
     @Override
-    public boolean canRemove(ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    public Identifier Identifier() {
-        return Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/soul/chaos_seven.png");
-
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
+        if (stack.get(DataReg.tag)==null){
+            return HashMultimap.create();
+        }
+        return doAttribute(stack, player);
     }
 
     @Override

@@ -7,7 +7,6 @@ import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.RendererFarm;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
-import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.tip.an_element.extend.BlackSkill;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
 import net.minecraft.client.gui.Font;

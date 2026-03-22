@@ -3,12 +3,10 @@ package com.ytgld.chest_item.items.black;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
-import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
@@ -23,9 +21,8 @@ public class DeathOmenStoneMonument extends ItemBlackShadow  implements ILight {
     public DeathOmenStoneMonument(Properties properties) {
         super(properties);
     }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(AttReg.shadow_shield_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.DeathOmenStoneMonument_.asItem().getDescriptionId()),
@@ -47,6 +44,11 @@ public class DeathOmenStoneMonument extends ItemBlackShadow  implements ILight {
                 InitItems.DeathOmenStoneMonument_.asItem().getDescriptionId()),
                 -0.9, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         return modifiers;
+    }
+    @Nullable
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player, ItemStack stack) {
+        return doAttribute(stack, player);
     }
     @Override
     public int color(ItemStack stack) {

@@ -1,7 +1,6 @@
 package com.ytgld.chest_item.tip.an_element.elements;
 
 import com.ytgld.chest_item.Handler;
-import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.extend.BlackSkill;
@@ -10,7 +9,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 public class DoomsdayJudgment extends SkillBase implements BlackSkill {
     public DoomsdayJudgment(){

@@ -5,7 +5,10 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.UnstableSpheres;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
-import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.IGUILightList;
+import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -25,7 +28,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
@@ -127,13 +129,13 @@ public class BloodyBelt extends ItemBlackShadow implements IGUILightList , Skill
         }
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.bloody_belt.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.bloody_belt.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.bloody_belt.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.bloody_belt.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+    public void text(ItemStack stack,Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.bloody_belt.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80FF5ACD))));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.bloody_belt.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.bloody_belt.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.bloody_belt.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
     }
 
     @Override

@@ -1,13 +1,16 @@
 package com.ytgld.chest_item.items.black.chaos_item;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
+import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -25,12 +28,13 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 /**
  *战争缔造者
@@ -66,14 +70,32 @@ import java.util.function.Consumer;
  * <p>
  * 	+10% 伤害
  */
-public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos {
+public class Warmaker extends ItemBlackShadow implements ITheChaos {
 
     public static final String healthStringFloat ="healthStringFloat";
     public static final String killIntString ="killIntString";
     public static final String notKillTimeInt ="notKillTimeInt";
     public static final int notKillTime =10*60;
     public static final String applyKillTimeBoolean ="applyKillTimeBoolean";
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Warmaker");
+            intValue =  builder.translation("chest_item.config.Warmaker")
+                    .defineInRange("number",1F,1,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Warmaker",
+                            "战争缔造者","最低生命值")
+            );
+        }
+    }
     public Warmaker(Properties properties) {
         super(properties);
     }
@@ -95,22 +117,22 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos
                         CompoundTag tag = stack.get(DataReg.tag);
                         //若超过10分钟未能击杀生物，则每秒强制扣除4点生命值，直到濒死
                         if (tag != null) {
-                            if (!tag.getBooleanOr(applyKillTimeBoolean, false)) {
+                            if (!tag.getBooleanOr(applyKillTimeBoolean,false)) {
                                 tag.putInt(notKillTimeInt,notKillTime);
                                 tag.putBoolean(applyKillTimeBoolean,true);
                             }
-                            if (tag.getIntOr(notKillTimeInt, 0) > 0) {
-                                tag.putInt(notKillTimeInt, tag.getIntOr(notKillTimeInt, 0) - 1);
+                            if (tag.getIntOr(notKillTimeInt,0) > 0) {
+                                tag.putInt(notKillTimeInt, tag.getIntOr(notKillTimeInt,0) - 1);
                                 break;
                             }else {
 
                                 float damage = getCurseDamage(stack);
-                                if (player.getHealth() > 1) {
+                                if (player.getHealth() > ConfigItem.intValue.get().floatValue()) {
                                     if (player.getHealth() > damage) {
                                         player.setHealth(player.getHealth() - damage);
                                         break;
                                     }else {
-                                        player.setHealth(1);
+                                        player.setHealth(ConfigItem.intValue.get().floatValue());
                                     }
                                 }
                             }
@@ -211,34 +233,41 @@ public class Warmaker extends ItemBlackShadow implements IBlackLight , ITheChaos
         return notKillTime;
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (compoundTag != null) {
             int s = compoundTag.getIntOr(notKillTimeInt,0);
-            tooltipAdder.accept((Component.translatable("item.chest_item.warmaker.string.0_1",s)).withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,255,0,0))));
-            tooltipAdder.accept(Component.literal(""));
-            if (!flag.hasShiftDown()) {
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
-            }else {
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.5_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.literal(""));
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.literal(""));
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.warmaker.string.8_1",getCurseDamage(stack)).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            }
+            tooltipComponents.accept((Component.translatable("item.chest_item.warmaker.string.0_1",s)).withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,255,0,0))));
+            tooltipComponents.accept(Component.literal(""));
+        }
+        if (!flag.hasShiftDown()) {
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
         }else {
-            tooltipAdder.accept((Component.translatable("item.chest_item.warmaker.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.5_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.literal(""));
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.literal(""));
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.warmaker.string.8_1",getCurseDamage(stack)).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         }
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+        return attributeModifierMultimap(stack);
+    }
+
+    @Override
+    public @Nullable Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player, ItemStack stack) {
+        return attributeModifierMultimap(stack);
+    }
+
+    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(ItemStack stack) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.chaos_armor, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.Warmaker_.asItem().getDescriptionId()),
                 0.3, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));

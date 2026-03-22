@@ -23,6 +23,7 @@ import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
+import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -234,6 +235,15 @@ public class InitItems {
                 .icon(Items.CHEST::getDefaultInstance)
                 .displayItems((parameters, output) -> {
                     output.accept(InitItems.Test_);
+                    output.accept(MemoryItems.Bluster_);
+                    output.accept(MemoryItems.Contradiction_);
+                    output.accept(MemoryItems.Extreme_);
+                    output.accept(MemoryItems.ForeverCurtain_);
+                    output.accept(MemoryItems.Martyrdom_);
+                    output.accept(MemoryItems.Peace_);
+                    output.accept(MemoryItems.War_);
+                    output.accept(MemoryItems.TheFox_);
+
 
                     output.accept(InitItems.FissionEmblem_);
 

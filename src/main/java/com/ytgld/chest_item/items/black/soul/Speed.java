@@ -4,13 +4,15 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.Meat;
-import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.items.black.TheSoul;
-import com.ytgld.chest_item.other.*;
+import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -20,28 +22,48 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
-public class Speed  extends TheImprintOfTheSoul {
+public class Speed extends TheSoul {
     public Speed(Properties properties) {
         super(properties);
     }
-    
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Speed");
+            intValue =  builder.translation("chest_item.config.Speed")
+                    .defineInRange("number",0.3f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.Speed2")
+                    .defineInRange("number2",0.3f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("Speed",
+                            "极限反应论","速度"),
+                    new CIString("Speed2",
+                            "极限反应论2","跳跃力量")
+            );
+        }
+    }
     @Override
     public Identifier Identifier() {
         return Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/soul/speed.png");
@@ -50,21 +72,6 @@ public class Speed  extends TheImprintOfTheSoul {
         ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
         give(chestInventory,player);
-    }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
-        modifiers.put(Attributes.JUMP_STRENGTH, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.Speed_.asItem().getDescriptionId()),
-                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-        modifiers.put(AttReg.more_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.Speed_.asItem().getDescriptionId()),
-                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-        modifiers.put(Attributes.SAFE_FALL_DISTANCE, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.Speed_.asItem().getDescriptionId()),
-                0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-
-        return modifiers;
     }
     public static void give(ChestInventory chestInventory,Player player){
         Set<Item> set = new HashSet<>();
@@ -109,18 +116,42 @@ public class Speed  extends TheImprintOfTheSoul {
             }
         }
     }
+    @Nullable
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
         if (stack.get(DataReg.tag)==null){
-            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipAdder.accept(Component.literal(""));
-            tooltipAdder.accept(Component.translatable("item.chest_item.speed.string.2").withStyle(ChatFormatting.GOLD));
+            return HashMultimap.create();
+        }
+        return doAttribute(stack, player);
+    }
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+
+            modifiers.put(Attributes.JUMP_STRENGTH, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.Speed_.asItem().getDescriptionId()),
+                    ConfigItem.intValue2.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        modifiers.put(AttReg.more_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.Speed_.asItem().getDescriptionId()),
+                ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        modifiers.put(Attributes.SAFE_FALL_DISTANCE, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.Speed_.asItem().getDescriptionId()),
+                ConfigItem.intValue2.get().floatValue(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+
+        return modifiers;
+    }
+
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        if (stack.get(DataReg.tag)==null){
+            tooltipComponents.accept(Component.translatable("chest_item.the_soul.give").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("chest_item.the_soul.give.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.literal(""));
+            tooltipComponents.accept(Component.translatable("item.chest_item.speed.string.2",100 * ConfigItem.intValue.get().floatValue()).withStyle(ChatFormatting.GOLD));
 
         }else {
-            tooltipAdder.accept(Component.translatable("item.chest_item.speed.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+            tooltipComponents.accept(Component.translatable("item.chest_item.speed.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         }
     }
+
     @Override
     public int soulColor() {
         return Light.ARGB.color(255,255,100,100);

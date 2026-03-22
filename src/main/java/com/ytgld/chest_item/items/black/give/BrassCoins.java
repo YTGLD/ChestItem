@@ -6,12 +6,11 @@ import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
-public class BrassCoins  extends ItemBase {
+public class BrassCoins extends ItemBase {
 
     public BrassCoins(Properties properties) {
         super(properties);
@@ -44,7 +43,7 @@ public class BrassCoins  extends ItemBase {
     public static boolean isTrue (ItemStack aBrassCoins,int max){
         CompoundTag component = aBrassCoins.get(DataReg.tag);
         if (component != null) {
-            return component.getIntOr(kill, 0) >= max;
+            return component.getIntOr(kill,0) >= max;
         }
         return false;
     }

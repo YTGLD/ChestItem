@@ -1,8 +1,8 @@
 package com.ytgld.chest_item;
 
+import com.ytgld.chest_item.config.ModLanguageProvider;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
-import com.ytgld.chest_item.entity.UnstableSpheres;
 import com.ytgld.chest_item.entity.render.AttackEndComingRender;
 import com.ytgld.chest_item.entity.render.EndComingRender;
 import com.ytgld.chest_item.entity.render.LaserColumnRender;
@@ -16,6 +16,11 @@ import com.ytgld.chest_item.event.loot.Loots;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.memory.MemoryAttreg;
+import com.ytgld.chest_item.items.memory.MemoryEvent;
+import com.ytgld.chest_item.items.memory.MemoryItems;
+import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
+import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
@@ -37,6 +42,7 @@ import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactori
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 import java.util.function.Function;
@@ -64,11 +70,24 @@ public class Chestitem {
         ChestMenuTypes.register.register(modEventBus);
         Particles.PARTICLE_TYPES.register(modEventBus);
         Sounds.REGISTRY.register(modEventBus);
+        TheMemoryDataHandler.ATTACHMENT_TYPES.register(modEventBus);
+        MemoryItems.ITEMS.register(modEventBus);
+        NeoForge.EVENT_BUS.register(new MemoryEvent());
+        MemoryAttreg.REGISTRY.register(modEventBus);
 
+        NeoForge.EVENT_BUS.addListener(PlayerEvent.Clone.class, event -> {
+            if (event.isWasDeath() && event.getOriginal().hasData(TheMemoryDataHandler.mStringSetData)) {
+                event.getEntity().getData(TheMemoryDataHandler.mStringSetData).clear();
+                event.getEntity().getData(TheMemoryDataHandler.mStringSetData)
+                        .addAll(event.getOriginal().getData(TheMemoryDataHandler.mStringSetData))
+                ;
+            }
+        });
         NeoForge.EVENT_BUS.register(new SkillEvent());
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.fc);
+
     }
     private void registerPayloadHandler(final RegisterPayloadHandlersEvent evt) {
         ChestNetworkHandler.register(evt.registrar("1.0"));
@@ -79,10 +98,12 @@ public class Chestitem {
         @SubscribeEvent
         public static void RegisterClientTooltipComponentFactoriesEvent(RegisterClientTooltipComponentFactoriesEvent event){
             event.register(SkillTooltip.class, Function.identity());
+            event.register(BigTooltip.class, Function.identity());
         }
         @SubscribeEvent // on the mod event bus
         public static void gatherData(GatherDataEvent.Client event) {
             event.createProvider(CISoundDefinitionsProvider::new);
+            event.createProvider(ModLanguageProvider::new);
         }
         @SubscribeEvent
         public static void RegisterRenderPipelinesEvent(EntityRenderersEvent.RegisterRenderers event){

@@ -24,11 +24,8 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Consumer;
 
 /**
  * 饕餮诅咒
@@ -88,7 +85,7 @@ public class Glutton extends TheImprintOfTheSoul {
                                     float food = sf.nutrition();
                                     float sta = sf.saturation();
                                     player.heal(food + sta);
-                                    player.getCooldowns().addCooldown(stack,200);
+                                    player.getCooldowns().addCooldown(stack.getItem().getDefaultInstance(),200);
                                     break;
                                 }
                             }
@@ -98,9 +95,28 @@ public class Glutton extends TheImprintOfTheSoul {
             }
         }
     }
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+    public static void  attrib(ItemStackTickEvent event){
+        ChestInventory chestInventory = event.chestInventory;
+        Player player = event.player;
+        if (player!=null) {
+            if (!player.level().isClientSide()) {
+                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                    ItemStack stack = chestInventory.getItem(i);
+                    if (stack.is(InitItems.Glutton_)) {
+                        if (player.tickCount % 200 == 1) {
+                            if (!player.getCooldowns().isOnCooldown(stack.getItem().getDefaultInstance())) {
+                                player.getFoodData().eat(-1, 0.5f);
+                            }
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         float hunger = 0;
         float speed = 0;
         if (player.getFoodData().getFoodLevel() > 12) {
@@ -123,36 +139,24 @@ public class Glutton extends TheImprintOfTheSoul {
                 hunger, AttributeModifier.Operation.ADD_VALUE));
         return modifiers;
     }
-    public static void  attrib(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
-        Player player = event.player;
-        if (player!=null) {
-            if (!player.level().isClientSide()) {
-                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                    ItemStack stack = chestInventory.getItem(i);
-                    if (stack.is(InitItems.Glutton_)) {
-                        if (player.tickCount % 200 == 1) {
-                            if (!player.getCooldowns().isOnCooldown(stack)) {
-                                player.getFoodData().eat(-1, 0.5f);
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
+
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.glutton.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.glutton.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.glutton.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.glutton.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.glutton.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.translatable("item.chest_item.glutton.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.glutton.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
-        tooltipAdder.accept(Component.translatable("item.chest_item.glutton.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+    public @Nullable Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
+        return doAttribute(stack,player);
+    }
+
+    @Override
+    public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+    
+       tooltipComponents.accept(Component.translatable("item.chest_item.glutton.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
+       tooltipComponents.accept(Component.translatable("item.chest_item.glutton.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+       tooltipComponents.accept(Component.translatable("item.chest_item.glutton.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+       tooltipComponents.accept(Component.translatable("item.chest_item.glutton.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+       tooltipComponents.accept(Component.literal(""));
+       tooltipComponents.accept(Component.translatable("item.chest_item.glutton.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))).withStyle(ChatFormatting.ITALIC));
+       tooltipComponents.accept(Component.translatable("item.chest_item.glutton.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+       tooltipComponents.accept(Component.translatable("item.chest_item.glutton.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
+       tooltipComponents.accept(Component.translatable("item.chest_item.glutton.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0Xff8040ff))));
     }
     @Override
     public Identifier Identifier() {
@@ -161,6 +165,6 @@ public class Glutton extends TheImprintOfTheSoul {
 
     @Override
     public int soulColor() {
-        return Light.ARGB.color(255,200 ,200 ,60);
+        return Light.ARGB.color(255,255 ,255 ,60);
     }
 }

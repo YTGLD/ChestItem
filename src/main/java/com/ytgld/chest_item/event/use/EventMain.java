@@ -9,8 +9,14 @@ import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
-import com.ytgld.chest_item.items.black.*;
-import com.ytgld.chest_item.items.black.celestial.*;
+import com.ytgld.chest_item.items.black.BloodyBelt;
+import com.ytgld.chest_item.items.black.ChaosConstructor;
+import com.ytgld.chest_item.items.black.OneEyedSpider;
+import com.ytgld.chest_item.items.black.ShadowMint;
+import com.ytgld.chest_item.items.black.celestial.Blood;
+import com.ytgld.chest_item.items.black.celestial.Chaos;
+import com.ytgld.chest_item.items.black.celestial.Samsara;
+import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
 import com.ytgld.chest_item.items.black.chaos_item.RunawayLining;
 import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
@@ -33,13 +39,13 @@ import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -59,7 +65,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.RenderTooltipEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.common.util.AttributeUtil;
@@ -117,10 +123,6 @@ public class EventMain {
 
 
     public static int time = 0;
-    @SubscribeEvent
-    public void ItemTooltipEvent(LevelTickEvent.Pre event){
-        time++;
-    }
 
     @SubscribeEvent
     public void AddAttributeTooltipsEvent(AddAttributeTooltipsEvent evt){

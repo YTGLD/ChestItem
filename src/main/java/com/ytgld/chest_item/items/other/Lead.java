@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.items.other;
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -12,12 +14,29 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class Lead  extends ItemBase {
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.IntValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Lead");
+            intValue =  builder.translation("chest_item.config.Lead")
+                    .defineInRange("number",3,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(new CIString("Lead",
+                    "恶意重铅","暴击需要的攻击次数"));
+        }
+    }
     public Lead(Properties properties) {
         super(properties);
     }
@@ -33,20 +52,13 @@ public class Lead  extends ItemBase {
                     if (stack.is(InitItems.Lead_)) {
                         CompoundTag compoundTag = stack.get(DataReg.tag);
                         if (compoundTag!=null){
-                            if (compoundTag.getInt(lead).isPresent()) {
-
-                                compoundTag.putInt(lead, compoundTag.getInt(lead).get() + 1);
-                                if (compoundTag.getInt(lead).get()>=3){
-                                    event.setDisableSweep(false);
-                                    event.setCriticalHit(true);
-                                    event.setDamageMultiplier(event.getDamageMultiplier()*1.5f);
-                                    compoundTag.putInt(lead, 0);
-                                }
-                            }else {
-                                compoundTag.putInt(lead,0);
+                            compoundTag.putInt(lead, compoundTag.getIntOr(lead,0) + 1);
+                            if (compoundTag.getIntOr(lead,0)>=ConfigItem.intValue.getAsInt()){
+                                event.setDisableSweep(false);
+                                event.setCriticalHit(true);
+                                event.setDamageMultiplier(event.getDamageMultiplier()*1.5f);
+                                compoundTag.putInt(lead, 0);
                             }
-
-
                         }else {
                             stack.set(DataReg.tag, new CompoundTag());
                         }
@@ -56,10 +68,10 @@ public class Lead  extends ItemBase {
         }
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
-        tooltipAdder.accept(Component.translatable("item.chest_item.lead.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
-        tooltipAdder.accept(Component.literal(""));
-        tooltipAdder.accept(Component.translatable("item.chest_item.lead.string.1").withStyle(ChatFormatting.GOLD));
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.lead.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
+        tooltipComponents.accept(Component.literal(""));
+        tooltipComponents.accept(Component.translatable("item.chest_item.lead.string.1",ConfigItem.intValue.getAsInt()).withStyle(ChatFormatting.GOLD));
 
         }
     @Override

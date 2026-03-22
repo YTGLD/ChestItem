@@ -3,7 +3,6 @@ package com.ytgld.chest_item.other;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;

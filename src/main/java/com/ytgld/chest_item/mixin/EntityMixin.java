@@ -5,7 +5,6 @@ import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
 import com.ytgld.chest_item.items.black.soul.TheOrderOfTheUndead;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

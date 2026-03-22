@@ -1,12 +1,15 @@
 package com.ytgld.chest_item.items.black.chaos_item;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
+import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -25,15 +28,16 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 /**
  *混沌要塞之护
@@ -63,9 +67,38 @@ import java.util.function.Consumer;
  * <p>
  * 	侵蚀装甲难以自然恢复
  */
-public class ChaosFortress extends ItemBlackShadow implements IBlackLight, ITheChaos {
+public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
     public ChaosFortress(Properties properties) {
         super(properties);
+    }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.DoubleValue intValue2 ;
+        public static ModConfigSpec.DoubleValue intValue3 ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("ChaosFortress");
+            intValue =  builder.translation("chest_item.config.ChaosFortress")
+                    .defineInRange("number",2f,0,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.ChaosFortress2")
+                    .defineInRange("number2",5f,0,Integer.MAX_VALUE);
+            intValue3 =  builder.translation("chest_item.config.ChaosFortress2")
+                    .defineInRange("number3",0.7f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("ChaosFortress",
+                            "混沌要塞之护","免疫低于这个值的伤害"),
+                    new CIString("ChaosFortress2",
+                            "混沌要塞之护2","增加的魔法伤害"),
+                    new CIString("ChaosFortress3",
+                            "混沌要塞之护3","伤害倍率")
+            );
+        }
     }
     public static void isInvulnerableToBase(Player player,
                                             DamageSource damageSource,
@@ -88,7 +121,7 @@ public class ChaosFortress extends ItemBlackShadow implements IBlackLight, ITheC
         //无效化低于2点的伤害
         if (event.getEntity() instanceof Player player) {
             if (Handler.has(player, InitItems.ChaosFortress_.asItem())) {
-                if (event.getAmount() < 2) {
+                if (event.getAmount() < ConfigItem.intValue.get().floatValue()) {
                     event.setCanceled(true);
                 }
             }
@@ -99,7 +132,7 @@ public class ChaosFortress extends ItemBlackShadow implements IBlackLight, ITheC
         if (event.getEntity() instanceof Player player) {
             if (Handler.has(player, InitItems.ChaosFortress_.asItem())) {
                 //增加15%的抗性
-                event.setNewDamage(event.getNewDamage() *  (1 - 0.3f));
+                event.setNewDamage(event.getNewDamage() *  ConfigItem.intValue3.get().floatValue());
                 //被攻击时有5%的概率获得3秒无敌
                 if (Mth.nextInt(RandomSource.create(), 0, 100) <= 5) {
                     player.getCooldowns().addCooldown(InitItems.ChaosFortress_.asItem().getDefaultInstance(),60);
@@ -112,7 +145,7 @@ public class ChaosFortress extends ItemBlackShadow implements IBlackLight, ITheC
                 float damage = player.getData(AttReg.chaosWinds) * 0.8f + 5;
                 //受到的魔法伤害提高400%
                 if (event.getSource().is(DamageTypes.MAGIC)) {
-                    event.setNewDamage(event.getNewDamage() * 5);
+                    event.setNewDamage(event.getNewDamage() * ConfigItem.intValue2.get().floatValue());
                 }
                 if (event.getSource().getEntity() instanceof LivingEntity entity) {
                     entity.hurt(entity.damageSources().dryOut(),damage);
@@ -138,7 +171,10 @@ public class ChaosFortress extends ItemBlackShadow implements IBlackLight, ITheC
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+        return attributeModifierMultimap(player);
+    }
+    public static Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap(Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         //获得55%基于护甲值的侵蚀装甲
         int armor = (int) (player.getArmorValue() * 0.55f);
         modifiers.put(AttReg.chaos_armor, new AttributeModifier(Identifier.parse(Chestitem.MODID +
@@ -160,30 +196,35 @@ public class ChaosFortress extends ItemBlackShadow implements IBlackLight, ITheC
         return co;
     }
     @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipAdder,TooltipFlag flag){
+     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (compoundTag != null) {
             if (!flag.hasShiftDown()) {
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
             }else {
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.literal(""));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.literal(""));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.8").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.9").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.literal(""));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.10").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.11").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipAdder.accept(Component.translatable("item.chest_item.chaos_fortress.string.12").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.3",ConfigItem.intValue3.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.literal(""));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.6").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.literal(""));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.8",ConfigItem.intValue.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.9").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.literal(""));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.10").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.11",ConfigItem.intValue2.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.12").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
             }
         }else {
-            tooltipAdder.accept((Component.translatable("item.chest_item.chaos_fortress.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+            tooltipComponents.accept((Component.translatable("item.chest_item.chaos_fortress.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
         }
+    }
+    @Nullable
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
+        return attributeModifierMultimap(player);
     }
 
 }
