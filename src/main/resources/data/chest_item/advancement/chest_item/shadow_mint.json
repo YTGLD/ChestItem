@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/dry_bones",
+  "criteria": {
+    "shadow_mint": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:shadow_mint"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:shadow_mint"
+    },
+    "title": {
+      "translate": "item.chest_item.shadow_mint.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "shadow_mint"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

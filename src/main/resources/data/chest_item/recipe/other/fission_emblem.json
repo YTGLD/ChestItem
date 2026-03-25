@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "chest_item:magic_iron",
+    "C": "chest_item:fission",
+    "D": "minecraft:diamond"
+  },
+  "pattern": [
+    "BBB",
+    "B B",
+    "DCD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:fission_emblem"
+  }
+}

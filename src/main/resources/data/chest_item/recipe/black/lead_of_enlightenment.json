@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:crying_obsidian",
+    "B": "chest_item:complete",
+    "C": "minecraft:netherite_scrap"
+  },
+  "pattern": [
+    "CAC",
+    "ABA",
+    "CAC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:lead_of_enlightenment"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "chest_item:shield_engine",
+    "B": "chest_item:condense_bone_cube",
+    "C": "minecraft:breeze_rod",
+    "D": "chest_item:heart"
+  },
+  "pattern": [
+    "CDC",
+    "CAC",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:mass_energy_converter"
+  }
+}

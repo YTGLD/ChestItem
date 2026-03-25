@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/the_end_is_coming",
+  "criteria": {
+    "end_effect": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:end_effect"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:end_effect"
+    },
+    "title": {
+      "translate": "item.chest_item.end_effect.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "end_effect"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/shield_engine",
+  "criteria": {
+    "alienation_diodes": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:alienation_diodes"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:alienation_diodes"
+    },
+    "title": {
+      "translate": "item.chest_item.alienation_diodes.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "alienation_diodes"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

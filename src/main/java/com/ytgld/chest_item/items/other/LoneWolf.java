@@ -1,0 +1,70 @@
+package com.ytgld.chest_item.items.other;
+
+import com.google.common.collect.Multimap;
+import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.renderer.light.Light;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
+/**
+ * 孤狼
+ * <p>
+ * 附近没有生物时速度提高15%
+ */
+public class LoneWolf extends ItemBase {
+    public LoneWolf(Properties properties) {
+        super(properties);
+    }
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.doAttribute(stack, player);
+        float apply = 0;
+        if (isNOt(player)){
+            apply = 0.15f;
+        }
+
+        modifiers.put(AttReg.more_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.LoneWolf_.asItem().getDescriptionId()),
+                apply, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        return modifiers;
+    }
+    public static boolean isNOt(LivingEntity me){
+        Vec3 playerPos = me.position();
+        int range = 4;
+        List<Integer> integers = new ArrayList<>();
+        List<LivingEntity> entities = me.level().getEntitiesOfClass(LivingEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
+        for (LivingEntity living : entities) {
+            if (!living.is(me)) {
+                integers.add(1);
+            }
+        }
+        return integers.isEmpty();
+    }
+
+    @Override
+    public void text(ItemStack stack,Consumer<Component> tooltipComponents,TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.lone_wolf.string.1").withStyle(ChatFormatting.GOLD));
+    }
+    @Override
+    public int color(ItemStack stack) {
+        return Light.ARGB.color(255, 255, 100, 50);
+    }
+
+}
