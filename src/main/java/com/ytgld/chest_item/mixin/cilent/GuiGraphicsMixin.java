@@ -177,7 +177,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             Light.ARGB.color(0, 0, 10, 33),
                             Light.ARGB.color(255, 50, 255, 20),
                             Light.ARGB.color(255, 50, 50, 100));
-                } else if (tooltipStack.getItem() instanceof EvilMother evilMother) {
+                } else if (tooltipStack.getItem() instanceof EvilMother) {
                     TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
                             Light.ARGB.color(0, 0, 10, 33),
                             Light.ARGB.color(0, 0, 10, 33),
@@ -206,6 +206,11 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 1000);
                 this.pose.popPose();
             }
+            if (tooltipStack.getItem() instanceof EvilMother) {
+                this.pose.pushPose();
+                si1_21_4$renderTooltipBackground_EvilMother((GuiGraphics) (Object) this, l, i1, i, j, 1000);
+                this.pose.popPose();
+            }
             if (tooltipStack.getItem() instanceof ItemBlackShadow) {
                 if (tooltipStack.getItem() instanceof TheChaos||tooltipStack.getItem() instanceof ITheChaos){
                     this.pose.pushPose();
@@ -218,6 +223,50 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 }
             }
         }
+    }
+
+    @Unique
+    public void si1_21_4$renderTooltipBackground_EvilMother(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
+        // 左上角
+        int topLeftX = x - 3 - 9+2;
+        int topLeftY = y - 3 - 9;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, -2,z);
+        MGuiGraphics.blit(guiGraphics,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "textures/gui/tooltip/evil_mother/tool_0_0.png"), topLeftX, topLeftY, 0, 0,48, 48, 48, 48,1,1,1,1);
+        guiGraphics.pose().popPose();
+
+        // 中间位置
+        int middleX = x + (width - 48) / 2;
+        int middleY = y - 3 - 6;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, -7,z);
+        guiGraphics.blitSprite(
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/evil_mother/tool_middle_0"),48,48, 0, 0,  middleX, middleY, 48, 48);
+        guiGraphics.pose().popPose();
+
+        //中下
+        int xXX = x + (width - 48) / 2;
+        int yYY =  y + height + 3 - 9 + 4;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, 0,z);
+        guiGraphics.blitSprite(
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/evil_mother/tool_down_0"),48,48, 0, 0,  xXX, yYY, 48, 48);
+        guiGraphics.pose().popPose();
+
+        // 右上角
+        int topRightX = x + width + 3 - 48+6;
+        int topRightY = y - 3 - 9;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, -2,z);
+        MGuiGraphics.blit(guiGraphics,
+                ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "textures/gui/tooltip/evil_mother/tool_0_1.png"), topRightX, topRightY, 0, 0,48, 48, 48, 48,1,1,1,1);
+        guiGraphics.pose().popPose();
+
     }
     @Unique
     public void si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
