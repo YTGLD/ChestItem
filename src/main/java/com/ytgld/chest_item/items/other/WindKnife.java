@@ -86,7 +86,7 @@ public class WindKnife extends ItemBase {
         super.appendHoverText(stack, context, tooltipAdder, flag);
         tooltipAdder.add(Component.translatable("item.chest_item.wind_knife.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.add(Component.literal(""));
-        tooltipAdder.add(Component.translatable("item.chest_item.wind_knife.string.1",ConfigItem.intValue.get().floatValue(),ConfigItem.intValue2.get().floatValue()).withStyle(ChatFormatting.GOLD));
+        tooltipAdder.add(Component.translatable("item.chest_item.wind_knife.string.1",ConfigItem.intValue.get().floatValue() * 100f,ConfigItem.intValue2.get().floatValue()*100f).withStyle(ChatFormatting.GOLD));
         tooltipAdder.add(Component.translatable("item.chest_item.wind_knife.string.2").withStyle(ChatFormatting.GOLD));
 
     }

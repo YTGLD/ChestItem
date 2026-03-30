@@ -13,6 +13,7 @@ import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
+import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.renderer.*;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
@@ -176,6 +177,12 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             Light.ARGB.color(0, 0, 10, 33),
                             Light.ARGB.color(255, 50, 255, 20),
                             Light.ARGB.color(255, 50, 50, 100));
+                } else if (tooltipStack.getItem() instanceof EvilMother evilMother) {
+                    TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
+                            Light.ARGB.color(0, 0, 10, 33),
+                            Light.ARGB.color(0, 0, 10, 33),
+                            Light.ARGB.color(255, 80,120,105),
+                            Light.ARGB.color(255, 80,120,105));
                 } else {
                     TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
                             Light.ARGB.color(0, 218, 165, 32),
@@ -625,18 +632,25 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                         GlStateManager.DestFactor.ZERO
                 );
         float a = 50;
+        ResourceLocation star = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                "textures/shadow/ci_star.png");
+        ResourceLocation fire = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                "textures/gui/tooltip/fire_black.png");
+
         if (stack.getItem() instanceof IBlackLight iBlackLight) {
             r = iBlackLight.colorBlack().r();
             g = iBlackLight.colorBlack().g();
             b = iBlackLight.colorBlack().b();
             ciFunc = iBlackLight.colorBlack().ciFunc();
             a = iBlackLight.colorBlack().a();
+
+            star = iBlackLight.blackStar();
+            fire = iBlackLight.blackFire();
         }
         if ((stack.getItem() instanceof IBlackLight)) {
             GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
             {
-                ResourceLocation fire = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "textures/gui/tooltip/fire_black.png");
+
                 float alpha = (float) (50 * Math.sin((entity.tickCount / 3f + seed)));
                 pose.pushPose();
                 pose.translate(8,8,0);
@@ -671,8 +685,6 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
             }
 
             {
-                ResourceLocation fire = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                        "textures/shadow/ci_star.png");
 
                 pose.pushPose();
                 pose.translate(8,8,0);
@@ -682,7 +694,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                     pose.translate(x, y,0);
                     pose.mulPose(Axis.ZP.rotationDegrees(entity.tickCount * 10f));
                     pose.translate(-x, -y,0);
-                    new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
+                    new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,star,
                             x - 16, y - 16, 0, 0,
                             32,32,32,32,
                             r/255f, g, b/255f,(a + alphaOffset*2)/255f);
@@ -696,7 +708,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             pose.translate(x, y,0);
                             pose.mulPose(Axis.ZP.rotationDegrees((entity.tickCount + i * 40F) ));
                             pose.translate(-x, -y,0);
-                            new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
+                            new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,star,
                                     x - 16, y - 16, 0, 0,
                                     32,32,32,32,
                                     r/255f, g, b/255f,(a + alphaOffset)/255f);
@@ -707,7 +719,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             pose.translate(x, y,0);
                             pose.mulPose(Axis.ZP.rotationDegrees((entity.tickCount - i * 40F)));
                             pose.translate(-x, -y,0);
-                            new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,fire,
+                            new CIStateShardsHasBlack(ciFunc).blit(guiGraphics,star,
                                     x - 16, y - 16, 0, 0,
                                     32,32,32,32,
                                     r/255f, g/255f, b/255f,(a + alphaOffset)/255f);

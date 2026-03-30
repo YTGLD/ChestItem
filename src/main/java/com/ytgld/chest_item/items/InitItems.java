@@ -18,6 +18,8 @@ import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.condensebone.*;
 import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
+import com.ytgld.chest_item.items.evil_mother.EvilMother;
+import com.ytgld.chest_item.items.evil_mother.MotherRemains;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
@@ -236,6 +238,8 @@ public class    InitItems {
 
     public static final DeferredItem<@NotNull Item> ActualSuffering_ = register("actual_suffering",
             (Identifier)-> new ActualSuffering(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
+            (Identifier)-> new MotherRemains(new Item.Properties().stacksTo(64)));
 
 
     public static final DeferredItem<Item> Pod_ = register("pod",
@@ -358,6 +362,9 @@ public class    InitItems {
                     output.accept(InitItems.Complementary_);
 
 
+                    output.accept(InitItems.MotherRemains_);
+
+
                 }).build());
 
     }
@@ -366,6 +373,7 @@ public class    InitItems {
 
 
         public static final TagKey<Item> chestItem = createTag("chest_item");
+        public static final TagKey<Item> evilMother = createTag("evil_mother");
         public static final TagKey<Item> chestItem_iron = createTag("chest_item_iron");
         public static final TagKey<Item> chestItemMeat = createTag("chest_item_meat");
         public static final TagKey<Item> chestItemBone = createTag("chest_item_bone");
@@ -377,14 +385,17 @@ public class    InitItems {
 
         @Override
         protected void addTags(HolderLookup.@NotNull Provider provider) {
+            tag(evilMother).add(
+                    MotherRemains_.asItem()
+
+            );
+
 
             tag(celestial).add(
                     Blood_.asItem(),
                     Chaos_.asItem(),
                     Sword_.asItem(),
                     Samsara_.asItem(),
-
-
 
                     NineDome_.asItem()
             );

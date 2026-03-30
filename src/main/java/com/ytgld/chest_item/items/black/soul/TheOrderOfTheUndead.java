@@ -219,7 +219,7 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
         super.appendHoverText(stack, context, tooltipComponents,tooltipFlag);
         tooltipComponents.add(Component.translatable("item.chest_item.the_order_of_the_undead.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))).withStyle(ChatFormatting.ITALIC));
         tooltipComponents.add(Component.translatable("item.chest_item.the_order_of_the_undead.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipComponents.add(Component.translatable("item.chest_item.the_order_of_the_undead.string.3",ConfigItem.intValue.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.add(Component.translatable("item.chest_item.the_order_of_the_undead.string.3",100 *ConfigItem.intValue.get().floatValue() - 100f).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         tooltipComponents.add(Component.translatable("item.chest_item.the_order_of_the_undead.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         tooltipComponents.add(Component.translatable("item.chest_item.the_order_of_the_undead.string.9").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
         tooltipComponents.add(Component.literal(""));

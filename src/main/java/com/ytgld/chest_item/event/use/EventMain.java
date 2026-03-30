@@ -22,6 +22,7 @@ import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
+import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
@@ -116,7 +117,11 @@ public class EventMain {
                     attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
                     evt.addTooltipLines(Component.empty());
                     if (!(stack.getItem() instanceof ItemBlackShadow)) {
-                        attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
+                        if (stack.getItem() instanceof EvilMother evilMother){
+                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.colorBlack().color())));
+                        }else {
+                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
+                        }
                     }
 
                     AttributeUtil.applyTextFor(
@@ -134,6 +139,10 @@ public class EventMain {
                         if (stack.getItem() instanceof ItemBlackShadow) {
                             MutableComponent co = component.copy();
                             co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80EE82EE)));
+                            evt.addTooltipLines(co);
+                        }else if (stack.getItem() instanceof EvilMother evilMother){
+                            MutableComponent co = component.copy();
+                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.colorBlack().color())));
                             evt.addTooltipLines(co);
                         } else {
                             MutableComponent co = component.copy();
@@ -502,8 +511,11 @@ public class EventMain {
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
         if (event.getItemStack().getItem() instanceof ItemBase) {
+            if (event.getItemStack().getItem() instanceof EvilMother evilMother) {
+                event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
+                        .withColor(evilMother.colorBlack().color())));
 
-
+            }
             if (event.getItemStack().getItem() instanceof ItemBlackShadow) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
@@ -532,12 +544,10 @@ public class EventMain {
                         }
                     }
                 }
-
-
-
             }
             if (!(event.getItemStack().getItem() instanceof ItemBlackShadow)
-                    && !(event.getItemStack().getItem() instanceof TheCelestial)) {
+                    && !(event.getItemStack().getItem() instanceof TheCelestial)
+                    && !(event.getItemStack().getItem() instanceof EvilMother)) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest", Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
             }

@@ -557,9 +557,9 @@
 
   "item.chest_item.heavy_blade": "天罡重刃",
   "item.chest_item.heavy_blade.string.0": "自律的刀锋极为可怕",
-  "item.chest_item.heavy_blade.string.1": "每点增生组织提供1.5%的所有伤害加成（上限%d%%）",
-  "item.chest_item.heavy_blade.string.2":"每点护甲提供1%所有伤害加成（上限%d%%）",
-  "item.chest_item.heavy_blade.string.3": "每点饥饿值提供0.5%所有伤害加成（上限%d%%）",
+  "item.chest_item.heavy_blade.string.1": "增生组织提供伤害加成（上限%d%%）",
+  "item.chest_item.heavy_blade.string.2":"护甲提供伤害加成（上限%d%%）",
+  "item.chest_item.heavy_blade.string.3": "饥饿值提供伤害加成（上限%d%%）",
   "item.chest_item.heavy_blade.string.4":"默认减少20%所有伤害",
 
   "advancements.chest_item.root.description": "然而这只是个箱子",
@@ -846,6 +846,15 @@
   "chest_item.config.RunawayLiningMin": "失控衬件的混沌施加最小值",
   "chest_item.config.RunawayLiningMax": "失控衬件的混沌施加最大值",
   "chest_item.config.listRunawayLining": "属性黑名单",
+
+  "item.chest_item.mother_remains": "邪母残骸",
+
+
+
+
+
+
+
 
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
