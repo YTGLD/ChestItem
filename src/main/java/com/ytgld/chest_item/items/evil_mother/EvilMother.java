@@ -4,6 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.ItemBase;
@@ -19,14 +21,37 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public abstract class EvilMother extends ItemBase implements IBlackLight {
     public EvilMother(Properties properties) {
         super(properties);
     }
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        public static ModConfigSpec.DoubleValue intValue;
 
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("EvilMother");
+            intValue = builder.translation("chest_item.config.EvilMother")
+                    .defineInRange("number", 1f, 0, 10000);
+
+            builder.pop();
+        }
+
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(
+                    new CIString("EvilMother",
+                            "邪母", "邪母的”理智“所造成的属性倍率")
+            );
+        }
+    }
     @Override
     public @NotNull Component getName(@NotNull ItemStack stack) {
         Component component = super.getName(stack);
@@ -73,11 +98,11 @@ public abstract class EvilMother extends ItemBase implements IBlackLight {
         float res = 0;
         if (value != base) {
             float c = base - value;
-            armor = c * 0.2f;
-            damage = c * 0.2f;
-            heal = c * 1.5f / 100f;
-            xp = c * 2.5f / 100f;
-            speed = c * 3.5f / 100f;
+            armor = (float) (c * 0.2f * ConfigItem.intValue.getAsDouble());
+            damage = (float) (c * 0.2f * ConfigItem.intValue.getAsDouble());
+            heal = (float) (c * 1.5f / 100f * ConfigItem.intValue.getAsDouble());
+            xp = (float) (c * 2.5f / 100f * ConfigItem.intValue.getAsDouble());
+            speed = (float) (c * 3.5f / 100f * ConfigItem.intValue.getAsDouble());
 
             //c大于base自己，也就是意识为负数
             if (c > base) {
@@ -85,7 +110,7 @@ public abstract class EvilMother extends ItemBase implements IBlackLight {
                 if (ss < 0) {
                     ss = -ss;
                 }
-                res = (15f / 100f) + ss;
+                res = (float) ((15f / 100f) + (ss * ConfigItem.intValue.getAsDouble()));
             }
         }
         attributeModifierMultimap.put(Attributes.ARMOR, new AttributeModifier(resourceLocation,
