@@ -4,4 +4,9 @@ public class MotherRemains extends EvilMother{
     public MotherRemains(Properties properties) {
         super(properties);
     }
+
+    @Override
+    public int getSanity() {
+        return 0;
+    }
 }

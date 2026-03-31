@@ -1,6 +1,7 @@
-// 1.21.1	2025-12-16T15:39:01.2055765	Tags for minecraft:item mod id chest_item
+// 1.21.1	2026-03-31T12:56:27.3915056	Tags for minecraft:item mod id chest_item
 89e53a8ab6ecdcb26a48f9bca5a5b572f8a94d28 data/chest_item/tags/item/celestial.json
 1e1b491d8da416d1996eaaf09a91969db66d8083 data/chest_item/tags/item/chest_item.json
 d7ac2454946c094ad593ad7d9cddfeadf70af3b8 data/chest_item/tags/item/chest_item_bone.json
 c4accbd9a4044fc2e74af85f1bb409134bb2c84d data/chest_item/tags/item/chest_item_iron.json
 14cd696e4c58df32b0f29616a775d737f0cfa936 data/chest_item/tags/item/chest_item_meat.json
+26313074bcb27dbf91f8e00969733f65ef3e8038 data/chest_item/tags/item/evil_mother.json

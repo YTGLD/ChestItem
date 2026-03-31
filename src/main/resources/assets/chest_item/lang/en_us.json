@@ -1,6 +1,11 @@
 {
 
 
+  "chest_item.configuration.TheKill": "苍鹭",
+  "chest_item.configuration.TheKill2": "苍鹭2",
+  "chest_item.config.TheKill": "连续斩击的触发概率",
+  "chest_item.config.TheKill2": "连斩次数",
+
 
   "chest_item.config.ActualSuffering": "最大创伤之痕",
   "chest_item.config.AlienationDiodes": "暴击伤害",
@@ -274,6 +279,7 @@
   "attribute.name.chest_item.pain_shield_res": "trauma intensity",
   "attribute.name.chest_item.pain_shield_res.desc": "Affects the degree of pain and incurability of scar scars, and reduces the threshold for pain effect",
   "sound.chest_item.heart" : "Scar: heartbeat",
+  "attribute.name.chest_item.the_sanity": "sanity",
 
 
 
@@ -800,6 +806,10 @@
   "item.chest_item.war_tooltip.string.0": "Wrath, the unquenchable rage",
   "item.chest_item.war_tooltip.string.1": "Attacks accumulate rage and convert damage to the next hit",
   "item.chest_item.war_tooltip.string.2": "Increases damage taken by 50%",
+
+"item.chest_item.the_kill": "Cangskill",
+  "item.chest_item.the_kill.string.0": "Attacks have %d%% chance to cause %d consecutive slashes",
+  "item.chest_item.the_kill.string.1": "The last hit of the slash is a critical hit",
 
   "item.chest_item.runaway_lining.string.2": "Permanently enhances the following accessories when worn:",
   "chest_item.config.RunawayLiningMin": "Chaos imposes minimum value for runaway lining",

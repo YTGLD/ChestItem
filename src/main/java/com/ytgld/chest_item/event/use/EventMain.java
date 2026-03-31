@@ -23,6 +23,7 @@ import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
 import com.ytgld.chest_item.items.evil_mother.EvilMother;
+import com.ytgld.chest_item.items.evil_mother.TheKill;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
@@ -97,7 +98,14 @@ public class EventMain {
     public void ItemTooltipEvent(LevelTickEvent.Pre event){
         time++;
     }
-
+    @SubscribeEvent
+    public void attack(SweepAttackEvent event){
+        TheKill.attack(event);
+    }
+    @SubscribeEvent
+    public void EntityTickEvent(EntityTickEvent.Post event){
+        TheKill.tickAttackHurt(event);
+    }
     @SubscribeEvent
     public void AddAttributeTooltipsEvent(AddAttributeTooltipsEvent evt){
         AttributeTooltipContext context = evt.getContext();
@@ -512,6 +520,7 @@ public class EventMain {
     public void tooltip(ItemTooltipEvent event){
         if (event.getItemStack().getItem() instanceof ItemBase) {
             if (event.getItemStack().getItem() instanceof EvilMother evilMother) {
+                event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
                         .withColor(evilMother.colorBlack().color())));
 

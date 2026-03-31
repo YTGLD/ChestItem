@@ -1,5 +1,10 @@
 {
 
+  "chest_item.configuration.TheKill": "苍戮",
+  "chest_item.configuration.TheKill2": "苍戮2",
+  "chest_item.config.TheKill": "连续斩击的触发概率",
+  "chest_item.config.TheKill2": "连斩次数",
+
 
   "chest_item.config.ActualSuffering": "最大创伤之痕",
   "chest_item.config.AlienationDiodes": "暴击伤害",
@@ -356,7 +361,7 @@
   "attribute.name.chest_item.pain_shield_res": "创伤力度",
   "attribute.name.chest_item.pain_shield_res.desc": "影响了疮疤之痕的痛苦与难以根治的程度，并会降低痛楚效果的阈值",
   "sound.chest_item.heart" : "疮疤之痕：心跳",
-
+  "attribute.name.chest_item.the_sanity": "理智",
 
   "key.category.chest_item.chest": "箱子里的小饰品",
   "key.chest_item.r": "打开神奇箱子",
@@ -849,6 +854,9 @@
 
   "item.chest_item.mother_remains": "邪母残骸",
 
+  "item.chest_item.the_kill": "苍戮",
+  "item.chest_item.the_kill.string.0": "攻击有%d%%的概率造成%d次的连续斩击",
+  "item.chest_item.the_kill.string.1": "连斩的最后一击必定暴击",
 
 
 

@@ -20,6 +20,7 @@ import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
 import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.items.evil_mother.MotherRemains;
+import com.ytgld.chest_item.items.evil_mother.TheKill;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
@@ -242,6 +243,10 @@ public class    InitItems {
             (Identifier)-> new MotherRemains(new Item.Properties().stacksTo(64)));
 
 
+    public static final DeferredItem<@NotNull Item> TheKill_ = register("the_kill",
+            (Identifier)-> new TheKill(new Item.Properties().stacksTo(1)));
+
+
     public static final DeferredItem<Item> Pod_ = register("pod",
             (resourceLocation)-> new Pod(new Item.Properties().stacksTo(1)));
 
@@ -363,6 +368,7 @@ public class    InitItems {
 
 
                     output.accept(InitItems.MotherRemains_);
+                    output.accept(InitItems.TheKill_);
 
 
                 }).build());
@@ -386,7 +392,8 @@ public class    InitItems {
         @Override
         protected void addTags(HolderLookup.@NotNull Provider provider) {
             tag(evilMother).add(
-                    MotherRemains_.asItem()
+                    MotherRemains_.asItem(),
+                    TheKill_.asItem()
 
             );
 

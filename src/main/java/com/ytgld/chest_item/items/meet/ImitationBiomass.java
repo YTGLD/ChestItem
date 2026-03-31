@@ -23,7 +23,7 @@ public class ImitationBiomass extends ItemBase implements Meat {
         super.appendHoverText(stack, context, tooltipAdder, flag);
         tooltipAdder.add(Component.translatable("item.chest_item.imitation_biomass.string.0").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
         tooltipAdder.add(Component.literal(""));
-        tooltipAdder.add(Component.translatable("item.chest_item.armor_stone.string.1", 100f- ArmorStone.ConfigItem.intValue.get().floatValue()* 100F - 100f).withStyle(ChatFormatting.GOLD));
+        tooltipAdder.add(Component.translatable("item.chest_item.armor_stone.string.1", 100f- ArmorStone.ConfigItem.intValue.get().floatValue()* 100F).withStyle(ChatFormatting.GOLD));
         tooltipAdder.add(Component.translatable("item.chest_item.stronger_stone.string.1", StrongerStone.ConfigItem.intValue.get().floatValue() * 100f - 100f).withStyle(ChatFormatting.GOLD));
         tooltipAdder.add(Component.translatable("item.chest_item.life_stone.string.1", LifeStone.ConfigItem.intValue.get().floatValue() * 100f -100f).withStyle(ChatFormatting.GOLD));
         tooltipAdder.add(Component.translatable("item.chest_item.heart.string.1").withStyle(ChatFormatting.GOLD));

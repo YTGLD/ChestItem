@@ -132,12 +132,26 @@ public class AttReg {
     public static final DeferredHolder<Attribute,?>  painShield_res = REGISTRY.register("pain_shield_res",()->{
         return new RangedAttribute("attribute.name.chest_item.pain_shield_res", 1, -1024, 1024).setSyncable(true);
     });
-
     public static final Supplier<AttachmentType<Float>> painShield = ATTACHMENT_TYPES.register(
             "pain_shield", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.
                     fieldOf("pain_shield").codec()).build()
 
     );
+    /**
+     * 邪母的嬗变
+     */
+    public static final DeferredHolder<Attribute,?> theSanity = REGISTRY.register("the_sanity",()->{
+        return new RangedAttribute("attribute.name.chest_item.the_sanity", 10, -100, 100).setSyncable(true);
+    });
+    public static final Supplier<AttachmentType<Float>> slashing = ATTACHMENT_TYPES.register(
+            "slashing", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.
+                    fieldOf("slashing").codec()).build()
+
+    );
+
+
+
+
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER , AttReg.heal,1);
@@ -160,6 +174,8 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.painShield_number,0);
         event.add(EntityType.PLAYER , AttReg.painShield_res,1);
         event.add(EntityType.PLAYER , AttReg.painShield_speed,1);
+
+        event.add(EntityType.PLAYER , AttReg.theSanity,10);
 
     }
 }
