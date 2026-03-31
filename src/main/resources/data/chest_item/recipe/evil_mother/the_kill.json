@@ -4,7 +4,7 @@
   "key": {
     "A": {"item": "minecraft:oxidized_copper"},
     "B": {"item": "chest_item:mother_remains"},
-    "C": {"item": "minecraft:diamond_sword"}
+    "C": {"item": "minecraft:netherite_sword"}
   },
   "pattern": [
     "ABA",

@@ -105,6 +105,7 @@ public class EventMain {
     @SubscribeEvent
     public void EntityTickEvent(EntityTickEvent.Post event){
         TheKill.tickAttackHurt(event);
+        EvilMother.attrib(event);
     }
     @SubscribeEvent
     public void AddAttributeTooltipsEvent(AddAttributeTooltipsEvent evt){
@@ -182,10 +183,6 @@ public class EventMain {
         Silent.livingHealEventSilent_(event);
     }
     @SubscribeEvent
-    public void exp(LivingExperienceDropEvent event) {
-        ChaosSeven.exp(event);
-    }
-    @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
         Mutation.die(event);
         ChaosSeven.die(event);
@@ -221,6 +218,18 @@ public class EventMain {
         Warmaker.hurt(event);
         ChaosFortress.hurtRes(event);
         LeadOfEnlightenment.die(event);
+
+        if (event.getEntity() instanceof Player player) {
+            AttributeInstance resistance = player.getAttribute(AttReg.resistance);
+            if (resistance != null) {
+                float value = (float) resistance.getValue();
+                float base = (float) resistance.getBaseValue();
+                if (value != base) {
+                    event.setNewDamage(event.getNewDamage() * ((1 - value) + 1));
+                }
+            }
+        }
+
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player living) {
@@ -333,6 +342,21 @@ public class EventMain {
     @SubscribeEvent
     public void attackEXP(LivingExperienceDropEvent event){
         MadnessTheory.attackEXP(event);
+        ChaosSeven.exp(event);
+        GoldCheese.event(event);
+        NuclearReaction.event(event);
+
+        if (event.getAttackingPlayer() instanceof Player player) {
+            AttributeInstance xp = player.getAttribute(AttReg.xp_drop);
+            if (xp != null) {
+                float value = (float) xp.getValue();
+                float base = (float) xp.getBaseValue();
+                if (value != base) {
+                    event.setDroppedExperience((int) (event.getDroppedExperience() * value));
+                }
+            }
+        }
+
     }
     @SubscribeEvent
     public void pick(PlayerXpEvent.PickupXp event){
@@ -501,12 +525,7 @@ public class EventMain {
         SpeedHeart.eat(event);
         Glutton.eatFinish(event);
     }
-    @SubscribeEvent
-    public void LivingExperienceDropEvent(LivingExperienceDropEvent event) {
-        GoldCheese.event(event);
-        NuclearReaction.event(event);
 
-    }
     @SubscribeEvent
     public void PlayerEnchantItemEvent(PlayerEnchantItemEvent event) {
         GoldCheese.event(event);

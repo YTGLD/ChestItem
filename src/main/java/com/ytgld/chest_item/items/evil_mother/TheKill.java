@@ -8,7 +8,9 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
@@ -23,6 +25,9 @@ import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
@@ -97,14 +102,25 @@ public class TheKill extends EvilMother{
                     LivingEntity entity = living.getLastHurtByMob();
                     if (entity != null) {
                         if (entity instanceof Player player) {
-                            living.invulnerableTime = 0;
-
+                            HolderLookup.RegistryLookup<Enchantment> registrylookup = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+                            float sweep = EnchantmentHelper.getEnchantmentLevel(registrylookup.getOrThrow(Enchantments.SWEEPING_EDGE),player);
+                            float sharpness = EnchantmentHelper.getEnchantmentLevel(registrylookup.getOrThrow(Enchantments.SHARPNESS),player);
                             if (slashing == 1){
+                                living.invulnerableTime = 0;
                                 CriticalHitEvent criticalHitEvent = new CriticalHitEvent(player,living,2,true);
                                 criticalHitEvent.setCriticalHit(true);
-
                                 NeoForge.EVENT_BUS.post(criticalHitEvent);
-                                living.hurt(living.damageSources().playerAttack(player), criticalHitEvent.getDamageMultiplier());
+
+                                if (sharpness > 0) {
+                                    player.crit(living);
+                                }
+
+                                living.hurt(living.damageSources().playerAttack(player),
+                                        criticalHitEvent.getDamageMultiplier()
+                                                + sweep * 1.5f
+                                                + sharpness * 2f
+
+                                );
                                 living.knockback(0.1f, player.getX() - living.getX(), player.getZ() - living.getZ());
 
                                 player.crit(living);
@@ -113,6 +129,7 @@ public class TheKill extends EvilMother{
                                 living.setData(AttReg.slashing.get(), slashing - 1f);
                             }
                             if (slashing > 1) {
+                                living.invulnerableTime = 0;
                                 LivingIncomingDamageEvent livingIncomingDamageEvent = new LivingIncomingDamageEvent(living,
                                         new DamageContainer(
                                                 living.damageSources().playerAttack(player),
@@ -120,7 +137,18 @@ public class TheKill extends EvilMother{
                                         ));
                                 NeoForge.EVENT_BUS.post(livingIncomingDamageEvent);
 
-                                living.hurt(living.damageSources().playerAttack(player), livingIncomingDamageEvent.getAmount());
+                                if (sharpness > 0) {
+                                    player.crit(living);
+                                }
+
+                                living.hurt(living.damageSources().playerAttack(player),
+                                        livingIncomingDamageEvent.getAmount()
+                                                + sweep
+                                                + sharpness
+                                );
+
+
+
                                 living.knockback(0.1f, player.getX() - living.getX(), player.getZ() - living.getZ());
                                 if (living.level() instanceof ServerLevel serverLevel) {
                                     serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK,

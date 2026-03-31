@@ -52,7 +52,12 @@ public class AttReg {
     public static final DeferredHolder<Attribute,?> fortune = REGISTRY.register("fortune",()->{
         return new RangedAttribute("attribute.name.chest_item.fortune", 0, -1024, 1024).setSyncable(true);
     });
-
+    public static final DeferredHolder<Attribute,?> xp_drop = REGISTRY.register("xp_drop",()->{
+        return new RangedAttribute("attribute.name.chest_item.xp_drop", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final DeferredHolder<Attribute,?> resistance = REGISTRY.register("resistance",()->{
+        return new RangedAttribute("attribute.name.chest_item.resistance", 1, -1024, 1024).setSyncable(true);
+    });
 
 
 
@@ -166,6 +171,10 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.more_speed,1);
         event.add(EntityType.PLAYER , AttReg.looting,0);
         event.add(EntityType.PLAYER , AttReg.fortune,0);
+
+        event.add(EntityType.PLAYER , AttReg.xp_drop,1);
+        event.add(EntityType.PLAYER , AttReg.resistance,1);
+
         event.add(EntityType.PLAYER , AttReg.chaos_armor,1);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_damage,1);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_speed,1);

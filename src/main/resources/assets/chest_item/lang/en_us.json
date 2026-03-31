@@ -280,6 +280,8 @@
   "attribute.name.chest_item.pain_shield_res.desc": "Affects the degree of pain and incurability of scar scars, and reduces the threshold for pain effect",
   "sound.chest_item.heart" : "Scar: heartbeat",
   "attribute.name.chest_item.the_sanity": "sanity",
+  "attribute.name.chest_item.xp_drop": "Experience drops",
+  "attribute.name.chest_item.resistance": "Resistance",
 
 
 
