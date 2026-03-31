@@ -22,6 +22,7 @@ import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
+import com.ytgld.chest_item.items.evil_mother.EvilBelt;
 import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.items.evil_mother.TheKill;
 import com.ytgld.chest_item.items.gold.*;
@@ -106,6 +107,10 @@ public class EventMain {
     public void EntityTickEvent(EntityTickEvent.Post event){
         TheKill.tickAttackHurt(event);
         EvilMother.attrib(event);
+    }
+    @SubscribeEvent
+    public void  knock(LivingKnockBackEvent event){
+        EvilBelt.knock(event);
     }
     @SubscribeEvent
     public void AddAttributeTooltipsEvent(AddAttributeTooltipsEvent evt){

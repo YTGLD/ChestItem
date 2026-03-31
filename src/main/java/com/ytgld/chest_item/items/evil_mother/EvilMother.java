@@ -137,7 +137,7 @@ public abstract class EvilMother extends ItemBase implements IBlackLight {
     }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
-        Multimap<Holder<Attribute> , AttributeModifier> attributeModifierMultimap = multimapAttribute();
+        Multimap<Holder<Attribute> , AttributeModifier> attributeModifierMultimap = multimapAttribute(stack, player);
         if (getSanity() != 0) {
             attributeModifierMultimap.put(AttReg.theSanity, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                     this.asItem().getDescriptionId()),
@@ -146,7 +146,7 @@ public abstract class EvilMother extends ItemBase implements IBlackLight {
         return attributeModifierMultimap;
     }
     public abstract int getSanity();
-    public Multimap<Holder<Attribute>, AttributeModifier> multimapAttribute(){
+    public Multimap<Holder<Attribute>, AttributeModifier> multimapAttribute(ItemStack stack, Player player){
         return HashMultimap.create();
     }
 

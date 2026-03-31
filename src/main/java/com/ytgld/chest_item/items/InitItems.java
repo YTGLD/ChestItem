@@ -18,6 +18,7 @@ import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.condensebone.*;
 import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
+import com.ytgld.chest_item.items.evil_mother.EvilBelt;
 import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.items.evil_mother.MotherRemains;
 import com.ytgld.chest_item.items.evil_mother.TheKill;
@@ -245,6 +246,8 @@ public class    InitItems {
 
     public static final DeferredItem<@NotNull Item> TheKill_ = register("the_kill",
             (Identifier)-> new TheKill(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> EvilBelt_ = register("evil_belt",
+            (Identifier)-> new EvilBelt(new Item.Properties().stacksTo(1)));
 
 
     public static final DeferredItem<Item> Pod_ = register("pod",
@@ -369,6 +372,7 @@ public class    InitItems {
 
                     output.accept(InitItems.MotherRemains_);
                     output.accept(InitItems.TheKill_);
+                    output.accept(InitItems.EvilBelt_);
 
 
                 }).build());
@@ -393,7 +397,8 @@ public class    InitItems {
         protected void addTags(HolderLookup.@NotNull Provider provider) {
             tag(evilMother).add(
                     MotherRemains_.asItem(),
-                    TheKill_.asItem()
+                    TheKill_.asItem(),
+                    EvilBelt_.asItem()
 
             );
 
