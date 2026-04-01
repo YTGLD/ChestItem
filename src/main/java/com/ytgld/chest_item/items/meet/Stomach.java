@@ -35,7 +35,7 @@ public class Stomach  extends ItemBase implements Meat {
             intValue =  builder.translation("chest_item.config.Stomach")
                     .defineInRange("number",60,1,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.Stomach2")
-                    .defineInRange("number",10,0,Integer.MAX_VALUE);
+                    .defineInRange("number2",10,0,Integer.MAX_VALUE);
             builder.pop();
         }
 
