@@ -4,7 +4,12 @@
   "chest_item.configuration.TheKill2": "苍戮2",
   "chest_item.config.TheKill": "连续斩击的触发概率",
   "chest_item.config.TheKill2": "连斩次数",
-
+  "chest_item.config.AnnualPlate": "致命一击的概率",
+  "chest_item.config.AnnualPlate2": "致命一击的伤害倍率",
+  "chest_item.config.EvilMother": "邪母的”理智“所造成的属性倍率",
+  "chest_item.configuration.EvilMother": "邪母",
+  "chest_item.configuration.AnnualPlate": "邪母年盘",
+  "chest_item.configuration.AnnualPlate2": "邪母年盘2",
 
   "chest_item.config.ActualSuffering": "最大创伤之痕",
   "chest_item.config.AlienationDiodes": "暴击伤害",
@@ -200,6 +205,7 @@
 
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下‘%d’键打开",
+  "key.chest_item.c": "使用技能",
   "item.chest_item.skill": "可以按下‘%d’键触发技能",
   "chest_item.memory": "你已经记住它了",
   "chest_item.memory.name": "信仰",
@@ -865,6 +871,11 @@
   "item.chest_item.evil_belt": "万腐束具",
   "item.chest_item.evil_belt.string.0": "获得绝对的击退抗性",
   "item.chest_item.evil_belt.string.1": "并使你的肉身几乎无法推动",
+
+
+  "item.chest_item.annual_plate": "邪母年盘",
+  "item.chest_item.annual_plate.string.0": "造成暴击时有%d%%的概率触发致命一击",
+  "item.chest_item.annual_plate.string.1": "致命一击的伤害倍率为正常暴击的%d%%",
 
 
 

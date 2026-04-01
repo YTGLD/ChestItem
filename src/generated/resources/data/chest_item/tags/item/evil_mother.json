@@ -1,6 +1,8 @@
 {
   "values": [
     "chest_item:mother_remains",
-    "chest_item:the_kill"
+    "chest_item:the_kill",
+    "chest_item:annual_plate",
+    "chest_item:evil_belt"
   ]
 }

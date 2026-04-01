@@ -7,9 +7,9 @@ public class Keys {
 
 
     public static final KeyMapping KEY_MAPPING_LAZY_R =
-            (new KeyMapping("key.chest_item.r", InputConstants.KEY_R, "key.chest_item.r"));
+            (new KeyMapping("key.chest_item.r", InputConstants.KEY_R, "key.category.chest_item.chest"));
     public static final KeyMapping KEY_MAPPING_LAZY_C =
-            (new KeyMapping("key.chest_item.c", InputConstants.KEY_C, "key.chest_item.c"));
+            (new KeyMapping("key.chest_item.c", InputConstants.KEY_C, "key.category.chest_item.chest"));
 
 
 

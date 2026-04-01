@@ -18,10 +18,7 @@ import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.condensebone.*;
 import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
-import com.ytgld.chest_item.items.evil_mother.EvilBelt;
-import com.ytgld.chest_item.items.evil_mother.EvilMother;
-import com.ytgld.chest_item.items.evil_mother.MotherRemains;
-import com.ytgld.chest_item.items.evil_mother.TheKill;
+import com.ytgld.chest_item.items.evil_mother.*;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
@@ -248,6 +245,8 @@ public class    InitItems {
             (Identifier)-> new TheKill(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<@NotNull Item> EvilBelt_ = register("evil_belt",
             (Identifier)-> new EvilBelt(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> AnnualPlate_ = register("annual_plate",
+            (Identifier)-> new AnnualPlate(new Item.Properties().stacksTo(1)));
 
 
     public static final DeferredItem<Item> Pod_ = register("pod",
@@ -373,6 +372,7 @@ public class    InitItems {
                     output.accept(InitItems.MotherRemains_);
                     output.accept(InitItems.TheKill_);
                     output.accept(InitItems.EvilBelt_);
+                    output.accept(InitItems.AnnualPlate_);
 
 
                 }).build());
@@ -398,6 +398,7 @@ public class    InitItems {
             tag(evilMother).add(
                     MotherRemains_.asItem(),
                     TheKill_.asItem(),
+                    AnnualPlate_.asItem(),
                     EvilBelt_.asItem()
 
             );

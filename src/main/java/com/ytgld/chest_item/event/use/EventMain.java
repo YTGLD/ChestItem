@@ -22,6 +22,7 @@ import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
+import com.ytgld.chest_item.items.evil_mother.AnnualPlate;
 import com.ytgld.chest_item.items.evil_mother.EvilBelt;
 import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.items.evil_mother.TheKill;
@@ -200,6 +201,7 @@ public class EventMain {
     public void CriticalHitEvent(CriticalHitEvent event){
         Lead.event(event);
         AlienationDiodes.CriticalHitEvent(event);
+        AnnualPlate.dieAnnualPlate(event);
     }
     @SubscribeEvent
     public  void dieTotem(LivingUseTotemEvent event) {
@@ -223,7 +225,6 @@ public class EventMain {
         Warmaker.hurt(event);
         ChaosFortress.hurtRes(event);
         LeadOfEnlightenment.die(event);
-
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);
             if (resistance != null) {

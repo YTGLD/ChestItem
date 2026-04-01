@@ -6,6 +6,12 @@
   "chest_item.config.TheKill": "连续斩击的触发概率",
   "chest_item.config.TheKill2": "连斩次数",
 
+  "chest_item.config.AnnualPlate": "致命一击的概率",
+  "chest_item.config.AnnualPlate2": "致命一击的伤害倍率",
+  "chest_item.config.EvilMother": "邪母的”理智“所造成的属性倍率",
+  "chest_item.configuration.EvilMother": "邪母",
+  "chest_item.configuration.AnnualPlate": "邪母年盘",
+  "chest_item.configuration.AnnualPlate2": "邪母年盘2",
 
   "chest_item.config.ActualSuffering": "最大创伤之痕",
   "chest_item.config.AlienationDiodes": "暴击伤害",
@@ -814,6 +820,11 @@
   "item.chest_item.the_kill.string.1": "The last hit of the slash is a critical hit",
 "item.chest_item.evil_belt": "poison belt",
   "item.chest_item.evil_belt.string.0": "Gain absolute knockback resistance",
+
+"item.chest_item.annual_plate": "Evil Mother's Annual Plate",
+  "item.chest_item.annual_plate.string.0": "%d%% chance to trigger a critical hit when critical hit is inflicted",
+  "item.chest_item.annual_plate.string.1": "The damage multiplier of critical hits is %d%% of normal critical hits",
+
   "item.chest_item.evil_belt.string.1": "and make your flesh almost impossible to push",
   "item.chest_item.runaway_lining.string.2": "Permanently enhances the following accessories when worn:",
   "chest_item.config.RunawayLiningMin": "Chaos imposes minimum value for runaway lining",
