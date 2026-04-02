@@ -1,7 +1,9 @@
 package com.ytgld.chest_item.items.evil_mother;
 
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
+import com.ytgld.chest_item.items.InitItems;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -69,9 +71,14 @@ public class AnnualPlate extends EvilMother{
             return;
         }
         if (event.getEntity() instanceof Player player) {
-            if (Mth.nextInt(RandomSource.create(),1,100)<= ConfigItem.intValue.getAsInt()) {
-                hurtEnemy(event.getTarget(), player);
-                event.setDamageMultiplier((float) (event.getDamageMultiplier() * ConfigItem.intValue2.getAsDouble()));
+            if (Handler.has(player, InitItems.AnnualPlate_.asItem())) {
+                if (!player.getCooldowns().isOnCooldown(InitItems.AnnualPlate_.asItem())) {
+                    if (Mth.nextInt(RandomSource.create(), 1, 100) <= ConfigItem.intValue.getAsInt()) {
+                        hurtEnemy(event.getTarget(), player);
+                        event.setDamageMultiplier((float) (event.getDamageMultiplier() * ConfigItem.intValue2.getAsDouble()));
+                        player.getCooldowns().addCooldown(InitItems.AnnualPlate_.asItem(),20);
+                    }
+                }
             }
         }
     }
