@@ -1,17 +1,14 @@
 package com.ytgld.chest_item.renderer;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -28,6 +25,8 @@ import java.util.function.Supplier;
 
 public class ShieldRenderHandler {
 
+    private static final ResourceLocation ECG_TEXTURE = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID
+            , "textures/gui/beat1.png");
     public static ResourceLocation SOUL_WARD = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID
             ,"textures/gui/pain.png");
 
@@ -40,7 +39,15 @@ public class ShieldRenderHandler {
 
 
     public static float sizeHeartBeat;
+    public static float theAlpha = 0;
 
+    public static float heartBeat = 0;
+    public static boolean isHeartBeat = false;
+    public static float ecgAlpha = 1;
+    public static boolean isSEcg = false;
+    private static int scrollX = 0;
+
+    public static float time = 0;
     public static void tick(ClientTickEvent event) {
         var player = Minecraft.getInstance().player;
         if (player != null) {
@@ -66,17 +73,19 @@ public class ShieldRenderHandler {
                     aFloat = 1;
                     aFloatCool = 40;
                 }
-                if (now >= max) {
-                    if (glow < 40) {
-                        glow++;
-                    }
-                } else {
+                if (now < max) {
                     if (glow > 0) {
                         glow--;
                     }
                 }
                 if (lastShield != now) {
                     glow = 15;
+                    theAlpha = 1f;
+                }
+                if (theAlpha > 0.05f) {
+                    theAlpha -= 0.05f;
+                }else {
+                    theAlpha = 0;
                 }
                 lastShield = now;
                 displayedShield = Mth.lerp(0.2f, displayedShield, (float) now);
@@ -95,6 +104,7 @@ public class ShieldRenderHandler {
                 }
                 if (sin > 0.8) {
                     sizeHeartBeat = 1.05f;
+                    isHeartBeat = true;
                     if (sin > 0.85) {
                         sizeHeartBeat = 1.1f;
                         if (sin > 0.9f) {
@@ -102,7 +112,36 @@ public class ShieldRenderHandler {
                         }
                     }
                 } else {
+                    isHeartBeat = false;
                     sizeHeartBeat = 1f;
+                }
+
+                if (isSEcg) {
+                    scrollX = 32;
+                    ecgAlpha = 1F;
+                }
+
+                if (scrollX > 0) {
+                    scrollX -= 4;
+                    if (ecgAlpha > 0) {
+                        ecgAlpha -= 0.125f;
+                    }
+                }
+                time += 1;
+                if (time % 32 == 1) {
+                    isSEcg = true;
+                }else {
+                    isSEcg = false;
+                }
+
+                if (isHeartBeat) {
+                    if (heartBeat < 0.9) {
+                        heartBeat += 0.3f;
+                    }
+                }else {
+                    if (heartBeat > 0.2f) {
+                        heartBeat -= 0.2f;
+                    }
                 }
                 if (soundCool > 0) {
                     soundCool--;
@@ -113,6 +152,10 @@ public class ShieldRenderHandler {
     public static float aFloat = 1;
     public static float aFloatCool = 40;
     public static int soundCool = 1;
+
+    public static ResourceLocation glowingSmall = ResourceLocation.fromNamespaceAndPath(Chestitem.MODID
+            ,"textures/gui/evil_heart_glowing_small.png");
+
     public static void renderShield(GuiGraphics guiGraphics) {
         var minecraft = Minecraft.getInstance();
         var poseStack = guiGraphics.pose();
@@ -144,13 +187,45 @@ public class ShieldRenderHandler {
                                         32 * delta * sizeHeartBeat,
                                         32 * delta * sizeHeartBeat,
                                         1,1,1,s);
+                        renderECG(guiGraphics);
                     }
                     poseStack.popPose();
                 }
             }
         }
     }
+    public static void renderECG(GuiGraphics guiGraphics) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.options.hideGui) return;
 
+        var player = minecraft.player;
+        if (player == null || minecraft.level == null) return;
+
+        PoseStack poseStack = guiGraphics.pose();
+        poseStack.pushPose();
+        float s = aFloat;
+        if (s < 0) {
+            s = 0;
+        }
+        int left = guiGraphics.guiWidth() / 2;
+        int top = guiGraphics.guiHeight() - 47;
+        int size = 32;
+        new MGuiGraphics.GUI(GameRenderer::getPositionTexColorShader,true)
+                .blit(guiGraphics,
+                        ECG_TEXTURE,
+
+                        left - size/2, top - size/2,
+                        0,0,
+
+                        size - scrollX, size,
+                        size, size,
+
+                        1,1,1,Math.min(s,Math.max(0,Math.min(1,ecgAlpha)))
+
+                        );
+
+        poseStack.popPose();
+    }
 
     public static void thepainShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player player) {
