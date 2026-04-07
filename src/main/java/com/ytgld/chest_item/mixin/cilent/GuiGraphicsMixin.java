@@ -1,24 +1,21 @@
 package com.ytgld.chest_item.mixin.cilent;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
-import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
-import com.ytgld.chest_item.items.evil_mother.EvilMother;
+import com.ytgld.chest_item.items.evil_mother.IEvil;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.renderer.*;
 import com.ytgld.chest_item.renderer.i.IAbstractContainerScreen;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
-import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -26,8 +23,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -46,8 +41,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
 
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin implements IGuiGraphics {
@@ -177,7 +170,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                             Light.ARGB.color(0, 0, 10, 33),
                             Light.ARGB.color(255, 50, 255, 20),
                             Light.ARGB.color(255, 50, 50, 100));
-                } else if (tooltipStack.getItem() instanceof EvilMother) {
+                } else if (tooltipStack.getItem() instanceof IEvil) {
                     TooltipRenderUtil.renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400,
                             Light.ARGB.color(0, 0, 10, 33),
                             Light.ARGB.color(0, 0, 10, 33),
@@ -206,7 +199,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
                 si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 1000);
                 this.pose.popPose();
             }
-            if (tooltipStack.getItem() instanceof EvilMother) {
+            if (tooltipStack.getItem() instanceof IEvil) {
                 this.pose.pushPose();
                 si1_21_4$renderTooltipBackground_EvilMother((GuiGraphics) (Object) this, l, i1, i, j, 1000);
                 this.pose.popPose();

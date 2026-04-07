@@ -3,13 +3,14 @@ package com.ytgld.chest_item.other;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
+import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
+import com.ytgld.chest_item.items.reinforced.ReinforcedDataHandler;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -27,12 +28,8 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
-    @Override
-    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
+    public void renderMemory(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick){
         Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
-
         for (int i = 0; i < strings.size(); i++) {
             int guiLeft = (this.width - this.imageWidth) / 2 - 20;
             int guiTop = (this.height - this.imageHeight) / 2 + 20 * i;
@@ -43,6 +40,26 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
                 guiGraphics.renderTooltip(this.font, MemoryBase.getMemoryItem(player).get(i), mouseX, mouseY);
             }
         }
+    }
+    public void renderReinforced(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick){
+        Set<String> strings = player.getData(ReinforcedDataHandler.reinforced);
+        for (int i = 0; i < strings.size(); i++) {
+            int guiLeft = (this.width - this.imageWidth) / 2 - 15;
+            int guiTop = (this.height - this.imageHeight) / 2 + 20 * i;
+            guiGraphics.renderItem(ReinforcedBaseItem.getItems(player).get(i), guiLeft, guiTop);
+            int appleSize = 16;
+            if (mouseX >= guiLeft && mouseX < guiLeft + appleSize &&
+                    mouseY >= guiTop && mouseY < guiTop + appleSize) {
+                guiGraphics.renderTooltip(this.font, ReinforcedBaseItem.getItems(player).get(i), mouseX, mouseY);
+            }
+        }
+    }
+    @Override
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
+        this.renderMemory(guiGraphics, mouseX, mouseY, partialTick);
+        this.renderReinforced(guiGraphics, mouseX, mouseY, partialTick);
     }
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = (this.width - this.imageWidth) / 2;

@@ -72,9 +72,7 @@ public abstract class MemoryBase extends Item {
         return UseAnim.DRINK;
     }
 
-    private ResourceLocation nameSResourceLocation (){
-        return ResourceLocation.fromNamespaceAndPath(memoryName().path,memoryName().name);
-    }
+    private ResourceLocation nameSResourceLocation (){return ResourceLocation.fromNamespaceAndPath(memoryName().path,memoryName().name);}
     private int max(Player player){
         return (int) (player.getAttributeValue(MemoryAttreg.maxMemory));
     }

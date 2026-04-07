@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public abstract class EvilMother extends ItemBase implements IBlackLight {
+public abstract class EvilMother extends ItemBase implements IBlackLight , IEvil {
     public EvilMother(Properties properties) {
         super(properties);
     }
@@ -160,4 +160,5 @@ public abstract class EvilMother extends ItemBase implements IBlackLight {
         return ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                 "textures/evil_mother/cube.png");
     }
+
 }

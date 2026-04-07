@@ -386,16 +386,26 @@ public class EventMain {
         ChaosFortress.hurtBy2(event);
 
         if (event.getSource().getEntity() instanceof LivingEntity living){
+            //1.3
             AttributeInstance instability = living.getAttribute(AttReg.instability);
             if (instability != null) {
                 float value = (float) instability.getValue();
                 float v1 = value - 1;
+                //0.3
                 if (v1>0) {
+                    //-0.3
+                    //0.345
                     float apply = Mth.nextFloat(RandomSource.create(), -v1,v1*1.15f);
+                    if (apply > 0.5f) {
+                        apply = 0.5f;
+                    }
                     event.setAmount(event.getAmount()*(1+apply));
                 }else if (v1 != 0){
                     if (v1 < 0) {
                         v1 = -v1;
+                    }
+                    if (v1 > 0.25f) {
+                        v1 = 0.25f;
                     }
                     event.setAmount(event.getAmount()*(1+v1));
                 }
@@ -407,10 +417,16 @@ public class EventMain {
                 float v1 = value - 1;
                 if (v1>0) {
                     float apply = Mth.nextFloat(RandomSource.create(), -v1*1.15f,v1);
+                    if (apply > 0.5f) {
+                        apply = 0.5f;
+                    }
                     event.setAmount(event.getAmount()*(1+apply));
                 }else if (v1 != 0){
                     if (v1 < 0) {
                         v1 = -v1;
+                    }
+                    if (v1 > 0.25f) {
+                        v1 = 0.25f;
                     }
                     event.setAmount(event.getAmount()*(1+v1));
                 }

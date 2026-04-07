@@ -26,7 +26,7 @@ public class TheMemoryDataHandler {
                     .build()
     );
 
-    private static class StringSetSync implements AttachmentSyncHandler<Set<String>> {
+    public static class StringSetSync implements AttachmentSyncHandler<Set<String>> {
 
         @Override
         public void write(RegistryFriendlyByteBuf buf, Set<String> attachment, boolean initialSync) {
@@ -53,9 +53,7 @@ public class TheMemoryDataHandler {
             return holder == to;
         }
     }
-
-    // Codec 用于序列化到 NBT
-    private static class StringSetCodec {
+    public static class StringSetCodec {
         public static final Codec<Set<String>> CODEC = Codec.STRING.listOf()
                 .xmap(HashSet::new, ArrayList::new);
     }

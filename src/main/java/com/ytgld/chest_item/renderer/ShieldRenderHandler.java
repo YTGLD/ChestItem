@@ -187,6 +187,33 @@ public class ShieldRenderHandler {
                                         32 * delta * sizeHeartBeat,
                                         32 * delta * sizeHeartBeat,
                                         1,1,1,s);
+                        float value = (float) player.getAttributeValue(AttReg.theSanity);
+                        float base = (float) player.getAttributeBaseValue(AttReg.theSanity);
+                        if (value < base) {
+
+                            float lvl = value / base;
+                            float now = (1 - (lvl));
+
+                            if (now < 0) {
+                                now = 0;
+                            }
+                            if (now > 1) {
+                                now = 1;
+                            }
+
+                            int size = 64;
+                            new MGuiGraphics.GUI(GameRenderer::getPositionTexColorShader, false)
+                                    .blit(guiGraphics, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID
+                                                    ,"textures/gui/sanity_heart.png"),
+                                            (left - (size * delta * sizeHeartBeat) / 2), (top - (size * delta * sizeHeartBeat) / 2),
+                                            0, 0,
+                                            size * delta * sizeHeartBeat,
+                                            size * delta * sizeHeartBeat,
+                                            size * delta * sizeHeartBeat,
+                                            size * delta * sizeHeartBeat,
+                                            1, 1, 1, now);
+                        }
+
                         renderECG(guiGraphics);
                     }
                     poseStack.popPose();
