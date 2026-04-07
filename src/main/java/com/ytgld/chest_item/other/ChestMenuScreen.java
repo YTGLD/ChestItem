@@ -31,7 +31,7 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
     public void renderMemory(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick){
         Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
         for (int i = 0; i < strings.size(); i++) {
-            int guiLeft = (this.width - this.imageWidth) / 2 - 20;
+            int guiLeft = (this.width - this.imageWidth) / 2 - 24;
             int guiTop = (this.height - this.imageHeight) / 2 + 20 * i;
             guiGraphics.renderItem(MemoryBase.getMemoryItem(player).get(i), guiLeft, guiTop);
             int appleSize = 16;
@@ -44,13 +44,13 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
     public void renderReinforced(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick){
         Set<String> strings = player.getData(ReinforcedDataHandler.reinforced);
         for (int i = 0; i < strings.size(); i++) {
-            int guiLeft = (this.width - this.imageWidth) / 2 - 15;
+            int guiLeft = (this.width - this.imageWidth) / 2 - 8;
             int guiTop = (this.height - this.imageHeight) / 2 + 20 * i;
-            guiGraphics.renderItem(ReinforcedBaseItem.getItems(player).get(i), guiLeft, guiTop);
+            guiGraphics.renderItem(ReinforcedBaseItem.getItems(player).get(i).getDefaultInstance(), guiLeft, guiTop);
             int appleSize = 16;
             if (mouseX >= guiLeft && mouseX < guiLeft + appleSize &&
                     mouseY >= guiTop && mouseY < guiTop + appleSize) {
-                guiGraphics.renderTooltip(this.font, ReinforcedBaseItem.getItems(player).get(i), mouseX, mouseY);
+                guiGraphics.renderTooltip(this.font, ReinforcedBaseItem.getItems(player).get(i).getDefaultInstance(), mouseX, mouseY);
             }
         }
     }

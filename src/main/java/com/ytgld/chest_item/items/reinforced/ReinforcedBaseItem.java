@@ -1,7 +1,11 @@
 package com.ytgld.chest_item.items.reinforced;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.evil_mother.IEvil;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -11,6 +15,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,12 +34,17 @@ public class ReinforcedBaseItem extends Item implements IEvil {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        addReinforcedItem(player);
-        player.level().playSound(null,player.blockPosition(), SoundEvents.ARMOR_EQUIP_NETHERITE.value(), SoundSource.AMBIENT,1,1);
-        return super.use(level, player, usedHand);
+        ItemStack itemstack = player.getItemInHand(usedHand);
+        if (addReinforcedItem(player)) {
+            player.level().playSound(null, player.blockPosition(), SoundEvents.ARMOR_EQUIP_NETHERITE.value(), SoundSource.AMBIENT, 1, 1);
+            itemstack.shrink(1);
+        }else if (!player.level().isClientSide){
+            player.displayClientMessage(Component.translatable("event.chest_item.reinforced.can_not"),false);
+        }
+        return InteractionResultHolder.pass(itemstack);
     }
 
-    private void addReinforcedItem(Player player){
+    private boolean addReinforcedItem(Player player){
         Set<String> strings = player.getData(ReinforcedDataHandler.reinforced);
         List<Integer> integers = new ArrayList<>();
         for (String ignored : strings){
@@ -45,7 +56,9 @@ public class ReinforcedBaseItem extends Item implements IEvil {
         }
         if (s < max(player)){
             strings.add(nameSResourceLocation().toString());
+            return true;
         }
+        return false;
     }
     private int max(Player player){
         return (int) (player.getAttributeValue(ReinforcedAttreg.maxReinforced));
@@ -55,13 +68,13 @@ public class ReinforcedBaseItem extends Item implements IEvil {
         return BuiltInRegistries.ITEM.getKey(this.name());
     }
 
-    public static List<ItemStack> getItems(Player player) {
+    public static List<Item> getItems(Player player) {
         Set<String> strings = player.getData(ReinforcedDataHandler.reinforced);
-        List<ItemStack> list = new ArrayList<>();
+        List<Item> list = new ArrayList<>();
         for (String string : strings) {
             String[] parts = string.split(":");
             Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(parts[0], parts[1]));
-            list.add(item.getDefaultInstance());
+            list.add(item);
         }
         return list;
     }
@@ -69,7 +82,16 @@ public class ReinforcedBaseItem extends Item implements IEvil {
     public Item name(){
         return this;
     };
-
+    public Multimap<Holder<Attribute>, AttributeModifier> attributeUse(Player player){
+        return HashMultimap.create();
+    }
+    public final Multimap<Holder<Attribute>, AttributeModifier> doAttribute(Player player){
+        Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap = attributeUse(player);
+        attributeModifierMultimap.put(AttReg.theSanity, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                this.asItem().getDescriptionId()),
+                -1, AttributeModifier.Operation.ADD_VALUE));
+        return attributeModifierMultimap;
+    }
     @Override
     public @NotNull Component getName(ItemStack stack) {
         Component component = super.getName(stack);
@@ -77,8 +99,23 @@ public class ReinforcedBaseItem extends Item implements IEvil {
         co.setStyle(Style.EMPTY.withColor(color));
         return co;
     }
-    public static boolean hasReinforcedItem(Player player ,String string){
+    public static boolean hasReinforcedItem(Player player ,Item item){
         Set<String> strings = player.getData(ReinforcedDataHandler.reinforced);
-        return strings.contains(Chestitem.MODID + ":" + string);
+        ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(item);
+        return strings.contains(resourceLocation.toString());
+    }
+    public static boolean hasDecayHeart(Player player){
+        return player.getAttributeValue(AttReg.theSanity) <= 0;
+    }
+
+    public static double getPainHeartValue(Player player){
+        return player.getData(AttReg.painShield);
+    }
+
+    public static boolean decayHeartIsZero(Player player){
+        if (ReinforcedBaseItem.hasDecayHeart(player)) {
+            return ReinforcedBaseItem.getPainHeartValue(player) <= 0;
+        }
+        return false;
     }
 }

@@ -30,6 +30,7 @@ import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
 import com.ytgld.chest_item.items.other.*;
+import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
@@ -126,6 +127,28 @@ public class EventMain {
         List<Component> attributesTooltip = new ArrayList<>();
         Player player = context.player();
         if (player!=null) {
+            if (stack.getItem() instanceof ReinforcedBaseItem reinforcedBaseItem) {
+                Multimap<Holder<Attribute>, AttributeModifier> attributes = reinforcedBaseItem.doAttribute(player);
+                if (!attributes.isEmpty()) {
+                    attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
+                    evt.addTooltipLines(Component.empty());
+
+                    attributesTooltip.add(Component.translatable("event.chest_item.reinforced").withStyle(Style.EMPTY.withColor(Light.ARGB.color(50,80,120,105))));
+
+                    AttributeUtil.applyTextFor(
+                            stack,
+                            attributesTooltip::add,
+                            attributes,
+                            AttributeTooltipContext.of(player, context, context.flag()));
+
+
+                    for (Component component : attributesTooltip) {
+                        MutableComponent co = component.copy();
+                        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(Light.ARGB.color(50,80,120,105))));
+                        evt.addTooltipLines(co);
+                    }
+                }
+            }
             if (stack.getItem() instanceof Terror terror) {
                 Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player,stack);
                 if (attributes != null && !attributes.isEmpty()) {

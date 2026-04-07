@@ -249,6 +249,8 @@
   "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
   "entity.chest_item.laser_column": "???",
   "event.chest_item.equip": "When placed in a magic box：",
+  "event.chest_item.reinforced.can_not": "You can no longer equip more enhancements",
+  "event.chest_item.reinforced": "When equipped as an augment：",
   "chest_item.the_imprint_of_the_soul.1": "Treaty",
   "chest_item.the_imprint_of_the_soul.2": "Crazy Theory",
     "chest_item.the_imprint_of_the_soul": "Eternal slave seal",

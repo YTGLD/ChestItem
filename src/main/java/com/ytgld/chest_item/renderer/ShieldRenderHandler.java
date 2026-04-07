@@ -211,7 +211,7 @@ public class ShieldRenderHandler {
                                             size * delta * sizeHeartBeat,
                                             size * delta * sizeHeartBeat,
                                             size * delta * sizeHeartBeat,
-                                            1, 1, 1, now);
+                                            1, 1, 1, Math.min(s,now));
                         }
 
                         renderECG(guiGraphics);

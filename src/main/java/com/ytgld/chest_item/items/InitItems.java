@@ -25,6 +25,7 @@ import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
+import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -373,6 +374,7 @@ public class    InitItems {
                     output.accept(InitItems.TheKill_);
                     output.accept(InitItems.EvilBelt_);
                     output.accept(InitItems.AnnualPlate_);
+                    output.accept(ReinforcedItems.Strengthen_);
 
 
                 }).build());

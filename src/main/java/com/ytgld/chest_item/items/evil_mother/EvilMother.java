@@ -92,8 +92,8 @@ public abstract class EvilMother extends ItemBase implements IBlackLight , IEvil
     private static Multimap<Holder<Attribute>, AttributeModifier> theAttrib(Player player) {
         Multimap<Holder<Attribute> , AttributeModifier> attributeModifierMultimap = HashMultimap.create();
         ResourceLocation resourceLocation = ResourceLocation.parse(Chestitem.MODID + "evil_mother");
-        float value = (float) player.getAttributeValue(AttReg.theSanity);
-        float base = (float) player.getAttributeBaseValue(AttReg.theSanity);
+        float value = (float) getSanValue(player);
+        float base = (float) getSanValueBase(player);
         float armor = 0 , damage = 0 ,heal = 0, xp = 0,speed = 0;
         float res = 0;
         if (value != base) {
@@ -160,5 +160,10 @@ public abstract class EvilMother extends ItemBase implements IBlackLight , IEvil
         return ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                 "textures/evil_mother/cube.png");
     }
-
+    public static double getSanValue(Player player){
+        return player.getAttributeValue(AttReg.theSanity);
+    }
+    public static double getSanValueBase(Player player) {
+        return player.getAttributeBaseValue(AttReg.theSanity);
+    }
 }
