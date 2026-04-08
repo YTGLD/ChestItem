@@ -3,6 +3,7 @@ package com.ytgld.chest_item.items.memory.items;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.effect.Effects;
@@ -11,6 +12,7 @@ import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.MemoryItems;
+import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -108,12 +110,7 @@ public class ForeverCurtain extends MemoryBase {
                         }
                     }
                     if (player.tickCount % 100 == 0) {
-                        AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
-                        if (maxShield != null) {
-                            if (player.getData(supplier) <= maxShield.getValue()) {
-                                player.setData(supplier, player.getData(supplier) + 0.5f);
-                            }
-                        }
+                        Handler.addHeartShield(player,0.5f);
                     }
                 } else {
                     if (player.getAttributes().hasModifier(AttReg.painShield_number, resourceLocation)) {

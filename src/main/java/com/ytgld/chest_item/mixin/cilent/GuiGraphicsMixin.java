@@ -131,7 +131,7 @@ public abstract class GuiGraphicsMixin implements IGuiGraphics {
         if (!ConfigC.config.RenderItemTooltip.get()){
             return;
         }
-        if (tooltipStack.getItem() instanceof ItemBase || tooltipStack.getItem() instanceof MemoryBase.BaseTooltip) {
+        if (tooltipStack.getItem() instanceof ItemBase || tooltipStack.getItem() instanceof MemoryBase.BaseTooltip || tooltipStack.getItem() instanceof IEvil) {
             RenderTooltipEvent.Pre preEvent = ClientHooks.onRenderTooltipPre(this.tooltipStack, (GuiGraphics) (Object) this, x, y, guiWidth(), guiHeight(), p_282615_, p_282675_, p_282442_);
 
             int i = 0;

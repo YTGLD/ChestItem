@@ -213,7 +213,7 @@
   "attribute.name.max_memory.heal": "最大信仰数",
   "event.chest_item.reinforced": "作为增强件装备时：",
   "event.chest_item.reinforced.can_not": "你无法再装备更多的增强件了",
-
+  "item.chest_item.reinforced.equipped": "可以右键来装备",
 
   "item.chest_item.contradiction": "瓶子",
   "item.chest_item.contradiction.string.1": "舍弃幽影，获得伤害减免",
@@ -879,6 +879,9 @@
   "item.chest_item.annual_plate.string.1": "致命一击的伤害倍率为正常暴击的%d%%",
 
 
+
+  "item.chest_item.strengthen": "强化衬件",
+  "item.chest_item.strengthen.string.0": "腐朽之心在被摧毁时给予额外的护甲，速度，抗性",
 
 
 

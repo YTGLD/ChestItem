@@ -2,21 +2,46 @@ package com.ytgld.chest_item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.ChestItemMenu;
 import com.ytgld.chest_item.other.IPlayer;
+import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.attachment.AttachmentType;
 
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class Handler {
+    public static void addHeartShield(Player player ,float number){
+        if (isInHeartShieldCooldown(player)){
+            return;
+        }
+        Supplier<AttachmentType<Float>> supplier = AttReg.painShield;
+        AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
+        if (maxShield != null) {
+            if (player.getData(supplier) <= maxShield.getValue()) {
+                player.setData(supplier, player.getData(supplier) + number);
+            }
+        }
+    }
+    public static boolean isInHeartShieldCooldown(LivingEntity living){
+        if (living instanceof Player player){
+            int cooldown = player.getData(AttReg.theHeartCooldown);
+            return cooldown > 0;
+        }
+        return false;
+    }
     public static boolean has(Player player, Item item){
         ChestInventory chestInventory= getItem(player);
         if (chestInventory != null) {

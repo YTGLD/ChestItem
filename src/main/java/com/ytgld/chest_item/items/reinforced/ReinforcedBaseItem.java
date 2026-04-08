@@ -15,11 +15,13 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,11 +29,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ReinforcedBaseItem extends Item implements IEvil {
+public abstract class ReinforcedBaseItem extends Item implements IEvil {
     public ReinforcedBaseItem(Properties properties) {
         super(properties);
+        ReinforcedLoot.lListItems.add(this);
     }
 
+    public abstract int sanDown();
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemstack = player.getItemInHand(usedHand);
@@ -49,6 +53,9 @@ public class ReinforcedBaseItem extends Item implements IEvil {
         List<Integer> integers = new ArrayList<>();
         for (String ignored : strings){
             integers.add(1);
+        }
+        if (strings.contains(nameSResourceLocation().toString())){
+            return false;
         }
         int  s = 0;
         for (Integer ignored : integers){
@@ -89,7 +96,7 @@ public class ReinforcedBaseItem extends Item implements IEvil {
         Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap = attributeUse(player);
         attributeModifierMultimap.put(AttReg.theSanity, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 this.asItem().getDescriptionId()),
-                -1, AttributeModifier.Operation.ADD_VALUE));
+                sanDown(), AttributeModifier.Operation.ADD_VALUE));
         return attributeModifierMultimap;
     }
     @Override
@@ -104,11 +111,18 @@ public class ReinforcedBaseItem extends Item implements IEvil {
         ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(item);
         return strings.contains(resourceLocation.toString());
     }
-    public static boolean hasDecayHeart(Player player){
-        return player.getAttributeValue(AttReg.theSanity) <= 0;
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        text(stack,tooltipComponents);
+    }
+    public void text(ItemStack stack,List<Component> tooltipComponents){
+
     }
 
-    public static double getPainHeartValue(Player player){
+    private static boolean hasDecayHeart(Player player){
+        return player.getAttributeValue(AttReg.theSanity) <= 0;
+    }
+    private static double getPainHeartValue(Player player){
         return player.getData(AttReg.painShield);
     }
 
@@ -117,5 +131,20 @@ public class ReinforcedBaseItem extends Item implements IEvil {
             return ReinforcedBaseItem.getPainHeartValue(player) <= 0;
         }
         return false;
+    }
+    public static boolean canLoot(Player player){
+        return player.getAttributeValue(AttReg.theSanity) < 10;
+    }
+    public static int getSanValue(Player player){
+        int sna = (int) player.getAttributeValue(AttReg.theSanity);
+        int base = (int) player.getAttributeBaseValue(AttReg.theSanity);
+        if (sna != base) {
+            int cha = sna - base;
+            if (cha < 0) {
+                cha = -cha;
+                return cha;
+            }
+        }
+        return 0;
     }
 }

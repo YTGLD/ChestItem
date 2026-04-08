@@ -22,10 +22,7 @@ import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
-import com.ytgld.chest_item.items.evil_mother.AnnualPlate;
-import com.ytgld.chest_item.items.evil_mother.EvilBelt;
-import com.ytgld.chest_item.items.evil_mother.EvilMother;
-import com.ytgld.chest_item.items.evil_mother.TheKill;
+import com.ytgld.chest_item.items.evil_mother.*;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
@@ -582,6 +579,11 @@ public class EventMain {
     }
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
+        if (event.getItemStack().getItem() instanceof ReinforcedBaseItem) {
+            event.getToolTip().add(1, Component.literal(""));
+            event.getToolTip().add(1, Component.translatable("item.chest_item.reinforced.equipped").withStyle(Style.EMPTY
+                    .withColor(IEvil.color)));
+        }
         if (event.getItemStack().getItem() instanceof ItemBase) {
             if (event.getItemStack().getItem() instanceof EvilMother evilMother) {
                 event.getToolTip().add(1, Component.literal(""));

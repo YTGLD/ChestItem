@@ -1,7 +1,6 @@
 package com.ytgld.chest_item.items.reinforced;
 
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.items.memory.items.Bluster;
 import com.ytgld.chest_item.items.reinforced.items.Strengthen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

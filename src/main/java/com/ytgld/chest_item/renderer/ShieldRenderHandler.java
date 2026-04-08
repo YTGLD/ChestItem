@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.Chestitem;
@@ -22,6 +23,8 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
+
+import static com.ytgld.chest_item.Handler.isInHeartShieldCooldown;
 
 public class ShieldRenderHandler {
 
@@ -315,51 +318,51 @@ public class ShieldRenderHandler {
         }
     }
     public static void tickShield(LivingEntity living){
-
         tickCooldown(living);
+        if (!isInHeartShieldCooldown(living)) {
+            if (living instanceof Player player && !player.level().isClientSide()) {
+                AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
+                AttributeInstance speed = player.getAttribute(AttReg.painShield_speed);
+                if (maxShield != null && speed != null) {
+                    if (maxShield.getValue() <= 0) {
+                        return;
+                    }
+                    Supplier<AttachmentType<Float>> supplier = AttReg.painShield;
+                    if (player.getData(supplier) <= maxShield.getValue()) {
+                        {
+                            float other = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                            if (other > 0) {
+                                addPain(player, speed.getValue(), other / 3);
+                                player.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                            }
+                        }
+                        {
+                            float other = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                            if (other > 0) {
+                                addPain(player, speed.getValue(), other);
+                                player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                            }
+                        }
+                        {
+                            float other = player.getData(AttReg.chaosWinds);
+                            if (other > 0) {
+                                addPain(player, speed.getValue(), other / 4);
+                                player.setData(AttReg.chaosWinds, 0f);
+                            }
+                        }
+                    } else {
+                        player.setData(AttReg.chaosWinds, 0f);
+                        player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                        player.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
 
-        if (living instanceof Player player && !player.level().isClientSide()) {
-            AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
-            AttributeInstance speed = player.getAttribute(AttReg.painShield_speed);
-            if (maxShield != null && speed != null) {
-                if (maxShield.getValue() <= 0) {
-                    return;
-                }
-                Supplier<AttachmentType<Float>> supplier = AttReg.painShield;
-                if (player.getData(supplier) <= maxShield.getValue()) {
-                    {
-                        float other = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
-                        if (other > 0) {
-                            addPain(player, speed.getValue(), supplier, other / 3);
-                            player.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
-                        }
                     }
-                    {
-                        float other = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
-                        if (other > 0) {
-                            addPain(player, speed.getValue(), supplier, other);
-                            player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
-                        }
-                    }
-                    {
-                        float other = player.getData(AttReg.chaosWinds);
-                        if (other > 0) {
-                            addPain(player, speed.getValue(), supplier, other / 4);
-                            player.setData(AttReg.chaosWinds, 0f);
-                        }
-                    }
-                }else {
-                    player.setData(AttReg.chaosWinds, 0f);
-                    player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
-                    player.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
-
                 }
             }
         }
     }
     public static boolean canHeal(LivingEntity living){
-        if (isInCooldown(living)) {
-            return false;
+        if (isInHeartShieldCooldown(living)) {
+            return true;
         }
         if (living instanceof Player player) {
             AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
@@ -370,19 +373,11 @@ public class ShieldRenderHandler {
         }
         return true;
     }
-    public static boolean isInCooldown(LivingEntity living){
-        if (living instanceof Player player){
-            int cooldown = player.getData(AttReg.theHeartCooldown);
-            if (cooldown > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
+
     public static void tickCooldown(LivingEntity living){
         if (living instanceof Player player) {
             if (!player.level().isClientSide) {
-                if (isInCooldown(living)) {
+                if (isInHeartShieldCooldown(living)) {
                     player.setData(AttReg.theHeartCooldown, player.getData(AttReg.theHeartCooldown) - 1);
                 }
                 if (player.getData(AttReg.theHeartCooldown) < 0) {
@@ -398,7 +393,7 @@ public class ShieldRenderHandler {
             }
         }
     }
-    public static void addPain(Player player, double speed, Supplier<AttachmentType<Float>> supplier,float add) {
-        player.setData(supplier,player.getData(supplier) + add * (float) speed);
+    public static void addPain(Player player, double speed, float add) {
+        Handler.addHeartShield(player,add * (float) speed);
     }
 }
