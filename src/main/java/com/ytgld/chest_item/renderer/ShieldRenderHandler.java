@@ -308,11 +308,16 @@ public class ShieldRenderHandler {
                     aFloatCool = 40;
                 } else {
                     player.setData(AttReg.painShield, 0f);
+                    int time = 200;
+                    addCooldown(player,time);
                 }
             }
         }
     }
     public static void tickShield(LivingEntity living){
+
+        tickCooldown(living);
+
         if (living instanceof Player player && !player.level().isClientSide()) {
             AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
             AttributeInstance speed = player.getAttribute(AttReg.painShield_speed);
@@ -353,6 +358,9 @@ public class ShieldRenderHandler {
         }
     }
     public static boolean canHeal(LivingEntity living){
+        if (isInCooldown(living)) {
+            return false;
+        }
         if (living instanceof Player player) {
             AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
             if (maxShield != null) {
@@ -362,9 +370,35 @@ public class ShieldRenderHandler {
         }
         return true;
     }
-
+    public static boolean isInCooldown(LivingEntity living){
+        if (living instanceof Player player){
+            int cooldown = player.getData(AttReg.theHeartCooldown);
+            if (cooldown > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static void tickCooldown(LivingEntity living){
+        if (living instanceof Player player) {
+            if (!player.level().isClientSide) {
+                if (isInCooldown(living)) {
+                    player.setData(AttReg.theHeartCooldown, player.getData(AttReg.theHeartCooldown) - 1);
+                }
+                if (player.getData(AttReg.theHeartCooldown) < 0) {
+                    player.setData(AttReg.theHeartCooldown, 0);
+                }
+            }
+        }
+    }
+    public static void addCooldown(LivingEntity living,int time){
+        if (living instanceof Player player) {
+            if (!player.level().isClientSide) {
+                player.setData(AttReg.theHeartCooldown, time);
+            }
+        }
+    }
     public static void addPain(Player player, double speed, Supplier<AttachmentType<Float>> supplier,float add) {
         player.setData(supplier,player.getData(supplier) + add * (float) speed);
-
     }
 }

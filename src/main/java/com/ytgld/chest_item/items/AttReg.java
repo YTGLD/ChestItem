@@ -2,6 +2,7 @@ package com.ytgld.chest_item.items;
 
 import com.mojang.serialization.Codec;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.other.IntSyncHandler;
 import com.ytgld.chest_item.other.SyncHandler;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -140,6 +141,11 @@ public class AttReg {
     public static final Supplier<AttachmentType<Float>> painShield = ATTACHMENT_TYPES.register(
             "pain_shield", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.
                     fieldOf("pain_shield").codec()).build()
+
+    );
+    public static final Supplier<AttachmentType<Integer>> theHeartCooldown = ATTACHMENT_TYPES.register(
+            "cooldown", () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler()).serialize(Codec.INT.
+                    fieldOf("cooldown").codec()).build()
 
     );
     /**
