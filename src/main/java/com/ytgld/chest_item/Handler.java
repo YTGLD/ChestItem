@@ -3,6 +3,7 @@ package com.ytgld.chest_item;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.reinforced.items.Excite;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.ChestItemMenu;
 import com.ytgld.chest_item.other.IPlayer;
@@ -31,6 +32,9 @@ public class Handler {
         AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
         if (maxShield != null) {
             if (player.getData(supplier) <= maxShield.getValue()) {
+
+                number = Excite.doINtHeal(number, player);
+
                 player.setData(supplier, player.getData(supplier) + number);
             }
         }

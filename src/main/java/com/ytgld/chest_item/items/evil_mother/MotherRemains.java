@@ -7,6 +7,6 @@ public class MotherRemains extends EvilMother{
 
     @Override
     public int getSanity() {
-        return 0;
+        return -1;
     }
 }

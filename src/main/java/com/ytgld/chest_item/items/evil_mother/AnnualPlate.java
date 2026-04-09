@@ -163,6 +163,6 @@ public class AnnualPlate extends EvilMother{
 
     @Override
     public int getSanity() {
-        return -2;
+        return -4;
     }
 }

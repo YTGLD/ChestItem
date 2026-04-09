@@ -375,6 +375,8 @@ public class    InitItems {
                     output.accept(InitItems.EvilBelt_);
                     output.accept(InitItems.AnnualPlate_);
                     output.accept(ReinforcedItems.Strengthen_);
+                    output.accept(ReinforcedItems.Accelerated_);
+                    output.accept(ReinforcedItems.Excite_);
 
 
                 }).build());
@@ -401,6 +403,9 @@ public class    InitItems {
                     MotherRemains_.asItem(),
                     TheKill_.asItem(),
                     AnnualPlate_.asItem(),
+                    ReinforcedItems.Accelerated_.asItem(),
+                    ReinforcedItems.Excite_.asItem(),
+                    ReinforcedItems.Strengthen_.asItem(),
                     EvilBelt_.asItem()
 
             );
@@ -437,6 +442,7 @@ public class    InitItems {
                     .add(Meat_Ball.asItem())
                     .add(ScarHeart_.asItem())
                     .add(Self_Increasing_Heart.asItem())
+                    .add(FleshAndBloodGears_.asItem())
                     .add(Stomach_.asItem());
 
 
@@ -452,6 +458,7 @@ public class    InitItems {
                     .add(Knife_.asItem())
                     .add(Lead_.asItem())
                     .add(DriftingBottles_.asItem())
+                    .add(FissionEmblem_.asItem())
                     .add(WindKnife_.asItem());
 
             tag(chestItem)

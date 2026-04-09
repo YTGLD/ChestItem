@@ -312,7 +312,7 @@ public class ShieldRenderHandler {
                 } else {
                     player.setData(AttReg.painShield, 0f);
                     int time = 200;
-                    addCooldown(player,time);
+                    addCooldown(player, (int) player.getAttributeValue(AttReg.shield_cooldown));
                 }
             }
         }

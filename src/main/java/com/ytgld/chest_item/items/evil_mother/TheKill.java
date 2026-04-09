@@ -181,6 +181,6 @@ public class TheKill extends EvilMother{
 
     @Override
     public int getSanity() {
-        return -2;
+        return -3;
     }
 }

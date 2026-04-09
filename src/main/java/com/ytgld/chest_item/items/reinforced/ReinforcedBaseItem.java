@@ -119,10 +119,10 @@ public abstract class ReinforcedBaseItem extends Item implements IEvil {
 
     }
 
-    private static boolean hasDecayHeart(Player player){
+    public static boolean hasDecayHeart(Player player){
         return player.getAttributeValue(AttReg.theSanity) <= 0;
     }
-    private static double getPainHeartValue(Player player){
+    public static double getPainHeartValue(Player player){
         return player.getData(AttReg.painShield);
     }
 

@@ -15,7 +15,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ReinforcedAttreg {
     public static final DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, Chestitem.MODID);
     public static final DeferredHolder<Attribute,?> maxReinforced = REGISTRY.register("max_reinforced",()->{
-        return new RangedAttribute("attribute.name.max_reinforced.heal", 0, 0, 10).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.max_reinforced", 0, 0, 10).setSyncable(true);
     });
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){

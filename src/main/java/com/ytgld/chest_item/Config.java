@@ -18,10 +18,6 @@ public class Config {
             doEndComingUp =  builder
                     .translation("chest_item.config.doEndComingUp")
                     .define("doEndComingUp", true);
-            chaosFortress =  builder
-                    .translation("chest_item.config.chaosFortress")
-                    .defineInRange("chaosFortress", 5000,1,Integer.MAX_VALUE);
-
             for (RegisterItemConfig registerItemConfig : ConfigPluginFinder.getModPlugins()){
                 registerItemConfig.config(builder);
             }
@@ -29,5 +25,4 @@ public class Config {
         builder.pop();
     }
     public final ModConfigSpec.BooleanValue doEndComingUp;
-    public final ModConfigSpec.IntValue chaosFortress;
 }

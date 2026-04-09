@@ -46,7 +46,7 @@ public class HeavyBlade extends ItemBase implements Meat {
                     .defineInRange("number",30f,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.HeavyBlade2")
                     .defineInRange("number2",25f,0,Integer.MAX_VALUE);
-            intValue3 =  builder.translation("chest_item.config.HeavyBlade2")
+            intValue3 =  builder.translation("chest_item.config.HeavyBlade3")
                     .defineInRange("number3",20f,0,Integer.MAX_VALUE);
             builder.pop();
         }

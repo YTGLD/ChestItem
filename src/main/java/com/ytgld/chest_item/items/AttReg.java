@@ -148,6 +148,9 @@ public class AttReg {
                     fieldOf("cooldown").codec()).build()
 
     );
+    public static final DeferredHolder<Attribute,?>  shield_cooldown = REGISTRY.register("shield_cooldown",()->{
+        return new RangedAttribute("attribute.name.chest_item.shield_cooldown", 200, -1024, 1024).setSyncable(true);
+    });
     /**
      * 邪母的嬗变
      */
@@ -191,6 +194,7 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.painShield_speed,1);
 
         event.add(EntityType.PLAYER , AttReg.theSanity,10);
+        event.add(EntityType.PLAYER , AttReg.shield_cooldown,200);
 
     }
 }

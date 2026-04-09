@@ -82,11 +82,14 @@ public class Warmaker extends ItemBlackShadow implements ITheChaos {
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
         public static ModConfigSpec.DoubleValue intValue ;
+        public static ModConfigSpec.BooleanValue intValue2 ;
         @Override
         public void config(ModConfigSpec.Builder builder) {
             builder.push("Warmaker");
             intValue =  builder.translation("chest_item.config.Warmaker")
                     .defineInRange("number",1F,1,Integer.MAX_VALUE);
+            intValue2 =  builder.translation("chest_item.config.Warmaker2")
+                    .define("number2",true);
             builder.pop();
         }
 
@@ -94,7 +97,10 @@ public class Warmaker extends ItemBlackShadow implements ITheChaos {
         public List<CIString> theLanguageProvider() {
             return List.of(
                     new CIString("Warmaker",
-                            "战争缔造者","最低生命值")
+                            "战争缔造者","最低生命值"),
+                    new CIString("Warmaker2",
+                            "战争缔造者2","是否在倒计时结束时扣血")
+
             );
         }
     }
@@ -129,12 +135,14 @@ public class Warmaker extends ItemBlackShadow implements ITheChaos {
                             }else {
 
                                 float damage = getCurseDamage(stack);
-                                if (player.getHealth() > ConfigItem.intValue.get().floatValue()) {
-                                    if (player.getHealth() > damage) {
-                                        player.setHealth(player.getHealth() - damage);
-                                        break;
-                                    }else {
-                                        player.setHealth(ConfigItem.intValue.get().floatValue());
+                                if (ConfigItem.intValue2.get()) {
+                                    if (player.getHealth() > ConfigItem.intValue.get().floatValue()) {
+                                        if (player.getHealth() > damage) {
+                                            player.setHealth(player.getHealth() - damage);
+                                            break;
+                                        } else {
+                                            player.setHealth(ConfigItem.intValue.get().floatValue());
+                                        }
                                     }
                                 }
                             }

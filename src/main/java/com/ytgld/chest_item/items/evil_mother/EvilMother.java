@@ -59,17 +59,6 @@ public abstract class EvilMother extends ItemBase implements IBlackLight , IEvil
         co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorBlack().color())));
         return co;
     }
-    @Override
-    public DoBlack colorBlack() {
-        return new DoBlack(50,80,120,105,
-                new CIStateShardsHasBlack.CIFunc(
-                        GlStateManager.SourceFactor.SRC_ALPHA,
-                        GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-                        GlStateManager.SourceFactor.ONE,
-                        GlStateManager.DestFactor.ZERO
-                )
-        );
-    }
     public static void attrib(EntityTickEvent.Post event){
         if (event.getEntity() instanceof Player player){
             player.getAttributes().addTransientAttributeModifiers(theAttrib(player));
@@ -148,17 +137,6 @@ public abstract class EvilMother extends ItemBase implements IBlackLight , IEvil
     public abstract int getSanity();
     public Multimap<Holder<Attribute>, AttributeModifier> multimapAttribute(ItemStack stack, Player player){
         return HashMultimap.create();
-    }
-
-    @Override
-    public ResourceLocation blackStar() {
-        return ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                "textures/evil_mother/cube.png");
-    }
-    @Override
-    public ResourceLocation blackFire() {
-        return ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                "textures/evil_mother/cube.png");
     }
     public static double getSanValue(Player player){
         return player.getAttributeValue(AttReg.theSanity);

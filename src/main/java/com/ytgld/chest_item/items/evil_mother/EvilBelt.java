@@ -79,6 +79,6 @@ public class EvilBelt extends EvilMother{
 
     @Override
     public int getSanity() {
-        return -3;
+        return -4;
     }
 }
