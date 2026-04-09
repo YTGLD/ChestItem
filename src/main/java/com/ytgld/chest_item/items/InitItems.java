@@ -374,9 +374,13 @@ public class    InitItems {
                     output.accept(InitItems.TheKill_);
                     output.accept(InitItems.EvilBelt_);
                     output.accept(InitItems.AnnualPlate_);
+                    output.accept(ReinforcedItems.SilentDevice_);
                     output.accept(ReinforcedItems.Strengthen_);
                     output.accept(ReinforcedItems.Accelerated_);
                     output.accept(ReinforcedItems.Excite_);
+                    output.accept(ReinforcedItems.Activity_);
+                    output.accept(ReinforcedItems.Dynamic_);
+                    output.accept(ReinforcedItems.Contingency_);
 
 
                 }).build());
@@ -403,9 +407,13 @@ public class    InitItems {
                     MotherRemains_.asItem(),
                     TheKill_.asItem(),
                     AnnualPlate_.asItem(),
+                    ReinforcedItems.SilentDevice_.asItem(),
                     ReinforcedItems.Accelerated_.asItem(),
                     ReinforcedItems.Excite_.asItem(),
                     ReinforcedItems.Strengthen_.asItem(),
+                    ReinforcedItems.Activity_.asItem(),
+                    ReinforcedItems.Dynamic_.asItem(),
+                    ReinforcedItems.Contingency_.asItem(),
                     EvilBelt_.asItem()
 
             );

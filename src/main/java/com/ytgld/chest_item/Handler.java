@@ -19,11 +19,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import oshi.driver.mac.net.NetStat;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class Handler {
+    public static void upDATA(Player player){
+        if (player instanceof IPlayer iPlayer){
+            iPlayer.cI1_21_11$upDATA();
+        }
+    }
     public static void addHeartShield(Player player ,float number){
         if (isInHeartShieldCooldown(player)){
             return;

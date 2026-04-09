@@ -6,5 +6,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public interface IPlayer {
     void cI1_21_11$onRemoveItem(ItemStack itemStack);
+    void cI1_21_11$upDATA();
     AtomicReference<ChestInventory> chest_item$chestInventory();
 }

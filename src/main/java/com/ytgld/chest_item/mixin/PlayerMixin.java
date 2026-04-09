@@ -103,6 +103,14 @@ public class PlayerMixin implements IPlayer {
         }
     }
 
+    @Override
+    public void cI1_21_11$upDATA() {
+        Player player = (Player) (Object) this;
+        for (Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap : cI1_21_11$reinforceCache.values()){
+            player.getAttributes().removeAttributeModifiers(attributeModifierMultimap);
+        }
+    }
+
     @Inject(method = "tick", at = @At(value = "RETURN"))
     private void tick(CallbackInfo ci) {
         Player player = (Player) (Object) this;
