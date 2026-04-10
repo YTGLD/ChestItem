@@ -22,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ReinforcedLoot extends LootModifier {
     public static final Supplier<MapCodec<ReinforcedLoot>> CODEC = Suppliers.memoize(() ->
@@ -44,9 +45,9 @@ public class ReinforcedLoot extends LootModifier {
                     String idSting = String.valueOf(s);
                     if (idSting.contains("chests/")) {
                         if (Mth.nextInt(RandomSource.create(), 0, 100) < Math.max(50, getLevel(player))) {
-                            for (Item item : lListItems) {
+                            if (!lListItems.isEmpty()){
+                                Item item = lListItems.get(new Random().nextInt(lListItems.size()));
                                 objectArrayList.add(item.getDefaultInstance());
-                                break;
                             }
                         }
                     }
