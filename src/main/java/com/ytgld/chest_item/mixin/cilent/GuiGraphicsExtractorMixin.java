@@ -11,6 +11,7 @@ import com.ytgld.chest_item.items.black.chaos_item.ITheChaos;
 import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
+import com.ytgld.chest_item.items.evil_mother.IEvil;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.MRender;
@@ -53,9 +54,9 @@ import java.util.Map;
 @Mixin(GuiGraphicsExtractor.class)
 public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
     @Shadow @Final
-    Minecraft minecraft;
+    private Minecraft minecraft;
     @Shadow @Final
-    GuiRenderState guiRenderState;
+    private GuiRenderState guiRenderState;
     @Shadow @Final private Matrix3x2fStack pose;
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
@@ -141,7 +142,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
             return;
         }
 
-        if (tooltipStack.getItem() instanceof ItemBase || tooltipStack.getItem() instanceof MemoryBase.BaseTooltip)  {
+        if (tooltipStack.getItem() instanceof ItemBase || tooltipStack.getItem() instanceof MemoryBase.BaseTooltip || tooltipStack.getItem() instanceof IEvil)  {
             RenderTooltipEvent.Pre preEvent = ClientHooks.onRenderTooltipPre(tooltipStack,  (GuiGraphicsExtractor) (Object) this, x, y, this.guiWidth(), this.guiHeight(), components, font, positioner);
             if (!preEvent.isCanceled()) {
                 font = preEvent.getFont();
@@ -169,12 +170,20 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                         } else if (tooltipStack.getItem() instanceof ItemBone) {
                             chest_item$renderItemBoneTooltipBackground((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
                         } else if (!Handler.isBlackChaos(tooltipStack)) {
-                            chest_item$renderTooltipBackground((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
+                            if (!(tooltipStack.getItem() instanceof IEvil)) {
+                                chest_item$renderTooltipBackground((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
+                            }
                         }
                         this.pose.popMatrix();
                         if (tooltipStack.getItem() instanceof Meat) {
                             this.pose.pushMatrix();
                             si1_21_4$renderTooltipBackground((GuiGraphicsExtractor) (Object) this, l, i1, i, j, 400);
+                            this.pose.popMatrix();
+                        }
+                        if (tooltipStack.getItem() instanceof IEvil) {
+                            this.pose.pushMatrix();
+                            chest_item$renderItemBlackShadowTooltipBackground_EvilMother((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
+                            si1_21_4$renderTooltipBackground_EvilMother((GuiGraphicsExtractor) (Object) this, l, i1, i, j, 1000);
                             this.pose.popMatrix();
                         }
                         if (tooltipStack.getItem() instanceof ItemBlackShadow) {
@@ -202,6 +211,49 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                 }
             }
         }
+    }
+    @Unique
+    public void si1_21_4$renderTooltipBackground_EvilMother(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, int z) {
+        // 左上角
+        int topLeftX = x - 3 - 9+2;
+        int topLeftY = y - 3 - 9;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, -2);
+        guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED,
+                Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                        "textures/gui/tooltip/evil_mother/tool_0_0.png"), topLeftX, topLeftY, 0, 0,48, 48, 48, 48,0xffffffff);
+        guiGraphics.pose().popMatrix();
+
+        // 中间位置
+        int middleX = x + (width - 48) / 2;
+        int middleY = y - 3 - 6;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, -7);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
+                Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/evil_mother/tool_middle_0"),48,48, 0, 0,  middleX, middleY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+        //中下
+        int xXX = x + (width - 48) / 2;
+        int yYY =  y + height + 3 - 9 + 4;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, 0);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
+                Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                        "tooltip/evil_mother/tool_down_0"),48,48, 0, 0,  xXX, yYY, 48, 48);
+        guiGraphics.pose().popMatrix();
+
+        // 右上角
+        int topRightX = x + width + 3 - 48+6;
+        int topRightY = y - 3 - 9;
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0.0F, -2);
+        guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED,
+                Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                        "textures/gui/tooltip/evil_mother/tool_0_1.png"), topRightX, topRightY, 0, 0,48, 48, 48, 48,0xffffffff);
+        guiGraphics.pose().popMatrix();
+
     }
     @Unique
     private  void chest_item$renderTooltipBackground_red(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height) {
@@ -389,7 +441,17 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
         int l = height + 3 + 3 + 18;
         guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,Identifier.fromNamespaceAndPath(Chestitem.MODID,"tooltip/frame"), i, j, k, l);
     }
-
+    @Unique
+    private  void chest_item$renderItemBlackShadowTooltipBackground_EvilMother(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height) {
+        int i = x - 3 - 9;
+        int j = y - 3 - 9;
+        int k = width + 3 + 3 + 18;
+        int l = height + 3 + 3 + 18;
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                "tooltip/evil_mother/frame"), i, j, k, l);
+        guiGraphics.blitSprite(MRender.RenderPs.GUI_TEXTURED,Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                "tooltip/evil_mother/background"), i, j, k, l);
+    }
     @Unique
     private  void chest_item$renderItemBlackShadowTooltipBackground(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height) {
         int i = x - 3 - 9;
@@ -703,6 +765,10 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
         int b = 10;
         RenderPipeline renderPipeline = MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction;
         int a = 200;
+        Identifier star = Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                "textures/shadow/ci_star.png");
+        Identifier fire = Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                "textures/gui/tooltip/fire_black.png");
 
         if (stack.getItem() instanceof IBlackLight iBlackLight) {
             r = iBlackLight.colorBlack().r();
@@ -710,14 +776,16 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
             b = iBlackLight.colorBlack().b();
             renderPipeline = iBlackLight.colorBlack().renderPipeline();
             a = iBlackLight.colorBlack().a();
+
+
+            star = iBlackLight.blackStar();
+            fire = iBlackLight.blackFire();
         }
         if ((stack.getItem() instanceof IBlackLight)  || Handler.isBlackChaos(stack)) {
 
 
             GuiGraphicsExtractor guiGraphics = (GuiGraphicsExtractor) (Object) this;
             {
-                Identifier fire = Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                        "textures/gui/tooltip/fire_black.png");
                 float alpha = (float) (50 * Math.sin((EventMain.time  + Mth.nextFloat(RandomSource.create(),-1,1))));
                 guiGraphics.blit(renderPipeline, fire,
                         x - 8, y - 8, 0, 0,
@@ -746,9 +814,6 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
             }
 
             {
-                Identifier fire = Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                        "textures/shadow/ci_star.png");
-
                 pose.pushMatrix();
                 pose.translate(8,8);
                 {
@@ -757,7 +822,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                     pose.translate(x, y);
                     pose.rotate(EventMain.time / 25f);
                     pose.translate(-x, -y);
-                    guiGraphics.blit(renderPipeline, fire,
+                    guiGraphics.blit(renderPipeline, star,
                             x - 16, y - 16, 0, 0,
                             32, 32, 32, 32,
                             Light.ARGB.color((int) (a / 5f + alphaOffset*2), r, g, b));
@@ -768,7 +833,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                             pose.translate(x, y);
                             pose.rotate((EventMain.time + i * 40F) / 25f);
                             pose.translate(-x, -y);
-                            guiGraphics.blit(renderPipeline, fire,
+                            guiGraphics.blit(renderPipeline, star,
                                     x - 16, y - 16, 0, 0,
                                     32, 32, 32, 32,
                                     Light.ARGB.color((int) (a / 5f +alphaOffset), r, g, b));
@@ -779,7 +844,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                             pose.translate(x, y);
                             pose.rotate((EventMain.time - i * 40F) / 25f);
                             pose.translate(-x, -y);
-                            guiGraphics.blit(renderPipeline, fire,
+                            guiGraphics.blit(renderPipeline, star,
                                     x - 16, y - 16, 0, 0,
                                     32, 32, 32, 32,
                                     Light.ARGB.color((int) (a / 5f +alphaOffset), r, g, b));

@@ -19,12 +19,17 @@ import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.condensebone.*;
 import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
+import com.ytgld.chest_item.items.evil_mother.AnnualPlate;
+import com.ytgld.chest_item.items.evil_mother.EvilBelt;
+import com.ytgld.chest_item.items.evil_mother.MotherRemains;
+import com.ytgld.chest_item.items.evil_mother.TheKill;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
+import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -224,6 +229,16 @@ public class InitItems {
     public static final DeferredItem<@NotNull Item> ActualSuffering_ = register("actual_suffering",
             (Identifier)-> new ActualSuffering(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
+
+    public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
+            (Identifier)-> new MotherRemains(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> TheKill_ = register("the_kill",
+            (Identifier)-> new TheKill(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> EvilBelt_ = register("evil_belt",
+            (Identifier)-> new EvilBelt(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> AnnualPlate_ = register("annual_plate",
+            (Identifier)-> new AnnualPlate(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
     }
@@ -234,7 +249,6 @@ public class InitItems {
                 .title(Component.translatable("itemGroup.chest_item"))
                 .icon(Items.CHEST::getDefaultInstance)
                 .displayItems((parameters, output) -> {
-                    output.accept(InitItems.Test_);
                     output.accept(MemoryItems.Bluster_);
                     output.accept(MemoryItems.Contradiction_);
                     output.accept(MemoryItems.Extreme_);
@@ -244,9 +258,6 @@ public class InitItems {
                     output.accept(MemoryItems.War_);
                     output.accept(MemoryItems.TheFox_);
 
-
-                    output.accept(InitItems.FissionEmblem_);
-
                     output.accept(InitItems.Fission_);
                     output.accept(InitItems.FleshAndBloodGears_);
                     output.accept(InitItems.Blood_);
@@ -255,6 +266,7 @@ public class InitItems {
                     output.accept(InitItems.Sword_);
                     output.accept(InitItems.Samsara_);
                     output.accept(InitItems.ChaosSeven_);
+                    output.accept(InitItems.FissionEmblem_);
 
 
 
@@ -295,7 +307,6 @@ public class InitItems {
                     output.accept(InitItems.AlienationDiodes_);
                     output.accept(InitItems.QualitativeComponents_);
                     output.accept(InitItems.MassEnergyConverter_);
-                    output.accept(InitItems.LoneWolf_);
                     output.accept(InitItems.HardwoodTotemPole_);
 
 
@@ -325,12 +336,10 @@ public class InitItems {
                     output.accept(InitItems.ChaosConstructor_);
                     output.accept(InitItems.ErosionTokens_);
                     output.accept(InitItems.OneEyedSpider_);
-                    output.accept(InitItems.BloodyBelt_);
                     output.accept(InitItems.LeadOfEnlightenment_);
                     output.accept(InitItems.DefeatTheArmy_);
                     output.accept(InitItems.Warmaker_);
                     output.accept(InitItems.ChaosFortress_);
-                    output.accept(InitItems.RunawayLining_);
                     output.accept(InitItems.ActualSuffering_);
 
 
@@ -347,6 +356,19 @@ public class InitItems {
                     output.accept(InitItems.Complementary_);
 
 
+                    output.accept(InitItems.MotherRemains_);
+                    output.accept(InitItems.TheKill_);
+                    output.accept(InitItems.EvilBelt_);
+                    output.accept(InitItems.AnnualPlate_);
+                    output.accept(ReinforcedItems.SilentDevice_);
+                    output.accept(ReinforcedItems.Strengthen_);
+                    output.accept(ReinforcedItems.Accelerated_);
+                    output.accept(ReinforcedItems.Excite_);
+                    output.accept(ReinforcedItems.Activity_);
+                    output.accept(ReinforcedItems.Dynamic_);
+                    output.accept(ReinforcedItems.Contingency_);
+
+
                 }).build());
 
     }
@@ -359,6 +381,7 @@ public class InitItems {
         public static final TagKey<@NotNull Item> celestial = createTag("celestial");
         public static final TagKey<@NotNull Item> chestItemMeat = createTag("chest_item_meat");
         public static final TagKey<@NotNull Item> chestItemBone = createTag("chest_item_bone");
+        public static final TagKey<Item> evilMother = createTag("evil_mother");
 
         public TagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
             super(output, lookupProvider,  Chestitem.MODID);
@@ -366,6 +389,20 @@ public class InitItems {
 
         @Override
         protected void addTags(HolderLookup.@NotNull Provider provider) {
+            tag(evilMother).add(
+                    MotherRemains_.asItem(),
+                    TheKill_.asItem(),
+                    AnnualPlate_.asItem(),
+                    ReinforcedItems.SilentDevice_.asItem(),
+                    ReinforcedItems.Accelerated_.asItem(),
+                    ReinforcedItems.Excite_.asItem(),
+                    ReinforcedItems.Strengthen_.asItem(),
+                    ReinforcedItems.Activity_.asItem(),
+                    ReinforcedItems.Dynamic_.asItem(),
+                    ReinforcedItems.Contingency_.asItem(),
+                    EvilBelt_.asItem()
+
+            );
 
             tag(celestial).add(
                     Blood_.asItem(),

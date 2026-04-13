@@ -5,15 +5,18 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.other.AttributeDataType;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.other.IPlayer;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -24,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -43,7 +47,8 @@ public abstract class PlayerMixin implements IPlayer {
     }
     @Unique
     private Map<ItemStack, Multimap<Holder<Attribute>, AttributeModifier>> cI1_21_11$attributeCache = new HashMap<>();
-
+    @Unique
+    private Map<Item, Multimap<Holder<Attribute>, AttributeModifier>> cI1_21_11$reinforceCache = new HashMap<>();
 
     @Unique
     private void cI1_21_11$updateAttribute() {
@@ -74,6 +79,25 @@ public abstract class PlayerMixin implements IPlayer {
         }
     }
 
+    @Unique
+    private void cI1_21_11$updateReinforceAttribute() {
+        Player player = (Player) (Object) this;
+        List<Item> items = ReinforcedBaseItem.getItems(player);
+        for (int i = 0; i  < items.size() ; i++) {
+            Item item = items.get(i);
+            if (item instanceof ReinforcedBaseItem reinforcedBaseItem) {
+                Multimap<Holder<Attribute>, AttributeModifier> doAttribute = reinforcedBaseItem.doAttribute(player);
+                cI1_21_11$reinforceCache.getOrDefault(item, HashMultimap.create()).forEach((attributeHolder, attributeModifier)->{
+                    Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
+                    modifiers.put(attributeHolder,attributeModifier);
+                    player.getAttributes().removeAttributeModifiers(modifiers);
+                });
+                player.getAttributes().addTransientAttributeModifiers(doAttribute);
+
+                cI1_21_11$reinforceCache.put(item, doAttribute);
+            }
+        }
+    }
     @Override
     public void cI1_21_11$onRemoveItem(ItemStack itemStack) {
         Player player = (Player) (Object) this;
@@ -83,10 +107,19 @@ public abstract class PlayerMixin implements IPlayer {
         }
     }
 
+    @Override
+    public void cI1_21_11$upDATA() {
+        Player player = (Player) (Object) this;
+        for (Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap : cI1_21_11$reinforceCache.values()){
+            player.getAttributes().removeAttributeModifiers(attributeModifierMultimap);
+        }
+    }
+
     @Inject(method = "tick", at = @At(value = "RETURN"))
     private void tick(CallbackInfo ci) {
         Player player = (Player) (Object) this;
         cI1_21_11$updateAttribute();
+        cI1_21_11$updateReinforceAttribute();
         if (!((Player) (Object) this).level().isClientSide()) {
             if (player.isAlive()) {
                 if (((Player) (Object) this).hasContainerOpen()) {

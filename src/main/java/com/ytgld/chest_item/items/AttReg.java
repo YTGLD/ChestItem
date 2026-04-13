@@ -2,6 +2,7 @@ package com.ytgld.chest_item.items;
 
 import com.mojang.serialization.Codec;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.other.IntSyncHandler;
 import com.ytgld.chest_item.other.SyncHandler;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -46,7 +47,12 @@ public class AttReg {
     public static final DeferredHolder<Attribute,?> fortune = REGISTRY.register("fortune",()->{
         return new RangedAttribute("attribute.name.chest_item.fortune", 0, -1024, 1024).setSyncable(true);
     });
-
+    public static final DeferredHolder<Attribute,?> xp_drop = REGISTRY.register("xp_drop",()->{
+        return new RangedAttribute("attribute.name.chest_item.xp_drop", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final DeferredHolder<Attribute,?> resistance = REGISTRY.register("resistance",()->{
+        return new RangedAttribute("attribute.name.chest_item.resistance", 1, -1024, 1024).setSyncable(true);
+    });
 
     /**
      * 疮疤的增生——对不可能说“不”
@@ -150,6 +156,26 @@ public class AttReg {
             "pain_shield", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf(
                     "pain_shield")).build()
     );
+    public static final DeferredHolder<Attribute,?>  shield_cooldown = REGISTRY.register("shield_cooldown",()->{
+        return new RangedAttribute("attribute.name.chest_item.shield_cooldown", 200, -1024, 1024).setSyncable(true);
+    });
+    public static final Supplier<AttachmentType<Integer>> theHeartCooldown = ATTACHMENT_TYPES.register(
+            "cooldown", () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler()).serialize(Codec.INT.
+                    fieldOf("cooldown")).build()
+
+    );
+    /**
+     * 邪母的嬗变
+     */
+    public static final DeferredHolder<Attribute,?> theSanity = REGISTRY.register("the_sanity",()->{
+        return new RangedAttribute("attribute.name.chest_item.the_sanity", 10, -100, 100).setSyncable(true);
+    });
+    public static final Supplier<AttachmentType<Float>> slashing = ATTACHMENT_TYPES.register(
+            "slashing", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf(
+                    "slashing")).build()
+
+    );
+
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER , AttReg.heal,1);
@@ -164,10 +190,15 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.more_speed,1);
         event.add(EntityType.PLAYER , AttReg.looting,0);
         event.add(EntityType.PLAYER , AttReg.fortune,0);
+
+        event.add(EntityType.PLAYER , AttReg.xp_drop,1);
+        event.add(EntityType.PLAYER , AttReg.resistance,1);
+
         event.add(EntityType.PLAYER , AttReg.chaos_armor,1);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_damage,1);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_speed,1);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_min,1);
+
         event.add(EntityType.PLAYER , AttReg.malicious_transformation,1);
         event.add(EntityType.PLAYER , AttReg.malicious_plunder,1);
         event.add(EntityType.PLAYER , AttReg.chaos_consciousness,1);
@@ -175,6 +206,9 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.painShield_number,0);
         event.add(EntityType.PLAYER , AttReg.painShield_res,1);
         event.add(EntityType.PLAYER , AttReg.painShield_speed,1);
+
+        event.add(EntityType.PLAYER , AttReg.theSanity,10);
+        event.add(EntityType.PLAYER , AttReg.shield_cooldown,200);
 
     }
 }

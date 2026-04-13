@@ -30,9 +30,12 @@ import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
+import com.ytgld.chest_item.items.evil_mother.*;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
+import com.ytgld.chest_item.items.memory.items.Contradiction;
 import com.ytgld.chest_item.items.other.*;
+import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.other.AttributeDataType;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
@@ -73,10 +76,12 @@ import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.*;
 
 public class EventMain {
+
     public Set<UUID> setUUID = new HashSet<>();
     @SubscribeEvent
     public void setUUIDPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
@@ -99,28 +104,25 @@ public class EventMain {
             }
         }
     }
-    @SubscribeEvent
-    public void LivingDropsEvent(LivingDropsEvent event){
-        if (event.getSource().getEntity() instanceof Player player) {
-            if (event.getEntity() instanceof LivingEntity living) {
-                float att = (float) player.getAttributeValue(AttReg.malicious_plunder);
-                Collection<ItemEntity> drop = event.getDrops();
-                List<ItemEntity> add = new ArrayList<>(drop);
-                int number = (int) att;
-                number-=1;
-                if (number > 0) {
-                    for (int i = 0; i < number; i++) {
-                        int mth = new Random().nextInt(add.size());
-                        drop.add(add.get(mth));
-                    }
-                }
-            }
-        }
-    }
-
 
     public static int time = 0;
-
+    @SubscribeEvent
+    public void ItemTooltipEvent(LevelTickEvent.Pre event){
+        time++;
+    }
+    @SubscribeEvent
+    public void attack(SweepAttackEvent event){
+        TheKill.attack(event);
+    }
+    @SubscribeEvent
+    public void EntityTickEvent(EntityTickEvent.Post event){
+        TheKill.tickAttackHurt(event);
+        EvilMother.attrib(event);
+    }
+    @SubscribeEvent
+    public void  knock(LivingKnockBackEvent event){
+        EvilBelt.knock(event);
+    }
     @SubscribeEvent
     public void AddAttributeTooltipsEvent(AddAttributeTooltipsEvent evt){
         AttributeTooltipContext context = evt.getContext();
@@ -134,13 +136,39 @@ public class EventMain {
         List<Component> attributesTooltip = new ArrayList<>();
         Player player = context.player();
         if (player!=null) {
+            if (stack.getItem() instanceof ReinforcedBaseItem reinforcedBaseItem) {
+                Multimap<Holder<Attribute>, AttributeModifier> attributes = reinforcedBaseItem.doAttribute(player);
+                if (!attributes.isEmpty()) {
+                    attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
+                    evt.addTooltipLines(Component.empty());
+
+                    attributesTooltip.add(Component.translatable("event.chest_item.reinforced").withStyle(Style.EMPTY.withColor(Light.ARGB.color(50,80,120,105))));
+
+                    AttributeUtil.applyTextFor(
+                            stack,
+                            attributesTooltip::add,
+                            attributes,
+                            AttributeTooltipContext.of(player, context, context.tooltipDisplay(),context.flag()));
+
+
+                    for (Component component : attributesTooltip) {
+                        MutableComponent co = component.copy();
+                        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(Light.ARGB.color(50,80,120,105))));
+                        evt.addTooltipLines(co);
+                    }
+                }
+            }
             if (stack.getItem() instanceof Terror terror) {
                 Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player,stack);
                 if (attributes != null && !attributes.isEmpty()) {
                     attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
                     evt.addTooltipLines(Component.empty());
                     if (!(stack.getItem() instanceof ItemBlackShadow)) {
-                        attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
+                        if (stack.getItem() instanceof EvilMother evilMother){
+                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.colorBlack().color())));
+                        }else {
+                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
+                        }
                     }
 
                     AttributeUtil.applyTextFor(
@@ -159,52 +187,17 @@ public class EventMain {
                             MutableComponent co = component.copy();
                             co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80EE82EE)));
                             evt.addTooltipLines(co);
+                        }else if (stack.getItem() instanceof EvilMother evilMother){
+                            MutableComponent co = component.copy();
+                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.colorBlack().color())));
+                            evt.addTooltipLines(co);
                         } else {
                             MutableComponent co = component.copy();
-                            if (stack.getItem() instanceof ITextColor iTextColor) {
-                                co.setStyle(Style.EMPTY.withColor(iTextColor.colorText()));
+                            if (stack.getItem() instanceof ITextColor color) {
+                                co.setStyle(Style.EMPTY.withColor(color.colorText()));
                             }
                             evt.addTooltipLines(co);
                         }
-                    }
-                }
-            }
-        }
-    }
-    @SubscribeEvent
-    public void BlackRl(AddAttributeTooltipsEvent evt){
-        AttributeTooltipContext context = evt.getContext();
-        ItemStack stack = evt.getStack();
-        GatherSkippedAttributeTooltipsEvent skipped =
-                NeoForge.EVENT_BUS.post(new GatherSkippedAttributeTooltipsEvent(stack, context));
-
-        if (skipped.isSkippingAll()) {
-            return;
-        }
-        List<Component> attributesTooltip = new ArrayList<>();
-        Player player = context.player();
-        if (player!=null) {
-            AttributeDataType attributeDataType = stack.get(DataReg.attributeType);
-            if (attributeDataType != null) {
-                Multimap<Holder<Attribute>, AttributeModifier> attributes = HashMultimap.create();
-                for (AttributeDataType.Entry modifiers : attributeDataType.modifiers()){
-                    attributes.put(modifiers.attribute(),modifiers.modifier());
-                }
-                if (!attributes.isEmpty()) {
-                    attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
-                    evt.addTooltipLines(Component.empty());
-                    attributesTooltip.add(Component.translatable("event.chest_item.equip.black")
-                            .withStyle(Style.EMPTY.withColor(Light.ARGB.color(255, 255, 0, 0))));
-                    AttributeUtil.applyTextFor(
-                            stack,
-                            attributesTooltip::add,
-                            attributes,
-                            AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
-
-                    for (Component component : attributesTooltip) {
-                        MutableComponent co = component.copy();
-                        co.setStyle(Style.EMPTY.withColor(Light.ARGB.color(255, 255, 0, 50)));
-                        evt.addTooltipLines(co);
                     }
                 }
             }
@@ -228,14 +221,9 @@ public class EventMain {
         Silent.livingHealEventSilent_(event);
     }
     @SubscribeEvent
-    public void exp(LivingExperienceDropEvent event) {
-        ChaosSeven.exp(event);
-    }
-    @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
         Mutation.die(event);
         ChaosSeven.die(event);
-        BloodyBelt.die(event);
         BrassCoins.die(event);
         Warmaker.die(event);
         LeadOfEnlightenment.die(event);
@@ -245,11 +233,11 @@ public class EventMain {
     public void CriticalHitEvent(CriticalHitEvent event){
         Lead.event(event);
         AlienationDiodes.CriticalHitEvent(event);
+        AnnualPlate.dieAnnualPlate(event);
     }
     @SubscribeEvent
     public  void dieTotem(LivingUseTotemEvent event) {
         ChaosFortress.dieTotem(event);
-        RunawayLining.dieTotem(event);
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
@@ -269,33 +257,20 @@ public class EventMain {
         Warmaker.hurt(event);
         ChaosFortress.hurtRes(event);
         LeadOfEnlightenment.die(event);
-
-        //降低受到的魔法和虚空伤害，并将受到的对应伤害转换成临时的攻击伤害
         if (event.getEntity() instanceof Player player) {
-            float malicious = (float) player.getAttributeValue(AttReg.malicious_transformation);
-            float res = malicious - 1;
-            if (res > 0) {
-                if (res > 1) {
-                    res = 1;
-                }
-                if (event.getSource().is(DamageTypes.MAGIC) || event.getSource().is(DamageTypes.DRY_OUT)){
-                    event.setNewDamage(event.getNewDamage() * (1 - res));
-
-                    float damage = event.getNewDamage();
-                    float end = player.getData(AttReg.maliciousTransformationDamage) + damage;
-                    float att = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                    player.setData(AttReg.maliciousTransformationDamage, Math.min(end, att));
+            AttributeInstance resistance = player.getAttribute(AttReg.resistance);
+            if (resistance != null) {
+                float value = (float) resistance.getValue();
+                float base = (float) resistance.getBaseValue();
+                if (value != base) {
+                    event.setNewDamage(event.getNewDamage() * ((1 - value) + 1));
                 }
             }
         }
-        if (event.getSource().getEntity() instanceof Player player){
-            float data = player.getData(AttReg.maliciousTransformationDamage);
-            event.setNewDamage(event.getNewDamage() + data);
-            player.setData(AttReg.maliciousTransformationDamage,0f);
-        }
+
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
-            if (event.getEntity() instanceof Player living) {
+        if (event.getEntity() instanceof Player living) {
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
             if (hyperplasia_stronger != null) {
                 float value = (float) hyperplasia_stronger.getValue();
@@ -405,6 +380,21 @@ public class EventMain {
     @SubscribeEvent
     public void attackEXP(LivingExperienceDropEvent event){
         MadnessTheory.attackEXP(event);
+        ChaosSeven.exp(event);
+        GoldCheese.event(event);
+        NuclearReaction.event(event);
+
+        if (event.getAttackingPlayer() instanceof Player player) {
+            AttributeInstance xp = player.getAttribute(AttReg.xp_drop);
+            if (xp != null) {
+                float value = (float) xp.getValue();
+                float base = (float) xp.getBaseValue();
+                if (value != base) {
+                    event.setDroppedExperience((int) (event.getDroppedExperience() * value));
+                }
+            }
+        }
+
     }
     @SubscribeEvent
     public void pick(PlayerXpEvent.PickupXp event){
@@ -428,16 +418,26 @@ public class EventMain {
         ChaosFortress.hurtBy2(event);
 
         if (event.getSource().getEntity() instanceof LivingEntity living){
+            //1.3
             AttributeInstance instability = living.getAttribute(AttReg.instability);
             if (instability != null) {
                 float value = (float) instability.getValue();
                 float v1 = value - 1;
+                //0.3
                 if (v1>0) {
+                    //-0.3
+                    //0.345
                     float apply = Mth.nextFloat(RandomSource.create(), -v1,v1*1.15f);
+                    if (apply > 0.5f) {
+                        apply = 0.5f;
+                    }
                     event.setAmount(event.getAmount()*(1+apply));
                 }else if (v1 != 0){
                     if (v1 < 0) {
                         v1 = -v1;
+                    }
+                    if (v1 > 0.25f) {
+                        v1 = 0.25f;
                     }
                     event.setAmount(event.getAmount()*(1+v1));
                 }
@@ -449,10 +449,16 @@ public class EventMain {
                 float v1 = value - 1;
                 if (v1>0) {
                     float apply = Mth.nextFloat(RandomSource.create(), -v1*1.15f,v1);
+                    if (apply > 0.5f) {
+                        apply = 0.5f;
+                    }
                     event.setAmount(event.getAmount()*(1+apply));
                 }else if (v1 != 0){
                     if (v1 < 0) {
                         v1 = -v1;
+                    }
+                    if (v1 > 0.25f) {
+                        v1 = 0.25f;
                     }
                     event.setAmount(event.getAmount()*(1+v1));
                 }
@@ -465,35 +471,8 @@ public class EventMain {
         TheOrderOfTheUndead.LivingChangeTargetEvent(event);
     }
     @SubscribeEvent
-    public void LivingChangeTargetEvent(EntityTickEvent.Pre event){
-        if (event.getEntity() instanceof Player player) {
-            if (!player.level().isClientSide()) {
-                if (player.tickCount % 300 == 0) {
-                    int s = (int) (float) player.getData(AttReg.attachmentTypeBLOOD_Model);
-                    if (s > 0) {
-                        player.setData(AttReg.attachmentTypeBLOOD_Model, s - 1f);
-                    }else {
-                        player.setData(AttReg.attachmentTypeBLOOD_Model, 0f);
-                    }
-                }
-            }
-        }
-
-    }
-    @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
-        {
-            ChestInventory chestInventory = event.chestInventory;
-            Player player = event.player;
-            if (!player.level().isClientSide()) {
-                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                    ItemStack stack = chestInventory.getItem(i);
-                    if (stack.get(DataReg.tag) == null) {
-                        stack.set(DataReg.tag, new CompoundTag());
-                    }
-                }
-            }
-        }
+
         DrugHeal.tick(event);
         Ring.tick(event);
         Stomach.tick(event);
@@ -510,13 +489,15 @@ public class EventMain {
         Blood.tick(event);
         ChaosConstructor.tick(event);
         TheBell.ItemStackTickEvent(event);
-        BloodyBelt.tick(event);
         FissionEmblem.tick(event);
         Warmaker.tick(event);
+
         LivingEntity living = event.player;
+
         ShieldRenderHandler.tickShield(living);
 
-        if (ShieldRenderHandler.canHeal(living))  {
+
+        if (ShieldRenderHandler.canHeal(living)){
             AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
             AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
 
@@ -540,7 +521,7 @@ public class EventMain {
                 }
             }
         }
-        if (ShieldRenderHandler.canHeal(living))  {
+        if (ShieldRenderHandler.canHeal(living)){
             AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
             if (attributeInstance != null ) {
                 float timeModify = (float) living.getAttributeValue(AttReg.chaos_armor_speed);
@@ -564,7 +545,7 @@ public class EventMain {
                 }
             }
         }
-        if (ShieldRenderHandler.canHeal(living))   {
+        if (ShieldRenderHandler.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
             AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
             AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
 
@@ -597,13 +578,8 @@ public class EventMain {
         SelfIncreasingHeart.tick(event);
         SpeedHeart.eat(event);
         Glutton.eatFinish(event);
-        OneEyedSpider.hurtOfBlood(event);
     }
-    @SubscribeEvent
-    public void LivingExperienceDropEvent(LivingExperienceDropEvent event) {
-        GoldCheese.event(event);
-        NuclearReaction.event(event);
-    }
+
     @SubscribeEvent
     public void PlayerEnchantItemEvent(PlayerEnchantItemEvent event) {
         GoldCheese.event(event);
@@ -615,17 +591,24 @@ public class EventMain {
     }
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
+        if (event.getItemStack().getItem() instanceof ReinforcedBaseItem) {
+            event.getToolTip().add(1, Component.literal(""));
+            event.getToolTip().add(1, Component.translatable("item.chest_item.reinforced.equipped").withStyle(Style.EMPTY
+                    .withColor(IEvil.color)));
+        }
         if (event.getItemStack().getItem() instanceof ItemBase) {
+            if (event.getItemStack().getItem() instanceof EvilMother evilMother) {
+                event.getToolTip().add(1, Component.literal(""));
+                event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
+                        .withColor(evilMother.colorBlack().color())));
 
-
+            }
             if (event.getItemStack().getItem() instanceof ItemBlackShadow) {
                 event.getToolTip().add(1, Component.literal(""));
-                event.getToolTip().add(1, Component.translatable("item.chest_item.chest", Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
+                event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
                         .withColor(Light.ARGB.color(255, 255, 0, 100))));
-                if (event.getItemStack().getItem() instanceof SkillItem) {
-                    event.getToolTip().add(1, Component.translatable("item.chest_item.skill", Keys.KEY_MAPPING_LAZY_C.getKey().getDisplayName()).withStyle(Style.EMPTY
-                            .withColor(Light.ARGB.color(255, 255, 0, 100))));
-                }
+
+
                 if (event.getItemStack().getItem() instanceof TheImprintOfTheSoul soul) {
                     if (!soul.canRemove(event.getItemStack())) {
                         if (event.getEntity() != null && !event.getEntity().isCreative()) {
@@ -650,13 +633,10 @@ public class EventMain {
                 }
             }
             if (!(event.getItemStack().getItem() instanceof ItemBlackShadow)
-                    && !(event.getItemStack().getItem() instanceof TheCelestial)) {
+                    && !(event.getItemStack().getItem() instanceof TheCelestial)
+                    && !(event.getItemStack().getItem() instanceof EvilMother)) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest", Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
-
-                if (event.getItemStack().getItem() instanceof SkillItem) {
-                    event.getToolTip().add(1, Component.translatable("item.chest_item.skill", Keys.KEY_MAPPING_LAZY_C.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
-                }
             }
         }
     }
@@ -682,9 +662,6 @@ public class EventMain {
 
                         .add(LootItem.lootTableItem(InitItems.TheBell_)
                                 .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.BloodyBelt_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
                         .build());
             }
         }
@@ -866,4 +843,5 @@ public class EventMain {
 
         }
     }
+
 }

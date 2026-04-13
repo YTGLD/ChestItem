@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item": "minecraft:oxidized_copper"},
+    "B": {"item": "chest_item:mother_remains"},
+    "C": {"item": "minecraft:netherite_sword"}
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:the_kill"
+  }
+}

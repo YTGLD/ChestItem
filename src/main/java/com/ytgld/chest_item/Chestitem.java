@@ -21,6 +21,10 @@ import com.ytgld.chest_item.items.memory.MemoryEvent;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
 import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;
+import com.ytgld.chest_item.items.reinforced.ReinforcedAttreg;
+import com.ytgld.chest_item.items.reinforced.ReinforcedDataHandler;
+import com.ytgld.chest_item.items.reinforced.ReinforcedEvent;
+import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
@@ -75,11 +79,22 @@ public class Chestitem {
         NeoForge.EVENT_BUS.register(new MemoryEvent());
         MemoryAttreg.REGISTRY.register(modEventBus);
 
+        ReinforcedDataHandler.ATTACHMENT_TYPES.register(modEventBus);
+        ReinforcedAttreg.REGISTRY.register(modEventBus);
+        NeoForge.EVENT_BUS.register(new ReinforcedEvent());
+        ReinforcedItems.ITEMS.register(modEventBus);
+
         NeoForge.EVENT_BUS.addListener(PlayerEvent.Clone.class, event -> {
             if (event.isWasDeath() && event.getOriginal().hasData(TheMemoryDataHandler.mStringSetData)) {
                 event.getEntity().getData(TheMemoryDataHandler.mStringSetData).clear();
                 event.getEntity().getData(TheMemoryDataHandler.mStringSetData)
                         .addAll(event.getOriginal().getData(TheMemoryDataHandler.mStringSetData))
+                ;
+            }
+            if (event.isWasDeath() && event.getOriginal().hasData(ReinforcedDataHandler.reinforced)) {
+                event.getEntity().getData(ReinforcedDataHandler.reinforced).clear();
+                event.getEntity().getData(ReinforcedDataHandler.reinforced)
+                        .addAll(event.getOriginal().getData(ReinforcedDataHandler.reinforced))
                 ;
             }
         });
