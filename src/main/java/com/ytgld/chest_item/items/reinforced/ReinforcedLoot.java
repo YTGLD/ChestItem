@@ -37,14 +37,14 @@ public class ReinforcedLoot extends LootModifier {
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(@NotNull ObjectArrayList<ItemStack> objectArrayList, LootContext lootContext) {
-        @Nullable Entity entity = lootContext.getParameter(LootContextParams.THIS_ENTITY);
+        @Nullable Entity entity = lootContext.getOptionalParameter(LootContextParams.THIS_ENTITY);
         if (entity instanceof Player player) {
             if (ReinforcedBaseItem.getSanValue(player) != 0) {
                 if (ReinforcedBaseItem.canLoot(player)) {
                     Identifier s = lootContext.getQueriedLootTableId();
                     String idSting = String.valueOf(s);
                     if (idSting.contains("chests/")) {
-                        if (Mth.nextInt(RandomSource.create(), 0, 100) < Math.max(20, getLevel(player))) {
+                        if (Mth.nextInt(RandomSource.create(), 0, 100) < Math.min(20, getLevel(player))) {
                             if (!lListItems.isEmpty()){
                                 Item item = lListItems.get(new Random().nextInt(lListItems.size()));
                                 objectArrayList.add(item.getDefaultInstance());

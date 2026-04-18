@@ -46,7 +46,7 @@ public class BigTooltip implements ClientTooltipComponent, TooltipComponent {
             int b = (int)((((baseColor) & 0xFF) * (1 - ratio)) + (255 * ratio));
             int color =(a << 24) | (r << 16) | (g << 8) | b;
             guiGraphics.centeredText(font,
-                    Component.literal(String.valueOf(c)), i * font.width(String.valueOf(c)), 0, color);
+                    Component.literal(String.valueOf(c)), i * font.width(String.valueOf(c)) + 4, 0, color);
         }
 
 

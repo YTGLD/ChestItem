@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {"item": "minecraft:oxidized_copper"},
-    "B": {"item": "chest_item:mother_remains"},
-    "C": {"item": "minecraft:netherite_sword"}
+    "A": "minecraft:oxidized_copper",
+    "B": "chest_item:mother_remains",
+    "C": "minecraft:netherite_sword"
   },
   "pattern": [
     "ABA",

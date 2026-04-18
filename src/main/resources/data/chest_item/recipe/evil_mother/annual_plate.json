@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {"item": "chest_item:mother_remains"},
-    "B": {"item": "minecraft:oxidized_copper"}
+    "A":  "chest_item:mother_remains",
+    "B":  "minecraft:oxidized_copper"
   },
   "pattern": [
     "AAA",

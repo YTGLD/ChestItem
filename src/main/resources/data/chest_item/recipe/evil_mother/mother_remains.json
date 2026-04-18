@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {"item": "minecraft:oxidized_copper"},
-    "B": {"item": "chest_item:condense_bone_cube"},
-    "C": {"item": "minecraft:ender_eye"}
+    "A":  "minecraft:oxidized_copper",
+    "B":  "chest_item:condense_bone_cube",
+    "C":  "minecraft:ender_eye"
   },
   "pattern": [
     "ABA",

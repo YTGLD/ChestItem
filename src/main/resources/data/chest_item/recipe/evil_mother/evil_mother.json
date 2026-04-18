@@ -3,7 +3,7 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.0,
-  "ingredient": {"tag": "chest_item:evil_mother"},
+  "ingredient":  "#chest_item:evil_mother",
   "result": {
     "id": "chest_item:mother_remains"
   }

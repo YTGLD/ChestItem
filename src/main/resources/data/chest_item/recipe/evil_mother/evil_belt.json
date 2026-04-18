@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {"item": "chest_item:mother_remains"},
-    "B": {"item": "chest_item:stone"}
+    "A":  "chest_item:mother_remains",
+    "B":  "chest_item:stone"
   },
   "pattern": [
     "AAA",
