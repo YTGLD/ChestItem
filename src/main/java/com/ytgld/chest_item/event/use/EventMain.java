@@ -8,6 +8,7 @@ import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
+import com.ytgld.chest_item.event.key.ClientEvent;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.BloodyBelt;
 import com.ytgld.chest_item.items.black.ChaosConstructor;
@@ -67,6 +68,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.common.util.AttributeUtil;
@@ -107,7 +109,7 @@ public class EventMain {
 
     public static int time = 0;
     @SubscribeEvent
-    public void ItemTooltipEvent(LevelTickEvent.Pre event){
+    public void ItemTooltipEvent(ClientTickEvent.Post event){
         time++;
     }
     @SubscribeEvent

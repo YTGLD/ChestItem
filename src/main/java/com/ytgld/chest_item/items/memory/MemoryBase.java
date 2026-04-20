@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.items.memory;
 
+import com.ytgld.chest_item.items.IBigTooltip;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;
@@ -126,15 +127,20 @@ public abstract class MemoryBase extends Item {
     }
 
     public record MemoryString (String  path , String name){}
-    public static abstract class BaseTooltip extends Item implements IBlackLight,ITheChaos {
+    public static abstract class BaseTooltip extends Item implements IBlackLight,ITheChaos , IBigTooltip {
         public BaseTooltip(Properties properties) {
             super(properties);
         }
         public abstract void doText(ItemStack stack , Consumer<Component> tooltipComponents);
-        public abstract Component doTextOne();
         public int color(){
             return Light.ARGB.color(255,255,0,0);
         };
+
+        @Override
+        public Item item() {
+            return this;
+        }
+
         @Override
         public Component getName(ItemStack stack) {
             Component component = super.getName(stack);

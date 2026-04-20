@@ -1,0 +1,22 @@
+{
+  "heart": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:heart",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.heart"
+  },
+  "laser_column": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:laser_column",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.sound_1"
+  }
+}
