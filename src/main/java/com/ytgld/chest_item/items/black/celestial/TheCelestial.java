@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.items.black.celestial;
 
 import com.ytgld.chest_item.items.ItemBlackShadow;
+import com.ytgld.chest_item.items.black.soul.NotLight;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -10,7 +11,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class TheCelestial extends ItemBlackShadow {
+public abstract class TheCelestial extends ItemBlackShadow implements NotLight {
 
 
     public abstract Identifier img(ItemStack stack);

@@ -167,7 +167,7 @@ public class EventMain {
                     evt.addTooltipLines(Component.empty());
                     if (!(stack.getItem() instanceof ItemBlackShadow)) {
                         if (stack.getItem() instanceof EvilMother evilMother){
-                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.colorBlack().color())));
+                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.color)));
                         }else {
                             attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
                         }
@@ -191,7 +191,7 @@ public class EventMain {
                             evt.addTooltipLines(co);
                         }else if (stack.getItem() instanceof EvilMother evilMother){
                             MutableComponent co = component.copy();
-                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.colorBlack().color())));
+                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.color)));
                             evt.addTooltipLines(co);
                         } else {
                             MutableComponent co = component.copy();
@@ -602,7 +602,7 @@ public class EventMain {
             if (event.getItemStack().getItem() instanceof EvilMother evilMother) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
-                        .withColor(evilMother.colorBlack().color())));
+                        .withColor(evilMother.color)));
 
             }
             if (event.getItemStack().getItem() instanceof ItemBlackShadow) {

@@ -863,18 +863,38 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
     @Inject(at = @At(value = "RETURN"),method = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;item(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V")
     public void renderItem(LivingEntity entity, Level level, ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
         if (stack.getItem() instanceof TheCelestial celestial){
-            GuiGraphicsExtractor guiGraphics = (GuiGraphicsExtractor) (Object) this;
+
             Identifier Identifier = celestial.img(stack);
+            GuiGraphicsExtractor guiGraphics = (GuiGraphicsExtractor) (Object) this;
             int color = celestial.soulColor(stack);
             int as = (color >> 24) & 0xFF;
             int rs = (color >> 16) & 0xFF;
             int gs = (color >> 8) & 0xFF;
             int bs = color & 0xFF;
-            guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, Identifier, x, y, 0, 0, 16, 16, 16, 16,
-                    Light.ARGB.color(as, rs, gs, bs));
+
+            float firstCharX = 0;
+            float firstCharY = 0;
+            float radius = 1f;
+            float angle = EventMain.time / 20F;
+
+            pose.pushMatrix();
+            pose.translate( x, y);
+            for (int iis = 0; iis < 8; iis++) {
+                pose.pushMatrix();
+
+                pose.translate(firstCharX + 4, firstCharY);
+                pose.rotate((float) Math.sin(angle + iis) / 7.5f );
+                pose.translate((float)(Math.sin(angle + iis) * radius), (float)(Math.cos(angle + iis) * radius));
+                pose.translate(-(firstCharX + 4), -firstCharY);
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, Identifier, 0, 0, 0, 0, 16, 16, 16, 16,
+                        Light.ARGB.color(as, rs / 8, gs / 8, bs / 8));
+                pose.popMatrix();
+            }
+            pose.popMatrix();
 
         }
         if (stack.getItem() instanceof TheImprintOfTheSoul soul) {
+
             Identifier Identifier = soul.Identifier();
             GuiGraphicsExtractor guiGraphics = (GuiGraphicsExtractor) (Object) this;
             int color = soul.soulColor();
@@ -883,8 +903,27 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
             int gs = (color >> 8) & 0xFF;
             int bs = color & 0xFF;
 
-            guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, Identifier, x, y, 0, 0, 16, 16, 16, 16,
-                    Light.ARGB.color(as, rs, gs - 20, bs - 30));
+            float firstCharX = 0;
+            float firstCharY = 0;
+            float radius = 1.25F;
+            float angle = EventMain.time / 20F;
+
+            pose.pushMatrix();
+            pose.translate( x, y);
+            for (int iis = 0; iis < 15; iis++) {
+                pose.pushMatrix();
+
+                pose.translate(firstCharX + 4, firstCharY);
+                pose.rotate((float) Math.sin(angle + iis) / 7.5f );
+                pose.translate((float)(Math.sin(angle + iis) * radius), (float)(Math.cos(angle + iis) * radius));
+                pose.translate(-(firstCharX + 4), -firstCharY);
+                guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction, Identifier, 0, 0, 0, 0, 16, 16, 16, 16,
+                        Light.ARGB.color(as / 5, rs, gs, bs));
+                pose.popMatrix();
+            }
+            guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED, Identifier, 0, 0, 0, 0, 16, 16, 16, 16,
+                    Light.ARGB.color(as / 3 , rs, gs, bs));
+            pose.popMatrix();
 
         }
     }

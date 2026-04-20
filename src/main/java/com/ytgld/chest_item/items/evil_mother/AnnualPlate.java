@@ -194,8 +194,8 @@ public class AnnualPlate extends EvilMother{
     @Override
     public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         super.text(stack, tooltipComponents, flag);
-        tooltipComponents.accept(Component.translatable("item.chest_item.annual_plate.string.0", ConfigItem.intValue.getAsInt(), TheKill.ConfigItem.intValue2.getAsInt()).withStyle(Style.EMPTY.withColor(colorBlack().color())));
-        tooltipComponents.accept(Component.translatable("item.chest_item.annual_plate.string.1",ConfigItem.intValue2.getAsDouble() * 100F).withStyle(Style.EMPTY.withColor(colorBlack().color())));
+        tooltipComponents.accept(Component.translatable("item.chest_item.annual_plate.string.0", ConfigItem.intValue.getAsInt(), TheKill.ConfigItem.intValue2.getAsInt()).withStyle(Style.EMPTY.withColor(color)));
+        tooltipComponents.accept(Component.translatable("item.chest_item.annual_plate.string.1",ConfigItem.intValue2.getAsDouble() * 100F).withStyle(Style.EMPTY.withColor(color)));
 
     }
     @Override

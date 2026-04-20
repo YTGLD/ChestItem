@@ -171,8 +171,8 @@ public class TheKill extends EvilMother{
     @Override
     public void text(ItemStack stack, Consumer<Component> tooltipAdder, TooltipFlag flag) {
         super.text(stack, tooltipAdder, flag);
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_kill.string.0",ConfigItem.intValue.getAsInt(),ConfigItem.intValue2.getAsInt()).withStyle(Style.EMPTY.withColor(colorBlack().color())));
-        tooltipAdder.accept(Component.translatable("item.chest_item.the_kill.string.1").withStyle(Style.EMPTY.withColor(colorBlack().color())));
+        tooltipAdder.accept(Component.translatable("item.chest_item.the_kill.string.0",ConfigItem.intValue.getAsInt(),ConfigItem.intValue2.getAsInt()).withStyle(Style.EMPTY.withColor(color)));
+        tooltipAdder.accept(Component.translatable("item.chest_item.the_kill.string.1").withStyle(Style.EMPTY.withColor(color)));
     }
 
     @Override

@@ -236,6 +236,6 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
 
     @Override
     public int soulColor() {
-        return Light.ARGB.color(255,255,0,255);
+        return Light.ARGB.color(255,255,0,0);
     }
 }

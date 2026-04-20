@@ -10,7 +10,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class TheImprintOfTheSoul extends ItemBlackShadow implements NotLight {
+public abstract class TheImprintOfTheSoul extends ItemBlackShadow implements NotLight ,IBlackLight{
     public TheImprintOfTheSoul(Properties properties) {
         super(properties);
     }
