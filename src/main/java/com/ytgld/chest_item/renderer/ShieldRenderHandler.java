@@ -270,7 +270,7 @@ public class ShieldRenderHandler {
                 if (data > 0) {
                     float damage = event.getNewDamage();
                     float newData = data - 0.5f - (damage * 0.2f);
-                    player.setData(AttReg.painShield,(float)newData);
+                    Handler.setDataValue(AttReg.painShield,player,(float)newData);
                     float modify = (float) Math.sqrt(value) * 1.25f;
                     if (modify < minDamage) {
                         modify = minDamage;
@@ -310,7 +310,7 @@ public class ShieldRenderHandler {
                     aFloat = 1;
                     aFloatCool = 40;
                 } else {
-                    player.setData(AttReg.painShield, 0f);
+                    Handler.setDataValue(AttReg.painShield,player, 0f);
                     int time = 200;
                     addCooldown(player, (int) player.getAttributeValue(AttReg.shield_cooldown));
                 }
@@ -333,27 +333,27 @@ public class ShieldRenderHandler {
                             float other = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
                             if (other > 0) {
                                 addPain(player, speed.getValue(), other / 3);
-                                player.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                                Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,player, 0f);
                             }
                         }
                         {
                             float other = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
                             if (other > 0) {
                                 addPain(player, speed.getValue(), other);
-                                player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                                Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, 0f);
                             }
                         }
                         {
                             float other = player.getData(AttReg.chaosWinds);
                             if (other > 0) {
                                 addPain(player, speed.getValue(), other / 4);
-                                player.setData(AttReg.chaosWinds, 0f);
+                                Handler.setDataValue(AttReg.chaosWinds,player, 0f);
                             }
                         }
                     } else {
-                        player.setData(AttReg.chaosWinds, 0f);
-                        player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
-                        player.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                        Handler.setDataValue(AttReg.chaosWinds,player, 0f);
+                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, 0f);
+                        Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,player, 0f);
 
                     }
                 }
@@ -378,10 +378,10 @@ public class ShieldRenderHandler {
         if (living instanceof Player player) {
             if (!player.level().isClientSide) {
                 if (isInHeartShieldCooldown(living)) {
-                    player.setData(AttReg.theHeartCooldown, player.getData(AttReg.theHeartCooldown) - 1);
+                    Handler.setDataValue(AttReg.theHeartCooldown,player, player.getData(AttReg.theHeartCooldown) - 1);
                 }
                 if (player.getData(AttReg.theHeartCooldown) < 0) {
-                    player.setData(AttReg.theHeartCooldown, 0);
+                    Handler.setDataValue(AttReg.theHeartCooldown,player, 0);
                 }
             }
         }
@@ -389,7 +389,7 @@ public class ShieldRenderHandler {
     public static void addCooldown(LivingEntity living,int time){
         if (living instanceof Player player) {
             if (!player.level().isClientSide) {
-                player.setData(AttReg.theHeartCooldown, time);
+                Handler.setDataValue(AttReg.theHeartCooldown,player, time);
             }
         }
     }

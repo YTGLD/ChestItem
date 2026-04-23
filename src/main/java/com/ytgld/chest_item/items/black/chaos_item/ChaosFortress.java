@@ -163,7 +163,7 @@ public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
             //杀死生物恢复10%的侵蚀装甲
             if (Handler.has(player, InitItems.ChaosFortress_.asItem())) {
                 if (player.getData(AttReg.chaosWinds) < player.getAttributeValue(AttReg.chaos_armor)) {
-                    player.setData(AttReg.chaosWinds,
+                    Handler.setDataValue(AttReg.chaosWinds,player,
                             player.getData(AttReg.chaosWinds)
                                     + ((player.getData(AttReg.chaosWinds) * 0.1f + 1)));
                 }

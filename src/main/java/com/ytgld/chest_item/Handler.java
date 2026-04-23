@@ -1,13 +1,10 @@
 package com.ytgld.chest_item;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.reinforced.items.Excite;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.ChestItemMenu;
 import com.ytgld.chest_item.other.IPlayer;
-import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -17,17 +14,51 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import oshi.driver.mac.net.NetStat;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class Handler {
+    public static<T> void setDataValue(Supplier<AttachmentType<T>> attachmentTypeSupplier,LivingEntity living ,T number){
+        if (living instanceof Player player) {
+            player.setData(attachmentTypeSupplier,number);
+        }
+    }
     public static void upDATA(Player player){
         if (player instanceof IPlayer iPlayer){
             iPlayer.cI1_21_11$upDATA();
+        }
+    }
+    public static void addHyperplasiaData(LivingEntity living ,float number){
+        if (living instanceof Player player) {
+            AttributeInstance attribute = player.getAttribute(AttReg.hyperplasia);
+            AttributeInstance attributeCooldown = player.getAttribute(AttReg.hyperplasiaCooldown);
+            if (attribute != null && attributeCooldown != null) {
+                int cooldown = player.getData(AttReg.hyperplasiaCooldownAttachmentType);
+                if (cooldown > 0) {
+                    number = 0;
+                }
+                float hyperplasiaValue = (float) attribute.getValue();
+                float data = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                float newValue = data + number;
+                if (newValue > hyperplasiaValue) {
+                    newValue = hyperplasiaValue;
+                }
+
+
+                player.setData(AttReg.hyperplasiaATTACHMENT_TYPES,newValue);
+            }
+        }
+    }
+    public static void reduceHyperplasiaData(LivingEntity living ,float number){
+        if (living instanceof Player player) {
+            float data = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+            float newValue = data - number;
+            if (newValue < 0) {
+                newValue = 0;
+            }
+            player.setData(AttReg.hyperplasiaATTACHMENT_TYPES, newValue);
         }
     }
     public static void addHeartShield(Player player ,float number){
@@ -79,49 +110,5 @@ public class Handler {
         }
         return null;
     }
-    public static void renderBlood(PoseStack.Pose poseStack, VertexConsumer vertexConsumer, Vec3 start, Vec3 end, float a, float r) {
-        int segmentCount = 16; // 圆柱横向细分数
 
-        for (int i = 0; i < segmentCount; i++) {
-            double angle1 = (2 * Math.PI * i) / segmentCount;
-            double angle2 = (2 * Math.PI * (i + 1)) / segmentCount;
-
-            double x1 = Math.cos(angle1) * r;
-            double z1 = Math.sin(angle1) * r;
-            double x2 = Math.cos(angle2) * r;
-            double z2 = Math.sin(angle2) * r;
-
-            Vec3 up1 = start.add(x1, 0, z1);
-            Vec3 up2 = start.add(x2, 0, z2);
-            Vec3 down1 = end.add(x1, 0, z1);
-            Vec3 down2 = end.add(x2, 0, z2);
-
-
-            addSquare(vertexConsumer, poseStack, up1, up2, down1, down2, a);
-        }
-    }
-
-
-    private static void addSquare(VertexConsumer vertexConsumer, PoseStack.Pose poseStack, Vec3 up1, Vec3 up2, Vec3 down1, Vec3 down2, float alpha) {
-        // 添加四个顶点来绘制一个矩形
-        vertexConsumer.addVertex(poseStack, (float) up1.x, (float) up1.y, (float) up1.z)
-                .setColor(255, 0, 0, (int) (alpha * 255))
-                .setUv2(240, 240)
-                .setNormal(poseStack,0, 0, 1);
-
-        vertexConsumer.addVertex(poseStack, (float) down1.x, (float) down1.y, (float) down1.z)
-                .setColor(255, 0, 0, (int) (alpha * 255))
-                .setUv2(240, 240)
-                .setNormal(poseStack,0, 0, 1);
-
-        vertexConsumer.addVertex(poseStack, (float) down2.x, (float) down2.y, (float) down2.z)
-                .setColor(255, 0, 0, (int) (alpha * 255))
-                .setUv2(240, 240)
-                .setNormal(poseStack,0, 0, 1);
-
-        vertexConsumer.addVertex(poseStack, (float) up2.x, (float) up2.y, (float) up2.z)
-                .setColor(255, 0, 0, (int) (alpha * 255))
-                .setUv2(240, 240)
-                .setNormal(poseStack,0, 0, 1);
-    }
 }

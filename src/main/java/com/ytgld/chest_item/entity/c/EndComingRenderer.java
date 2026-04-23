@@ -73,7 +73,7 @@ public class EndComingRenderer extends EntityRenderer<EndComing> {
             Vec3 adjustedCurrPos = new Vec3(currPos.x - entity.getX(), currPos.y - entity.getY(), currPos.z - entity.getZ());
 
             float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
-            Handler.renderBlood(matrices.last(), vertexConsumers.getBuffer(renderType), adjustedPrevPos, adjustedCurrPos, alpha,alpha/3.3F);
+            HandlerClient.renderBlood(matrices.last(), vertexConsumers.getBuffer(renderType), adjustedPrevPos, adjustedCurrPos, alpha,alpha/3.3F);
         }
         matrices.popPose();
     }

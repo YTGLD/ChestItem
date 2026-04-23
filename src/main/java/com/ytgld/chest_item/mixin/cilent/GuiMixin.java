@@ -124,7 +124,7 @@ public abstract class GuiMixin {
             if (hurtTime > 0) {
                 cI1_21_9$showAlpha = 255;
             }
-            if (i>=player.getAttributeValue(AttReg.hyperplasia) - 1){
+            if (i>=player.getAttributeValue(AttReg.hyperplasia)){
                 if (hurtTime <= 0) {
                     if (cI1_21_9$lightAmout >=0.45f) {
                         if (cI1_21_9$showAlpha > 0) {
@@ -194,7 +194,7 @@ public abstract class GuiMixin {
             if (hurtTime > 0) {
                 cI1_21_9$showAlphaShadow = 255;
             }
-            if (i>=player.getAttributeValue(AttReg.shadow_shield) - 1){
+            if (i>=player.getAttributeValue(AttReg.shadow_shield)){
                 if (hurtTime <= 0) {
                     if (cI1_21_9$lightAmoutShadow >=1) {
                         if (cI1_21_9$showAlphaShadow > 0) {
@@ -269,7 +269,7 @@ public abstract class GuiMixin {
             if (hurtTime > 0) {
                 cI1_21_9$showAlpha_chaosWinds = 255;
             }
-            if (i>=player.getAttributeValue(AttReg.chaos_armor) - 1){
+            if (i>=player.getAttributeValue(AttReg.chaos_armor)){
                 if (hurtTime <= 0) {
                     if (cI1_21_9$lightAmout_chaosWinds >=0.45f) {
                         if (cI1_21_9$showAlpha_chaosWinds > 0) {
