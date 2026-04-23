@@ -323,6 +323,9 @@ public class InitItems {
                     output.accept(InitItems.ScarHeart_);
                     output.accept(InitItems.LifeCoin_);
                     output.accept(InitItems.HeavyBlade_);
+                    output.accept(ReinforcedItems.RegenerationPlugin_);
+                    output.accept(ReinforcedItems.ComplexComponents_);
+                    output.accept(ReinforcedItems.StabilizingDevice_);
 
 
 
@@ -438,6 +441,9 @@ public class InitItems {
                     .add(ScarHeart_.asItem())
                     .add(Self_Increasing_Heart.asItem())
                     .add(ActualSuffering_.asItem())
+                    .add(ReinforcedItems.RegenerationPlugin_.asItem())
+                    .add(ReinforcedItems.ComplexComponents_.asItem())
+                    .add(ReinforcedItems.StabilizingDevice_.asItem())
                     .add(Stomach_.asItem());
 
 

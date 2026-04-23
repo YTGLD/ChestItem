@@ -85,7 +85,7 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
         }
     }
     public void renderReinforced(@NotNull GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick){
-        Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
+        Set<String> strings = player.getData(ReinforcedDataHandler.reinforced);
         if (strings.isEmpty()) {
             return;
         }

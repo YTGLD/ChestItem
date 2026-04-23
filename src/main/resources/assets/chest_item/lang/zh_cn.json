@@ -730,8 +730,8 @@
 
   "item.chest_item.mass_energy_converter": "质能转换器",
   "item.chest_item.mass_energy_converter.string.0": "质能方程式",
-  "item.chest_item.mass_energy_converter.string.1": "每损失百分之一生命值，增加%d%%抗性",
-  "item.chest_item.mass_energy_converter.string.2": "每损失百分之一生命值，增加%d%%伤害",
+  "item.chest_item.mass_energy_converter.string.1": "每损失1%生命值，增加%d%%抗性",
+  "item.chest_item.mass_energy_converter.string.2": "每损失1%生命值，增加%d%%伤害",
 
 
   "item.chest_item.qualitative_components": "质化组件",
@@ -797,7 +797,7 @@
   "item.chest_item.chaos_constructor.string.5": "”....第42次尝试后，我似乎得到的了我想要的结果——盾御引擎是目前唯一一个可以容纳这种物质的载体“",
   "item.chest_item.chaos_constructor.string.6": "”我将这台诡异的融合机械体命名为‘混沌构造件’......我很兴奋，因为这是迈出幽影瓶颈的一大步！”",
   "item.chest_item.chaos_constructor.string.7": "连续受到伤害时逐渐提高抗性",
-  "item.chest_item.chaos_constructor.string.8": "每次都会提升，但不超过%d%%",
+  "item.chest_item.chaos_constructor.string.8": "每次提升1%，但不超过%d%%",
   "item.chest_item.one_eye_spider": "独眼蜘蛛",
   "item.chest_item.one_eye_spider.string.1": "每吃下一个从未尝试过的食物都会增加你的部分属性",
   "item.chest_item.one_eye_spider.string.2": "最大生命值",
@@ -934,6 +934,18 @@
 
   "item.chest_item.silent_device": "静默装置",
   "item.chest_item.silent_device.string.0": "右键取下一个增强件",
+
+  "item.chest_item.regeneration_plugin": "再生插件",
+  "item.chest_item.regeneration_plugin.string.0": "疤痕组织有%d%%的概率进行双倍治愈",
+  "item.chest_item.regeneration_plugin.string.1": "疤痕组织在治愈时有%d%%的概率同时治疗持有者",
+
+  "item.chest_item.stabilizing_device": "稳固装置",
+  "item.chest_item.stabilizing_device.string.0": "疤痕组织提高%d%%的坚韧度",
+  "item.chest_item.stabilizing_device.string.1": "疤痕组织治愈效果降低%d%%",
+
+  "item.chest_item.complex_components": "繁复组件",
+  "item.chest_item.complex_components.string.0": "疤痕组织吸收全部伤害",
+  "item.chest_item.complex_components.string.1": "疤痕组织被抹去时会施加额外%d%%休眠时长",
 
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"

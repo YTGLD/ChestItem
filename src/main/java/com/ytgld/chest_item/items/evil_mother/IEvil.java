@@ -8,4 +8,7 @@ import net.minecraft.resources.Identifier;
 
 public interface IEvil {
     int color = Light.ARGB.color(255,80,120,105);
+    default int theColor(){
+        return Light.ARGB.color(50,80,120,105);
+    }
 }

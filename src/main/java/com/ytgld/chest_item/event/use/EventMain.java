@@ -37,6 +37,7 @@ import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
+import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
 import com.ytgld.chest_item.other.AttributeDataType;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
@@ -155,7 +156,7 @@ public class EventMain {
 
                     for (Component component : attributesTooltip) {
                         MutableComponent co = component.copy();
-                        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(Light.ARGB.color(50,80,120,105))));
+                        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(reinforcedBaseItem.theColor())));
                         evt.addTooltipLines(co);
                     }
                 }
@@ -167,7 +168,7 @@ public class EventMain {
                     evt.addTooltipLines(Component.empty());
                     if (!(stack.getItem() instanceof ItemBlackShadow)) {
                         if (stack.getItem() instanceof EvilMother evilMother){
-                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.color)));
+                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.theColor())));
                         }else {
                             attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
                         }
@@ -191,7 +192,7 @@ public class EventMain {
                             evt.addTooltipLines(co);
                         }else if (stack.getItem() instanceof EvilMother evilMother){
                             MutableComponent co = component.copy();
-                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.color)));
+                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.theColor())));
                             evt.addTooltipLines(co);
                         } else {
                             MutableComponent co = component.copy();
@@ -286,7 +287,11 @@ public class EventMain {
                         modify = 0.3f;
                     }
                     float newDamage = damage * (0.3f / modify);
-                    event.setNewDamage(newDamage);
+                    if (!ComplexComponents.absorptionDamage(living)) {
+                        event.setNewDamage(newDamage);
+                    }else {
+                        event.setNewDamage(0);
+                    }
                 } else {
                     Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,living,0f);
                     AttributeInstance time = living.getAttribute(AttReg.hyperplasiaCooldown);
@@ -602,16 +607,16 @@ public class EventMain {
     }
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
-        if (event.getItemStack().getItem() instanceof ReinforcedBaseItem) {
+        if (event.getItemStack().getItem() instanceof ReinforcedBaseItem item) {
             event.getToolTip().add(1, Component.literal(""));
             event.getToolTip().add(1, Component.translatable("item.chest_item.reinforced.equipped").withStyle(Style.EMPTY
-                    .withColor(IEvil.color)));
+                    .withColor(item.theColor())));
         }
         if (event.getItemStack().getItem() instanceof ItemBase) {
             if (event.getItemStack().getItem() instanceof EvilMother evilMother) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
-                        .withColor(evilMother.color)));
+                        .withColor(evilMother.theColor())));
 
             }
             if (event.getItemStack().getItem() instanceof ItemBlackShadow) {

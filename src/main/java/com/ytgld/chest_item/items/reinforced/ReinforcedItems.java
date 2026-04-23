@@ -2,6 +2,9 @@ package com.ytgld.chest_item.items.reinforced;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.reinforced.items.*;
+import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
+import com.ytgld.chest_item.items.reinforced.meat.RegenerationPlugin;
+import com.ytgld.chest_item.items.reinforced.meat.StabilizingDevice;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -14,6 +17,19 @@ import java.util.function.Function;
 
 public class ReinforcedItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Chestitem.MODID);
+
+
+    public static final DeferredItem<Item> RegenerationPlugin_ = register("regeneration_plugin",
+            (Identifier)-> new RegenerationPlugin(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<Item> StabilizingDevice_ = register("stabilizing_device",
+            (Identifier)-> new StabilizingDevice(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<Item> ComplexComponents_ = register("complex_components",
+            (Identifier)-> new ComplexComponents(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+
+
+
+
     public static final DeferredItem<Item> SilentDevice_ = register("silent_device",
             (Identifier)-> new SilentDevice(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<Item> Strengthen_ = register("strengthen",
