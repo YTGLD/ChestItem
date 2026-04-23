@@ -42,9 +42,9 @@ public class Contingency extends ReinforcedBaseItem {
         public List<CIString> theLanguageProvider() {
             return List.of(
                     new CIString("Contingency",
-                            "活性衬件","腐堕之心被击碎时获得的生命恢复等级"),
+                            "应急衬件","腐堕之心被击碎时获得的生命恢复等级"),
                     new CIString("Contingency2",
-                            "活性衬件2","腐堕之心被击碎时获得的生命恢复时长")
+                            "应急衬件2","腐堕之心被击碎时获得的生命恢复时长")
             );
         }
     }

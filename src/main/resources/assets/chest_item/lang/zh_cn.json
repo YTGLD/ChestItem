@@ -1,5 +1,6 @@
 {
 
+
   "chest_item.config.Accelerated": "腐堕之心在低于50%时给予的额外强度",
   "chest_item.config.Accelerated2": "腐堕之心被击碎时产生的额外反应时间倍数",
   "chest_item.config.Activity": "腐堕之心被击碎时获得的生命恢复等级",
@@ -16,8 +17,8 @@
   "chest_item.config.Bluster2": "受伤倍率",
   "chest_item.config.BoneHead": "额外的吃东西速度",
   "chest_item.config.Chaos": "受伤倍率",
-  "chest_item.config.ChaosConstructor": "最大抗性",
-  "chest_item.config.ChaosConstructor2": "侵蚀装甲",
+  "chest_item.config.ChaosConstructor": "受伤累计的最大抗性",
+  "chest_item.config.ChaosConstructor2": "增加的侵蚀装甲",
   "chest_item.config.ChaosFortress": "免疫低于这个值的伤害",
   "chest_item.config.ChaosFortress2": "增加的魔法伤害",
   "chest_item.config.ChaosFortress3": "伤害倍率",
@@ -131,16 +132,16 @@
   "chest_item.configuration.Bluster2": "信仰嫉灭2",
   "chest_item.configuration.BoneHead": "无厌之骸骨",
   "chest_item.configuration.Chaos": "混沌体",
-  "chest_item.configuration.ChaosConstructor": "混沌构件",
-  "chest_item.configuration.ChaosConstructor2": "混沌构件2",
+  "chest_item.configuration.ChaosConstructor": "混沌构造器",
+  "chest_item.configuration.ChaosConstructor2": "混沌构造器2",
   "chest_item.configuration.ChaosFortress": "混沌要塞之护",
   "chest_item.configuration.ChaosFortress2": "混沌要塞之护2",
   "chest_item.configuration.ChaosFortress3": "混沌要塞之护3",
   "chest_item.configuration.ChaosSeven": "混沌七子",
   "chest_item.configuration.Conch": "闪电海螺",
   "chest_item.configuration.Conch2": "闪电海螺2",
-  "chest_item.configuration.Contingency": "活性衬件",
-  "chest_item.configuration.Contingency2": "活性衬件2",
+  "chest_item.configuration.Contingency": "应急衬件",
+  "chest_item.configuration.Contingency2": "应急衬件2",
   "chest_item.configuration.Contradiction": "信仰矛盾",
   "chest_item.configuration.Contradiction2": "信仰矛盾2",
   "chest_item.configuration.DefeatTheArmy": "破军",
@@ -928,11 +929,10 @@
   "item.chest_item.dynamic.string.0": "腐堕之心被击碎时发生爆炸，此效果具有%d秒的冷却",
 
   "item.chest_item.activity": "活性衬件",
-  "item.chest_item.activity.string.0": "腐堕之心被击碎时获得的%d%%级生命恢复（%d秒）",
+  "item.chest_item.activity.string.0": "腐堕之心被击碎时获得的%d级生命恢复（%d秒）",
 
   "item.chest_item.silent_device": "静默装置",
   "item.chest_item.silent_device.string.0": "右键取下一个增强件",
-
 
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"

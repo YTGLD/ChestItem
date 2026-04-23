@@ -16,17 +16,17 @@ public class ReinforcedItems {
 
 
     public static final DeferredItem<Item> Strengthen_ = register("strengthen",
-            (resourceLocation)-> new Strengthen(new Item.Properties().stacksTo(1)));
+            (resourceLocation)-> new Strengthen(new Item.Properties().stacksTo(64)));
     public static final DeferredItem<Item> Accelerated_ = register("accelerated",
-            (Identifier)-> new Accelerated(new Item.Properties().stacksTo(1)));
+            (Identifier)-> new Accelerated(new Item.Properties().stacksTo(64)));
     public static final DeferredItem<Item> Excite_ = register("excite",
-            (Identifier)-> new Excite(new Item.Properties().stacksTo(1)));
+            (Identifier)-> new Excite(new Item.Properties().stacksTo(64)));
     public static final DeferredItem<Item> Activity_ = register("activity",
-            (Identifier)-> new Activity(new Item.Properties().stacksTo(1)));
+            (Identifier)-> new Activity(new Item.Properties().stacksTo(64)));
     public static final DeferredItem<Item> Dynamic_ = register("dynamic",
-            (Identifier)-> new Dynamic(new Item.Properties().stacksTo(1)));
+            (Identifier)-> new Dynamic(new Item.Properties().stacksTo(64)));
     public static final DeferredItem<Item> Contingency_ = register("contingency",
-            (Identifier)-> new Contingency(new Item.Properties().stacksTo(1)));
+            (Identifier)-> new Contingency(new Item.Properties().stacksTo(64)));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);

@@ -24,9 +24,4 @@ public interface IEvil extends IBlackLight {
         return ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                 "textures/evil_mother/cube.png");
     }
-    @Override
-    default ResourceLocation blackFire() {
-        return ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                "textures/evil_mother/cube.png");
-    }
 }

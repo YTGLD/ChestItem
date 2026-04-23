@@ -61,9 +61,9 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
         public List<CIString> theLanguageProvider() {
             return List.of(
                     new CIString("ChaosConstructor",
-                            "混沌构件","最大抗性"),
+                            "混沌构造器","受伤累计的最大抗性"),
                     new CIString("ChaosConstructor2",
-                            "混沌构件2","侵蚀装甲")
+                            "混沌构造器2","增加的侵蚀装甲")
             );
         }
     }

@@ -44,7 +44,7 @@ public class ReinforcedLoot extends LootModifier {
                     ResourceLocation s = lootContext.getQueriedLootTableId();
                     String idSting = String.valueOf(s);
                     if (idSting.contains("chests/")) {
-                        if (Mth.nextInt(RandomSource.create(), 0, 100) < Math.max(50, getLevel(player))) {
+                        if (Mth.nextInt(RandomSource.create(), 0, 100) < Math.min(20, getLevel(player))) {
                             if (!lListItems.isEmpty()){
                                 Item item = lListItems.get(new Random().nextInt(lListItems.size()));
                                 objectArrayList.add(item.getDefaultInstance());
