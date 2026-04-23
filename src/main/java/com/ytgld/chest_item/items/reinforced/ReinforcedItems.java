@@ -2,7 +2,9 @@ package com.ytgld.chest_item.items.reinforced;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.reinforced.items.*;
+import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
 import com.ytgld.chest_item.items.reinforced.meat.RegenerationPlugin;
+import com.ytgld.chest_item.items.reinforced.meat.StabilizingDevice;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -17,6 +19,10 @@ public class ReinforcedItems {
 
     public static final DeferredItem<Item> RegenerationPlugin_ = register("regeneration_plugin",
             (Identifier)-> new RegenerationPlugin(new Item.Properties().stacksTo(64)));
+    public static final DeferredItem<Item> StabilizingDevice_ = register("stabilizing_device",
+            (Identifier)-> new StabilizingDevice(new Item.Properties().stacksTo(64)));
+    public static final DeferredItem<Item> ComplexComponents_ = register("complex_components",
+            (Identifier)-> new ComplexComponents(new Item.Properties().stacksTo(64)));
 
 
 

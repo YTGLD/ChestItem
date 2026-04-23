@@ -28,6 +28,7 @@ import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
+import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
@@ -272,7 +273,11 @@ public class EventMain {
                         modify = 0.3f;
                     }
                     float newDamage = damage * (0.3f / modify);
-                    event.setNewDamage(newDamage);
+                    if (!ComplexComponents.absorptionDamage(living)) {
+                        event.setNewDamage(newDamage);
+                    }else {
+                        event.setNewDamage(0);
+                    }
                 } else {
                     Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,living,0f);
                     AttributeInstance time = living.getAttribute(AttReg.hyperplasiaCooldown);

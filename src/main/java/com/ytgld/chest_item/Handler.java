@@ -3,6 +3,7 @@ package com.ytgld.chest_item;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.reinforced.items.Excite;
 import com.ytgld.chest_item.items.reinforced.meat.RegenerationPlugin;
+import com.ytgld.chest_item.items.reinforced.meat.StabilizingDevice;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.ChestItemMenu;
 import com.ytgld.chest_item.other.IPlayer;
@@ -41,6 +42,7 @@ public class Handler {
                     number = 0;
                 }
                 number = RegenerationPlugin.doubleAdd(living,number);
+                number = StabilizingDevice.cutHeal(living,number);
                 float hyperplasiaValue = (float) attribute.getValue();
                 float data = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
                 if (data >= hyperplasiaValue) {
