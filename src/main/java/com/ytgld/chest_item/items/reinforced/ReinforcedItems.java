@@ -2,6 +2,7 @@ package com.ytgld.chest_item.items.reinforced;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.reinforced.items.*;
+import com.ytgld.chest_item.items.reinforced.meat.RegenerationPlugin;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -13,6 +14,13 @@ public class ReinforcedItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Chestitem.MODID);
     public static final DeferredItem<Item> SilentDevice_ = register("silent_device",
             (Identifier)-> new SilentDevice(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> RegenerationPlugin_ = register("regeneration_plugin",
+            (Identifier)-> new RegenerationPlugin(new Item.Properties().stacksTo(64)));
+
+
+
+
 
 
     public static final DeferredItem<Item> Strengthen_ = register("strengthen",

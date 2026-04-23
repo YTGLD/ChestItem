@@ -27,7 +27,7 @@ public class SilentDevice extends EvilMother {
     @Override
     public void text(ItemStack stack, List<Component> tooltipAdder, TooltipFlag flag) {
         super.text(stack, tooltipAdder, flag);
-        tooltipAdder.add(Component.translatable("item.chest_item.silent_device.string.0").withStyle(Style.EMPTY.withColor(colorBlack().color())));
+        tooltipAdder.add(Component.translatable("item.chest_item.silent_device.string.0").withStyle(Style.EMPTY.withColor(this.theColor())));
     }
 
     @Override

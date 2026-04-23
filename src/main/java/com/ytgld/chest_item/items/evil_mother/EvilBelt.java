@@ -63,8 +63,8 @@ public class EvilBelt extends EvilMother{
     @Override
     public void text(ItemStack stack, List<Component> tooltipAdder, TooltipFlag flag) {
         super.text(stack, tooltipAdder, flag);
-        tooltipAdder.add(Component.translatable("item.chest_item.evil_belt.string.0", TheKill.ConfigItem.intValue.getAsInt(), TheKill.ConfigItem.intValue2.getAsInt()).withStyle(Style.EMPTY.withColor(colorBlack().color())));
-        tooltipAdder.add(Component.translatable("item.chest_item.evil_belt.string.1").withStyle(Style.EMPTY.withColor(colorBlack().color())));
+        tooltipAdder.add(Component.translatable("item.chest_item.evil_belt.string.0", TheKill.ConfigItem.intValue.getAsInt(), TheKill.ConfigItem.intValue2.getAsInt()).withStyle(Style.EMPTY.withColor(this.theColor())));
+        tooltipAdder.add(Component.translatable("item.chest_item.evil_belt.string.1").withStyle(Style.EMPTY.withColor(this.theColor())));
 
     }
 

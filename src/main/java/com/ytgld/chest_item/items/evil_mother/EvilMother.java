@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public abstract class EvilMother extends ItemBase implements IBlackLight , IEvil {
+public abstract class EvilMother extends ItemBase implements IEvil {
     public EvilMother(Properties properties) {
         super(properties);
     }
@@ -56,7 +56,7 @@ public abstract class EvilMother extends ItemBase implements IBlackLight , IEvil
     public @NotNull Component getName(@NotNull ItemStack stack) {
         Component component = super.getName(stack);
         MutableComponent co = component.copy();
-        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorBlack().color())));
+        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(theColor())));
         return co;
     }
     public static void attrib(EntityTickEvent.Post event){

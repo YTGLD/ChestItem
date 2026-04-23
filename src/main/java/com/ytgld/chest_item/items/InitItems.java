@@ -25,6 +25,7 @@ import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
+import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -337,6 +338,7 @@ public class    InitItems {
                     output.accept(InitItems.ScarHeart_);
                     output.accept(InitItems.LifeCoin_);
                     output.accept(InitItems.HeavyBlade_);
+                    output.accept(ReinforcedItems.RegenerationPlugin_);
 
 
 
@@ -451,6 +453,7 @@ public class    InitItems {
                     .add(ScarHeart_.asItem())
                     .add(Self_Increasing_Heart.asItem())
                     .add(FleshAndBloodGears_.asItem())
+                    .add(ReinforcedItems.RegenerationPlugin_.asItem())
                     .add(Stomach_.asItem());
 
 

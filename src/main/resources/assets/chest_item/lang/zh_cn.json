@@ -935,6 +935,10 @@
   "item.chest_item.silent_device": "静默装置",
   "item.chest_item.silent_device.string.0": "右键取下一个增强件",
 
+  "item.chest_item.regeneration_plugin": "再生插件",
+  "item.chest_item.regeneration_plugin.string.0": "疤痕组织有%d%%的概率进行双倍治愈",
+  "item.chest_item.regeneration_plugin.string.1": "疤痕组织在治愈时有%d%%的概率同时治疗持有者",
+
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 }

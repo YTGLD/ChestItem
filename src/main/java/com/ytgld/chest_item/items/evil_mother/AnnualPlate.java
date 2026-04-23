@@ -156,8 +156,8 @@ public class AnnualPlate extends EvilMother{
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipAdder, TooltipFlag flag) {
         text(stack, tooltipAdder, flag);
-        tooltipAdder.add(Component.translatable("item.chest_item.annual_plate.string.0", ConfigItem.intValue.getAsInt(), TheKill.ConfigItem.intValue2.getAsInt()).withStyle(Style.EMPTY.withColor(colorBlack().color())));
-        tooltipAdder.add(Component.translatable("item.chest_item.annual_plate.string.1",ConfigItem.intValue2.getAsDouble() * 100F).withStyle(Style.EMPTY.withColor(colorBlack().color())));
+        tooltipAdder.add(Component.translatable("item.chest_item.annual_plate.string.0", ConfigItem.intValue.getAsInt(), TheKill.ConfigItem.intValue2.getAsInt()).withStyle(Style.EMPTY.withColor(this.theColor())));
+        tooltipAdder.add(Component.translatable("item.chest_item.annual_plate.string.1",ConfigItem.intValue2.getAsDouble() * 100F).withStyle(Style.EMPTY.withColor(this.theColor())));
 
     }
 

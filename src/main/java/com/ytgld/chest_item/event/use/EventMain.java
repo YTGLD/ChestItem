@@ -141,7 +141,7 @@ public class EventMain {
 
                     for (Component component : attributesTooltip) {
                         MutableComponent co = component.copy();
-                        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(Light.ARGB.color(50,80,120,105))));
+                        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(reinforcedBaseItem.theColor())));
                         evt.addTooltipLines(co);
                     }
                 }
@@ -153,7 +153,7 @@ public class EventMain {
                     evt.addTooltipLines(Component.empty());
                     if (!(stack.getItem() instanceof ItemBlackShadow)) {
                         if (stack.getItem() instanceof EvilMother evilMother){
-                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.colorBlack().color())));
+                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.theColor())));
                         }else {
                             attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
                         }
@@ -177,7 +177,7 @@ public class EventMain {
                             evt.addTooltipLines(co);
                         }else if (stack.getItem() instanceof EvilMother evilMother){
                             MutableComponent co = component.copy();
-                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.colorBlack().color())));
+                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.theColor())));
                             evt.addTooltipLines(co);
                         } else {
                             MutableComponent co = component.copy();
@@ -588,16 +588,16 @@ public class EventMain {
     }
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
-        if (event.getItemStack().getItem() instanceof ReinforcedBaseItem) {
+        if (event.getItemStack().getItem() instanceof ReinforcedBaseItem item) {
             event.getToolTip().add(1, Component.literal(""));
             event.getToolTip().add(1, Component.translatable("item.chest_item.reinforced.equipped").withStyle(Style.EMPTY
-                    .withColor(IEvil.color)));
+                    .withColor(item.theColor())));
         }
         if (event.getItemStack().getItem() instanceof ItemBase) {
             if (event.getItemStack().getItem() instanceof EvilMother evilMother) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
-                        .withColor(evilMother.colorBlack().color())));
+                        .withColor(evilMother.theColor())));
 
             }
             if (event.getItemStack().getItem() instanceof ItemBlackShadow) {

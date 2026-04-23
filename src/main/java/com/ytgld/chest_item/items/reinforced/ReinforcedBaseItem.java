@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.evil_mother.IEvil;
+import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -31,6 +32,9 @@ import java.util.Set;
 public abstract class ReinforcedBaseItem extends Item implements IEvil {
     public ReinforcedBaseItem(Properties properties) {
         super(properties);
+        addLoot();
+    }
+    public void addLoot(){
         ReinforcedLoot.lListItems.add(this);
     }
 
@@ -93,19 +97,28 @@ public abstract class ReinforcedBaseItem extends Item implements IEvil {
     }
     public final Multimap<Holder<Attribute>, AttributeModifier> doAttribute(Player player){
         Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap = attributeUse(player);
-        attributeModifierMultimap.put(AttReg.theSanity, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
-                this.asItem().getDescriptionId()),
-                sanDown(), AttributeModifier.Operation.ADD_VALUE));
+        if (sanDown() != 0) {
+            attributeModifierMultimap.put(AttReg.theSanity, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                    this.asItem().getDescriptionId()),
+                    sanDown(), AttributeModifier.Operation.ADD_VALUE));
+        }
         return attributeModifierMultimap;
     }
     @Override
     public @NotNull Component getName(ItemStack stack) {
         Component component = super.getName(stack);
         MutableComponent co = component.copy();
-        co.setStyle(Style.EMPTY.withColor(color));
+        co.setStyle(Style.EMPTY.withColor(theColor()));
         return co;
     }
-    public static boolean hasReinforcedItem(Player player ,Item item){
+
+    @Override
+    public int theColor() {
+        return Light.ARGB.color(50,80,120,105);
+
+    }
+
+    public static boolean hasReinforcedItem(Player player , Item item){
         Set<String> strings = player.getData(ReinforcedDataHandler.reinforced);
         ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(item);
         return strings.contains(resourceLocation.toString());
