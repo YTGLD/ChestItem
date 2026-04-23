@@ -45,10 +45,10 @@ public class ShadowMint extends ItemBlackShadow {
                                 if (shadow_shield > 0) {
                                     living.hurt(living.damageSources().magic(),10);
                                     if (living.isDeadOrDying()){
-                                        player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, shadow_shield + 4);
+                                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, shadow_shield + 4);
                                         player.heal(4);
                                     }
-                                    player.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, shadow_shield - 1);
+                                    Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, shadow_shield - 1);
                                     break;
                                 }
                             }

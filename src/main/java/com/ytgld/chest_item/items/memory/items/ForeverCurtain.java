@@ -3,6 +3,7 @@ package com.ytgld.chest_item.items.memory.items;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.effect.Effects;
@@ -111,7 +112,7 @@ public class ForeverCurtain extends MemoryBase {
                         AttributeInstance maxShield = player.getAttribute(AttReg.painShield_number);
                         if (maxShield != null) {
                             if (player.getData(supplier) <= maxShield.getValue()) {
-                                player.setData(supplier, player.getData(supplier) + 0.5f);
+                                Handler.setDataValue(supplier,player, player.getData(supplier) + 0.5f);
                             }
                         }
                     }

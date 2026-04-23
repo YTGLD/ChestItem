@@ -27,6 +27,43 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class Handler {
+    public static<T> void setDataValue(Supplier<AttachmentType<T>> attachmentTypeSupplier,LivingEntity living ,T number){
+        if (living instanceof Player player) {
+            player.setData(attachmentTypeSupplier,number);
+        }
+    }
+    public static void addHyperplasiaData(LivingEntity living ,float number){
+        if (living instanceof Player player) {
+            AttributeInstance attribute = player.getAttribute(AttReg.hyperplasia);
+            AttributeInstance attributeCooldown = player.getAttribute(AttReg.hyperplasiaCooldown);
+            if (attribute != null && attributeCooldown != null) {
+                int cooldown = player.getData(AttReg.hyperplasiaCooldownAttachmentType);
+                if (cooldown > 0) {
+                    number = 0;
+                }
+                float hyperplasiaValue = (float) attribute.getValue();
+                float data = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                float newValue = data + number;
+                if (newValue > hyperplasiaValue) {
+                    newValue = hyperplasiaValue;
+                }
+
+
+                player.setData(AttReg.hyperplasiaATTACHMENT_TYPES,newValue);
+            }
+        }
+    }
+
+    public static void reduceHyperplasiaData(LivingEntity living ,float number){
+        if (living instanceof Player player) {
+            float data = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+            float newValue = data - number;
+            if (newValue < 0) {
+                newValue = 0;
+            }
+            player.setData(AttReg.hyperplasiaATTACHMENT_TYPES, newValue);
+        }
+    }
     public static void upDATA(Player player) {
         if (player instanceof IPlayer iPlayer) {
             iPlayer.cI1_21_11$upDATA();

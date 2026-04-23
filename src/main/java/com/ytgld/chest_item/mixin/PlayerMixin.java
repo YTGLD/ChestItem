@@ -117,24 +117,8 @@ public abstract class PlayerMixin implements IPlayer {
 
     @Inject(method = "tick", at = @At(value = "RETURN"))
     private void tick(CallbackInfo ci) {
-        Player player = (Player) (Object) this;
         cI1_21_11$updateAttribute();
         cI1_21_11$updateReinforceAttribute();
-        if (!((Player) (Object) this).level().isClientSide()) {
-            if (player.isAlive()) {
-                if (((Player) (Object) this).hasContainerOpen()) {
-                    if (((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) < 255) {
-                        ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, ((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) + 25);
-                    }
-                } else {
-                    if (((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) > 5) {
-                        ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, ((Player) (Object) this).getData(AttReg.black_shadowAttachmentType) - 10);
-                    } else {
-                        ((Player) (Object) this).setData(AttReg.black_shadowAttachmentType, 0f);
-                    }
-                }
-            }
-        }
     }
     @Override
     public AtomicReference<ChestInventory> chest_item$chestInventory() {

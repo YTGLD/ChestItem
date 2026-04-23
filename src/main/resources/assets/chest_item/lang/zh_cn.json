@@ -403,6 +403,7 @@
   "attribute.name.chest_item.resistance": "抗性",
   "attribute.name.chest_item.max_reinforced": "可装备的最大增强件数量",
   "attribute.name.chest_item.shield_cooldown": "击碎反应时间",
+  "attribute.name.chest_item.hyperplasia_cooldown": "休眠时间",
 
 
   "key.category.chest_item.chest": "箱子里的小饰品",

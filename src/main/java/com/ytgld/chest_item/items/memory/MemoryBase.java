@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.items.memory;
 
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.IBigTooltip;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.black.ITheChaos;
@@ -36,7 +37,7 @@ public abstract class MemoryBase extends Item {
         ItemStack itemstack = player.getItemInHand(usedHand);
         player.startUsingItem(usedHand);
         if (!player.hasData(TheMemoryDataHandler.mStringSetData)){
-            player.setData(TheMemoryDataHandler.mStringSetData,new HashSet<>());
+            Handler.setDataValue(TheMemoryDataHandler.mStringSetData,player,new HashSet<>());
         }
         return InteractionResult.CONSUME;
     }
@@ -62,7 +63,7 @@ public abstract class MemoryBase extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) {
             if (!player.hasData(TheMemoryDataHandler.mStringSetData)) {
-                player.setData(TheMemoryDataHandler.mStringSetData, new HashSet<>());
+                Handler.setDataValue(TheMemoryDataHandler.mStringSetData,player, new HashSet<>());
             }
             Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
             addMemory(player);

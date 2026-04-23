@@ -61,7 +61,7 @@ public class AttReg {
             "hyperplasia", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf("hyperplasia")).build()
     );
     public static final DeferredHolder<Attribute,?> hyperplasia = REGISTRY.register("hyperplasia",()->{
-        return new RangedAttribute("attribute.name.chest_item.hyperplasia", 1, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.hyperplasia", 0, -1024, 1024).setSyncable(true);
     });
 
     public static final DeferredHolder<Attribute,?> hyperplasia_speed = REGISTRY.register("hyperplasia_speed",()->{
@@ -70,7 +70,13 @@ public class AttReg {
     public static final DeferredHolder<Attribute,?> hyperplasia_stronger = REGISTRY.register("hyperplasia_stronger",()->{
         return new RangedAttribute("attribute.name.chest_item.hyperplasia_stronger", 1, -1024, 1024).setSyncable(true);
     });
-
+    public static final DeferredHolder<Attribute,?> hyperplasiaCooldown= REGISTRY.register("hyperplasia_cooldown",()->{
+        return new RangedAttribute("attribute.name.chest_item.hyperplasia_cooldown", 8, -1024, 1024).setSyncable(true);
+    });
+    public static final Supplier<AttachmentType<Integer>> hyperplasiaCooldownAttachmentType = ATTACHMENT_TYPES.register(
+            "hyperplasia_cooldown_data", () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler()).serialize(Codec.INT.
+                    fieldOf("hyperplasia_cooldown_data")).build()
+    );
     /**
      * 失败的理论——探索未知
      */
@@ -79,7 +85,7 @@ public class AttReg {
                     .serialize(Codec.FLOAT.fieldOf("shadow_shield")).build()
     );
     public static final DeferredHolder<Attribute,?> shadow_shield = REGISTRY.register("shadow_shield",()->{
-        return new RangedAttribute("attribute.name.chest_item.shadow_shield", 1, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.shadow_shield", 0, -1024, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> shadow_shield_speed = REGISTRY.register("shadow_shield_speed",()->{
         return new RangedAttribute("attribute.name.chest_item.shadow_shield_speed", 1, -1024, 1024).setSyncable(true);
@@ -94,7 +100,7 @@ public class AttReg {
      *侵蚀装甲
      */
     public static final DeferredHolder<Attribute,?> chaos_armor = REGISTRY.register("chaos_armor",()->{
-        return new RangedAttribute("attribute.name.chest_item.chaos_armor", 1, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.chaos_armor", 0, -1024, 1024).setSyncable(true);
     });
     /**
      * 混沌理论：
@@ -181,12 +187,16 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.heal,1);
         event.add(EntityType.PLAYER , AttReg.instability,1);
         event.add(EntityType.PLAYER , AttReg.instability_low,1);
-        event.add(EntityType.PLAYER , AttReg.hyperplasia,1);
+
+        event.add(EntityType.PLAYER , AttReg.hyperplasia,0);
         event.add(EntityType.PLAYER , AttReg.hyperplasia_speed,1);
         event.add(EntityType.PLAYER , AttReg.hyperplasia_stronger,1);
-        event.add(EntityType.PLAYER , AttReg.shadow_shield,1);
+        event.add(EntityType.PLAYER , AttReg.hyperplasiaCooldown,8);
+
+        event.add(EntityType.PLAYER , AttReg.shadow_shield,0);
         event.add(EntityType.PLAYER , AttReg.shadow_shield_speed,1);
         event.add(EntityType.PLAYER , AttReg.shadow_shield_stronger,1);
+
         event.add(EntityType.PLAYER , AttReg.more_speed,1);
         event.add(EntityType.PLAYER , AttReg.looting,0);
         event.add(EntityType.PLAYER , AttReg.fortune,0);
@@ -194,7 +204,7 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.xp_drop,1);
         event.add(EntityType.PLAYER , AttReg.resistance,1);
 
-        event.add(EntityType.PLAYER , AttReg.chaos_armor,1);
+        event.add(EntityType.PLAYER , AttReg.chaos_armor,0);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_damage,1);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_speed,1);
         event.add(EntityType.PLAYER , AttReg.chaos_armor_min,1);

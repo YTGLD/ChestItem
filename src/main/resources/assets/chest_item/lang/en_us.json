@@ -321,6 +321,7 @@
   "attribute.name.chest_item.resistance": "Resistance",
   "attribute.name.chest_item.max_reinforced": "The maximum number of enhancements that can be equipped",
   "attribute.name.chest_item.shield_cooldown": "Shattering reaction time",
+  "attribute.name.chest_item.hyperplasia_cooldown": "Dormant time",
 
 
 

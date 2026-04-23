@@ -109,7 +109,7 @@ public class EventMain {
 
     public static int time = 0;
     @SubscribeEvent
-    public void ItemTooltipEvent(ClientTickEvent.Post event){
+    public void ItemTooltipEvent(LevelTickEvent.Pre event){
         time++;
     }
     @SubscribeEvent
@@ -280,7 +280,7 @@ public class EventMain {
                 if (data > 0) {
                     float damage = event.getNewDamage();
                     int newData = (int) (data - 1 - ((int) (damage * 0.5f)));
-                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES,(float)newData);
+                    Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,living,(float)newData);
                     float modify = (float) Math.sqrt(value);
                     if (modify < 0.3f) {
                         modify = 0.3f;
@@ -288,9 +288,24 @@ public class EventMain {
                     float newDamage = damage * (0.3f / modify);
                     event.setNewDamage(newDamage);
                 } else {
-                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                    Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,living,0f);
+                    AttributeInstance time = living.getAttribute(AttReg.hyperplasiaCooldown);
+                    if (time != null) {
+                        int cooldown = (int) time.getValue();
+                        Handler.setDataValue(AttReg.hyperplasiaCooldownAttachmentType,living,cooldown);
+                    }
                 }
             }
+        }
+    }
+    public static void upDataHyperplasiaCooldown(Player player){
+        if (player.tickCount % 20 == 1) {
+            int c = player.getData(AttReg.hyperplasiaCooldownAttachmentType);
+            int newV = c - 1;
+            if (newV < 0) {
+                newV = 0;
+            }
+            Handler.setDataValue(AttReg.hyperplasiaCooldownAttachmentType, player, newV);
         }
     }
     public void ChaosShield (LivingDamageEvent.Pre event) {
@@ -303,7 +318,7 @@ public class EventMain {
                 float damage = event.getNewDamage();
                 float newData = data - damage;
                 if (newData > 0) {
-                    living.setData(AttReg.chaosWinds, (newData));
+                    Handler.setDataValue(AttReg.chaosWinds,living, (newData));
                     event.setNewDamage(0);
                 } else {
                     float minModify = (float) living.getAttributeValue(AttReg.chaos_armor_min);
@@ -330,11 +345,11 @@ public class EventMain {
                             }
                         }
                     }
-                    living.setData(AttReg.chaosWinds, 0f);
+                    Handler.setDataValue(AttReg.chaosWinds,living, 0f);
                     event.setNewDamage(damage - data);
                 }
             } else {
-                living.setData(AttReg.chaosWinds, 0f);
+                Handler.setDataValue(AttReg.chaosWinds,living, 0f);
             }
         }
     }
@@ -366,14 +381,14 @@ public class EventMain {
                     float damage = event.getAmount() ;
                     float newData = data - damage / 1.2f / value;
                     if (newData > 0) {
-                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, (newData));
+                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, (newData));
                         event.setAmount(0);
                     } else {
-                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, 0f);
                         event.setAmount(damage - data);
                     }
                 }else {
-                    living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                    Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, 0f);
                 }
             }
         }
@@ -494,32 +509,28 @@ public class EventMain {
         FissionEmblem.tick(event);
         Warmaker.tick(event);
 
-        LivingEntity living = event.player;
+        Player living = event.player;
 
         ShieldRenderHandler.tickShield(living);
-
+        upDataHyperplasiaCooldown(living);
 
         if (ShieldRenderHandler.canHeal(living)){
-            AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
-            AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
-
-            if (hyperplasia != null && hyperplasia_speed != null) {
-                float time = (float) (15 * hyperplasia_speed.getValue());
-                if (time < 1) {
-                    time = 1;
-                }
-
-                float value = (float) hyperplasia.getValue();
-                float sNumber = value - 1;
-                float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
-
-                if (living.tickCount % (time * 7) == 1) {
-                    if (data < sNumber) {
-                        living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, data + 1);
+            int cooldown = living.getData(AttReg.hyperplasiaCooldownAttachmentType);
+            if (cooldown <= 0) {
+                AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
+                AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
+                if (hyperplasia != null && hyperplasia_speed != null) {
+                    float time = (float) (15 * hyperplasia_speed.getValue());
+                    if (time < 1) {
+                        time = 1;
                     }
-                }
-                if (data < 0) {
-                    living.setData(AttReg.hyperplasiaATTACHMENT_TYPES, 0f);
+                    float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                    if (living.tickCount % (time * 7) == 1) {
+                        Handler.addHyperplasiaData(living, 1);
+                    }
+                    if (data < 0) {
+                        Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES, living, 0f);
+                    }
                 }
             }
         }
@@ -533,17 +544,16 @@ public class EventMain {
                 if (doTime < 10) {
                     doTime = 10;
                 }
-                float value = (float) attributeInstance.getValue();
-                float sNumber = value - 1;
+                float sNumber = (float) attributeInstance.getValue();
                 float data = living.getData(AttReg.chaosWinds);
 
                 if (living.tickCount % doTime == 1) {
                     if (data < sNumber) {
-                        living.setData(AttReg.chaosWinds, data + 1);
+                        Handler.setDataValue(AttReg.chaosWinds,living, data + 1);
                     }
                 }
                 if (data < 0) {
-                    living.setData(AttReg.chaosWinds, 0f);
+                    Handler.setDataValue(AttReg.chaosWinds,living, 0f);
                 }
             }
         }
@@ -557,17 +567,16 @@ public class EventMain {
                 if (time < 20) {
                     time = 20f;
                 }
-                float value = (float) shadow_shield.getValue();
-                float sNumber = value - 1;
+                float sNumber = (float) shadow_shield.getValue();
                 float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
 
                 if (living.tickCount % (int)time == 1) {
                     if (data < sNumber) {
-                        living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, data + 1);
+                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, data + 1);
                     }
                 }
                 if (data < 0) {
-                    living.setData(AttReg.shadow_shield_ATTACHMENT_TYPES, 0f);
+                    Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, 0f);
                 }
             }
         }
