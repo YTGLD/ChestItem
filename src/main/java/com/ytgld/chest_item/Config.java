@@ -15,10 +15,6 @@ public class Config {
             doEndComingUp =  builder
                     .translation("chest_item.config.doEndComingUp")
                     .define("doEndComingUp", true);
-            chaosFortress =  builder
-                    .translation("chest_item.config.chaosFortress")
-                    .defineInRange("chaosFortress", 5000,1,Integer.MAX_VALUE);
-
             RunawayLiningMin =  builder
                     .translation("chest_item.config.RunawayLiningMin")
                     .defineInRange("RunawayLiningMin", -0.1F,0,Integer.MAX_VALUE);
@@ -32,8 +28,6 @@ public class Config {
         builder.pop();
     }
     public final ModConfigSpec.BooleanValue doEndComingUp;
-    public final ModConfigSpec.IntValue chaosFortress;
-
     public final ModConfigSpec.DoubleValue RunawayLiningMin;
     public final ModConfigSpec.DoubleValue RunawayLiningMax;
 }
