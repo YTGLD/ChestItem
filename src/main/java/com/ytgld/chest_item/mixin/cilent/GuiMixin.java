@@ -5,7 +5,6 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.MGuiGraphicsCI_Life;
 import com.ytgld.chest_item.renderer.MGuiGraphics;
-import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -48,16 +47,6 @@ public abstract class GuiMixin {
             cI1_21_9$renderArmor(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 10, 1, 0, l);
             this.minecraft.getProfiler().pop();
             if (i > 0&&cI1_21_9$showAlpha > 0) {
-                this.leftHeight += 20;
-            }
-        }
-        if (player != null) {
-            float i = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
-            int l = p_283143_.guiWidth() / 2 - 91;
-            this.minecraft.getProfiler().push("shadow_shield");
-            cI1_21_9$renderShadowBlackArmor(p_283143_, player, p_283143_.guiHeight() - this.leftHeight + 20, 1, 0, l);
-            this.minecraft.getProfiler().pop();
-            if (i > 0&&cI1_21_9$showAlphaShadow > 0) {
                 this.leftHeight += 20;
             }
         }
@@ -185,6 +174,25 @@ public abstract class GuiMixin {
     @Unique
     private float cI1_21_9$lightAmoutShadow = 0;
 
+
+    @Unique
+    private float cI1_21_1$blackShadowAlpha = 1;
+    @Unique
+    private float cI1_21_1$blackHurtOfSize = 1;
+    @Unique
+    private void cI1_21_1$renderBoomBlackShadow(GuiGraphics guiGraphics, Player player, int x, int y,float alpha,float size){
+        var pose = guiGraphics.pose();
+        pose.pushPose();
+        pose.translate(x,y,0);
+        pose.scale(size,size,size);
+        MGuiGraphicsCI_Life.blit(guiGraphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                        "textures/gui/shadow_black_1.png"),
+                0, 0,
+                0, 0, 12, 12, 12, 12,
+                1, 1, 1, alpha);
+        pose.popPose();
+    }
+
     @Unique
     private void cI1_21_9$renderShadowBlackArmor(GuiGraphics guiGraphics, Player player, int y, int heartRows, int height, int x) {
         float is = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
@@ -193,6 +201,10 @@ public abstract class GuiMixin {
             int hurtTime = player.hurtTime;
             if (hurtTime > 0) {
                 cI1_21_9$showAlphaShadow = 255;
+                cI1_21_1$blackHurtOfSize = 0.5f;
+            }
+            if (cI1_21_1$blackHurtOfSize < 1) {
+                cI1_21_1$blackHurtOfSize += 0.025f;
             }
             if (i>=player.getAttributeValue(AttReg.shadow_shield)){
                 if (hurtTime <= 0) {
@@ -241,13 +253,9 @@ public abstract class GuiMixin {
                 guiGraphics.drawString(Minecraft.getInstance().font,String.valueOf((int) i),(x) + 4 * 8- 3,j ,
                         Light.ARGB.color(alpha,100,50,255));
             }
-
-            RenderSystem.disableBlend();
         }
 
     }
-
-
 
 
 

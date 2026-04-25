@@ -1,6 +1,5 @@
 {
 
-
   "chest_item.config.Accelerated": "腐堕之心在低于50%时给予的额外强度",
   "chest_item.config.Accelerated2": "腐堕之心被击碎时产生的额外反应时间倍数",
   "chest_item.config.Activity": "腐堕之心被击碎时获得的生命恢复等级",
@@ -23,6 +22,7 @@
   "chest_item.config.ChaosFortress2": "增加的魔法伤害",
   "chest_item.config.ChaosFortress3": "伤害倍率",
   "chest_item.config.ChaosSeven": "属性倍率",
+  "chest_item.config.ComplexComponents": "额外休眠时长",
   "chest_item.config.Conch": "攻击半径",
   "chest_item.config.Conch2": "连锁伤害",
   "chest_item.config.Contingency": "腐堕之心被击碎时获得的生命恢复等级",
@@ -78,6 +78,8 @@
   "chest_item.config.PainRune2": "减益",
   "chest_item.config.Peace": "伤害倍率",
   "chest_item.config.QualitativeComponents": "速度",
+  "chest_item.config.RegenerationPlugin": "双倍治愈的概率",
+  "chest_item.config.RegenerationPlugin2": "对玩家进行治疗的概率",
   "chest_item.config.Ring": "药水等级",
   "chest_item.config.Samsara": "免伤概率",
   "chest_item.config.ScarHeart": "数值",
@@ -92,6 +94,8 @@
   "chest_item.config.Speed": "速度",
   "chest_item.config.Speed2": "跳跃力量",
   "chest_item.config.SpeedHeart": "恢复生命值的比率量",
+  "chest_item.config.StabilizingDevice": "疤痕组织提高的坚韧度",
+  "chest_item.config.StabilizingDevice2": "疤痕组织的降低的恢复效果",
   "chest_item.config.Stomach": "恢复饥饿所需的时间",
   "chest_item.config.Stomach2": "饥饿惩罚",
   "chest_item.config.Stone": "护甲",
@@ -138,6 +142,7 @@
   "chest_item.configuration.ChaosFortress2": "混沌要塞之护2",
   "chest_item.configuration.ChaosFortress3": "混沌要塞之护3",
   "chest_item.configuration.ChaosSeven": "混沌七子",
+  "chest_item.configuration.ComplexComponents": "繁复组件",
   "chest_item.configuration.Conch": "闪电海螺",
   "chest_item.configuration.Conch2": "闪电海螺2",
   "chest_item.configuration.Contingency": "应急衬件",
@@ -193,6 +198,8 @@
   "chest_item.configuration.PainRune2": "痛苦符石2",
   "chest_item.configuration.Peace": "信仰和平",
   "chest_item.configuration.QualitativeComponents": "质化组件",
+  "chest_item.configuration.RegenerationPlugin": "再生插件",
+  "chest_item.configuration.RegenerationPlugin2": "再生插件2",
   "chest_item.configuration.Ring": "矿工戒指",
   "chest_item.configuration.Samsara": "轮回道体",
   "chest_item.configuration.ScarHeart": "疤痕组织",
@@ -207,6 +214,8 @@
   "chest_item.configuration.Speed": "极限反应论",
   "chest_item.configuration.Speed2": "极限反应论2",
   "chest_item.configuration.SpeedHeart": "钢铁之心",
+  "chest_item.configuration.StabilizingDevice": "稳固装置",
+  "chest_item.configuration.StabilizingDevice2": "稳固装置2",
   "chest_item.configuration.Stomach": "人造胃",
   "chest_item.configuration.Stomach2": "人造胃2",
   "chest_item.configuration.Stone": "重石",
@@ -231,7 +240,6 @@
   "chest_item.configuration.Warmaker2": "战争缔造者2",
   "chest_item.configuration.WindKnife": "罡风刀环",
   "chest_item.configuration.WindKnife2": "罡风刀环2",
-
 
   "item.chest_item.chest": "可以放入神奇箱子内，按下‘%d’键打开",
   "key.chest_item.c": "使用技能",
@@ -378,9 +386,9 @@
   "attribute.name.chest_item.hyperplasia": "疮疤增生最大值",
   "attribute.name.chest_item.hyperplasia_speed": "疤痕组织治愈可能",
   "attribute.name.chest_item.hyperplasia_stronger": "增生组织坚韧度",
-  "attribute.name.chest_item.shadow_shield": "幽影护盾",
-  "attribute.name.chest_item.shadow_shield_speed": "幽影护盾扩充速度",
-  "attribute.name.chest_item.shadow_shield_stronger": "幽影护盾稳固度",
+  "attribute.name.chest_item.shadow_shield": "幽影容量",
+  "attribute.name.chest_item.shadow_shield_speed": "幽影扩充速度",
+  "attribute.name.chest_item.shadow_shield_stronger": "幽影稳固度",
   "attribute.name.chest_item.looting": "抢夺",
   "attribute.name.chest_item.fortune": "时运",
   "attribute.name.chest_item.chaos_armor": "侵蚀装甲",
@@ -404,7 +412,7 @@
   "attribute.name.chest_item.max_reinforced": "可装备的最大增强件数量",
   "attribute.name.chest_item.shield_cooldown": "击碎反应时间",
   "attribute.name.chest_item.hyperplasia_cooldown": "休眠时间",
-
+  "attribute.name.chest_item.shadow_shield_conversion": "幽影转换",
 
   "key.category.chest_item.chest": "箱子里的小饰品",
   "key.chest_item.r": "打开神奇箱子",

@@ -8,6 +8,7 @@ import com.ytgld.chest_item.entity.c.AttackEndComingRenderer;
 import com.ytgld.chest_item.entity.c.EndComingRenderer;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
+import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
 import com.ytgld.chest_item.renderer.CIStateShardsHasBlack;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
@@ -80,10 +81,14 @@ public class ChestitemClient{
     public static void registerOverlays(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"pain_shield"),
                 (guiGraphics,tracker)->ShieldRenderHandler.renderShield(guiGraphics));
+
+        event.registerAbove(VanillaGuiLayers.FOOD_LEVEL, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"black_shield"),
+                (guiGraphics,tracker)-> BlackShieldRenderHandler.renderShield(guiGraphics));
     }
     @SubscribeEvent
     public static void clientTickEvent(ClientTickEvent.Pre event) {
         ShieldRenderHandler.tick(event);
+        BlackShieldRenderHandler.tick(event);
     }
     @SubscribeEvent
     public static void EntityRenderersEvent(RegisterShadersEvent event) {

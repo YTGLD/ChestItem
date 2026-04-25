@@ -31,6 +31,7 @@ import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
@@ -47,6 +48,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -231,6 +233,7 @@ public class EventMain {
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
         ShieldRenderHandler.thepainShield(event);
+        BlackShieldRenderHandler.hurtBlackShield(event);
         Complementary.damage(event);
         ChaosShield(event);
         hyperplasiaShield(event);
@@ -260,6 +263,10 @@ public class EventMain {
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player living) {
+            float shadow_shield = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+            if (shadow_shield > 0) {
+                return;
+            }
             AttributeInstance hyperplasia_stronger = living.getAttribute(AttReg.hyperplasia_stronger);
             if (hyperplasia_stronger != null) {
                 float value = (float) hyperplasia_stronger.getValue();
@@ -344,42 +351,73 @@ public class EventMain {
             }
         }
     }
-
+    /**
+     * shadow_shield_stronger
+     * <p>
+     * 幽影稳固度是受到伤害后保护的幽影值
+     * <p>
+     * shadow_shield_conversion
+     * <p>
+     * 幽影转换是幽影护盾在受到伤害时将幽影转换成侵蚀装甲和疤痕组织的比率
+     *
+     *
+     */
     public void ShadowShield (LivingIncomingDamageEvent event){
-
         if (event.getEntity() instanceof Player living) {
             if (living instanceof Player player) {
-                ChestInventory chestInventory = Handler.getItem(player);
-                if (chestInventory != null) {
-                    if (!player.level().isClientSide()) {
-                        for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                            ItemStack stack = chestInventory.getItem(i);
-                            if (stack.is(InitItems.ShadowMint_)) {
-                                return;
-                            }
-                        }
-                    }
+                if (Handler.has(player, InitItems.ShadowMint_.asItem())){
+                    return;
                 }
             }
-
-
-
+            //幽影稳固度
             AttributeInstance shadow_shield_stronger = living.getAttribute(AttReg.shadow_shield_stronger);
             if (shadow_shield_stronger != null) {
                 float value = (float) shadow_shield_stronger.getValue();
                 float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
                 if (data > 0) {
                     float damage = event.getAmount() ;
-                    float newData = data - damage / 1.2f / value;
+                    //newData：是减少后的值
+                    float newData = data - (damage / value);
                     if (newData > 0) {
-                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, (newData));
-                        event.setAmount(0);
-                    } else {
-                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, 0f);
-                        event.setAmount(damage - data);
+                        AttributeInstance shadow_shield_conversion = living.getAttribute(AttReg.shadow_shield_conversion);
+                        if (shadow_shield_conversion != null) {
+                            float sscValue = (float) shadow_shield_conversion.getValue();
+
+                            float hyperplasiaAValue = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                            float chaosWindsAValue = living.getData(AttReg.chaosWinds);
+
+                            AttributeInstance max_hyperplasiaAttributeInstance = living.getAttribute(AttReg.hyperplasia);
+                            AttributeInstance max_chaos_armorAttributeInstance = living.getAttribute(AttReg.chaos_armor);
+
+                            if (max_hyperplasiaAttributeInstance != null && max_chaos_armorAttributeInstance != null) {
+                                float hyperplasia = (float) max_hyperplasiaAttributeInstance.getValue();
+                                float chaosArmor = (float) max_chaos_armorAttributeInstance.getValue();
+
+                                float newValueHyp = newData + hyperplasiaAValue;
+                                newValueHyp *= sscValue;
+                                if (newValueHyp > hyperplasia) {
+                                    newValueHyp = hyperplasia;
+                                }
+                                Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,living,newValueHyp);
+
+                                float newValueChaosArmor = newData + chaosWindsAValue;
+                                newValueChaosArmor *= sscValue;
+                                if (newValueChaosArmor > chaosArmor) {
+                                    newValueChaosArmor = chaosArmor;
+                                }
+
+                                event.setAmount(event.getAmount() * 0.8f);
+
+                                Handler.setDataValue(AttReg.chaosWinds,living,newValueChaosArmor);
+                                Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living,newData);
+                            }
+                        }
+                    }else {
+                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living,0f);
                     }
                 }else {
                     Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, 0f);
+                    Handler.setDataValue(AttReg.shadow_shield_cooldown_dataAttachmentType,living,200);
                 }
             }
         }
@@ -548,31 +586,43 @@ public class EventMain {
                 }
             }
         }
+        upDataShadowCooldown(living);
         if (ShieldRenderHandler.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
-            AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
-            AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
+            if (living.getData(AttReg.shadow_shield_cooldown_dataAttachmentType) <= 0) {
+                AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
+                AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
 
-            if (shadow_shield != null && shadow_shield_speed != null) {
-                float time = 300;
-                time /= (float) shadow_shield_speed.getValue();
-                if (time < 20) {
-                    time = 20f;
-                }
-                float sNumber = (float) shadow_shield.getValue();
-                float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
-
-                if (living.tickCount % (int)time == 1) {
-                    if (data < sNumber) {
-                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, data + 1);
+                if (shadow_shield != null && shadow_shield_speed != null) {
+                    float time = 300;
+                    time /= (float) shadow_shield_speed.getValue();
+                    if (time < 20) {
+                        time = 20f;
                     }
-                }
-                if (data < 0) {
-                    Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, 0f);
+                    float sNumber = (float) shadow_shield.getValue();
+                    float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+
+                    if (living.tickCount % (int) time == 1) {
+                        if (data < sNumber) {
+                            Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES, living, data + 1);
+                        }
+                    }
+                    if (data < 0) {
+                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES, living, 0f);
+                    }
                 }
             }
         }
     }
-
+    public static void upDataShadowCooldown(Player player){
+        if (player.tickCount % 20 == 1) {
+            int c = player.getData(AttReg.shadow_shield_cooldown_dataAttachmentType);
+            int newV = c - 1;
+            if (newV < 0) {
+                newV = 0;
+            }
+            Handler.setDataValue(AttReg.shadow_shield_cooldown_dataAttachmentType, player, newV);
+        }
+    }
     @SubscribeEvent
     public void tick(LivingEntityUseItemEvent.Finish event) {
         Stomach.tick(event);
