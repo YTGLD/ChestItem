@@ -226,34 +226,34 @@ public class ShieldRenderHandler {
         }
     }
     public static void renderECG(GuiGraphicsExtractor guiGraphics) {
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.options.hideGui) return;
-
-        var player = minecraft.player;
-        if (player == null || minecraft.level == null) return;
-
-        Matrix3x2fStack poseStack = guiGraphics.pose();
-        poseStack.pushMatrix();
-        float s = aFloat;
-        if (s < 0) {
-            s = 0;
-        }
-        int left = guiGraphics.guiWidth() / 2;
-        int top = guiGraphics.guiHeight() - 47;
-        int size = 32;
-        guiGraphics
-                .blit(MRender.RenderPs.GUI_TEXTURED,
-                        ECG_TEXTURE,
-
-                        left - size/2, top - size/2,
-                        0,0,
-
-                        size - scrollX, size,
-                        size, size,
-
-                        Light.ARGB.color((int) Math.min(s,Math.max(0,Math.min(255,ecgAlpha * 255))),255,255,255));
-
-        poseStack.popMatrix();
+//        Minecraft minecraft = Minecraft.getInstance();
+//        if (minecraft.options.hideGui) return;
+//
+//        var player = minecraft.player;
+//        if (player == null || minecraft.level == null) return;
+//
+//        Matrix3x2fStack poseStack = guiGraphics.pose();
+//        poseStack.pushMatrix();
+//        float s = aFloat;
+//        if (s < 0) {
+//            s = 0;
+//        }
+//        int left = 0;
+//        int top = 0;
+//        int size = 32;
+//        guiGraphics
+//                .blit(MRender.RenderPs.GUI_TEXTURED,
+//                        ECG_TEXTURE,
+//
+//                        0,0,
+//                        0,0,
+//
+//                        size - scrollX, size,
+//                        size, size,
+//
+//                        Light.ARGB.color((int) Math.min(s,Math.max(0,Math.min(255,ecgAlpha * 255))),255,255,255));
+//
+//        poseStack.popMatrix();
     }
 
     public static void thepainShield (LivingDamageEvent.Pre event) {

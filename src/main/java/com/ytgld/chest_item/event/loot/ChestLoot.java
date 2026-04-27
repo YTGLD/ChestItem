@@ -23,8 +23,14 @@ public class ChestLoot extends LootModifier {
             RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst,
                     ChestLoot::new)));
 
-    public ChestLoot(LootItemCondition[] conditionsIn) {
-        super(conditionsIn);
+    /**
+     * Constructs a LootModifier.
+     *
+     * @param conditions
+     * @param priority
+     */
+    protected ChestLoot(LootItemCondition[] conditions, int priority) {
+        super(conditions, priority);
     }
 
     @Override

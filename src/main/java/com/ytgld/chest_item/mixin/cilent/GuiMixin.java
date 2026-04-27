@@ -42,16 +42,6 @@ public abstract class GuiMixin {
                 this.leftHeight += 20;
             }
         }
-        if (player != null) {
-            float i = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
-            int l = graphics.guiWidth() / 2 - 91;
-            Profiler.get().push("shadow_shield");
-            cI1_21_9$renderShadowBlackArmor(graphics, player, graphics.guiHeight() - this.leftHeight + 10, 1, 0, l);
-            Profiler.get().pop();
-            if (i > 0&&cI1_21_9$showAlphaShadow > 0) {
-                this.leftHeight += 20;
-            }
-        }
     }
 
     @Inject(at = @At("RETURN"), method = "extractFoodLevel")

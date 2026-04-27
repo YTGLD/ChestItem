@@ -34,6 +34,29 @@ public class Handler {
             player.setData(attachmentTypeSupplier,number);
         }
     }
+
+    public static void addShadowBlackShieldData(LivingEntity living ,float number){
+        if (living instanceof Player player) {
+            AttributeInstance shadowAttributeInstance = player.getAttribute(AttReg.shadow_shield);
+            if (shadowAttributeInstance != null ) {
+                int cooldown = player.getData(AttReg.shadow_shield_cooldown_dataAttachmentType);
+                if (cooldown > 0) {
+                    number = 0;
+                }
+                float shadowValue = (float) shadowAttributeInstance.getValue();
+                float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                float newValue = data + number;
+                if (data > shadowValue) {
+                    return;
+                }
+                if (newValue > shadowValue) {
+                    newValue = shadowValue;
+                }
+
+                setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player,newValue);
+            }
+        }
+    }
     public static void addHyperplasiaData(LivingEntity living ,float number){
         if (living instanceof Player player) {
             AttributeInstance attribute = player.getAttribute(AttReg.hyperplasia);
@@ -57,7 +80,7 @@ public class Handler {
                 if (number > 0) {
                     RegenerationPlugin.heal(living);
                 }
-                player.setData(AttReg.hyperplasiaATTACHMENT_TYPES,newValue);
+                setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,player,newValue);
             }
         }
     }

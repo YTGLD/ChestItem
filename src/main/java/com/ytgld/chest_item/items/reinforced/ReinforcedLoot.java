@@ -29,11 +29,18 @@ public class ReinforcedLoot extends LootModifier {
             RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst,
                     ReinforcedLoot::new)));
 
-    public ReinforcedLoot(LootItemCondition[] conditionsIn) {
-        super(conditionsIn);
-    }
 
     public static List<Item> lListItems = new ArrayList<>();
+
+    /**
+     * Constructs a LootModifier.
+     *
+     * @param conditions
+     * @param priority
+     */
+    protected ReinforcedLoot(LootItemCondition[] conditions, int priority) {
+        super(conditions, priority);
+    }
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(@NotNull ObjectArrayList<ItemStack> objectArrayList, LootContext lootContext) {

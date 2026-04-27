@@ -6,6 +6,7 @@ import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
+import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
@@ -51,11 +52,14 @@ public class ChestitemClient{
     @SubscribeEvent
     public static void clientTickEvent(ClientTickEvent.Pre event) {
         ShieldRenderHandler.tick(event);
+        BlackShieldRenderHandler.tick(event);
     }
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, Identifier.fromNamespaceAndPath(Chestitem.MODID,"pain_shield"),
                 (guiGraphics,tracker)->ShieldRenderHandler.renderShield(guiGraphics));
+        event.registerAbove(VanillaGuiLayers.FOOD_LEVEL, Identifier.fromNamespaceAndPath(Chestitem.MODID,"black_shield"),
+                (guiGraphics,tracker)-> BlackShieldRenderHandler.renderShield(guiGraphics));
     }
     @SubscribeEvent
     public static void regMenu(RegisterMenuScreensEvent event){

@@ -93,7 +93,13 @@ public class AttReg {
     public static final DeferredHolder<Attribute,?> shadow_shield_stronger = REGISTRY.register("shadow_shield_stronger",()->{
         return new RangedAttribute("attribute.name.chest_item.shadow_shield_stronger", 1, -1024, 1024).setSyncable(true);
     });
-
+    public static final DeferredHolder<Attribute,?> shadow_shield_conversion = REGISTRY.register("shadow_shield_conversion",()->{
+        return new RangedAttribute("attribute.name.chest_item.shadow_shield_conversion", 1, -1024, 1024).setSyncable(true);
+    });
+    public static final Supplier<AttachmentType<Integer>> shadow_shield_cooldown_dataAttachmentType = ATTACHMENT_TYPES.register(
+            "shadow_shield_cooldown_data", () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler()).serialize(Codec.INT.
+                    fieldOf("shadow_shield_cooldown_data")).build()
+    );
        /**
      * 混沌理论：
      * <p>
@@ -196,6 +202,7 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.shadow_shield,0);
         event.add(EntityType.PLAYER , AttReg.shadow_shield_speed,1);
         event.add(EntityType.PLAYER , AttReg.shadow_shield_stronger,1);
+        event.add(EntityType.PLAYER , AttReg.shadow_shield_conversion,1);
 
         event.add(EntityType.PLAYER , AttReg.more_speed,1);
         event.add(EntityType.PLAYER , AttReg.looting,0);

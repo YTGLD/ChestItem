@@ -10,6 +10,9 @@
     "chest_item:scar_heart",
     "chest_item:self_increasing_heart",
     "chest_item:actual_suffering",
+    "chest_item:regeneration_plugin",
+    "chest_item:complex_components",
+    "chest_item:stabilizing_device",
     "chest_item:stomach"
   ]
 }
