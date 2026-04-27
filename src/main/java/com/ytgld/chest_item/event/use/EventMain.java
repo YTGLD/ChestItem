@@ -386,6 +386,9 @@ public class EventMain {
             AttributeInstance shadow_shield_stronger = living.getAttribute(AttReg.shadow_shield_stronger);
             if (shadow_shield_stronger != null) {
                 float value = (float) shadow_shield_stronger.getValue();
+                if (value <= 0) {
+                    return;
+                }
                 float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
                 if (data > 0) {
                     float damage = event.getAmount() ;
@@ -452,7 +455,7 @@ public class EventMain {
                     }
                 }else {
                     Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, 0f);
-                    Handler.setDataValue(AttReg.shadow_shield_cooldown_dataAttachmentType,living,200);
+                    Handler.setDataValue(AttReg.shadow_shield_cooldown_dataAttachmentType,living,10);
                 }
             }
         }

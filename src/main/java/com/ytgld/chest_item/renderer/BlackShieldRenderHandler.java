@@ -14,13 +14,13 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 public class BlackShieldRenderHandler {
 
     public static int glow;
-
     public static double lastShield;
-    public static float displayedShield;
-
-    public static float theAlpha = 0;
-
     public static float time = 0;
+    public static float aSize = 1;
+    public static float aGlow = 1f;
+    public static float aGlowMin = 0F;
+    public static float aGlowDOLDOWN = 0f;
+
     public static void tick(ClientTickEvent event) {
         var player = Minecraft.getInstance().player;
         if (player != null) {
@@ -53,6 +53,29 @@ public class BlackShieldRenderHandler {
                 }
                 if (lastShield != now) {
                     glow = 20;
+                    aGlowDOLDOWN = 1;
+                    aGlow = 1f;
+                    aGlowMin = 0f;
+                }
+                if (aFloat < 1) {
+                    aGlow = 1f;
+                    aGlowMin = 0f;
+                }
+                if (aGlowDOLDOWN > 0) {
+                    aGlowDOLDOWN -= 0.1f;
+                    if (aGlowMin < 1) {
+                        aGlowMin += 0.1f;
+                    }
+                    if (aGlow > 0) {
+                        aGlow -= 0.1f;
+                    }
+                }
+                if (aFloat < 1) {
+                    if (aSize < 1.5f) {
+                        aSize += 0.003f;
+                    }
+                }else {
+                    aSize = 1;
                 }
 
                 lastShield = now;
@@ -78,10 +101,36 @@ public class BlackShieldRenderHandler {
                         return;
                     }
                     double max = player.getAttributeValue(AttReg.shadow_shield);
-                    poseStack.pushPose();
-                    int left = guiGraphics.guiWidth() / 2;
-                    int top = guiGraphics.guiHeight() - 47;
                     if (max > 0) {
+                        if (aFloat < 1) {
+                            poseStack.pushPose();
+                            poseStack.translate(
+                                    ((guiGraphics.guiWidth() / 2f) - (24 * aSize) / 2),
+                                    ((guiGraphics.guiHeight() - 47f) - (24 * aSize) / 2),
+                                    0);
+                            poseStack.scale(aSize, aSize, aSize);
+                            new MGuiGraphics.GUI(GameRenderer::getPositionTexColorShader, true)
+                                    .blit(guiGraphics, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                                    "textures/gui/black_shadow_glow_4.png"),
+                                            0, 0,
+                                            0, 0,
+                                            24,
+                                            24,
+                                            24,
+                                            24,
+                                            1, 1, 1, aFloat);
+                            poseStack.popPose();
+                        }
+                    }
+                    poseStack.pushPose();
+                    poseStack.translate(
+                            (guiGraphics.guiWidth() / 2f) - (float) (24) / 2,
+                            (guiGraphics.guiHeight() - 47f)- (float) (24) / 2,
+                            0);
+                    int left = 0;
+                    int top = 0;
+                    if (max > 0) {
+
                         float s = aFloat;
                         if (s < 0) {
                             s = 0;
@@ -92,31 +141,31 @@ public class BlackShieldRenderHandler {
                             delta = 1;
                         }
                         if (delta <= 0.25 && delta > 0.1f) {
-                            renderSs4(guiGraphics,left,top,s, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            renderSs4(guiGraphics, s, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/gui/black_shadow_1.png"),ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/gui/black_shadow_glow_1.png"));
                         }else if (delta > 0.25 && delta <= 0.5) {
-                            renderSs4(guiGraphics,left,top,s, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            renderSs4(guiGraphics, s, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/gui/black_shadow_2.png"),ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/gui/black_shadow_glow_2.png"));
                         }else if (delta > 0.5 && delta <= 0.75) {
-                            renderSs4(guiGraphics,left,top,s, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            renderSs4(guiGraphics, s, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/gui/black_shadow_3.png"),ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/gui/black_shadow_glow_3.png"));
                         }else if (delta > 0.75 && delta <= 1) {
-                            renderSs4(guiGraphics,left,top,s, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
-                                    "textures/gui/black_shadow_4.png"),ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                            renderSs4(guiGraphics, s, ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+                                    "textures/gui/black_shadow_4.png"), ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                                     "textures/gui/black_shadow_glow_4.png"));
                         }
-
                     }
                     poseStack.popPose();
+
                 }
             }
         }
     }
 
-    public static void renderSs4(GuiGraphics guiGraphics, int left, int top , float s, ResourceLocation resourceLocation,ResourceLocation glowRes){
+    public static void renderSs4(GuiGraphics guiGraphics, float s, ResourceLocation resourceLocation, ResourceLocation glowRes){
         var minecraft = Minecraft.getInstance();
         var player = minecraft.player;
         if (player == null) {
@@ -124,7 +173,7 @@ public class BlackShieldRenderHandler {
         }else {
             new MGuiGraphics.GUI(GameRenderer::getPositionTexColorShader, false)
                     .blit(guiGraphics, resourceLocation,
-                            (left - (float) (24) / 2), (top - (float) (24) / 2),
+                            0,0,
                             0, 0,
                             24,
                             24,
@@ -134,13 +183,24 @@ public class BlackShieldRenderHandler {
 
             new MGuiGraphics.GUI(GameRenderer::getPositionTexColorShader, true)
                     .blit(guiGraphics, glowRes,
-                            (left - (float) (24) / 2), (top - (float) (24) / 2),
+                            0,0,
                             0, 0,
                             24,
                             24,
                             24,
                             24,
                             1, 1, 1, glow / 20f);
+
+
+            new MGuiGraphics.GUI(GameRenderer::getPositionTexColorShader, true)
+                    .blit(guiGraphics, resourceLocation,
+                            0,0,
+                            0, 0,
+                            24,
+                            24,
+                            24,
+                            24,
+                            1, 1, 1, Math.min(aFloat,Math.min(aGlowMin,aGlow)));
         }
     }
     public static void hurtBlackShield (LivingDamageEvent.Pre event) {
