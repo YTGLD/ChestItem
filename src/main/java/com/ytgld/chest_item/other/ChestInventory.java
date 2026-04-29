@@ -54,9 +54,8 @@ public class ChestInventory extends SimpleContainer{
             ItemStack itemstack = this.getItem(i);
             if (!itemstack.isEmpty()) {
                 if (!(itemstack.getItem() instanceof ItemBase) && !(itemstack.getItem() instanceof IChestItem)) {
-                    int count = itemstack.getCount();
                     player.drop(itemstack.copy(), false);
-                    itemstack.shrink(count);
+                    this.setItem(i, ItemStack.EMPTY);
                 }
             }
         }
