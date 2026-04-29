@@ -958,6 +958,6 @@
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零",
 
-  "item.chest_item.example_axe_accessory": "示例斧头饰品",
-  "item.chest_item.example_axe_accessory.string.0": "在神奇箱子中时每3秒赋予力量效果"
+  "item.chest_item.doom_axe": "示例斧头饰品",
+  "item.chest_item.doom_axe.string.0": "在神奇箱子中时每3秒赋予力量效果"
 }

@@ -25,7 +25,6 @@ import com.ytgld.chest_item.items.iron.IronHeart;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
-import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -256,8 +255,8 @@ public class    InitItems {
     public static final DeferredItem<Item> Pod_ = register("pod",
             (resourceLocation)-> new Pod(new Item.Properties().stacksTo(1)));
 
-    public static final DeferredItem<Item> ExampleAxeAccessory_ = register("example_axe_accessory",
-            (resourceLocation)-> new ExampleAxeAccessory(new Item.Properties().stacksTo(1)
+    public static final DeferredItem<Item> DoomAxe_ = register("doom_axe",
+            (resourceLocation)-> new DoomAxe(new Item.Properties().stacksTo(1)
                     .attributes(AxeItem.createAttributes(Tiers.IRON, 6.0F, -3.1F))));
 
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
@@ -392,7 +391,7 @@ public class    InitItems {
                     output.accept(ReinforcedItems.Dynamic_);
                     output.accept(ReinforcedItems.Contingency_);
 
-                    output.accept(InitItems.ExampleAxeAccessory_);
+                    output.accept(InitItems.DoomAxe_);
 
                 }).build());
 

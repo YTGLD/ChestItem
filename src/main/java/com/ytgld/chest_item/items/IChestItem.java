@@ -6,10 +6,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 
 public interface IChestItem {
     default void onChestTick(ItemStack stack, Player player) {}
     default void onChestAttack(ItemStack stack, Player player, LivingEntity target, ItemStackAttackEvent event) {}
+
+    default void onChestCrit(ItemStack stack, Player player, LivingEntity target, CriticalHitEvent event) {}
+
     default void onChestHurt(ItemStack stack, Player player, LivingIncomingDamageEvent event) {}
     default void onChestHeal(ItemStack stack, Player player, LivingHealEvent event) {}
 }
