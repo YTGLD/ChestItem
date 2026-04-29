@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.other;
 
+import com.ytgld.chest_item.items.IChestItem;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
@@ -24,6 +25,8 @@ public class ChestSlot extends Slot {
                 if (stack.getItem() instanceof TheImprintOfTheSoul) {
                     return false;
                 }
+                return true;
+            }else if (stack.getItem() instanceof IChestItem) {
                 return true;
             }else {
                 return false;

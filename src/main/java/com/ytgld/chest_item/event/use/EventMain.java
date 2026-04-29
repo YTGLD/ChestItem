@@ -198,6 +198,15 @@ public class EventMain {
     public void ItemStackAttackEvent(ItemStackAttackEvent event){
         GodBlood.attack(event);
         Conch.event(event);
+        if (!event.player.level().isClientSide()) {
+            LivingEntity target = event.event.getEntity();
+            for (int i = 0; i < event.chestInventory.getContainerSize(); i++) {
+                ItemStack stack = event.chestInventory.getItem(i);
+                if (!stack.isEmpty() && stack.getItem() instanceof IChestItem iChestItem) {
+                    iChestItem.onChestAttack(stack, event.player, target, event);
+                }
+            }
+        }
     }
     @SubscribeEvent
     public void LivingHealEvent(LivingHealEvent event){
@@ -210,6 +219,19 @@ public class EventMain {
         }
         LifeStone.tick(event);
         Silent.livingHealEventSilent_(event);
+        if (event.getEntity() instanceof Player player) {
+            if (!player.level().isClientSide()) {
+                ChestInventory chestInventory = Handler.getItem(player);
+                if (chestInventory != null) {
+                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                        ItemStack stack = chestInventory.getItem(i);
+                        if (!stack.isEmpty() && stack.getItem() instanceof IChestItem iChestItem) {
+                            iChestItem.onChestHeal(stack, player, event);
+                        }
+                    }
+                }
+            }
+        }
     }
     @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
@@ -549,6 +571,19 @@ public class EventMain {
             }
         }
         ShadowShield(event);
+        if (event.getEntity() instanceof Player player) {
+            if (!player.level().isClientSide()) {
+                ChestInventory chestInventory = Handler.getItem(player);
+                if (chestInventory != null) {
+                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                        ItemStack stack = chestInventory.getItem(i);
+                        if (!stack.isEmpty() && stack.getItem() instanceof IChestItem iChestItem) {
+                            iChestItem.onChestHurt(stack, player, event);
+                        }
+                    }
+                }
+            }
+        }
     }
     @SubscribeEvent
     public void LivingChangeTargetEvent(LivingChangeTargetEvent event){
@@ -643,6 +678,14 @@ public class EventMain {
                     if (data < 0) {
                         Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES, living, 0f);
                     }
+                }
+            }
+        }
+        if (!living.level().isClientSide()) {
+            for (int i = 0; i < event.chestInventory.getContainerSize(); i++) {
+                ItemStack stack = event.chestInventory.getItem(i);
+                if (!stack.isEmpty() && stack.getItem() instanceof IChestItem iChestItem) {
+                    iChestItem.onChestTick(stack, living);
                 }
             }
         }
