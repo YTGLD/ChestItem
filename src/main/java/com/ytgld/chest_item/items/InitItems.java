@@ -35,9 +35,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -254,6 +256,10 @@ public class    InitItems {
     public static final DeferredItem<Item> Pod_ = register("pod",
             (resourceLocation)-> new Pod(new Item.Properties().stacksTo(1)));
 
+    public static final DeferredItem<Item> ExampleAxeAccessory_ = register("example_axe_accessory",
+            (resourceLocation)-> new ExampleAxeAccessory(new Item.Properties().stacksTo(1)
+                    .attributes(AxeItem.createAttributes(Tiers.IRON, 6.0F, -3.1F))));
+
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
     }
@@ -386,6 +392,7 @@ public class    InitItems {
                     output.accept(ReinforcedItems.Dynamic_);
                     output.accept(ReinforcedItems.Contingency_);
 
+                    output.accept(InitItems.ExampleAxeAccessory_);
 
                 }).build());
 

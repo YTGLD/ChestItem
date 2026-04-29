@@ -909,5 +909,8 @@
   "item.chest_item.mother_remains": "The remains of the evil mother",
   "chest_item.config.listRunawayLining": "Attribute blacklist",
   "item.chest_item.pod": "wilted pod",
-  "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"
+  "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering",
+
+  "item.chest_item.example_axe_accessory": "Example Axe Accessory",
+  "item.chest_item.example_axe_accessory.string.0": "Grants Strength every 3 seconds while in the magic box"
 }

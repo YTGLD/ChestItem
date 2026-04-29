@@ -1,5 +1,7 @@
 package com.ytgld.chest_item.other;
 
+import com.ytgld.chest_item.items.IChestItem;
+import com.ytgld.chest_item.items.ItemBase;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -47,8 +49,21 @@ public class ChestInventory extends SimpleContainer{
         return listtag;
     }
 
+    public void drop(Player player) {
+        for (int i = 0; i < this.getContainerSize(); ++i) {
+            ItemStack itemstack = this.getItem(i);
+            if (!itemstack.isEmpty()) {
+                if (!(itemstack.getItem() instanceof ItemBase) && !(itemstack.getItem() instanceof IChestItem)) {
+                    player.drop(itemstack.copy(), false);
+                    this.setItem(i, ItemStack.EMPTY);
+                }
+            }
+        }
+    }
+
     public void stopOpen(Player player) {
         player.level().playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.CHEST_CLOSE, SoundSource.AMBIENT,1,1);
+        drop(player);
         super.stopOpen(player);
     }
 }
