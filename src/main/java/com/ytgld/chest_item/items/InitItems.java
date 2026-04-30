@@ -391,7 +391,7 @@ public class    InitItems {
                     output.accept(ReinforcedItems.Dynamic_);
                     output.accept(ReinforcedItems.Contingency_);
 
-                    output.accept(InitItems.DoomAxe_);
+//                    output.accept(InitItems.DoomAxe_);
 
                 }).build());
 

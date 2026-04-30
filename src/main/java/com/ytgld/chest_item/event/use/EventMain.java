@@ -247,7 +247,7 @@ public class EventMain {
         Lead.event(event);
         AlienationDiodes.CriticalHitEvent(event);
         AnnualPlate.dieAnnualPlate(event);
-        DoomAxe.onCritEvent(event);
+//        DoomAxe.onCritEvent(event);
         Player player = event.getEntity();
         ChestInventory chestInventory = Handler.getItem(player);
         if (chestInventory != null) {
@@ -282,7 +282,7 @@ public class EventMain {
         Warmaker.hurt(event);
         ChaosFortress.hurtRes(event);
         LeadOfEnlightenment.die(event);
-        DoomAxe.onAttackEvent(event);
+//        DoomAxe.onAttackEvent(event);
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);
             if (resistance != null) {
