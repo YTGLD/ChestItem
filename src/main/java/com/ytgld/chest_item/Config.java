@@ -17,7 +17,7 @@ public class Config {
                     .define("doEndComingUp", true);
             RunawayLiningMin =  builder
                     .translation("chest_item.config.RunawayLiningMin")
-                    .defineInRange("RunawayLiningMin", -0.1F,0,Integer.MAX_VALUE);
+                    .defineInRange("RunawayLiningMin", -0.1F,-Integer.MAX_VALUE,Integer.MAX_VALUE);
             RunawayLiningMax =  builder
                     .translation("chest_item.config.RunawayLiningMax")
                     .defineInRange("RunawayLiningMax", 0.1f,0,Integer.MAX_VALUE);

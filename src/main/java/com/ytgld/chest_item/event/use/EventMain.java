@@ -38,6 +38,7 @@ import com.ytgld.chest_item.items.memory.items.Contradiction;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
+import com.ytgld.chest_item.items.tool.WallowAxe;
 import com.ytgld.chest_item.other.AttributeDataType;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
@@ -238,6 +239,7 @@ public class EventMain {
         Lead.event(event);
         AlienationDiodes.CriticalHitEvent(event);
         AnnualPlate.dieAnnualPlate(event);
+        WallowAxe.cit(event);
     }
     @SubscribeEvent
     public  void dieTotem(LivingUseTotemEvent event) {
@@ -262,6 +264,7 @@ public class EventMain {
         Warmaker.hurt(event);
         ChaosFortress.hurtRes(event);
         LeadOfEnlightenment.die(event);
+        WallowAxe.damage(event);
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);
             if (resistance != null) {

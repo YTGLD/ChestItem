@@ -30,6 +30,7 @@ import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
+import com.ytgld.chest_item.items.tool.WallowAxe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -228,6 +229,11 @@ public class InitItems {
             (Identifier)-> new RunawayLining(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> ActualSuffering_ = register("actual_suffering",
             (Identifier)-> new ActualSuffering(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> WallowAxe_ = register("wallow_axe",
+            (Identifier)-> new WallowAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> WallowAxe_Small = register("wallow_axe_small",
+            (Identifier)-> new WallowAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
 
 
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
@@ -344,6 +350,7 @@ public class InitItems {
                     output.accept(InitItems.Warmaker_);
                     output.accept(InitItems.ChaosFortress_);
                     output.accept(InitItems.ActualSuffering_);
+                    output.accept(InitItems.WallowAxe_);
 
 
 

@@ -19,6 +19,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.Nullable;
@@ -63,6 +64,27 @@ public class DryBones extends ItemBlackShadow {
         float s =0;
         float d =0;
         float f =0;
+        float axe = 0f;
+        if (player.getMainHandItem().is(InitItems.WallowAxe_.asItem())) {
+            axe = 0.2f;
+        }
+        modifiers.put(AttReg.heal, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+
+        modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+
+        modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        modifiers.put(Attributes.ATTACK_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         AttributeInstance attributeInstance_hyperplasia = player.getAttribute(AttReg.hyperplasia);
         AttributeInstance attributeInstance_shadow_shield = player.getAttribute(AttReg.shadow_shield);
@@ -83,6 +105,13 @@ public class DryBones extends ItemBlackShadow {
                     f = ConfigItem.intValue.get().floatValue();
                 }
             }
+        }
+
+        if (player.getMainHandItem().is(InitItems.WallowAxe_.asItem())) {
+            a =0;
+            s =0;
+            d =0;
+            f =0;
         }
 
         modifiers.put(Attributes.ARMOR, new AttributeModifier(Identifier.parse(Chestitem.MODID +
@@ -109,7 +138,7 @@ public class DryBones extends ItemBlackShadow {
     }
 
     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
-        tooltipComponents.accept(Component.translatable("item.chest_item.dry_bones.string.1",ConfigItem.intValue.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        tooltipComponents.accept(Component.translatable("item.chest_item.dry_bones.string.2",ConfigItem.intValue2.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.dry_bones.string.1",ConfigItem.intValue.get().floatValue() * 100f).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.dry_bones.string.2",ConfigItem.intValue2.get().floatValue() * 100f).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
     }
 }

@@ -7,6 +7,7 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
+import com.ytgld.chest_item.renderer.model.WallingAxeModel;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
@@ -88,6 +89,11 @@ public class ChestitemClient{
             }
         }
     }
+    @SubscribeEvent
+    public static void registerItemModels(RegisterItemModelsEvent event) {
+        event.register(Identifier.fromNamespaceAndPath(Chestitem.MODID,"model"), WallingAxeModel.Unbaked.MAP_CODEC);
+    }
+
 
     @SubscribeEvent
     public static void registerFactories(RegisterParticleProvidersEvent event) {

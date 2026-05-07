@@ -203,7 +203,7 @@ public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
                 tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
                 tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
             }else {
-                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.3",ConfigItem.intValue3.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.3",100f - (ConfigItem.intValue3.get().floatValue() * 100f)).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipComponents.accept(Component.literal(""));
@@ -214,7 +214,7 @@ public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
                 tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.9").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipComponents.accept(Component.literal(""));
                 tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.10").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.11",ConfigItem.intValue2.get().floatValue()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+                tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.11",ConfigItem.intValue2.get().floatValue() * 100f).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
                 tooltipComponents.accept(Component.translatable("item.chest_item.chaos_fortress.string.12").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
             }
         }else {

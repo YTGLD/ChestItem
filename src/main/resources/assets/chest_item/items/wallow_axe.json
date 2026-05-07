@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "chest_item:model",
+    "model": "chest_item:item/wallow_axe",
+    "model2": "chest_item:item/wallow_axe_huge_glow"
+  }
+}

@@ -23,7 +23,7 @@ public class ConfigC {
 
             RenderGUILight =  BUILDER
                     .translation("chest_item.config.RenderGUILight")
-                    .define("RenderGUILight", true);
+                    .define("RenderGUILight_", false);
             RenderItemTooltip =  BUILDER
                     .translation("chest_item.config.RenderItemTooltip")
                     .define("RenderItemTooltip", true);

@@ -19,6 +19,9 @@ import net.minecraft.client.renderer.rendertype.OutputTarget;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Util;
+
+import java.util.function.Function;
 
 import static net.minecraft.client.renderer.RenderPipelines.*;
 
@@ -46,6 +49,20 @@ public abstract class MRender {
         }
         return Minecraft.getInstance().getMainRenderTarget();
     });
+
+    private static Function<Identifier, RenderType> ITEM_TRANSLUCENT(OutputTarget outline2) {
+        return Util.memoize((texture) -> {
+            RenderSetup state = RenderSetup.builder(RenderPipelines.ITEM_TRANSLUCENT)
+                    .withTexture("Sampler0", texture)
+                    .setOutputTarget(outline2).
+                    useLightmap().affectsCrumbling().sortOnUpload().setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE).createRenderSetup();
+            return RenderType.create("item_translucent", state);
+        });
+    }
+    public static RenderType itemTranslucent(Identifier texture,OutputTarget outline2) {
+        return ITEM_TRANSLUCENT(outline2).apply(texture);
+    }
+
     public static RenderType warped(){
         return RenderType.create("warpeds",
                 RenderSetup.builder(RenderPipelines.LIGHTNING).setOutputTarget(warped).sortOnUpload().createRenderSetup());

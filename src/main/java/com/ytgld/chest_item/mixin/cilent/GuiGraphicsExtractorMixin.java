@@ -60,7 +60,6 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
     @Shadow @Final private Matrix3x2fStack pose;
     @Shadow public abstract int guiWidth();
     @Shadow public abstract int guiHeight();
-
     @Override
     public GuiRenderState cI1_21_11$guiRenderState() {
         return guiRenderState;
@@ -142,7 +141,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
             return;
         }
 
-        if (tooltipStack.getItem() instanceof ItemBase || tooltipStack.getItem() instanceof MemoryBase.BaseTooltip || tooltipStack.getItem() instanceof IEvil)  {
+        if (tooltipStack.getItem() instanceof com.ytgld.chest_item.items.black.ITheChaos || tooltipStack.getItem() instanceof ItemBase || tooltipStack.getItem() instanceof MemoryBase.BaseTooltip || tooltipStack.getItem() instanceof IEvil)  {
             RenderTooltipEvent.Pre preEvent = ClientHooks.onRenderTooltipPre(tooltipStack,  (GuiGraphicsExtractor) (Object) this, x, y, this.guiWidth(), this.guiHeight(), components, font, positioner);
             if (!preEvent.isCanceled()) {
                 font = preEvent.getFont();
@@ -170,7 +169,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                         } else if (tooltipStack.getItem() instanceof ItemBone) {
                             chest_item$renderItemBoneTooltipBackground((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
                         } else if (!Handler.isBlackChaos(tooltipStack)) {
-                            if (!(tooltipStack.getItem() instanceof IEvil)) {
+                            if (!(tooltipStack.getItem() instanceof IEvil)&& !(tooltipStack.getItem() instanceof com.ytgld.chest_item.items.black.ITheChaos)) {
                                 chest_item$renderTooltipBackground((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
                             }
                         }
@@ -199,6 +198,12 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                         }
                     }
                 }else {
+                    this.pose.pushMatrix();
+                    si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphicsExtractor) (Object) this, l, i1, i, j, 400);
+                    chest_item$renderItemBlackShadowTooltipBackground((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
+                    this.pose.popMatrix();
+                }
+                if (tooltipStack.getItem() instanceof com.ytgld.chest_item.items.black.ITheChaos) {
                     this.pose.pushMatrix();
                     si1_21_4$renderItemBlackShadowTooltipBackground_CHAOS((GuiGraphicsExtractor) (Object) this, l, i1, i, j, 400);
                     chest_item$renderItemBlackShadowTooltipBackground((GuiGraphicsExtractor) (Object) this, l, i1, i, j);

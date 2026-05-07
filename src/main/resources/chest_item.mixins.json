@@ -28,6 +28,7 @@
     "cilent.GuiGraphicsExtractorMixin",
     "cilent.GuiMixin",
     "cilent.ParticleEngineMixin",
+    "cilent.model.GuiGraphicsExtractorMixin",
     "outline.BlackMixin"
   ]
 }

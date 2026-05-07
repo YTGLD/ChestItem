@@ -630,8 +630,8 @@
 
   "item.chest_item.dry_bones": "腐枯尊骨",
   "item.chest_item.dry_bones.string.0": "腐烂的头骨",
-  "item.chest_item.dry_bones.string.1": "幽影护盾恢复至100%时给予%d%%的伤害和攻速加成",
-  "item.chest_item.dry_bones.string.2": "增生组织恢复至100%时给予%d%%的护甲和速度加成",
+  "item.chest_item.dry_bones.string.1": "幽影护盾恢复满时给予%d%%的伤害和攻速加成",
+  "item.chest_item.dry_bones.string.2": "增生组织恢复满时给予%d%%的护甲和速度加成",
 
   "item.chest_item.shadow_mint": "幽影铸币",
   "item.chest_item.shadow_mint.string.0": "暗影的赞歌",
@@ -884,7 +884,7 @@
   "item.chest_item.chaos_fortress.string.8":"无效化低于%d点的伤害",
   "item.chest_item.chaos_fortress.string.9": "满生命的生物对你的伤害降低20%",
   "item.chest_item.chaos_fortress.string.10":"不死图腾无法对你生效",
-  "item.chest_item.chaos_fortress.string.11": "受到的魔法伤害提高%d%%%",
+  "item.chest_item.chaos_fortress.string.11": "受到的魔法伤害提高%d%%",
   "item.chest_item.chaos_fortress.string.12":"侵蚀装甲难以自然恢复",
   "item.chest_item.owner_lead": "创世者的礼物",
   "chest_item.config.chaosFortress": "混沌要塞之护的获取要求",
@@ -950,6 +950,12 @@
   "item.chest_item.stabilizing_device": "稳固装置",
   "item.chest_item.stabilizing_device.string.0": "疤痕组织提高%d%%的坚韧度",
   "item.chest_item.stabilizing_device.string.1": "疤痕组织治愈效果降低%d%%",
+
+  "item.chest_item.wallow_axe": "沉沦战斧",
+  "item.chest_item.wallow_axe.string.1": "2倍暴击伤害，非暴击伤害较小",
+  "item.chest_item.wallow_axe.string.2": "每次攻击消耗25%幽影护盾获得额外50%伤害",
+  "item.chest_item.wallow_axe.string.3": "佩戴腐枯尊骨后，手持获得20%治疗,护甲,伤害,速度,攻速",
+  "item.chest_item.wallow_axe.string.4": "但是腐枯尊骨的原本属性失效",
 
   "item.chest_item.complex_components": "繁复组件",
   "item.chest_item.complex_components.string.0": "疤痕组织吸收全部伤害",

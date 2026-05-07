@@ -34,7 +34,7 @@ public class Conch  extends ItemBase {
             intValue =  builder.translation("chest_item.config.Conch")
                     .defineInRange("number",4,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.Conch2")
-                    .defineInRange("number2",0.5f,1,Integer.MAX_VALUE);
+                    .defineInRange("number2",0.5f,0,Integer.MAX_VALUE);
             builder.pop();
         }
 

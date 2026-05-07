@@ -901,6 +901,12 @@
   "item.chest_item.complex_components.string.0": "Scar tissue absorbs all damage",
   "item.chest_item.complex_components.string.1": "Applies an additional %d%% dormancy duration when scar tissue is erased",
 
+  "item.chest_item.wallow_axe": "Sinking tomahawk",
+  "item.chest_item.wallow_axe.string.1": "2x critical damage, less non-critical damage",
+  "item.chest_item.wallow_axe.string.2": "Each attack costs 25% Shadow Shield and gains an additional 50% damage",
+  "item.chest_item.wallow_axe.string.3": "After wearing the Decayed Bone, hold it to gain 20% healing, armor, damage, speed, and attack speed",
+  "item.chest_item.wallow_axe.string.4": "However, the original attributes of the Decaying Bone are invalid",
+
   "item.chest_item.strengthen.string.0": "Decay Heart grants additional armor, speed, and resistance when destroyed",
   "item.chest_item.evil_belt.string.1": "and make your flesh almost impossible to push",
   "item.chest_item.runaway_lining.string.2": "Permanently enhances the following accessories when worn:",
