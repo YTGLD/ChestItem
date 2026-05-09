@@ -44,52 +44,43 @@ public class BigTooltip implements ClientTooltipComponent, TooltipComponent {
 
         float firstCharX = 0;
         float firstCharY = 0;
-        float radius = 0.4f;
         float angle = time / 20f;
-
-        for (int iis = 0; iis < 10; iis++) {
-
-            stack.pushMatrix();
-
-            stack.translate(firstCharX + 4, firstCharY);
-            stack.translate((float)(Math.sin(angle + iis) * radius), (float)(Math.cos(angle + iis) * radius));
-            stack.translate(-(firstCharX + 4), -firstCharY);
-
-
-            for (int i = 0; i < length; i++) {
-                char c = text.charAt(i);
-                float ratio = i / (float)(length - 1);
-                int a = 80;
-                int r = (int)((((baseColor >> 16) & 0xFF) * (1 - ratio)) + (255 * ratio) + Math.sin(angle ) * 40f);
-                int g = (int)(((baseColor >> 8) & 0xFF)  + Math.sin(angle ) * 40f);
-                int b = (int)((((baseColor) & 0xFF) * (1 - ratio)) + (255 * ratio) + Math.sin(angle ) * 40f);
-                if (r > 255) {
-                    r = 255;
-                }
-                if (g > 255) {
-                    g = 255;
-                }
-                if (b > 255) {
-                    b = 255;
-                }
-                if (r < 0) {
-                    r = 0;
-                }
-                if (g < 0) {
-                    g = 0;
-                }
-                if (b < 0) {
-                    b = 0;
-                }
-
-
-                int color = (a << 24) | (r << 16) | (g << 8) | b;
-
-                guiGraphics.centeredText(font, Component.literal(String.valueOf(c)), i * font.width(String.valueOf(c)) + 4, 0, color);
+        stack.pushMatrix();
+        stack.translate(firstCharX + 4, firstCharY);
+        stack.translate(-(firstCharX + 4), -firstCharY);
+        for (int i = 0; i < length; i++) {
+            char c = text.charAt(i);
+            float ratio = i / (float)(length - 1);
+            int a = 255;
+            int r = (int)((((baseColor >> 16) & 0xFF) * (1 - ratio)) + (255 * ratio) + Math.sin(angle ) * 40f);
+            int g = (int)(((baseColor >> 8) & 0xFF)  + Math.sin(angle ) * 40f);
+            int b = (int)((((baseColor) & 0xFF) * (1 - ratio)) + (255 * ratio) + Math.sin(angle ) * 40f);
+            if (r > 255) {
+                r = 255;
+            }
+            if (g > 255) {
+                g = 255;
+            }
+            if (b > 255) {
+                b = 255;
+            }
+            if (r < 0) {
+                r = 0;
+            }
+            if (g < 0) {
+                g = 0;
+            }
+            if (b < 0) {
+                b = 0;
             }
 
-            stack.popMatrix();
+
+            int color = (a << 24) | (r << 16) | (g << 8) | b;
+
+            guiGraphics.centeredText(font, Component.literal(String.valueOf(c)), i * font.width(String.valueOf(c)) + 4, 0, color);
         }
+
+        stack.popMatrix();
 
         stack.popMatrix();
     }

@@ -5,6 +5,7 @@ import com.ytgld.chest_item.items.IBigTooltip;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;
+import com.ytgld.chest_item.items.memory.tooltip.ImageTooltip;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,8 +24,10 @@ import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
+import org.jspecify.annotations.NonNull;
 
 import java.util.*;
+import java.util.List;
 import java.util.function.Consumer;
 
 public abstract class MemoryBase extends Item {
@@ -45,6 +48,14 @@ public abstract class MemoryBase extends Item {
     public void doText(ItemStack stack , Consumer<Component> tooltipComponents){
 
     };
+
+    @Override
+    public @NonNull Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
+        if (name() instanceof BaseTooltip tooltip){
+            return Optional.of(new ImageTooltip(tooltip));
+        }
+        return super.getTooltipImage(itemStack);
+    }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {

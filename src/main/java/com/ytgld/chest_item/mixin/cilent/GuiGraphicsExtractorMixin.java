@@ -761,7 +761,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
         }
     }
     @Override
-    public void cI1_21_11$stringBlack(ItemStack stack, int x, int y) {
+    public void cI1_21_11$stringBlack( int x, int y) {
         if (!ConfigC.config.RenderItemTooltip.get()) {
             return;
         }
@@ -775,91 +775,77 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
         Identifier fire = Identifier.fromNamespaceAndPath(Chestitem.MODID,
                 "textures/gui/tooltip/fire_black.png");
 
-        if (stack.getItem() instanceof IBlackLight iBlackLight) {
-            r = iBlackLight.colorBlack().r();
-            g = iBlackLight.colorBlack().g();
-            b = iBlackLight.colorBlack().b();
-            renderPipeline = iBlackLight.colorBlack().renderPipeline();
-            a = iBlackLight.colorBlack().a();
+
+        GuiGraphicsExtractor guiGraphics = (GuiGraphicsExtractor) (Object) this;
+        {
+            float alpha = (float) (50 * Math.sin((EventMain.time  + Mth.nextFloat(RandomSource.create(),-1,1))));
+            guiGraphics.blit(renderPipeline, fire,
+                    x - 8, y - 8, 0, 0,
+                    32, 32, 32, 32,
+                    Light.ARGB.color((int) (a + alpha), r, g, b));
+
+            float alpha1 = (float) (50 * Math.sin((EventMain.time + Mth.nextFloat(RandomSource.create(),-1,1)) / 2f));
+            guiGraphics.blit(renderPipeline, fire,
+                    x - 8, y - 8, 0, 0,
+                    32, 32, 32, 32,
+                    Light.ARGB.color(-((int) (a + alpha1)), r, g, b));
 
 
-            star = iBlackLight.blackStar();
-            fire = iBlackLight.blackFire();
+            float alpha2 = (float) (50 * Math.sin((EventMain.time + Mth.nextFloat(RandomSource.create(),-1,1)) * 2f));
+            guiGraphics.blit(renderPipeline, fire,
+                    x - 8, y - 8, 0, 0,
+                    32, 32, 32, 32,
+                    Light.ARGB.color(-((int) (a + alpha2)), r, g, b));
+
+            float alpha3 = (float) (10 * Math.sin((EventMain.time + Mth.nextFloat(RandomSource.create(),-1,1)) /4F));
+            guiGraphics.blit(renderPipeline, fire,
+                    x - 8, y - 8, 0, 0,
+                    32, 32, 32, 32,
+                    Light.ARGB.color(-((int) (a + alpha3)), r, g, b));
+
         }
-        if ((stack.getItem() instanceof IBlackLight)  || Handler.isBlackChaos(stack)) {
 
-
-            GuiGraphicsExtractor guiGraphics = (GuiGraphicsExtractor) (Object) this;
+        {
+            pose.pushMatrix();
+            pose.translate(8,8);
             {
-                float alpha = (float) (50 * Math.sin((EventMain.time  + Mth.nextFloat(RandomSource.create(),-1,1))));
-                guiGraphics.blit(renderPipeline, fire,
-                        x - 8, y - 8, 0, 0,
-                        32, 32, 32, 32,
-                        Light.ARGB.color((int) (a + alpha), r, g, b));
-
-                float alpha1 = (float) (50 * Math.sin((EventMain.time + Mth.nextFloat(RandomSource.create(),-1,1)) / 2f));
-                guiGraphics.blit(renderPipeline, fire,
-                        x - 8, y - 8, 0, 0,
-                        32, 32, 32, 32,
-                        Light.ARGB.color(-((int) (a + alpha1)), r, g, b));
-
-
-                float alpha2 = (float) (50 * Math.sin((EventMain.time + Mth.nextFloat(RandomSource.create(),-1,1)) * 2f));
-                guiGraphics.blit(renderPipeline, fire,
-                        x - 8, y - 8, 0, 0,
-                        32, 32, 32, 32,
-                        Light.ARGB.color(-((int) (a + alpha2)), r, g, b));
-
-                float alpha3 = (float) (10 * Math.sin((EventMain.time + Mth.nextFloat(RandomSource.create(),-1,1)) /4F));
-                guiGraphics.blit(renderPipeline, fire,
-                        x - 8, y - 8, 0, 0,
-                        32, 32, 32, 32,
-                        Light.ARGB.color(-((int) (a + alpha3)), r, g, b));
-
-            }
-
-            {
+                float alphaOffset = (float) (10 * Math.sin(((EventMain.time + Mth.nextFloat(RandomSource.create(),-1,1)))/10f));
                 pose.pushMatrix();
-                pose.translate(8,8);
+                pose.translate(x, y);
+                pose.rotate(EventMain.time / 25f);
+                pose.translate(-x, -y);
+                guiGraphics.blit(renderPipeline, star,
+                        x - 16, y - 16, 0, 0,
+                        32, 32, 32, 32,
+                        Light.ARGB.color((int) (a / 5f + alphaOffset*2), r, g, b));
+                pose.popMatrix();
                 {
-                    float alphaOffset = (float) (10 * Math.sin(((EventMain.time + Mth.nextFloat(RandomSource.create(),-1,1)))/10f));
-                    pose.pushMatrix();
-                    pose.translate(x, y);
-                    pose.rotate(EventMain.time / 25f);
-                    pose.translate(-x, -y);
-                    guiGraphics.blit(renderPipeline, star,
-                            x - 16, y - 16, 0, 0,
-                            32, 32, 32, 32,
-                            Light.ARGB.color((int) (a / 5f + alphaOffset*2), r, g, b));
-                    pose.popMatrix();
-                    {
-                        for (int i = 0; i < 4; i++) {
-                            pose.pushMatrix();
-                            pose.translate(x, y);
-                            pose.rotate((EventMain.time + i * 40F) / 25f);
-                            pose.translate(-x, -y);
-                            guiGraphics.blit(renderPipeline, star,
-                                    x - 16, y - 16, 0, 0,
-                                    32, 32, 32, 32,
-                                    Light.ARGB.color((int) (a / 5f +alphaOffset), r, g, b));
-                            pose.popMatrix();
-                        }
-                        for (int i = 0; i < 4; i++) {
-                            pose.pushMatrix();
-                            pose.translate(x, y);
-                            pose.rotate((EventMain.time - i * 40F) / 25f);
-                            pose.translate(-x, -y);
-                            guiGraphics.blit(renderPipeline, star,
-                                    x - 16, y - 16, 0, 0,
-                                    32, 32, 32, 32,
-                                    Light.ARGB.color((int) (a / 5f +alphaOffset), r, g, b));
-                            pose.popMatrix();
-                        }
+                    for (int i = 0; i < 4; i++) {
+                        pose.pushMatrix();
+                        pose.translate(x, y);
+                        pose.rotate((EventMain.time + i * 40F) / 25f);
+                        pose.translate(-x, -y);
+                        guiGraphics.blit(renderPipeline, star,
+                                x - 16, y - 16, 0, 0,
+                                32, 32, 32, 32,
+                                Light.ARGB.color((int) (a / 5f +alphaOffset), r, g, b));
+                        pose.popMatrix();
+                    }
+                    for (int i = 0; i < 4; i++) {
+                        pose.pushMatrix();
+                        pose.translate(x, y);
+                        pose.rotate((EventMain.time - i * 40F) / 25f);
+                        pose.translate(-x, -y);
+                        guiGraphics.blit(renderPipeline, star,
+                                x - 16, y - 16, 0, 0,
+                                32, 32, 32, 32,
+                                Light.ARGB.color((int) (a / 5f +alphaOffset), r, g, b));
+                        pose.popMatrix();
                     }
                 }
-
-                pose.popMatrix();
             }
+
+            pose.popMatrix();
         }
     }
     @Unique

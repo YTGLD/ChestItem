@@ -112,7 +112,7 @@ public class EventMain {
 
     public static int time = 0;
     @SubscribeEvent
-    public void ItemTooltipEvent(LevelTickEvent.Pre event){
+    public void ItemTooltipEvent(ClientTickEvent.Pre event){
         time++;
     }
     @SubscribeEvent

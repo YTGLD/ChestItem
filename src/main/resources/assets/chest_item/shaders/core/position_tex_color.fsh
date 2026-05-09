@@ -11,8 +11,7 @@ void main() {
     vec2 uv = texCoord0;
 
     float GameTime = texture(Sampler0, texCoord0).x + texture(Sampler0, texCoord0).y + texture(Sampler0, texCoord0).z;
-    GameTime += vertexColor.a + vertexColor.r + vertexColor.g + vertexColor.b;
-    GameTime += texCoord0.x + texCoord0.y;
+    GameTime += vertexColor.a + vertexColor.r + vertexColor.g + vertexColor.b; GameTime += texCoord0.x + texCoord0.y;
     GameTime *= sin(PositionPosition.x + PositionPosition.y + PositionPosition.z);
     float wave1 = sin(uv.y * 15.0 + GameTime) * 0.02;
     float wave2 = cos(uv.x * 20.0 + GameTime * 1.3) * 0.015;
@@ -22,7 +21,6 @@ void main() {
 
     // 扭曲后的纹理坐标
     vec2 deformedUV = uv + offset;
-
     // 防止纹理越界
     deformedUV = clamp(deformedUV, 0.0, 1.0);
 

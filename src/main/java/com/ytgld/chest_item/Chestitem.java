@@ -21,6 +21,7 @@ import com.ytgld.chest_item.items.memory.MemoryEvent;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
 import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;
+import com.ytgld.chest_item.items.memory.tooltip.ImageTooltip;
 import com.ytgld.chest_item.items.reinforced.ReinforcedAttreg;
 import com.ytgld.chest_item.items.reinforced.ReinforcedDataHandler;
 import com.ytgld.chest_item.items.reinforced.ReinforcedEvent;
@@ -114,6 +115,7 @@ public class Chestitem {
         public static void RegisterClientTooltipComponentFactoriesEvent(RegisterClientTooltipComponentFactoriesEvent event){
             event.register(SkillTooltip.class, Function.identity());
             event.register(BigTooltip.class, Function.identity());
+            event.register(ImageTooltip.class, Function.identity());
         }
         @SubscribeEvent // on the mod event bus
         public static void gatherData(GatherDataEvent.Client event) {
