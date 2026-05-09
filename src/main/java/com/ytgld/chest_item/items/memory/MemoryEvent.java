@@ -1,11 +1,9 @@
 package com.ytgld.chest_item.items.memory;
 
+import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.memory.items.*;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 public class MemoryEvent {
@@ -17,6 +15,15 @@ public class MemoryEvent {
     public  void tick(EntityTickEvent.Post event){
         ForeverCurtain.ForeverCurtainTooltip.tick(event);
         TheFox.TheFoxTooltip.tick(event);
+    }
+    @SubscribeEvent
+    public  void tick(ItemStackTickEvent event){
+        Protest.ProtestTooltip.protestTooltipHurtAndEffect(event);
+        Crave.CraveTooltip.craveCauseFood(event);
+    }
+    @SubscribeEvent
+    public void Finish(LivingEntityUseItemEvent.Finish event){
+        Crave.CraveTooltip.craveCauseFood(event);
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){

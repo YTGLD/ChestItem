@@ -61,6 +61,18 @@ public class MemoryItems {
             (resourceLocation)-> new TheFox.TheFoxTooltip(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));;
 
 
+
+
+    public static final DeferredItem<Item> Protest_ = register("protest",
+            (resourceLocation)-> new Protest(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));;
+    public static final DeferredItem<Item> ProtestTooltip_ = register("protest_tooltip",
+            (resourceLocation)-> new Protest.ProtestTooltip(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));;
+
+    public static final DeferredItem<Item> Crave_ = register("crave",
+            (resourceLocation)-> new Crave(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));;
+    public static final DeferredItem<Item>CraveTooltip_ = register("crave_tooltip",
+            (resourceLocation)-> new Crave.CraveTooltip(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,resourceLocation))));;
+
     public static DeferredItem<Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
     }

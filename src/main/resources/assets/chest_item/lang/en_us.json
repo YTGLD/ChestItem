@@ -907,6 +907,22 @@
   "item.chest_item.wallow_axe.string.3": "After wearing the Decayed Bone, hold it to gain 20% healing, armor, damage, speed, and attack speed",
   "item.chest_item.wallow_axe.string.4": "However, the original attributes of the Decaying Bone are invalid",
 
+
+"item.chest_item.protest": "bottle",
+  "item.chest_item.protest.string.1": "The world is an enemy, but the target that wants to attack you will continue to be weakened",
+  "item.chest_item.protest_tooltip": "protest",
+  "item.chest_item.protest_tooltip.string.0": "Let invisible darkness and hatred envelop the heart of the Tao",
+  "item.chest_item.protest_tooltip.string.1": "Creatures that want to attack you are slow and weak, and deal massive damage if they cannot be applied",
+  "item.chest_item.protest_tooltip.string.2": "But mobs in a large area will actively attack you",
+
+
+"item.chest_item.crave": "bottle",
+  "item.chest_item.crave.string.1": "Feeling abnormally hungry for duration, cancels out the sensation when eating and gains a large amount of buffs",
+  "item.chest_item.crave_tooltip": "thirst",
+  "item.chest_item.crave_tooltip.string.0": "Death is not the end of cause and effect",
+  "item.chest_item.crave_tooltip.string.1": "Eat to gain a large amount of buffs and restore health",
+  "item.chest_item.crave_tooltip.string.2": "Hunger is depleted quickly, and symptoms can be relieved for a short time after eating",
+
   "item.chest_item.strengthen.string.0": "Decay Heart grants additional armor, speed, and resistance when destroyed",
   "item.chest_item.evil_belt.string.1": "and make your flesh almost impossible to push",
   "item.chest_item.runaway_lining.string.2": "Permanently enhances the following accessories when worn:",

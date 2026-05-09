@@ -961,6 +961,20 @@
   "item.chest_item.complex_components.string.0": "疤痕组织吸收全部伤害",
   "item.chest_item.complex_components.string.1": "疤痕组织被抹去时会施加额外%d%%休眠时长",
 
+  "item.chest_item.protest": "瓶子",
+  "item.chest_item.protest.string.1": "举世为敌，但欲要攻击你的目标会持续受到削弱",
+  "item.chest_item.protest_tooltip": "抗旨",
+  "item.chest_item.protest_tooltip.string.0": "让无形的黑暗与仇恨笼罩道心",
+  "item.chest_item.protest_tooltip.string.1": "欲要攻击你的生物会受到缓慢和虚弱，若无法施加效果，则造成巨大伤害",
+  "item.chest_item.protest_tooltip.string.2": "但大范围内的生物会主动攻击于你",
+
+  "item.chest_item.crave": "瓶子",
+  "item.chest_item.crave.string.1": "时长感到异常饥饿，进食时抵消感触并获得大量增益效果",
+  "item.chest_item.crave_tooltip": "渴求",
+  "item.chest_item.crave_tooltip.string.0": "死亡并非因果之末",
+  "item.chest_item.crave_tooltip.string.1": "进食获得大量增益效果并恢复生命值",
+  "item.chest_item.crave_tooltip.string.2": "饥饿值会快速消耗，进食之后可短时间缓解症状",
+
   "item.chest_item.pod": "枯萎荚果",
   "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 }
