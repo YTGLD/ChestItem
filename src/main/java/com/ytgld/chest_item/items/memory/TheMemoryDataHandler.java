@@ -2,6 +2,8 @@ package com.ytgld.chest_item.items.memory;
 
 import com.mojang.serialization.Codec;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.reinforced.ReinforcedDataHandler;
+import com.ytgld.chest_item.other.IntSyncHandler;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
@@ -12,6 +14,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -26,7 +29,18 @@ public class TheMemoryDataHandler {
                     .serialize(StringSetCodec.CODEC.fieldOf("string_set_data"))
                     .build()
     );
-
+    public static final Supplier<AttachmentType<Set<String>>> notActivated = ATTACHMENT_TYPES.register(
+            "not_activated",
+            () -> AttachmentType.<Set<String>>builder(() -> new HashSet<>())
+                    .sync(new StringSetSync())
+                    .serialize(StringSetCodec.CODEC.fieldOf("not_activated"))
+                    .build()
+    );
+    public static final Supplier<AttachmentType<IntAndStringSyncHandler.ISClass>> counter = ATTACHMENT_TYPES.register(
+            "counter", () -> AttachmentType.builder(()->new IntAndStringSyncHandler.ISClass(new HashMap<>()))
+                    .sync(new IntAndStringSyncHandler()).serialize(IntAndStringSyncHandler.CODEC.
+                    fieldOf("counter")).build()
+    );
     public static class StringSetSync implements AttachmentSyncHandler<Set<String>> {
 
         @Override

@@ -15,6 +15,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -24,6 +25,7 @@ import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import org.jspecify.annotations.NonNull;
 
 import java.util.*;
@@ -77,7 +79,11 @@ public abstract class MemoryBase extends Item {
                 Handler.setDataValue(TheMemoryDataHandler.mStringSetData,player, new HashSet<>());
             }
             Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
-            addMemory(player);
+            if (!isHasActivated()) {
+                addMemory(player);
+            }else {
+                doEnabled(player);
+            }
             if (strings.contains(nameSResourceLocation().toString())) {
                 if (!level.isClientSide()) {
                     player.sendOverlayMessage(Component.translatable("chest_item.memory"));
@@ -86,6 +92,66 @@ public abstract class MemoryBase extends Item {
         }
         stack.shrink(1);
         return super.finishUsingItem(stack, level, livingEntity);
+    }
+
+    /**
+     *
+     * @param player 需要的玩家
+     * @param string 计数器名称
+     * @param value 计数器每次增加的值
+     */
+    public static void addCounter(Player player ,String  string, int value){
+        IntAndStringSyncHandler.ISClass isClass = player.getData(TheMemoryDataHandler.counter);
+        isClass.map().put(string,isClass.map().getOrDefault(string,0) + value);
+
+    }
+
+    /**
+     *
+     * @param player 需要的玩家
+     * @param string 计数器名称
+     * @return 获取这个 string 的计数器的值
+     */
+    public static int getCounter(Player player,String string){
+        IntAndStringSyncHandler.ISClass isClass = player.getData(TheMemoryDataHandler.counter);
+        return isClass.map().getOrDefault(string,0);
+    }
+
+    public static void  clearCounter(Player player,String string){
+        IntAndStringSyncHandler.ISClass isClass = player.getData(TheMemoryDataHandler.counter);
+        isClass.map().remove(string);
+    }
+    /**
+     * 用于判断瓶子是不是要激活或者完成任务才可以解锁信仰
+     * @return 默认为false，所以多数物品不需要这个
+     */
+    public boolean isHasActivated(){
+        return false;
+    }
+
+    /**
+     *
+     * @param player 检查玩家
+     * @param string 需要判断的那个未激活信仰
+     * @return 返回一个值：若存在那个未激活信仰则为false
+     */
+    public static boolean isEnabled(Player player,String string){
+        Set<String> strings = player.getData(TheMemoryDataHandler.notActivated);
+        return !strings.contains(string);
+    }
+    private void doEnabled(Player player){
+        Set<String> strings = player.getData(TheMemoryDataHandler.notActivated);
+        List<Integer> integers = new ArrayList<>();
+        for (String ignored : strings){
+            integers.add(1);
+        }
+        int  s = 0;
+        for (Integer ignored : integers){
+            s++;
+        }
+        if (s < max(player)){
+            strings.add(nameSResourceLocation().toString());
+        }
     }
     @Override
     public ItemUseAnimation getUseAnimation(ItemStack stack) {
@@ -179,17 +245,3 @@ public abstract class MemoryBase extends Item {
         return strings.contains(string);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
