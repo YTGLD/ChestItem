@@ -19,6 +19,7 @@ public class MemoryEvent {
     @SubscribeEvent
     public  void tick(ItemStackTickEvent event){
         Protest.ProtestTooltip.protestTooltipHurtAndEffect(event);
+        Protest.ProtestTooltip.tick(event);
         Crave.CraveTooltip.craveCauseFood(event);
     }
     @SubscribeEvent

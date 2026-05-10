@@ -50,7 +50,9 @@ public abstract class MemoryBase extends Item {
     public void doText(ItemStack stack , Consumer<Component> tooltipComponents){
 
     };
+    public void doTextGive(ItemStack stack , Consumer<Component> tooltipComponents){
 
+    };
     @Override
     public @NonNull Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
         if (name() instanceof BaseTooltip tooltip){
@@ -61,10 +63,25 @@ public abstract class MemoryBase extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        tooltipAdder.accept(Component.translatable("item.chest_item.memory.string.1").withStyle(ChatFormatting.GRAY));
-        tooltipAdder.accept(Component.translatable("item.chest_item.memory.string.2").withStyle(ChatFormatting.GRAY));
-        tooltipAdder.accept(Component.literal(""));
-        doText(stack,tooltipAdder);
+        if (!isHasActivated()) {
+            tooltipAdder.accept(Component.translatable("item.chest_item.memory.string.1").withStyle(ChatFormatting.GRAY));
+            tooltipAdder.accept(Component.translatable("item.chest_item.memory.string.2").withStyle(ChatFormatting.GRAY));
+            tooltipAdder.accept(Component.literal(""));
+            doText(stack,tooltipAdder);
+        }else {
+            tooltipAdder.accept(Component.translatable("item.chest_item.memory.string.3").withStyle(ChatFormatting.GRAY));
+            tooltipAdder.accept(Component.translatable("item.chest_item.memory.string.4").withStyle(ChatFormatting.GRAY));
+            tooltipAdder.accept(Component.literal(""));
+            tooltipAdder.accept(Component.translatable("item.chest_item.memory.string.7").withStyle(ChatFormatting.GRAY));
+            doTextGive(stack,tooltipAdder);
+            tooltipAdder.accept(Component.literal(""));
+            if (flag.hasShiftDown()) {
+                tooltipAdder.accept(Component.translatable("item.chest_item.memory.string.6").withStyle(ChatFormatting.DARK_GRAY));
+                doText(stack,tooltipAdder);
+            }else {
+                tooltipAdder.accept(Component.translatable("item.chest_item.memory.string.5").withStyle(ChatFormatting.GRAY));
+            }
+        }
     }
 
 
@@ -135,9 +152,12 @@ public abstract class MemoryBase extends Item {
      * @param string 需要判断的那个未激活信仰
      * @return 返回一个值：若存在那个未激活信仰则为false
      */
-    public static boolean isEnabled(Player player,String string){
+    public static boolean isHasEnabled(Player player,String string){
         Set<String> strings = player.getData(TheMemoryDataHandler.notActivated);
-        return !strings.contains(string);
+        if (strings.contains(string)) {
+            return true;
+        }
+        return false;
     }
     private void doEnabled(Player player){
         Set<String> strings = player.getData(TheMemoryDataHandler.notActivated);
@@ -153,6 +173,20 @@ public abstract class MemoryBase extends Item {
             strings.add(nameSResourceLocation().toString());
         }
     }
+    public static void addMemoryIt(Player player ,String name){
+        Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
+        List<Integer> integers = new ArrayList<>();
+        for (String ignored : strings){
+            integers.add(1);
+        }
+        int  s = 0;
+        for (Integer ignored : integers){
+            s++;
+        }
+        if (s < max(player)){
+            strings.add(name);
+        }
+    }
     @Override
     public ItemUseAnimation getUseAnimation(ItemStack stack) {
         return ItemUseAnimation.DRINK;
@@ -161,7 +195,7 @@ public abstract class MemoryBase extends Item {
     private Identifier nameSResourceLocation (){
         return Identifier.fromNamespaceAndPath(memoryName().path,memoryName().name);
     }
-    private int max(Player player){
+    private static int max(Player player){
         return (int) (player.getAttributeValue(MemoryAttreg.maxMemory));
     }
 

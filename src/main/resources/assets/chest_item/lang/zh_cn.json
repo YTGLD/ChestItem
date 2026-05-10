@@ -252,7 +252,11 @@
   "event.chest_item.reinforced": "作为增强件装备时：",
   "event.chest_item.reinforced.can_not": "你无法再装备更多的增强件了",
   "item.chest_item.reinforced.equipped": "可以右键来装备",
-
+  "item.chest_item.memory.string.3": "喝下药水进行试炼",
+  "item.chest_item.memory.string.4": "若完成试炼即可证明一个信仰",
+  "item.chest_item.memory.string.7": "获得条件：",
+  "item.chest_item.memory.string.5": ">按住‘Shift’查看相关信仰<",
+  "item.chest_item.memory.string.6": "<按住‘Shift’查看相关信仰>",
   "item.chest_item.contradiction": "瓶子",
   "item.chest_item.contradiction.string.1": "舍弃幽影，获得伤害减免",
   "item.chest_item.contradiction_tooltip": "矛盾",

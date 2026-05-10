@@ -6,16 +6,19 @@ import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.MemoryItems;
+import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
@@ -24,6 +27,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.UnknownNullability;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -75,7 +79,16 @@ public class Protest extends MemoryBase {
         tooltipComponents.accept(Component.translatable("item.chest_item.protest.string.1").withStyle(ChatFormatting.GRAY));
     }
 
-    public static class  ProtestTooltip extends BaseTooltip {
+    @Override
+    public boolean isHasActivated() {
+        return true;
+    }
+
+    @Override
+    public void doTextGive(ItemStack stack, Consumer<Component> tooltipComponents) {
+        tooltipComponents.accept(Component.translatable("item.chest_item.protest.string.give").withStyle(ChatFormatting.GRAY));
+    }
+    public static class ProtestTooltip extends BaseTooltip {
         public ProtestTooltip(Properties properties) {
             super(properties);
         }
@@ -91,6 +104,20 @@ public class Protest extends MemoryBase {
         @Override
         public Component doTextOne() {
             return Component.translatable("item.chest_item.protest_tooltip.string.0").setStyle(Style.EMPTY.withColor(color()));
+        }
+        public static void tick(ItemStackTickEvent event){
+            Player player = event.getPlayer();
+            if (MemoryBase.isHasEnabled(player, "chest_item:protest_tooltip")) {
+                if (player.level() instanceof ServerLevel serverLevel){
+                    Raid serverLevelRaidAt  =serverLevel.getRaidAt(player.blockPosition());
+                    if (serverLevelRaidAt != null && serverLevelRaidAt.isActive()) {
+                        MemoryBase.addCounter(player,"chest_item:protest_tooltip",1);
+                    }
+                }
+                if (MemoryBase.getCounter(player, "chest_item:protest_tooltip") >= 3) {
+                    MemoryBase.addMemoryIt(player,"chest_item:protest_tooltip");
+                }
+            }
         }
         public static void protestTooltipHurtAndEffect(ItemStackTickEvent event){
             Player player = event.getPlayer();

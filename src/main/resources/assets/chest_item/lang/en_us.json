@@ -292,6 +292,11 @@
   "chest_item.the_imprint_of_the_soul.1": "Treaty",
   "chest_item.the_imprint_of_the_soul.2": "Crazy Theory",
     "chest_item.the_imprint_of_the_soul": "Eternal slave seal",
+"item.chest_item.memory.string.3": "Drink the potion for trial",
+  "item.chest_item.memory.string.7": "Get conditions：",
+  "item.chest_item.memory.string.4": "Earn a faith by completing the trial",
+  "item.chest_item.memory.string.5": ">Press and hold 'Shift' to view the relevant faith<",
+  "item.chest_item.memory.string.6": "<Press and hold 'Shift' to view the relevant faith>",
   "chest_item.the_soul": "Will",
   "chest_item.the_imprint_of_the_soul.can_not_remove": "It will become an indelible stain on you",
 
@@ -909,6 +914,7 @@
 
 
 "item.chest_item.protest": "bottle",
+  "item.chest_item.protest.string.give": "至少胜利3次袭击",
   "item.chest_item.protest.string.1": "The world is an enemy, but the target that wants to attack you will continue to be weakened",
   "item.chest_item.protest_tooltip": "protest",
   "item.chest_item.protest_tooltip.string.0": "Let invisible darkness and hatred envelop the heart of the Tao",
