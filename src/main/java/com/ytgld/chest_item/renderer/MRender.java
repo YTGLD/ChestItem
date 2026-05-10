@@ -15,6 +15,7 @@ import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.rendertype.LayeringTransform;
 import net.minecraft.client.renderer.rendertype.OutputTarget;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
@@ -83,7 +84,12 @@ public abstract class MRender {
         }
         return RenderType.create(
                 "lightning",
-                RenderSetup.builder(RenderPipelines.LIGHTNING)
+                RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning").
+                                withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
+                                .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING)
+                                ).withVertexFormat(DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS)
+                                .withDepthStencilState(DepthStencilState.DEFAULT).withCull(false).build()
+       )
                         .sortOnUpload().createRenderSetup());
 
     }
@@ -101,6 +107,39 @@ public abstract class MRender {
                 RenderSetup.builder(RenderPs.TRANSLUCENT)
                         .withTexture("Sampler0", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"))
                         .withTexture("Sampler1", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"))
+                        .createRenderSetup());
+    }
+    public static RenderType line(boolean isOutline) {
+        if (isOutline) {
+            return RenderType.create(
+                    "lines",
+                    RenderSetup.builder((RenderPipeline.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET, GLOBALS_SNIPPET)
+                                    .withVertexShader("core/rendertype_lines")
+                                    .withFragmentShader("core/rendertype_lines")
+                                    .withColorTargetState(new ColorTargetState(new BlendFunction(SourceFactor.SRC_ALPHA,
+                                            DestFactor.ONE,
+                                            SourceFactor.ONE,
+                                            DestFactor.ZERO))).withCull(false)
+                                    .withCull(false).withVertexFormat(DefaultVertexFormat.POSITION_COLOR_NORMAL_LINE_WIDTH,
+                                            VertexFormat.Mode.LINES).withDepthStencilState(DepthStencilState.DEFAULT).buildSnippet()).withLocation("pipeline/lines").build()))
+                            .setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+                            .setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET).setOutputTarget(outline2)
+                            .createRenderSetup()
+            );
+        }
+        return RenderType.create(
+                "lines",
+                RenderSetup.builder((RenderPipeline.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET, GLOBALS_SNIPPET)
+                                .withVertexShader("core/rendertype_lines")
+                                .withFragmentShader("core/rendertype_lines")
+                                .withColorTargetState(new ColorTargetState(new BlendFunction(SourceFactor.SRC_ALPHA,
+                                        DestFactor.ONE,
+                                        SourceFactor.ONE,
+                                        DestFactor.ZERO))).withCull(false)
+                                .withCull(false).withVertexFormat(DefaultVertexFormat.POSITION_COLOR_NORMAL_LINE_WIDTH,
+                                        VertexFormat.Mode.LINES).withDepthStencilState(DepthStencilState.DEFAULT).buildSnippet()).withLocation("pipeline/lines").build()))
+                        .setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+                        .setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
                         .createRenderSetup());
     }
     public static class RenderPs {
