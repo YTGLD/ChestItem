@@ -914,7 +914,7 @@
 
 
 "item.chest_item.protest": "bottle",
-  "item.chest_item.protest.string.give": "至少胜利3次袭击",
+  "item.chest_item.protest.string.give": "Win at least 3 raids",
   "item.chest_item.protest.string.1": "The world is an enemy, but the target that wants to attack you will continue to be weakened",
   "item.chest_item.protest_tooltip": "protest",
   "item.chest_item.protest_tooltip.string.0": "Let invisible darkness and hatred envelop the heart of the Tao",
@@ -924,6 +924,7 @@
 
 "item.chest_item.crave": "bottle",
   "item.chest_item.crave.string.1": "Feeling abnormally hungry for duration, cancels out the sensation when eating and gains a large amount of buffs",
+  "item.chest_item.crave.string.give": "Doesn't eat for 3 days in a row, and your progress resets when you die",
   "item.chest_item.crave_tooltip": "thirst",
   "item.chest_item.crave_tooltip.string.0": "Death is not the end of cause and effect",
   "item.chest_item.crave_tooltip.string.1": "Eat to gain a large amount of buffs and restore health",

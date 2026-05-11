@@ -173,6 +173,10 @@ public abstract class MemoryBase extends Item {
             strings.add(nameSResourceLocation().toString());
         }
     }
+    public static void clearEnabledMemory(Player player ,String name){
+        Set<String> strings = player.getData(TheMemoryDataHandler.notActivated);
+        strings.remove(name);
+    }
     public static void addMemoryIt(Player player ,String name){
         Set<String> strings = player.getData(TheMemoryDataHandler.mStringSetData);
         List<Integer> integers = new ArrayList<>();

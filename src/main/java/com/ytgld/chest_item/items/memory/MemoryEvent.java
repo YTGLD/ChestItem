@@ -21,10 +21,12 @@ public class MemoryEvent {
         Protest.ProtestTooltip.protestTooltipHurtAndEffect(event);
         Protest.ProtestTooltip.tick(event);
         Crave.CraveTooltip.craveCauseFood(event);
+        Crave.CraveTooltip.tickGive(event);
     }
     @SubscribeEvent
     public void Finish(LivingEntityUseItemEvent.Finish event){
         Crave.CraveTooltip.craveCauseFood(event);
+        Crave.CraveTooltip.eatNot(event);
     }
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){

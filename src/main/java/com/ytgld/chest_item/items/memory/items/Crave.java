@@ -12,10 +12,12 @@ import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
@@ -50,7 +52,7 @@ public class Crave extends MemoryBase {
             intValue =  builder.translation("chest_item.config.Crave")
                     .defineInRange("number",20,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.Crave2")
-                    .defineInRange("number2",0.025f,0,Integer.MAX_VALUE);
+                    .defineInRange("number2",0.033f,0,Integer.MAX_VALUE);
             builder.pop();
         }
 
@@ -81,7 +83,15 @@ public class Crave extends MemoryBase {
     public void doText(ItemStack stack, @UnknownNullability Consumer<Component> tooltipComponents) {
         tooltipComponents.accept(Component.translatable("item.chest_item.crave.string.1").withStyle(ChatFormatting.GRAY));
     }
+    @Override
+    public boolean isHasActivated() {
+        return true;
+    }
 
+    @Override
+    public void doTextGive(ItemStack stack, Consumer<Component> tooltipComponents) {
+        tooltipComponents.accept(Component.translatable("item.chest_item.crave.string.give").withStyle(ChatFormatting.GRAY));
+    }
     public static class  CraveTooltip extends BaseTooltip {
         public static final String cooldown = "CraveTooltipCooldown";
         public CraveTooltip(Properties properties) {
@@ -100,8 +110,33 @@ public class Crave extends MemoryBase {
         public Component doTextOne() {
             return Component.translatable("item.chest_item.crave_tooltip.string.0").setStyle(Style.EMPTY.withColor(color()));
         }
-
-
+        public static void tickGive(ItemStackTickEvent event){
+            Player player = event.getPlayer();
+            if (MemoryBase.isHasEnabled(player, "chest_item:crave_tooltip")) {
+                if (!player.isAlive()) {
+                    MemoryBase.clearCounter(player, "chest_item:crave_tooltip");
+                }
+                if (!player.level().isClientSide()) {
+                    if (player.tickCount % 20 ==1) {
+                        MemoryBase.addCounter(player, "chest_item:crave_tooltip", 1);
+                    }
+                }
+                if (MemoryBase.getCounter(player,"chest_item:crave_tooltip") >= 60 * 20 * 3) {
+                    MemoryBase.addMemoryIt(player, "chest_item:crave_tooltip");
+                    MemoryBase.clearCounter(player, "chest_item:crave_tooltip");
+                    MemoryBase.clearEnabledMemory(player, "chest_item:crave_tooltip");
+                }
+            }
+        }
+        public static void eatNot(LivingEntityUseItemEvent.Finish event) {
+            if (event.getEntity() instanceof Player player) {
+                if (MemoryBase.isHasEnabled(player, "chest_item:crave_tooltip")) {
+                    if (event.getItem().getUseAnimation() == ItemUseAnimation.EAT) {
+                        MemoryBase.clearCounter(player, "chest_item:crave_tooltip");
+                    }
+                }
+            }
+        }
         public static void craveCauseFood(ItemStackTickEvent event){
             Player player = event.getPlayer();
             if (MemoryBase.hasMemory(player,"chest_item:crave_tooltip")){

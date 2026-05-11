@@ -116,6 +116,9 @@ public class Protest extends MemoryBase {
                 }
                 if (MemoryBase.getCounter(player, "chest_item:protest_tooltip") >= 3) {
                     MemoryBase.addMemoryIt(player,"chest_item:protest_tooltip");
+
+                    MemoryBase.clearCounter(player,"chest_item:protest_tooltip");
+                    MemoryBase.clearEnabledMemory(player,"chest_item:protest_tooltip");
                 }
             }
         }

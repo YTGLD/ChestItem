@@ -967,6 +967,7 @@
 
   "item.chest_item.protest": "瓶子",
   "item.chest_item.protest.string.1": "举世为敌，但欲要攻击你的目标会持续受到削弱",
+  "item.chest_item.protest.string.give": "至少胜利3次袭击",
   "item.chest_item.protest_tooltip": "抗旨",
   "item.chest_item.protest_tooltip.string.0": "让无形的黑暗与仇恨笼罩道心",
   "item.chest_item.protest_tooltip.string.1": "欲要攻击你的生物会受到缓慢和虚弱，若无法施加效果，则造成巨大伤害",
@@ -974,6 +975,7 @@
 
   "item.chest_item.crave": "瓶子",
   "item.chest_item.crave.string.1": "时长感到异常饥饿，进食时抵消感触并获得大量增益效果",
+  "item.chest_item.crave.string.give": "连续3天不吃东西，死亡时进度重置",
   "item.chest_item.crave_tooltip": "渴求",
   "item.chest_item.crave_tooltip.string.0": "死亡并非因果之末",
   "item.chest_item.crave_tooltip.string.1": "进食获得大量增益效果并恢复生命值",
