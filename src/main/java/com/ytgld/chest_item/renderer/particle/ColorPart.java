@@ -1,10 +1,9 @@
 package com.ytgld.chest_item.renderer.particle;
 
+import com.mojang.blaze3d.opengl.GlStateManager;
 import com.ytgld.chest_item.renderer.MRender;
-import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -15,10 +14,10 @@ import org.jetbrains.annotations.NotNull;
 public class ColorPart extends SingleQuadParticle {
     public ColorPart(ClientLevel level, double x, double y, double z, float movementX, float movementY, float movementZ, TextureAtlasSprite textureAtlasSprite) {
         super(level,x,y,z,movementX,movementY,movementZ,textureAtlasSprite);
+        this.setParticleSpeed(movementX,movementY,movementZ);
         this.lifetime = 200;
-        this.setColor(Mth.nextFloat(RandomSource.create(),0.8f,1),Mth.nextFloat(RandomSource.create(),0.2f,1),0.25f);
-        this.scale(Mth.nextFloat(RandomSource.create(),1,5));
-        this.gravity = -0.01f;
+        this.setColor(Mth.nextFloat(RandomSource.create(),0.9f,1),Mth.nextFloat(RandomSource.create(),0,0.1f),0.1f);
+        this.scale(Mth.nextFloat(RandomSource.create(),1,3));
     }
 
     @Override
@@ -29,7 +28,13 @@ public class ColorPart extends SingleQuadParticle {
     public int time = 200;
     public void tick() {
         super.tick();
-        this.quadSize = this.quadSize * 0.9f;
+        this.roll+=0.05f + Mth.nextFloat(RandomSource.create(),0.01F,0.2F);
+        this.oRoll+= (float) (0.05 + Mth.nextFloat(RandomSource.create(),0.01F,0.2F));
+        float ca = this.quadSize * 0.95f;
+        if (ca < 0) {
+            ca = 0;
+        }
+        this.quadSize = ca;
         if (alpha>0.05f) {
             this.alpha -= 0.05f;
         }
@@ -40,20 +45,10 @@ public class ColorPart extends SingleQuadParticle {
     }
 
     @Override
-    public void extract(QuadParticleRenderState reusedState, Camera camera, float partialTick) {
-        super.extract(reusedState, camera, partialTick);
-    }
-
-    @Override
     protected @NotNull Layer getLayer() {
+        GlStateManager._enableDepthTest();
         return new Layer(true, TextureAtlas.LOCATION_PARTICLES, MRender.RenderPs.TRANSLUCENT_PARTICLE);
     }
-
-    @Override
-    public ParticleRenderType getGroup() {
-        return super.getGroup();
-    }
-
     public record Provider(SpriteSet sprite) implements ParticleProvider<SimpleParticleType> {
         public Provider(SpriteSet sprite) {
             this.sprite = sprite;

@@ -1,25 +1,21 @@
 package com.ytgld.chest_item.event.use;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.OwnerLead;
+import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
-import com.ytgld.chest_item.event.key.ClientEvent;
 import com.ytgld.chest_item.items.*;
-import com.ytgld.chest_item.items.black.BloodyBelt;
 import com.ytgld.chest_item.items.black.ChaosConstructor;
-import com.ytgld.chest_item.items.black.OneEyedSpider;
 import com.ytgld.chest_item.items.black.ShadowMint;
 import com.ytgld.chest_item.items.black.celestial.Blood;
 import com.ytgld.chest_item.items.black.celestial.Chaos;
 import com.ytgld.chest_item.items.black.celestial.Samsara;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
-import com.ytgld.chest_item.items.black.chaos_item.RunawayLining;
 import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
@@ -39,8 +35,6 @@ import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
 import com.ytgld.chest_item.items.tool.WallowAxe;
-import com.ytgld.chest_item.other.AttributeDataType;
-import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
@@ -54,13 +48,10 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -81,7 +72,6 @@ import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
-import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.*;
 
@@ -249,6 +239,10 @@ public class EventMain {
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
         ShieldRenderHandler.thepainShield(event);
         BlackShieldRenderHandler.hurtBlackShield(event);
+        BlackShieldRenderHandler.ShadowShield(event);
+
+
+
         Complementary.damage(event);
         ChaosShield(event);
         hyperplasiaShield(event);
@@ -371,112 +365,6 @@ public class EventMain {
             }
         }
     }
-    /**
-     * <p>
-     * 更新幽影护盾
-     * <p>
-     * 幽影护盾现在存在时获得伤害抗性，其伤害抗性的值为“幽影稳固度”属性值的10%（1级的幽影护盾就是1倍，3级是3倍，4级就是4倍），
-     * <p>
-     * 并且幽影护盾在被攻击时会将自身受到的伤害转化为疤痕组织和侵蚀装甲，但幽影护盾被击碎时会获得10秒的冷却（在冷却期间无法恢复幽影护盾）。
-     * <p>
-     * 幽影护盾现在会在疤痕组织或者侵蚀装甲消耗之前进行操作（疤痕组织或者侵蚀装甲必须在幽影护盾消耗完之后才会进行计算减伤）
-     * <p>
-     * 幽影稳固度现在效果更改为了“受到伤害后保护的幽影值”
-     * <p>
-     * 幽影稳固度现在越高，每级幽影护盾提供的抗性越高
-     * <p>
-     * 添加了新的1属性：幽影转换。
-     * 幽影转换是幽影护盾在受到伤害时将幽影转换成侵蚀装甲和疤痕组织的比率，默认为1点。
-     * <p>
-     * 幽影护盾现在显示的位置与创伤之痕的位置相同，且重新更改显示模式
-     * @since 1.21.1-1.2.0.0
-     */
-    public void ShadowShield (LivingIncomingDamageEvent event){
-        if (event.getEntity() instanceof Player living) {
-            if (living instanceof Player player) {
-                if (Handler.has(player, InitItems.ShadowMint_.asItem())){
-                    return;
-                }
-            }
-            //幽影稳固度
-            AttributeInstance shadow_shield_stronger = living.getAttribute(AttReg.shadow_shield_stronger);
-            if (shadow_shield_stronger != null) {
-                float value = (float) shadow_shield_stronger.getValue();
-                if (value <= 0) {
-                    return;
-                }
-                float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
-                if (data > 0) {
-                    float damage = event.getAmount() ;
-                    //newData：是减少后的值
-                    float newData = data - (damage / value);
-                    if (newData > 0) {
-                        AttributeInstance shadow_shield_conversion = living.getAttribute(AttReg.shadow_shield_conversion);
-                        if (shadow_shield_conversion != null) {
-                            float sscValue = (float) shadow_shield_conversion.getValue();
-
-                            float hyperplasiaAValue = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
-                            float chaosWindsAValue = living.getData(AttReg.chaosWinds);
-
-                            AttributeInstance max_hyperplasiaAttributeInstance = living.getAttribute(AttReg.hyperplasia);
-                            AttributeInstance max_chaos_armorAttributeInstance = living.getAttribute(AttReg.chaos_armor);
-
-                            if (max_hyperplasiaAttributeInstance != null && max_chaos_armorAttributeInstance != null) {
-                                float hyperplasia = (float) max_hyperplasiaAttributeInstance.getValue();
-                                float chaosArmor = (float) max_chaos_armorAttributeInstance.getValue();
-
-                                float newValueHyp = newData + hyperplasiaAValue;
-                                newValueHyp *= sscValue;
-                                if (newValueHyp > hyperplasia) {
-                                    newValueHyp = hyperplasia;
-                                }
-                                Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,living,newValueHyp);
-
-                                float newValueChaosArmor = newData + chaosWindsAValue;
-                                newValueChaosArmor *= sscValue;
-                                if (newValueChaosArmor > chaosArmor) {
-                                    newValueChaosArmor = chaosArmor;
-                                }
-
-                                double max = living.getAttributeValue(AttReg.shadow_shield);
-                                //attachment 越大 delta 越大
-                                //0~1
-                                float delta = (float) (living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) / max);
-                                //0.255是  1
-                                //0.5是  2
-                                //1是  4
-
-                                int difference = (int) (delta * 4);
-                                if (difference < 1) {
-                                    difference = 1;
-                                }
-                                if (difference > 4) {
-                                    difference = 4;
-                                }
-                                //0.1
-                                float attRes = (float) (living.getAttributeValue(AttReg.shadow_shield_stronger) / 10f);
-                                attRes *= difference;
-                                float end = 1 - attRes;
-                                if (end < 0.1f) {
-                                    end = 0.1f;
-                                }
-                                event.setAmount(event.getAmount() * end);
-
-                                Handler.setDataValue(AttReg.chaosWinds,living,newValueChaosArmor);
-                                Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living,newData);
-                            }
-                        }
-                    }else {
-                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living,0f);
-                    }
-                }else {
-                    Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,living, 0f);
-                    Handler.setDataValue(AttReg.shadow_shield_cooldown_dataAttachmentType,living,10);
-                }
-            }
-        }
-    }
-
     @SubscribeEvent
     public void attackEXP(LivingExperienceDropEvent event){
         MadnessTheory.attackEXP(event);
@@ -564,7 +452,6 @@ public class EventMain {
                 }
             }
         }
-        ShadowShield(event);
     }
     @SubscribeEvent
     public void LivingChangeTargetEvent(LivingChangeTargetEvent event){

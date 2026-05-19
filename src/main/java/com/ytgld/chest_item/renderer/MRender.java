@@ -5,6 +5,7 @@ import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.ColorTargetState;
 import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.CompareOp;
 import com.mojang.blaze3d.platform.DestFactor;
 import com.mojang.blaze3d.platform.SourceFactor;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
@@ -77,6 +78,7 @@ public abstract class MRender {
                     "lightning", RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
                                     .withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
                                     .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
+                                    .withDepthStencilState(DepthStencilState.DEFAULT)
                                     .withVertexFormat(DefaultVertexFormat.POSITION_COLOR,
                                             VertexFormat.Mode.QUADS).withCull(false).build())
                             .setOutputTarget(outline2).sortOnUpload().createRenderSetup()
@@ -88,10 +90,47 @@ public abstract class MRender {
                                 withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
                                 .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING)
                                 ).withVertexFormat(DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS)
+                                .withDepthStencilState(DepthStencilState.DEFAULT)
                                 .withDepthStencilState(DepthStencilState.DEFAULT).withCull(false).build()
        )
                         .sortOnUpload().createRenderSetup());
 
+    }
+
+    public static RenderType colorOutlineLines(boolean isOutline){
+        if (isOutline){
+           return  RenderType.create(
+                   "lines",
+                   RenderSetup.builder(RenderPipeline.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET, GLOBALS_SNIPPET)
+                                   .withVertexShader("core/rendertype_lines")
+                                   .withFragmentShader("core/rendertype_lines")
+                                   .withColorTargetState(new ColorTargetState(new BlendFunction(SourceFactor.SRC_ALPHA,
+                                           DestFactor.ONE,
+                                           SourceFactor.ONE,
+                                           DestFactor.ZERO)))
+                                   .withCull(false)
+                                   .withVertexFormat(DefaultVertexFormat.POSITION_COLOR_NORMAL_LINE_WIDTH,
+                                           VertexFormat.Mode.LINES).withDepthStencilState(DepthStencilState.DEFAULT)
+                                   .buildSnippet()).withLocation("pipeline/lines").build())
+                           .setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+                           .setOutputTarget(outline2)
+                           .createRenderSetup());
+        }
+        return  RenderType.create(
+                "lines",
+                RenderSetup.builder(RenderPipeline.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET, GLOBALS_SNIPPET)
+                                .withVertexShader("core/rendertype_lines")
+                                .withFragmentShader("core/rendertype_lines")
+                                .withColorTargetState(new ColorTargetState(new BlendFunction(SourceFactor.SRC_ALPHA,
+                                        DestFactor.ONE,
+                                        SourceFactor.ONE,
+                                        DestFactor.ZERO)))
+                                .withCull(false)
+                                .withVertexFormat(DefaultVertexFormat.POSITION_COLOR_NORMAL_LINE_WIDTH,
+                                        VertexFormat.Mode.LINES).withDepthStencilState(DepthStencilState.DEFAULT)
+                                .buildSnippet()).withLocation("pipeline/lines").build())
+                        .setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+                        .createRenderSetup());
     }
     public static RenderType endBlack(boolean isOutline){
         if (isOutline){
@@ -169,7 +208,13 @@ public abstract class MRender {
                         .withDepthStencilState(DepthStencilState.DEFAULT)
                         .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/gui_textured")).build());
 
-        public static final RenderPipeline  TRANSLUCENT_PARTICLE = (RenderPipeline.builder(PARTICLE_SNIPPET)
+        public static final RenderPipeline  TRANSLUCENT_PARTICLE = (RenderPipeline.builder( RenderPipeline.builder(MATRICES_FOG_SNIPPET)
+                        .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/particle"))
+                        .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/particle"))
+                        .withSampler("Sampler0").withSampler("Sampler2")
+                        .withCull(false)
+                        .withVertexFormat(DefaultVertexFormat.PARTICLE, VertexFormat.Mode.QUADS)
+                        .withDepthStencilState(new DepthStencilState(CompareOp.LESS_THAN_OR_EQUAL, false)).buildSnippet())
                 .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/translucent_particle")).
                 withColorTargetState(new ColorTargetState(
                         new BlendFunction(

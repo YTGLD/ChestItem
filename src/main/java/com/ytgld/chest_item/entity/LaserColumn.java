@@ -109,11 +109,6 @@ public class LaserColumn extends TamableAnimal {
             canSee = false;
         }
         placeFire(position(),0,0,this);
-        if (this.tickCount % 5 == 1) {
-            if (this.level() instanceof ServerLevel level) {
-                level.sendParticles(Particles.FireBlock_.get(), getX(), getY(), getZ(), 10, 3, 0, 3, 0);
-            }
-        }
         if (!canSee) {
             live--;
             if (live<= 0) {

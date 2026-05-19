@@ -31,6 +31,9 @@ public class Entitys {
             EntityType.Builder.of(LaserColumn::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(200).build(ResourceKey.create(Registries.ENTITY_TYPE,
                     Identifier.fromNamespaceAndPath(Chestitem.MODID, "laser_column"))));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<TheHyperplasia>> TheHyperplasia_ = REGISTRY.register("hyperplasia", () ->
+            EntityType.Builder.of(TheHyperplasia::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "hyperplasia"))));
 
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeCreationEvent event){

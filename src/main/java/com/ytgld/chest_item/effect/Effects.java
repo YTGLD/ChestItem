@@ -18,5 +18,9 @@ public class Effects {
             Rage::new);
     public static final DeferredHolder<MobEffect,?> Pain  =EFFECT_DEFERRED_REGISTER.register("pain",
             Pain::new);
+    public static final DeferredHolder<MobEffect,?> ShadowErosion_  =EFFECT_DEFERRED_REGISTER.register("shadow_erosion",
+            ShadowErosion::new);
+    public static final DeferredHolder<MobEffect,?> EvilErosion  =EFFECT_DEFERRED_REGISTER.register("evil_erosion",
+            EvilErosion::new);
 
 }

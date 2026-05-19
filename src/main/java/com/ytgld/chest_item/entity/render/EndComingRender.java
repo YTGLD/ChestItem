@@ -7,6 +7,7 @@ import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.entity.state.EndComingRenderState;
 import com.ytgld.chest_item.renderer.MRender;
+import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -42,93 +43,32 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
-        if (!renderState.entity.entityTags().contains(EndComing.isTrial)) {
-            collector.submitCustomGeometry(poseStack, MRender.red(true), (pose, bufferSource) -> {
-                setT(pose, entity, bufferSource);
-            });
-            collector.submitCustomGeometry(poseStack, MRender.red(false), (pose, bufferSource) -> {
-                setT(pose, entity, bufferSource);
-            });
-
-            collector.submitCustomGeometry(poseStack, MRender.red(true), (pose, bufferSource) -> {
-                renderSphere1(pose, bufferSource, 0, 0.35f);
-            });
-            collector.submitCustomGeometry(poseStack, MRender.red(false), (pose, bufferSource) -> {
-                renderSphere1(pose, bufferSource, 255, 0.35f);
-            });
-        }else {
-            HandlerClient.showRenderWarped = true;
-            HandlerClient.doPassWarped = true;
-            collector.submitCustomGeometry(poseStack, MRender.warped(), (pose, bufferSource) -> {
-                setTWarped(pose, entity, bufferSource);
-            });
-            collector.submitCustomGeometry(poseStack, MRender.warped(), (pose, bufferSource) -> {
-                renderSphere1Warped(pose, bufferSource, 255, 0.35f);
-            });
-        }
-
-
+        int colorO = entity.getDoSize() / 10;
+        collector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+            setT(pose, entity, bufferSource);
+        });
+        collector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+            renderSphere1(pose, bufferSource, 0, 0.35f + colorO / 2f);
+        });
+        collector.submitCustomGeometry(poseStack, MRender.colorOutline(false), (pose, bufferSource) -> {
+            renderSphere1(pose, bufferSource, 255, 0.35f + colorO / 2f);
+        });
         poseStack.popPose();
     }
 
 
     private void setT(PoseStack.Pose matrices, EndComing entity, VertexConsumer vertexConsumers) {
         for (int i = 1; i < entity.getTrailPositions().size(); i++){
-            Vec3 prevPos = entity.getTrailPositions().get(i - 1);
-            Vec3 currPos = entity.getTrailPositions().get(i);
+            Vec3 prevPos = entity.getTrailPositions().get(i - 1).vec3();
+            Vec3 currPos = entity.getTrailPositions().get(i).vec3();
             Vec3 adjustedPrevPos = new Vec3(prevPos.x - entity.getX(), prevPos.y - entity.getY(), prevPos.z - entity.getZ());
             Vec3 adjustedCurrPos = new Vec3(currPos.x - entity.getX(), currPos.y - entity.getY(), currPos.z - entity.getZ());
             float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
-            HandlerClient.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha,alpha/3f);
-            HandlerClient.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha,alpha/3f);
-
+            renderBloodW(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, Light.ARGB.color((int) (alpha * 255),255,0,0),alpha/3f);
+            renderBloodW(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, Light.ARGB.color((int) (alpha * 255),255,0,0),alpha/3f);
         }
     }
-
-    public void renderSphere1(@NotNull PoseStack.Pose matrices, @NotNull VertexConsumer vertexConsumer, int light, float s ) {
-        int stacks = 10; // 垂直方向的分割数
-        int slices = 10; // 水平方向的分割数
-        for (int i = 0; i < stacks; ++i) {
-            float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);
-            float phi1 = (float) Math.PI * ((i + 1) / (float) stacks);
-
-            for (int j = 0; j < slices; ++j) {
-                float theta0 = (float) (2 * Math.PI) * ((j + 0) / (float) slices);
-                float theta1 = (float) (2 * Math.PI) * ((j + 1) / (float) slices);
-
-                float x0 = s * (float) Math.sin(phi0) * (float) Math.cos(theta0);
-                float y0 = s * (float) Math.cos(phi0);
-                float z0 = s * (float) Math.sin(phi0) * (float) Math.sin(theta0);
-                float x1 = s * (float) Math.sin(phi0) * (float) Math.cos(theta1);
-                float y1 = s * (float) Math.cos(phi0);
-                float z1 = s * (float) Math.sin(phi0) * (float) Math.sin(theta1);
-                float x2 = s * (float) Math.sin(phi1) * (float) Math.cos(theta1);
-                float y2 = s * (float) Math.cos(phi1);
-                float z2 = s * (float) Math.sin(phi1) * (float) Math.sin(theta1);
-                float x3 = s * (float) Math.sin(phi1) * (float) Math.cos(theta0);
-                float y3 = s * (float) Math.cos(phi1);
-                float z3 = s * (float) Math.sin(phi1) * (float) Math.sin(theta0);
-
-                vertexConsumer.addVertex(matrices, x0, y0, z0).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-                vertexConsumer.addVertex(matrices, x1, y1, z1).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-                vertexConsumer.addVertex(matrices, x2, y2, z2).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-                vertexConsumer.addVertex(matrices, x3, y3, z3).setColor(1.0f, 1.0f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-            }
-        }
-    }
-    private void setTWarped(PoseStack.Pose matrices, EndComing entity, VertexConsumer vertexConsumers) {
-        for (int i = 1; i < entity.getTrailPositions().size(); i++){
-            Vec3 prevPos = entity.getTrailPositions().get(i - 1);
-            Vec3 currPos = entity.getTrailPositions().get(i);
-            Vec3 adjustedPrevPos = new Vec3(prevPos.x - entity.getX(), prevPos.y - entity.getY(), prevPos.z - entity.getZ());
-            Vec3 adjustedCurrPos = new Vec3(currPos.x - entity.getX(), currPos.y - entity.getY(), currPos.z - entity.getZ());
-            float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
-            renderBloodW(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha,alpha/3f);
-            renderBloodW(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha,alpha/3f);
-
-        }
-    }
-    public static void renderBloodW(PoseStack.Pose poseStack, VertexConsumer vertexConsumer, Vec3 start, Vec3 end, float a, float r) {
+    public static void renderBloodW(PoseStack.Pose poseStack, VertexConsumer vertexConsumer, Vec3 start, Vec3 end, int a, float r) {
         int segmentCount = 16; // 圆柱横向细分数
 
         for (int i = 0; i < segmentCount; i++) {
@@ -151,29 +91,30 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
     }
 
 
-    private static void addSquare(VertexConsumer vertexConsumer, PoseStack.Pose poseStack, Vec3 up1, Vec3 up2, Vec3 down1, Vec3 down2, float alpha) {
+    private static void addSquare(VertexConsumer vertexConsumer, PoseStack.Pose poseStack, Vec3 up1, Vec3 up2, Vec3 down1, Vec3 down2, int c) {
         // 添加四个顶点来绘制一个矩形
         vertexConsumer.addVertex(poseStack, (float) up1.x, (float) up1.y, (float) up1.z)
-                .setColor(255,100,255,255)
+                .setColor(c)
                 .setUv2(255, 255)
                 .setNormal(poseStack,0, 0, 1);
 
         vertexConsumer.addVertex(poseStack, (float) down1.x, (float) down1.y, (float) down1.z)
-                .setColor(255,100,255,255)
+                .setColor(c)
                 .setUv2(255, 255)
                 .setNormal(poseStack,0, 0, 1);
 
         vertexConsumer.addVertex(poseStack, (float) down2.x, (float) down2.y, (float) down2.z)
-                .setColor(255,100,255,255)
+                .setColor(c)
                 .setUv2(255, 255)
                 .setNormal(poseStack,0, 0, 1);
 
         vertexConsumer.addVertex(poseStack, (float) up2.x, (float) up2.y, (float) up2.z)
-                .setColor(255,100,255,255)
+                .setColor(c)
                 .setUv2(255, 255)
                 .setNormal(poseStack,0, 0, 1);
     }
-    public void renderSphere1Warped(@NotNull PoseStack.Pose matrices, @NotNull VertexConsumer vertexConsumer, int light, float s ) {
+    public void renderSphere1(@NotNull PoseStack.Pose matrices, @NotNull VertexConsumer vertexConsumer, int light, float s ) {
+
         int stacks = 10; // 垂直方向的分割数
         int slices = 10; // 水平方向的分割数
         for (int i = 0; i < stacks; ++i) {
@@ -197,10 +138,10 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
                 float y3 = s * (float) Math.cos(phi1);
                 float z3 = s * (float) Math.sin(phi1) * (float) Math.sin(theta0);
 
-                vertexConsumer.addVertex(matrices, x0, y0, z0).setColor(1.0f, 0.2f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-                vertexConsumer.addVertex(matrices, x1, y1, z1).setColor(1.0f, 0.2f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-                vertexConsumer.addVertex(matrices, x2, y2, z2).setColor(1.0f, 0.2f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
-                vertexConsumer.addVertex(matrices, x3, y3, z3).setColor(1.0f, 0.2f, 1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
+                vertexConsumer.addVertex(matrices, x0, y0, z0).setColor(1.0f, 0, 0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
+                vertexConsumer.addVertex(matrices, x1, y1, z1).setColor(1.0f, 0, 0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
+                vertexConsumer.addVertex(matrices, x2, y2, z2).setColor(1.0f, 0, 0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
+                vertexConsumer.addVertex(matrices, x3, y3, z3).setColor(1.0f, 0, 0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setUv(0, 0).setUv2(light, light).setNormal(matrices,1, 0, 0);
             }
         }
     }

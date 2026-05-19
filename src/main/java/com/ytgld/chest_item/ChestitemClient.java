@@ -12,6 +12,7 @@ import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
 import com.ytgld.chest_item.renderer.particle.FireBlock;
+import com.ytgld.chest_item.renderer.particle.OrbPart;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.ClientAvatarEntity;
@@ -99,6 +100,7 @@ public class ChestitemClient{
     public static void registerFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(Particles.colorPart.get(), ColorPart.Provider::new);
         event.registerSpriteSet(Particles.FireBlock_.get(), FireBlock.Provider::new);
+        event.registerSpriteSet(Particles.orbAPart.get(), OrbPart.Provider::new);
     }
     @SubscribeEvent
     public static void RegisterKeyMappingsEvent(RegisterKeyMappingsEvent event){

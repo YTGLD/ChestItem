@@ -11,7 +11,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class Rage  extends MobEffect {
     public Rage() {
-        super(MobEffectCategory.BENEFICIAL, 0xff0000, Particles.colorPart.get());
+        super(MobEffectCategory.BENEFICIAL, 0xff0000);
         this.addAttributeModifier(Attributes.MOVEMENT_SPEED, Identifier.fromNamespaceAndPath(Chestitem.MODID,"rage"),0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         this.addAttributeModifier(Attributes.ATTACK_DAMAGE, Identifier.fromNamespaceAndPath(Chestitem.MODID,"rage"),0.05f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         this.addAttributeModifier(Attributes.ATTACK_SPEED, Identifier.fromNamespaceAndPath(Chestitem.MODID,"rage"),0.05f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);

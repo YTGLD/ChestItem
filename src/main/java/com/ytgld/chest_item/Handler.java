@@ -23,6 +23,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
 import javax.annotation.Nullable;
@@ -192,4 +193,5 @@ public class Handler {
         return false;
     }
 
+    public static record Vec3Color(Vec3 vec3 , int color){}
 }

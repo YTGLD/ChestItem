@@ -1,22 +1,16 @@
 package com.ytgld.chest_item.entity;
 
-import com.ytgld.chest_item.Config;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
-import com.ytgld.chest_item.tip.an_element.elements.DoomsdayJudgment;
-import net.minecraft.core.particles.ParticleTypes;
+import com.ytgld.chest_item.renderer.light.Light;
+import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -28,19 +22,29 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
 
     public class EndComing  extends TamableAnimal {
 
+
+        private final List<Handler.Vec3Color> trailPositions = new ArrayList<>();
+        private int attackTIME = 0;
+        private int notAttackTime = 10;
+        public int doSize= 0;
+        public boolean canLive = true;
+        public int blueColor = 255;
         public static final String  isTrial = "isTrial";
+
+
         public EndComing(EntityType<? extends EndComing> p_21803_, Level p_21804_) {
             super(p_21803_, p_21804_);
             this.setNoGravity(true);
@@ -48,11 +52,11 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
         @Override
         public void die(@NotNull DamageSource p_21809_) {
         }
-
-        private final List<Vec3> trailPositions = new ArrayList<>();
-
-        public List<Vec3> getTrailPositions() {
+        public List<Handler.Vec3Color> getTrailPositions() {
             return trailPositions;
+        }
+        public int getDoSize() {
+            return doSize;
         }
 
         public void dis(){
@@ -72,70 +76,52 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
         }
         public boolean isHasEffectEnd(){
             if (this.getOwner()!= null &&this.getOwner() instanceof Player player){
-                ChestInventory chestInventory = Handler.getItem(player);
-                if (chestInventory!=null) {
-                    if (!player.level().isClientSide()) {
-                        for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                            ItemStack stack = chestInventory.getItem(i);
-                            if (stack.is(InitItems.EndEffect_)) {
-                                return true;
-                            }
-                        }
-                    }
-                }
+                return Handler.has(player, InitItems.EndEffect_.asItem());
             }
             return false;
         }
 
-        @Override
-        public void tick() {
-            super.tick();
-            if (this.getOwner() instanceof Player player) {
-                if (player.hasEffect(MobEffects.TRIAL_OMEN) || player.hasEffect(MobEffects.BAD_OMEN) || player.hasEffect(MobEffects.RAID_OMEN)) {
-                    if (Config.config.doEndComingUp.get()) {
-                        if (this.addTag(isTrial)) {
-                            if (this.level() instanceof ServerLevel level) {
-                                level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 50, 2, 2, 2, 0.2f);
-                            }
-                            this.level().playSound(null, player.blockPosition(), SoundEvents.TRIAL_SPAWNER_OMINOUS_ACTIVATE, SoundSource.AMBIENT, 1, 1);
+        public void hurtaTTACK(){
+            int time = 8;
+            if (isHasEffectEnd()) {
+                time = 5;
+            }
+
+            if (this.getOwner() instanceof Player player && player.getLastHurtByMob() instanceof LivingEntity living) {
+                if (player.position().distanceTo(living.position()) < 45) {
+                    if (this.tickCount % time ==1) {
+                        TheHyperplasia theHyperplasia = new TheHyperplasia(Entitys.TheHyperplasia_.get(), living.level());
+                        theHyperplasia.setTarget(living);
+                        theHyperplasia.setPos(this.position().add(0, 0, 0));
+                        theHyperplasia.setOwner(player);
+                        theHyperplasia.setDamage( 5 + (float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.1F));
+                        this.level().addFreshEntity(theHyperplasia);
+                        if (this.level() instanceof ServerLevel level) {
+                            level.sendParticles(Particles.orbAPart.get(), getX() + 0, getY() + 0, getZ() + 0, 2, 0, 0, 0, 0);
                         }
-                    }
-                } else {
-                    this.removeTag(isTrial);
-                }
-                int lvl = 0;
-                if (isHasEffectEnd()) {
-                    lvl = 1;
-                }
-                if (this.entityTags().contains(isTrial)) {
-                    if (!player.level().isClientSide()) {
-                        if (player.tickCount % 4 == 1) {
-                            player.addEffect(new MobEffectInstance(MobEffects.SPEED, 100, 2 + lvl, false, false));
-                            player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 100, 1, false, false));
-                            player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 100, 0, false, false));
-                            player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 100, 1 + lvl, false, false));
-                            player.addEffect(new MobEffectInstance(MobEffects.HASTE, 100, 2 + lvl, false, false));
-                        }
-                    }
-                }else {
-                    if (player.tickCount % 4 == 1) {
-                        player.addEffect(new MobEffectInstance(MobEffects.SPEED, 100, 1 + lvl, false, false));
-                        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 100, lvl, false, false));
-                        player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 100, lvl, false, false));
-                        player.addEffect(new MobEffectInstance(MobEffects.HASTE, 100, 1 + lvl, false, false));
                     }
                 }
             }
+        }
+        @Override
+        public void tick() {
+            super.tick();
+
+            if (attackTIME > 0) {
+                attackTIME --;
+            }
+            if (notAttackTime < 10) {
+                notAttackTime ++;
+            }
+            doSize = Math.min(attackTIME,notAttackTime);
+
             this.setNoGravity(true);
             dis();
 
             if (this.getOwner() == null) {
                 this.discard();
             }
-            LivingEntity owner = getOwner(); // 获取主人
-//            LivingEntity target = getTarget(); // 获取目标
-//            Vec3 currentPos = this.position();
-//
+            LivingEntity owner = getOwner();
             if (owner != null){
                 double desiredDistance = 2; // 设置想要保持的距离
                 Vec3 targetPos = owner.position().add(0, 3, -1.5); // 获取玩家位置并抬高
@@ -150,95 +136,48 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
                             Set.of(), this.getYRot(), this.getXRot(), false);
                 }
             }
-            trailPositions.add(new Vec3(this.getX(), this.getY(), this.getZ()));
 
-            if (trailPositions.size() > 30) {
-                trailPositions.removeFirst();
+            if (this.level().isClientSide()) {
+                trailPositions.add(new Handler.Vec3Color(new Vec3(this.getX(), this.getY(), this.getZ()), Light.ARGB.color(255, 255, 0, blueColor)));
+                if (blueColor > 0) {
+                    blueColor -= 5;
+                }
+                if (trailPositions.size() > 85) {
+                    trailPositions.removeFirst();
+                }
             }
-
-//            if (this.getTarget() != null&&this.getOwner()!=null){
-//                if (this.getTarget().is(this.getOwner())){
-//                    this.setTarget(null);
-//                }
-//            }
-//            if (this.getTarget() != null) {
-//                if (!this.getTarget().isAlive()) {
-//                    this.setTarget(null);
-//                }
-//            }
-
-//            float s = DoomsdayJudgment.attackTime(this.getOwner());
-//            if (isHasEffectEnd()){
-//                s += 10;
-//            }
-//            if (s < 1) {
-//                s = 1;
-//            }
-
-//            if (!this.entityTags().contains(isTrial)) {
-//                if (this.getOwner() != null && this.getOwner() instanceof Player && this.getTarget() != null) {
-//                    if (this.tickCount % (int) s == 0) {
-//                        AttackEndComing attackBlood = new AttackEndComing(Entitys.AttackEndComing_.get(), this.level());
-//                        attackBlood.setTarget(this.getTarget());
-//                        if (isHasEffectEnd()) {
-//                            attackBlood.damages += 3;
-//                        }
-//                        attackBlood.setPos(this.position());
-//                        attackBlood.setOwner(this.getOwner());
-//                        attackBlood.follow = false;
-//                        this.level().addFreshEntity(attackBlood);
-//                        playRemoveOneSound(this);
-//                    }
-//                    if (this.tickCount % s * 2 == 0) {
-//                        AttackEndComing attackBlood = new AttackEndComing(Entitys.AttackEndComing_.get(), this.level());
-//                        attackBlood.setTarget(this.getTarget());
-//                        if (isHasEffectEnd()) {
-//                            attackBlood.damages += 5;
-//                        }
-//                        attackBlood.setPos(this.position());
-//                        attackBlood.setOwner(this.getOwner());
-//                        attackBlood.follow = true;
-//                        attackBlood.setDeltaMovement(new Vec3(Mth.nextFloat(RandomSource.create(), -0.5f, 0.5f), Mth.nextFloat(RandomSource.create(), -0.5f, 0.5f), Mth.nextFloat(RandomSource.create(), -0.5f, 0.5f)));
-//                        this.level().addFreshEntity(attackBlood);
-//                        playRemoveOneSound(this);
-//                    }
-//                }
-//            }
-//            if (this.getOwner()!= null&&this.getOwner() instanceof Player player) {
-//                if (!isHasEffectEnd()) {
-//                    if (look(player.level(), player) instanceof LivingEntity living) {
-//                        if (!living.is(this)) {
-//                            if (Handler.chestEntity(living,this.getOwner())) {
-//                                this.setTarget(living);
-//                            }
-//                        }
-//                    } else {
-//                        this.setTarget(null);
-//                    }
-//                }else {
-//                    Vec3 playerPos = this.position();
-//                    int range = 20;
-//                    List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
-//                    for (LivingEntity living : entities) {
-//                        if (this.getTarget() == null) {
-//                            if (living != player&& !(living instanceof EndComing)) {
-//                                if (Handler.chestEntity(living,this.getOwner())) {
-//                                    this.setTarget(living);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//
-//            }
-//            if ( target != null) {
-//                if (currentPos.distanceTo(target.position()) > 30) {
-//                    this.setTarget(null);
-//                }
-//            }
             clear();
+            hurtaTTACK();
         }
-       public boolean canLive = true;
+        public static void getOwnerHurt(LivingDamageEvent.@UnknownNullability Pre event){
+            if (event.getSource().getDirectEntity() instanceof Player player) {
+                if (player.position().distanceTo(event.getEntity().position()) > 5) {
+                    return;
+                }
+                if (Handler.has(player, InitItems.TheEndIsComing_.asItem())) {
+                    if (!player.getCooldowns().isOnCooldown(InitItems.TheEndIsComing_.asItem().getDefaultInstance())) {
+                        Vec3 playerPos = player.position();
+                        int range = 4;
+                        List<EndComing> imperialHematomas = player.level().getEntitiesOfClass(EndComing.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
+                        for (EndComing endComing : imperialHematomas) {
+                            if (endComing.getOwner() instanceof Player player1 && player.is(player1)) {
+                                TheHyperplasia theHyperplasia = new TheHyperplasia(Entitys.TheHyperplasia_.get(), endComing.level());
+                                theHyperplasia.setTarget(event.getEntity());
+                                theHyperplasia.setPos(endComing.position().add(0, 0, 0));
+                                theHyperplasia.setOwner(player);
+                                theHyperplasia.setDamage(5 + (float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.1F));
+                                endComing.level().addFreshEntity(theHyperplasia);
+                                if (endComing.level() instanceof ServerLevel level) {
+                                    level.sendParticles(Particles.orbAPart.get(), endComing.getX() + 0, endComing.getY() + 0, endComing.getZ() + 0, 2, 0, 0, 0, 0);
+                                }
+                                player.getCooldowns().addCooldown(InitItems.TheEndIsComing_.asItem().getDefaultInstance(),20);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void clear(){
             if (canLive) {
                 if (this.getOwner() != null && this.getOwner() instanceof Player player) {
@@ -269,45 +208,7 @@ import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
                 this.discard();
             }
         }
-//        public Entity look(Level level, LivingEntity living) {
-//            Entity pointedEntity = null;
-//            double range = 20.0D;
-//            Vec3 srcVec = living.getEyePosition();
-//            Vec3 lookVec = living.getViewVector(1.0F);
-//            Vec3 destVec = srcVec.add(lookVec.x() * range, lookVec.y() * range, lookVec.z() * range);
-//            float var9 = 1.0F;
-//            List<Entity> possibleList = level.getEntities(living, living.getBoundingBox().expandTowards(lookVec.x() * range, lookVec.y() * range, lookVec.z() * range).inflate(var9, var9, var9));
-//            double hitDist = 0;
-//
-//            for (Entity possibleEntity : possibleList) {
-//
-//                if (possibleEntity.isPickable()) {
-//                    float borderSize = possibleEntity.getPickRadius();
-//                    AABB collisionBB = possibleEntity.getBoundingBox().inflate(borderSize, borderSize, borderSize);
-//                    Optional<Vec3> interceptPos = collisionBB.clip(srcVec, destVec);
-//
-//                    if (collisionBB.contains(srcVec)) {
-//                        if (0.0D < hitDist || hitDist == 0.0D) {
-//                            pointedEntity = possibleEntity;
-//                            hitDist = 0.0D;
-//                        }
-//                    } else if (interceptPos.isPresent()) {
-//                        double possibleDist = srcVec.distanceTo(interceptPos.get());
-//
-//                        if (possibleDist < hitDist || hitDist == 0.0D) {
-//                            pointedEntity = possibleEntity;
-//                            hitDist = possibleDist;
-//                        }
-//                    }
-//                }
-//            }
-//            return pointedEntity;
-//        }
 
-
-        private void playRemoveOneSound(Entity p_186343_) {
-            p_186343_.playSound(SoundEvents.WARDEN_HEARTBEAT, 0.8F, 0.8F + p_186343_.level().getRandom().nextFloat() * 0.4F);
-        }
         @Override
         public boolean isFood(ItemStack pStack) {
             return false;

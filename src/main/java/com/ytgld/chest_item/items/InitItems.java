@@ -235,7 +235,6 @@ public class InitItems {
             (Identifier)-> new WallowAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
-
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
             (Identifier)-> new MotherRemains(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> TheKill_ = register("the_kill",

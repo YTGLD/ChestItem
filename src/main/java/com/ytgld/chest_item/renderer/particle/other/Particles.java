@@ -14,6 +14,7 @@ public class Particles {
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> colorPart;
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FireBlock_;
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> orbAPart;
 
     static {
         PARTICLE_TYPES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, Chestitem.MODID);
@@ -21,6 +22,9 @@ public class Particles {
             return new SimpleParticleType(false);
         });
         colorPart = PARTICLE_TYPES.register("color", ()->{
+            return new SimpleParticleType(false);
+        });
+        orbAPart = PARTICLE_TYPES.register("orb", ()->{
             return new SimpleParticleType(false);
         });
     }
