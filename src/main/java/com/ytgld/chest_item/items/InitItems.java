@@ -30,6 +30,7 @@ import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
+import com.ytgld.chest_item.items.tool.EvilAxe;
 import com.ytgld.chest_item.items.tool.WallowAxe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -233,6 +234,8 @@ public class InitItems {
             (Identifier)-> new WallowAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> WallowAxe_Small = register("wallow_axe_small",
             (Identifier)-> new WallowAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> EvilAxe_ = register("evil_axe",
+            (Identifier)-> new EvilAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",

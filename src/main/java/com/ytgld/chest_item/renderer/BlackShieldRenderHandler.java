@@ -109,11 +109,16 @@ public class BlackShieldRenderHandler {
 
                     poseStack.pushMatrix();
                     poseStack.translate(
-                            (guiGraphics.guiWidth() / 2f) - (float) (48) / 2,
-                            (guiGraphics.guiHeight() - 47f)- (float) (48) / 2);
+                            guiGraphics.guiWidth() / 2f,
+                            guiGraphics.guiHeight() - 47f);
+                    poseStack.rotate(player.tickCount / 12f);
+                    poseStack.translate(-64f / 2, -64f / 2);
                     evilGlow(guiGraphics,Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                            "textures/item_glowing/all.png"));
+                            "textures/gui/color.png"),64);
+                    evilGlow(guiGraphics,Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                            "textures/item_glowing/all.png"),64);
                     poseStack.popMatrix();
+
 
                     double max = player.getAttributeValue(AttReg.shadow_shield);
                     if (max > 0) {
@@ -249,7 +254,7 @@ public class BlackShieldRenderHandler {
             }
         }
     }
-    public static void evilGlow(GuiGraphicsExtractor guiGraphics, Identifier glowRes) {
+    public static void evilGlow(GuiGraphicsExtractor guiGraphics, Identifier glowRes,int size) {
         var minecraft = Minecraft.getInstance();
         var player = minecraft.player;
         if (player != null) {
@@ -259,13 +264,12 @@ public class BlackShieldRenderHandler {
                 if (sanValue(player) >= 10) {
                     guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED
                             , glowRes, 0, 0, 0, 0,
-                            48, 48,
-                            48, 48,
+                            size, size,
+                            size, size,
                             Light.ARGB.color((int) ((glow / 20f) * 255), 45, 255, 170));
                 }
             }
         }
-
     }
     public static void hurtBlackShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player player) {
@@ -346,7 +350,7 @@ public class BlackShieldRenderHandler {
                 if (data > 0) {
                     float damage = event.getNewDamage() ;
                     //newData：是减少后的值
-                    float newData = data - (damage / value);
+                    float newData = data - ((damage / value) / 5f);
                     if (newData > 0) {
                         AttributeInstance shadow_shield_conversion = player.getAttribute(AttReg.shadow_shield_conversion);
                         if (shadow_shield_conversion != null) {
