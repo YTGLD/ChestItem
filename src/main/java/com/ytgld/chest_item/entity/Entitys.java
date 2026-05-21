@@ -34,6 +34,9 @@ public class Entitys {
     public static final DeferredHolder<EntityType<?>, EntityType<TheHyperplasia>> TheHyperplasia_ = REGISTRY.register("hyperplasia", () ->
             EntityType.Builder.of(TheHyperplasia::new, MobCategory.MISC).sized(0.1f, 0.1f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
                     Identifier.fromNamespaceAndPath(Chestitem.MODID, "hyperplasia"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<EvilMotherSpirit>> EvilMotherSpirit_ = REGISTRY.register("spirit", () ->
+            EntityType.Builder.of(EvilMotherSpirit::new, MobCategory.MISC).sized(0.01f, 0.01f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "spirit"))));
 
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeCreationEvent event){

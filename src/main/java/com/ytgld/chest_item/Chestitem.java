@@ -135,6 +135,7 @@ public class Chestitem {
             event.registerEntityRenderer(Entitys.UnstableSpheres_.get(), UnstableSpheresRender::new);
             event.registerEntityRenderer(Entitys.LaserColumn_.get(), LaserColumnRender::new);
             event.registerEntityRenderer(Entitys.TheHyperplasia_.get(), TheHyperplasiaRender::new);
+            event.registerEntityRenderer(Entitys.EvilMotherSpirit_.get(), EvilMotherSpiritRender::new);
         }
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent evt) {

@@ -13,6 +13,9 @@ import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
 import com.ytgld.chest_item.renderer.particle.FireBlock;
 import com.ytgld.chest_item.renderer.particle.OrbPart;
+import com.ytgld.chest_item.renderer.particle.evilmother.ColorPartEvil;
+import com.ytgld.chest_item.renderer.particle.evilmother.CubeEvil;
+import com.ytgld.chest_item.renderer.particle.evilmother.OrbPartEvil;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.ClientAvatarEntity;
@@ -101,6 +104,10 @@ public class ChestitemClient{
         event.registerSpriteSet(Particles.colorPart.get(), ColorPart.Provider::new);
         event.registerSpriteSet(Particles.FireBlock_.get(), FireBlock.Provider::new);
         event.registerSpriteSet(Particles.orbAPart.get(), OrbPart.Provider::new);
+
+        event.registerSpriteSet(Particles.orbAPart_evil.get(), OrbPartEvil.Provider::new);
+        event.registerSpriteSet(Particles.colorPart_evil.get(), ColorPartEvil.Provider::new);
+        event.registerSpriteSet(Particles.cube_evil.get(), CubeEvil.Provider::new);
     }
     @SubscribeEvent
     public static void RegisterKeyMappingsEvent(RegisterKeyMappingsEvent event){
