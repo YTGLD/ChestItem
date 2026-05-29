@@ -15,6 +15,7 @@ import com.ytgld.chest_item.renderer.particle.FireBlock;
 import com.ytgld.chest_item.renderer.particle.OrbPart;
 import com.ytgld.chest_item.renderer.particle.evilmother.ColorPartEvil;
 import com.ytgld.chest_item.renderer.particle.evilmother.CubeEvil;
+import com.ytgld.chest_item.renderer.particle.evilmother.EvilTailing;
 import com.ytgld.chest_item.renderer.particle.evilmother.OrbPartEvil;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.client.Minecraft;
@@ -44,6 +45,10 @@ public class ChestitemClient{
     public static void ItemTooltipEvent(ClientTickEvent.Pre event){
         EventMain.time++;
     }
+//    @SubscribeEvent
+//    public static void RenderLevelStageEvent(RenderLevelStageEvent.AfterTranslucentParticles event){
+//        EvilTailing.RenderLevelStageEvent(event);
+//    }
 
     @SubscribeEvent
     public static void registerFactories(ViewportEvent.RenderFog event) {
@@ -108,6 +113,7 @@ public class ChestitemClient{
         event.registerSpriteSet(Particles.orbAPart_evil.get(), OrbPartEvil.Provider::new);
         event.registerSpriteSet(Particles.colorPart_evil.get(), ColorPartEvil.Provider::new);
         event.registerSpriteSet(Particles.cube_evil.get(), CubeEvil.Provider::new);
+        event.registerSpriteSet(Particles.evil_tailing.get(), EvilTailing.Provider::new);
     }
     @SubscribeEvent
     public static void RegisterKeyMappingsEvent(RegisterKeyMappingsEvent event){

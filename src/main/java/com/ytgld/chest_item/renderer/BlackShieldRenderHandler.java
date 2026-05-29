@@ -9,11 +9,21 @@ import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
@@ -26,6 +36,7 @@ public class BlackShieldRenderHandler {
     public static float aGlow = 1f;
     public static float aGlowMin = 0F;
     public static float aGlowDOLDOWN = 0f;
+    public static float glowRed = 0f;
 
     public static void tick(ClientTickEvent event) {
         var player = Minecraft.getInstance().player;
@@ -33,6 +44,9 @@ public class BlackShieldRenderHandler {
             double max = player.getAttributeValue(AttReg.shadow_shield);
             double now = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
             if (max > 0) {
+                if (glowRed > 0) {
+                    glowRed -= 0.05f;
+                }
 
                 if (aFloatCool > 0) {
                     aFloatCool--;
@@ -112,11 +126,11 @@ public class BlackShieldRenderHandler {
                             guiGraphics.guiWidth() / 2f,
                             guiGraphics.guiHeight() - 47f);
                     poseStack.rotate(player.tickCount / 12f);
-                    poseStack.translate(-64f / 2, -64f / 2);
+                    poseStack.translate(-48 / 2f, -48 / 2f);
                     evilGlow(guiGraphics,Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                            "textures/gui/color.png"),64);
+                            "textures/gui/color.png"),48);
                     evilGlow(guiGraphics,Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                            "textures/item_glowing/all.png"),64);
+                            "textures/shadow/ci_star.png"),48);
                     poseStack.popMatrix();
 
 
@@ -144,7 +158,6 @@ public class BlackShieldRenderHandler {
                             (guiGraphics.guiWidth() / 2f) - (float) (24) / 2,
                             (guiGraphics.guiHeight() - 47f)- (float) (24) / 2);
                     if (max > 0) {
-
                         float s = aFloat;
                         if (s < 0) {
                             s = 0;
@@ -269,8 +282,11 @@ public class BlackShieldRenderHandler {
                             Light.ARGB.color((int) ((glow / 20f) * 255), 45, 255, 170));
                 }
             }
+
+
         }
     }
+
     public static void hurtBlackShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player player) {
             AttributeInstance shadowShield = player.getAttribute(AttReg.shadow_shield);
@@ -315,15 +331,14 @@ public class BlackShieldRenderHandler {
 //     */
 
     /**
-     * 幽影护盾现在不仅可以吸收伤害，还可以反弹伤害
+     * 幽影护盾现在不仅可以吸收伤害，还可以反弹一些Buff并根据一些属性的值来概率判定90%的免伤(此操作会使幽影护盾的容量减半)
      * <p>
-     * 反弹的伤害为150%幽影护盾当量
      * <p>
-     * 反弹伤害时会使目标施加“幽影侵蚀”效果，并且时间由幽影护盾当量决定(幽影侵蚀）：减少10%速度  伤害  攻速
+     * 反弹时会使目标施加“幽影侵蚀”效果，并且时间由幽影护盾当量决定(幽影侵蚀）：减少10%速度  伤害  攻速
      * <p>
      * 如果完全转变为邪母之盾则返回“邪母之拒”，并且时间由邪母的理智值当量决定 (邪母之拒）：减少22.5%速度  伤害  攻速  护甲  治疗  生命值
      * <p>
-     * 当然，如果目标无法添加相关效果，则受到额外伤害
+     * 当然，如果目标无法添加相关效果，则受到额外90%的免伤概率
      * <p>
      * 但是由低理智转化的“邪母之盾”的双相盾转化效率下降，其下降效果为：每减少1理智值则减少10%转化效果
      * <p>
@@ -394,16 +409,20 @@ public class BlackShieldRenderHandler {
                                     end = 0.1f;
                                 }
                                 if (event.getSource().getEntity() instanceof LivingEntity livingEntity) {
-                                    float damageEffect = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) * 1.5f;
+                                    int damageEffect = (int) (5 + Math.min(5,Math.sqrt(max)));
                                     if (theSanValue > 0) {
                                         if (livingEntity.addEffect(new MobEffectInstance(Effects.EvilErosion, (int) (theSanValue * 20 * 4), 0))){
-                                            damageEffect *= 1.5f;
+                                            damageEffect *= 2;
                                         }
                                     }else if (livingEntity.addEffect(new MobEffectInstance(Effects.ShadowErosion_,
                                             (int) (player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) * 60),0))){
-                                        damageEffect *= 1.5f;
+                                        damageEffect *= 3;
                                     }
-                                    livingEntity.hurt(livingEntity.damageSources().magic(),damageEffect);
+                                    if (Mth.nextInt(player.getRandom(), 0, 100) <= damageEffect) {
+                                        event.setNewDamage(event.getNewDamage() * 0.1f);
+                                        swingHandAndAttack(player,livingEntity);
+                                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player,player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) / 2f);
+                                    }
                                 }
                                 float resEvil = 1;
                                 resEvil -= 0.1f + (theSanValue / 100f * 2f);
@@ -429,5 +448,36 @@ public class BlackShieldRenderHandler {
             }
         }
     }
+    public static void swingHandAndAttack(Player player,LivingEntity livingEntity){
+        if (player.getMainHandItem().is(InitItems.EvilAxe_.asItem())) {
+            livingEntity.setLastHurtByMob(player);
+            livingEntity.setData(AttReg.slashing.get(), 1F);
+            hurtEnemy(livingEntity,player);
+        }
+    }
+    public static void hurtEnemy(Entity target, LivingEntity attacker) {
+        if (attacker instanceof ServerPlayer serverplayer) {
+            ServerLevel serverlevel = (ServerLevel) attacker.level();
+            if (serverplayer.isIgnoringFallDamageFromCurrentImpulse() && serverplayer.currentImpulseImpactPos != null) {
+                if (serverplayer.currentImpulseImpactPos.y > serverplayer.position().y) {
+                    serverplayer.currentImpulseImpactPos = serverplayer.position();
+                }
+            } else {
+                serverplayer.currentImpulseImpactPos = serverplayer.position();
+            }
+            attacker.setIgnoreFallDamageFromCurrentImpulse(true, calculateImpactPosition(attacker));
+            serverplayer.connection.send(new ClientboundSetEntityMotionPacket(serverplayer));
+            serverplayer.setSpawnExtraParticlesOnFall(true);
+            SoundEvent soundevent = SoundEvents.MACE_SMASH_GROUND ;
+            serverlevel.playSound(null, serverplayer.getX(), serverplayer.getY(), serverplayer.getZ(), soundevent, serverplayer.getSoundSource(), 1.0F, 1.0F);
+            knockback(serverlevel, serverplayer, target);
+        }
+    }
+    private static Vec3 calculateImpactPosition(LivingEntity attacker) {
+        return attacker.isIgnoringFallDamageFromCurrentImpulse() && attacker.currentImpulseImpactPos.y <= attacker.position().y ? attacker.currentImpulseImpactPos : attacker.position();
+    }
 
+    private static void knockback(Level level, Player player, Entity entity) {
+        level.levelEvent(2013, entity.getOnPos(), 750);
+    }
 }

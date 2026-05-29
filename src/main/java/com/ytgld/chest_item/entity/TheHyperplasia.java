@@ -30,7 +30,7 @@ public class TheHyperplasia extends ThrowableItemProjectile implements Targeting
     public LivingEntity target;
     @Override
     protected Item getDefaultItem() {
-        return Items.AIR;
+        return Items.APPLE;
     }
     public int live = 50;
     public boolean canSee = true;

@@ -981,6 +981,10 @@
   "item.chest_item.protest_tooltip.string.1": "欲要攻击你的生物会受到缓慢和虚弱，若无法施加效果，则造成巨大伤害",
   "item.chest_item.protest_tooltip.string.2": "但大范围内的生物会主动攻击于你",
 
+
+  "item.chest_item.evil_axe": "天蚀重斧",
+  "item.chest_item.evil_axe.string.1": "右键发射5束实质理智",
+
   "item.chest_item.crave": "瓶子",
   "item.chest_item.crave.string.1": "时长感到异常饥饿，进食时抵消感触并获得大量增益效果",
   "item.chest_item.crave.string.give": "连续3天不吃东西，死亡时进度重置",

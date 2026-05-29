@@ -20,6 +20,7 @@ public class Particles {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> colorPart_evil;
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> orbAPart_evil;
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> cube_evil;
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> evil_tailing;
 
     static {
         PARTICLE_TYPES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, Chestitem.MODID);
@@ -37,5 +38,6 @@ public class Particles {
         colorPart_evil = PARTICLE_TYPES.register("color_evil", ()-> new SimpleParticleType(false));
         orbAPart_evil = PARTICLE_TYPES.register("orb_evil", ()-> new SimpleParticleType(false));
         cube_evil = PARTICLE_TYPES.register("cube_evil", ()-> new SimpleParticleType(false));
+        evil_tailing = PARTICLE_TYPES.register("evil_tailing", ()-> new SimpleParticleType(false));
     }
 }

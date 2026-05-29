@@ -931,7 +931,10 @@
   "item.chest_item.protest_tooltip.string.2": "But mobs in a large area will actively attack you",
 
 
-"item.chest_item.crave": "bottle",
+  "item.chest_item.evil_axe": "THERE WAS A HEAVENLY ECLIPSE",
+  "item.chest_item.evil_axe.string.1": "Right-click to fire 5 beams of Solid Rationality",
+
+  "item.chest_item.crave": "bottle",
   "item.chest_item.crave.string.1": "Feeling abnormally hungry for duration, cancels out the sensation when eating and gains a large amount of buffs",
   "item.chest_item.crave.string.give": "Doesn't eat for 3 days in a row, and your progress resets when you die",
   "item.chest_item.crave_tooltip": "thirst",

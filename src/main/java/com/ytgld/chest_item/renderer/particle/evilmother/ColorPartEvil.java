@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ColorPartEvil extends SingleQuadParticle {
     public ColorPartEvil(ClientLevel level, double x, double y, double z, float movementX, float movementY, float movementZ, TextureAtlasSprite textureAtlasSprite) {
-        super(level,x,y,z,movementX,movementY,movementZ,textureAtlasSprite);
+        super(level,x,y+0.025f,z,movementX,movementY,movementZ,textureAtlasSprite);
         this.setParticleSpeed(movementX,movementY,movementZ);
         this.lifetime = 200;
         this.setColor(80 / 255f,255 / 255f,180 /255f);

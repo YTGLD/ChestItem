@@ -236,6 +236,9 @@ public class InitItems {
             (Identifier)-> new WallowAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> EvilAxe_ = register("evil_axe",
             (Identifier)-> new EvilAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> EvilAxe_Small = register("evil_axe_small",
+            (Identifier)-> new EvilAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
 
 
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
@@ -381,6 +384,7 @@ public class InitItems {
                     output.accept(ReinforcedItems.Activity_);
                     output.accept(ReinforcedItems.Dynamic_);
                     output.accept(ReinforcedItems.Contingency_);
+                    output.accept(InitItems.EvilAxe_);
 
 
                 }).build());

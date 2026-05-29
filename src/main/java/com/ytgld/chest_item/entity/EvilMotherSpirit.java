@@ -5,7 +5,10 @@ import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
+import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -111,6 +114,7 @@ public class EvilMotherSpirit extends ThrowableItemProjectile {
         int range = 2;
         if (canSee) {
             List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
+            this.level().playSound(null,this.getX(),this.getY(),this.getZ(), Sounds.Heart, SoundSource.BLOCKS,0.1f,1);
             for (LivingEntity entity : entities){
                 if ((this.getOwner()!=null && this.getOwner() instanceof Player player) && !entity.is(this.getOwner())){
                     float theSanValue = sanValue(player);
@@ -173,7 +177,7 @@ public class EvilMotherSpirit extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return Items.AIR;
+        return Items.APPLE;
     }
 }
 

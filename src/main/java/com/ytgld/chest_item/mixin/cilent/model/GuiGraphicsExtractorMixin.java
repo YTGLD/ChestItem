@@ -57,6 +57,15 @@ public abstract class GuiGraphicsExtractorMixin {
             this.guiRenderState.addItem(new GuiItemRenderState(new Matrix3x2f(this.pose), itemStackRenderState, x, y,
                     this.peekScissorStack()));
         }
+        if (itemStack.is(InitItems.EvilAxe_.asItem())) {
+            ci.cancel();
+            TrackingItemStackRenderState itemStackRenderState = new TrackingItemStackRenderState();
+            this.minecraft.getItemModelResolver().updateForTopItem(itemStackRenderState, InitItems.EvilAxe_Small.asItem().getDefaultInstance()
+                    , ItemDisplayContext.GUI, level, owner, seed);
+
+            this.guiRenderState.addItem(new GuiItemRenderState(new Matrix3x2f(this.pose), itemStackRenderState, x, y,
+                    this.peekScissorStack()));
+        }
 
     }
 }
