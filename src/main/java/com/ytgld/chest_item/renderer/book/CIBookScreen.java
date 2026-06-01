@@ -158,6 +158,7 @@ public class CIBookScreen extends Screen {
             }
         }
     }
+
     @AddBookPage
     public static class AddPageClass implements RegisterBookPage {
         @Override
@@ -173,5 +174,18 @@ public class CIBookScreen extends Screen {
         }
     }
     public record CIBookGuiAdd(Item item, Vec2 vecPos, Component mainText,List<Component> text, int colorMain,int colorText){}
+    public enum ThePage{
+        BASE(Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/base.png")),
+        BLACK(Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/black.png")),
+        MEAT(Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/meat.png"));
+        private final Identifier identifier;
+        private ThePage(Identifier identifier){
+            this.identifier = identifier;
+        }
+
+        public Identifier getIdentifier() {
+            return identifier;
+        }
+    }
 }
 
