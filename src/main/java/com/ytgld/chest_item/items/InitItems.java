@@ -53,6 +53,10 @@ import java.util.function.Function;
 
 public class InitItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Chestitem.MODID);
+    public static final DeferredItem<@NotNull Item> BARRIER = register("barrier",
+            (Identifier)-> new GodBlood(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> Star = register("star",
+            (Identifier)-> new GodBlood(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static final DeferredItem<@NotNull Item> God_blood = register("god_blood",
             (Identifier)-> new GodBlood(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));

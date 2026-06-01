@@ -89,6 +89,13 @@ public class Chestitem {
                         .addAll(event.getOriginal().getData(TheMemoryDataHandler.mStringSetData))
                 ;
             }
+
+            if (event.isWasDeath() && event.getOriginal().hasData(AttReg.itemRecord)) {
+                event.getEntity().getData(AttReg.itemRecord).clear();
+                event.getEntity().getData(AttReg.itemRecord)
+                        .addAll(event.getOriginal().getData(AttReg.itemRecord))
+                ;
+            }
             if (event.isWasDeath() && event.getOriginal().hasData(TheMemoryDataHandler.notActivated)) {
                 event.getEntity().getData(TheMemoryDataHandler.notActivated).clear();
                 event.getEntity().getData(TheMemoryDataHandler.notActivated)

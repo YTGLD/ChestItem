@@ -952,6 +952,12 @@
   "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering",
 
+  "chest_item.item.not_has": "未获取",
+
+  "chest_item.book.self_increasing_heart.main": "自增心脏",
+  "chest_item.book.self_increasing_heart.1": "自增心脏减少了生命值，但是进食后获得额外生命",
+  "chest_item.book.self_increasing_heart.2": "自增心脏发现在多数的地牢，矿井，远古城市的战利品箱子里",
+  "chest_item.book.self_increasing_heart.3": "它也可以合成获取",
 
   "chest_item.book.heart.main": "仿生心脏",
   "chest_item.book.heart.1": "这个物品使饥饿值转化为生命值的速度显著提高",

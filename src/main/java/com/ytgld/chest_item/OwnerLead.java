@@ -65,7 +65,7 @@ public class OwnerLead extends ItemBase {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        Minecraft.getInstance().setScreen(new CIBookScreen());
+        Minecraft.getInstance().setScreen(new CIBookScreen(player));
         return super.use(level, player, hand);
     }
 }

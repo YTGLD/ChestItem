@@ -2,6 +2,7 @@ package com.ytgld.chest_item.items;
 
 import com.mojang.serialization.Codec;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
 import com.ytgld.chest_item.other.IntSyncHandler;
 import com.ytgld.chest_item.other.SyncHandler;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,6 +17,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = Chestitem.MODID)
@@ -27,6 +30,13 @@ public class AttReg {
                     .serialize(Codec.FLOAT.fieldOf("black_shadow")).build()
     );
 
+    public static final Supplier<AttachmentType<Set<String>>> itemRecord = ATTACHMENT_TYPES.register(
+            "item_record",
+            () -> AttachmentType.<Set<String>>builder(() -> new HashSet<>())
+                    .sync(new TheMemoryDataHandler.StringSetSync())
+                    .serialize(TheMemoryDataHandler.StringSetCodec.CODEC.fieldOf("item_record"))
+                    .build()
+    );
 
     public static final DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, Chestitem.MODID);
     public static final DeferredHolder<Attribute,?> heal = REGISTRY.register("heal",()->{

@@ -11,6 +11,9 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.renderer.book.CIBookScreen;
+import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
+import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
@@ -29,6 +32,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +46,22 @@ import java.util.Optional;
 public class SelfIncreasingHeart extends ItemBase implements Meat ,SkillList{
     public SelfIncreasingHeart(Properties properties) {
         super(properties);
+    }
+    @AddBookPage
+    public static class AddPageClass implements RegisterBookPage {
+        @Override
+        public void addPage(List<CIBookScreen.CIBookGuiAdd> list) {
+            list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Self_Increasing_Heart.asItem(),new Vec2(32,-64),
+                    Component.translatable("chest_item.book.self_increasing_heart.main"),
+                    List.of(
+                            Component.translatable("chest_item.book.self_increasing_heart.1"),
+                            Component.translatable("chest_item.book.self_increasing_heart.2"),
+                            Component.translatable("chest_item.book.self_increasing_heart.3")
+                    ),
+                    Light.ARGB.color(255,255,255,255),
+                    Light.ARGB.color(255,150,150,150),
+                    CIBookScreen.ThePage.MEAT));
+        }
     }
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {

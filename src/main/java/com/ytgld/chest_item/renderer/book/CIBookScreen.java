@@ -2,6 +2,8 @@ package com.ytgld.chest_item.renderer.book;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.BookPageFinder;
 import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
@@ -14,10 +16,12 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundSeenAdvancementsPacket;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,6 +38,7 @@ public class CIBookScreen extends Screen {
             Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/back.png");
     private static final Component TITLE = Component.translatable("advancements.chest_item.root.title");
     private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
+    private final Player player;
     private float offsetX = 0;
     private float offsetY = 0;
 
@@ -41,8 +46,9 @@ public class CIBookScreen extends Screen {
     private double lastMouseX;
     private double lastMouseY;
 
-    public CIBookScreen() {
+    public CIBookScreen(Player player) {
         super(TITLE);
+        this.player = player;
     }
 
     public final List<CIBookGuiAdd> list = new ArrayList<>();
@@ -120,12 +126,22 @@ public class CIBookScreen extends Screen {
             int centerY = (int)(yo + 140 / 2f + ciBookGuiAdd.vecPos.y + offsetY);
             centers.add(new int[]{centerX, centerY});
         }
-        for (int i = 0; i < centers.size() - 1; i++) {
-            int[] c1 = centers.get(i);
-            int[] c2 = centers.get(i + 1);
-            drawLine(graphics, c1[0], c1[1], c2[0], c2[1], 0xFFAAAAAA);
-        }
 
+        for (int i = 0; i < centers.size(); i++) {
+            int[] c = centers.get(i);
+            int minDist = Integer.MAX_VALUE;
+            int[] nearest = null;
+            for (int j = 0; j < centers.size(); j++) {
+                if (i == j) continue;
+                int[] o = centers.get(j);
+                int dist = (c[0] - o[0])*(c[0] - o[0]) + (c[1] - o[1])*(c[1] - o[1]);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearest = o;
+                }
+            }
+            drawLine(graphics, c[0], c[1], nearest[0], nearest[1], 0xFFAAAAAA);
+        }
 
 
         for (CIBookGuiAdd ciBookGuiAdd : list) {
@@ -187,8 +203,20 @@ public class CIBookScreen extends Screen {
         }
 
         ItemStack stack = new ItemStack(ciBookGuiAdd.item);
+
+
+
+
         graphics.item(stack, centerX - 8, centerY - 8);
+
         graphics.blit(RenderPipelines.GUI_TEXTURED,ciBookGuiAdd.thePage.identifier,centerX - 8, centerY - 8,0,0,16,16,16,16);
+        if (!has(stack)) {
+            if (!stack.is(Items.CHEST)) {
+                graphics.text(mc.font, Component.translatable("chest_item.item.not_has"), centerX + 8, centerY - 4, Light.ARGB.color(255, 200, 20, 20));
+            }
+        }else {
+            graphics.item(InitItems.Star.asItem().getDefaultInstance(), centerX - 12, centerY - 12);
+        }
         if (mouseX >= centerX - 8 && mouseX <= centerX + 8 &&
                 mouseY >= centerY - 8 && mouseY <= centerY + 8) {
 
@@ -198,6 +226,15 @@ public class CIBookScreen extends Screen {
                 graphics.text(mc.font, ciBookGuiAdd.text.get(i), mouseX, mouseY + (i + 1) * 12, ciBookGuiAdd.colorText);
             }
         }
+    }
+    public boolean has(ItemStack stack){
+        for (String string :player.getData(AttReg.itemRecord)) {
+            Item item = BuiltInRegistries.ITEM.getValue(Identifier.parse(string));
+            if (stack.is(item)) {
+                return true;
+            }
+        }
+        return false;
     }
     public void addText(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY){
         Minecraft mc = Minecraft.getInstance();
