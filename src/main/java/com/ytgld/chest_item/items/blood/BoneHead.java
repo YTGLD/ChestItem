@@ -34,23 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class BoneHead extends ItemBase implements SkillList{
-    @AddBookPage
-    public static class AddPageClass implements RegisterBookPage {
-        @Override
-        public void addPage(List<CIBookScreen.CIBookGuiAdd> list) {
-            list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Bone_Head.asItem(),new Vec2(0,32),
-                    Component.translatable("chest_item.book.bone_head.main"),
-                    List.of(
-                            Component.translatable("chest_item.book.bone_head.1"),
-                            Component.translatable("chest_item.book.bone_head.2"),
-                            Component.translatable("chest_item.book.bone_head.3"),
-                            Component.translatable("chest_item.book.bone_head.4")
-                    ),
-                    Light.ARGB.color(255,255,255,255),
-                    Light.ARGB.color(255,150,150,150),
-                    CIBookScreen.ThePage.BASE));
-        }
-    }
+
     public BoneHead(Properties properties) {
         super(properties);
     }

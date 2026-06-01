@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.items;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.MysteriousMetal;
 import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
@@ -242,6 +243,8 @@ public class InitItems {
             (Identifier)-> new EvilAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> EvilAxe_Small = register("evil_axe_small",
             (Identifier)-> new EvilAxe(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> MysteriousMetal_ = register("mysterious_metal",
+            (Identifier)-> new MysteriousMetal(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
 
@@ -264,6 +267,8 @@ public class InitItems {
                 .title(Component.translatable("itemGroup.chest_item"))
                 .icon(Items.CHEST::getDefaultInstance)
                 .displayItems((parameters, output) -> {
+                    output.accept(InitItems.MysteriousMetal_);
+
                     output.accept(MemoryItems.Bluster_);
                     output.accept(MemoryItems.Contradiction_);
                     output.accept(MemoryItems.Extreme_);

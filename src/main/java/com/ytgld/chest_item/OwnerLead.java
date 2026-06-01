@@ -62,10 +62,4 @@ public class OwnerLead extends ItemBase {
             tooltipComponents.accept(Component.literal(compoundTag.getStringOr(name,"null")).append(Component.literal("的礼物！").withStyle(ChatFormatting.GOLD)));
         }
     }
-
-    @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        Minecraft.getInstance().setScreen(new CIBookScreen(player));
-        return super.use(level, player, hand);
-    }
 }

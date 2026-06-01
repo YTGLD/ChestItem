@@ -47,22 +47,7 @@ public class SelfIncreasingHeart extends ItemBase implements Meat ,SkillList{
     public SelfIncreasingHeart(Properties properties) {
         super(properties);
     }
-    @AddBookPage
-    public static class AddPageClass implements RegisterBookPage {
-        @Override
-        public void addPage(List<CIBookScreen.CIBookGuiAdd> list) {
-            list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Self_Increasing_Heart.asItem(),new Vec2(32,-64),
-                    Component.translatable("chest_item.book.self_increasing_heart.main"),
-                    List.of(
-                            Component.translatable("chest_item.book.self_increasing_heart.1"),
-                            Component.translatable("chest_item.book.self_increasing_heart.2"),
-                            Component.translatable("chest_item.book.self_increasing_heart.3")
-                    ),
-                    Light.ARGB.color(255,255,255,255),
-                    Light.ARGB.color(255,150,150,150),
-                    CIBookScreen.ThePage.MEAT));
-        }
-    }
+
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
         public static ModConfigSpec.IntValue intValue ;

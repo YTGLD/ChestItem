@@ -952,6 +952,9 @@
   "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering",
 
+  "item.chest_item.mysterious_metal": "神秘金属书",
+  "item.chest_item.mysterious_metal.string.1": "把它想象成模组的收集手册",
+
   "chest_item.item.not_has": "未获取",
 
   "chest_item.book.self_increasing_heart.main": "自增心脏",
@@ -973,5 +976,7 @@
 
 
   "chest_item.book.test.main": "箱子里的小饰品",
-  "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）"
+  "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
+  "chest_item.book.test.2": "test 1",
+  "chest_item.book.test.3": "test 2"
 }

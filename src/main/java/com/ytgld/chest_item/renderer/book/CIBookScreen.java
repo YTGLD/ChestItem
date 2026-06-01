@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.renderer.book;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
@@ -26,7 +25,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec2;
-import org.joml.Matrix3x2fStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,64 +117,16 @@ public class CIBookScreen extends Screen {
     public void extractWindow(GuiGraphicsExtractor graphics, int xo, int yo, int mouseX, int mouseY) {
         float s = 1.2f;
         graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (142 * s), (int) (256 * s), (int) (256 * s));
-
-        List<int[]> centers = new ArrayList<>();
-        for (CIBookGuiAdd ciBookGuiAdd : list) {
-            int centerX = (int)(xo + 252 / 2f + ciBookGuiAdd.vecPos.x + offsetX);
-            int centerY = (int)(yo + 140 / 2f + ciBookGuiAdd.vecPos.y + offsetY);
-            centers.add(new int[]{centerX, centerY});
-        }
-
-        for (int i = 0; i < centers.size(); i++) {
-            int[] c = centers.get(i);
-            int minDist = Integer.MAX_VALUE;
-            int[] nearest = null;
-            for (int j = 0; j < centers.size(); j++) {
-                if (i == j) continue;
-                int[] o = centers.get(j);
-                int dist = (c[0] - o[0])*(c[0] - o[0]) + (c[1] - o[1])*(c[1] - o[1]);
-                if (dist < minDist) {
-                    minDist = dist;
-                    nearest = o;
-                }
-            }
-            drawLine(graphics, c[0], c[1], nearest[0], nearest[1], 0xFFAAAAAA);
-        }
-
-
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addItem(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
         }
         graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (142 * s), (int) (256 * s), (int) (256 * s));
+
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addText(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
         }
     }
-    private void drawLine(GuiGraphicsExtractor g, int x1, int y1, int x2, int y2, int color) {
-        int dx = Math.abs(x2 - x1);
-        int dy = Math.abs(y2 - y1);
 
-        int sx = x1 < x2 ? 1 : -1;
-        int sy = y1 < y2 ? 1 : -1;
-
-        int err = dx - dy;
-
-        while (true) {
-            g.fill(x1, y1, x1 + 1, y1 + 1, color);
-
-            if (x1 == x2 && y1 == y2) break;
-
-            int e2 = 2 * err;
-            if (e2 > -dy) {
-                err -= dy;
-                x1 += sx;
-            }
-            if (e2 < dx) {
-                err += dx;
-                y1 += sy;
-            }
-        }
-    }
     public void addItem(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY){
         Minecraft mc = Minecraft.getInstance();
 
@@ -215,7 +165,8 @@ public class CIBookScreen extends Screen {
                 graphics.text(mc.font, Component.translatable("chest_item.item.not_has"), centerX + 8, centerY - 4, Light.ARGB.color(255, 200, 20, 20));
             }
         }else {
-            graphics.item(InitItems.Star.asItem().getDefaultInstance(), centerX - 12, centerY - 12);
+            graphics.blit(RenderPipelines.GUI_TEXTURED,Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item/star.png"),
+                    centerX - 12, centerY - 12,0,0,16,16,16,16);
         }
         if (mouseX >= centerX - 8 && mouseX <= centerX + 8 &&
                 mouseY >= centerY - 8 && mouseY <= centerY + 8) {
