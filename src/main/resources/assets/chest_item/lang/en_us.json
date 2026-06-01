@@ -950,5 +950,9 @@
   "item.chest_item.mother_remains": "The remains of the evil mother",
   "chest_item.config.listRunawayLining": "Attribute blacklist",
   "item.chest_item.pod": "wilted pod",
-  "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering"
+  "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering",
+
+"chest_item.book.test.main": "Title",
+  "chest_item.book.test.1": "Test text",
+  "chest_item.book.test.2": "Test Text 2"
 }
