@@ -994,13 +994,7 @@
   "item.chest_item.crave_tooltip.string.2": "饥饿值会快速消耗，进食之后可短时间缓解症状",
 
   "item.chest_item.pod": "枯萎荚果",
-  "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零",
+  "item.chest_item.pod.string.1": "免疫黑暗，中毒，凋零"
 
 
-
-
-
-  "chest_item.book.test.main": "测试标题",
-  "chest_item.book.test.1": "测试文本",
-  "chest_item.book.test.2": "测试文本2"
 }

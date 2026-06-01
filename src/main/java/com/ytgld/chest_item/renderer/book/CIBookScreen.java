@@ -114,13 +114,54 @@ public class CIBookScreen extends Screen {
         float s = 1.2f;
         graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (142 * s), (int) (256 * s), (int) (256 * s));
 
+        List<int[]> centers = new ArrayList<>();
         for (CIBookGuiAdd ciBookGuiAdd : list) {
-            addItemAndText(ciBookGuiAdd,graphics,xo,yo,mouseX,mouseY);
+            int centerX = (int)(xo + 252 / 2f + ciBookGuiAdd.vecPos.x + offsetX);
+            int centerY = (int)(yo + 140 / 2f + ciBookGuiAdd.vecPos.y + offsetY);
+            centers.add(new int[]{centerX, centerY});
+        }
+        for (int i = 0; i < centers.size() - 1; i++) {
+            int[] c1 = centers.get(i);
+            int[] c2 = centers.get(i + 1);
+            drawLine(graphics, c1[0], c1[1], c2[0], c2[1], 0xFFAAAAAA);
         }
 
+
+
+        for (CIBookGuiAdd ciBookGuiAdd : list) {
+            addItem(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
+        }
         graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (142 * s), (int) (256 * s), (int) (256 * s));
+        for (CIBookGuiAdd ciBookGuiAdd : list) {
+            addText(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
+        }
     }
-    public void addItemAndText(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY){
+    private void drawLine(GuiGraphicsExtractor g, int x1, int y1, int x2, int y2, int color) {
+        int dx = Math.abs(x2 - x1);
+        int dy = Math.abs(y2 - y1);
+
+        int sx = x1 < x2 ? 1 : -1;
+        int sy = y1 < y2 ? 1 : -1;
+
+        int err = dx - dy;
+
+        while (true) {
+            g.fill(x1, y1, x1 + 1, y1 + 1, color);
+
+            if (x1 == x2 && y1 == y2) break;
+
+            int e2 = 2 * err;
+            if (e2 > -dy) {
+                err -= dy;
+                x1 += sx;
+            }
+            if (e2 < dx) {
+                err += dx;
+                y1 += sy;
+            }
+        }
+    }
+    public void addItem(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY){
         Minecraft mc = Minecraft.getInstance();
 
         int centerX = (int)(
@@ -147,7 +188,7 @@ public class CIBookScreen extends Screen {
 
         ItemStack stack = new ItemStack(ciBookGuiAdd.item);
         graphics.item(stack, centerX - 8, centerY - 8);
-
+        graphics.blit(RenderPipelines.GUI_TEXTURED,ciBookGuiAdd.thePage.identifier,centerX - 8, centerY - 8,0,0,16,16,16,16);
         if (mouseX >= centerX - 8 && mouseX <= centerX + 8 &&
                 mouseY >= centerY - 8 && mouseY <= centerY + 8) {
 
@@ -158,7 +199,58 @@ public class CIBookScreen extends Screen {
             }
         }
     }
+    public void addText(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY){
+        Minecraft mc = Minecraft.getInstance();
 
+        int centerX = (int)(
+                windowLeft + 252 / 2f
+                        + ciBookGuiAdd.vecPos.x
+                        + offsetX
+        );
+
+        int centerY = (int)(
+                windowTop + 140 / 2f
+                        + ciBookGuiAdd.vecPos.y
+                        + offsetY
+        );
+
+        if (mouseX >= centerX - 8 && mouseX <= centerX + 8 &&
+                mouseY >= centerY - 8 && mouseY <= centerY + 8) {
+
+            int paddingX = 4;
+            int paddingY = 2;
+
+            int mainWidth = mc.font.width(ciBookGuiAdd.mainText);
+            int mainHeight = mc.font.lineHeight;
+            graphics.fill(
+                    mouseX - paddingX,
+                    mouseY - paddingY,
+                    mouseX + mainWidth + paddingX,
+                    mouseY + mainHeight + paddingY,
+                    Light.ARGB.color(200,0,0,0)
+            );
+
+            for (int i = 0; i < ciBookGuiAdd.text.size(); i++) {
+                String line = String.valueOf(ciBookGuiAdd.text.get(i));
+                int lineWidth = mc.font.width(line);
+                int lineHeight = mc.font.lineHeight;
+                int y = mouseY + (i + 1) * 12;
+                graphics.fill(
+                        mouseX - paddingX,
+                        y - paddingY,
+                        mouseX + lineWidth + paddingX,
+                        y + lineHeight + paddingY,
+                        Light.ARGB.color(200,0,0,0)
+                );
+            }
+
+            graphics.text(mc.font, ciBookGuiAdd.mainText, mouseX, mouseY, ciBookGuiAdd.colorMain);
+
+            for (int i = 0; i < ciBookGuiAdd.text.size(); i++) {
+                graphics.text(mc.font, ciBookGuiAdd.text.get(i), mouseX, mouseY + (i + 1) * 12, ciBookGuiAdd.colorText);
+            }
+        }
+    }
     @AddBookPage
     public static class AddPageClass implements RegisterBookPage {
         @Override
@@ -166,14 +258,14 @@ public class CIBookScreen extends Screen {
             list.add(new CIBookGuiAdd(Items.CHEST,new Vec2(0,0),
                     Component.translatable("chest_item.book.test.main"),
                     List.of(
-                            Component.translatable("chest_item.book.test.1"),
-                            Component.translatable("chest_item.book.test.2")
+                            Component.translatable("chest_item.book.test.1")
                     ),
                     Light.ARGB.color(255,255,255,255),
-                    Light.ARGB.color(255,150,150,150)));
+                    Light.ARGB.color(255,150,150,150),
+                    ThePage.BASE));
         }
     }
-    public record CIBookGuiAdd(Item item, Vec2 vecPos, Component mainText,List<Component> text, int colorMain,int colorText){}
+    public record CIBookGuiAdd(Item item, Vec2 vecPos, Component mainText,List<Component> text, int colorMain,int colorText,ThePage thePage){}
     public enum ThePage{
         BASE(Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/base.png")),
         BLACK(Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/black.png")),

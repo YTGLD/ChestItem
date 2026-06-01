@@ -952,7 +952,20 @@
   "item.chest_item.pod": "wilted pod",
   "item.chest_item.pod.string.1": "Immune darkness, poisoning, withering",
 
-"chest_item.book.test.main": "Title",
-  "chest_item.book.test.1": "Test text",
-  "chest_item.book.test.2": "Test Text 2"
+
+  "chest_item.book.heart.main": "仿生心脏",
+  "chest_item.book.heart.1": "这个物品使饥饿值转化为生命值的速度显著提高",
+  "chest_item.book.heart.2": "仿生心脏发现在多数的地牢，矿井，远古城市的战利品箱子里",
+  "chest_item.book.heart.3": "仿生心脏也是绝大多数的仿生物品的合成材料",
+
+
+  "chest_item.book.bone_head.main": "无厌之骸骨",
+  "chest_item.book.bone_head.1": "这个物品提供了大量的进食速度，在某些情况下可以拯救你的生命",
+  "chest_item.book.bone_head.2": "无厌之骸骨发现在多数的地牢，矿井，远古城市的战利品箱子里",
+  "chest_item.book.bone_head.3": "它还有一个技能，可以对满血的生物造成额外伤害",
+  "chest_item.book.bone_head.4": "可以触发技能获得经验值（不是玩家的，而是技能的）最高提升至3级",
+
+
+  "chest_item.book.test.main": "箱子里的小饰品",
+  "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）"
 }

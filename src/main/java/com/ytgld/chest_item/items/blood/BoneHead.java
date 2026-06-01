@@ -6,6 +6,9 @@ import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
+import com.ytgld.chest_item.renderer.book.CIBookScreen;
+import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
+import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
@@ -17,7 +20,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +34,23 @@ import java.util.Map;
 import java.util.Optional;
 
 public class BoneHead extends ItemBase implements SkillList{
-
+    @AddBookPage
+    public static class AddPageClass implements RegisterBookPage {
+        @Override
+        public void addPage(List<CIBookScreen.CIBookGuiAdd> list) {
+            list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Bone_Head.asItem(),new Vec2(0,32),
+                    Component.translatable("chest_item.book.bone_head.main"),
+                    List.of(
+                            Component.translatable("chest_item.book.bone_head.1"),
+                            Component.translatable("chest_item.book.bone_head.2"),
+                            Component.translatable("chest_item.book.bone_head.3"),
+                            Component.translatable("chest_item.book.bone_head.4")
+                    ),
+                    Light.ARGB.color(255,255,255,255),
+                    Light.ARGB.color(255,150,150,150),
+                    CIBookScreen.ThePage.BASE));
+        }
+    }
     public BoneHead(Properties properties) {
         super(properties);
     }
