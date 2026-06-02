@@ -967,6 +967,12 @@
   "chest_item.book.heart.2": "仿生心脏发现在多数的地牢，矿井，远古城市的战利品箱子里",
   "chest_item.book.heart.3": "仿生心脏也是绝大多数的仿生物品的合成材料",
 
+  "chest_item.book.flesh_and_blood_gears.main": "血肉齿轮",
+  "chest_item.book.flesh_and_blood_gears.1": "这个物品有两个技能",
+  "chest_item.book.flesh_and_blood_gears.2": "第一个技能可以在50%生命值以上时提供大量治疗",
+  "chest_item.book.flesh_and_blood_gears.3": "第二个技能会在生命值低于50%时触发并获得速度和伤害加成",
+  "chest_item.book.flesh_and_blood_gears.4": "血肉齿轮发现在多数的地牢，矿井，远古城市的战利品箱子里",
+
 
   "chest_item.book.bone_head.main": "无厌之骸骨",
   "chest_item.book.bone_head.1": "这个物品提供了大量的进食速度，在某些情况下可以拯救你的生命",
