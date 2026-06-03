@@ -16,6 +16,8 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -25,6 +27,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundSeenAdvancementsPacket;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,9 +35,7 @@ import net.minecraft.world.phys.Vec2;
 import org.joml.Matrix3x2fStack;
 import org.jspecify.annotations.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CIBookScreen extends Screen {
     private static final Identifier window =
@@ -54,11 +55,14 @@ public class CIBookScreen extends Screen {
     private double lastMouseX;
     private double lastMouseY;
     public final List<CIBookGuiAdd> list = new ArrayList<>();
-
+    private final HashMap<Vec2,Item> map = new HashMap<>();
     private float size = 1;
 
     private boolean isLook = false;
     private int lookAlpha = 0;
+
+    private boolean isMouseClicked = false;
+    private Item lastItem = ItemStack.EMPTY.getItem();
 
 //    private float size = 1;
     public CIBookScreen(Player player) {
@@ -70,6 +74,9 @@ public class CIBookScreen extends Screen {
     protected void init() {
         for (RegisterBookPage registerItemConfig : BookPageFinder.getModPlugins()) {
             registerItemConfig.addPage(list);
+        }
+        for (CIBookGuiAdd ciBookGuiAdd : list){
+            map.put(ciBookGuiAdd.vecPos,ciBookGuiAdd.item);
         }
         this.layout.addTitleHeader(TITLE, this.font);
         this.layout.addToFooter(Button.builder(CommonComponents.GUI_DONE, _ -> this.onClose()).width(200).build());
@@ -92,10 +99,45 @@ public class CIBookScreen extends Screen {
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         if (event.button() == 0) {
-            dragging = true;
-            lastMouseX = event.x();
-            lastMouseY = event.y();
+            if (!isMouseClicked) {
+                dragging = true;
+                lastMouseX = event.x();
+                lastMouseY = event.y();
+                for (CIBookGuiAdd ciBookGuiAdd : list) {
+                    float s = 1.2f;
+                    int xo = (int) ((this.width - 255 * s) / 2);
+                    int yo = (int) ((this.height - 155 * (s)) / 2);
+                    int centerX = (int) (
+                            xo + 256 / 2f
+                                    + ciBookGuiAdd.vecPos.x
+                                    + offsetX
+                    );
+
+                    int centerY = (int) (
+                            yo + 155 / 2f
+                                    + ciBookGuiAdd.vecPos.y
+                                    + offsetY
+                    );
+
+                    for (int i = -12; i < 12; i++) {
+                        if (event.x() >= centerX - i && event.x() <= centerX + i &&
+                                event.y() >= centerY - i && event.y() <= centerY + i) {
+                            for (Vec2 vec2 : map.keySet()) {
+                                if (vec2.distanceToSqr(new Vec2(ciBookGuiAdd.vecPos.x, ciBookGuiAdd.vecPos.y)) == 0) {
+                                    isMouseClicked = true;
+                                    lastItem = map.get(vec2);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }else {
+            isMouseClicked = false;
+            lastItem = ItemStack.EMPTY.getItem();
         }
+
         return super.mouseClicked(event,doubleClick);
     }
     @Override
@@ -129,13 +171,55 @@ public class CIBookScreen extends Screen {
         graphics.nextStratum();
         graphics.nextStratum();
         this.extractWindow(graphics, xo, yo, mouseX, mouseY);
-        if (isLook) {
-            if (lookAlpha < 240) {
-                lookAlpha += 15;
-            }
-        }else {
-            if (lookAlpha > 0) {
-                lookAlpha -= 15;
+        if (isMouseClicked) {
+            graphics.blit(RenderPipelines.GUI_TEXTURED,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/back_small.png"),
+                    (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * (s)) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s));
+
+            graphics.blit(RenderPipelines.GUI_TEXTURED,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/book_small.png"),
+                    (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * (s)) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s));
+
+            if (!lastItem.getDefaultInstance().isEmpty()) {
+                Optional<TooltipComponent> image = lastItem.getDefaultInstance().getTooltipImage();
+
+                List<Component> lines = Screen.getTooltipFromItem(minecraft, lastItem.getDefaultInstance());
+
+                List<ClientTooltipComponent> components = new ArrayList<>();
+                image.ifPresent(img -> components.add(ClientTooltipComponent.create(img)));
+
+
+                for (Component line : lines) {
+                    components.add(ClientTooltipComponent.create(line.getVisualOrderText()));
+                }
+                for (CIBookGuiAdd ciBookGuiAdd :list) {
+                    List<Component> component = ciBookGuiAdd.otherText;
+                    if (!component.isEmpty()) {
+                        for (int i = 0; i < component.size(); i++) {
+                            graphics.pose().pushMatrix();
+                            graphics.text(Minecraft.getInstance().font, component.get(i),
+                                    width / 2 - 72, height / 2 - 48 + i * 10,
+                                    Light.ARGB.color(255, 200, 200, 200));
+                            graphics.pose().popMatrix();
+                        }
+                    } else {
+                        graphics.text(Minecraft.getInstance().font, Component.translatable("chest_item.book.not"),
+                                width / 2 - 72, height / 2 - 48,
+                                Light.ARGB.color(255, 200, 200, 200));
+                    }
+                }
+                graphics.item(lastItem.getDefaultInstance(),width / 2  - 7,height / 2 - 74);
+                if (mouseX >= width / 2  - 7 - 16 && mouseX <= width / 2  - 7 + 16 &&
+                       mouseY >= height / 2 - 74 - 16 && mouseY <= height / 2 - 74 + 16){
+                    graphics.tooltip(
+                            font,
+                            components,
+                            mouseX, mouseY,
+                            DefaultTooltipPositioner.INSTANCE,
+                            null,
+                            lastItem.getDefaultInstance()
+                    );
+                }
             }
         }
     }
@@ -151,29 +235,6 @@ public class CIBookScreen extends Screen {
 
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addText(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
-        }
-        this.look(xo, yo, mouseX, mouseY);
-    }
-    public void look (int windowLeft, int windowTop, int mouseX, int mouseY) {
-        for (CIBookGuiAdd ciBookGuiAdd : list) {
-            int centerX = (int) (
-                    windowLeft + 252 / 2f
-                            + ciBookGuiAdd.vecPos.x
-                            + offsetX
-            );
-
-            int centerY = (int) (
-                    windowTop + 140 / 2f
-                            + ciBookGuiAdd.vecPos.y
-                            + offsetY
-            );
-            if (mouseX >= centerX - 8 && mouseX <= centerX + 8 &&
-                    mouseY >= centerY - 8 && mouseY <= centerY + 8) {
-                isLook = true;
-                return;
-            } else {
-                isLook = false;
-            }
         }
     }
     public void addItem(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY){
@@ -282,7 +343,9 @@ public class CIBookScreen extends Screen {
     }
     public void addText(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY){
         Minecraft mc = Minecraft.getInstance();
-
+        if (isMouseClicked){
+            return;
+        }
         int centerX = (int)(
                 windowLeft + 252 / 2f
                         + ciBookGuiAdd.vecPos.x
@@ -368,7 +431,106 @@ public class CIBookScreen extends Screen {
                     Light.ARGB.color(255,255,255,100)));
         }
     }
-    public record CIBookGuiAdd(Item item, Vec2 vecPos, Component mainText,List<Component> text, int colorMain,int colorText,ThePage thePage,int lightColor){}
+
+    public static final class CIBookGuiAdd {
+        private final Item item;
+        private final Vec2 vecPos;
+        private final Component mainText;
+        private final List<Component> text;
+        private final int colorMain;
+        private final int colorText;
+        private final ThePage thePage;
+        private final int lightColor;
+        private final List<Component> otherText;
+
+        public CIBookGuiAdd(Item item, Vec2 vecPos, Component mainText, List<Component> text, int colorMain, int colorText, ThePage thePage, int lightColor) {
+            this.item = item;
+            this.vecPos = vecPos;
+            this.mainText = mainText;
+            this.text = text;
+            this.colorMain = colorMain;
+            this.colorText = colorText;
+            this.thePage = thePage;
+            this.lightColor = lightColor;
+            otherText = new ArrayList<>();
+        }
+        public CIBookGuiAdd(Item item, Vec2 vecPos, Component mainText, List<Component> text, int colorMain, int colorText, ThePage thePage, int lightColor,List<Component> otherText) {
+            this.item = item;
+            this.vecPos = vecPos;
+            this.mainText = mainText;
+            this.text = text;
+            this.colorMain = colorMain;
+            this.colorText = colorText;
+            this.thePage = thePage;
+            this.lightColor = lightColor;
+            this.otherText = otherText;
+        }
+
+        public Item item() {
+            return item;
+        }
+
+        public Vec2 vecPos() {
+            return vecPos;
+        }
+
+        public Component mainText() {
+            return mainText;
+        }
+
+        public List<Component> text() {
+            return text;
+        }
+
+        public int colorMain() {
+            return colorMain;
+        }
+
+        public int colorText() {
+            return colorText;
+        }
+
+        public ThePage thePage() {
+            return thePage;
+        }
+
+        public int lightColor() {
+            return lightColor;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == this) return true;
+            if (obj == null || obj.getClass() != this.getClass()) return false;
+            var that = (CIBookGuiAdd) obj;
+            return Objects.equals(this.item, that.item) &&
+                    Objects.equals(this.vecPos, that.vecPos) &&
+                    Objects.equals(this.mainText, that.mainText) &&
+                    Objects.equals(this.text, that.text) &&
+                    this.colorMain == that.colorMain &&
+                    this.colorText == that.colorText &&
+                    Objects.equals(this.thePage, that.thePage) &&
+                    this.lightColor == that.lightColor;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(item, vecPos, mainText, text, colorMain, colorText, thePage, lightColor);
+        }
+
+        @Override
+        public String toString() {
+            return "CIBookGuiAdd[" +
+                    "item=" + item + ", " +
+                    "vecPos=" + vecPos + ", " +
+                    "mainText=" + mainText + ", " +
+                    "text=" + text + ", " +
+                    "colorMain=" + colorMain + ", " +
+                    "colorText=" + colorText + ", " +
+                    "thePage=" + thePage + ", " +
+                    "lightColor=" + lightColor + ']';
+        }
+    }
     public enum ThePage{
         BASE(Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/base.png")),
         BLACK(Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/black.png")),

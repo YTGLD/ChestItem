@@ -1002,5 +1002,6 @@
 
   "chest_item.book.test.main": "箱子里的小饰品",
   "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
-  "chest_item.book.test.2": "贡献者：秋季"
+  "chest_item.book.test.2": "贡献者：秋季",
+  "chest_item.book.not": "无额外描述......"
 }
