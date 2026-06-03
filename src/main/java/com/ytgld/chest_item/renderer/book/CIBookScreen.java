@@ -41,6 +41,10 @@ public class CIBookScreen extends Screen {
             Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/window.png");
     private static final Identifier back =
             Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/back.png");
+    private static final Identifier look_black =
+            Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/look_black.png");
+
+
     private static final Component TITLE = Component.translatable("advancements.chest_item.root.title");
     private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
     private final Player player;
@@ -50,7 +54,13 @@ public class CIBookScreen extends Screen {
     private double lastMouseX;
     private double lastMouseY;
     public final List<CIBookGuiAdd> list = new ArrayList<>();
+
     private float size = 1;
+
+    private boolean isLook = false;
+    private int lookAlpha = 0;
+
+//    private float size = 1;
     public CIBookScreen(Player player) {
         super(TITLE);
         this.player = player;
@@ -119,6 +129,15 @@ public class CIBookScreen extends Screen {
         graphics.nextStratum();
         graphics.nextStratum();
         this.extractWindow(graphics, xo, yo, mouseX, mouseY);
+        if (isLook) {
+            if (lookAlpha < 240) {
+                lookAlpha += 15;
+            }
+        }else {
+            if (lookAlpha > 0) {
+                lookAlpha -= 15;
+            }
+        }
     }
     public void extractWindow(GuiGraphicsExtractor graphics, int xo, int yo, int mouseX, int mouseY) {
         float s = 1.2f;
@@ -127,13 +146,36 @@ public class CIBookScreen extends Screen {
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addItem(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
         }
+        graphics.blit(RenderPipelines.GUI_TEXTURED, look_black, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
         graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
 
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addText(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
         }
+        this.look(xo, yo, mouseX, mouseY);
     }
+    public void look (int windowLeft, int windowTop, int mouseX, int mouseY) {
+        for (CIBookGuiAdd ciBookGuiAdd : list) {
+            int centerX = (int) (
+                    windowLeft + 252 / 2f
+                            + ciBookGuiAdd.vecPos.x
+                            + offsetX
+            );
 
+            int centerY = (int) (
+                    windowTop + 140 / 2f
+                            + ciBookGuiAdd.vecPos.y
+                            + offsetY
+            );
+            if (mouseX >= centerX - 8 && mouseX <= centerX + 8 &&
+                    mouseY >= centerY - 8 && mouseY <= centerY + 8) {
+                isLook = true;
+                return;
+            } else {
+                isLook = false;
+            }
+        }
+    }
     public void addItem(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY){
         Minecraft mc = Minecraft.getInstance();
 
@@ -260,7 +302,7 @@ public class CIBookScreen extends Screen {
             int paddingX = 4;
             int paddingY = 2;
 
-            int mainWidth = mc.font.width(ciBookGuiAdd.mainText);
+            int mainWidth = (int) (mc.font.width(ciBookGuiAdd.mainText) * 1.25f);
             int mainHeight = mc.font.lineHeight;
             graphics.fill(
                     mouseX - paddingX,
@@ -283,7 +325,11 @@ public class CIBookScreen extends Screen {
                         Light.ARGB.color(200,0,0,0)
                 );
             }
-            graphics.text(mc.font, ciBookGuiAdd.mainText, mouseX, mouseY,ciBookGuiAdd.colorMain);
+            graphics.pose().pushMatrix();
+            graphics.pose().translate(mouseX, mouseY);
+            graphics.pose().scale(1.25f,1.25f);
+            graphics.text(mc.font, ciBookGuiAdd.mainText,0,0 ,ciBookGuiAdd.colorMain);
+            graphics.pose().popMatrix();
             for (int i = 0; i < ciBookGuiAdd.text.size(); i++) {
                 graphics.text(mc.font, ciBookGuiAdd.text.get(i), mouseX, mouseY + (i + 1) * 12, ciBookGuiAdd.colorText);
             }
