@@ -2,7 +2,7 @@ package com.ytgld.chest_item.renderer.book;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.SkillItem;
+import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.BookPageFinder;
@@ -30,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec2;
 import org.joml.Matrix3x2fStack;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,18 +46,16 @@ public class CIBookScreen extends Screen {
     private final Player player;
     private float offsetX = 0;
     private float offsetY = 0;
-
     private boolean dragging = false;
     private double lastMouseX;
     private double lastMouseY;
-
+    public final List<CIBookGuiAdd> list = new ArrayList<>();
     private float size = 1;
     public CIBookScreen(Player player) {
         super(TITLE);
         this.player = player;
     }
 
-    public final List<CIBookGuiAdd> list = new ArrayList<>();
     @Override
     protected void init() {
         for (RegisterBookPage registerItemConfig : BookPageFinder.getModPlugins()) {
@@ -87,17 +86,17 @@ public class CIBookScreen extends Screen {
             lastMouseX = event.x();
             lastMouseY = event.y();
         }
-
         return super.mouseClicked(event,doubleClick);
     }
     @Override
-    public boolean mouseDragged(MouseButtonEvent event, double dx, double dy) {
+    public boolean mouseDragged(@NonNull MouseButtonEvent event, double dx, double dy) {
         if (dragging) {
             offsetX += (float) (event.x() - lastMouseX);
             offsetY += (float) (event.y() - lastMouseY);
 
-            offsetX = Math.max(-200, Math.min(offsetX, 200));
-            offsetY = Math.max(-100, Math.min(offsetY, 100));
+            int size = 350;
+            offsetX = Math.max(-size, Math.min(offsetX, size));
+            offsetY = Math.max(-size, Math.min(offsetY, size));
 
             lastMouseX = event.x();
             lastMouseY = event.y();
@@ -107,27 +106,28 @@ public class CIBookScreen extends Screen {
         return super.mouseDragged(event, dx, dy);
     }
     @Override
-    public boolean mouseReleased(MouseButtonEvent event) {
+    public boolean mouseReleased(@NonNull MouseButtonEvent event) {
         dragging = false;
         return super.mouseReleased(event);
     }
     @Override
-    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+    public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
         float s = 1.2f;
         int xo = (int) ((this.width - 255 * s) / 2);
-        int yo = (int) ((this.height - 142 * (s)) / 2);
+        int yo = (int) ((this.height - 155 * (s)) / 2);
         graphics.nextStratum();
         graphics.nextStratum();
         this.extractWindow(graphics, xo, yo, mouseX, mouseY);
     }
     public void extractWindow(GuiGraphicsExtractor graphics, int xo, int yo, int mouseX, int mouseY) {
         float s = 1.2f;
-        graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (142 * s), (int) (256 * s), (int) (256 * s));
+
+        graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addItem(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
         }
-        graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (142 * s), (int) (256 * s), (int) (256 * s));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
 
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addText(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
@@ -150,12 +150,12 @@ public class CIBookScreen extends Screen {
         );
 
         int windowRight = windowLeft + 255;
-        int windowBottom = windowTop + 150;
+        int windowBottom = windowTop + 155;
 
         int itemSize = 16;
 
-        if (centerX - 30 + itemSize / 2 < windowLeft || centerX - itemSize / 2 > windowRight ||
-                centerY - 30 + itemSize / 2 < windowTop || centerY - itemSize / 2 > windowBottom) {
+        if (centerX - 24 + itemSize / 2 < windowLeft || centerX - 20 - itemSize / 2 > windowRight ||
+                centerY - 24 + itemSize / 2 < windowTop || centerY - 4 - itemSize / 2 > windowBottom) {
             return;
         }
 
@@ -181,7 +181,6 @@ public class CIBookScreen extends Screen {
 
         graphics.blit(RenderPipelines.GUI_TEXTURED,ciBookGuiAdd.thePage.identifier,centerX - 9, centerY - 9,0,0,18,18,18,18);
         int color = ciBookGuiAdd.lightColor;
-        int as = (color >> 24) & 0xFF;
         int rs = (color >> 16) & 0xFF;
         int gs = (color >> 8) & 0xFF;
         int bs = color & 0xFF;
@@ -221,8 +220,8 @@ public class CIBookScreen extends Screen {
         pose.popMatrix();
 
         if (!has(stack)) {
-            if (!stack.is(Items.CHEST)) {
-                graphics.text(mc.font, Component.translatable("chest_item.item.not_has"), centerX + 8, centerY - 4, Light.ARGB.color(255, 200, 20, 20));
+            if (stack.getItem() instanceof ItemBase) {
+                graphics.text(mc.font, Component.translatable("chest_item.item.not_has"), centerX - 12, centerY + 10, Light.ARGB.color(255, 200, 20, 20));
             }
         }else {
             graphics.blit(RenderPipelines.GUI_TEXTURED,Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item/star.png"),
@@ -314,7 +313,8 @@ public class CIBookScreen extends Screen {
             list.add(new CIBookGuiAdd(Items.CHEST,new Vec2(0,0),
                     Component.translatable("chest_item.book.test.main"),
                     List.of(
-                            Component.translatable("chest_item.book.test.1")
+                            Component.translatable("chest_item.book.test.1"),
+                            Component.translatable("chest_item.book.test.2")
                     ),
                     Light.ARGB.color(255,255,255,255),
                     Light.ARGB.color(255,150,150,150),
@@ -328,7 +328,7 @@ public class CIBookScreen extends Screen {
         BLACK(Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/black.png")),
         MEAT(Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/meat.png"));
         private final Identifier identifier;
-        private ThePage(Identifier identifier){
+        ThePage(Identifier identifier){
             this.identifier = identifier;
         }
 

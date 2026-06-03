@@ -686,26 +686,26 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
             {
                 Identifier fire = Identifier.fromNamespaceAndPath(Chestitem.MODID,
                         "textures/gui/tooltip/fire_black.png");
-                float alpha = (float) (50 * Math.sin((entity.tickCount + seed)));
+                float alpha = (float) (50 * Math.sin((EventMain.time + seed)));
                 guiGraphics.blit(renderPipeline, fire,
                         x - 8, y - 8, 0, 0,
                         32, 32, 32, 32,
                         Light.ARGB.color((int) (a + alpha), r, g, b));
 
-                float alpha1 = (float) (50 * Math.sin((entity.tickCount + seed) / 2f));
+                float alpha1 = (float) (50 * Math.sin((EventMain.time + seed) / 2f));
                 guiGraphics.blit(renderPipeline, fire,
                         x - 8, y - 8, 0, 0,
                         32, 32, 32, 32,
                         Light.ARGB.color(-((int) (a + alpha1)), r, g, b));
 
 
-                float alpha2 = (float) (50 * Math.sin((entity.tickCount + seed) * 2f));
+                float alpha2 = (float) (50 * Math.sin((EventMain.time + seed) * 2f));
                 guiGraphics.blit(renderPipeline, fire,
                         x - 8, y - 8, 0, 0,
                         32, 32, 32, 32,
                         Light.ARGB.color(-((int) (a + alpha2)), r, g, b));
 
-                float alpha3 = (float) (10 * Math.sin((entity.tickCount + seed) /4F));
+                float alpha3 = (float) (10 * Math.sin((EventMain.time + seed) /4F));
                 guiGraphics.blit(renderPipeline, fire,
                         x - 8, y - 8, 0, 0,
                         32, 32, 32, 32,
@@ -720,10 +720,10 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                 pose.pushMatrix();
                 pose.translate(8,8);
                 {
-                    float alphaOffset = (float) (10 * Math.sin(((entity.tickCount + seed))/10f));
+                    float alphaOffset = (float) (10 * Math.sin(((EventMain.time + seed))/10f));
                     pose.pushMatrix();
                     pose.translate(x, y);
-                    pose.rotate(entity.tickCount / 25f);
+                    pose.rotate(EventMain.time / 25f);
                     pose.translate(-x, -y);
                     guiGraphics.blit(renderPipeline, fire,
                             x - 16, y - 16, 0, 0,
@@ -734,7 +734,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                         for (int i = 0; i < 4; i++) {
                             pose.pushMatrix();
                             pose.translate(x, y);
-                            pose.rotate((entity.tickCount + i * 40F) / 25f);
+                            pose.rotate((EventMain.time + i * 40F) / 25f);
                             pose.translate(-x, -y);
                             guiGraphics.blit(renderPipeline, fire,
                                     x - 16, y - 16, 0, 0,
@@ -745,7 +745,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                         for (int i = 0; i < 4; i++) {
                             pose.pushMatrix();
                             pose.translate(x, y);
-                            pose.rotate((entity.tickCount - i * 40F) / 25f);
+                            pose.rotate((EventMain.time - i * 40F) / 25f);
                             pose.translate(-x, -y);
                             guiGraphics.blit(renderPipeline, fire,
                                     x - 16, y - 16, 0, 0,

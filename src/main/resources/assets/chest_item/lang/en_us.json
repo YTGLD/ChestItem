@@ -980,9 +980,27 @@
   "chest_item.book.bone_head.3": "它还有一个技能，可以对满血的生物造成额外伤害",
   "chest_item.book.bone_head.4": "可以触发技能获得经验值（不是玩家的，而是技能的）最高提升至3级",
 
+  "chest_item.book.stronger_stone.main": "黄金战神",
+  "chest_item.book.stronger_stone.1": "这个物品提供少量近战伤害加成（可自行配置界面调整）",
+  "chest_item.book.stronger_stone.2": "黄金战神发现在大多数地牢，矿井，远古城市等战利品箱",
+
+  "chest_item.book.armor_stone.main": "黄金护卫",
+  "chest_item.book.armor_stone.1": "这个物品提供少量抗性加成（可自行配置界面调整）",
+  "chest_item.book.armor_stone.2": "黄金护卫发现在大多数地牢，矿井，远古城市等战利品箱",
+
+  "chest_item.book.life_stone.main": "黄金生命",
+  "chest_item.book.life_stone.1": "这个物品提供少量治疗加成（可自行配置界面调整）",
+  "chest_item.book.life_stone.2": "黄金生命发现在大多数地牢，矿井，远古城市等战利品箱",
+
+  "chest_item.book.knife.main": "掩埋刀锋",
+  "chest_item.book.knife.1": "该物品使伤害随机化，最大可达1.2%，最小降至0.9%（可自行配置界面调整）",
+  "chest_item.book.knife.2": "掩埋刀锋发现在大多数地牢，矿井，远古城市等战利品箱",
+
+  "chest_item.book.ring.main": "矿工戒指",
+  "chest_item.book.ring.1": "这个物品提供一级急迫加成（可自行配置界面调整）",
+  "chest_item.book.ring.2": "矿工戒指发现在大多数地牢，矿井，远古城市等战利品箱",
 
   "chest_item.book.test.main": "箱子里的小饰品",
   "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
-  "chest_item.book.test.2": "test 1",
-  "chest_item.book.test.3": "test 2"
+  "chest_item.book.test.2": "贡献者：秋季"
 }
