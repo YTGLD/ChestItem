@@ -29,6 +29,8 @@
     "cilent.GuiMixin",
     "cilent.ParticleEngineMixin",
     "cilent.model.GuiGraphicsExtractorMixin",
-    "outline.BlackMixin"
+    "outline.BlackMixin",
+    "outline.GameRendererMixin",
+    "outline.WarpedMixin"
   ]
 }

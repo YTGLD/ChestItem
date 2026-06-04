@@ -11,7 +11,9 @@ import com.mojang.blaze3d.platform.SourceFactor;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.renderer.outline.ILevelRendererWarped;
+import com.ytgld.chest_item.renderer.outline.IWarped;
 import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -51,6 +53,16 @@ public abstract class MRender {
         }
         return Minecraft.getInstance().getMainRenderTarget();
     });
+    public static final OutputTarget sScreenWarped = new OutputTarget("screen_warped", () -> {
+        LevelRenderer rendertarget = Minecraft.getInstance().levelRenderer;
+        if (rendertarget instanceof IWarped iWarped){
+            if (iWarped.chest_item$IWarped()!=null) {
+                iWarped.chest_item$IWarped().copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
+                return iWarped.chest_item$IWarped();
+            }
+        }
+        return Minecraft.getInstance().getMainRenderTarget();
+    });
 
     private static Function<Identifier, RenderType> ITEM_TRANSLUCENT(OutputTarget outline2) {
         return Util.memoize((texture) -> {
@@ -65,9 +77,9 @@ public abstract class MRender {
         return ITEM_TRANSLUCENT(outline2).apply(texture);
     }
 
-    public static RenderType warped(){
-        return RenderType.create("warpeds",
-                RenderSetup.builder(RenderPipelines.LIGHTNING).setOutputTarget(warped).sortOnUpload().createRenderSetup());
+    public static RenderType warpedScreen(){
+        return RenderType.create("warped",
+                RenderSetup.builder(RenderPipelines.LIGHTNING).setOutputTarget(sScreenWarped).sortOnUpload().createRenderSetup());
     }
     public static RenderType red(boolean isOutline){
         return endBlack(isOutline);
@@ -234,6 +246,18 @@ public abstract class MRender {
                                 DestFactor.ONE,
                                 SourceFactor.ONE,
                                 DestFactor.ZERO)))
+                        .withVertexFormat(DefaultVertexFormat.EMPTY, VertexFormat.Mode.TRIANGLES)
+                        .withCull(false)
+                        .build()
+        );
+        public static final RenderPipeline sScreenWarped = (
+                RenderPipeline.builder()
+                        .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/screen_warped"))
+                        .withVertexShader("core/screenquad")
+                        .withFragmentShader("core/blit_screen")
+                        .withSampler("InSampler")
+                        .withShaderDefine("time", EventMain.time)
+                        .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
                         .withVertexFormat(DefaultVertexFormat.EMPTY, VertexFormat.Mode.TRIANGLES)
                         .withCull(false)
                         .build()

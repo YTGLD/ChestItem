@@ -8,14 +8,23 @@ import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.entity.state.EndComingRenderState;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Matrix4f;
+import org.joml.Vector4f;
+
+import javax.swing.text.html.parser.Entity;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComingRenderState> {
     public EndComingRender(EntityRendererProvider.Context p_173917_) {
@@ -33,7 +42,12 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
     }
 
     @Override
-    public void submit(EndComingRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
+    public void submit(EndComingRenderState renderState, PoseStack modelView , SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
+        EndComing entity = renderState.entity;
+
+        submitOther(renderState, modelView, collector, camera);
+    }
+    public void submitOther(EndComingRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
         HandlerClient.showOutline = true;
         HandlerClient.doPass = true;
 
@@ -50,7 +64,7 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
         collector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
             renderSphere1(pose, bufferSource, 0, 0.35f + colorO / 2f);
         });
-        collector.submitCustomGeometry(poseStack, MRender.colorOutline(false), (pose, bufferSource) -> {
+        collector.submitCustomGeometry(poseStack, MRender.warpedScreen(), (pose, bufferSource) -> {
             renderSphere1(pose, bufferSource, 255, 0.35f + colorO / 2f);
         });
         poseStack.popPose();
