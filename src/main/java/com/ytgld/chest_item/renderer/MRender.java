@@ -253,8 +253,8 @@ public abstract class MRender {
         public static final RenderPipeline sScreenWarped = (
                 RenderPipeline.builder()
                         .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/screen_warped"))
-                        .withVertexShader("core/screenquad")
-                        .withFragmentShader("core/blit_screen")
+                        .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/screenquad"))
+                        .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/blit_screen"))
                         .withSampler("InSampler")
                         .withShaderDefine("time", EventMain.time)
                         .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))

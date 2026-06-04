@@ -1,11 +1,11 @@
 #version 330
-//#moj_import <minecraft:globals.glsl>
+#moj_import <minecraft:globals.glsl>
 
 uniform sampler2D InSampler;
 
 layout(std140) uniform WarpedInfo {
     float stronger;
-    vec2 posClasses;
+    vec2 pos;
     int time;
 } warpedInfo;
 
@@ -27,9 +27,7 @@ void main() {
     // =========================
     // 扭曲参数
     // =========================
-    vec2 pos = vec2(texture(InSampler,texCoord).x,texture(InSampler,texCoord).y);
-    vec2 center = pos;
-
+    vec2 center = warpedInfo.pos;;
 
     vec2 diff = texCoord - center;
     float distCenter = length(diff);
@@ -63,43 +61,19 @@ void main() {
     );
 
     // 防止UV越界
-    twistedTexCoord = clamp(twistedTexCoord, vec2(0.0), vec2(1.0));
-    // =========================
-    // 模糊参数
-    // =========================
-    vec2 posScreen = pos;
-
-    vec2 oneTexel = 1.0 / InSize;
-    vec2 sampleStep = oneTexel * BlurDir;
-
-    float distBlur = distance(gl_FragCoord.xy / InSize, posScreen);
-
-    float radius = warpedInfo.stronger;
-
-    // 模糊区域半径
-    float blurRadiusLimit = 0.2;
-
-    float blurFactor = smoothstep(blurRadiusLimit, 0.0, distBlur);
-    // =========================
-    // 模糊采样
-    // =========================
-    vec4 blurred = vec4(0.0);
-
-    for (float a = -radius + 0.5;a <= radius; a += 2.0) {
-        blurred += texture(InSampler, twistedTexCoord + sampleStep * a);
-    }
-
-    blurred += texture(InSampler, twistedTexCoord + sampleStep * radius) * 0.5;
-
-    blurred /= (radius + 0.5);
-
-    // =========================
-    // 原图（已扭曲）
-    // =========================
-    vec4 original = texture(InSampler, twistedTexCoord);
+    twistedTexCoord = clamp(
+        twistedTexCoord,
+        vec2(0.0),
+        vec2(1.0)
+    );
+    vec4 original =
+    texture(
+        InSampler,
+        twistedTexCoord
+    );
 
     // =========================
     // 最终输出
     // =========================
-    fragColor = mix(original, blurred,blurFactor);
+    fragColor =original;
 }

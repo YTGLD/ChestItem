@@ -50,6 +50,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.Set;
 
 import static net.minecraft.client.renderer.PostChain.MAIN_TARGET_ID;
 
@@ -90,7 +91,7 @@ public abstract class WarpedMixin implements IWarped {
     }
     @Inject(method = "doEntityOutline", at = @At(value = "RETURN"))
     private void drawEntityOutlinesFramebuffer(CallbackInfo ci) {
-        chest_item$blitAndBlendToTexture(this.minecraft.getMainRenderTarget().getColorTextureView(),cI26_1Pre3$renderTarget, MRender.RenderPs.sScreenWarped);
+//        chest_item$blitAndBlendToTexture(this.minecraft.getMainRenderTarget().getColorTextureView(),cI26_1Pre3$renderTarget, MRender.RenderPs.sScreenWarped);
     }
 
     @Inject(method = "resize", at = @At(value = "RETURN"))
@@ -119,22 +120,21 @@ public abstract class WarpedMixin implements IWarped {
         }
     }
 
-    @Inject(method = "renderLevel", at = @At(value = "RETURN"))
-    private void render(GraphicsResourceAllocator resourceAllocator, DeltaTracker deltaTracker, boolean renderOutline, CameraRenderState cameraState, Matrix4fc modelViewMatrix, GpuBufferSlice terrainFog, Vector4f fogColor, boolean shouldRenderSky, ChunkSectionsToRender chunkSectionsToRender, CallbackInfo ci) {
+    @Inject(method = "addMainPass", at = @At(value = "RETURN"))
+    private void render(FrameGraphBuilder frame, Frustum frustum, Matrix4fc modelViewMatrix, GpuBufferSlice terrainFog, boolean renderOutline, LevelRenderState levelRenderState, DeltaTracker deltaTracker, ProfilerFiller profiler, ChunkSectionsToRender chunkSectionsToRender, CallbackInfo ci) {
         if (minecraft.player != null) {
             if (minecraft.player.isAlive()) {
-                PostChain postChain = this.minecraft.getShaderManager().getPostChain(Identifier.fromNamespaceAndPath(Chestitem.MODID,"warped_screen"),
-                        LevelTargetBundle.MAIN_TARGETS);
-                int i = this.cI26_1Pre3$renderTarget.width;
-                int j = this.cI26_1Pre3$renderTarget.height;
-                if (postChain != null) {
-                    FrameGraphBuilder frameGraphBuilder = new FrameGraphBuilder();
+                {
 
-                    PostChain.TargetBundle targets = PostChain.TargetBundle.of(MAIN_TARGET_ID, frameGraphBuilder.importExternal("main",
-                            cI26_1Pre3$renderTarget));
+                    PostChain postChain = this.minecraft.getShaderManager().getPostChain(Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                                    "warped_screen"),
+                            Set.of(WarpedFrameSets.MAIN, WarpedFrameSets.WARPED));
 
-                    postChain.addToFrame(frameGraphBuilder,i,j,targets);
-                    frameGraphBuilder.execute(((IGameRenderer) minecraft.gameRenderer).cI26_1Pre3$resourcePool());
+                    int i = this.cI26_1Pre3$renderTarget.width;
+                    int j = this.cI26_1Pre3$renderTarget.height;
+                    if (postChain != null) {
+                        postChain.addToFrame(frame, i, j, this.cI26_1Pre3$warpedFrameSets);
+                    }
                 }
             }
         }
@@ -142,12 +142,11 @@ public abstract class WarpedMixin implements IWarped {
     @Unique
     public void chest_item$blitAndBlendToTexture(GpuTextureView output, RenderTarget renderTarget, RenderPipeline renderPipeline) {
         RenderSystem.assertOnRenderThread();
-        var currentBuffer= this.cI26_1Pre3$ubo.currentBuffer();
         CommandEncoder commandEncoder = RenderSystem.getDevice().createCommandEncoder();
-        try (GpuBuffer.MappedView view = commandEncoder.mapBuffer(currentBuffer, false, true)) {
+        try (GpuBuffer.MappedView view = commandEncoder.mapBuffer(this.cI26_1Pre3$ubo.currentBuffer(), false, true)) {
             Std140Builder.intoBuffer(view.data())
                     .putFloat(1f)
-                    .putVec2(0,0)
+                    .putVec2(0.2f,0.5f)
                     .putInt(EventMain.time)
             ;
         }
@@ -155,9 +154,10 @@ public abstract class WarpedMixin implements IWarped {
         try (RenderPass renderPass = commandEncoder.createRenderPass(() -> "Blit render target", output, OptionalInt.empty())) {
             renderPass.setPipeline(renderPipeline);
             RenderSystem.bindDefaultUniforms(renderPass);
+            renderPass.setUniform("WarpedInfo", this.cI26_1Pre3$ubo.currentBuffer());
             renderPass.bindTexture("InSampler", renderTarget.getColorTextureView(), RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST));
-            renderPass.setUniform("WarpedInfo", currentBuffer);
             renderPass.draw(0, 3);
         }
+        cI26_1Pre3$ubo.rotate();
     }
 }
