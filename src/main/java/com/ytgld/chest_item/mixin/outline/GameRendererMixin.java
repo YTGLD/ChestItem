@@ -6,15 +6,15 @@ import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-
-@Mixin(GameRenderer.class)
-public class GameRendererMixin implements IGameRenderer {
-    @Shadow
-    @Final
-    private CrossFrameResourcePool resourcePool;
-
-    @Override
-    public CrossFrameResourcePool cI26_1Pre3$resourcePool() {
-        return resourcePool;
-    }
-}
+//
+//@Mixin(GameRenderer.class)
+//public class GameRendererMixin implements IGameRenderer {
+//    @Shadow
+//    @Final
+//    private CrossFrameResourcePool resourcePool;
+//
+//    @Override
+//    public CrossFrameResourcePool cI26_1Pre3$resourcePool() {
+//        return resourcePool;
+//    }
+//}

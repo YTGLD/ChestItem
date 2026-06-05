@@ -1,22 +1,11 @@
 #version 330
-#moj_import <minecraft:globals.glsl>
 
 uniform sampler2D InSampler;
 
-layout(std140) uniform WarpedInfo {
+layout(std140) uniform WarpConfig {
     float stronger;
     vec2 pos;
     int time;
-} warpedInfo;
-
-layout(std140) uniform SamplerInfo {
-    vec2 OutSize;
-    vec2 InSize;
-};
-
-layout(std140) uniform BlurConfig {
-    vec2 BlurDir;
-    float Radius;
 };
 
 in vec2 texCoord;
@@ -27,7 +16,7 @@ void main() {
     // =========================
     // 扭曲参数
     // =========================
-    vec2 center = warpedInfo.pos;;
+    vec2 center = pos;;
 
     vec2 diff = texCoord - center;
     float distCenter = length(diff);
@@ -46,7 +35,7 @@ void main() {
 
     // 动态旋涡
     float twistFactor =
-    sin(GameTime * 3333.0 + distCenter * 30.0)
+    sin(time * 3333.0 + distCenter * 30.0)
     * twistStrength
     * 0.5;
 

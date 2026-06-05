@@ -108,6 +108,33 @@ public class Other implements RegisterBookPage {
                         CIBookScreen.ThePage.BASE,
                         itemBase.color(InitItems.Pain_Rune.asItem().getDefaultInstance())));
             }
+        }{
+            if (InitItems.Ring_.asItem() instanceof ItemBase itemBase) {
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Ring_.asItem(), new Vec2(-32, 132),
+                        Component.translatable("chest_item.book.ring.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.ring.1"),
+                                Component.translatable("chest_item.book.ring.2")
+                        ),
+                        Light.ARGB.color(255, 255, 255, 255),
+                        Light.ARGB.color(255, 150, 150, 150),
+                        CIBookScreen.ThePage.BASE,
+                        itemBase.color(InitItems.Ring_.asItem().getDefaultInstance())));
+            }
+        }
+        {
+            if (InitItems.Knife_.asItem() instanceof ItemBase itemBase) {
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Knife_.asItem(), new Vec2(32, 132),
+                        Component.translatable("chest_item.book.knife.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.knife.1"),
+                                Component.translatable("chest_item.book.knife.2")
+                        ),
+                        Light.ARGB.color(255, 255, 255, 255),
+                        Light.ARGB.color(255, 150, 150, 150),
+                        CIBookScreen.ThePage.BASE,
+                        itemBase.color(InitItems.Knife_.asItem().getDefaultInstance())));
+            }
         }
     }
 }

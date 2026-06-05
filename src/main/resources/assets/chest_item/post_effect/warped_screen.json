@@ -15,32 +15,21 @@
       ],
       "output": "swap",
       "uniforms": {
-        "WarpedInfo":[
-          {
-            "name": "stronger",
-            "type": "float",
-            "value": 5
-          },
+        "WarpConfig": [
           {
             "name": "pos",
             "type": "vec2",
             "value": [ 0.5,0.5 ]
-          },{
-            "name": "time",
-            "type": "int",
-            "value": 0
-          }
-        ],
-        "BlurConfig": [
-          {
-            "name": "BlurDir",
-            "type": "vec2",
-            "value": [ 1.0, 0.0 ]
           },
           {
-            "name": "Radius",
+            "name": "time",
+            "type": "int",
+            "value": 5
+          },
+          {
+            "name": "stronger",
             "type": "float",
-            "value": 0.0
+            "value": 1.0
           }
         ]
       }
@@ -57,32 +46,21 @@
       ],
       "output": "chest_item:warped_screen",
       "uniforms": {
-        "WarpedInfo":[
-          {
-            "name": "stronger",
-            "type": "float",
-            "value": 5
-          },
+        "WarpConfig": [
           {
             "name": "pos",
             "type": "vec2",
             "value": [ 0.5,0.5 ]
-          },{
-            "name": "time",
-            "type": "int",
-            "value": 0
-          }
-        ],
-        "BlurConfig": [
-          {
-            "name": "BlurDir",
-            "type": "vec2",
-            "value": [ 0.0, 1.0 ]
           },
           {
-            "name": "Radius",
+            "name": "time",
+            "type": "int",
+            "value": 5
+          },
+          {
+            "name": "stronger",
             "type": "float",
-            "value": 0.0
+            "value": 1.0
           }
         ]
       }
@@ -98,32 +76,21 @@
       ],
       "output": "swap",
       "uniforms": {
-        "WarpedInfo":[
-          {
-            "name": "stronger",
-            "type": "float",
-            "value": 5
-          },
+        "WarpConfig": [
           {
             "name": "pos",
             "type": "vec2",
             "value": [ 0.5,0.5 ]
-          },{
-            "name": "time",
-            "type": "int",
-            "value": 0
-          }
-        ],
-        "BlurConfig": [
-          {
-            "name": "BlurDir",
-            "type": "vec2",
-            "value": [ 1.0, 0.0 ]
           },
           {
-            "name": "Radius",
+            "name": "time",
+            "type": "int",
+            "value": 5
+          },
+          {
+            "name": "stronger",
             "type": "float",
-            "value": 0.0
+            "value": 1.0
           }
         ]
       }
@@ -140,32 +107,21 @@
       ],
       "output": "chest_item:warped_screen",
       "uniforms": {
-        "WarpedInfo":[
-          {
-            "name": "stronger",
-            "type": "float",
-            "value": 5
-          },
+        "WarpConfig": [
           {
             "name": "pos",
             "type": "vec2",
             "value": [ 0.5,0.5 ]
-          },{
-            "name": "time",
-            "type": "int",
-            "value": 0
-          }
-        ],
-        "BlurConfig": [
-          {
-            "name": "BlurDir",
-            "type": "vec2",
-            "value": [ 0.0, 1.0 ]
           },
           {
-            "name": "Radius",
+            "name": "time",
+            "type": "int",
+            "value": 5
+          },
+          {
+            "name": "stronger",
             "type": "float",
-            "value": 0.0
+            "value": 1.0
           }
         ]
       }
@@ -182,32 +138,21 @@
       ],
       "output": "swap",
       "uniforms": {
-        "WarpedInfo":[
-          {
-            "name": "stronger",
-            "type": "float",
-            "value": 5
-          },
+        "WarpConfig": [
           {
             "name": "pos",
             "type": "vec2",
             "value": [ 0.5,0.5 ]
-          },{
-            "name": "time",
-            "type": "int",
-            "value": 0
-          }
-        ],
-        "BlurConfig": [
-          {
-            "name": "BlurDir",
-            "type": "vec2",
-            "value": [ 1.0, 0.0 ]
           },
           {
-            "name": "Radius",
+            "name": "time",
+            "type": "int",
+            "value": 5
+          },
+          {
+            "name": "stronger",
             "type": "float",
-            "value": 0.0
+            "value": 1.0
           }
         ]
       }
@@ -224,32 +169,21 @@
       ],
       "output": "chest_item:warped_screen",
       "uniforms": {
-        "WarpedInfo":[
-          {
-            "name": "stronger",
-            "type": "float",
-            "value": 5
-          },
+        "WarpConfig": [
           {
             "name": "pos",
             "type": "vec2",
             "value": [ 0.5,0.5 ]
-          },{
-            "name": "time",
-            "type": "int",
-            "value": 0
-          }
-        ],
-        "BlurConfig": [
-          {
-            "name": "BlurDir",
-            "type": "vec2",
-            "value": [ 0.0, 1.0 ]
           },
           {
-            "name": "Radius",
+            "name": "time",
+            "type": "int",
+            "value": 5
+          },
+          {
+            "name": "stronger",
             "type": "float",
-            "value": 0.0
+            "value": 1.0
           }
         ]
       }

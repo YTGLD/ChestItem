@@ -395,6 +395,9 @@ public class CIBookScreen extends Screen {
             graphics.pose().popMatrix();
             for (int i = 0; i < ciBookGuiAdd.text.size(); i++) {
                 graphics.text(mc.font, ciBookGuiAdd.text.get(i), mouseX, mouseY + (i + 1) * 12, ciBookGuiAdd.colorText);
+                if (i == ciBookGuiAdd.text.size() - 1) {
+                    graphics.text(mc.font, Component.translatable("chest_item.book.mouse"), mouseX, mouseY + (i + 2) * 12, Light.ARGB.color(255,200,150,50));
+                }
             }
 
             ItemStack stack = new ItemStack(ciBookGuiAdd.item);

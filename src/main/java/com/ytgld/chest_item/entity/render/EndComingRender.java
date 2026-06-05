@@ -64,9 +64,6 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
         collector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
             renderSphere1(pose, bufferSource, 0, 0.35f + colorO / 2f);
         });
-        collector.submitCustomGeometry(poseStack, MRender.warpedScreen(), (pose, bufferSource) -> {
-            renderSphere1(pose, bufferSource, 255, 0.35f + colorO / 2f);
-        });
         poseStack.popPose();
     }
 

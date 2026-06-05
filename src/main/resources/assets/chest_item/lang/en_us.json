@@ -996,6 +996,62 @@
   "chest_item.book.knife.1": "该物品使伤害随机化，最大可达1.2%，最小降至0.9%（可自行配置界面调整）",
   "chest_item.book.knife.2": "掩埋刀锋发现在大多数地牢，矿井，远古城市等战利品箱",
 
+
+  "chest_item.book.dry_bones.main": "腐枯尊骨",
+  "chest_item.book.dry_bones.1": "此物品在某些情况下可以提供超额属性",
+  "chest_item.book.dry_bones.2": "腐枯尊骨在两种护盾恢复至100%时提供了大量的加成",
+  "chest_item.book.dry_bones.3": "此物品只能合成获取",
+
+
+  "chest_item.book.shadow_mint.main": "幽影铸币",
+  "chest_item.book.shadow_mint.1": "此物品可以使幽影护盾变为反击利器",
+  "chest_item.book.shadow_mint.2": "但是幽影护盾不再可以承受伤害",
+  "chest_item.book.shadow_mint.3": "此物品只能合成获取",
+
+
+
+  "chest_item.book.wallow_axe.main": "沉沦战斧",
+  "chest_item.book.wallow_axe.1": "此物品与腐枯尊骨有冥冥中的联系",
+  "chest_item.book.wallow_axe.2": "暴击伤害极高，但是非暴击伤害较小",
+  "chest_item.book.wallow_axe.3": "此物品只能合成获取",
+
+  "chest_item.book.glutton.main": "饕餮诅咒",
+  "chest_item.book.glutton.1": "饕餮诅咒可以极大的提高生命能力",
+  "chest_item.book.glutton.2": "但是饥饿速度显著提高",
+  "chest_item.book.glutton.3": "此奴印无法获取",
+
+  "chest_item.book.madness_theory.main": "癫狂理论",
+  "chest_item.book.madness_theory.1": "癫狂理论降低经验获取来增加伤害输出",
+  "chest_item.book.madness_theory.2": "但是代价时无法获取经验值",
+  "chest_item.book.madness_theory.3": "此奴印无法获取",
+
+  "chest_item.book.mutation.main": "异变",
+  "chest_item.book.mutation.1": "异变使得身体的素质显著提高",
+  "chest_item.book.mutation.2": "但是对防具具有极大的排斥性",
+  "chest_item.book.mutation.3": "此奴印需要佩戴“异魔硬币”并且不佩戴其他箱子饰品杀死凋零",
+
+  "chest_item.book.the_order_of_the_undead.main": "亡者号令",
+  "chest_item.book.the_order_of_the_undead.1": "亡者号令使亡灵与你中立且增加物理伤害",
+  "chest_item.book.the_order_of_the_undead.2": "并且免疫了外来负面的侵蚀，但饥饿增加且难以治疗",
+  "chest_item.book.the_order_of_the_undead.3": "此奴印可以合成获取",
+
+  "chest_item.book.silent.main": "静置沉默",
+  "chest_item.book.silent.1": "自身静止时属性得以提高",
+  "chest_item.book.silent.2": "此奴印可以使用“黄铜币”获取",
+  "chest_item.book.silent.3": "条件为：佩戴黄铜币杀死300只生物",
+
+  "chest_item.book.speed.main": "极限反应论",
+  "chest_item.book.speed.1": "自身的速度和机动性的以极大的提高",
+  "chest_item.book.speed.2": "此奴印可以使用血肉类型的物品获取",
+  "chest_item.book.speed.3": "条件为：佩戴9个不同的仿生物品，之后即可自动获取",
+
+
+  "chest_item.book.chaos_seven.main": "混沌七子",
+  "chest_item.book.chaos_seven.1": "混沌七子融合了7种意识，持有者获得了极大的增强",
+  "chest_item.book.chaos_seven.2": "混沌七子需要玩家拥有7种不同的负面效果击杀末影龙",
+  "chest_item.book.chaos_seven.3": "你...听说过...月之石吗...",
+
+
   "chest_item.book.ring.main": "矿工戒指",
   "chest_item.book.ring.1": "这个物品提供一级急迫加成（可自行配置界面调整）",
   "chest_item.book.ring.2": "矿工戒指发现在大多数地牢，矿井，远古城市等战利品箱",
@@ -1003,5 +1059,6 @@
   "chest_item.book.test.main": "箱子里的小饰品",
   "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
   "chest_item.book.test.2": "贡献者：秋季",
-  "chest_item.book.not": "无额外描述......"
+  "chest_item.book.not": "无额外描述......",
+  "chest_item.book.mouse": "点击查看详情"
 }

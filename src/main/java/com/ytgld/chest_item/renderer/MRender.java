@@ -8,6 +8,7 @@ import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.platform.CompareOp;
 import com.mojang.blaze3d.platform.DestFactor;
 import com.mojang.blaze3d.platform.SourceFactor;
+import com.mojang.blaze3d.shaders.UniformType;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.ytgld.chest_item.Chestitem;
@@ -53,16 +54,16 @@ public abstract class MRender {
         }
         return Minecraft.getInstance().getMainRenderTarget();
     });
-    public static final OutputTarget sScreenWarped = new OutputTarget("screen_warped", () -> {
-        LevelRenderer rendertarget = Minecraft.getInstance().levelRenderer;
-        if (rendertarget instanceof IWarped iWarped){
-            if (iWarped.chest_item$IWarped()!=null) {
-                iWarped.chest_item$IWarped().copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
-                return iWarped.chest_item$IWarped();
-            }
-        }
-        return Minecraft.getInstance().getMainRenderTarget();
-    });
+//    public static final OutputTarget sScreenWarped = new OutputTarget("screen_warped", () -> {
+//        LevelRenderer rendertarget = Minecraft.getInstance().levelRenderer;
+//        if (rendertarget instanceof IWarped iWarped){
+//            if (iWarped.chest_item$IWarped()!=null) {
+//                iWarped.chest_item$IWarped().copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
+//                return iWarped.chest_item$IWarped();
+//            }
+//        }
+//        return Minecraft.getInstance().getMainRenderTarget();
+//    });
 
     private static Function<Identifier, RenderType> ITEM_TRANSLUCENT(OutputTarget outline2) {
         return Util.memoize((texture) -> {
@@ -77,10 +78,10 @@ public abstract class MRender {
         return ITEM_TRANSLUCENT(outline2).apply(texture);
     }
 
-    public static RenderType warpedScreen(){
-        return RenderType.create("warped",
-                RenderSetup.builder(RenderPipelines.LIGHTNING).setOutputTarget(sScreenWarped).sortOnUpload().createRenderSetup());
-    }
+//    public static RenderType warpedScreen(){
+//        return RenderType.create("warped",
+//                RenderSetup.builder(RenderPipelines.LIGHTNING).setOutputTarget(sScreenWarped).sortOnUpload().createRenderSetup());
+//    }
     public static RenderType red(boolean isOutline){
         return endBlack(isOutline);
     }
@@ -250,18 +251,16 @@ public abstract class MRender {
                         .withCull(false)
                         .build()
         );
-        public static final RenderPipeline sScreenWarped = (
-                RenderPipeline.builder()
-                        .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/screen_warped"))
-                        .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/screenquad"))
-                        .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/blit_screen"))
-                        .withSampler("InSampler")
-                        .withShaderDefine("time", EventMain.time)
-                        .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
-                        .withVertexFormat(DefaultVertexFormat.EMPTY, VertexFormat.Mode.TRIANGLES)
-                        .withCull(false)
-                        .build()
-        );
+//        public static final RenderPipeline sScreenWarped = (
+//                RenderPipeline.builder()
+//                        .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/screen_warped"))
+//                        .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/screenquad"))
+//                        .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"post/box_blur"))
+//                        .withSampler("InSampler")
+//                        .withUniform("WarpConfig",UniformType.UNIFORM_BUFFER)
+//                        .withVertexFormat(DefaultVertexFormat.EMPTY, VertexFormat.Mode.TRIANGLES)
+//                        .build()
+//        );
 
 
         public static final RenderPipeline BACK =(RenderPipeline.builder(
