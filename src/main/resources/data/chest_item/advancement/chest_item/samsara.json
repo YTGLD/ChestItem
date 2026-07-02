@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/sword",
+  "criteria": {
+    "samsara": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:samsara"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:samsara"
+    },
+    "title": {
+      "translate": "item.chest_item.samsara.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "samsara"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

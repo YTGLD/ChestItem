@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "chest_item:condense_bone_cube",
+    "B": "minecraft:heart_of_the_sea",
+    "C": "chest_item:heart"
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:regeneration_plugin"
+  }
+}

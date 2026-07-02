@@ -1,0 +1,149 @@
+package com.ytgld.chest_item;
+
+import com.ytgld.chest_item.event.Keys;
+import com.ytgld.chest_item.event.use.EventMain;
+import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.other.ChestMenuScreen;
+import com.ytgld.chest_item.other.ChestMenuTypes;
+import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
+import com.ytgld.chest_item.renderer.RenderBlackSoul;
+import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
+import com.ytgld.chest_item.renderer.model.BigGlowingModel;
+import com.ytgld.chest_item.renderer.MRender;
+import com.ytgld.chest_item.renderer.ShieldRenderHandler;
+import com.ytgld.chest_item.renderer.model.CIItemFeatureRenderer;
+import com.ytgld.chest_item.renderer.model.WarpModel;
+import com.ytgld.chest_item.renderer.particle.ColorPart;
+import com.ytgld.chest_item.renderer.particle.FireBlock;
+import com.ytgld.chest_item.renderer.particle.OrbPart;
+import com.ytgld.chest_item.renderer.particle.SwordEnergy;
+import com.ytgld.chest_item.renderer.particle.evilmother.ColorPartEvil;
+import com.ytgld.chest_item.renderer.particle.evilmother.CubeEvil;
+import com.ytgld.chest_item.renderer.particle.evilmother.EvilTailing;
+import com.ytgld.chest_item.renderer.particle.evilmother.OrbPartEvil;
+import com.ytgld.chest_item.renderer.particle.other.Particles;
+import com.ytgld.chest_item.renderer.particle.sword.SwordShadow1;
+import com.ytgld.chest_item.renderer.particle.sword.SwordShadow2;
+import com.ytgld.chest_item.renderer.particle.sword.SwordShadow3;
+import com.ytgld.chest_item.renderer.particle.sword.SwordShadow4;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.ClientAvatarEntity;
+import net.minecraft.client.particle.ParticleResources;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.Avatar;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+
+@Mod(value = Chestitem.MODID, dist = Dist.CLIENT)
+@EventBusSubscriber(modid = Chestitem.MODID, value = Dist.CLIENT)
+public class ChestitemClient{
+    public ChestitemClient(ModContainer container) {
+        container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+    }
+    @SubscribeEvent
+    public static void ItemTooltipEvent(ClientTickEvent.Pre event){
+        EventMain.time++;
+    }
+    @SubscribeEvent
+    public static void registerFactories(ViewportEvent.RenderFog event) {
+        if (event.getCamera().entity() instanceof Player player){
+            float number = (float) player.getAttributeValue(AttReg.chaos_consciousness);
+            if (number > 0) {
+                event.setFarPlaneDistance(event.getFarPlaneDistance() * number);
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void clientTickEvent(ClientTickEvent.Pre event) {
+        ShieldRenderHandler.tick(event);
+        BlackShieldRenderHandler.tick(event);
+        RenderBlackSoul.clientTick(event);
+        BlackParticlesAdd.tick();
+    }
+    @SubscribeEvent
+    public static void registerOverlays(RegisterGuiLayersEvent event) {
+        event.registerAbove(VanillaGuiLayers.AIR_LEVEL, Identifier.fromNamespaceAndPath(Chestitem.MODID,"pain_shield"),
+                (guiGraphics,tracker)->ShieldRenderHandler.renderShield(guiGraphics));
+        event.registerAbove(VanillaGuiLayers.FOOD_LEVEL, Identifier.fromNamespaceAndPath(Chestitem.MODID,"black_shield"),
+                (guiGraphics,tracker)-> BlackShieldRenderHandler.renderShield(guiGraphics));
+    }
+    @SubscribeEvent
+    public static void regMenu(RegisterMenuScreensEvent event){
+        event.register(ChestMenuTypes.GENERIC_12.get(), ChestMenuScreen::new);
+    }
+    @SubscribeEvent
+    public static <T extends Avatar & ClientAvatarEntity> void regMenu(RenderPlayerEvent.Pre<T> event) {
+        if (Minecraft.getInstance().player instanceof Player living) {
+            int value = (int) ((float) living.getData(AttReg.attachmentTypeBLOOD_Model));
+            if (value>0) {
+                HandlerClient.doPass = true;
+                HandlerClient.showOutline = true;
+                event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(), MRender.colorOutline(false), (pose, var) -> {
+                            float s = value * 0.1f;
+                            HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
+                                    new Vec3(0, 2.25 + s, 0),
+                                    s, var);
+                        }
+                );
+                event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(), MRender.colorOutline(true), (pose, var) -> {
+                    float s = value * 0.1f;
+                    HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
+                            new Vec3(0, 2.25 + s, 0),
+                            s, var);
+                });
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void registerItemModels(RegisterItemModelsEvent event) {
+        event.register(Identifier.fromNamespaceAndPath(Chestitem.MODID,"model"), BigGlowingModel.Unbaked.MAP_CODEC);
+        event.register(Identifier.fromNamespaceAndPath(Chestitem.MODID,"warp"), WarpModel.Unbaked.MAP_CODEC);
+    }
+    @SubscribeEvent
+    public static void RegisterFeatureRenderersEvent(RegisterFeatureRenderersEvent event) {
+        event.register(CIItemFeatureRenderer.TYPE,new CIItemFeatureRenderer());
+    }
+
+
+
+    @SubscribeEvent
+    public static void registerFactories(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(Particles.colorPart.get(), ColorPart.Provider::new);
+        event.registerSpriteSet(Particles.FireBlock_.get(), FireBlock.Provider::new);
+        event.registerSpriteSet(Particles.orbAPart.get(), OrbPart.Provider::new);
+
+        event.registerSpriteSet(Particles.orbAPart_evil.get(), OrbPartEvil.Provider::new);
+        event.registerSpriteSet(Particles.colorPart_evil.get(), ColorPartEvil.Provider::new);
+        event.registerSpriteSet(Particles.cube_evil.get(), CubeEvil.Provider::new);
+        event.registerSpriteSet(Particles.evil_tailing.get(), EvilTailing.Provider::new);
+
+        event.registerSpriteSet(Particles.SwordEnergyOption_.get(), SwordEnergy.Provider::new);
+
+        event.registerSpriteSet(Particles.sword_shadow_1.get(), SwordShadow1.Provider::new);
+        event.registerSpriteSet(Particles.sword_shadow_2.get(), SwordShadow2.Provider::new);
+        event.registerSpriteSet(Particles.sword_shadow_3.get(), SwordShadow3.Provider::new);
+        event.registerSpriteSet(Particles.sword_shadow_4.get(), SwordShadow4.Provider::new);
+
+    }
+    @SubscribeEvent
+    public static void RegisterKeyMappingsEvent(RegisterKeyMappingsEvent event){
+        event.registerCategory(Keys.chest);
+    }
+    @SubscribeEvent
+    public static void onGatherData(GatherDataEvent.Client event) {
+        event.createProvider(InitItems.TagsProvider::new);
+    }
+}

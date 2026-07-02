@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "chest_item:drifting_bottles",
+    "B": "minecraft:netherite_scrap",
+    "C": "#chest_item:celestial"
+  },
+  "pattern": [
+    "BBB",
+    "BAB",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:war"
+  }
+}
