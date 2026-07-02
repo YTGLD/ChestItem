@@ -5,6 +5,7 @@ import net.minecraft.resources.Identifier;
 
 public class BlackState {
     public int alpha;
+    public int lifeTime = 0;
     public int lastSeenTick;
 
     public final int screenX;

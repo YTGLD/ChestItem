@@ -7,6 +7,7 @@ import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.BookPageFinder;
 import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
+import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.extend.BlackSkill;
@@ -331,6 +332,7 @@ public class CIBookScreen extends Screen {
         pose.scale(size,size);
         pose.translate( - 8,  - 8);
         graphics.item(stack, 0,0);
+
         pose.popMatrix();
 
         if (!has(stack)) {

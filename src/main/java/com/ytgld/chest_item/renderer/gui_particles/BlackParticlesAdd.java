@@ -1,8 +1,5 @@
 package com.ytgld.chest_item.renderer.gui_particles;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import net.minecraft.resources.Identifier;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,8 +13,8 @@ public class BlackParticlesAdd {
     public static void tick() {
         time += 2;
         for (BlackState s : STATES.values()) {
+            s.lifeTime =  s.lifeTime + 1;
             if (time - s.lastSeenTick <= KEEP_ALIVE) {
-                s.alpha = Math.min(200, s.alpha + 40);
             } else {
                 s.alpha = Math.max(0, s.alpha - 30);
             }
@@ -30,7 +27,7 @@ public class BlackParticlesAdd {
         BlackKey key = new BlackKey(x, y,imageColorAndRenderPipeline);
 
         STATES.computeIfAbsent(key,
-                k -> new BlackState(0, time, x, y,imageColorAndRenderPipeline)
+                k -> new BlackState(imageColorAndRenderPipeline.color().a(), time, x, y,imageColorAndRenderPipeline)
         ).lastSeenTick = time;
     }
 
