@@ -2,7 +2,6 @@ package com.ytgld.chest_item.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.entity.AttackEndComing;
 import com.ytgld.chest_item.entity.EndComing;

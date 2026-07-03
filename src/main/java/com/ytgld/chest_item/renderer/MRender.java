@@ -14,13 +14,12 @@ import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BindGroupLayouts;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.rendertype.*;
+import net.minecraft.client.renderer.rendertype.LayeringTransform;
+import net.minecraft.client.renderer.rendertype.OutputTarget;
+import net.minecraft.client.renderer.rendertype.RenderSetup;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.Util;
-
-import java.util.function.Function;
 
 import static com.mojang.blaze3d.platform.BlendFactor.*;
 import static net.minecraft.client.renderer.RenderPipelines.*;

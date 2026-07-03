@@ -7,7 +7,10 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
-import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -40,7 +43,7 @@ import java.util.List;
  * 超过5点的伤害将转换成等数值的流血
  * <P>
  */
-public class GodApple extends ItemBase implements Meat , ILight {
+public class GodApple extends ItemBase implements Meat  {
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
         public static ModConfigSpec.DoubleValue intValue ;
@@ -163,9 +166,5 @@ public class GodApple extends ItemBase implements Meat , ILight {
         return Light.ARGB.color(255,255,135,105);
     }
 
-    @Override
-    public boolean isWhirlpool() {
-        return true;
-    }
 }
 

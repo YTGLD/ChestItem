@@ -4,7 +4,6 @@ import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.items.black.celestial.CommonCelestial;
-import com.ytgld.chest_item.items.black.celestial.EternalVows;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -24,16 +23,9 @@ public class ChestSlot extends Slot {
             if (stack.getItem() instanceof TheImprintOfTheSoul) {
                 return true;
             }
-
-            if (stack.getItem() instanceof EternalVows) {
-                return true;
-            }
         }else {
             if (stack.getItem() instanceof ItemBase){
                 if (stack.getItem() instanceof TheImprintOfTheSoul) {
-                    return false;
-                }
-                if (stack.getItem() instanceof EternalVows) {
                     return false;
                 }
                 return true;
@@ -53,12 +45,6 @@ public class ChestSlot extends Slot {
                         + BuiltInRegistries.ITEM.getKey(itemstack.getItem()).getPath()
         );
         player.setData(AttReg.itemRecord,va);
-
-        if (itemstack.getItem() instanceof EternalVows) {
-            if (!player.isCreative()) {
-                return false;
-            }
-        }
         if (player instanceof IPlayer iPlayer) {
             iPlayer.cI1_21_11$onRemoveItem(itemstack);
         }

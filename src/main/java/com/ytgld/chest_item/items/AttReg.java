@@ -6,7 +6,6 @@ import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
 import com.ytgld.chest_item.other.IntSyncHandler;
 import com.ytgld.chest_item.other.SyncHandler;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;

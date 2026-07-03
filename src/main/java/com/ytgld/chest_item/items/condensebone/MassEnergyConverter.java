@@ -51,35 +51,6 @@ public class MassEnergyConverter extends ItemBone {
     public MassEnergyConverter(Properties properties) {
         super(properties);
     }
-    @Override
-    public GUILight guiLight(LivingEntity entity) {
-        int lightNumber = 3;
-        Map<Integer,Integer> listGUIColor = new HashMap<>();
-
-        //蓝色
-        listGUIColor.put(0, Light.ARGB.color(100,80,120,255));
-        listGUIColor.put(1, Light.ARGB.color(100,80,120,255));
-        //绿色
-        listGUIColor.put(2, Light.ARGB.color(100,120,255,60));
-
-
-        Map<Integer, Vec2> listPosOffset = new HashMap<>();
-        //蓝色
-        listPosOffset.put(0, new Vec2(4,0));
-        listPosOffset.put(1, new Vec2(-4,0));
-        //绿色
-        listPosOffset.put(2, new Vec2(0,-2));
-
-
-
-        Map<Integer, Identifier> listImg = new HashMap<>();
-        for (int i = 0; i < lightNumber; i++) {
-            Identifier identifier = Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png");
-            listImg.put(i,identifier);
-        }
-
-        return new GUILight(listGUIColor,listPosOffset,listImg,true,lightNumber);
-    }
 
     public static void LivingIncomingDamageEvent(LivingIncomingDamageEvent event){
         if (event.getEntity() instanceof Player player) {

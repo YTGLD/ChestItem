@@ -21,10 +21,12 @@
   },
   "client": [
     "cilent.AbstractContainerScreenMixin",
+    "cilent.AddBlackShadowMixin",
     "cilent.AvatarRendererMixin",
     "cilent.AvatarRenderStateMixin",
     "cilent.GuiGraphicsExtractorMixin",
     "cilent.ParticleEngineMixin",
+    "cilent.RenderBlackShadowMixin",
     "cilent.blacksoul.GuiGraphicsExtractorMixin",
     "cilent.guiparticles.ScreenMixin",
     "cilent.hud.GuiMixin",

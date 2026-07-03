@@ -3,7 +3,6 @@ package com.ytgld.chest_item.items.other;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
-import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -40,7 +39,7 @@ import java.util.List;
  * <p>
  * 受伤有概率反弹伤害
  */
-public class HardwoodTotemPole extends ItemBase implements ILight {
+public class HardwoodTotemPole extends ItemBase {
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
         public static ModConfigSpec.IntValue intValue ;
@@ -134,8 +133,4 @@ public class HardwoodTotemPole extends ItemBase implements ILight {
         return Light.ARGB.color(255, 255, 100, 50);
     }
 
-    @Override
-    public boolean isWhirlpool() {
-        return true;
-    }
 }

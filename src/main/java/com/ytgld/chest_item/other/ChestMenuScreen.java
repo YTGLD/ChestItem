@@ -5,7 +5,6 @@ import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
 import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.items.reinforced.ReinforcedDataHandler;
-import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -54,6 +53,8 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
             int guiLeft = (this.width - this.imageWidth) / 2 - 24;
             int guiTop = (this.height - this.imageHeight) / 2 + 20 * i;
             guiGraphics.item(MemoryBase.getMemoryItem(player).get(i), guiLeft, guiTop);
+
+
             int appleSize = 16;
             ItemStack itemstack = MemoryBase.getMemoryItem(player).get(i);
             if (mouseX >= guiLeft && mouseX < guiLeft + appleSize &&

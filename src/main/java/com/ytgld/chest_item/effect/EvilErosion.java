@@ -3,7 +3,6 @@ package com.ytgld.chest_item.effect;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.evil_mother.IEvil;
-import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

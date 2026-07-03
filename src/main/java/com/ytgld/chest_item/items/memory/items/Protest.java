@@ -6,7 +6,6 @@ import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.MemoryItems;
-import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -27,7 +26,6 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.UnknownNullability;
 
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 
 /**

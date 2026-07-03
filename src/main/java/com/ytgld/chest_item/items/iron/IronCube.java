@@ -4,7 +4,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import net.minecraft.ChatFormatting;
@@ -26,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
  * <p>
  * 生命值降低不会影响你的意志，反而会增加自身的稳定性
  */
-public class IronCube extends ItemBase implements ILight {
+public class IronCube extends ItemBase {
     public IronCube(Properties properties) {
         super(properties);
     }
@@ -69,8 +68,4 @@ public class IronCube extends ItemBase implements ILight {
         tooltipComponents.accept(Component.translatable("item.chest_item.iron_cube.string.3").withStyle(ChatFormatting.GOLD));
     }
 
-    @Override
-    public boolean isWhirlpool() {
-        return true;
-    }
 }

@@ -1,8 +1,5 @@
 package com.ytgld.chest_item.renderer.gui_particles;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import net.minecraft.resources.Identifier;
-
 public class BlackState {
     public int alpha;
     public int lifeTime = 0;

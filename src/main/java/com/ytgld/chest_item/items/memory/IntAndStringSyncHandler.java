@@ -1,6 +1,6 @@
 package com.ytgld.chest_item.items.memory;
 
-import com.mojang.serialization.*;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -8,7 +8,8 @@ import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
 import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import org.jspecify.annotations.NonNull;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class IntAndStringSyncHandler implements AttachmentSyncHandler<IntAndStringSyncHandler.ISClass> {
 

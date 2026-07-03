@@ -64,10 +64,6 @@ public class SeparateRune extends ItemBase implements IGold {
         return modifiers;
     }
     @Override
-    public int guiColor(ItemStack stack) {
-        return Light.ARGB.color(200,255,50,50);
-    }
-    @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255,255,255,20);
     }

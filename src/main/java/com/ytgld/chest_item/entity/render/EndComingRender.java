@@ -2,13 +2,11 @@ package com.ytgld.chest_item.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.entity.state.EndComingRenderState;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -16,15 +14,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Matrix4f;
-import org.joml.Vector4f;
-
-import javax.swing.text.html.parser.Entity;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComingRenderState> {
     public EndComingRender(EntityRendererProvider.Context p_173917_) {

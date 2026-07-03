@@ -11,7 +11,10 @@ import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.ChaosConstructor;
 import com.ytgld.chest_item.items.black.ShadowMint;
-import com.ytgld.chest_item.items.black.celestial.*;
+import com.ytgld.chest_item.items.black.celestial.Blood;
+import com.ytgld.chest_item.items.black.celestial.Chaos;
+import com.ytgld.chest_item.items.black.celestial.CommonCelestial;
+import com.ytgld.chest_item.items.black.celestial.Samsara;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
 import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
@@ -24,7 +27,10 @@ import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
-import com.ytgld.chest_item.items.evil_mother.*;
+import com.ytgld.chest_item.items.evil_mother.AnnualPlate;
+import com.ytgld.chest_item.items.evil_mother.EvilBelt;
+import com.ytgld.chest_item.items.evil_mother.EvilMother;
+import com.ytgld.chest_item.items.evil_mother.TheKill;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
@@ -1048,27 +1054,6 @@ public class EventMain {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
                         .withColor(Light.ARGB.color(255, 255, 0, 100))));
-
-                if (event.getItemStack().getItem() instanceof EternalVows) {
-                    if (event.getEntity() != null && !event.getEntity().isCreative()) {
-                        event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove").withStyle(Style.EMPTY
-                                .withColor(Light.ARGB.color(255, 255, 20, 80))));
-                    } else {
-                        event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove_and").withStyle(Style.EMPTY
-                                .withColor(Light.ARGB.color(255, 255, 150, 0))));
-                    }
-                }
-                if (event.getItemStack().getItem() instanceof TheImprintOfTheSoul soul) {
-                    if (!soul.canRemove(event.getItemStack())) {
-                        if (event.getEntity() != null && !event.getEntity().isCreative()) {
-                            event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove").withStyle(Style.EMPTY
-                                    .withColor(Light.ARGB.color(255, 255, 20, 80))));
-                        } else {
-                            event.getToolTip().add(1, Component.translatable("chest_item.the_imprint_of_the_soul.can_not_remove_and").withStyle(Style.EMPTY
-                                    .withColor(Light.ARGB.color(255, 255, 150, 0))));
-                        }
-                    }
-                }
                 if (event.getItemStack().getItem() instanceof CommonCelestial celestial) {
                     if (!celestial.canRemove(event.getItemStack())) {
                         if (event.getEntity() != null && !event.getEntity().isCreative()) {

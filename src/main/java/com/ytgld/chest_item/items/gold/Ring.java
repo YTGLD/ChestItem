@@ -62,20 +62,6 @@ public class Ring extends ItemBase implements IGold {
         tooltipComponents.accept(Component.translatable("item.chest_item.ring.string.1").withStyle(ChatFormatting.GOLD));
     }
 
-
-
-
-    @Override
-    public Vec2 posOffset() {
-        return new Vec2(4,4);
-    }
-
-    @Override
-    public int guiColor(ItemStack stack) {
-        return Light.ARGB.color(255,50,120,255);
-    }
-
-
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255,255,255,20);

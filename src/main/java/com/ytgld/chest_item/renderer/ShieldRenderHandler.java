@@ -2,27 +2,19 @@ package com.ytgld.chest_item.renderer;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
-import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import org.joml.Matrix3x2fStack;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 import static com.ytgld.chest_item.Handler.isInHeartShieldCooldown;

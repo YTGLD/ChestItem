@@ -12,7 +12,6 @@ import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 /**

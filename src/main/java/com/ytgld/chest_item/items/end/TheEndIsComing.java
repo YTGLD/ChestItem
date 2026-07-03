@@ -3,7 +3,6 @@ package com.ytgld.chest_item.items.end;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.entity.Entitys;
-import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -15,7 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
-public class TheEndIsComing extends ItemBase implements ILight {
+public class TheEndIsComing extends ItemBase {
     public TheEndIsComing(Properties properties) {
         super(properties);
     }
@@ -57,8 +56,4 @@ public class TheEndIsComing extends ItemBase implements ILight {
         tooltipComponents.accept(Component.translatable("item.chest_item.the_end_is_coming.string.2").withStyle(ChatFormatting.GOLD));
     }
 
-    @Override
-    public boolean isWhirlpool() {
-        return true;
-    }
 }

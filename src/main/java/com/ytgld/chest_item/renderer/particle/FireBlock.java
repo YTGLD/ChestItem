@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.renderer.particle;
 
-import com.mojang.blaze3d.opengl.GlStateManager;
 import com.ytgld.chest_item.renderer.MRender;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -13,7 +12,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 
 public class FireBlock extends SingleQuadParticle {
     public FireBlock(ClientLevel level, double x, double y, double z, float movementX, float movementY, float movementZ, TextureAtlasSprite textureAtlasSprite) {

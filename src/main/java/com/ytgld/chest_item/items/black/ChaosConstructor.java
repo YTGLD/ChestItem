@@ -8,7 +8,6 @@ import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.IGUILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -41,7 +40,7 @@ import java.util.List;
  * 	每次提升1%，但不超过30%
  * <p>
  */
-public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
+public class ChaosConstructor extends ItemBlackShadow  {
     public static final String leadHurtSize = "leadHurtSize";
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
@@ -154,13 +153,4 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
         return doAttribute(stack, player);
     }
 
-    @Override
-    public int guiColor(ItemStack stack) {
-        return 0;
-    }
-
-    @Override
-    public Vec2 posOffset() {
-        return new Vec2(0,0);
-    }
 }

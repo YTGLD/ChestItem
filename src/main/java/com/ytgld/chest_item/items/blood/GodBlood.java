@@ -6,7 +6,6 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
-import com.ytgld.chest_item.items.IGUILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -39,7 +38,7 @@ import java.util.List;
  *增加20%攻速
  */
 
-public class  GodBlood extends ItemBase implements IGUILight {
+public class  GodBlood extends ItemBase  {
     public GodBlood(Properties properties) {
         super(properties);
     }
@@ -112,13 +111,4 @@ public class  GodBlood extends ItemBase implements IGUILight {
         return Light.ARGB.color(255,100,100,255);
     }
 
-    @Override
-    public int guiColor(ItemStack stack) {
-        return Light.ARGB.color(150,120,80,255);
-    }
-
-    @Override
-    public Vec2 posOffset() {
-        return new Vec2(0,4);
-    }
 }

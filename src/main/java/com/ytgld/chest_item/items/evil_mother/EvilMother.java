@@ -6,7 +6,6 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.ItemBase;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;

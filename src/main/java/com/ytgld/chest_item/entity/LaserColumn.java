@@ -3,7 +3,6 @@ package com.ytgld.chest_item.entity;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

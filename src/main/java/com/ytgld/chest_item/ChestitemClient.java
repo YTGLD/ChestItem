@@ -7,11 +7,10 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
-import com.ytgld.chest_item.renderer.RenderBlackSoul;
-import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
-import com.ytgld.chest_item.renderer.model.BigGlowingModel;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
+import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
+import com.ytgld.chest_item.renderer.model.BigGlowingModel;
 import com.ytgld.chest_item.renderer.model.CIItemFeatureRenderer;
 import com.ytgld.chest_item.renderer.model.WarpModel;
 import com.ytgld.chest_item.renderer.particle.ColorPart;
@@ -29,9 +28,6 @@ import com.ytgld.chest_item.renderer.particle.sword.SwordShadow3;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow4;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.ClientAvatarEntity;
-import net.minecraft.client.particle.ParticleResources;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.player.Player;
@@ -70,7 +66,6 @@ public class ChestitemClient{
     public static void clientTickEvent(ClientTickEvent.Pre event) {
         ShieldRenderHandler.tick(event);
         BlackShieldRenderHandler.tick(event);
-        RenderBlackSoul.clientTick(event);
         BlackParticlesAdd.tick();
     }
     @SubscribeEvent

@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.items.black.give;
 
-import com.ytgld.chest_item.Config;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;

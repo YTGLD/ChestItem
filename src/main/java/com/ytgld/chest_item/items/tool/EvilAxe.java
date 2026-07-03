@@ -3,7 +3,6 @@ package com.ytgld.chest_item.items.tool;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.EvilMotherSpirit;
 import com.ytgld.chest_item.items.evil_mother.IEvil;
-import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;

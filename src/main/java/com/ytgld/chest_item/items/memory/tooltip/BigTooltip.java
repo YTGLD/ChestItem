@@ -2,8 +2,6 @@ package com.ytgld.chest_item.items.memory.tooltip;
 
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.IBigTooltip;
-import com.ytgld.chest_item.items.memory.MemoryBase;
-import com.ytgld.chest_item.renderer.i.IGuiGraphics;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.network.chat.Component;

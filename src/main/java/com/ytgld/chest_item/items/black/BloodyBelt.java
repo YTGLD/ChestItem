@@ -6,7 +6,6 @@ import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.UnstableSpheres;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.IGUILightList;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -40,7 +39,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public class BloodyBelt extends ItemBlackShadow implements IGUILightList , SkillList {
+public class BloodyBelt extends ItemBlackShadow implements SkillList {
     public BloodyBelt(Properties properties) {
         super(properties);
     }
@@ -141,36 +140,6 @@ public class BloodyBelt extends ItemBlackShadow implements IGUILightList , Skill
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color((int) (255), 250, 150, 50);
-    }
-
-    @Override
-    public GUILight guiLight(LivingEntity entity) {
-        if (entity!=null) {
-            int lightNumber = 8;
-            Map<Integer, Vec2> listPosOffset = new HashMap<>();
-            double radius = 4;
-            double angleStep = 2 * Math.PI / lightNumber;
-            Map<Integer, Integer> listGUIColor = new HashMap<>();
-            Identifier identifier = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/all.png");
-            Map<Integer, Identifier> listImg = new HashMap<>();
-            for (int i = 0; i < lightNumber; i++) {
-                double angle = i * angleStep;
-                double x = radius * Math.cos(angle);
-                double y = radius * Math.sin(angle);
-                listPosOffset.put(i, new Vec2((float) x, (float) y).add(new Vec2(-2, 4)));
-
-                float alpha = (float) Math.sin((entity.tickCount + i * 5.0f) / 10.0f);
-                alpha *= 25.0f;
-                alpha = Math.abs(alpha);
-                alpha = Math.min(alpha, 50.0f);
-
-                listGUIColor.put(i, Light.ARGB.color((int) (25 + alpha), 250, 150, 50));
-                listImg.put(i, identifier);
-            }
-
-            return new GUILight(listGUIColor,listPosOffset,listImg,true,lightNumber);
-        }
-        return null;
     }
 
     @Nullable

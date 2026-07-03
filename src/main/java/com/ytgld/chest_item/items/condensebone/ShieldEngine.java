@@ -51,29 +51,7 @@ public class ShieldEngine extends ItemBone {
     public ShieldEngine(Properties properties) {
         super(properties);
     }
-    @Override
-    public GUILight guiLight(LivingEntity entity) {
-        int lightNumber = 1;
 
-
-
-        Map<Integer,Integer> listGUIColor = new HashMap<>();
-        listGUIColor.put(0, Light.ARGB.color(150,120,255,80));
-
-
-
-        Map<Integer, Vec2> listPosOffset = new HashMap<>();
-        listPosOffset.put(0,new Vec2(0,4));
-
-
-        Map<Integer, Identifier> listImg = new HashMap<>();
-        for (int i = 0; i < lightNumber; i++) {
-            Identifier identifier = Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png");
-            listImg.put(i,identifier);
-        }
-
-        return new GUILight(listGUIColor,listPosOffset,listImg,true,lightNumber);
-    }
     public static void LivingIncomingDamageEvent(LivingIncomingDamageEvent event){
         if (event.getEntity() instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);

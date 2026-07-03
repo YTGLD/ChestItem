@@ -2,8 +2,6 @@ package com.ytgld.chest_item.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.entity.EvilMotherSpirit;
 import com.ytgld.chest_item.entity.state.EvilMotherSpiritState;
 import com.ytgld.chest_item.renderer.MRender;
@@ -12,7 +10,6 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;

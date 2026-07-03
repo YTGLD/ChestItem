@@ -47,38 +47,6 @@ public class QualitativeComponents extends ItemBone {
     public QualitativeComponents(Properties properties) {
         super(properties);
     }
-    @Override
-    public GUILight guiLight(LivingEntity entity) {
-        int lightNumber = 4;
-        Map<Integer,Integer> listGUIColor = new HashMap<>();
-        listGUIColor.put(0, Light.ARGB.color(100,120,255,80));
-        listGUIColor.put(1,Light.ARGB.color(100,120,255,80));
-
-
-        listGUIColor.put(2,Light.ARGB.color(60,80,120,255));
-
-
-        listGUIColor.put(3,Light.ARGB.color(120,80,120,255));
-        Map<Integer, Vec2> listPosOffset = new HashMap<>();
-        listPosOffset.put(0,new Vec2(4,-2));
-        listPosOffset.put(1,new Vec2(-4,-2));
-
-
-        listPosOffset.put(2,new Vec2(0,0));
-
-
-        listPosOffset.put(3,new Vec2(0,4));
-        Map<Integer, Identifier> listImg = new HashMap<>();
-
-
-
-        for (int i = 0; i < lightNumber; i++) {
-            Identifier identifier = Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png");
-            listImg.put(i,identifier);
-        }
-
-        return new GUILight(listGUIColor,listPosOffset,listImg,true,lightNumber);
-    }
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(AttReg.more_speed, new AttributeModifier(Identifier.parse(Chestitem.MODID +

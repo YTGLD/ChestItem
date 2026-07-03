@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.items.condensebone;
 
-import com.ytgld.chest_item.items.IGUILightList;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.renderer.light.GUILight;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -12,7 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class ItemBone extends ItemBase implements IGUILightList {
+public class ItemBone extends ItemBase {
     public ItemBone(Properties properties) {
         super(properties);
     }
@@ -28,10 +27,5 @@ public class ItemBone extends ItemBase implements IGUILightList {
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255, 50, 255, 50);
-    }
-
-    @Override
-    public GUILight guiLight(LivingEntity entity) {
-        return null;
     }
 }

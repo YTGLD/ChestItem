@@ -4,7 +4,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.ILight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -17,7 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public class DeathOmenStoneMonument extends ItemBlackShadow  implements ILight {
+public class DeathOmenStoneMonument extends ItemBlackShadow  {
     public DeathOmenStoneMonument(Properties properties) {
         super(properties);
     }
@@ -53,9 +52,5 @@ public class DeathOmenStoneMonument extends ItemBlackShadow  implements ILight {
     @Override
     public int color(ItemStack stack) {
         return Light.ARGB.color(255, 255, 100, 255);
-    }
-    @Override
-    public boolean isWhirlpool() {
-        return true;
     }
 }

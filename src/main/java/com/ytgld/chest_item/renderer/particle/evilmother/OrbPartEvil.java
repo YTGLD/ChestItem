@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.renderer.particle.evilmother;
 
-import com.mojang.blaze3d.opengl.GlStateManager;
 import com.ytgld.chest_item.renderer.MRender;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;

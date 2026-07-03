@@ -2,7 +2,6 @@ package com.ytgld.chest_item.effect;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

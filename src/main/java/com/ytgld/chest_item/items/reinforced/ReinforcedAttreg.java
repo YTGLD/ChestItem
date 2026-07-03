@@ -2,7 +2,6 @@ package com.ytgld.chest_item.items.reinforced;
 
 import com.ytgld.chest_item.Chestitem;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;

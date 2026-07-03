@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.items.tool;
 
-import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
@@ -11,16 +10,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import org.jspecify.annotations.NonNull;
-
-import java.util.Collection;
 
 public class FearGreatsword extends Item {
     public static final String doubleString = "doubleString";

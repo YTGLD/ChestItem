@@ -51,38 +51,6 @@ public class AlienationDiodes extends ItemBone {
     public AlienationDiodes(Properties properties) {
         super(properties);
     }
-    @Override
-    public GUILight guiLight(LivingEntity entity) {
-        int lightNumber = 4;
-        Map<Integer,Integer> listGUIColor = new HashMap<>();
-
-        //蓝色
-        listGUIColor.put(0, Light.ARGB.color(125,80,120,255));
-        listGUIColor.put(1, Light.ARGB.color(125,80,120,255));
-        //绿色
-        listGUIColor.put(2, Light.ARGB.color(125,120,255,60));
-        listGUIColor.put(3, Light.ARGB.color(125,120,255,60));
-
-        Map<Integer, Vec2> listPosOffset = new HashMap<>();
-
-        //蓝色
-        listPosOffset.put(0, new Vec2(0,-5));
-        listPosOffset.put(1, new Vec2(5,0));
-        //绿色
-        listPosOffset.put(2, new Vec2(0,5));
-        listPosOffset.put(3, new Vec2(-5,0));
-
-
-
-        Map<Integer, Identifier> listImg = new HashMap<>();
-
-        for (int i = 0; i < lightNumber; i++) {
-            Identifier identifier = Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png");
-            listImg.put(i,identifier);
-        }
-
-        return new GUILight(listGUIColor,listPosOffset,listImg,true,lightNumber);
-    }
     public static void CriticalHitEvent(CriticalHitEvent event){
         if (event.getEntity() instanceof Player player) {
             ChestInventory chestInventory = Handler.getItem(player);

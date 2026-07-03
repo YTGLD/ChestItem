@@ -249,9 +249,6 @@ public class InitItems {
             (Identifier)-> new MysteriousMetal(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> Adjudication_ = register("adjudication",
             (Identifier)-> new Adjudication(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
-    public static final DeferredItem<@NotNull Item> ChiefPriest_ = register("chief_priest",
-            (Identifier)-> new ChiefPriest(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
-
 
 
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",

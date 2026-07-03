@@ -1,15 +1,12 @@
 package com.ytgld.chest_item.entity;
 
-import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.renderer.particle.other.Particles;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
