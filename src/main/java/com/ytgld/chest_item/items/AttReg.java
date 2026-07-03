@@ -43,10 +43,10 @@ public class AttReg {
         return new RangedAttribute("attribute.name.chest_item.heal", 1, -1024, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> instability = REGISTRY.register("instability",()->{
-        return new RangedAttribute("attribute.name.chest_item.instability", 1, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.instability", 1, 1, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> instability_low = REGISTRY.register("instability_low",()->{
-        return new RangedAttribute("attribute.name.chest_item.instability_low", 1, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.instability_low", 1, 1, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> more_speed = REGISTRY.register("more_speed",()->{
         return new RangedAttribute("attribute.name.chest_item.more_speed", 1, -1024, 1024).setSyncable(true);

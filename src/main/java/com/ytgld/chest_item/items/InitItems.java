@@ -410,11 +410,11 @@ public class InitItems {
     public static class TagsProvider extends ItemTagsProvider {
 
 
-        public static final TagKey<@NotNull Item> chestItem = createTag("chest_item");
-        public static final TagKey<@NotNull Item> chestItem_iron = createTag("chest_item_iron");
-        public static final TagKey<@NotNull Item> celestial = createTag("celestial");
-        public static final TagKey<@NotNull Item> chestItemMeat = createTag("chest_item_meat");
-        public static final TagKey<@NotNull Item> chestItemBone = createTag("chest_item_bone");
+        public static final TagKey<Item> chestItem = createTag("chest_item");
+        public static final TagKey<Item> chestItem_iron = createTag("chest_item_iron");
+        public static final TagKey<Item> celestial = createTag("celestial");
+        public static final TagKey<Item> chestItemMeat = createTag("chest_item_meat");
+        public static final TagKey<Item> chestItemBone = createTag("chest_item_bone");
         public static final TagKey<Item> evilMother = createTag("evil_mother");
 
         public TagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
@@ -472,6 +472,7 @@ public class InitItems {
                     .add(ScarHeart_.getKey())
                     .add(Self_Increasing_Heart.getKey())
                     .add(ActualSuffering_.getKey())
+                    .add(FleshAndBloodGears_.getKey())
                     .add(ReinforcedItems.RegenerationPlugin_.getKey())
                     .add(ReinforcedItems.ComplexComponents_.getKey())
                     .add(ReinforcedItems.StabilizingDevice_.getKey())
@@ -489,6 +490,8 @@ public class InitItems {
                     .add(DevilCoins_.getKey())
                     .add(Knife_.getKey())
                     .add(Lead_.getKey())
+                    .add(Fission_.getKey())
+                    .add(FissionEmblem_.getKey())
                     .add(DriftingBottles_.getKey())
                     .add(WindKnife_.getKey());
 

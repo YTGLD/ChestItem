@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.items.meet;
 
+import com.mojang.datafixers.kinds.IdF;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
@@ -9,6 +10,8 @@ import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -52,17 +55,10 @@ public class MeatBall  extends ItemBase implements Meat {
     public static void tick(LivingEntityUseItemEvent.Finish event) {
         LivingEntity living = event.getEntity();
         if (living instanceof Player player) {
-            ChestInventory chestInventory = Handler.getItem(player);
-            if (chestInventory != null) {
-                if (!player.level().isClientSide()) {
-                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                        ItemStack stack = chestInventory.getItem(i);
-                        if (stack.is(InitItems.Meat_Ball)) {
-                            if (event.getItem().getUseAnimation() == ItemUseAnimation.EAT) {
-                                player.getFoodData().eat(ConfigItem.intValue.get().intValue(), ConfigItem.intValue2.get().floatValue());
-                                break;
-                            }
-                        }
+            if (Handler.has(player, InitItems.Meat_Ball.asItem())) {
+                if (event.getItem().get(DataComponents.FOOD) != null) {
+                    if (event.getItem().getUseAnimation() == ItemUseAnimation.EAT) {
+                        player.getFoodData().eat(ConfigItem.intValue.get().intValue(), ConfigItem.intValue2.get().floatValue());
                     }
                 }
             }

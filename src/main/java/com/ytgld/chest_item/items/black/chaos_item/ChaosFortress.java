@@ -83,7 +83,7 @@ public class ChaosFortress extends ItemBlackShadow implements ITheChaos {
                     .defineInRange("number",2f,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.ChaosFortress2")
                     .defineInRange("number2",5f,0,Integer.MAX_VALUE);
-            intValue3 =  builder.translation("chest_item.config.ChaosFortress2")
+            intValue3 =  builder.translation("chest_item.config.ChaosFortress3")
                     .defineInRange("number3",0.7f,0,Integer.MAX_VALUE);
             builder.pop();
         }

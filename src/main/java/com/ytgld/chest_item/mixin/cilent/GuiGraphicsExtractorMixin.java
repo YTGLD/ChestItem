@@ -11,7 +11,6 @@ import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
 import com.ytgld.chest_item.items.evil_mother.IEvil;
 import com.ytgld.chest_item.items.memory.MemoryBase;
-import com.ytgld.chest_item.renderer.ChestItemLightRender;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
 import net.minecraft.client.Minecraft;
@@ -22,9 +21,7 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositione
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.state.gui.GuiRenderState;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import org.joml.Matrix3x2fStack;

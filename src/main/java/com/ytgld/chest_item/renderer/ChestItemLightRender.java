@@ -1,12 +1,9 @@
 package com.ytgld.chest_item.renderer;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.ConfigC;
-import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.items.black.celestial.CommonCelestial;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;

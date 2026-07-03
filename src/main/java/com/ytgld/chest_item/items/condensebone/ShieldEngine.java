@@ -1,27 +1,19 @@
 package com.ytgld.chest_item.items.condensebone;
 
-import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
-import com.ytgld.chest_item.renderer.light.GUILight;
-import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ShieldEngine extends ItemBone {
     @ConfigPlugin
@@ -54,28 +46,19 @@ public class ShieldEngine extends ItemBone {
 
     public static void LivingIncomingDamageEvent(LivingIncomingDamageEvent event){
         if (event.getEntity() instanceof Player player) {
-            ChestInventory chestInventory = Handler.getItem(player);
-            if (chestInventory!=null) {
-                if (!player.level().isClientSide()) {
-                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                        ItemStack stack = chestInventory.getItem(i);
-                        if (stack.is(InitItems.ShieldEngine_)) {
-                            float lv = player.getHealth() / player.getMaxHealth();
-                            lv *= 100;
-                            int now = (int) (100 -(lv));
-                            float apply = 1 / 100f * now;
-                            apply /= ConfigItem.intValue.get().floatValue();
+            if (Handler.has(player,InitItems.ShieldEngine_.asItem())) {
+                float lv = player.getHealth() / player.getMaxHealth();
+                lv *= 100;
+                int now = (int) (100 -(lv));
+                float apply = 1 / 100f * now;
+                apply /= ConfigItem.intValue.get().floatValue();
 
-                            float s  = 1 -apply * ConfigItem.intValue2.get().floatValue();
-                            if (s > 1) {
-                                s = 1;
-                            }
-
-                            event.setAmount(event.getAmount()*s);
-                            break;
-                        }
-                    }
+                float s  = 1 -apply * ConfigItem.intValue2.get().floatValue();
+                if (s > 1) {
+                    s = 1;
                 }
+
+                event.setAmount(event.getAmount()*s);
             }
         }
     }

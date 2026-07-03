@@ -750,8 +750,8 @@
 
   "item.chest_item.mass_energy_converter": "质能转换器",
   "item.chest_item.mass_energy_converter.string.0": "质能方程式",
-  "item.chest_item.mass_energy_converter.string.1": "每损失1%生命值，增加%d%%抗性",
-  "item.chest_item.mass_energy_converter.string.2": "每损失1%生命值，增加%d%%伤害",
+  "item.chest_item.mass_energy_converter.string.1": "每损失百分之一生命值，增加%d%%抗性",
+  "item.chest_item.mass_energy_converter.string.2": "每损失百分之一生命值，增加%d%%伤害",
 
 
   "item.chest_item.qualitative_components": "质化组件",
