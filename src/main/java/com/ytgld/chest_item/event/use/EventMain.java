@@ -146,11 +146,13 @@ public class EventMain {
             if (slashing > 0) {
                 if (living.tickCount % 4 == 0) {
                     LivingEntity entity = living.getLastHurtByMob();
-                    RandomSource randomSource = living.getRandom();
-                    Vec3 vec3 = new Vec3(randomSource.nextInt(-25,25), randomSource.nextInt(-360,360), randomSource.nextInt(-25,25));
-                    living.level().addParticle(SwordEnergyOption.createSwordEnergyOption(Particles.SwordEnergyOption_.get(),
-                            vec3,false ,Light.ARGB.color(255,255,255,255),10),
-                            living.getX(), living.getY() + 1, living.getZ(), 0, 0, 0);
+                    if (living.level() instanceof ServerLevel serverLevel) {
+                        RandomSource randomSource = living.getRandom();
+                        Vec3 vec3 = new Vec3(randomSource.nextInt(-25, 25), randomSource.nextInt(-360, 360), randomSource.nextInt(-25, 25));
+                        serverLevel.sendParticles(SwordEnergyOption.createSwordEnergyOption(Particles.SwordEnergyOption_.get(),
+                                        vec3, false, Light.ARGB.color(255, 255, 255, 255), 10),
+                                living.getX(), living.getY() + 1, living.getZ(), 1, 0.5f, 0,0.5f,0);
+                    }
                     if (entity != null) {
                         if (entity instanceof Player player) {
                             HolderLookup.RegistryLookup<Enchantment> registrylookup = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
