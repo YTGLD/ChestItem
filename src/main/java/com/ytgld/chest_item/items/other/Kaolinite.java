@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.items.other;
 
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
@@ -46,21 +47,16 @@ public class Kaolinite extends ItemBase {
         super(properties);
     }
     public static void event(ItemStackTickEvent event){
-        ChestInventory chestInventory = event.chestInventory;
         Player player = event.player;
-        if (!player.level().isClientSide()) {
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.Kaolinite_)) {
-                    if (player.experienceLevel > 0 ){
-                        if (player.tickCount%ConfigItem.intValue.get().intValue()==1) {
-                            addDamage(player,EquipmentSlot.HEAD);
-                            addDamage(player,EquipmentSlot.CHEST);
-                            addDamage(player,EquipmentSlot.LEGS);
-                            addDamage(player,EquipmentSlot.FEET);
-                            addDamage(player,EquipmentSlot.MAINHAND);
-                        }
-                    }
+        if (Handler.has(player, InitItems.Kaolinite_.asItem())) {
+            if (player.experienceLevel > 0 ){
+                if (player.tickCount%ConfigItem.intValue.get().intValue()==1) {
+                    addDamage(player,EquipmentSlot.HEAD);
+                    addDamage(player,EquipmentSlot.CHEST);
+                    addDamage(player,EquipmentSlot.LEGS);
+                    addDamage(player,EquipmentSlot.FEET);
+                    addDamage(player,EquipmentSlot.MAINHAND);
+                    addDamage(player,EquipmentSlot.OFFHAND);
                 }
             }
         }

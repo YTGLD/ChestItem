@@ -1,12 +1,15 @@
 package com.ytgld.chest_item.renderer.book;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.BookPageFinder;
 import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
+import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
+import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.extend.BlackSkill;
@@ -26,6 +29,8 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundSeenAdvancementsPacket;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -33,6 +38,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec2;
 import org.joml.Matrix3x2fStack;
+import org.joml.Vector2f;
 import org.jspecify.annotations.NonNull;
 
 import java.util.*;
@@ -172,10 +178,30 @@ public class CIBookScreen extends Screen {
         dragging = false;
         return super.mouseReleased(event);
     }
+    public RandomSource source = RandomSource.create();
+    public void addPart(int x, int y, BlackKey.ColorImage colorImage){
+        float s = 1.2f;
+        int xo = (int) ((this.width - 255 * s) / 2);
+        int yo = (int) ((this.height - 155 * (s)) / 2);
+
+        if (EventMain.time % 2 ==0) {
+
+            BlackParticlesAdd.markSeen((int) (xo + x * s), (int) (yo + y * s), new BlackKey.ImageColorAndRenderPipeline(32,
+                    colorImage,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED,
+                    new Vector2f(), new Vector2f(Mth.nextFloat(source,-0.025f,0.025f), Mth.nextFloat(source,-0.1f,-0.15f)), new Vector2f(), false));
+        }
+    }
     @Override
     public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
         targetOffset();
+
+        addPart(6,6,new BlackKey.ColorImage(150, (int) (240* 0.85F), (int) (240* 0.85F), (int) (100 * 0.85F)));
+        addPart(249,6,new BlackKey.ColorImage(150, (int) (130* 0.85F), (int) (255* 0.85F), (int) (100 * 0.85F)));
+        addPart(249,148,new BlackKey.ColorImage(150, (int) (100* 0.85F), (int) (240* 0.85F), (int) (255 * 0.85F)));
+        addPart(6,148,new BlackKey.ColorImage(150, (int) (255* 0.85F), (int) (100* 0.85F), (int) (255 * 0.85F)));
+
         float s = 1.2f;
         int xo = (int) ((this.width - 255 * s) / 2);
         int yo = (int) ((this.height - 155 * (s)) / 2);

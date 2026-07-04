@@ -39,7 +39,7 @@ public class ImageTooltip implements ClientTooltipComponent, TooltipComponent {
             BlackParticlesAdd.markSeen((int) (x + Math.cos(i + time) * 20) + 16, (int) (y + Math.sin(i + time) * 20) + 24,
                     new BlackKey.ImageColorAndRenderPipeline(8,new BlackKey.ColorImage(255,20,5,5),
                     Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction,
-                    new Vector2f(),new Vector2f(0,0),new Vector2f()));
+                    new Vector2f(),new Vector2f(0,0),new Vector2f(), false));
 
         }
 

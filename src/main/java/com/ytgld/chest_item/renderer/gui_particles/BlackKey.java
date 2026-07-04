@@ -10,6 +10,6 @@ public record BlackKey(int x, int y,ImageColorAndRenderPipeline imageColorAndRen
                                               RenderPipeline renderPipeline,
                                               Vector2f position,
                                               Vector2f velocity,
-                                              Vector2f acceleration){}
+                                              Vector2f acceleration, boolean rot){}
     public record ColorImage(int a,int r,int g ,int b ){}
 }

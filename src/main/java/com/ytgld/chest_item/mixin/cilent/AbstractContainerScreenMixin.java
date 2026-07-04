@@ -29,65 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(AbstractContainerScreen.class)
-public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMenu> extends Screen implements MenuAccess<T>, IAbstractContainerScreen {
-    @Shadow @Final protected T menu;
-    @Unique
-    private final List<Vec2> seekingImmortals$vec2 = new ArrayList<>();
-    @Unique
-    private Integer cI1_21_9$integerList = Light.ARGB.color(255,255,255,255);
+public abstract class AbstractContainerScreenMixin {
 
-    protected AbstractContainerScreenMixin(Component title) {
-        super(title);
-    }
-
-    @Inject(at = @At(value = "RETURN"), method = "extractContents")
-    public void LnetHEADHEADHEAD(net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){
-        ItemStack itemstack = this.menu.getCarried();
-        cI1_21_11$addTar(mouseX, mouseY);
-        if (!seekingImmortals$vec2.isEmpty()) {
-            if (seekingImmortals$vec2.size() > 100) {
-                seekingImmortals$vec2.removeFirst();
-            }
-            if (itemstack.isEmpty()|| !(itemstack.getItem() instanceof ItemBase)) {
-                seekingImmortals$vec2.removeFirst();
-            }
-        }
-    }
-    @Unique
-    public void cI1_21_11$addTar(int mouseX, int mouseY){
-        ItemStack itemstack = this.menu.getCarried();
-        CompoundTag tag = itemstack.get(DataReg.tag);
-        if ( tag!= null) {
-            if (tag.getBooleanOr(IBlackLight.blackName,false)) {
-                return;
-            }
-        }
-        if (ConfigC.config.RenderGUILight.get()) {
-            if (!itemstack.isEmpty()) {
-                if (itemstack.getItem() instanceof ItemBase) {
-                    if (!(itemstack.getItem() instanceof TheImprintOfTheSoul)&&!(itemstack.getItem() instanceof IBlackLight)) {
-                        seekingImmortals$vec2.add(new Vec2(mouseX, mouseY));
-                        if (itemstack.getItem() instanceof Terror terror) {
-                            cI1_21_9$integerList = terror.color(itemstack);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    @Inject(at = @At(value = "HEAD"), method = "extractContents")
-    public void renderHEAD(net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci){
-        ItemStack itemstack = this.menu.getCarried();
-        if (guiGraphics instanceof IGuiGraphics iGuiGraphics) {
-            iGuiGraphics.chest_item$addW(itemstack);
-        }
-    }
-    @Override
-    public List<Vec2> chest_item$xy() {
-        return seekingImmortals$vec2;
-    }
-    @Override
-    public int cI1_21_9$color() {
-        return cI1_21_9$integerList;
-    }
 }

@@ -4,7 +4,7 @@ modId="${mod_id}" #mandatory
 version="${mod_version}" #mandatory
 displayName="${mod_name}" #mandatory
 description='''Example mod description.'''
-authors="ytgld"
+authors="com.ytgld.chest_item.test.ytgld"
 
 
 [[mixins]]

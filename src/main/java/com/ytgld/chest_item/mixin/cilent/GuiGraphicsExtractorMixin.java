@@ -12,6 +12,8 @@ import com.ytgld.chest_item.items.condensebone.ItemBone;
 import com.ytgld.chest_item.items.evil_mother.IEvil;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.renderer.MRender;
+import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
+import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
 import com.ytgld.chest_item.renderer.i.IGuiGraphics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -25,6 +27,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import org.joml.Matrix3x2fStack;
+import org.joml.Vector2f;
 import org.joml.Vector2ic;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -57,7 +60,7 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
         guiGraphics.pose().pushMatrix();
         guiGraphics.pose().popMatrix();
     }
-    @Inject(at = @At(value = "RETURN"),method = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;tooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Lnet/minecraft/resources/Identifier;Lnet/minecraft/world/item/ItemStack;)V")
+    @Inject(at = @At(value = "RETURN"),method = "tooltip(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Lnet/minecraft/resources/Identifier;Lnet/minecraft/world/item/ItemStack;)V")
     public void ytgld$ClientTooltipPositioner(Font font, List<ClientTooltipComponent> components, int x, int y, ClientTooltipPositioner positioner, Identifier background, ItemStack tooltipStack, CallbackInfo ci) {
         if (!ConfigC.config.RenderItemTooltip.get()){
             return;
@@ -150,7 +153,10 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
         }
     }
     @Unique
+    public int chest26_2$timeEvil = 0;
+    @Unique
     public void si1_21_4$renderTooltipBackground_EvilMother(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, int z) {
+        chest26_2$timeEvil++;
         // 左上角
         int topLeftX = x - 3 - 9+2;
         int topLeftY = y - 3 - 9;
@@ -164,6 +170,22 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
         // 中间位置
         int middleX = x + (width - 48) / 2;
         int middleY = y - 3 - 6;
+        BlackParticlesAdd.markSeen(middleX + 24, middleY,new BlackKey.ImageColorAndRenderPipeline(16,
+                new BlackKey.ColorImage(200, 70,240,210),
+                Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED,
+                new Vector2f(),new Vector2f(0,-0.05f),new Vector2f(), false));
+       if (chest26_2$timeEvil % 2 == 1){
+
+           BlackParticlesAdd.markSeen(x, middleY + 4,new BlackKey.ImageColorAndRenderPipeline(8,
+                   new BlackKey.ColorImage(200, 70,240,210),
+                   Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED,
+                   new Vector2f(),new Vector2f(0,-0.025f),new Vector2f(), false));
+
+           BlackParticlesAdd.markSeen(x + width + 3 - 6, middleY + 4,new BlackKey.ImageColorAndRenderPipeline(8,
+                   new BlackKey.ColorImage(200, 70,240,210),
+                   Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED,
+                   new Vector2f(),new Vector2f(0,-0.025f),new Vector2f(), false));
+       }
         guiGraphics.pose().pushMatrix();
         guiGraphics.pose().translate(0.0F, -7);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
@@ -272,6 +294,10 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
         // 中间位置
         int middleX = x + (width - 48) / 2;
         int middleY = y - 3 - 6;
+        BlackParticlesAdd.markSeen(middleX + 24, middleY + 8,new BlackKey.ImageColorAndRenderPipeline(16,
+                new BlackKey.ColorImage(255, 0,0,0),
+                Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction,
+                new Vector2f(),new Vector2f(0,-0.05f),new Vector2f(), false));
         guiGraphics.pose().pushMatrix();
         guiGraphics.pose().translate(0.0F, -7);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,

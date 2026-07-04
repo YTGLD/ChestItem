@@ -23,7 +23,8 @@ public class BlackParticlesRenderer {
         int size = state.imageColorAndRenderPipeline.size();
         Identifier identifier = state.imageColorAndRenderPipeline.identifier();
 
-        addCom((state.lifeTime), guiGraphics, pose, x, y,state,alpha,size,identifier,true,true);
+        boolean rot = state.imageColorAndRenderPipeline.rot();
+        addCom((state.lifeTime), guiGraphics, pose, x, y,state,alpha,size,identifier,true,rot);
         addCom((state.lifeTime), guiGraphics, pose, x, y,state,alpha / 10,size * 2,Identifier.fromNamespaceAndPath(Chestitem.MODID,
                 "textures/item_glowing/all.png"),false,false);
     }

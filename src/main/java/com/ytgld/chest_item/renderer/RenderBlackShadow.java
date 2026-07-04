@@ -17,7 +17,7 @@ public class RenderBlackShadow {
                     BlackParticlesAdd.markSeen(x-8, y-8,new BlackKey.ImageColorAndRenderPipeline(24,
                             new BlackKey.ColorImage(200, iBlackLight.colorBlack().r(), iBlackLight.colorBlack().g(), iBlackLight.colorBlack().b()),
                             Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction,
-                            new Vector2f(),new Vector2f((float) (Math.cos(i) / 10f), (float) (Math.sin(i) / 10f)),new Vector2f()));
+                            new Vector2f(),new Vector2f((float) (Math.cos(i) / 10f), (float) (Math.sin(i) / 10f)),new Vector2f(), false));
                 }
             }
         }
