@@ -20,10 +20,7 @@ import com.ytgld.chest_item.items.blood.LifeCrystal;
 import com.ytgld.chest_item.items.condensebone.*;
 import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
-import com.ytgld.chest_item.items.evil_mother.AnnualPlate;
-import com.ytgld.chest_item.items.evil_mother.EvilBelt;
-import com.ytgld.chest_item.items.evil_mother.MotherRemains;
-import com.ytgld.chest_item.items.evil_mother.TheKill;
+import com.ytgld.chest_item.items.evil_mother.*;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
@@ -249,6 +246,8 @@ public class InitItems {
             (Identifier)-> new MysteriousMetal(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> Adjudication_ = register("adjudication",
             (Identifier)-> new Adjudication(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> DefyLife_ = register("defy_life",
+            (Identifier)-> new DefyLife(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
@@ -400,6 +399,7 @@ public class InitItems {
                     output.accept(ReinforcedItems.Dynamic_);
                     output.accept(ReinforcedItems.Contingency_);
                     output.accept(InitItems.EvilAxe_);
+                    output.accept(InitItems.DefyLife_);
 
                     output.accept(InitItems.Adjudication_);
 
@@ -427,6 +427,7 @@ public class InitItems {
                     MotherRemains_.getKey(),
                     TheKill_.getKey(),
                     AnnualPlate_.getKey(),
+                    DefyLife_.getKey(),
                     ReinforcedItems.SilentDevice_.getKey(),
                     ReinforcedItems.Accelerated_.getKey(),
                     ReinforcedItems.Excite_.getKey(),

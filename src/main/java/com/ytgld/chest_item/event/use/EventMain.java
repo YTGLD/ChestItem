@@ -27,10 +27,7 @@ import com.ytgld.chest_item.items.blood.GodBlood;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
-import com.ytgld.chest_item.items.evil_mother.AnnualPlate;
-import com.ytgld.chest_item.items.evil_mother.EvilBelt;
-import com.ytgld.chest_item.items.evil_mother.EvilMother;
-import com.ytgld.chest_item.items.evil_mother.TheKill;
+import com.ytgld.chest_item.items.evil_mother.*;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
@@ -432,6 +429,10 @@ public class EventMain {
         }
         LifeStone.tick(event);
         Silent.livingHealEventSilent_(event);
+    }
+    @SubscribeEvent
+    public void LivingDeathEvent(PlayerEvent.PlayerRespawnEvent event){
+        DefyLife.PlayerRespawnEvent(event);
     }
     @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){

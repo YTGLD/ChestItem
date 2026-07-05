@@ -1205,6 +1205,12 @@
   "chest_item.book.iron_cube.2": "This item can only be obtained through synthesis",
 
 
+  "item.chest_item.defy_life": "违命抗衡",
+  "item.chest_item.defy_life.string.1": "短时间内多次死亡会使你越来越强，最多叠加10层",
+  "item.chest_item.defy_life.string.2": "背包界面右键此物品来激活",
+  "item.chest_item.defy_life.string.3": "激活后可在重生后传送回上一个死亡点",
+  "item.chest_item.defy_life.string.4": "目前状态已激活",
+
   "chest_item.eternal_vows": "Eternal vows",
 
 "chest_item.book.test.main": "Small trinket in the box",

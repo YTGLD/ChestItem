@@ -1276,6 +1276,12 @@
   "chest_item.book.iron_cube.1": "这个物品一定程度上的稳定不稳定脉冲器的随机伤害，代价是削去大量护甲值，且总体伤害是提升的",
   "chest_item.book.iron_cube.2": "这个物品只能通过合成获得",
 
+  "item.chest_item.defy_life": "违命抗衡",
+  "item.chest_item.defy_life.string.1": "短时间内多次死亡会使你越来越强，最多叠加10层",
+  "item.chest_item.defy_life.string.2": "背包界面右键此物品来激活",
+  "item.chest_item.defy_life.string.3": "激活后可在重生后传送回上一个死亡点",
+  "item.chest_item.defy_life.string.4": "目前状态已激活",
+
   "chest_item.eternal_vows": "永恒誓令",
 
   "chest_item.book.test.main": "箱子里的小饰品",
