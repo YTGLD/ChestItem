@@ -20,14 +20,17 @@ public class ChestSlot extends Slot {
         if (this.index == 9 ||
                 this.index == 10 ||
                 this.index == 11) {
+            if (stack.getItem() instanceof ItemBase){
+                return false;
+            }
             if (stack.getItem() instanceof TheImprintOfTheSoul) {
                 return true;
             }
         }else {
+            if (stack.getItem() instanceof TheImprintOfTheSoul) {
+                return false;
+            }
             if (stack.getItem() instanceof ItemBase){
-                if (stack.getItem() instanceof TheImprintOfTheSoul) {
-                    return false;
-                }
                 return true;
             }else {
                 return false;

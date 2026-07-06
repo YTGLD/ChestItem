@@ -31,14 +31,13 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
 
     private static final Identifier myIdentifier = Identifier.fromNamespaceAndPath(Chestitem.MODID,
             "textures/gui/container/generic.png");
-    private final int containerRows;
     private final Player player;
 
     public ChestMenuScreen(ChestItemMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title);
+        super(menu, playerInventory, title,256,166);
         player = playerInventory.player;
-        this.containerRows = menu.getRowCount();
-        this.inventoryLabelY = this.imageHeight - 94;
+        this.inventoryLabelY = this.imageHeight - 106;
+        this.inventoryLabelX = this.imageWidth + 100;
     }
 
     public void renderMemory(@NotNull GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick){
@@ -139,8 +138,8 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
         super.extractBackground(guiGraphics, mouseX, mouseY, a);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, myIdentifier, i, j, 0.0F, 0.0F, 256, this.containerRows * 18 + 17, 256, 256);
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, myIdentifier, i, j + this.containerRows * 18 + 17, 0.0F, 126.0F, 256, 96, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, myIdentifier, i, j, 0.0F, 0.0F, 256, 256, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, myIdentifier, i, 256, 0.0F, 126.0F, 256, 96, 256, 256);
 
     }
 }
