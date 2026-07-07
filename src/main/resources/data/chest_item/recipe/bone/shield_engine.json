@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A":  {"item":"chest_item:stronger_stone"},
+    "B":  {"item":"chest_item:condense_bone_cube"},
+    "C":  {"item":"minecraft:end_stone"}
+  },
+  "pattern": [
+    "CBC",
+    "BAB",
+    "CBC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:shield_engine"
+  }
+}

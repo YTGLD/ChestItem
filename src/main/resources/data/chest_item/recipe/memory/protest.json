@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+     {"item":"chest_item:drifting_bottles"},
+     {"item":"chest_item:heart"},
+     {"item":"minecraft:ominous_bottle"}
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:protest"
+  }
+}

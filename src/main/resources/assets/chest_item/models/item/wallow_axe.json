@@ -1,0 +1,15 @@
+{
+  "parent": "item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "chest_item:item/wallow_axe_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "chest_item:item/wallow_axe_gui"
+    },
+    "fixed": {
+      "parent": "chest_item:item/wallow_axe_gui"
+    }
+  }
+}

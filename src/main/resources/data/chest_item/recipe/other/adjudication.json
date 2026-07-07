@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item":"minecraft:iron_sword"},
+    "B": {"item":"chest_item:lead_of_enlightenment"},
+    "C": {"item":"minecraft:heart_of_the_sea"},
+    "D": {"item":"chest_item:heart"},
+    "E": {"item":"chest_item:regeneration_plugin"},
+    "F": {"item":"minecraft:diamond"}
+  },
+  "pattern": [
+    "DCD",
+    "BAB",
+    "FEF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:adjudication"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "targets": [
+    "swap",
+    "final"
+  ],
+  "passes": [
+    {
+      "name": "chest_item:entity_outline",
+      "intarget": "final",
+      "outtarget": "swap"
+    },
+    {
+      "name": "chest_item:warped",
+      "intarget": "swap",
+      "outtarget": "final",
+      "use_linear_filter": true,
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [ 3.75, 0.0 ],
+          "GameTime": 10
+        }
+      ]
+    },
+    {
+      "name": "chest_item:warped",
+      "intarget": "final",
+      "outtarget": "swap",
+      "use_linear_filter": true,
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [ 0.0, 3.75 ],
+          "GameTime": 10
+        }
+      ]
+    },
+    {
+      "name": "chest_item:blit",
+      "intarget": "swap",
+      "outtarget": "final"
+    }
+  ]
+}

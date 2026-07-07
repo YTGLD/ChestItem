@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item": "chest_item:gold_cheese"},
+    "B": {"item": "chest_item:self_increasing_heart"},
+    "C": {"item": "chest_item:heart"},
+    "D": {"item": "chest_item:heart"},
+    "E": {"item": "chest_item:self_increasing_heart"}
+  },
+  "pattern": [
+    " B ",
+    "CAD",
+    " E "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:the_end_is_coming"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A":  {"item":"minecraft:crying_obsidian"},
+    "B":  {"item":"chest_item:evil_thoughts_forge_dreams"},
+    "C":  {"item":"chest_item:life_coin"}
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:shadow_mint"
+  }
+}

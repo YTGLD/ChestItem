@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item":"minecraft:crying_obsidian"},
+    "B": {"item":"chest_item:god_blood"},
+    "C": {"item":"chest_item:abnormal"}
+  },
+  "pattern": [
+    "AAA",
+    "CBC",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:erosion_tokens"
+  }
+}

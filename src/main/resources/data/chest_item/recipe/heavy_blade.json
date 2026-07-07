@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {"tag": "minecraft:meat"},
+    "A": {"item": "chest_item:wind_knife"},
+    "C": {"item": "minecraft:heavy_core"}
+  },
+  "pattern": [
+    "BBB",
+    "BAB",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:heavy_blade"
+  }
+}

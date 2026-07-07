@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A":{"item":  "minecraft:copper_ingot"},
+    "B":{"item":  "chest_item:magic_iron"}
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:mysterious_metal"
+  }
+}

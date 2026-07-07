@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/root",
+  "criteria": {
+    "life_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:life_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:life_crystal"
+    },
+    "title": {
+      "translate": "item.chest_item.life_crystal.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "life_crystal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item":"minecraft:crying_obsidian"},
+    "B": {"item":"chest_item:shield_engine"},
+    "C": {"item":"minecraft:ghast_tear"},
+    "D": {"tag":"chest_item:celestial"}
+  },
+  "pattern": [
+    "ACA",
+    "ABA",
+    "ADA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:chaos_constructor"
+  }
+}

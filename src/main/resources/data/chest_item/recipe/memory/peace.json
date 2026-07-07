@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item":"chest_item:drifting_bottles"},
+    "B": {"tag": "minecraft:bee_food"},
+    "C": {"item":"chest_item:the_order_of_the_undead"}
+  },
+  "pattern": [
+    "BBB",
+    "BAB",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:peace"
+  }
+}

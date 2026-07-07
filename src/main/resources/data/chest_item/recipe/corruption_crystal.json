@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {"item":"minecraft:crying_obsidian"},
+    "A": {"item":"chest_item:life_crystal"}
+  },
+  "pattern": [
+    "BBB",
+    "BAB",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:corruption_crystal"
+  }
+}

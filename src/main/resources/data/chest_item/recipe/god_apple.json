@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item": "minecraft:apple"},
+    "B": {"item": "chest_item:self_increasing_heart"},
+    "C": {"item": "chest_item:meatball"},
+    "D": {"item": "chest_item:stomach"},
+    "E": {"item": "chest_item:heart"}
+  },
+  "pattern": [
+    " B ",
+    "CAD",
+    " E "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:god_apple"
+  }
+}

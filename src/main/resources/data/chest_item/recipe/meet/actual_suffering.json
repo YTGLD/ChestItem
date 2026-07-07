@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item": "chest_item:evil_thoughts_forge_dreams"},
+    "B": {"item": "chest_item:scar_heart"},
+    "C": {"item": "chest_item:defeat_the_army"},
+    "D": {"tag": "minecraft:meat"},
+    "E": {"item": "chest_item:heart"}
+  },
+  "pattern": [
+    "ABC",
+    "DED",
+    "DDD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:actual_suffering"
+  }
+}
