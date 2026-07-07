@@ -2,6 +2,7 @@ package com.ytgld.chest_item.mixin;
 
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.evil_mother.WarGodCommand;
 import com.ytgld.chest_item.other.ChestInventory;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.food.FoodData;
@@ -15,7 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FoodData.class)
 public class FoodDataMixin {
     @Shadow private int tickTimer;
-
+    @Inject(method = "tick", at = @At(value = "HEAD"),cancellable = true)
+    private void cirFood(ServerPlayer player, CallbackInfo ci){
+        WarGodCommand.cirFood(player,ci);
+    }
     @Inject(method = "tick", at = @At(value = "RETURN"))
     private void tick(ServerPlayer player, CallbackInfo ci) {
         ChestInventory chestInventory = Handler.getItem(player);

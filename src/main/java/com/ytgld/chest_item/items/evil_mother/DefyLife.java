@@ -45,6 +45,11 @@ public class DefyLife extends EvilMother{
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction clickAction, Player player, SlotAccess carriedItem) {
         CompoundTag compoundTag = stack.get(DataReg.tag);
         if (clickAction.equals(ClickAction.SECONDARY)) {
+            CompoundTag tag = new CompoundTag();
+            tag.putBoolean(canUse,true);
+            if (compoundTag == null) {
+                stack.set(DataReg.tag,tag);
+            }
             if (compoundTag != null) {
                 compoundTag.putBoolean(canUse, !compoundTag.getBooleanOr(canUse, false));
                 return true;
@@ -110,19 +115,19 @@ public class DefyLife extends EvilMother{
         }
 
         modifiers.put(AttReg.heal, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.ErosionTokens_.asItem().getDescriptionId()),
+                InitItems.DefyLife_.asItem().getDescriptionId()),
                 value, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
         modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.ErosionTokens_.asItem().getDescriptionId()),
+                InitItems.DefyLife_.asItem().getDescriptionId()),
                 value, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
         modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.ErosionTokens_.asItem().getDescriptionId()),
+                InitItems.DefyLife_.asItem().getDescriptionId()),
                 value, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
         modifiers.put(Attributes.ATTACK_SPEED, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.ErosionTokens_.asItem().getDescriptionId()),
+                InitItems.DefyLife_.asItem().getDescriptionId()),
                 value, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
         return modifiers;
@@ -134,6 +139,7 @@ public class DefyLife extends EvilMother{
         tooltipComponents.accept(Component.translatable("item.chest_item.defy_life.string.1").withStyle(Style.EMPTY.withColor(color)));
         tooltipComponents.accept(Component.translatable("item.chest_item.defy_life.string.2").withStyle(Style.EMPTY.withColor(color)));
         tooltipComponents.accept(Component.translatable("item.chest_item.defy_life.string.3").withStyle(Style.EMPTY.withColor(color)));
+        tooltipComponents.accept(Component.literal(""));
         if (stack.get(DataReg.tag) !=null) {
             if (stack.get(DataReg.tag).getBooleanOr(canUse,false)) {
                 tooltipComponents.accept(Component.translatable("item.chest_item.defy_life.string.4").withStyle(Style.EMPTY.withColor(color)));

@@ -248,6 +248,8 @@ public class InitItems {
             (Identifier)-> new Adjudication(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> DefyLife_ = register("defy_life",
             (Identifier)-> new DefyLife(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> WarGodCommand_ = register("war_god_command",
+            (Identifier)-> new WarGodCommand(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
@@ -400,6 +402,7 @@ public class InitItems {
                     output.accept(ReinforcedItems.Contingency_);
                     output.accept(InitItems.EvilAxe_);
                     output.accept(InitItems.DefyLife_);
+                    output.accept(InitItems.WarGodCommand_);
 
                     output.accept(InitItems.Adjudication_);
 
@@ -428,6 +431,7 @@ public class InitItems {
                     TheKill_.getKey(),
                     AnnualPlate_.getKey(),
                     DefyLife_.getKey(),
+                    WarGodCommand_.getKey(),
                     ReinforcedItems.SilentDevice_.getKey(),
                     ReinforcedItems.Accelerated_.getKey(),
                     ReinforcedItems.Excite_.getKey(),

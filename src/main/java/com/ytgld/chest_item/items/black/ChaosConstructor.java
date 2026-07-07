@@ -132,19 +132,8 @@ public class ChaosConstructor extends ItemBlackShadow  {
 
     @Override
      public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
-        if (flag.hasShiftDown()) {
-            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80ff5ACD))));
-            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.8",ConfigItem.intValue.getAsInt()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80ff5ACD))));
-        }else {
-            tooltipComponents.accept(Component.translatable("options.key.hold").append(Component.translatable("key.keyboard.left.shift")).withStyle(ChatFormatting.GOLD));
-            tooltipComponents.accept(Component.literal(""));
-            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.1").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.2").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.3").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.4").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.5").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-            tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.6").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-        }
+        tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.7").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80ff5ACD))));
+        tooltipComponents.accept(Component.translatable("item.chest_item.chaos_constructor.string.8",ConfigItem.intValue.getAsInt()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80ff5ACD))));
     }
     @Nullable
     @Override

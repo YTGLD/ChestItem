@@ -83,7 +83,6 @@ public class DriftingBottles extends ItemBase {
 
     public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
         if (flag.hasShiftDown()) {
-
             tooltipComponents.accept(Component.translatable("item.chest_item.drifting_bottles.string.2").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80DAA520))));
             tooltipComponents.accept(Component.literal(""));
             tooltipComponents.accept(Component.translatable("item.chest_item.drifting_bottles.string.3").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80DAA520))));

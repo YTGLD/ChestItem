@@ -1282,6 +1282,13 @@
   "item.chest_item.defy_life.string.3": "激活后可在重生后传送回上一个死亡点",
   "item.chest_item.defy_life.string.4": "目前状态已激活",
 
+  "item.chest_item.war_god_command": "军神之令",
+  "item.chest_item.war_god_command.string.1": "生命值最多自然恢复到%d%%",
+  "item.chest_item.war_god_command.string.2": "饥饿值会在恢复到这个值时停止消耗",
+  "item.chest_item.war_god_command.string.3": "损失生命值带来巨大的加成",
+  "item.chest_item.war_god_command.string.4": "持有此令者，有%d%%的概率规避受到的必死伤害",
+  "item.chest_item.war_god_command.string.5": "此令牌与破军冲突",
+
   "chest_item.eternal_vows": "永恒誓令",
 
   "chest_item.book.test.main": "箱子里的小饰品",

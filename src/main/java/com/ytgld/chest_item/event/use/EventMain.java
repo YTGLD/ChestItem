@@ -429,6 +429,7 @@ public class EventMain {
         }
         LifeStone.tick(event);
         Silent.livingHealEventSilent_(event);
+        WarGodCommand.healOFf(event);
     }
     @SubscribeEvent
     public void LivingDeathEvent(PlayerEvent.PlayerRespawnEvent event){
@@ -476,6 +477,8 @@ public class EventMain {
         ChaosFortress.hurtRes(event);
         LeadOfEnlightenment.die(event);
         WallowAxe.damage(event);
+        WarGodCommand.notDie(event);
+
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);
             if (resistance != null) {
