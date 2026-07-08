@@ -244,6 +244,13 @@
   "chest_item.configuration.Warmaker": "战争缔造者",
   "chest_item.configuration.WindKnife": "罡风刀环",
   "chest_item.configuration.WindKnife2": "罡风刀环2",
+  "chest_item.configuration.WarGodCommand": "军神之令",
+  "chest_item.configuration.WarGodCommand2": "军神之令1",
+  "chest_item.configuration.WarGodCommand3": "军神之令2",
+  "chest_item.configuration.Adjudication": "审判之剑",
+  "chest_item.config.WarGodCommand": "生命值最多恢复到多少",
+  "chest_item.config.WarGodCommand2": "损失生命值带来其属性的倍率",
+  "chest_item.config.WarGodCommand3": "规避必死伤害的概率",
 
   "chest_item.config.doEndComingUp": "It is possible to turn Doomsday into a ghost state when using some items",
   "chest_item.configuration.Common": "Conventional",
@@ -343,7 +350,7 @@
   "attribute.name.chest_item.shield_cooldown": "Shattering reaction time",
   "attribute.name.chest_item.hyperplasia_cooldown": "Dormant time",
   "attribute.name.chest_item.shadow_shield_conversion": "Shadow transformation",
-
+  "attribute.name.chest_item.oppression": "Oppression",
 
 
   "itemGroup.chest_item": "Trinkets in the chest",
@@ -1210,6 +1217,9 @@
   "item.chest_item.defy_life.string.2": "背包界面右键此物品来激活",
   "item.chest_item.defy_life.string.3": "激活后可在重生后传送回上一个死亡点",
   "item.chest_item.defy_life.string.4": "目前状态已激活",
+
+  "item.chest_item.demon_lord": "权力之掌控",
+  "item.chest_item.demon_lord.string.1": "即使准星偏移了目标，在合理范围内仍然能攻击到目标",
 
   "item.chest_item.war_god_command": "军神之令",
   "item.chest_item.war_god_command.string.1": "生命值最多自然恢复到%d%%",

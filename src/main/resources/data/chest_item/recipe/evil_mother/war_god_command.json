@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "chest_item:mother_remains",
+    "B": "minecraft:nether_star",
+    "C": "chest_item:defeat_the_army"
+  },
+  "pattern": [
+    "AAA",
+    "ACA",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:war_god_command"
+  }
+}

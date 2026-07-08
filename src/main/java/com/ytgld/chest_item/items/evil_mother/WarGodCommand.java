@@ -57,7 +57,7 @@ public class WarGodCommand extends EvilMother {
             public void config(ModConfigSpec.Builder builder) {
                 builder.push("WarGodCommand");
                 intValue = builder.translation("chest_item.config.WarGodCommand")
-                        .defineInRange("number", 50, 0, 100);
+                        .defineInRange("number", 45, 0, 100);
                 intValue2 = builder.translation("chest_item.config.WarGodCommand2")
                         .defineInRange("number2", 1F, 0, 100);
                 intValue3 = builder.translation("chest_item.config.WarGodCommand3")

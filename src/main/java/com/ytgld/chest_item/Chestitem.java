@@ -4,6 +4,7 @@ import com.ytgld.chest_item.config.ModLanguageProvider;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.render.*;
+import com.ytgld.chest_item.event.AttackClickEmptyHandler;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.EventHandler;
 import com.ytgld.chest_item.event.key.ChestNetworkHandler;
@@ -13,6 +14,7 @@ import com.ytgld.chest_item.event.loot.Loots;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.evil_mother.DemonLord;
 import com.ytgld.chest_item.items.memory.MemoryAttreg;
 import com.ytgld.chest_item.items.memory.MemoryEvent;
 import com.ytgld.chest_item.items.memory.MemoryItems;
@@ -122,6 +124,7 @@ public class Chestitem {
         ChestNetworkHandler.register(evt.registrar("1.0"));
         UseCuriosHandler.register(evt.registrar("1.0"));
         MysteriousMetal.register(evt);
+        AttackClickEmptyHandler.register(evt);
     }
     @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {

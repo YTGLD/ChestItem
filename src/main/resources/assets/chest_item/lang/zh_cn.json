@@ -1,5 +1,12 @@
 {
 
+  "chest_item.configuration.WarGodCommand": "军神之令",
+  "chest_item.configuration.WarGodCommand2": "军神之令1",
+  "chest_item.configuration.WarGodCommand3": "军神之令2",
+  "chest_item.configuration.Adjudication": "审判之剑",
+  "chest_item.config.WarGodCommand": "生命值最多恢复到多少",
+  "chest_item.config.WarGodCommand2": "损失生命值带来其属性的倍率",
+  "chest_item.config.WarGodCommand3": "规避必死伤害的概率",
   "chest_item.config.Accelerated": "腐堕之心在低于50%时给予的额外强度",
   "chest_item.config.Accelerated2": "腐堕之心被击碎时产生的额外反应时间倍数",
   "chest_item.config.Activity": "腐堕之心被击碎时获得的生命恢复等级",
@@ -423,6 +430,7 @@
   "attribute.name.chest_item.shield_cooldown": "击碎反应时间",
   "attribute.name.chest_item.hyperplasia_cooldown": "休眠时间",
   "attribute.name.chest_item.shadow_shield_conversion": "幽影转换",
+  "attribute.name.chest_item.oppression": "威压锁定",
 
   "key.category.chest_item.chest": "箱子里的小饰品",
   "key.chest_item.r": "打开神奇箱子",
@@ -1281,6 +1289,9 @@
   "item.chest_item.defy_life.string.2": "背包界面右键此物品来激活",
   "item.chest_item.defy_life.string.3": "激活后可在重生后传送回上一个死亡点",
   "item.chest_item.defy_life.string.4": "目前状态已激活",
+
+  "item.chest_item.demon_lord": "权力之掌控",
+  "item.chest_item.demon_lord.string.1": "即使准星偏移了目标，在合理范围内仍然能攻击到目标",
 
   "item.chest_item.war_god_command": "军神之令",
   "item.chest_item.war_god_command.string.1": "生命值最多自然恢复到%d%%",
