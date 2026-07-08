@@ -1212,21 +1212,23 @@
   "chest_item.book.iron_cube.2": "This item can only be obtained through synthesis",
 
 
-  "item.chest_item.defy_life": "违命抗衡",
-  "item.chest_item.defy_life.string.1": "短时间内多次死亡会使你越来越强，最多叠加10层",
-  "item.chest_item.defy_life.string.2": "背包界面右键此物品来激活",
-  "item.chest_item.defy_life.string.3": "激活后可在重生后传送回上一个死亡点",
-  "item.chest_item.defy_life.string.4": "目前状态已激活",
+  "item.chest_item.defy_life": "Defying orders and resisting",
+  "item.chest_item.defy_life.string.1": "Multiple deaths in a short period of time will make you stronger, with a maximum of 10 layers added",
+  "item.chest_item.defy_life.string.2": "Right click on this item on the backpack interface to activate it",
+  "item.chest_item.defy_life.string.3": "After activation, it can be sent back to the previous point of death after rebirth",
+  "item.chest_item.defy_life.string.4": "Current status activated",
 
-  "item.chest_item.demon_lord": "权力之掌控",
-  "item.chest_item.demon_lord.string.1": "即使准星偏移了目标，在合理范围内仍然能攻击到目标",
+  "item.chest_item.demon_lord": "Control of Power",
+  "item.chest_item.demon_lord.string.1": "Even if the crosshair deviates from the target, it can still attack the target within a reasonable range",
+  "item.chest_item.demon_lord.string.2": "你的威压使附近的生物难以瞄准你",
+  "item.chest_item.demon_lord.string.3": "附近的弹射物会因为威压而变慢",
 
-  "item.chest_item.war_god_command": "军神之令",
-  "item.chest_item.war_god_command.string.1": "生命值最多自然恢复到%d%%",
-  "item.chest_item.war_god_command.string.2": "饥饿值会在恢复到这个值时停止消耗",
-  "item.chest_item.war_god_command.string.3": "损失生命值带来巨大的加成",
-  "item.chest_item.war_god_command.string.4": "持有此令者，有%d%%的概率规避受到的必死伤害",
-  "item.chest_item.war_god_command.string.5": "此令牌与破军冲突",
+  "item.chest_item.war_god_command": "The Order of the Military God",
+  "item.chest_item.war_god_command.string.1": "The maximum health value naturally recovers to%d%%",
+  "item.chest_item.war_god_command.string.2": "The hunger value will stop consuming when it returns to this value",
+  "item.chest_item.war_god_command.string.3": "Losing health brings huge bonuses",
+  "item.chest_item.war_god_command.string.4": "The holder of this command has a %d%% probability of avoiding fatal damage received",
+  "item.chest_item.war_god_command.string.5": "This token conflicts with the military",
 
   "chest_item.eternal_vows": "Eternal vows",
 

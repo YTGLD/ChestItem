@@ -80,6 +80,9 @@ public class DemonLord extends EvilMother implements SkillList {
     public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         super.text(stack, tooltipComponents, flag);
         tooltipComponents.accept(Component.translatable("item.chest_item.demon_lord.string.1").withStyle(Style.EMPTY.withColor(color)));
+        tooltipComponents.accept(Component.literal("").withStyle(Style.EMPTY.withColor(color)));
+        tooltipComponents.accept(Component.translatable("item.chest_item.demon_lord.string.2").withStyle(Style.EMPTY.withColor(color)));
+        tooltipComponents.accept(Component.translatable("item.chest_item.demon_lord.string.3").withStyle(Style.EMPTY.withColor(color)));
     }
 
 

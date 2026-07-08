@@ -1292,6 +1292,8 @@
 
   "item.chest_item.demon_lord": "权力之掌控",
   "item.chest_item.demon_lord.string.1": "即使准星偏移了目标，在合理范围内仍然能攻击到目标",
+  "item.chest_item.demon_lord.string.2": "你的威压使附近的生物难以瞄准你",
+  "item.chest_item.demon_lord.string.3": "附近的弹射物会因为威压而变慢",
 
   "item.chest_item.war_god_command": "军神之令",
   "item.chest_item.war_god_command.string.1": "生命值最多自然恢复到%d%%",

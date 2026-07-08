@@ -5,7 +5,7 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.effect.Effects;
-import com.ytgld.chest_item.event.AttackClickEmptyHandler;
+import com.ytgld.chest_item.event.OppressionHandler;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
@@ -49,15 +49,11 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -87,7 +83,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
@@ -98,11 +93,7 @@ import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
@@ -1032,9 +1023,12 @@ public class EventMain {
     }
     @SubscribeEvent
     public void LeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
-        AttackClickEmptyHandler.lightHurtEmp(event);
+        OppressionHandler.lightHurtEmp(event);
     }
-
+    @SubscribeEvent
+    public void EntityTickEvent(EntityTickEvent.Pre event) {
+        OppressionHandler.tickCanNotLooking(event);
+    }
     @SubscribeEvent
     public void PlayerEnchantItemEvent(PlayerEnchantItemEvent event) {
         GoldCheese.event(event);
