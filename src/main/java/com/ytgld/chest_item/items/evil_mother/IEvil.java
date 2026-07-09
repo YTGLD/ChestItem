@@ -7,8 +7,8 @@ import com.ytgld.chest_item.items.black.soul.NotLight;import com.ytgld.chest_ite
 import com.ytgld.chest_item.renderer.light.Light;import net.minecraft.resources.ResourceLocation;
 
 public interface IEvil extends NotLight {
-    int color = Light.ARGB.color(50,80,120,105);
+    int color = Light.ARGB.color(255,80,120,105);
     default int theColor(){
-        return Light.ARGB.color(50,80,120,105);
+        return Light.ARGB.color(255,80,120,105);
     }
 }

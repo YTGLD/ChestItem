@@ -3,6 +3,7 @@ package com.ytgld.chest_item.renderer;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
@@ -70,6 +71,9 @@ public class MGuiGraphics {
             RenderSystem.setShaderTexture(0, texture);
             RenderSystem.setShader(shaderSupplier);
             RenderSystem.enableBlend();
+            RenderSystem.colorMask(true, true, true, false);
+            RenderSystem.depthMask(false);
+            RenderSystem.disableDepthTest();
             if (isLight) {
                 RenderSystem.blendFuncSeparate(
                         GlStateManager.SourceFactor.SRC_ALPHA,
@@ -86,7 +90,9 @@ public class MGuiGraphics {
             bufferbuilder.addVertex(matrix4f, (float) startX, (float) endY, (float) zLevel).setColor(r, g, b, a).setUv(u0, v1);
             bufferbuilder.addVertex(matrix4f, (float) endX, (float) endY, (float) zLevel).setColor(r, g, b, a).setUv(u1, v1);
             bufferbuilder.addVertex(matrix4f, (float) endX, (float) startY, (float) zLevel).setColor(r, g, b, a).setUv(u1, v0);
-            BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
+            RenderSystem.colorMask(true, true, true, true);
+            RenderSystem.depthMask(true);
+            RenderSystem.enableDepthTest();
             RenderSystem.disableBlend();
             RenderSystem.defaultBlendFunc();
         }
@@ -107,6 +113,9 @@ public class MGuiGraphics {
             RenderSystem.setShaderTexture(0, texture);
             RenderSystem.setShader(shaderSupplier);
             RenderSystem.enableBlend();
+            RenderSystem.colorMask(true, true, true, false);
+            RenderSystem.depthMask(false);
+            RenderSystem.disableDepthTest();
             if (isLight) {
                 RenderSystem.blendFuncSeparate(
                         GlStateManager.SourceFactor.SRC_ALPHA,
@@ -124,6 +133,9 @@ public class MGuiGraphics {
             bufferbuilder.addVertex(matrix4f, (float) endX, (float) endY, (float) zLevel).setColor(c).setUv(u1, v1);
             bufferbuilder.addVertex(matrix4f, (float) endX, (float) startY, (float) zLevel).setColor(c).setUv(u1, v0);
             BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
+            RenderSystem.colorMask(true, true, true, true);
+            RenderSystem.depthMask(true);
+            RenderSystem.enableDepthTest();
             RenderSystem.disableBlend();
             RenderSystem.defaultBlendFunc();
         }

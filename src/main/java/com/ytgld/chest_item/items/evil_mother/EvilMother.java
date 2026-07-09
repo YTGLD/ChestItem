@@ -124,6 +124,11 @@ public abstract class EvilMother extends ItemBase implements IEvil {
 
         return attributeModifierMultimap;
     }
+
+    @Override
+    public int color(ItemStack stack) {
+        return color;
+    }
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
         Multimap<Holder<Attribute> , AttributeModifier> attributeModifierMultimap = multimapAttribute(stack, player);

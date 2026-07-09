@@ -358,7 +358,9 @@ public class CIBookScreen extends Screen {
 
         if (!has(stack)) {
             if (stack.getItem() instanceof ItemBase) {
-                graphics.drawString(mc.font, Component.translatable("chest_item.item.not_has"), centerX - 12, centerY + 10, Light.ARGB.color(255, 200, 20, 20));
+                new MGuiGraphics.GUI(CIStateShardsHasBlack::getHasBlock,false)
+                        .blit(graphics,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/item/not.png"),
+                                centerX - 12, centerY - 12,0,0,16,16,16,16,0xffffffff);
             }
         }else {
             new MGuiGraphics.GUI(CIStateShardsHasBlack::getHasBlock,false)

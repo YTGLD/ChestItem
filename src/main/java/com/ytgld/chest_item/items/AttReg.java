@@ -182,6 +182,9 @@ public class AttReg {
     /**
      * 邪母的嬗变
      */
+    public static final DeferredHolder<Attribute,?> oppression = REGISTRY.register("oppression",()->{
+        return new RangedAttribute("attribute.name.chest_item.oppression", 0, 0, 360).setSyncable(true);
+    });
     public static final DeferredHolder<Attribute,?> theSanity = REGISTRY.register("the_sanity",()->{
         return new RangedAttribute("attribute.name.chest_item.the_sanity", 10, -100, 100).setSyncable(true);
     });
@@ -227,6 +230,8 @@ public class AttReg {
         event.add(EntityType.PLAYER , AttReg.painShield_speed,1);
 
         event.add(EntityType.PLAYER , AttReg.theSanity,10);
+        event.add(EntityType.PLAYER , AttReg.oppression,0);
+
         event.add(EntityType.PLAYER , AttReg.shield_cooldown,200);
 
     }

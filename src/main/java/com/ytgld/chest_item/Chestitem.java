@@ -4,6 +4,7 @@ import com.ytgld.chest_item.config.ModLanguageProvider;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.event.Keys;
+import com.ytgld.chest_item.event.OppressionHandler;
 import com.ytgld.chest_item.event.activated.EventHandler;
 import com.ytgld.chest_item.event.key.ChestNetworkHandler;
 import com.ytgld.chest_item.event.key.ClientEvent;
@@ -144,6 +145,7 @@ public class Chestitem {
         ChestNetworkHandler.register(evt.registrar("1.0"));
         UseCuriosHandler.register(evt.registrar("1.0"));
         MysteriousMetal.register(evt);
+        OppressionHandler.register(evt);
     }
 
 

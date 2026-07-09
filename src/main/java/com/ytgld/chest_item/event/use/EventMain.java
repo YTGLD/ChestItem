@@ -6,6 +6,7 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.Keys;
+import com.ytgld.chest_item.event.OppressionHandler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
@@ -138,11 +139,13 @@ public class EventMain {
             if (slashing > 0) {
                 if (living.tickCount % 4 == 0) {
                     LivingEntity entity = living.getLastHurtByMob();
-                    RandomSource randomSource = living.getRandom();
-                    Vec3 vec3 = new Vec3(randomSource.nextInt(-25,25), randomSource.nextInt(-360,360), randomSource.nextInt(-25,25));
-                    living.level().addParticle(SwordEnergyOption.createSwordEnergyOption(Particles.SwordEnergyOption_.get(),
-                                    vec3,false ,Light.ARGB.color(255,255,255,255),10),
-                            living.getX(), living.getY() + 1, living.getZ(), 0, 0, 0);
+                    if (living.level() instanceof ServerLevel level) {
+                        RandomSource randomSource = living.getRandom();
+                        float size = randomSource.nextInt(15,25);
+                        level.sendParticles(SwordEnergyOption.createSwordEnergyOption(Particles.SwordEnergyOption_.get(),
+                                        new Vec3(0,0,0), true, Light.ARGB.color(255,255,255,255), size),
+                                living.getX(), living.getY() + 1.0f, living.getZ(), 1, 0, 0,0,0);
+                    }
                     if (entity != null) {
                         if (entity instanceof Player player) {
                             HolderLookup.RegistryLookup<Enchantment> registrylookup = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
@@ -320,6 +323,10 @@ public class EventMain {
         return 0;
     }
     @SubscribeEvent
+    public void PlayerRespawnEvent(PlayerEvent.PlayerRespawnEvent event) {
+        DefyLife.PlayerRespawnEvent(event);
+    }
+    @SubscribeEvent
     public void  knock(LivingKnockBackEvent event){
         EvilBelt.knock(event);
     }
@@ -408,6 +415,16 @@ public class EventMain {
         GodBlood.attack(event);
         Conch.event(event);
     }
+
+    @SubscribeEvent
+    public void LeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
+        OppressionHandler.lightHurtEmp(event);
+    }
+
+    @SubscribeEvent
+    public void EntityTickEvent(EntityTickEvent.Pre event) {
+        OppressionHandler.tickCanNotLooking(event);
+    }
     @SubscribeEvent
     public void LivingHealEvent(LivingHealEvent event){
         if (event.getEntity() instanceof LivingEntity living){
@@ -419,6 +436,7 @@ public class EventMain {
         }
         LifeStone.tick(event);
         Silent.livingHealEventSilent_(event);
+        WarGodCommand.healOFf(event);
     }
     @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
@@ -460,6 +478,7 @@ public class EventMain {
         ChaosFortress.hurtRes(event);
         LeadOfEnlightenment.die(event);
         ShadowShield(event);
+        WarGodCommand.notDie(event);
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);
             if (resistance != null) {

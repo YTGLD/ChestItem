@@ -247,6 +247,12 @@ public class    InitItems {
             (Identifier)-> new MotherRemains(new Item.Properties().stacksTo(64)));
     public static final DeferredItem<@NotNull Item> Adjudication_ = register("adjudication",
             (Identifier)-> new Adjudication(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> DefyLife_ = register("defy_life",
+            (Identifier)-> new DefyLife(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> WarGodCommand_ = register("war_god_command",
+            (Identifier)-> new WarGodCommand(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> DemonLord_ = register("demon_lord",
+            (Identifier)-> new DemonLord(new Item.Properties().stacksTo(1)));
 
 
 
@@ -401,6 +407,10 @@ public class    InitItems {
                     output.accept(ReinforcedItems.Dynamic_);
                     output.accept(ReinforcedItems.Contingency_);
 
+                    output.accept(InitItems.DefyLife_);
+                    output.accept(InitItems.DemonLord_);
+                    output.accept(InitItems.WarGodCommand_);
+
 
                 }).build());
 
@@ -426,6 +436,9 @@ public class    InitItems {
                     MotherRemains_.asItem(),
                     TheKill_.asItem(),
                     AnnualPlate_.asItem(),
+                     DefyLife_.asItem(),
+                    WarGodCommand_.asItem(),
+                    DemonLord_.asItem(),
                     ReinforcedItems.SilentDevice_.asItem(),
                     ReinforcedItems.Accelerated_.asItem(),
                     ReinforcedItems.Excite_.asItem(),

@@ -4,6 +4,7 @@
   "chest_item.config.Activity": "腐堕之心被击碎时获得的生命恢复等级",
   "chest_item.config.Activity2": "腐堕之心被击碎时获得的生命恢复时长",
   "chest_item.config.ActualSuffering": "最大创伤之痕",
+  "chest_item.config.Adjudication": "每个箱子的经验值",
   "chest_item.config.AlienationDiodes": "暴击伤害",
   "chest_item.config.AlienationDiodes2": "暴击伤害造成的治疗",
   "chest_item.config.AnnualPlate": "致命一击的概率",
@@ -118,6 +119,9 @@
   "chest_item.config.UndeadRune2": "减益",
   "chest_item.config.War": "受到伤害倍率",
   "chest_item.config.War2": "攻击转化倍率",
+  "chest_item.config.WarGodCommand": "生命值最多恢复到多少",
+  "chest_item.config.WarGodCommand2": "损失生命值带来其属性的倍率",
+  "chest_item.config.WarGodCommand3": "规避必死伤害的概率",
   "chest_item.config.Warmaker": "最低生命值",
   "chest_item.config.Warmaker2": "是否在倒计时结束时扣血",
   "chest_item.config.WindKnife": "最小伤害",
@@ -127,6 +131,7 @@
   "chest_item.configuration.Activity": "活性衬件",
   "chest_item.configuration.Activity2": "活性衬件2",
   "chest_item.configuration.ActualSuffering": "实质之痛苦",
+  "chest_item.configuration.Adjudication": "审判之剑",
   "chest_item.configuration.AlienationDiodes": "异化二极管",
   "chest_item.configuration.AlienationDiodes2": "异化二极管2",
   "chest_item.configuration.AnnualPlate": "邪母年盘",
@@ -241,6 +246,9 @@
   "chest_item.configuration.UndeadRune2": "亡灵符石2",
   "chest_item.configuration.War": "信仰战争",
   "chest_item.configuration.War2": "信仰战争2",
+  "chest_item.configuration.WarGodCommand": "军神之令",
+  "chest_item.configuration.WarGodCommand2": "军神之令1",
+  "chest_item.configuration.WarGodCommand3": "军神之令2",
   "chest_item.configuration.Warmaker": "战争缔造者",
   "chest_item.configuration.Warmaker2": "战争缔造者2",
   "chest_item.configuration.WindKnife": "罡风刀环",
@@ -344,7 +352,7 @@
   "attribute.name.chest_item.shield_cooldown": "Shattering reaction time",
   "attribute.name.chest_item.hyperplasia_cooldown": "Dormant time",
   "attribute.name.chest_item.shadow_shield_conversion": "Shadow transformation",
-
+  "attribute.name.chest_item.oppression": "oppression",
 
 
   "itemGroup.chest_item": "Trinkets in the chest",
@@ -1180,6 +1188,24 @@
 
 "chest_item.book.protest_tooltip.1": "After swearing, weaken or damage to creatures that hate you",
   "chest_item.book.protest_tooltip.2": "But a large area of creatures will actively attack you",
+
+  "item.chest_item.defy_life": "Defying orders and resisting",
+  "item.chest_item.defy_life.string.1": "Multiple deaths in a short period of time will make you stronger, with a maximum of 10 layers added",
+  "item.chest_item.defy_life.string.2": "Right click on this item on the backpack interface to activate it",
+  "item.chest_item.defy_life.string.3": "After activation, it can be sent back to the previous point of death after rebirth",
+  "item.chest_item.defy_life.string.4": "Current status activated",
+
+  "item.chest_item.demon_lord": "Control of Power",
+  "item.chest_item.demon_lord.string.1": "Even if the crosshair deviates from the target, it can still attack the target within a reasonable range",
+  "item.chest_item.demon_lord.string.2": "Your aura makes nearby creatures struggle to aim at you",
+  "item.chest_item.demon_lord.string.3": "Nearby projectiles will slow down due to the pressure",
+
+  "item.chest_item.war_god_command": "The Order of the Military God",
+  "item.chest_item.war_god_command.string.1": "The maximum health value naturally recovers to%d%%",
+  "item.chest_item.war_god_command.string.2": "The hunger value will stop consuming when it returns to this value",
+  "item.chest_item.war_god_command.string.3": "Losing health brings huge bonuses",
+  "item.chest_item.war_god_command.string.4": "The holder of this command has a %d%% probability of avoiding fatal damage received",
+  "item.chest_item.war_god_command.string.5": "This token conflicts with the military",
 
   "sound.chest_item.sword" : "剑气：斩击",
   "sound.chest_item.kill" : "剑气：斩杀",
