@@ -3,14 +3,17 @@ package com.ytgld.chest_item.renderer;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec2;
 
 public class ChaosArmorRender {
+
     public static void renderArmorLevel(GuiGraphicsExtractor graphics, Player player,int rightHeight) {
         if (player != null) {
             int l = graphics.guiWidth() / 2 + 10;
@@ -139,6 +142,7 @@ public class ChaosArmorRender {
                                   int d,
                                   int offset, int alpha, RenderPipeline renderPipeline
     ){
+
         if (offset > 10) {
             offset = 10;
         }
@@ -147,18 +151,23 @@ public class ChaosArmorRender {
             if (i > aa + 3) {
                 guiGraphics.blit(renderPipeline, a1,
                         9 + ((x) + (offset - 1) * 8- 1), yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
+                ShieldRenderHandler.rednerPart(xx,yy,ShieldRenderHandler.doChaosWindsParticle,new BlackKey.ColorImage(255, 255, 75, 255));
             }
             if (i == aa) {
                 guiGraphics.blit(renderPipeline, a4, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
+                ShieldRenderHandler.rednerPart(xx,yy,ShieldRenderHandler.doChaosWindsParticle,new BlackKey.ColorImage(255, 255, 75, 255));
             }
             if (i == b) {
                 guiGraphics.blit(renderPipeline, a3, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
+                ShieldRenderHandler.rednerPart(xx,yy,ShieldRenderHandler.doChaosWindsParticle,new BlackKey.ColorImage(255, 255, 75, 255));
             }
             if (i == c) {
                 guiGraphics.blit(renderPipeline, a2, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
+                ShieldRenderHandler.rednerPart(xx,yy,ShieldRenderHandler.doChaosWindsParticle,new BlackKey.ColorImage(255, 255, 75, 255));
             }
             if (i == d) {
                 guiGraphics.blit(renderPipeline, a1, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
+                ShieldRenderHandler.rednerPart(xx,yy,ShieldRenderHandler.doChaosWindsParticle,new BlackKey.ColorImage(255, 255, 75, 255));
             }
         }
     }

@@ -3,6 +3,8 @@ package com.ytgld.chest_item.renderer;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
+import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -12,8 +14,10 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import org.joml.Vector2f;
 
 import java.util.function.Supplier;
 
@@ -44,12 +48,43 @@ public class ShieldRenderHandler {
     private static int scrollX = 0;
 
     public static float time = 0;
+
+
+    public static float lastHyperplasia;
+    public static boolean doHyperplasiaParticle  = false;
+
+    public static float lastBlackShadow;
+    public static boolean doBlackShadowParticle  = false;
+
+    public static float lastChaosWinds;
+    public static boolean doChaosWindsParticle  = false;
+
+    public static Vec2 heartVec2 = null;
+    public static boolean doZeroPart = false;
+
+
     public static void tick(ClientTickEvent event) {
         var player = Minecraft.getInstance().player;
         if (player != null) {
             double max = player.getAttributeValue(AttReg.painShield_number);
             double now = player.getData(AttReg.painShield);
             if (max > 0) {
+                float hyperplasiaDataType = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                float blackShadowDataType = player.getData(AttReg.black_shadowAttachmentType);
+                float chaosWindsDataType = player.getData(AttReg.chaosWinds);
+
+                if (!isInHeartShieldCooldown(player)) {
+                    doHyperplasiaParticle = lastHyperplasia != hyperplasiaDataType;
+                    lastHyperplasia = hyperplasiaDataType;
+
+                    doBlackShadowParticle = lastBlackShadow != blackShadowDataType;
+                    lastBlackShadow = blackShadowDataType;
+
+                    doChaosWindsParticle = lastChaosWinds != chaosWindsDataType;
+                    lastChaosWinds = chaosWindsDataType;
+                }
+
+
 
                 if (player.hurtDuration == 10) {
                     aFloat = 1;
@@ -86,6 +121,11 @@ public class ShieldRenderHandler {
                     theAlpha -= 0.05f;
                 }else {
                     theAlpha = 0;
+                }
+                if (now <= 0 && lastShield != now) {
+                    doZeroPart = true;
+                }else {
+                    doZeroPart = false;
                 }
                 lastShield = now;
                 displayedShield = Mth.lerp(0.2f, displayedShield, (float) now);
@@ -168,11 +208,18 @@ public class ShieldRenderHandler {
                     }
                     float delta = (float) (displayedShield / maxShield);
                     delta/= 1.55f;
-
+                    if (doZeroPart) {
+                        for (int size = 0; size < 25; size++) {
+                            BlackParticlesAdd.markSeen((int) (left - (32 * delta * sizeHeartBeat) /2), (int) (top -  (32 * delta * sizeHeartBeat) /2), new BlackKey.ImageColorAndRenderPipeline(32,
+                                    new BlackKey.ColorImage(255, 185, 75, 105),
+                                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED,
+                                    new Vector2f(), new Vector2f((float) (Math.cos(size) / 25f), (float) (Math.sin(size) / 25f)), new Vector2f(), false));
+                        }
+                    }
                     if (delta > 1) {
                         delta = 1;
                     }
-
+                    heartVec2 = new Vec2(left - (32 * delta * sizeHeartBeat) /2, top -  (32 * delta * sizeHeartBeat) /2);
                     poseStack.pushMatrix();
                     poseStack.translate(left - (32 * delta * sizeHeartBeat) /2, top -  (32 * delta * sizeHeartBeat) /2);
                     poseStack.scale(delta * sizeHeartBeat,delta * sizeHeartBeat);
@@ -212,45 +259,10 @@ public class ShieldRenderHandler {
                                         Light.ARGB.color((int) Math.min(s * 255f,now * 255f), 255, 255,255));
                     }
                     poseStack.popMatrix();
-
-
-                    renderECG(guiGraphics);
                 }
             }
         }
     }
-    public static void renderECG(GuiGraphicsExtractor guiGraphics) {
-//        Minecraft minecraft = Minecraft.getInstance();
-//        if (minecraft.options.hideGui) return;
-//
-//        var player = minecraft.player;
-//        if (player == null || minecraft.level == null) return;
-//
-//        Matrix3x2fStack poseStack = guiGraphics.pose();
-//        poseStack.pushMatrix();
-//        float s = aFloat;
-//        if (s < 0) {
-//            s = 0;
-//        }
-//        int left = 0;
-//        int top = 0;
-//        int size = 32;
-//        guiGraphics
-//                .blit(MRender.RenderPs.GUI_TEXTURED,
-//                        ECG_TEXTURE,
-//
-//                        0,0,
-//                        0,0,
-//
-//                        size - scrollX, size,
-//                        size, size,
-//
-//                        Light.ARGB.color((int) Math.min(s,Math.max(0,Math.min(255,ecgAlpha * 255))),255,255,255));
-//
-//        poseStack.popMatrix();
-    }
-
-
     public static void tickShield(LivingEntity living){
         tickCooldown(living);
         if (!isInHeartShieldCooldown(living)) {
@@ -263,32 +275,33 @@ public class ShieldRenderHandler {
                     }
                     Supplier<AttachmentType<Float>> supplier = AttReg.painShield;
                     if (player.getData(supplier) <= maxShield.getValue()) {
-                        {
-                            float other = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
-                            if (other > 0) {
-                                addPain(player, speed.getValue(), other / 3);
-                                Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,player, 0f);
+                        if (player.tickCount % 10 == 1 && !player.level().isClientSide()) {
+                            {
+                                float other = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                                if (other > 0) {
+                                    addPain(player, speed.getValue(), other / 3);
+                                    Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES, player, player.getData(AttReg.hyperplasiaATTACHMENT_TYPES) - 1);
+                                }
                             }
-                        }
-                        {
-                            float other = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
-                            if (other > 0) {
-                                addPain(player, speed.getValue(), other);
-                                Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, 0f);
+                            {
+                                float other = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                                if (other > 0) {
+                                    addPain(player, speed.getValue(), other);
+                                    Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES, player, player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) - 1);
+                                }
                             }
-                        }
-                        {
-                            float other = player.getData(AttReg.chaosWinds);
-                            if (other > 0) {
-                                addPain(player, speed.getValue(), other / 4);
-                                Handler.setDataValue(AttReg.chaosWinds,player, 0f);
+                            {
+                                float other = player.getData(AttReg.chaosWinds);
+                                if (other > 0) {
+                                    addPain(player, speed.getValue(), other / 4);
+                                    Handler.setDataValue(AttReg.chaosWinds, player, player.getData(AttReg.chaosWinds) - 1);
+                                }
                             }
                         }
                     } else {
                         Handler.setDataValue(AttReg.chaosWinds,player, 0f);
                         Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, 0f);
                         Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,player, 0f);
-
                     }
                 }
             }
@@ -307,7 +320,21 @@ public class ShieldRenderHandler {
         }
         return true;
     }
+    public static void rednerPart(int x, int y, boolean t, BlackKey.ColorImage colorImage){
+        if (ShieldRenderHandler.heartVec2 !=null && t) {
+            Vector2f posA = new Vector2f(x + 4, y + 4);
 
+            Vector2f posB = new Vector2f(ShieldRenderHandler.heartVec2.x, ShieldRenderHandler.heartVec2.y);
+
+            Vector2f velocity = posB.sub(posA, new Vector2f())
+                    .normalize()
+                    .mul(0.125f);
+            BlackParticlesAdd.markSeen(x + 4, y + 4, new BlackKey.ImageColorAndRenderPipeline(16,
+                    colorImage,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED,
+                    new Vector2f(), velocity, new Vector2f(), false));
+        }
+    }
     public static void tickCooldown(LivingEntity living){
         if (living instanceof Player player) {
             if (!player.level().isClientSide()) {

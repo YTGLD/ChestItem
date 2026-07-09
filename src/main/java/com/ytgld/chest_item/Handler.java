@@ -30,12 +30,11 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class Handler {
-    public static<T> void setDataValue(Supplier<AttachmentType<T>> attachmentTypeSupplier,LivingEntity living ,T number){
+    public static<T> void setDataValue(Supplier<AttachmentType<T>> attachmentTypeSupplier,LivingEntity living ,T number) {
         if (living instanceof Player player) {
-            player.setData(attachmentTypeSupplier,number);
+            player.setData(attachmentTypeSupplier, number);
         }
     }
-
     public static void addShadowBlackShieldData(LivingEntity living ,float number){
         if (living instanceof Player player) {
             AttributeInstance shadowAttributeInstance = player.getAttribute(AttReg.shadow_shield);

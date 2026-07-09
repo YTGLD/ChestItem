@@ -1220,8 +1220,8 @@
 
   "item.chest_item.demon_lord": "Control of Power",
   "item.chest_item.demon_lord.string.1": "Even if the crosshair deviates from the target, it can still attack the target within a reasonable range",
-  "item.chest_item.demon_lord.string.2": "你的威压使附近的生物难以瞄准你",
-  "item.chest_item.demon_lord.string.3": "附近的弹射物会因为威压而变慢",
+  "item.chest_item.demon_lord.string.2": "Your aura makes nearby creatures struggle to aim at you",
+  "item.chest_item.demon_lord.string.3": "Nearby projectiles will slow down due to the pressure",
 
   "item.chest_item.war_god_command": "The Order of the Military God",
   "item.chest_item.war_god_command.string.1": "The maximum health value naturally recovers to%d%%",

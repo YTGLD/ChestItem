@@ -3,12 +3,15 @@ package com.ytgld.chest_item.renderer;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
+import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.world.entity.player.Player;
+import org.joml.Vector2f;
 
 public class HyperplasiaRender {
     public static void renderArmorLevel(GuiGraphicsExtractor graphics, Player player,int leftHeight) {
@@ -90,6 +93,7 @@ public class HyperplasiaRender {
 
             int yyBase = y - 10;
 
+
             for (int row = 0; row <= rowIndex; row++) {
                 int offsetI = row == rowIndex ? baseI : rowSize;
 
@@ -107,6 +111,7 @@ public class HyperplasiaRender {
                             j,
                             alpha,
                             RenderPipelines.GUI_TEXTURED
+                            ,player
                     );
 
                     drawArmor(
@@ -119,7 +124,8 @@ public class HyperplasiaRender {
                             3 + j * 4, 4 + j * 4,
                             j,
                             light,
-                            MRender.RenderPs.GUI_TEXTURED
+                            MRender.RenderPs.GUI_TEXTURED,
+                            player
                     );
                 }
             }
@@ -137,11 +143,12 @@ public class HyperplasiaRender {
                                   int b,
                                   int c,
                                   int d,
-                                  int offset, int alpha, RenderPipeline renderPipeline
-    ){
+                                  int offset, int alpha, RenderPipeline renderPipeline,
+                                  Player player){
         if (offset > 10) {
             offset = 10;
         }
+
         if (i > 0) {
             int xx = (x) + offset * 8- 1;
             if (i > aa + 3) {
@@ -150,16 +157,29 @@ public class HyperplasiaRender {
             }
             if (i == aa) {
                 guiGraphics.blit(renderPipeline, a4, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
+                if (lastShield != player.getData(AttReg.hyperplasiaATTACHMENT_TYPES)) {
+                    for (int size = 0; size < 25; size++) {
+                        BlackParticlesAdd.markSeen(xx + 4, yy + 4, new BlackKey.ImageColorAndRenderPipeline(8,
+                                new BlackKey.ColorImage(255, 185, 75, 105),
+                                Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED,
+                                new Vector2f(), new Vector2f((float) (Math.cos(size) / 33f), (float) (Math.sin(size) / 33f)), new Vector2f(), false));
+                    }
+                }
+                ShieldRenderHandler.rednerPart(xx,yy,ShieldRenderHandler.doHyperplasiaParticle,new BlackKey.ColorImage(255, 185, 75, 105));
             }
             if (i == b) {
                 guiGraphics.blit(renderPipeline, a3, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
+                ShieldRenderHandler.rednerPart(xx,yy,ShieldRenderHandler.doHyperplasiaParticle,new BlackKey.ColorImage(255, 185, 75, 105));
             }
             if (i == c) {
                 guiGraphics.blit(renderPipeline, a2, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
+                ShieldRenderHandler.rednerPart(xx,yy,ShieldRenderHandler.doHyperplasiaParticle,new BlackKey.ColorImage(255, 185, 75, 105));
             }
             if (i == d) {
                 guiGraphics.blit(renderPipeline, a1, xx, yy, 0, 0, 9, 9, 9, 9, Light.ARGB.color(alpha, 255, 255, 255));
+                ShieldRenderHandler.rednerPart(xx,yy,ShieldRenderHandler.doHyperplasiaParticle,new BlackKey.ColorImage(255, 185, 75, 105));
             }
         }
     }
+
 }

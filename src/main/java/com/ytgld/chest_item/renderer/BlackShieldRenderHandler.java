@@ -2,6 +2,7 @@ package com.ytgld.chest_item.renderer;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
