@@ -29,6 +29,7 @@ import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
 import com.ytgld.chest_item.items.evil_mother.*;
+import com.ytgld.chest_item.items.evil_mother.decay.Triangle;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
@@ -479,6 +480,8 @@ public class EventMain {
         LeadOfEnlightenment.die(event);
         WallowAxe.damage(event);
         WarGodCommand.notDie(event);
+        Triangle.hurtSize(event);
+
 
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);
