@@ -1302,6 +1302,11 @@
   "item.chest_item.war_god_command.string.4": "持有此令者，有%d%%的概率规避受到的必死伤害",
   "item.chest_item.war_god_command.string.5": "此令牌与破军冲突",
 
+  "item.chest_item.triangle": "古朽三角",
+  "item.chest_item.triangle.string.1": "获得基于%d%%生命值修正的伤害",
+  "item.chest_item.triangle.string.2": "获得基于%d%%伤害修正的护甲值",
+  "item.chest_item.triangle.string.3": "获得基于%d%%护甲值修正的生命值",
+
   "chest_item.eternal_vows": "永恒誓令",
 
   "chest_item.book.test.main": "箱子里的小饰品",

@@ -683,6 +683,11 @@ public class EventMain {
             if (stronger != null && number != null) {
                 float value = (float) stronger.getValue();
                 float theNumber = (float) number.getValue();
+                if (theNumber <= 0) {
+                    if (player.getData(AttReg.painShield) > 0) {
+                        player.setData(AttReg.painShield, 0f);
+                    }
+                }
                 float data = player.getData(AttReg.painShield);
                 if (data > 0) {
                     float damage = event.getNewDamage();

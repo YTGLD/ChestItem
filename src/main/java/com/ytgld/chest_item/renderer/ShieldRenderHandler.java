@@ -127,6 +127,7 @@ public class ShieldRenderHandler {
                 }else {
                     doZeroPart = false;
                 }
+
                 lastShield = now;
                 displayedShield = Mth.lerp(0.2f, displayedShield, (float) now);
                 if (now > 0 && now < max) {
@@ -206,6 +207,7 @@ public class ShieldRenderHandler {
                     if (s < 0) {
                         s = 0;
                     }
+
                     float delta = (float) (displayedShield / maxShield);
                     delta/= 1.55f;
                     if (doZeroPart) {

@@ -21,6 +21,7 @@ import com.ytgld.chest_item.items.condensebone.*;
 import com.ytgld.chest_item.items.end.EndEffect;
 import com.ytgld.chest_item.items.end.TheEndIsComing;
 import com.ytgld.chest_item.items.evil_mother.*;
+import com.ytgld.chest_item.items.evil_mother.decay.Triangle;
 import com.ytgld.chest_item.items.gold.*;
 import com.ytgld.chest_item.items.iron.IronCube;
 import com.ytgld.chest_item.items.iron.IronHeart;
@@ -253,6 +254,9 @@ public class InitItems {
     public static final DeferredItem<@NotNull Item> DemonLord_ = register("demon_lord",
             (Identifier)-> new DemonLord(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
+    public static final DeferredItem<@NotNull Item> Triangle_ = register("triangle",
+            (Identifier)-> new Triangle(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
 
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
             (Identifier)-> new MotherRemains(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
@@ -406,6 +410,7 @@ public class InitItems {
                     output.accept(InitItems.DefyLife_);
                     output.accept(InitItems.WarGodCommand_);
                     output.accept(InitItems.DemonLord_);
+                    output.accept(InitItems.Triangle_);
 
 
 
@@ -438,6 +443,7 @@ public class InitItems {
                     DefyLife_.getKey(),
                     WarGodCommand_.getKey(),
                     DemonLord_.getKey(),
+                    Triangle_.getKey(),
                     ReinforcedItems.SilentDevice_.getKey(),
                     ReinforcedItems.Accelerated_.getKey(),
                     ReinforcedItems.Excite_.getKey(),

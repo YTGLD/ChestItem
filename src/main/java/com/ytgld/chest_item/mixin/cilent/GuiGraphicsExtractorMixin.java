@@ -10,6 +10,7 @@ import com.ytgld.chest_item.items.black.chaos_item.ITheChaos;
 import com.ytgld.chest_item.items.black.soul.chaos.TheChaos;
 import com.ytgld.chest_item.items.condensebone.ItemBone;
 import com.ytgld.chest_item.items.evil_mother.IEvil;
+import com.ytgld.chest_item.items.evil_mother.decay.IDecay;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
@@ -112,11 +113,23 @@ public abstract class GuiGraphicsExtractorMixin implements IGuiGraphics {
                             si1_21_4$renderTooltipBackground((GuiGraphicsExtractor) (Object) this, l, i1, i, j, 400);
                             this.pose.popMatrix();
                         }
-                        if (tooltipStack.getItem() instanceof IEvil) {
-                            this.pose.pushMatrix();
-                            chest_item$renderItemBlackShadowTooltipBackground_EvilMother((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
-                            si1_21_4$renderTooltipBackground_EvilMother((GuiGraphicsExtractor) (Object) this, l, i1, i, j, 1000);
-                            this.pose.popMatrix();
+                        if (tooltipStack.getItem() instanceof IEvil iEvil) {
+                            if (!iEvil.isDecay()) {
+                                this.pose.pushMatrix();
+                                chest_item$renderItemBlackShadowTooltipBackground_EvilMother((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
+                                si1_21_4$renderTooltipBackground_EvilMother((GuiGraphicsExtractor) (Object) this, l, i1, i, j, 1000);
+                                this.pose.popMatrix();
+                            }else {
+                                this.pose.pushMatrix();
+                                chest_item$renderItemBlackShadowTooltipBackground_EvilMother((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
+                                si1_21_4$renderTooltipBackground_EvilMother((GuiGraphicsExtractor) (Object) this, l, i1, i, j, 1000);
+                                this.pose.popMatrix();
+
+//                                this.pose.pushMatrix();
+//                                IDecay.ShowBackAndFarm.renderBack((GuiGraphicsExtractor) (Object) this, l, i1, i, j);
+//                                IDecay.ShowBackAndFarm.renderTooltip((GuiGraphicsExtractor) (Object) this, l, i1, i, j, 1000);
+//                                this.pose.popMatrix();
+                            }
                         }
                         if (tooltipStack.getItem() instanceof ItemBlackShadow) {
                             if (tooltipStack.getItem() instanceof TheChaos || tooltipStack.getItem() instanceof ITheChaos) {

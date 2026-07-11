@@ -28,6 +28,9 @@ public class ItemBase extends Item implements Terror{
         super(properties);
     }
 
+    public void tick(Player player, ItemStack stack){
+
+    }
     @Override
     public @NotNull Component getName(@NotNull ItemStack stack) {
         Component component = super.getName(stack);

@@ -7,4 +7,7 @@ public interface IEvil {
     default int theColor(){
         return Light.ARGB.color(50,80,120,105);
     }
+    default boolean isDecay(){
+        return false;
+    }
 }

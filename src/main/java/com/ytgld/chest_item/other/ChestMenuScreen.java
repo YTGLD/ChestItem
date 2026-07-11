@@ -25,10 +25,6 @@ import java.util.Optional;
 import java.util.Set;
 
 public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
-    private static final Identifier CONTAINER_BACKGROUND = Identifier.withDefaultNamespace(
-            "textures/gui/container/generic_54.png");
-
-
     private static final Identifier myIdentifier = Identifier.fromNamespaceAndPath(Chestitem.MODID,
             "textures/gui/container/generic.png");
     private final Player player;
@@ -139,7 +135,6 @@ public class ChestMenuScreen extends AbstractContainerScreen<ChestItemMenu> {
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, myIdentifier, i, j, 0.0F, 0.0F, 256, 256, 256, 256);
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, myIdentifier, i, 256, 0.0F, 126.0F, 256, 96, 256, 256);
 
     }
 }
