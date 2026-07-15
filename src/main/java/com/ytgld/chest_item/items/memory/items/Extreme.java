@@ -33,7 +33,11 @@ public class Extreme extends MemoryBase {
         super(properties);
     }
     @ConfigPlugin
-    public static class ConfigItem implements RegisterItemConfig {
+     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Memory";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         @Override
         public void config(ModConfigSpec.Builder builder) {

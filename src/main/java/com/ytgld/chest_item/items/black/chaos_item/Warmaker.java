@@ -78,7 +78,11 @@ public class  Warmaker extends ItemBlackShadow implements ITheChaos {
     public static final int notKillTime =10*60;
     public static final String applyKillTimeBoolean ="applyKillTimeBoolean";
     @ConfigPlugin
-    public static class ConfigItem implements RegisterItemConfig {
+     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "BlackShadow";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         @Override
         public void config(ModConfigSpec.Builder builder) {

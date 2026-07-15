@@ -48,7 +48,11 @@ public class WarGodCommand extends EvilMother {
         }
 
         @ConfigPlugin
-        public static class ConfigItem implements RegisterItemConfig {
+         public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "EvilMother";
+        }
             public static ModConfigSpec.IntValue intValue;
             public static ModConfigSpec.DoubleValue intValue2;
             public static ModConfigSpec.IntValue intValue3;

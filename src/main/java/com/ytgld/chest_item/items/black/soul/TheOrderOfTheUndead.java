@@ -60,7 +60,11 @@ public class TheOrderOfTheUndead extends TheImprintOfTheSoul {
         super(properties);
     }
     @ConfigPlugin
-    public static class ConfigItem implements RegisterItemConfig {
+     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "BlackShadow";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         public static ModConfigSpec.IntValue intValue2 ;
         @Override

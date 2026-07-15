@@ -43,221 +43,224 @@ public class RunawayLining extends ItemBlackShadow implements IBlackLight, ITheC
     public RunawayLining(Properties properties) {
         super(properties);
     }
-    @Override
-    public @NotNull Component getName(@NotNull ItemStack stack) {
-        Component component = super.getName(stack);
-        MutableComponent co = component.copy();
-        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF0000)));
-        return co;
-    }
-    @Override
-    public void text(ItemStack stack,Consumer<Component> tooltipComponents,TooltipFlag flag){
-        CompoundTag compoundTag = stack.get(DataReg.tag);
-        if (compoundTag != null) {
-            tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF0000))));
-            tooltipComponents.accept(Component.literal(""));
-            if (!flag.hasShiftDown()) {
-                tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
-                tooltipComponents.accept(Component.translatable("key.keyboard.left.shift").withStyle(ChatFormatting.GOLD));
-            }else {
-                tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipComponents.accept(Component.literal(""));
-                tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
-                tooltipComponents.accept(Component.translatable("item.chest_item.bloody_belt").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipComponents.accept(Component.translatable("item.chest_item.corruption_crystal").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipComponents.accept(Component.translatable("item.chest_item.evil_thoughts_forge_dreams").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipComponents.accept(Component.translatable("item.chest_item.death_omen_stone_monument").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipComponents.accept(Component.translatable("item.chest_item.dry_bones").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipComponents.accept(Component.translatable("chest_item.the_imprint_of_the_soul").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipComponents.accept(Component.translatable("chest_item.the_imprint_of_the_soul.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-                tooltipComponents.accept(Component.translatable("chest_item.celestial").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
-            }
-        }else {
-            tooltipComponents.accept((Component.translatable("item.chest_item.runaway_lining.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
-        }
-    }
-
-    public static Identifier identifier(ItemStack stack) {
-        return Identifier.parse("runaway_lining_string:" + stack.getItem().getDescriptionId());
-    }
-    public static final float min = -0.15f;
-    public static final float max =  0.35f;
-    public static final String lock =  "LockSting";
-    @Override
-    public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
-        if (other.is(Items.TOTEM_OF_UNDYING.asItem())) {
-            die(player);
-            player.level().playSound(null,player.blockPosition(), SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.AMBIENT,1,1);
-            other.shrink(1);
-            return true;
-        }
-
-        return false;
-    }
-    public static  void dieTotem(LivingUseTotemEvent event) {
-        if (event.getEntity() instanceof Player player) {
-            die(player);
-        }
-    }
-    public static void die(Player player){
-        if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
-            ChestInventory chestInventory = Handler.getItem(player);
-            if (chestInventory != null) {
-                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                    ItemStack stack = chestInventory.getItem(i);
-                    if (!stack.is(InitItems.RunawayLining_) && !stack.isEmpty()){
-                        AttributeDataType attributeDataType = stack.get(DataReg.attributeType);
-                        AttributeDataType doIt = new AttributeDataType(List.of());
-
-                        CompoundTag compoundTag = stack.get(DataReg.tag);
-
-                        if (compoundTag == null) {
-                            stack.set(DataReg.tag,new CompoundTag());
-                        }
-
-                        if (compoundTag != null){
-                            if (compoundTag.getBooleanOr(lock,false)){
-                                continue;
-                            }
-                        }
-                        if (attributeDataType == null) {
-                            AttributeDataType attribute = addAttributeType(player,stack,doIt);
-                            stack.set(DataReg.attributeType,attribute);
-                        }
-                        if (compoundTag != null) {
-                            compoundTag.putBoolean(lock,true);
-                            compoundTag.putBoolean(IBlackLight.blackName,true);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    public static float addNumber( RandomSource create,Player player){
-        float add = Mth.nextFloat(create, (float) (double)Config.config.RunawayLiningMin.get(),(float) (double)Config.config.RunawayLiningMax.get());
-        float sqrtLuck = (float) Math.sqrt(player.getLuck());
-        if (sqrtLuck > 4) {
-            sqrtLuck = 4;
-        }
-        sqrtLuck /= 20;
-        add += sqrtLuck;
-        return add;
-    }
-    public static AttributeDataType addAttributeType(
-            Player player,ItemStack stack,
-            AttributeDataType attributeDataType){
-
-        Optional<Holder.Reference<Attribute>> optional =
-                BuiltInRegistries.ATTRIBUTE.get(RandomSource.create().nextInt(BuiltInRegistries.ATTRIBUTE.size()));
-        Optional<Holder.Reference<Attribute>> optional1 =
-                BuiltInRegistries.ATTRIBUTE.get(RandomSource.create().nextInt(BuiltInRegistries.ATTRIBUTE.size()));
-        Optional<Holder.Reference<Attribute>> optional2 =
-                BuiltInRegistries.ATTRIBUTE.get(RandomSource.create().nextInt(BuiltInRegistries.ATTRIBUTE.size()));
-        if (optional.isPresent() && optional1.isPresent() && optional2.isPresent()) {
-            if (optional.get().getKey()!=null && optional1.get().getKey()!=null && optional2.get().getKey()!=null){
-                return attributeDataType.builder().add(optional.get(),
-                              new AttributeModifier(Identifier.parse(
-                                Chestitem.MODID + "_" + "runaway_lining_string" + "_"+
-                                stack.getItem().getDescriptionId()+"_" +"1"
-                                ), addNumber(RandomSource.create(),player), AttributeModifier.Operation.ADD_MULTIPLIED_BASE))
-                      .add(optional1.get(),
-                              new AttributeModifier(Identifier.parse(
-                              Chestitem.MODID + "_" + "runaway_lining_string" + "_"+
-                                      stack.getItem().getDescriptionId()+"_" +"2"
-                              ), addNumber(RandomSource.create(),player), AttributeModifier.Operation.ADD_MULTIPLIED_BASE))
-                      .add(optional2.get(),
-                              new AttributeModifier(Identifier.parse(
-                              Chestitem.MODID + "_" + "runaway_lining_string" + "_"+
-                                      stack.getItem().getDescriptionId()+"_" +"3"
-                              ), addNumber(RandomSource.create(),player), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)).build();
-            }
-        }
-        return new AttributeDataType(List.of());
-    }
-
-    public static void addMap(Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap, Player player , ItemStack stack){
-        CompoundTag compoundTag = stack.get(DataReg.tag);
-        if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
-            if (stack.is(InitItems.BloodyBelt_)
-                    || stack.is(InitItems.CorruptionCrystal_)
-                    || stack.is(InitItems.EvilThoughtsForgeDreams_)
-                    || stack.is(InitItems.DeathOmenStoneMonument_)
-                    || stack.is(InitItems.DryBones_)
-                    || stack.getItem() instanceof CommonCelestial
-                    || stack.getItem() instanceof TheImprintOfTheSoul
-            ) {
-                if (compoundTag != null) {
-                    compoundTag.putBoolean(IBlackLight.blackName,true);
-                }else {
-                    stack.set(DataReg.tag,new CompoundTag());
-                }
-            }
-        }
-        if (compoundTag != null) {
-            if (compoundTag.getBooleanOr(IBlackLight.blackName, false)) {
-                if (stack.is(InitItems.BloodyBelt_)) {
-                    attributeModifierMultimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(identifier(stack),
-                            2, AttributeModifier.Operation.ADD_VALUE));
-                    attributeModifierMultimap.put(Attributes.MAX_HEALTH, new AttributeModifier(identifier(stack),
-                            4, AttributeModifier.Operation.ADD_VALUE));
-
-                }
-                if (stack.is(InitItems.CorruptionCrystal_)) {
-                    attributeModifierMultimap.put(AttReg.looting, new AttributeModifier(identifier(stack),
-                            1, AttributeModifier.Operation.ADD_VALUE));
-                    attributeModifierMultimap.put(AttReg.fortune, new AttributeModifier(identifier(stack),
-                            1, AttributeModifier.Operation.ADD_VALUE));
-
-                    attributeModifierMultimap.put(AttReg.shadow_shield, new AttributeModifier(identifier(stack),
-                            4, AttributeModifier.Operation.ADD_VALUE));
-                    attributeModifierMultimap.put(AttReg.shadow_shield_stronger, new AttributeModifier(identifier(stack),
-                            0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-
-                }
-                if (stack.is(InitItems.EvilThoughtsForgeDreams_)) {
-                    attributeModifierMultimap.put(AttReg.shadow_shield_stronger, new AttributeModifier(identifier(stack),
-                            0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-                    attributeModifierMultimap.put(AttReg.shadow_shield, new AttributeModifier(identifier(stack),
-                            0.3, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-                    attributeModifierMultimap.put(AttReg.shadow_shield_speed, new AttributeModifier(identifier(stack),
-                            0.4, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-
-                }
-                if (stack.is(InitItems.DeathOmenStoneMonument_)) {
-                    attributeModifierMultimap.put(Attributes.MAX_HEALTH, new AttributeModifier(identifier(stack),
-                            0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-                    attributeModifierMultimap.put(Attributes.ARMOR, new AttributeModifier(identifier(stack),
-                            0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
-                }
-                if (stack.is(InitItems.DryBones_)) {
-                    attributeModifierMultimap.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(identifier(stack),
-                            0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-                    attributeModifierMultimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(identifier(stack),
-                            0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-                    attributeModifierMultimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(identifier(stack),
-                            0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-                    attributeModifierMultimap.put(Attributes.ARMOR, new AttributeModifier(identifier(stack),
-                            0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-
-                }
-                if (stack.getItem() instanceof CommonCelestial) {
-                    attributeModifierMultimap.put(AttReg.heal, new AttributeModifier(identifier(stack),
-                            0.05F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-                    attributeModifierMultimap.put(AttReg.more_speed, new AttributeModifier(identifier(stack),
-                            0.02F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-
-                }
-                if (stack.getItem() instanceof TheImprintOfTheSoul) {
-                    attributeModifierMultimap.put(AttReg.chaos_armor, new AttributeModifier(identifier(stack),
-                            2, AttributeModifier.Operation.ADD_VALUE));
-                    attributeModifierMultimap.put(AttReg.chaos_armor_min, new AttributeModifier(identifier(stack),
-                            -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
-                }
-            }
-        }
-    }
+//    public RunawayLining(Properties properties) {
+//        super(properties);
+//    }
+//    @Override
+//    public @NotNull Component getName(@NotNull ItemStack stack) {
+//        Component component = super.getName(stack);
+//        MutableComponent co = component.copy();
+//        co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF0000)));
+//        return co;
+//    }
+//    @Override
+//    public void text(ItemStack stack,Consumer<Component> tooltipComponents,TooltipFlag flag){
+//        CompoundTag compoundTag = stack.get(DataReg.tag);
+//        if (compoundTag != null) {
+//            tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.5").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF0000))));
+//            tooltipComponents.accept(Component.literal(""));
+//            if (!flag.hasShiftDown()) {
+//                tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+//                tooltipComponents.accept(Component.translatable("key.keyboard.left.shift").withStyle(ChatFormatting.GOLD));
+//            }else {
+//                tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+//                tooltipComponents.accept(Component.literal(""));
+//                tooltipComponents.accept(Component.translatable("item.chest_item.runaway_lining.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+//                tooltipComponents.accept(Component.translatable("item.chest_item.bloody_belt").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+//                tooltipComponents.accept(Component.translatable("item.chest_item.corruption_crystal").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+//                tooltipComponents.accept(Component.translatable("item.chest_item.evil_thoughts_forge_dreams").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+//                tooltipComponents.accept(Component.translatable("item.chest_item.death_omen_stone_monument").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+//                tooltipComponents.accept(Component.translatable("item.chest_item.dry_bones").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+//                tooltipComponents.accept(Component.translatable("chest_item.the_imprint_of_the_soul").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+//                tooltipComponents.accept(Component.translatable("chest_item.the_imprint_of_the_soul.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+//                tooltipComponents.accept(Component.translatable("chest_item.celestial").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFFF5ACD))));
+//            }
+//        }else {
+//            tooltipComponents.accept((Component.translatable("item.chest_item.runaway_lining.string.0")).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(colorText()))));
+//        }
+//    }
+//
+//    public static Identifier identifier(ItemStack stack) {
+//        return Identifier.parse("runaway_lining_string:" + stack.getItem().getDescriptionId());
+//    }
+//    public static final float min = -0.15f;
+//    public static final float max =  0.35f;
+//    public static final String lock =  "LockSting";
+//    @Override
+//    public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
+//        if (other.is(Items.TOTEM_OF_UNDYING.asItem())) {
+//            die(player);
+//            player.level().playSound(null,player.blockPosition(), SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.AMBIENT,1,1);
+//            other.shrink(1);
+//            return true;
+//        }
+//
+//        return false;
+//    }
+//    public static  void dieTotem(LivingUseTotemEvent event) {
+//        if (event.getEntity() instanceof Player player) {
+//            die(player);
+//        }
+//    }
+//    public static void die(Player player){
+//        if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
+//            ChestInventory chestInventory = Handler.getItem(player);
+//            if (chestInventory != null) {
+//                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+//                    ItemStack stack = chestInventory.getItem(i);
+//                    if (!stack.is(InitItems.RunawayLining_) && !stack.isEmpty()){
+//                        AttributeDataType attributeDataType = stack.get(DataReg.attributeType);
+//                        AttributeDataType doIt = new AttributeDataType(List.of());
+//
+//                        CompoundTag compoundTag = stack.get(DataReg.tag);
+//
+//                        if (compoundTag == null) {
+//                            stack.set(DataReg.tag,new CompoundTag());
+//                        }
+//
+//                        if (compoundTag != null){
+//                            if (compoundTag.getBooleanOr(lock,false)){
+//                                continue;
+//                            }
+//                        }
+//                        if (attributeDataType == null) {
+//                            AttributeDataType attribute = addAttributeType(player,stack,doIt);
+//                            stack.set(DataReg.attributeType,attribute);
+//                        }
+//                        if (compoundTag != null) {
+//                            compoundTag.putBoolean(lock,true);
+//                            compoundTag.putBoolean(IBlackLight.blackName,true);
+//                        }
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    public static float addNumber( RandomSource create,Player player){
+//        float add = Mth.nextFloat(create, (float) (double)Config.config.RunawayLiningMin.get(),(float) (double)Config.config.RunawayLiningMax.get());
+//        float sqrtLuck = (float) Math.sqrt(player.getLuck());
+//        if (sqrtLuck > 4) {
+//            sqrtLuck = 4;
+//        }
+//        sqrtLuck /= 20;
+//        add += sqrtLuck;
+//        return add;
+//    }
+//    public static AttributeDataType addAttributeType(
+//            Player player,ItemStack stack,
+//            AttributeDataType attributeDataType){
+//
+//        Optional<Holder.Reference<Attribute>> optional =
+//                BuiltInRegistries.ATTRIBUTE.get(RandomSource.create().nextInt(BuiltInRegistries.ATTRIBUTE.size()));
+//        Optional<Holder.Reference<Attribute>> optional1 =
+//                BuiltInRegistries.ATTRIBUTE.get(RandomSource.create().nextInt(BuiltInRegistries.ATTRIBUTE.size()));
+//        Optional<Holder.Reference<Attribute>> optional2 =
+//                BuiltInRegistries.ATTRIBUTE.get(RandomSource.create().nextInt(BuiltInRegistries.ATTRIBUTE.size()));
+//        if (optional.isPresent() && optional1.isPresent() && optional2.isPresent()) {
+//            if (optional.get().getKey()!=null && optional1.get().getKey()!=null && optional2.get().getKey()!=null){
+//                return attributeDataType.builder().add(optional.get(),
+//                              new AttributeModifier(Identifier.parse(
+//                                Chestitem.MODID + "_" + "runaway_lining_string" + "_"+
+//                                stack.getItem().getDescriptionId()+"_" +"1"
+//                                ), addNumber(RandomSource.create(),player), AttributeModifier.Operation.ADD_MULTIPLIED_BASE))
+//                      .add(optional1.get(),
+//                              new AttributeModifier(Identifier.parse(
+//                              Chestitem.MODID + "_" + "runaway_lining_string" + "_"+
+//                                      stack.getItem().getDescriptionId()+"_" +"2"
+//                              ), addNumber(RandomSource.create(),player), AttributeModifier.Operation.ADD_MULTIPLIED_BASE))
+//                      .add(optional2.get(),
+//                              new AttributeModifier(Identifier.parse(
+//                              Chestitem.MODID + "_" + "runaway_lining_string" + "_"+
+//                                      stack.getItem().getDescriptionId()+"_" +"3"
+//                              ), addNumber(RandomSource.create(),player), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)).build();
+//            }
+//        }
+//        return new AttributeDataType(List.of());
+//    }
+//
+//    public static void addMap(Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap, Player player , ItemStack stack){
+//        CompoundTag compoundTag = stack.get(DataReg.tag);
+//        if (Handler.has(player,InitItems.RunawayLining_.asItem())) {
+//            if (stack.is(InitItems.BloodyBelt_)
+//                    || stack.is(InitItems.CorruptionCrystal_)
+//                    || stack.is(InitItems.EvilThoughtsForgeDreams_)
+//                    || stack.is(InitItems.DeathOmenStoneMonument_)
+//                    || stack.is(InitItems.DryBones_)
+//                    || stack.getItem() instanceof CommonCelestial
+//                    || stack.getItem() instanceof TheImprintOfTheSoul
+//            ) {
+//                if (compoundTag != null) {
+//                    compoundTag.putBoolean(IBlackLight.blackName,true);
+//                }else {
+//                    stack.set(DataReg.tag,new CompoundTag());
+//                }
+//            }
+//        }
+//        if (compoundTag != null) {
+//            if (compoundTag.getBooleanOr(IBlackLight.blackName, false)) {
+//                if (stack.is(InitItems.BloodyBelt_)) {
+//                    attributeModifierMultimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(identifier(stack),
+//                            2, AttributeModifier.Operation.ADD_VALUE));
+//                    attributeModifierMultimap.put(Attributes.MAX_HEALTH, new AttributeModifier(identifier(stack),
+//                            4, AttributeModifier.Operation.ADD_VALUE));
+//
+//                }
+//                if (stack.is(InitItems.CorruptionCrystal_)) {
+//                    attributeModifierMultimap.put(AttReg.looting, new AttributeModifier(identifier(stack),
+//                            1, AttributeModifier.Operation.ADD_VALUE));
+//                    attributeModifierMultimap.put(AttReg.fortune, new AttributeModifier(identifier(stack),
+//                            1, AttributeModifier.Operation.ADD_VALUE));
+//
+//                    attributeModifierMultimap.put(AttReg.shadow_shield, new AttributeModifier(identifier(stack),
+//                            4, AttributeModifier.Operation.ADD_VALUE));
+//                    attributeModifierMultimap.put(AttReg.shadow_shield_stronger, new AttributeModifier(identifier(stack),
+//                            0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//
+//                }
+//                if (stack.is(InitItems.EvilThoughtsForgeDreams_)) {
+//                    attributeModifierMultimap.put(AttReg.shadow_shield_stronger, new AttributeModifier(identifier(stack),
+//                            0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//                    attributeModifierMultimap.put(AttReg.shadow_shield, new AttributeModifier(identifier(stack),
+//                            0.3, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//                    attributeModifierMultimap.put(AttReg.shadow_shield_speed, new AttributeModifier(identifier(stack),
+//                            0.4, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//
+//                }
+//                if (stack.is(InitItems.DeathOmenStoneMonument_)) {
+//                    attributeModifierMultimap.put(Attributes.MAX_HEALTH, new AttributeModifier(identifier(stack),
+//                            0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+//                    attributeModifierMultimap.put(Attributes.ARMOR, new AttributeModifier(identifier(stack),
+//                            0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+//
+//                }
+//                if (stack.is(InitItems.DryBones_)) {
+//                    attributeModifierMultimap.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(identifier(stack),
+//                            0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//                    attributeModifierMultimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(identifier(stack),
+//                            0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//                    attributeModifierMultimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(identifier(stack),
+//                            0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//                    attributeModifierMultimap.put(Attributes.ARMOR, new AttributeModifier(identifier(stack),
+//                            0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//
+//                }
+//                if (stack.getItem() instanceof CommonCelestial) {
+//                    attributeModifierMultimap.put(AttReg.heal, new AttributeModifier(identifier(stack),
+//                            0.05F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//                    attributeModifierMultimap.put(AttReg.more_speed, new AttributeModifier(identifier(stack),
+//                            0.02F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+//
+//                }
+//                if (stack.getItem() instanceof TheImprintOfTheSoul) {
+//                    attributeModifierMultimap.put(AttReg.chaos_armor, new AttributeModifier(identifier(stack),
+//                            2, AttributeModifier.Operation.ADD_VALUE));
+//                    attributeModifierMultimap.put(AttReg.chaos_armor_min, new AttributeModifier(identifier(stack),
+//                            -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+//
+//                }
+//            }
+//        }
+//    }
 }

@@ -21,7 +21,11 @@ import java.util.List;
 
 public class Knife extends ItemBase {
     @ConfigPlugin
-    public static class ConfigItem implements RegisterItemConfig {
+     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Other";
+        }
         public static ModConfigSpec.DoubleValue doubleValue ;
         public static ModConfigSpec.DoubleValue doubleValue2 ;
         @Override

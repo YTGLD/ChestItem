@@ -28,7 +28,11 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
         super(properties);
     }
     @ConfigPlugin
-    public static class ConfigItem implements RegisterItemConfig {
+     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "BlackShadow";
+        }
         public static ModConfigSpec.IntValue intValue ;
         public static ModConfigSpec.IntValue intValue2 ;
         @Override

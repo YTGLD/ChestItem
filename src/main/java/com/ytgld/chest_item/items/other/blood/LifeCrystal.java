@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.blood;
+package com.ytgld.chest_item.items.other.blood;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -35,7 +35,11 @@ public class LifeCrystal extends ItemBase implements SkillList{
         super(properties);
     }
     @ConfigPlugin
-    public static class ConfigItem implements RegisterItemConfig {
+     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Other";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         @Override
         public void config(ModConfigSpec.Builder builder) {

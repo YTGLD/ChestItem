@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
+import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndComing;
 
     public class EndComing  extends TamableAnimal {
 

@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.blood;
+package com.ytgld.chest_item.items.other.blood;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -42,7 +42,11 @@ public class  GodBlood extends ItemBase  {
         super(properties);
     }
     @ConfigPlugin
-    public static class ConfigItem implements RegisterItemConfig {
+     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Other";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         public static ModConfigSpec.IntValue intValue2 ;
         @Override

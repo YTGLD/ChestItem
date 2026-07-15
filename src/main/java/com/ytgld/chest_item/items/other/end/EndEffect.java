@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.end;
+package com.ytgld.chest_item.items.other.end;
 
 import com.ytgld.chest_item.items.ItemBase;
 import net.minecraft.ChatFormatting;

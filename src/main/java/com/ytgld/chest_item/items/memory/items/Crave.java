@@ -40,7 +40,11 @@ import java.util.function.Consumer;
  */
 public class Crave extends MemoryBase {
     @ConfigPlugin
-    public static class ConfigItem implements RegisterItemConfig {
+     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Memory";
+        }
         public static ModConfigSpec.IntValue intValue ;
         public static ModConfigSpec.DoubleValue intValue2 ;
         @Override

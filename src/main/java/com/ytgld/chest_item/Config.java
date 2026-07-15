@@ -12,22 +12,18 @@ public class Config {
     public Config(ModConfigSpec.Builder builder){
         builder.push("Common");
         {
-            doEndComingUp =  builder
-                    .translation("chest_item.config.doEndComingUp")
-                    .define("doEndComingUp", true);
-            RunawayLiningMin =  builder
-                    .translation("chest_item.config.RunawayLiningMin")
-                    .defineInRange("RunawayLiningMin", -0.1F,-Integer.MAX_VALUE,Integer.MAX_VALUE);
-            RunawayLiningMax =  builder
-                    .translation("chest_item.config.RunawayLiningMax")
-                    .defineInRange("RunawayLiningMax", 0.1f,0,Integer.MAX_VALUE);
             for (RegisterItemConfig registerItemConfig : ConfigPluginFinder.getModPlugins()){
-                registerItemConfig.config(builder);
+                if (registerItemConfig.theCategory().isEmpty()) {
+                    registerItemConfig.config(builder);
+                }else {
+                    builder.push(registerItemConfig.theCategory());
+                    registerItemConfig.config(builder);
+                    builder.pop();
+
+                }
             }
+
         }
         builder.pop();
     }
-    public final ModConfigSpec.BooleanValue doEndComingUp;
-    public final ModConfigSpec.DoubleValue RunawayLiningMin;
-    public final ModConfigSpec.DoubleValue RunawayLiningMax;
 }
