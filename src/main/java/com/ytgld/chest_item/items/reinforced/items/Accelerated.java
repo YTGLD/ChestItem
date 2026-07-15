@@ -33,6 +33,10 @@ public class Accelerated  extends EvilMotherReinforced {
 
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Reinforced";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         public static ModConfigSpec.DoubleValue intValue2 ;
         @Override

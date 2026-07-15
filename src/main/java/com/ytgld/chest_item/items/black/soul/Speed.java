@@ -42,6 +42,10 @@ public class Speed extends TheSoul {
     }
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "BlackShadow";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         public static ModConfigSpec.DoubleValue intValue2 ;
         @Override

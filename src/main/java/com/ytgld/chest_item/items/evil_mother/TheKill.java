@@ -51,6 +51,10 @@ public class TheKill extends EvilMother{
     }
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "EvilMother";
+        }
         public static ModConfigSpec.IntValue intValue;
         public static ModConfigSpec.IntValue intValue2;
 

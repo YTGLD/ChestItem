@@ -27,6 +27,10 @@ public class Contingency extends EvilMotherReinforced {
 
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Reinforced";
+        }
         public static ModConfigSpec.IntValue intValue ;
         public static ModConfigSpec.IntValue intValue2 ;
         @Override

@@ -28,6 +28,10 @@ public class SeparateRune extends ItemBase implements IGold {
     }
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Gold";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         public static ModConfigSpec.DoubleValue intValue2 ;
         @Override

@@ -25,6 +25,10 @@ public class Conch  extends ItemBase {
     }
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Other";
+        }
         public static ModConfigSpec.IntValue intValue ;
         public static ModConfigSpec.DoubleValue intValue2 ;
         @Override

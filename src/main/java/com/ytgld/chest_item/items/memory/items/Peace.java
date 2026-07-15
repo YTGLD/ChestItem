@@ -30,6 +30,10 @@ import java.util.List;
 public class Peace extends MemoryBase {
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Memory";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         @Override
         public void config(ModConfigSpec.Builder builder) {

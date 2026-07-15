@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.blood;
+package com.ytgld.chest_item.items.other.blood;
 
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
@@ -94,6 +94,10 @@ public class BoneHead extends ItemBase implements SkillList{
 
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Other";
+        }
         public static ModConfigSpec.DoubleValue doubleValue1 ;
         @Override
         public void config(ModConfigSpec.Builder builder) {

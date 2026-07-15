@@ -1,19 +1,13 @@
 package com.ytgld.chest_item.entity;
 
-import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.Config;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.tip.an_element.elements.DoomsdayJudgment;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -37,9 +31,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-import static com.ytgld.chest_item.items.end.TheEndIsComing.chestHasEndComing;
+import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndComing;
 
 public class EndComing  extends TamableAnimal {
 
@@ -95,14 +88,7 @@ public class EndComing  extends TamableAnimal {
         super.tick();
         if (this.getOwner() instanceof Player player) {
             if (player.hasEffect(MobEffects.TRIAL_OMEN)||player.hasEffect(MobEffects.BAD_OMEN)||player.hasEffect(MobEffects.RAID_OMEN)) {
-                if (Config.config.doEndComingUp.get()) {
-                    if (this.addTag(isTrial)) {
-                        if (this.level() instanceof ServerLevel level) {
-                            level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 50, 2, 2, 2, 0.2f);
-                        }
-                        this.level().playSound(null, player.blockPosition(), SoundEvents.TRIAL_SPAWNER_OMINOUS_ACTIVATE, SoundSource.AMBIENT, 1, 1);
-                    }
-                }
+
             } else {
                 this.removeTag(isTrial);
             }

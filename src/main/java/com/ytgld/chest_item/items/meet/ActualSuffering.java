@@ -32,6 +32,10 @@ public class ActualSuffering extends ItemBase implements Meat, IBlackLight , ITe
     }
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Meat";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         @Override
         public void config(ModConfigSpec.Builder builder) {

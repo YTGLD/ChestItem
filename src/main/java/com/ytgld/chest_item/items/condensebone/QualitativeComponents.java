@@ -28,6 +28,10 @@ import java.util.Map;
 public class QualitativeComponents extends ItemBone {
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Bone";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         @Override
         public void config(ModConfigSpec.Builder builder) {

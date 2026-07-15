@@ -32,6 +32,10 @@ import java.util.List;
 public class War extends MemoryBase {
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Memory";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         public static ModConfigSpec.DoubleValue intValue2 ;
         @Override

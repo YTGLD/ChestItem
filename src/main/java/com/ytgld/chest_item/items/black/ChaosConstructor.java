@@ -45,6 +45,10 @@ public class ChaosConstructor extends ItemBlackShadow  implements IGUILight {
     public static final String leadHurtSize = "leadHurtSize";
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "BlackShadow";
+        }
         public static ModConfigSpec.IntValue intValue ;
         public static ModConfigSpec.DoubleValue intValue2 ;
         @Override

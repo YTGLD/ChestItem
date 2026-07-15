@@ -33,6 +33,10 @@ public class Samsara extends TheCelestial{
     }
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "BlackShadow";
+        }
         public static ModConfigSpec.IntValue intValue ;
         @Override
         public void config(ModConfigSpec.Builder builder) {

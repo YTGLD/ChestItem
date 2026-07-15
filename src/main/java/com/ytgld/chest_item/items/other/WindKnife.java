@@ -33,6 +33,10 @@ import java.util.List;
 public class WindKnife extends ItemBase {
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Other";
+        }
         public static ModConfigSpec.DoubleValue intValue ;
         public static ModConfigSpec.DoubleValue intValue2 ;
         @Override

@@ -33,6 +33,10 @@ public abstract class EvilMother extends ItemBase implements IEvil {
     }
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "EvilMother";
+        }
         public static ModConfigSpec.DoubleValue intValue;
 
         @Override

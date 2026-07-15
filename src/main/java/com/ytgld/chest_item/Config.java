@@ -15,14 +15,18 @@ public class Config {
 
         builder.push("Common");
         {
-            doEndComingUp =  builder
-                    .translation("chest_item.config.doEndComingUp")
-                    .define("doEndComingUp", true);
             for (RegisterItemConfig registerItemConfig : ConfigPluginFinder.getModPlugins()){
-                registerItemConfig.config(builder);
+                if (registerItemConfig.theCategory().isEmpty()) {
+                    registerItemConfig.config(builder);
+                }else {
+                    builder.push(registerItemConfig.theCategory());
+                    registerItemConfig.config(builder);
+                    builder.pop();
+
+                }
             }
+
         }
         builder.pop();
     }
-    public final ModConfigSpec.BooleanValue doEndComingUp;
 }

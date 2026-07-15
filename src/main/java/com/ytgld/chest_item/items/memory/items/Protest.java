@@ -42,6 +42,10 @@ import java.util.function.Consumer;
 public class Protest extends MemoryBase {
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Memory";
+        }
         public static ModConfigSpec.IntValue intValue ;
         @Override
         public void config(ModConfigSpec.Builder builder) {

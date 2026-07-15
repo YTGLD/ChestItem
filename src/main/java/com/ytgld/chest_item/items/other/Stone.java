@@ -24,6 +24,10 @@ import java.util.List;
 public class Stone extends ItemBase {
     @ConfigPlugin
     public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return "Other";
+        }
         public static ModConfigSpec.IntValue intValue ;
         public static ModConfigSpec.IntValue intValue2 ;
         @Override
