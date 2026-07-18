@@ -48,7 +48,6 @@ public class ItemBase extends Item implements Terror{
     }
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player){
         Multimap<Holder<Attribute>, AttributeModifier> attributeModifierMultimap = HashMultimap.create();
-//        RunawayLining.addMap(attributeModifierMultimap, player, stack);
         return attributeModifierMultimap;
     }
     public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag){

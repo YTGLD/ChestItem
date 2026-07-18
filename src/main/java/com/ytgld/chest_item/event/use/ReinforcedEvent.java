@@ -1,6 +1,8 @@
-package com.ytgld.chest_item.items.reinforced;
+package com.ytgld.chest_item.event.use;
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.items.reinforced.ReinforcedAttreg;
+import com.ytgld.chest_item.items.reinforced.ReinforcedDataHandler;
 import com.ytgld.chest_item.items.reinforced.items.Activity;
 import com.ytgld.chest_item.items.reinforced.items.Contingency;
 import com.ytgld.chest_item.items.reinforced.items.Dynamic;

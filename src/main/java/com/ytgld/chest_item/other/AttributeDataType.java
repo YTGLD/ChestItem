@@ -46,9 +46,5 @@ public record AttributeDataType(List<Entry> modifiers)  {
                                 group(Attribute.CODEC.fieldOf("attribute").forGetter(Entry::attribute),
                                         AttributeModifier.CODEC.fieldOf("modifier").forGetter(Entry::modifier)).apply(entryInstance,Entry::new));
 
-        public Entry(Holder<Attribute> attribute, AttributeModifier modifier) {
-            this.attribute = attribute;
-            this.modifier= modifier;
-        }
     }
 }

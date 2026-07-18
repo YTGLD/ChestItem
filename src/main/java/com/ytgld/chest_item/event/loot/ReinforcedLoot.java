@@ -1,9 +1,10 @@
-package com.ytgld.chest_item.items.reinforced;
+package com.ytgld.chest_item.event.loot;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;

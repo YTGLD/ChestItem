@@ -3,6 +3,7 @@ package com.ytgld.chest_item.items.reinforced;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.event.loot.ReinforcedLoot;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.evil_mother.IEvil;
 import com.ytgld.chest_item.renderer.light.Light;

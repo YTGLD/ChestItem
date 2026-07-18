@@ -2,7 +2,6 @@ package com.ytgld.chest_item.event.loot;
 
 import com.mojang.serialization.MapCodec;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.items.reinforced.ReinforcedLoot;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;

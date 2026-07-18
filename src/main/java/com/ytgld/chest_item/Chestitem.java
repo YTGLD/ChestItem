@@ -15,14 +15,14 @@ import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.memory.MemoryAttreg;
-import com.ytgld.chest_item.items.memory.MemoryEvent;
+import com.ytgld.chest_item.event.use.MemoryEvent;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.memory.TheMemoryDataHandler;
 import com.ytgld.chest_item.items.memory.tooltip.BigTooltip;
 import com.ytgld.chest_item.items.memory.tooltip.ImageTooltip;
 import com.ytgld.chest_item.items.reinforced.ReinforcedAttreg;
 import com.ytgld.chest_item.items.reinforced.ReinforcedDataHandler;
-import com.ytgld.chest_item.items.reinforced.ReinforcedEvent;
+import com.ytgld.chest_item.event.use.ReinforcedEvent;
 import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
@@ -58,6 +58,8 @@ public class Chestitem {
     public static final Identifier warpedPOST = Identifier.fromNamespaceAndPath(Chestitem.MODID,
             "warped");
 
+    public static final Identifier warpedScreen = Identifier.fromNamespaceAndPath(Chestitem.MODID,
+            "warp");
     public Chestitem(IEventBus modEventBus, Dist dist, ModContainer modContainer) {
         modEventBus.addListener(this::registerPayloadHandler);
         AttReg.REGISTRY.register(modEventBus);

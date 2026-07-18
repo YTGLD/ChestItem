@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.memory;
+package com.ytgld.chest_item.event.use;
 
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.memory.items.*;

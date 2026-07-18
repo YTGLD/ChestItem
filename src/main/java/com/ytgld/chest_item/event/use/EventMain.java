@@ -1,5 +1,6 @@
 package com.ytgld.chest_item.event.use;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
@@ -38,6 +39,7 @@ import com.ytgld.chest_item.items.other.sword.Adjudication;
 import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
 import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
 import com.ytgld.chest_item.items.tool.WallowAxe;
+import com.ytgld.chest_item.other.AttributeDataType;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -48,6 +50,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -55,6 +58,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -347,6 +351,7 @@ public class EventMain {
         }
         List<Component> attributesTooltip = new ArrayList<>();
         Player player = context.player();
+        AttributeDataType attributeDataType = stack.get(DataReg.attributeType);
         if (player!=null) {
             if (stack.getItem() instanceof ReinforcedBaseItem reinforcedBaseItem) {
                 Multimap<Holder<Attribute>, AttributeModifier> attributes = reinforcedBaseItem.doAttribute(player);
@@ -372,43 +377,50 @@ public class EventMain {
             }
             if (stack.getItem() instanceof Terror terror) {
                 Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player,stack);
-                if (attributes != null && !attributes.isEmpty()) {
-                    attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
-                    evt.addTooltipLines(Component.empty());
-                    if (!(stack.getItem() instanceof ItemBlackShadow)) {
-                        if (stack.getItem() instanceof EvilMother evilMother){
-                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.theColor())));
-                        }else {
-                            attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
+                if (attributes != null) {
+                    if (attributeDataType != null){
+                        for (AttributeDataType.Entry entry :attributeDataType.modifiers()){
+                            attributes.put(entry.attribute(),entry.modifier());
                         }
                     }
-
-                    AttributeUtil.applyTextFor(
-                            stack,
-                            attributesTooltip::add,
-                            attributes,
-                            AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
-                    Component blackShadow = Component.translatable("event.chest_item.equip")
-                            .withStyle(Style.EMPTY.withColor(Light.ARGB.color(255, 255, 0, 100)));
-
-                    if (stack.getItem() instanceof ItemBlackShadow) {
-                        evt.addTooltipLines(blackShadow);
-                    }
-                    for (Component component : attributesTooltip) {
-                        if (stack.getItem() instanceof ItemBlackShadow) {
-                            MutableComponent co = component.copy();
-                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80EE82EE)));
-                            evt.addTooltipLines(co);
-                        }else if (stack.getItem() instanceof EvilMother evilMother){
-                            MutableComponent co = component.copy();
-                            co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.theColor())));
-                            evt.addTooltipLines(co);
-                        } else {
-                            MutableComponent co = component.copy();
-                            if (stack.getItem() instanceof ITextColor color) {
-                                co.setStyle(Style.EMPTY.withColor(color.colorText()));
+                    if (!attributes.isEmpty()) {
+                        attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
+                        evt.addTooltipLines(Component.empty());
+                        if (!(stack.getItem() instanceof ItemBlackShadow)) {
+                            if (stack.getItem() instanceof EvilMother evilMother) {
+                                attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(Style.EMPTY.withColor(evilMother.theColor())));
+                            } else {
+                                attributesTooltip.add(Component.translatable("event.chest_item.equip").withStyle(ChatFormatting.GOLD));
                             }
-                            evt.addTooltipLines(co);
+                        }
+
+                        AttributeUtil.applyTextFor(
+                                stack,
+                                attributesTooltip::add,
+                                attributes,
+                                AttributeTooltipContext.of(player, context, context.tooltipDisplay(), context.flag()));
+                        Component blackShadow = Component.translatable("event.chest_item.equip")
+                                .withStyle(Style.EMPTY.withColor(Light.ARGB.color(255, 255, 0, 100)));
+
+                        if (stack.getItem() instanceof ItemBlackShadow) {
+                            evt.addTooltipLines(blackShadow);
+                        }
+                        for (Component component : attributesTooltip) {
+                            if (stack.getItem() instanceof ItemBlackShadow) {
+                                MutableComponent co = component.copy();
+                                co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X80EE82EE)));
+                                evt.addTooltipLines(co);
+                            } else if (stack.getItem() instanceof EvilMother evilMother) {
+                                MutableComponent co = component.copy();
+                                co.setStyle(Style.EMPTY.withColor(TextColor.fromRgb(evilMother.theColor())));
+                                evt.addTooltipLines(co);
+                            } else {
+                                MutableComponent co = component.copy();
+                                if (stack.getItem() instanceof ITextColor color) {
+                                    co.setStyle(Style.EMPTY.withColor(color.colorText()));
+                                }
+                                evt.addTooltipLines(co);
+                            }
                         }
                     }
                 }
@@ -457,6 +469,7 @@ public class EventMain {
     public  void dieTotem(LivingUseTotemEvent event) {
         ChaosFortress.dieTotem(event);
     }
+
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
         thepainShield(event);

@@ -10,6 +10,7 @@ import com.mojang.blaze3d.platform.CompareOp;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.renderer.outline.ILevelRendererWarped;
+import com.ytgld.chest_item.renderer.outline.IWarped;
 import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BindGroupLayouts;

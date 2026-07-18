@@ -12,9 +12,9 @@ public class WarpedFrameSets implements PostChain.TargetBundle{
 
 
 
-    public  ResourceHandle<RenderTarget> mainFramebuffer = ResourceHandle.invalid();
+    public  ResourceHandle<RenderTarget> mainFramebuffer;
     public static final Identifier MAIN =Identifier.fromNamespaceAndPath(Chestitem.MODID,"main");
-    public static final Identifier WARPED = Identifier.fromNamespaceAndPath(Chestitem.MODID,"warped_screen");
+    public static final Identifier WARPED = Identifier.fromNamespaceAndPath(Chestitem.MODID,"warp");
     @Override
     public ResourceHandle<RenderTarget> getOrThrow(Identifier id) {
         if (id .equals(WARPED) ) {

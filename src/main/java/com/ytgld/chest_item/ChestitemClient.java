@@ -1,5 +1,7 @@
 package com.ytgld.chest_item;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
@@ -26,22 +28,36 @@ import com.ytgld.chest_item.renderer.particle.sword.SwordShadow1;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow2;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow3;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow4;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.ClientAvatarEntity;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.Avatar;
+import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.BlockEntityRenderBoundsDebugRenderer;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.client.renderstate.AvatarRenderStateModifier;
+import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import org.jspecify.annotations.NullMarked;
+
+import java.util.List;
 
 @Mod(value = Chestitem.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = Chestitem.MODID, value = Dist.CLIENT)
@@ -80,29 +96,6 @@ public class ChestitemClient{
         event.register(ChestMenuTypes.GENERIC_12.get(), ChestMenuScreen::new);
     }
     @SubscribeEvent
-    public static <T extends Avatar & ClientAvatarEntity> void regMenu(RenderPlayerEvent.Pre<T> event) {
-        if (Minecraft.getInstance().player instanceof Player living) {
-            int value = (int) ((float) living.getData(AttReg.attachmentTypeBLOOD_Model));
-            if (value>0) {
-                HandlerClient.doPass = true;
-                HandlerClient.showOutline = true;
-                event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(), MRender.colorOutline(false), (pose, var) -> {
-                            float s = value * 0.1f;
-                            HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
-                                    new Vec3(0, 2.25 + s, 0),
-                                    s, var);
-                        }
-                );
-                event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(), MRender.colorOutline(true), (pose, var) -> {
-                    float s = value * 0.1f;
-                    HandlerClient.renderBlood(pose, (float) Math.sin(living.tickCount / 10f) / 7f,
-                            new Vec3(0, 2.25 + s, 0),
-                            s, var);
-                });
-            }
-        }
-    }
-    @SubscribeEvent
     public static void registerItemModels(RegisterItemModelsEvent event) {
         event.register(Identifier.fromNamespaceAndPath(Chestitem.MODID,"model"), BigGlowingModel.Unbaked.MAP_CODEC);
         event.register(Identifier.fromNamespaceAndPath(Chestitem.MODID,"warp"), WarpModel.Unbaked.MAP_CODEC);
@@ -113,7 +106,60 @@ public class ChestitemClient{
     }
 
 
-
+//    private static final ContextKey<Integer> integerContextKey = new ContextKey<>(Identifier.fromNamespaceAndPath(Chestitem.MODID, "slime"));
+//    @SubscribeEvent
+//    public static void RegisterRenderStateModifiersEvent(RegisterRenderStateModifiersEvent event ){
+//        event.registerAvatarEntityModifier(new AvatarRenderStateModifier() {
+//            @Override
+//            public <T extends Avatar & ClientAvatarEntity> void accept(T avatar, AvatarRenderState renderState) {
+//                renderState.setRenderData(integerContextKey,avatar.getData(AttReg.slime.get()));
+//            }
+//        });
+//    }
+//    @SubscribeEvent
+//    public static <T extends Avatar & ClientAvatarEntity> void regRenderPlayerEvent(RenderPlayerEvent.Pre<T> event) {
+//        var renderData = event.getRenderState().getRenderData(integerContextKey);
+//        float size = event.getRenderState().scale;
+//        if (renderData != null) {
+//            int slime = renderData;
+//            if (slime > 0) {
+//                PoseStack stack = event.getPoseStack();
+//                stack.pushPose();
+//                addPlayer(size,stack,new Vec3(1,-1.5f,1),event);
+//                stack.popPose();
+//                if (slime > 1) {
+//                    stack.pushPose();
+//                    addPlayer(size,stack,new Vec3(1,-1.5f,-1),event);
+//                    stack.popPose();
+//                }
+//                if (slime > 2) {
+//                    stack.pushPose();
+//                    addPlayer(size,stack,new Vec3(-1,-1.5f,1),event);
+//                    stack.popPose();
+//                }
+//                if (slime > 3) {
+//                    stack.pushPose();
+//                    addPlayer(size,stack,new Vec3(-1,-1.5f,-1),event);
+//                    stack.popPose();
+//                }
+//            }
+//        }
+//    }
+//    private static<T extends Avatar & ClientAvatarEntity>  void addPlayer(float size,PoseStack stack,
+//                                                                          Vec3 vec3 ,
+//                                                                          RenderPlayerEvent.Pre<T> event){
+//
+//        stack.mulPose(Axis.ZN.rotationDegrees(180));
+//        stack.scale(size,size,size);
+//        stack.translate(vec3.x * size, vec3.y, vec3.z * size);
+//        stack.mulPose(Axis.YP.rotationDegrees(180 + event.getRenderState().yRot));
+//
+//        event.getSubmitNodeCollector().submitModel(event.getRenderer().getModel(),
+//                event.getRenderState(),
+//                event.getPoseStack(), RenderTypes.entityCutout(event.getRenderer().getTextureLocation(event.getRenderState())),
+//                255, OverlayTexture.NO_OVERLAY, 0x00000000, null);
+//
+//    }
     @SubscribeEvent
     public static void registerFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(Particles.colorPart.get(), ColorPart.Provider::new);

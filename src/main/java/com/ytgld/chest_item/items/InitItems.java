@@ -14,6 +14,7 @@ import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
+import com.ytgld.chest_item.items.evil_mother.decay.DecayFruit;
 import com.ytgld.chest_item.items.other.blood.BoneHead;
 import com.ytgld.chest_item.items.other.blood.GodBlood;
 import com.ytgld.chest_item.items.other.blood.LifeCrystal;
@@ -256,6 +257,9 @@ public class InitItems {
 
     public static final DeferredItem<@NotNull Item> Triangle_ = register("triangle",
             (Identifier)-> new Triangle(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<@NotNull Item> DecayFruit_ = register("decay_fruit",
+            (Identifier)-> new DecayFruit(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
