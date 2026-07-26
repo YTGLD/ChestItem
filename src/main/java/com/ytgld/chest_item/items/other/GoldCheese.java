@@ -11,6 +11,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -63,26 +64,16 @@ public class GoldCheese extends ItemBase {
     }
     public static void event(PlayerEnchantItemEvent event) {
         if (event.getEntity() instanceof Player player) {
-            ChestInventory chestInventory = Handler.getItem(player);
-            if (chestInventory != null) {
-                if (!player.level().isClientSide()) {
-                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                        ItemStack stack = chestInventory.getItem(i);
-                        if (stack.is(InitItems.Gold_Cheese)) {
-                            ItemStack eventStack = event.getEnchantedItem();
-                            if (BuiltInRegistries.ITEM.getKey(eventStack.getItem()).getPath().contains("gold")) {
-
-                                List<EnchantmentInstance> list = event.getEnchantments();
-                                for (EnchantmentInstance enchantmentInstance : list){
-                                    int level = enchantmentInstance.level;
-                                    Holder<Enchantment> enchantment = enchantmentInstance.enchantment;
-                                    ItemEnchantments.Mutable itemenchantments$mutable = new ItemEnchantments.Mutable(EnchantmentHelper.getEnchantmentsForCrafting(eventStack));
-                                    itemenchantments$mutable.set(enchantment,level+ConfigItem.intValue.get().intValue());
-                                    EnchantmentHelper.setEnchantments(eventStack,itemenchantments$mutable.toImmutable());
-                                }
-                                break;
-                            }
-                        }
+            if (Handler.has(player, InitItems.Gold_Cheese.asItem())) {
+                ItemStack eventStack = event.getEnchantedItem();
+                if (eventStack.is(ItemTags.PIGLIN_LOVED)) {
+                    List<EnchantmentInstance> list = event.getEnchantments();
+                    for (EnchantmentInstance enchantmentInstance : list){
+                        int level = enchantmentInstance.level;
+                        Holder<Enchantment> enchantment = enchantmentInstance.enchantment;
+                        ItemEnchantments.Mutable itemenchantments$mutable = new ItemEnchantments.Mutable(EnchantmentHelper.getEnchantmentsForCrafting(eventStack));
+                        itemenchantments$mutable.set(enchantment,level+ConfigItem.intValue.get().intValue());
+                        EnchantmentHelper.setEnchantments(eventStack,itemenchantments$mutable.toImmutable());
                     }
                 }
             }
@@ -90,20 +81,11 @@ public class GoldCheese extends ItemBase {
     }
     public static void event(LivingExperienceDropEvent event) {
         if (event.getAttackingPlayer() instanceof Player player) {
-            ChestInventory chestInventory = Handler.getItem(player);
-            if (chestInventory != null) {
-                if (!player.level().isClientSide()) {
-                    for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                        ItemStack stack = chestInventory.getItem(i);
-                        if (stack.is(InitItems.Gold_Cheese)) {
-                            if (BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).getPath().contains("gold")) {
-                                event.setDroppedExperience(event.getDroppedExperience() * ConfigItem.intValue2.get().intValue());
-                                if (Mth.nextInt(RandomSource.create(),0,100) <= 20) {
-                                    event.getEntity().level().addFreshEntity(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), new ItemStack(Items.GOLD_INGOT)));
-                                }
-                                break;
-                            }
-                        }
+            if (Handler.has(player, InitItems.Gold_Cheese.asItem())) {
+                if (BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).getPath().contains("gold")) {
+                    event.setDroppedExperience(event.getDroppedExperience() * ConfigItem.intValue2.get().intValue());
+                    if (Mth.nextInt(RandomSource.create(),0,100) <= 20) {
+                        event.getEntity().level().addFreshEntity(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), new ItemStack(Items.GOLD_INGOT)));
                     }
                 }
             }

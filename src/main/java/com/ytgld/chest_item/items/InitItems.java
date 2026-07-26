@@ -404,6 +404,10 @@ public class    InitItems {
                     output.accept(ReinforcedItems.Activity_);
                     output.accept(ReinforcedItems.Dynamic_);
                     output.accept(ReinforcedItems.Contingency_);
+                    output.accept(ReinforcedItems.Diffusion_);
+                    output.accept(ReinforcedItems.Distillation_);
+                    output.accept(ReinforcedItems.MysteryLiner_);
+                    output.accept(ReinforcedItems.Fusion_);
 
                     output.accept(InitItems.DefyLife_);
                     output.accept(InitItems.DemonLord_);
@@ -444,6 +448,10 @@ public class    InitItems {
                     ReinforcedItems.Activity_.asItem(),
                     ReinforcedItems.Dynamic_.asItem(),
                     ReinforcedItems.Contingency_.asItem(),
+                    ReinforcedItems.Distillation_.asItem(),
+                    ReinforcedItems.Diffusion_.asItem(),
+                    ReinforcedItems.Fusion_.asItem(),
+                    ReinforcedItems.MysteryLiner_.asItem(),
                     EvilBelt_.asItem()
 
             );

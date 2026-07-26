@@ -13,6 +13,10 @@
     "chest_item:activity",
     "chest_item:dynamic",
     "chest_item:contingency",
+    "chest_item:distillation",
+    "chest_item:diffusion",
+    "chest_item:fusion",
+    "chest_item:mystery_liner",
     "chest_item:evil_belt"
   ]
 }

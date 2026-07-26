@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item": "chest_item:mother_remains"},
+    "B": {"item": "minecraft:enchanted_book"},
+    "C": {"item": "minecraft:nether_star"}
+  },
+  "pattern": [
+    "BBB",
+    "ACA",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:mystery_liner"
+  }
+}

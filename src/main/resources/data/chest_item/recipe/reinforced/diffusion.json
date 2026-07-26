@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {"item": "chest_item:mother_remains"},
+    "B": {"item": "minecraft:echo_shard"},
+    "C": {"item": "chest_item:battery"}
+  },
+  "pattern": [
+    "BBB",
+    "ACA",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:diffusion"
+  }
+}

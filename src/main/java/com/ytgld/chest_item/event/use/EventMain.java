@@ -4,9 +4,10 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.OwnerLead;
-import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.OppressionHandler;
+import com.ytgld.chest_item.event.ShadowShieldHandler;
+import com.ytgld.chest_item.event.SwordHandler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
@@ -30,40 +31,30 @@ import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.items.Contradiction;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
+import com.ytgld.chest_item.items.reinforced.items.Diffusion;
+import com.ytgld.chest_item.items.reinforced.items.Distillation;
+import com.ytgld.chest_item.items.reinforced.items.Fusion;
+import com.ytgld.chest_item.items.reinforced.items.MysteryLiner;
 import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
 import com.ytgld.chest_item.items.tool.WallowAxe;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.renderer.particle.other.Particles;
-import com.ytgld.chest_item.renderer.particle.other.SwordEnergyOption;
-import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -76,7 +67,6 @@ import net.neoforged.neoforge.client.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.GatherSkippedAttributeTooltipsEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
@@ -84,7 +74,6 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
 public class EventMain {
@@ -123,200 +112,13 @@ public class EventMain {
     }
     @SubscribeEvent
     public void EntityTickEvent(EntityTickEvent.Post event){
-        tickSwordIntent(event);
-        tickAttackHurt(event);
+        SwordHandler.tickSwordIntent(event);
+        SwordHandler.tickAttackHurt(event);
         EvilMother.attrib(event);
+        Fusion.event(event);
     }
 
-    public static void tickAttackHurt(EntityTickEvent.Post event){
-        if (event.getEntity() instanceof LivingEntity living) {
-            int slashing = (int)(float)living.getData(AttReg.slashing.get());
-            if (slashing > 0) {
-                if (living.tickCount % 4 == 0) {
-                    LivingEntity entity = living.getLastHurtByMob();
-                    if (living.level() instanceof ServerLevel level) {
-                        RandomSource randomSource = living.getRandom();
-                        float size = randomSource.nextInt(15,25);
-                        level.sendParticles(SwordEnergyOption.createSwordEnergyOption(Particles.SwordEnergyOption_.get(),
-                                        new Vec3(0,0,0), true, Light.ARGB.color(255,255,255,255), size),
-                                living.getX(), living.getY() + 1.0f, living.getZ(), 1, 0, 0,0,0);
-                    }
-                    if (entity != null) {
-                        if (entity instanceof Player player) {
-                            HolderLookup.RegistryLookup<Enchantment> registrylookup = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
-                            float sweep = EnchantmentHelper.getEnchantmentLevel(registrylookup.getOrThrow(Enchantments.SWEEPING_EDGE),player);
-                            float sharpness = EnchantmentHelper.getEnchantmentLevel(registrylookup.getOrThrow(Enchantments.SHARPNESS),player);
 
-                            if (slashing == 1){
-                                living.invulnerableTime = 0;
-                                CriticalHitEvent criticalHitEvent = new CriticalHitEvent(player,living,2,true);
-                                criticalHitEvent.setCriticalHit(true);
-                                NeoForge.EVENT_BUS.post(criticalHitEvent);
-
-                                if (sharpness > 0) {
-                                    player.crit(living);
-                                }
-
-                                living.hurt(living.damageSources().playerAttack(player),
-                                        criticalHitEvent.getDamageMultiplier()
-                                                + sweep * 1.5f
-                                                + sharpness * 2f
-
-                                );
-                                living.knockback(0.1f, player.getX() - living.getX(), player.getZ() - living.getZ());
-
-                                player.crit(living);
-
-                                living.level().playSound(null, living.blockPosition(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.MASTER, 1, 1);
-                                living.setData(AttReg.slashing.get(), slashing - 1f);
-                            }
-                            if (slashing > 1) {
-
-                                living.invulnerableTime = 0;
-                                LivingIncomingDamageEvent livingIncomingDamageEvent = new LivingIncomingDamageEvent(living,
-                                        new DamageContainer(
-                                                living.damageSources().playerAttack(player),
-                                                (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE)
-                                        ));
-                                NeoForge.EVENT_BUS.post(livingIncomingDamageEvent);
-
-                                if (sharpness > 0) {
-                                    player.crit(living);
-                                }
-
-                                living.hurt(living.damageSources().playerAttack(player),
-                                        livingIncomingDamageEvent.getAmount()
-                                                + sweep
-                                                + sharpness
-                                );
-
-
-
-                                living.knockback(0.1f, player.getX() - living.getX(), player.getZ() - living.getZ());
-
-
-
-                                living.level().playSound(null, living.blockPosition(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.MASTER, 1, 1);
-
-                                living.setData(AttReg.slashing.get(), slashing - 1f);
-
-                            }
-                        }else {
-                            living.hurt(living.damageSources().mobAttack(entity), 10);
-                            living.setData(AttReg.slashing.get(),slashing - 1f);
-                        }
-                    }
-                }
-            }
-            if (slashing < 0){
-                living.setData(AttReg.slashing.get(),0f);
-            }
-        }
-    }
-    /**
-     * 斩击造成伤害将治疗自身
-     * <p>
-     * 若剑气在未消耗完的情况下提前杀死了目标
-     * <p>
-     * 残余的剑气将扩散至附近生物上
-     */
-
-    public static void tickSwordIntent(EntityTickEvent.Post event) {
-        if (event.getEntity() instanceof LivingEntity living) {
-            int swordIntent = living.getData(AttReg.swordIntent.get());
-            if (swordIntent > 0) {
-                if (living.tickCount % 2 == 0) {
-                    LivingEntity entity = living.getLastHurtByMob();
-
-                    if (living.level() instanceof ServerLevel level) {
-                        RandomSource randomSource = living.getRandom();
-                        Vec3 axis = new Vec3(randomSource.nextInt(-25, 25), randomSource.nextInt(-360, 360), randomSource.nextInt(-25, 25));
-                        int color = Light.ARGB.color(255,165,215,230);
-                        float size = randomSource.nextInt(15,25);
-                        level.sendParticles(SwordEnergyOption.createSwordEnergyOption(Particles.SwordEnergyOption_.get(),
-                                        axis, true, color, size),
-                                living.getX(), living.getY() + 1.25f, living.getZ(), 1, 0, 0,0,0);
-                        if (swordIntent == 1 && randomSource.nextInt(100) <= 25) {
-                            List<ParticleOptions> options = getSwordParticles();
-                            int rNext = randomSource.nextInt(options.size());
-                            level.sendParticles(options.get(rNext),
-                                    living.getX(), living.getEyeY() + 0.1f, living.getZ(), 1, 0, 0,0,0);
-
-                        }
-                    }
-
-                    if (entity instanceof Player player) {
-                        living.invulnerableTime = 0;
-                        living.hurt(living.damageSources().playerAttack(player),
-                                (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE) / 2
-                        );
-                        player.heal(2);
-                        swordEnemy(living,swordIntent,player);
-                        if (living.tickCount % 6 == 0) {
-                            living.level().playSound(null, living.getX(), living.getY(), living.getZ(), Sounds.Sword.value(), SoundSource.PLAYERS, 0.15F, 1);
-                        }
-                        if (living.tickCount % 10 == 0 && !living.isAlive()) {
-                            living.level().playSound(null, living.getX(), living.getY(), living.getZ(),
-                                    Sounds.Kill.value(), SoundSource.PLAYERS, 0.75f, 1);
-                        }
-                        living.setData(AttReg.swordIntent.get(), swordIntent - 1);
-                    }else {
-                        living.invulnerableTime = 0;
-                        living.hurt(living.damageSources().magic(),
-                                4
-                        );
-                        swordEnemy(living,swordIntent,null);
-                        living.setData(AttReg.swordIntent.get(), swordIntent - 1);
-                    }
-                }
-            }
-            if (swordIntent < 0){
-                living.setData(AttReg.swordIntent.get(),0);
-            }
-        }
-    }
-    public static List<ParticleOptions> getSwordParticles(){
-        return List.of(Particles.sword_shadow_1.get(),
-                Particles.sword_shadow_2.get(),
-                Particles.sword_shadow_3.get(),
-                Particles.sword_shadow_4.get());
-    }
-    public static void swordEnemy(LivingEntity living,int residual,@Nullable Player player){
-        if (!living.isAlive()) {
-            Vec3 playerPos = living.position().add(0, 1.5f, 0);
-            int range = 4;
-            List<LivingEntity> entities = living.level().getEntitiesOfClass(LivingEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
-            for (LivingEntity other : entities){
-                if (other.isAlive()) {
-                    if (entities.size() == 1 && other.is(living) && !other.isAlive()) {
-                        living.level().playSound(null, living.getX(), living.getY(), living.getZ(),
-                                Sounds.FlySword.value(), SoundSource.PLAYERS, 0.33f, 1);
-                    }
-                    if (!other.is(living) && other.getData(AttReg.swordIntent.get()) < 1) {
-                        if (player != null) {
-                            player.getCooldowns().addCooldown(InitItems.Adjudication_.asItem(), 100);
-                            if (other.is(player)) {
-                                return;
-                            }
-                        }
-                        other.setData(AttReg.swordIntent.get(), other.getData(AttReg.swordIntent.get()) + (residual + enemy(player)));
-                        other.setLastHurtByMob(player);
-                        return;
-                    }
-                }
-            }
-        }
-    }
-    public static int enemy(@Nullable Player player){
-        if (player!=null) {
-            if (Handler.has(player, InitItems.Adjudication_.asItem())) {
-                return 1;
-            }
-        }else {
-            return 0;
-        }
-        return 0;
-    }
     @SubscribeEvent
     public void PlayerRespawnEvent(PlayerEvent.PlayerRespawnEvent event) {
         DefyLife.PlayerRespawnEvent(event);
@@ -417,6 +219,15 @@ public class EventMain {
     }
 
     @SubscribeEvent
+    public void MobEffectEvent(MobEffectEvent.Added event) {
+        Distillation.event(event);
+    }
+    @SubscribeEvent
+    public void PlayerXpEvent(PlayerXpEvent.XpChange event) {
+        Diffusion.event(event);
+    }
+
+    @SubscribeEvent
     public void EntityTickEvent(EntityTickEvent.Pre event) {
         OppressionHandler.tickCanNotLooking(event);
     }
@@ -472,7 +283,7 @@ public class EventMain {
         Warmaker.hurt(event);
         ChaosFortress.hurtRes(event);
         LeadOfEnlightenment.die(event);
-        ShadowShield(event);
+        ShadowShieldHandler.ShadowShield(event);
         WarGodCommand.notDie(event);
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);
@@ -481,127 +292,6 @@ public class EventMain {
                 float base = (float) resistance.getBaseValue();
                 if (value != base) {
                     event.setNewDamage(event.getNewDamage() * ((1 - value) + 1));
-                }
-            }
-        }
-    }
-
-    public static float sanValue (Player player){
-        float base = (float) player.getAttributeBaseValue(AttReg.theSanity);
-        float san = (float) player.getAttributeValue(AttReg.theSanity) - base;
-        if (san < 0) {
-            san = -san;
-        }
-        return san;
-    }
-    /**
-     * 幽影护盾现在不仅可以吸收伤害，还可以反弹伤害
-     * <p>
-     * 反弹的伤害为150%幽影护盾当量
-     * <p>
-     * 反弹伤害时会使目标施加“幽影侵蚀”效果，并且时间由幽影护盾当量决定(幽影侵蚀）：减少10%速度  伤害  攻速
-     * <p>
-     * 如果完全转变为邪母之盾则返回“邪母之拒”，并且时间由邪母的理智值当量决定 (邪母之拒）：减少22.5%速度  伤害  攻速  护甲  治疗  生命值
-     * <p>
-     * 当然，如果目标无法添加相关效果，则受到额外伤害
-     * <p>
-     * 但是由低理智转化的“邪母之盾”的双相盾转化效率下降，其下降效果为：每减少1理智值则减少10%转化效果
-     * <p>
-     * 当理智开始消失时，每减少1理智值则减少10%抵御伤害的效果
-     * <p>
-     * 但也不会太过于薄弱，作为舍弃双相之盾的补偿，邪母之盾会提供10%的抗性，并且每减少1点理智，获得的抗性增加2%，最多50%
-     * @since 26.1.2-1.0.4.5
-     */
-    public static void ShadowShield (LivingDamageEvent.Pre event){
-        if (event.getEntity() instanceof Player player) {
-            if (player instanceof Player) {
-                if (Handler.has(player, InitItems.ShadowMint_.asItem())){
-                    return;
-                }
-            }
-            //幽影稳固度
-            AttributeInstance shadow_shield_stronger = player.getAttribute(AttReg.shadow_shield_stronger);
-            if (shadow_shield_stronger != null) {
-                float value = (float) shadow_shield_stronger.getValue();
-                if (value <= 0) {
-                    return;
-                }
-                float data = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
-                if (data > 0) {
-                    float damage = event.getNewDamage() ;
-                    float newData = data - (damage / value);
-                    if (newData > 0) {
-                        AttributeInstance shadow_shield_conversion = player.getAttribute(AttReg.shadow_shield_conversion);
-                        if (shadow_shield_conversion != null) {
-                            float sscValue = (float) shadow_shield_conversion.getValue();
-                            float theSanValue = sanValue(player);
-                            float doSan = 1 - (theSanValue / 10);
-                            sscValue *= doSan;
-                            if (sscValue < 0) {
-                                sscValue =0;
-                            }
-
-                            float hyperplasiaAValue = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
-                            float chaosWindsAValue = player.getData(AttReg.chaosWinds);
-
-                            AttributeInstance max_hyperplasiaAttributeInstance = player.getAttribute(AttReg.hyperplasia);
-                            AttributeInstance max_chaos_armorAttributeInstance = player.getAttribute(AttReg.chaos_armor);
-
-                            if (max_hyperplasiaAttributeInstance != null && max_chaos_armorAttributeInstance != null) {
-                                float hyperplasia = (float) max_hyperplasiaAttributeInstance.getValue();
-                                float chaosArmor = (float) max_chaos_armorAttributeInstance.getValue();
-
-                                float newValueHyp = newData + hyperplasiaAValue;
-                                newValueHyp *= sscValue;
-                                if (newValueHyp > hyperplasia) {
-                                    newValueHyp = hyperplasia;
-                                }
-                                Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,player,newValueHyp);
-
-                                float newValueChaosArmor = newData + chaosWindsAValue;
-                                newValueChaosArmor *= sscValue;
-                                if (newValueChaosArmor > chaosArmor) {
-                                    newValueChaosArmor = chaosArmor;
-                                }
-
-                                float attRes = (float) (player.getAttributeValue(AttReg.shadow_shield_stronger) / 10f);
-                                attRes *= doSan;
-                                float end = 1 - attRes;
-                                if (end < 0.1f) {
-                                    end = 0.1f;
-                                }
-                                if (event.getSource().getEntity() instanceof LivingEntity livingEntity) {
-                                    float damageEffect = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) * 1.5f;
-                                    if (theSanValue > 0) {
-                                        if (livingEntity.addEffect(new MobEffectInstance(Effects.EvilErosion, (int) (theSanValue * 20 * 4), 0))){
-                                            damageEffect *= 1.5f;
-                                        }
-                                    }else if (livingEntity.addEffect(new MobEffectInstance(Effects.ShadowErosion_,
-                                            (int) (player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) * 60),0))){
-                                        damageEffect *= 1.5f;
-                                    }
-                                    livingEntity.hurt(livingEntity.damageSources().magic(),damageEffect);
-                                }
-                                float resEvil = 1;
-                                resEvil -= 0.1f + (theSanValue / 100f * 2f);
-                                if (resEvil < 0.5f) {
-                                    resEvil = 0.5f;
-                                }
-                                if (theSanValue >= 10) {
-                                    event.setNewDamage(event.getNewDamage() * resEvil);
-                                }else {
-                                    event.setNewDamage(event.getNewDamage() * end);
-                                }
-                                Handler.setDataValue(AttReg.chaosWinds,player,newValueChaosArmor);
-                                Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player,newData);
-                            }
-                        }
-                    }else {
-                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player,0f);
-                    }
-                }else {
-                    Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, 0f);
-                    Handler.setDataValue(AttReg.shadow_shield_cooldown_dataAttachmentType,player,10);
                 }
             }
         }
@@ -908,6 +598,7 @@ public class EventMain {
     @SubscribeEvent
     public void PlayerEnchantItemEvent(PlayerEnchantItemEvent event) {
         GoldCheese.event(event);
+        MysteryLiner.event(event);
     }
     @SubscribeEvent
     public void attack(LivingEntityUseItemEvent.Start event){
