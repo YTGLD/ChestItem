@@ -11,6 +11,7 @@ public class BlackFramebufferSets implements PostChain.TargetBundle  {
 
     public  ResourceHandle<RenderTarget> entityOutlineFramebuffer;
     public  ResourceHandle<RenderTarget> WarpedFramebuffer;
+    public  ResourceHandle<RenderTarget> resourceHandleDecay;
 
 
 
@@ -18,12 +19,15 @@ public class BlackFramebufferSets implements PostChain.TargetBundle  {
     public static final Identifier MAIN =Identifier.fromNamespaceAndPath(Chestitem.MODID,"main");
     public static final Identifier ENTITY_OUTLINE = Identifier.fromNamespaceAndPath(Chestitem.MODID,"black");
     public static final Identifier WARPED = Identifier.fromNamespaceAndPath(Chestitem.MODID,"warped");
+    public static final Identifier decay = Identifier.fromNamespaceAndPath(Chestitem.MODID,"decay");
     @Override
     public ResourceHandle<RenderTarget> getOrThrow(Identifier id) {
         if (id .equals(WARPED) ) {
             return WarpedFramebuffer;
         }else if (id .equals(ENTITY_OUTLINE) ) {
             return entityOutlineFramebuffer;
+        }else if (id .equals(decay) ) {
+            return resourceHandleDecay;
         }else if (id.equals(MAIN)){
             return mainFramebuffer;
         }
@@ -37,6 +41,8 @@ public class BlackFramebufferSets implements PostChain.TargetBundle  {
             WarpedFramebuffer = framebuffer;
         }else if (id.equals(ENTITY_OUTLINE) ) {
             entityOutlineFramebuffer = framebuffer;
+        }else if (id.equals(decay) ) {
+            resourceHandleDecay = framebuffer;
         }else if (id.equals(MAIN)){
             mainFramebuffer = framebuffer;
         }else {
@@ -51,6 +57,8 @@ public class BlackFramebufferSets implements PostChain.TargetBundle  {
             return WarpedFramebuffer;
         }else if (id .equals(ENTITY_OUTLINE) ) {
             return entityOutlineFramebuffer;
+        }else if (id .equals(decay) ) {
+            return resourceHandleDecay;
         }else if (id.equals(MAIN)){
             return mainFramebuffer;
         }

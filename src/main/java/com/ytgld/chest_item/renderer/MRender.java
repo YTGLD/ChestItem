@@ -49,6 +49,17 @@ public abstract class MRender {
         }
         return Minecraft.getInstance().gameRenderer.mainRenderTarget();
     });
+
+    public static final OutputTarget decay = new OutputTarget("decay", () -> {
+        LevelRenderer rendertarget = Minecraft.getInstance().levelRenderer;
+        if (rendertarget instanceof MFramebufferBlack framebuffer){
+            if (framebuffer.chest_item$render_Decay()!=null) {
+                framebuffer.chest_item$render_Decay().copyDepthFrom(Minecraft.getInstance().gameRenderer.mainRenderTarget());
+                return framebuffer.chest_item$render_Decay();
+            }
+        }
+        return Minecraft.getInstance().gameRenderer.mainRenderTarget();
+    });
     private static final  RenderPipeline.Snippet buildSnippetItem = RenderPipeline.builder(MATRICES_FOG_LIGHT_DIR_SNIPPET)
             .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/item"))
             .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/item")).
@@ -212,25 +223,9 @@ public abstract class MRender {
                         ZERO)))
                 .withVertexBinding(0, DefaultVertexFormat.POSITION_TEX_COLOR).withPrimitiveTopology(PrimitiveTopology.QUADS).buildSnippet();
 
-        public static final RenderPipeline.Snippet  LiveTImage = RenderPipeline.builder(GLOBALS_SNIPPET).
-                withBindGroupLayout(BindGroupLayouts.MATRICES_PROJECTION).
-                withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/live"))
-                .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/live"))
-                .withBindGroupLayout(BindGroupLayouts.SAMPLER0).withColorTargetState(new ColorTargetState(new BlendFunction(
-                        SRC_ALPHA,
-                        ONE,
-                        ONE,
-                        ZERO)))
-                .withVertexBinding(0, DefaultVertexFormat.POSITION_TEX_COLOR).withPrimitiveTopology(PrimitiveTopology.QUADS).buildSnippet();
-
-
         public static final RenderPipeline GUI_TEXTURED =
                 (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).
                         withLocation("pipeline/gui_textured").build());
-
-        public static final RenderPipeline LiveTImageRenderPipe =
-                (RenderPipeline.builder(LiveTImage).
-                        withLocation("pipeline/gui_textured_live").build());
 
 
         public static final RenderPipeline GUI_TEXTURED_BLACK_BlendFunction =

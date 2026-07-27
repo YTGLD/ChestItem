@@ -15,6 +15,9 @@ public class HandlerClient {
     public static boolean doPassWarped = false;
 
 
+    public static boolean showRenderDecay = false;
+    public static boolean doPassDecay = false;
+
 
 
 

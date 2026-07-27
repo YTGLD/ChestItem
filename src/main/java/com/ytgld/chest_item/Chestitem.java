@@ -57,9 +57,9 @@ public class Chestitem {
             "black");
     public static final Identifier warpedPOST = Identifier.fromNamespaceAndPath(Chestitem.MODID,
             "warped");
+    public static final Identifier decay = Identifier.fromNamespaceAndPath(Chestitem.MODID,
+            "decay");
 
-    public static final Identifier warpedScreen = Identifier.fromNamespaceAndPath(Chestitem.MODID,
-            "warp");
     public Chestitem(IEventBus modEventBus, Dist dist, ModContainer modContainer) {
         modEventBus.addListener(this::registerPayloadHandler);
         AttReg.REGISTRY.register(modEventBus);
