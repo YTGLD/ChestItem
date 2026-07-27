@@ -1,10 +1,11 @@
-#version 150
+#version 330
 
 #moj_import <minecraft:fog.glsl>
 #moj_import <minecraft:matrix.glsl>
 #moj_import <minecraft:globals.glsl>
 
 uniform sampler2D Sampler0;
+uniform sampler2D Sampler1;
 
 in vec4 texProj0;
 in float sphericalVertexDistance;
@@ -56,7 +57,7 @@ out vec4 fragColor;
 void main() {
     vec3 color = textureProj(Sampler0, texProj0).rgb * COLORS[0];
     for (int i = 0; i < PORTAL_LAYERS; i++) {
-        color += textureProj(Sampler0, texProj0 * end_portal_layer(float(i + 1))).rgb * COLORS[i];
+        color += textureProj(Sampler1, texProj0 * end_portal_layer(float(i + 1))).rgb * COLORS[i];
     }
     fragColor = apply_fog(vec4(color, 1.0), sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
 }

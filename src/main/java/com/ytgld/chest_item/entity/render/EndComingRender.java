@@ -49,10 +49,16 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
         int colorO = entity.getDoSize() / 10;
-        collector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+        collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
             setT(pose, entity, bufferSource);
         });
-        collector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+        collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
+            renderSphere1(pose, bufferSource, 0, 0.35f + colorO / 2f);
+        });
+        collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
+            setT(pose, entity, bufferSource);
+        });
+        collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
             renderSphere1(pose, bufferSource, 0, 0.35f + colorO / 2f);
         });
         poseStack.popPose();

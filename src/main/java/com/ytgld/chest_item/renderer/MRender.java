@@ -167,14 +167,14 @@ public abstract class MRender {
         if (isOutline){
             return RenderType.create(
                     "end_gateway",
-                    RenderSetup.builder(RenderPs.BACK).setOutputTarget(outline2)
+                    RenderSetup.builder(RenderPipeline.builder(RenderPs.END_PORTAL_SNIPPET).withLocation("pipeline/end_portal").withShaderDefine("PORTAL_LAYERS", 15).build()).setOutputTarget(outline2)
                             .withTexture("Sampler0", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
                             .withTexture("Sampler1", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
                             .createRenderSetup());
         }
         return RenderType.create(
                 "end_gateway",
-                RenderSetup.builder(RenderPs.TRANSLUCENT)
+                RenderSetup.builder(RenderPipeline.builder(RenderPs.END_PORTAL_SNIPPET2).withLocation("pipeline/end_portal").withShaderDefine("PORTAL_LAYERS", 15).build())
                         .withTexture("Sampler0", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"))
                         .withTexture("Sampler1", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"))
                         .createRenderSetup());
@@ -298,37 +298,30 @@ public abstract class MRender {
                         .build()
         );
 
-        public static final RenderPipeline BACK =(RenderPipeline.builder(
-                RenderPipeline.builder(GLOBALS_SNIPPET)
-                        .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID, "core/rendertype_end_portal"))
-                        .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID, "core/rendertype_end_portal"))
-                                .withBindGroupLayout(BindGroupLayouts.SAMPLER0)
-                        .withVertexBinding(0,DefaultVertexFormat.POSITION).buildSnippet())
+        public static final RenderPipeline.Snippet END_PORTAL_SNIPPET = RenderPipeline.builder(GLOBALS_SNIPPET)
+                .withBindGroupLayout(BindGroupLayouts.MATRICES_PROJECTION)
+                .withBindGroupLayout(BindGroupLayouts.FOG)
+                .withVertexShader("core/rendertype_end_portal")
+                .withFragmentShader("core/rendertype_end_portal")
+                .withBindGroupLayout(BindGroupLayouts.SAMPLER0_SAMPLER1)
+                .withVertexBinding(0, DefaultVertexFormat.POSITION)
                 .withPrimitiveTopology(PrimitiveTopology.QUADS)
-                .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/end_gateway")).withColorTargetState(new ColorTargetState(
-                        new BlendFunction(
-                                SRC_ALPHA,
-                                ONE,
-                                ONE,
-                                ZERO
-                        )
-                ))
+                .withColorTargetState(new ColorTargetState(new BlendFunction(
+                        SRC_ALPHA,
+                        ONE,
+                        ONE,
+                        ZERO)))
                 .withDepthStencilState(DepthStencilState.DEFAULT)
-                .withShaderDefine("PORTAL_LAYERS", 16)
-                .withCull(false)
-                .build());
-        public static final RenderPipeline TRANSLUCENT =(RenderPipeline.builder(
-                        RenderPipeline.builder(GLOBALS_SNIPPET)
-                                .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID, "core/rendertype_end_portal"))
-                                .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID, "core/rendertype_end_portal"))
-                                        .withBindGroupLayout(BindGroupLayouts.SAMPLER0)
-                                .withVertexBinding(0,DefaultVertexFormat.POSITION).buildSnippet())
+                .buildSnippet();
+        public static final RenderPipeline.Snippet END_PORTAL_SNIPPET2 = RenderPipeline.builder(GLOBALS_SNIPPET)
+                .withBindGroupLayout(BindGroupLayouts.MATRICES_PROJECTION)
+                .withBindGroupLayout(BindGroupLayouts.FOG)
+                .withVertexShader("core/rendertype_end_portal")
+                .withFragmentShader("core/rendertype_end_portal")
+                .withBindGroupLayout(BindGroupLayouts.SAMPLER0_SAMPLER1)
+                .withVertexBinding(0, DefaultVertexFormat.POSITION)
                 .withPrimitiveTopology(PrimitiveTopology.QUADS)
-                .withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/end_gateway")).withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
-                .withShaderDefine("PORTAL_LAYERS", 16)
                 .withDepthStencilState(DepthStencilState.DEFAULT)
-                .withCull(false)
-                .build());
-
+                .buildSnippet();
     }
 }
