@@ -506,6 +506,7 @@ public class    InitItems {
                     .add(DevilCoins_.asItem())
                     .add(Knife_.asItem())
                     .add(Lead_.asItem())
+                    .add(Fission_.asItem())
                     .add(DriftingBottles_.asItem())
                     .add(FissionEmblem_.asItem())
                     .add(WindKnife_.asItem());
