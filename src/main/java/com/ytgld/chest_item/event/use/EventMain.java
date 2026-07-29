@@ -342,6 +342,9 @@ public class EventMain {
             Handler.setDataValue(AttReg.hyperplasiaCooldownAttachmentType, player, newV);
         }
     }
+    public static final String chaosWindsNow = "chaosWindsNow";
+    public static final String chaosWindsLast = "chaosWindsLast";
+
     public void ChaosShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player living) {
             float shadow_shield = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
@@ -350,42 +353,29 @@ public class EventMain {
             }
             float data = living.getData(AttReg.chaosWinds);
             float damageChaos = (float) living.getAttributeValue(AttReg.chaos_armor_damage);
-            float damageChaosBase = (float) living.getAttributeValue(AttReg.chaos_armor);
+
+
+            CompoundTag compoundTag  = living.getPersistentData();
+            compoundTag.putFloat(chaosWindsLast,data);
+
+            float nowShield = compoundTag.getFloat(chaosWindsNow);
+            float lastShield = compoundTag.getFloat(chaosWindsLast);
 
             if (data > 0) {
                 float damage = event.getNewDamage();
                 float newData = data - damage;
+                if (nowShield < lastShield){
+                    float damageBounces = lastShield - nowShield;
+                    if (event.getSource().getEntity() instanceof LivingEntity entity) {
+                        float doDamage = (event.getNewDamage() * 0.125f) * damageChaos * damageBounces;
+                        entity.hurt(entity.damageSources().magic(), doDamage);
+                    }
+                }
                 if (newData > 0) {
                     Handler.setDataValue(AttReg.chaosWinds,living, (newData));
                     event.setNewDamage(0);
-                } else {
-                    float minModify = (float) living.getAttributeValue(AttReg.chaos_armor_min);
-                    if (damage > damageChaosBase * 0.4f * minModify) {
-                        if (event.getSource().getEntity() instanceof LivingEntity entity) {
-                            float doDamage = event.getNewDamage() * damageChaos;
-                            if (Handler.has(living,InitItems.ErosionTokens_.asItem())){
-                                Vec3 playerPos = living.position();
-                                int range = 8;
-                                List<LivingEntity> livingEntities = living.level().getEntitiesOfClass(LivingEntity.class,
-                                        new AABB(playerPos.x - range, playerPos.y - range,
-                                                playerPos.z - range, playerPos.x + range,
-                                                playerPos.y + range, playerPos.z + range));
-                                for (LivingEntity e : livingEntities){
-                                    if (!e.is(living)){
-                                        if (!(e instanceof Player)){
-                                            e.hurt(entity.damageSources().magic(), doDamage);
-                                        }
-                                    }
-                                }
-
-                            }else {
-                                entity.hurt(entity.damageSources().magic(), doDamage);
-                            }
-                        }
-                    }
-                    Handler.setDataValue(AttReg.chaosWinds,living, 0f);
-                    event.setNewDamage(damage - data);
                 }
+                compoundTag.putFloat(chaosWindsNow,newData);
             } else {
                 Handler.setDataValue(AttReg.chaosWinds,living, 0f);
             }
