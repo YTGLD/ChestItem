@@ -367,14 +367,12 @@ public class EventMain {
                 if (nowShield < lastShield){
                     float damageBounces = lastShield - nowShield;
                     if (event.getSource().getEntity() instanceof LivingEntity entity) {
-                        float doDamage = (event.getNewDamage() * 0.125f) * damageChaos * damageBounces;
+                        float doDamage = (event.getOriginalDamage() * 0.05f + 0.35f) * damageChaos * damageBounces;
                         entity.hurt(entity.damageSources().magic(), doDamage);
                     }
                 }
-                if (newData > 0) {
-                    Handler.setDataValue(AttReg.chaosWinds,living, (newData));
-                    event.setNewDamage(0);
-                }
+                Handler.setDataValue(AttReg.chaosWinds,living, (newData));
+                event.setNewDamage(0);
                 compoundTag.putFloat(chaosWindsNow,newData);
             } else {
                 Handler.setDataValue(AttReg.chaosWinds,living, 0f);

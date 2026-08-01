@@ -82,7 +82,8 @@ public class GoldCheese extends ItemBase {
     public static void event(LivingExperienceDropEvent event) {
         if (event.getAttackingPlayer() instanceof Player player) {
             if (Handler.has(player, InitItems.Gold_Cheese.asItem())) {
-                if (BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).getPath().contains("gold")) {
+                ItemStack stack  =player.getMainHandItem().getItem().getDefaultInstance();
+                if (stack.is(ItemTags.PIGLIN_LOVED)) {
                     event.setDroppedExperience(event.getDroppedExperience() * ConfigItem.intValue2.get().intValue());
                     if (Mth.nextInt(RandomSource.create(),0,100) <= 20) {
                         event.getEntity().level().addFreshEntity(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), new ItemStack(Items.GOLD_INGOT)));
