@@ -44,6 +44,14 @@ public class ReinforcedItems {
             (Identifier)-> new Dynamic(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<Item> Contingency_ = register("contingency",
             (Identifier)-> new Contingency(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<Item> Distillation_ = register("distillation",
+            (Identifier)-> new Distillation(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<Item> Diffusion_ = register("diffusion",
+            (Identifier)-> new Diffusion(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<Item> MysteryLiner_ = register("mystery_liner",
+            (Identifier)-> new MysteryLiner(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<Item> Fusion_ = register("fusion",
+            (Identifier)-> new Fusion(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);

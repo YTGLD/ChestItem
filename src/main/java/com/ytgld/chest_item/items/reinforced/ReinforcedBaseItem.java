@@ -128,6 +128,20 @@ public abstract class ReinforcedBaseItem extends Item implements IEvil {
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         text(itemStack,builder);
+
+        List<Component> components = new ArrayList<>();
+        appendHoverText(itemStack, null, components, tooltipFlag);
+        text(itemStack, components);
+        for (Component component : components) {
+            builder.accept(component);
+        }
+    }
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+
+    }
+
+    public void text(ItemStack stack,List<Component> tooltipComponents) {
+
     }
     public void text(ItemStack stack,Consumer<Component> tooltipComponents){
 

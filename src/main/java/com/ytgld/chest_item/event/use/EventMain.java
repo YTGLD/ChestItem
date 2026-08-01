@@ -39,6 +39,10 @@ import com.ytgld.chest_item.items.memory.items.Contradiction;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.other.sword.Adjudication;
 import com.ytgld.chest_item.items.reinforced.ReinforcedBaseItem;
+import com.ytgld.chest_item.items.reinforced.items.Diffusion;
+import com.ytgld.chest_item.items.reinforced.items.Distillation;
+import com.ytgld.chest_item.items.reinforced.items.Fusion;
+import com.ytgld.chest_item.items.reinforced.items.MysteryLiner;
 import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
 import com.ytgld.chest_item.items.tool.WallowAxe;
 import com.ytgld.chest_item.other.AttributeDataType;
@@ -144,6 +148,7 @@ public class EventMain {
        SwordHandler.tickSwordIntent(event);
        SwordHandler.tickAttackHurt(event);
         EvilMother.attrib(event);
+        Fusion.event(event);
     }
     @SubscribeEvent
     public void  knock(LivingKnockBackEvent event){
@@ -435,6 +440,10 @@ public class EventMain {
             Handler.setDataValue(AttReg.hyperplasiaCooldownAttachmentType, player, newV);
         }
     }
+
+    public static final String chaosWindsNow = "chaosWindsNow";
+    public static final String chaosWindsLast = "chaosWindsLast";
+
     public void ChaosShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player living) {
             float shadow_shield = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
@@ -443,42 +452,27 @@ public class EventMain {
             }
             float data = living.getData(AttReg.chaosWinds);
             float damageChaos = (float) living.getAttributeValue(AttReg.chaos_armor_damage);
-            float damageChaosBase = (float) living.getAttributeValue(AttReg.chaos_armor);
+
+
+            CompoundTag compoundTag  = living.getPersistentData();
+            compoundTag.putFloat(chaosWindsLast,data);
+
+            float nowShield = compoundTag.getFloatOr(chaosWindsNow,0);
+            float lastShield = compoundTag.getFloatOr(chaosWindsLast,0);
 
             if (data > 0) {
                 float damage = event.getNewDamage();
                 float newData = data - damage;
-                if (newData > 0) {
-                    Handler.setDataValue(AttReg.chaosWinds,living, (newData));
-                    event.setNewDamage(0);
-                } else {
-                    float minModify = (float) living.getAttributeValue(AttReg.chaos_armor_min);
-                    if (damage > damageChaosBase * 0.4f * minModify) {
-                        if (event.getSource().getEntity() instanceof LivingEntity entity) {
-                            float doDamage = event.getNewDamage() * damageChaos;
-                            if (Handler.has(living,InitItems.ErosionTokens_.asItem())){
-                                Vec3 playerPos = living.position();
-                                int range = 8;
-                                List<LivingEntity> livingEntities = living.level().getEntitiesOfClass(LivingEntity.class,
-                                        new AABB(playerPos.x - range, playerPos.y - range,
-                                                playerPos.z - range, playerPos.x + range,
-                                                playerPos.y + range, playerPos.z + range));
-                                for (LivingEntity e : livingEntities){
-                                    if (!e.is(living)){
-                                        if (!(e instanceof Player)){
-                                            e.hurt(entity.damageSources().magic(), doDamage);
-                                        }
-                                    }
-                                }
-
-                            }else {
-                                entity.hurt(entity.damageSources().magic(), doDamage);
-                            }
-                        }
+                if (nowShield < lastShield){
+                    float damageBounces = lastShield - nowShield;
+                    if (event.getSource().getEntity() instanceof LivingEntity entity) {
+                        float doDamage = (event.getOriginalDamage() * 0.05f + 0.35f) * damageChaos * damageBounces;
+                        entity.hurt(entity.damageSources().magic(), doDamage);
                     }
-                    Handler.setDataValue(AttReg.chaosWinds,living, 0f);
-                    event.setNewDamage(damage - data);
                 }
+                Handler.setDataValue(AttReg.chaosWinds,living, (newData));
+                event.setNewDamage(0);
+                compoundTag.putFloat(chaosWindsNow,newData);
             } else {
                 Handler.setDataValue(AttReg.chaosWinds,living, 0f);
             }
@@ -563,6 +557,14 @@ public class EventMain {
     @SubscribeEvent
     public void LivingChangeTargetEvent(LivingChangeTargetEvent event){
         TheOrderOfTheUndead.LivingChangeTargetEvent(event);
+    }
+    @SubscribeEvent
+    public void PlayerXpEvent(PlayerXpEvent.XpChange event) {
+        Diffusion.event(event);
+    }
+    @SubscribeEvent
+    public void MobEffectEvent(MobEffectEvent.Added event) {
+        Distillation.event(event);
     }
     @SubscribeEvent
     public void ItemStackTickEvent(ItemStackTickEvent event){
@@ -684,6 +686,7 @@ public class EventMain {
     @SubscribeEvent
     public void PlayerEnchantItemEvent(PlayerEnchantItemEvent event) {
         GoldCheese.event(event);
+        MysteryLiner.event(event);
     }
     @SubscribeEvent
     public void attack(LivingEntityUseItemEvent.Start event){
@@ -756,81 +759,92 @@ public class EventMain {
         if (event.getName().toString().contains("chests/")){
             if (event.getName().toString().contains("trial_chambers")){
                 table.addPool(LootPool.lootPool().name(Chestitem.MODID + "trial_chambers")
-
                         .setRolls(ConstantValue.exactly(1))
-
-                        .add(LootItem.lootTableItem(InitItems.Complementary_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.FissionEmblem_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Life_Crystal)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.God_blood)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Drug_Heal)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Bone_Head)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Conch_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Lead_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Stone_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Knife_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Ring_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
-
-                        .add(LootItem.lootTableItem(InitItems.Life_Stone)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Armor_Stone)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Stronger_Stone)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
-                        .add(LootItem.lootTableItem(InitItems.Separate_Rune)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Undead_Rune)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Pain_Rune)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
-
                         .add(LootItem.lootTableItem(InitItems.Heart_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Meat_Ball)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Self_Increasing_Heart)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-                        .add(LootItem.lootTableItem(InitItems.Stomach_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
-                        .add(LootItem.lootTableItem(InitItems.Battery_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
+                                .when(LootItemRandomChanceCondition.randomChance(0.02f)))
                         .add(LootItem.lootTableItem(InitItems.MAGIC_IRON)
-                                .when(LootItemRandomChanceCondition.randomChance(0.09f)))
-
-                        .add(LootItem.lootTableItem(InitItems.SpeedHeart_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
-                        .add(LootItem.lootTableItem(InitItems.Kaolinite_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
-                        .add(LootItem.lootTableItem(InitItems.EyeBook_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
+                                .when(LootItemRandomChanceCondition.randomChance(0.1f)))
                         .add(LootItem.lootTableItem(InitItems.Fission_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
+                                .when(LootItemRandomChanceCondition.randomChance(0.02f)))
                         .add(LootItem.lootTableItem(InitItems.FleshAndBloodGears_)
-                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))
-
-
+                                .when(LootItemRandomChanceCondition.randomChance(0.02f)))
                         .build());
+                if (event.getName().toString().contains("reward_ominous")) {
+                    table.addPool(LootPool.lootPool().name(Chestitem.MODID + "trial_chambers_reward_ominous")
+                            .setRolls(ConstantValue.exactly(1))
+                            .add(LootItem.lootTableItem(InitItems.Complementary_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.FissionEmblem_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Life_Crystal)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.God_blood)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Drug_Heal)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Bone_Head)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Conch_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Lead_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Stone_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Knife_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Ring_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
 
+
+                            .add(LootItem.lootTableItem(InitItems.Life_Stone)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Armor_Stone)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Stronger_Stone)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                            .add(LootItem.lootTableItem(InitItems.Separate_Rune)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Undead_Rune)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Pain_Rune)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+
+                            .add(LootItem.lootTableItem(InitItems.Heart_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Meat_Ball)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Self_Increasing_Heart)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                            .add(LootItem.lootTableItem(InitItems.Stomach_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                            .add(LootItem.lootTableItem(InitItems.Battery_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                            .add(LootItem.lootTableItem(InitItems.MAGIC_IRON)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.09f)))
+
+                            .add(LootItem.lootTableItem(InitItems.SpeedHeart_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                            .add(LootItem.lootTableItem(InitItems.Kaolinite_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                            .add(LootItem.lootTableItem(InitItems.EyeBook_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                            .add(LootItem.lootTableItem(InitItems.Fission_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+                            .add(LootItem.lootTableItem(InitItems.FleshAndBloodGears_)
+                                    .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+
+
+                            .build());
+
+                }
             }
         }
         if (event.getName().toString().contains("pots/")){

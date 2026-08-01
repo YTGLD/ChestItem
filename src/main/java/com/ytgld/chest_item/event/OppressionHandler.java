@@ -75,54 +75,10 @@ public class OppressionHandler {
     public static void tickCanNotLooking(EntityTickEvent.Pre event){
         if (event.getEntity() instanceof Player player) {
             if (player.getAttributeValue(AttReg.oppression) > 0) {
-                float oppressionAngle = (float) player.getAttributeValue(AttReg.oppression);
                 Vec3 playerPos = player.position().add(0, 1, 0);
                 int range = 12;
                 List<Entity> entities = player.level().getEntitiesOfClass(Entity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
-                float offSetXZ = (player.getDimensions(player.getPose())).width() / 2;
-                float offSetY =  (player.getDimensions(player.getPose()).height()) / 2;
-                Vec3 myPos = player.position().add(offSetXZ, -offSetY, offSetXZ);
                 for (Entity baseEntity : entities){
-                    if (baseEntity instanceof LivingEntity entity) {
-                        if (!entity.is(player)) {
-                            Vec3 eyePos = entity.getEyePosition();
-                            Vec3 lookVec = entity.getViewVector(1.0F).normalize();
-                            Vec3 toPlayer = myPos.subtract(eyePos).normalize();
-
-                            Vec3 axis = lookVec.cross(toPlayer);
-                            if (axis.lengthSqr() < 1e-6) {
-                                continue;
-                            }
-                            axis = axis.normalize();
-                            double angle = Math.toDegrees(Math.acos(Mth.clamp(
-                                    lookVec.dot(toPlayer), -1.0, 1.0)));
-                            double targetAngle = Math.min(angle, oppressionAngle);
-                            float minSpeed = 0.1f;
-                            float maxSpeed = 3.0F;
-
-                            float rotate = (float) (targetAngle / oppressionAngle);
-                            rotate = minSpeed + (maxSpeed - minSpeed) * rotate;
-                            rotate = Math.min(rotate, (float) targetAngle);
-
-                            double rad = Math.toRadians(rotate);
-                            Vec3 newLook = rotate(lookVec, axis, -rad).normalize();
-
-                            double x = newLook.x;
-                            double y = newLook.y;
-                            double z = newLook.z;
-
-                            float yaw = (float) (Mth.atan2(-x, z) * Mth.RAD_TO_DEG);
-                            float pitch = (float) (-(Mth.atan2(y, Math.sqrt(x * x + z * z)) * Mth.RAD_TO_DEG));
-
-                            entity.setYRot(yaw);
-                            entity.setXRot(pitch);
-
-                            entity.yHeadRot = yaw;
-                            entity.yBodyRot = yaw;
-
-
-                        }
-                    }
                     if (baseEntity instanceof Projectile projectile) {
                         if (!projectile.is(player)) {
                             if (projectile.getOwner() instanceof Player player1) {

@@ -6,6 +6,7 @@ import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ytgld.chest_item.items.other.Battery;
+import com.ytgld.chest_item.items.reinforced.items.Diffusion;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
@@ -40,6 +41,7 @@ public class ChestLoot extends LootModifier {
         String idSting = String.valueOf(s);
         if (idSting.contains("chests/")) {
             if (entity != null) {
+                Diffusion.addLoot(objectArrayList,lootContext,entity);
                 Battery.objectArrayList(objectArrayList, entity);
             }
         }

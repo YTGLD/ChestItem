@@ -410,6 +410,10 @@ public class InitItems {
                     output.accept(ReinforcedItems.Activity_);
                     output.accept(ReinforcedItems.Dynamic_);
                     output.accept(ReinforcedItems.Contingency_);
+                    output.accept(ReinforcedItems.Diffusion_);
+                    output.accept(ReinforcedItems.Distillation_);
+                    output.accept(ReinforcedItems.MysteryLiner_);
+                    output.accept(ReinforcedItems.Fusion_);
                     output.accept(InitItems.EvilAxe_);
                     output.accept(InitItems.DefyLife_);
                     output.accept(InitItems.WarGodCommand_);
@@ -455,6 +459,12 @@ public class InitItems {
                     ReinforcedItems.Activity_.getKey(),
                     ReinforcedItems.Dynamic_.getKey(),
                     ReinforcedItems.Contingency_.getKey(),
+
+                    ReinforcedItems.Diffusion_.getKey(),
+                    ReinforcedItems.Distillation_.getKey(),
+                    ReinforcedItems.MysteryLiner_.getKey(),
+                    ReinforcedItems.Fusion_.getKey(),
+
                     EvilBelt_.getKey()
 
             );
