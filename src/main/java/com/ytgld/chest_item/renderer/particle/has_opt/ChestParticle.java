@@ -22,7 +22,7 @@ public class ChestParticle extends SingleQuadParticle {
 
     private ChestParticle(ClientLevel level, double x, double y, double z, SpriteSet sprite) {
         super(level, x, y, z, sprite.first());
-        this.lifetime = 50;
+        this.lifetime = 100;
         this.scale(size);
     }
 
@@ -35,22 +35,17 @@ public class ChestParticle extends SingleQuadParticle {
 
         this.roll+=0.05f + Mth.nextFloat(RandomSource.create(),0.01F,0.2F);
         this.oRoll+= (float) (0.05 + Mth.nextFloat(RandomSource.create(),0.01F,0.2F));
-        if (alpha>0.05f) {
+        if (alpha>0) {
             this.alpha -= 0.05f;
         }
-        if (alpha < 0.1) {
+        if (alpha <= 0.0) {
             this.remove();
         }
     }
 
     @Override
     protected @NotNull Layer getLayer() {
-        if (!isLight){
-            return new Layer(true, TextureAtlas.LOCATION_PARTICLES, MRender.RenderPs.PARTICLE);
-        }
-        else {
-            return new Layer(true, TextureAtlas.LOCATION_PARTICLES, MRender.RenderPs.TRANSLUCENT_PARTICLE);
-        }
+        return new Layer(true, TextureAtlas.LOCATION_PARTICLES, MRender.RenderPs.TRANSLUCENT_PARTICLE);
     }
     public record Provider(SpriteSet sprite) implements ParticleProvider<ColorOption> {
         public Provider(SpriteSet sprite) {

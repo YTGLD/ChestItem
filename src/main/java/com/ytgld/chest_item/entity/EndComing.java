@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.entity;
 
-import com.mojang.math.Axis;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -8,7 +7,6 @@ import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.renderer.particle.has_opt.ColorOption;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
-import com.ytgld.chest_item.renderer.particle.other.SwordEnergyOption;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,10 +23,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnknownNullability;
+import oshi.driver.mac.net.NetStat;
 
 import java.util.*;
 
@@ -89,17 +86,19 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
                 time = 5;
             }
 
-            if (this.getOwner() instanceof Player player && player.getLastHurtByMob() instanceof LivingEntity living) {
+            if (this.getOwner() instanceof Player player && this.getTarget() instanceof LivingEntity living) {
                 if (player.position().distanceTo(living.position()) < 45) {
                     if (this.tickCount % time ==1) {
-                        TheHyperplasia theHyperplasia = new TheHyperplasia(Entitys.TheHyperplasia_.get(), living.level());
-                        theHyperplasia.setTarget(living);
-                        theHyperplasia.setPos(this.position().add(0, 0, 0));
-                        theHyperplasia.setOwner(player);
-                        theHyperplasia.setDamage( 5 + (float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.1F));
-                        this.level().addFreshEntity(theHyperplasia);
+                        AttackEndComing attackEndComing = new AttackEndComing(Entitys.AttackEndComing_.get(), living.level());
+                        attackEndComing.setPos(this.position().add(0, 0, 0));
+                        attackEndComing.setOwner(player);
+                        attackEndComing.setTarget(living);
+                        attackEndComing.damages += ((float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.1F));
+                        this.level().addFreshEntity(attackEndComing);
                         if (this.level() instanceof ServerLevel level) {
-                            level.sendParticles(Particles.orbAPart.get(), getX() + 0, getY() + 0, getZ() + 0, 2, 0, 0, 0, 0);
+                            level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                            Vec3.ZERO, true, Light.ARGB.color(255, 255, 12, 20), 3),
+                                    this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
                         }
                     }
                 }
@@ -130,19 +129,24 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
         @Override
         public void tick() {
             super.tick();
-            if (this.tickCount <= 240){
-                if (this.tickCount % 40 == 0) {
-                    if (this.level() instanceof ServerLevel level) {
-                        level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
-                                        Vec3.ZERO, true, Light.ARGB.color(255, 255, 12, 20), 7),
-                                this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
-                    }
+            if (this.tickCount == 10) {
+                if (this.level() instanceof ServerLevel level) {
+                    level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                    Vec3.ZERO, true, Light.ARGB.color(255, 255, 12, 20), 10),
+                            this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
                 }
             }
+            if (tickCount == 10) {
+                if (this.level() instanceof ServerLevel level) {
+                    level.sendParticles(Particles.COLOR_PART.get(), getX() + 0, getY() + 0, getZ() + 0, 24, 0, 0, 0, 0.2f);
+                    level.sendParticles(Particles.FireBlock_.get(), getX() + 0, getY() + 0, getZ() + 0, 16, 0, 0, 0, 0.2f);
+                }
+            }
+
             if (colorBlood == null) {
                 colorBlood = new ColorBlood();
             }else {
-                int l = 15;
+                int l = 10;
                 if (tickCount % 20 == 1) {
                     if (new Random().nextInt(100)< l) {
                         colorBlood.c1 = 20;
@@ -215,36 +219,24 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
                     trailPositions.removeFirst();
                 }
             }
-            clear();
-            hurtaTTACK();
-        }
-        public static void getOwnerHurt(LivingDamageEvent.@UnknownNullability Pre event){
-            if (event.getSource().getDirectEntity() instanceof Player player) {
-                if (player.position().distanceTo(event.getEntity().position()) > 5) {
-                    return;
-                }
-                if (Handler.has(player, InitItems.TheEndIsComing_.asItem())) {
-                    if (!player.getCooldowns().isOnCooldown(InitItems.TheEndIsComing_.asItem().getDefaultInstance())) {
-                        Vec3 playerPos = player.position();
-                        int range = 4;
-                        List<EndComing> imperialHematomas = player.level().getEntitiesOfClass(EndComing.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
-                        for (EndComing endComing : imperialHematomas) {
-                            if (endComing.getOwner() instanceof Player player1 && player.is(player1)) {
-                                TheHyperplasia theHyperplasia = new TheHyperplasia(Entitys.TheHyperplasia_.get(), endComing.level());
-                                theHyperplasia.setTarget(event.getEntity());
-                                theHyperplasia.setPos(endComing.position().add(0, 0, 0));
-                                theHyperplasia.setOwner(player);
-                                theHyperplasia.setDamage(5 + (float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.1F));
-                                endComing.level().addFreshEntity(theHyperplasia);
-                                if (endComing.level() instanceof ServerLevel level) {
-                                    level.sendParticles(Particles.orbAPart.get(), endComing.getX() + 0, endComing.getY() + 0, endComing.getZ() + 0, 2, 0, 0, 0, 0);
-                                }
-                                player.getCooldowns().addCooldown(InitItems.TheEndIsComing_.asItem().getDefaultInstance(),20);
+            if (owner instanceof Player player) {
+                if (Handler.has(player,InitItems.EndEffect_.asItem())) {
+                    if (this.getTarget() == null) {
+                        Vec3 playerPos = this.position().add(0, 0.75, 0);
+                        int range = 20;
+                        List<Mob> entities = this.level().getEntitiesOfClass(Mob.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
+                        for (Mob mob : entities) {
+                            if (!mob.is(this)) {
+                                this.setTarget(mob);
                             }
                         }
                     }
+                } else {
+                    this.setTarget(player.getLastHurtMob());
                 }
             }
+            clear();
+            hurtaTTACK();
         }
 
         private void clear(){
@@ -290,18 +282,6 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
         public boolean attackable() {
             return false;
         }
-
-
-        @Override
-        public boolean wantsToAttack(LivingEntity target, LivingEntity owner) {
-            return false;
-        }
-
-        @Override
-        public boolean canAttack(LivingEntity target) {
-            return false;
-        }
-
 
         @Override
         public boolean hurtServer(ServerLevel p_376221_, DamageSource p_376460_, float p_376610_) {

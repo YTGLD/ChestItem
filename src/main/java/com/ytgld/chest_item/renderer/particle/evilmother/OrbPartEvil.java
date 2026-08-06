@@ -31,11 +31,11 @@ public class OrbPartEvil extends SingleQuadParticle {
     protected int getLightCoords(float a) {
         return 255;
     }
-    public int time = 180;
+    public int time = 20;
     public void tick() {
         super.tick();
-        if (alpha>0.05f) {
-            this.alpha -= 0.05f;
+        if (alpha>0) {
+            this.alpha *= 0.8f;
         }
         this.quadSize *= 1.075f;
         time --;

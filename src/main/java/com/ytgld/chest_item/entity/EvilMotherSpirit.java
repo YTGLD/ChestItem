@@ -4,6 +4,7 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.light.Light;
+import com.ytgld.chest_item.renderer.particle.has_opt.ColorOption;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.server.level.ServerLevel;
@@ -163,8 +164,10 @@ public class EvilMotherSpirit extends ThrowableItemProjectile {
             if (this.level() instanceof ServerLevel level) {
                 level.sendParticles(Particles.colorPart_evil.get(), getX() + 0, getY() + 0, getZ() + 0, 24, 0, 0, 0, 0.2f);
                 level.sendParticles(Particles.cube_evil.get(), getX() + 0, getY() + 0, getZ() + 0, 32, 0, 0, 0, 0.2f);
-
-                level.sendParticles(Particles.orbAPart_evil.get(), getX() + 0, getY() + 0.25, getZ() + 0, 4, 0, 0, 0, 0);
+                level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                Vec3.ZERO, true, Light.ARGB.color(100, 40, 125, 90), 10),
+                        this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                level.sendParticles(Particles.orbAPart_evil.get(), getX() + 0, getY() + 0.25, getZ() + 0, 1, 0, 0, 0, 0);
             }
             canSee = false;
         }

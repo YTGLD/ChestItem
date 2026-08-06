@@ -150,15 +150,6 @@ public class AttackEndComing extends ThrowableItemProjectile {
         super.tick();
         this.setNoGravity(true);
         this.noPhysics = true;
-
-        if (this.tickCount % 2 == 1) {
-            if (this.level() instanceof ServerLevel level) {
-                level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
-                                this.getDeltaMovement().scale(0.8f), true, Light.ARGB.color(255, 255, 12, 20), 1),
-                        this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
-            }
-        }
-
         if (canSee) {
             if (this.tickCount > 100) {
                 if (follow) {

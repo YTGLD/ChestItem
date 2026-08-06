@@ -49,40 +49,19 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
-        int colorO = entity.getDoSize() / 10;
-//        collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
-//            setT(pose, entity, bufferSource);
-//        });
-//        collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
-//            setT(pose, entity, bufferSource);
-//        });
-
         collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
-            renderSphere1(pose, bufferSource, 0, 0.15f);
+            setT(pose, entity, bufferSource);
         });
         collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
-            renderSphere1(pose, bufferSource, 0, 0.15f);
+            setT(pose, entity, bufferSource);
         });
-        poseStack.pushPose();
-        poseStack.mulPose(Axis.XN.rotationDegrees(-entity.tickCount * 1.3f + renderState.partialTick));
-        poseStack.mulPose(Axis.YN.rotationDegrees(-entity.tickCount * 1.3f + renderState.partialTick));
-        poseStack.mulPose(Axis.ZN.rotationDegrees(-entity.tickCount * 1.3f + renderState.partialTick));
-        poseStack.translate(-0.5, -0.5, -0.5);
-        collector.submitCustomGeometry(poseStack, MRender.colorOutline(false), (pose, bufferSource) -> {
-            int faceSize = (int) (entity.tickCount / 40f);
-            EndComing.ColorBlood color1Add = entity.colorBlood;
-            if (color1Add != null) {
-                int color1 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c1 * 5),Math.min(255,50 + color1Add.c1 * 5),Math.min(255,50 + color1Add.c1 * 5));
-                int color2 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c2 * 5),Math.min(255,50 + color1Add.c2 * 5),Math.min(255,50 + color1Add.c2 * 5));
-                int color3 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c3 * 5),Math.min(255,50 + color1Add.c3 * 5),Math.min(255,50 + color1Add.c3 * 5));
-                int color4 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c4 * 5),Math.min(255,50 + color1Add.c4 * 5),Math.min(255,50 + color1Add.c4 * 5));
-                int color5 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c5 * 5),Math.min(255,50 + color1Add.c5 * 5),Math.min(255,50 + color1Add.c5 * 5));
-                int color6 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c6 * 5),Math.min(255,50 + color1Add.c6 * 5),Math.min(255,50 + color1Add.c6 * 5));
-                renderCubeFace(bufferSource,pose,255,faceSize,color1,color2,color3,color4,color5,color6);
-            }
 
+        collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
+            renderSphere1(pose, bufferSource, 0, 0.44f);
         });
-        poseStack.popPose();
+        collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
+            renderSphere1(pose, bufferSource, 0, 0.44f);
+        });
         poseStack.popPose();
     }
 
