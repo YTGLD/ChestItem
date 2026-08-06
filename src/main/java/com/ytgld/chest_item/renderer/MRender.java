@@ -236,8 +236,8 @@ public abstract class MRender {
         public static final RenderPipeline TRANSLUCENT_PARTICLE =
                 RenderPipeline.builder(
                                 RenderPipeline.builder(MATRICES_FOG_SNIPPET)
-                                        .withVertexShader("core/particle")
-                                        .withFragmentShader("core/particle")
+                                        .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/particle"))
+                                        .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/particle"))
                                         .withCull(false)
                                         .withBindGroupLayout(BindGroupLayouts.SAMPLER0_SAMPLER2)
                                         .withVertexBinding(0, DefaultVertexFormat.PARTICLE)
@@ -265,9 +265,9 @@ public abstract class MRender {
         public static final RenderPipeline PARTICLE =
                 RenderPipeline.builder(
                                 RenderPipeline.builder(MATRICES_FOG_SNIPPET)
-                                        .withVertexShader("core/particle")
+                                        .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/particle"))
                                         .withCull(false)
-                                        .withFragmentShader("core/particle")
+                                        .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/particle"))
                                         .withBindGroupLayout(BindGroupLayouts.SAMPLER0_SAMPLER2)
                                         .withVertexBinding(0, DefaultVertexFormat.PARTICLE)
                                         .withPrimitiveTopology(PrimitiveTopology.QUADS)

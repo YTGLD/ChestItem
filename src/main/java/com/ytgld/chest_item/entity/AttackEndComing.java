@@ -2,11 +2,15 @@ package com.ytgld.chest_item.entity;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.renderer.light.Light;
+import com.ytgld.chest_item.renderer.particle.has_opt.ColorOption;
+import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.tip.an_element.elements.DoomsdayJudgment;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -89,6 +93,18 @@ public class AttackEndComing extends ThrowableItemProjectile {
     public int live = 50;
 
     public boolean canSee = true;
+
+    public void setCanSee(boolean canSee) {
+        if (!canSee) {
+            if (this.level() instanceof ServerLevel level) {
+                level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                Vec3.ZERO, true, Light.ARGB.color(255, 255, 12, 20), 2),
+                        this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+            }
+        }
+        this.canSee = canSee;
+    }
+
     public void attack(){
         Vec3 playerPos = this.position().add(0, 0.75, 0);
         int range = 2;
@@ -105,7 +121,7 @@ public class AttackEndComing extends ThrowableItemProjectile {
                                 if (entity instanceof OwnableEntity ownableEntity) {
                                     if (ownableEntity.getOwner() != null) {
                                         if (ownableEntity.getOwner().is(this.getOwner())) {
-                                            canSee = false;
+                                            setCanSee(false);
                                             return;
                                         }
                                     }
@@ -117,9 +133,9 @@ public class AttackEndComing extends ThrowableItemProjectile {
                                 if (follow) {
                                     this.level().addParticle(ParticleTypes.SONIC_BOOM, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
                                 }
-                                canSee = false;
+                                setCanSee(false);
                             }else {
-                                canSee = false;
+                                setCanSee(false);
 
                             }
                         }
@@ -135,13 +151,20 @@ public class AttackEndComing extends ThrowableItemProjectile {
         this.setNoGravity(true);
         this.noPhysics = true;
 
+        if (this.tickCount % 2 == 1) {
+            if (this.level() instanceof ServerLevel level) {
+                level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                this.getDeltaMovement().scale(0.8f), true, Light.ARGB.color(255, 255, 12, 20), 1),
+                        this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+            }
+        }
 
         if (canSee) {
             if (this.tickCount > 100) {
                 if (follow) {
                     this.level().addParticle(ParticleTypes.SONIC_BOOM,this.getX(),this.getY(),this.getZ(),0,0,0);
                 }
-                canSee = false;
+                setCanSee(false);
             }
             if (target != null) {
                 if (!target.isAlive()) {

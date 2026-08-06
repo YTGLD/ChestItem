@@ -13,9 +13,7 @@ in vec4 vertexColor;
 out vec4 fragColor;
 
 void main() {
-    vec4 color = texture(Sampler0, clamp(texCoord0,0,1)) * vertexColor * ColorModulator;
-    if (color.a < 0.1) {
-        discard;
-    }
-    fragColor = mix(color, color * ColorModulator, 0.5);
+    vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
+    vec4 SSS = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
+    fragColor = mix(SSS, SSS * ColorModulator, 0.5);
 }

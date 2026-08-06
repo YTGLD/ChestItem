@@ -109,7 +109,7 @@ public class TheHyperplasia extends ThrowableItemProjectile implements Targeting
                         livingEntity.hurt(livingEntity.damageSources().playerAttack(player),damage);
                         if (!livingEntity.isAlive()) {
                             if (this.level() instanceof ServerLevel level) {
-                                level.sendParticles(Particles.colorPart.get(), getX() + 0, getY() + 0, getZ() + 0, 24, 0, 0, 0, 0.2f);
+                                level.sendParticles(Particles.COLOR_PART.get(), getX() + 0, getY() + 0, getZ() + 0, 24, 0, 0, 0, 0.2f);
                                 level.sendParticles(Particles.FireBlock_.get(), getX() + 0, getY() + 0, getZ() + 0, 16, 0, 0, 0, 0.2f);
                             }
                         }

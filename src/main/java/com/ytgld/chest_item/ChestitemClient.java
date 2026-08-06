@@ -1,7 +1,5 @@
 package com.ytgld.chest_item;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
@@ -9,7 +7,6 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
-import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
 import com.ytgld.chest_item.renderer.model.BigGlowingModel;
@@ -23,41 +20,24 @@ import com.ytgld.chest_item.renderer.particle.evilmother.ColorPartEvil;
 import com.ytgld.chest_item.renderer.particle.evilmother.CubeEvil;
 import com.ytgld.chest_item.renderer.particle.evilmother.EvilTailing;
 import com.ytgld.chest_item.renderer.particle.evilmother.OrbPartEvil;
+import com.ytgld.chest_item.renderer.particle.has_opt.ChestParticle;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow1;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow2;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow3;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow4;
-import net.minecraft.client.entity.ClientAvatarEntity;
-import net.minecraft.client.renderer.entity.player.AvatarRenderer;
-import net.minecraft.client.renderer.entity.state.AvatarRenderState;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.context.ContextKey;
-import net.minecraft.world.entity.Avatar;
-import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.BlockEntityRenderBoundsDebugRenderer;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
-import net.neoforged.neoforge.client.renderstate.AvatarRenderStateModifier;
-import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import org.jspecify.annotations.NullMarked;
-
-import java.util.List;
 
 @Mod(value = Chestitem.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = Chestitem.MODID, value = Dist.CLIENT)
@@ -162,7 +142,7 @@ public class ChestitemClient{
 //    }
     @SubscribeEvent
     public static void registerFactories(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(Particles.colorPart.get(), ColorPart.Provider::new);
+        event.registerSpriteSet(Particles.COLOR_PART.get(), ColorPart.Provider::new);
         event.registerSpriteSet(Particles.FireBlock_.get(), FireBlock.Provider::new);
         event.registerSpriteSet(Particles.orbAPart.get(), OrbPart.Provider::new);
 
@@ -172,6 +152,7 @@ public class ChestitemClient{
         event.registerSpriteSet(Particles.evil_tailing.get(), EvilTailing.Provider::new);
 
         event.registerSpriteSet(Particles.SwordEnergyOption_.get(), SwordEnergy.Provider::new);
+        event.registerSpriteSet(Particles.colorOption.get(), ChestParticle.Provider::new);
 
         event.registerSpriteSet(Particles.sword_shadow_1.get(), SwordShadow1.Provider::new);
         event.registerSpriteSet(Particles.sword_shadow_2.get(), SwordShadow2.Provider::new);

@@ -2,6 +2,7 @@ package com.ytgld.chest_item.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.entity.state.EndComingRenderState;
@@ -49,18 +50,39 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
         int colorO = entity.getDoSize() / 10;
+//        collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
+//            setT(pose, entity, bufferSource);
+//        });
+//        collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
+//            setT(pose, entity, bufferSource);
+//        });
+
         collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
-            setT(pose, entity, bufferSource);
-        });
-        collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
-            renderSphere1(pose, bufferSource, 0, 0.35f + colorO / 2f);
+            renderSphere1(pose, bufferSource, 0, 0.15f);
         });
         collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
-            setT(pose, entity, bufferSource);
+            renderSphere1(pose, bufferSource, 0, 0.15f);
         });
-        collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
-            renderSphere1(pose, bufferSource, 0, 0.35f + colorO / 2f);
+        poseStack.pushPose();
+        poseStack.mulPose(Axis.XN.rotationDegrees(-entity.tickCount * 1.3f + renderState.partialTick));
+        poseStack.mulPose(Axis.YN.rotationDegrees(-entity.tickCount * 1.3f + renderState.partialTick));
+        poseStack.mulPose(Axis.ZN.rotationDegrees(-entity.tickCount * 1.3f + renderState.partialTick));
+        poseStack.translate(-0.5, -0.5, -0.5);
+        collector.submitCustomGeometry(poseStack, MRender.colorOutline(false), (pose, bufferSource) -> {
+            int faceSize = (int) (entity.tickCount / 40f);
+            EndComing.ColorBlood color1Add = entity.colorBlood;
+            if (color1Add != null) {
+                int color1 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c1 * 5),Math.min(255,50 + color1Add.c1 * 5),Math.min(255,50 + color1Add.c1 * 5));
+                int color2 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c2 * 5),Math.min(255,50 + color1Add.c2 * 5),Math.min(255,50 + color1Add.c2 * 5));
+                int color3 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c3 * 5),Math.min(255,50 + color1Add.c3 * 5),Math.min(255,50 + color1Add.c3 * 5));
+                int color4 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c4 * 5),Math.min(255,50 + color1Add.c4 * 5),Math.min(255,50 + color1Add.c4 * 5));
+                int color5 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c5 * 5),Math.min(255,50 + color1Add.c5 * 5),Math.min(255,50 + color1Add.c5 * 5));
+                int color6 = Light.ARGB.color(255,Math.min(255,220 + color1Add.c6 * 5),Math.min(255,50 + color1Add.c6 * 5),Math.min(255,50 + color1Add.c6 * 5));
+                renderCubeFace(bufferSource,pose,255,faceSize,color1,color2,color3,color4,color5,color6);
+            }
+
         });
+        poseStack.popPose();
         poseStack.popPose();
     }
 
@@ -153,6 +175,50 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
             }
         }
     }
+
+    public void renderCubeFace(VertexConsumer vertexConsumer, PoseStack.Pose matrix4f, int light, int face,int color1,int color2,int color3,int colot4,int c5,int c6) {
+        float x = 0.5F;
+        float y = 0.5F;
+        float z = 0.5F;
+        float size = 0.5F;
+        if (face > 0) { // 前面
+            vertexConsumer.addVertex(matrix4f, x - size, y - size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color1);
+            vertexConsumer.addVertex(matrix4f, x + size, y - size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color1);
+            vertexConsumer.addVertex(matrix4f, x + size, y + size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color1);
+            vertexConsumer.addVertex(matrix4f, x - size, y + size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color1);
+        }
+        if (face > 1) { // 后面
+            vertexConsumer.addVertex(matrix4f, x - size, y + size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color2);
+            vertexConsumer.addVertex(matrix4f, x + size, y + size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color2);
+            vertexConsumer.addVertex(matrix4f, x + size, y - size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color2);
+            vertexConsumer.addVertex(matrix4f, x - size, y - size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color2);
+        }
+        if (face > 2) { // 左面
+            vertexConsumer.addVertex(matrix4f, x - size, y - size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color3);
+            vertexConsumer.addVertex(matrix4f, x - size, y - size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color3);
+            vertexConsumer.addVertex(matrix4f, x - size, y + size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color3);
+            vertexConsumer.addVertex(matrix4f, x - size, y + size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(color3);
+        }
+        if (face > 3) { // 右面
+            vertexConsumer.addVertex(matrix4f, x + size, y - size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(colot4);
+            vertexConsumer.addVertex(matrix4f, x + size, y - size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(colot4);
+            vertexConsumer.addVertex(matrix4f, x + size, y + size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(colot4);
+            vertexConsumer.addVertex(matrix4f, x + size, y + size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(colot4);
+        }
+        if (face > 4) { // 上面
+            vertexConsumer.addVertex(matrix4f, x - size, y + size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(c5);
+            vertexConsumer.addVertex(matrix4f, x + size, y + size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(c5);
+            vertexConsumer.addVertex(matrix4f, x + size, y + size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(c5);
+            vertexConsumer.addVertex(matrix4f, x - size, y + size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(c5);
+        }
+        if (face > 5) { // 下面
+            vertexConsumer.addVertex(matrix4f, x - size, y - size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(c6);
+            vertexConsumer.addVertex(matrix4f, x + size, y - size, z + size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(c6);
+            vertexConsumer.addVertex(matrix4f, x + size, y - size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(c6);
+            vertexConsumer.addVertex(matrix4f, x - size, y - size, z - size).setUv(0, 0).setUv2(light, light).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0).setColor(c6);
+        }
+    }
+
     @Override
     public void extractRenderState(EndComing entity, EndComingRenderState reusedState, float partialTick) {
         super.extractRenderState(entity, reusedState, partialTick);

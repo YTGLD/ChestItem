@@ -3,6 +3,7 @@ package com.ytgld.chest_item.renderer.particle.other;
 
 import com.mojang.serialization.MapCodec;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.renderer.particle.has_opt.ColorOption;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,7 +16,7 @@ public class Particles {
 
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, Chestitem.MODID);
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> colorPart;
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> COLOR_PART;
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FireBlock_;
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> orbAPart;
 
@@ -37,6 +38,23 @@ public class Particles {
                             return SwordEnergyOption.STREAM_CODEC;
                         }
                     });
+
+
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColorOption>> colorOption =
+            PARTICLE_TYPES.register("color_option",
+                    () -> new ParticleType<>(false) {
+                        @Override
+                        public MapCodec<ColorOption> codec() {
+                            return ColorOption.CODEC;
+                        }
+
+                        @Override
+                        public StreamCodec<? super RegistryFriendlyByteBuf, ColorOption> streamCodec() {
+                            return ColorOption.STREAM_CODEC;
+                        }
+                    });
+
+
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> sword_shadow_1;
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> sword_shadow_2;
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> sword_shadow_3;
@@ -48,7 +66,7 @@ public class Particles {
         FireBlock_ = PARTICLE_TYPES.register("fire_block", ()->{
             return new SimpleParticleType(false);
         });
-        colorPart = PARTICLE_TYPES.register("color", ()->{
+        COLOR_PART = PARTICLE_TYPES.register("color", ()->{
             return new SimpleParticleType(false);
         });
         orbAPart = PARTICLE_TYPES.register("orb", ()->{

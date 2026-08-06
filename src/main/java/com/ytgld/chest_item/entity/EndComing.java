@@ -1,11 +1,14 @@
 package com.ytgld.chest_item.entity;
 
+import com.mojang.math.Axis;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
+import com.ytgld.chest_item.renderer.particle.has_opt.ColorOption;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
+import com.ytgld.chest_item.renderer.particle.other.SwordEnergyOption;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -27,9 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndComing;
 
@@ -37,6 +38,7 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
 
 
         private final List<Handler.Vec3Color> trailPositions = new ArrayList<>();
+        public int color1Add = 0;
         private int attackTIME = 0;
         private int notAttackTime = 10;
         public int doSize= 0;
@@ -103,9 +105,76 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
                 }
             }
         }
+
+        public static final class ColorBlood {
+            public int c1;
+            public int c2;
+            public int c3;
+            public int c4;
+            public int c5;
+            public int c6;
+
+            public ColorBlood() {
+                this.c1 = 0;
+                this.c2 = 0;
+                this.c3 = 0;
+                this.c4 = 0;
+                this.c5 = 0;
+                this.c6 = 0;
+            }
+        }
+
+        public ColorBlood colorBlood = null;
+
+
         @Override
         public void tick() {
             super.tick();
+            if (this.tickCount <= 240){
+                if (this.tickCount % 40 == 0) {
+                    if (this.level() instanceof ServerLevel level) {
+                        level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                        Vec3.ZERO, true, Light.ARGB.color(255, 255, 12, 20), 7),
+                                this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                    }
+                }
+            }
+            if (colorBlood == null) {
+                colorBlood = new ColorBlood();
+            }else {
+                int l = 15;
+                if (tickCount % 20 == 1) {
+                    if (new Random().nextInt(100)< l) {
+                        colorBlood.c1 = 20;
+                    }
+                    if (new Random().nextInt(100)< l) {
+                        colorBlood.c2 = 20;
+                    }
+                    if (new Random().nextInt(100)< l) {
+                        colorBlood.c3 = 20;
+                    }
+                    if (new Random().nextInt(100)< l) {
+                        colorBlood.c4 = 20;
+                    }
+                    if (new Random().nextInt(100)< l) {
+                        colorBlood.c5 = 20;
+                    }
+                    if (new Random().nextInt(100)< l) {
+                        colorBlood.c6 = 20;
+                    }
+                }
+
+
+
+                if (colorBlood.c1 > 0) {colorBlood.c1--;}
+                if (colorBlood.c2 > 0) {colorBlood.c2--;}
+                if (colorBlood.c3 > 0) {colorBlood.c3--;}
+                if (colorBlood.c4 > 0) {colorBlood.c4--;}
+                if (colorBlood.c5 > 0) {colorBlood.c5--;}
+                if (colorBlood.c6 > 0) {colorBlood.c6--;}
+            }
+
+
 
             if (attackTIME > 0) {
                 attackTIME --;
