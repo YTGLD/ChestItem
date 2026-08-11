@@ -1,11 +1,17 @@
 package com.ytgld.chest_item.other;
 
+import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.ClientAttReg;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.Set;
 
 public class ChestItemMenu extends AbstractContainerMenu {
     private final Container container;
@@ -42,6 +48,19 @@ public class ChestItemMenu extends AbstractContainerMenu {
     }
     public boolean stillValid(Player player) {
         return this.container.stillValid(player);
+    }
+
+    @Override
+    public void clicked(
+            int slotId,
+            int button,
+            ClickType clickType,
+            Player player
+    ) {
+        if(slotId >= 0 && this.getSlot(slotId) instanceof ChestSlot slot){
+            slot.player = player;
+        }
+        super.clicked(slotId, button, clickType, player);
     }
 
     public ItemStack quickMoveStack(Player player, int index) {

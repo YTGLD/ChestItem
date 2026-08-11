@@ -251,6 +251,8 @@ public class    InitItems {
             (Identifier)-> new WarGodCommand(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<@NotNull Item> DemonLord_ = register("demon_lord",
             (Identifier)-> new DemonLord(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> RottingSubstance_ = register("rotting_substance",
+            (Identifier)-> new RottingSubstance(new Item.Properties().stacksTo(1)));
 
 
 
@@ -412,6 +414,7 @@ public class    InitItems {
                     output.accept(InitItems.DefyLife_);
                     output.accept(InitItems.DemonLord_);
                     output.accept(InitItems.WarGodCommand_);
+                    output.accept(InitItems.RottingSubstance_);
 
 
                 }).build());
@@ -441,6 +444,7 @@ public class    InitItems {
                      DefyLife_.asItem(),
                     WarGodCommand_.asItem(),
                     DemonLord_.asItem(),
+                    RottingSubstance_.asItem(),
                     ReinforcedItems.SilentDevice_.asItem(),
                     ReinforcedItems.Accelerated_.asItem(),
                     ReinforcedItems.Excite_.asItem(),

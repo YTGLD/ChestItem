@@ -247,15 +247,15 @@ public class ShieldRenderHandler {
                 .blit(guiGraphics,
                         ECG_TEXTURE,
 
-                        left - size/2, top - size/2,
+                        left - (float) size /2, top - (float) size /2,
                         0,0,
 
                         size - scrollX, size,
                         size, size,
 
-                        1,1,1,Math.min(s,Math.max(0,Math.min(1,ecgAlpha)))
+                        1,1,1, Math.clamp(Math.min(1, ecgAlpha), 0, s)
 
-                        );
+                );
 
         poseStack.popPose();
     }

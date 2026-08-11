@@ -1,6 +1,8 @@
 package com.ytgld.chest_item.other;
 
+import com.google.common.collect.Sets;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.ClientAttReg;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.TheImprintOfTheSoul;
 import com.ytgld.chest_item.items.black.celestial.TheCelestial;
@@ -10,9 +12,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Set;
+
 public class ChestSlot extends Slot {
     public ChestSlot(Container container, int slot, int x, int y) {
         super(container, slot, x, y);
+    }
+
+    public Player player ;
+    @Override
+    public void onTake(Player player, ItemStack stack) {
+        super.onTake(player, stack);
+        onPlayerTake(player,this,stack);
     }
 
     @Override
@@ -31,6 +42,44 @@ public class ChestSlot extends Slot {
                 return false;
             }
         }
+    }
+
+    @Override
+    public void set(ItemStack stack) {
+
+        ItemStack old = this.getItem();
+
+        super.set(stack);
+
+        if (old.isEmpty() && !stack.isEmpty()) {
+            onPlayerPut(player, this, stack);
+        }
+    }
+
+    private void onPlayerPut(Player player, Slot slot, ItemStack stack) {
+        if (!(slot instanceof ChestSlot)) {
+            return;
+        }
+        if (player == null) {
+            return;
+        }
+        String s = BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
+        Set<String> stringSet = player.getData(ClientAttReg.record.get());
+        stringSet.add(s);
+        player.setData(ClientAttReg.record,stringSet);
+    }
+
+    private void onPlayerTake(Player player, Slot slot, ItemStack stack) {
+        if (!(slot instanceof ChestSlot)) {
+            return;
+        }
+        if (player == null) {
+            return;
+        }
+        Set<String> stringSet = player.getData(ClientAttReg.record.get());
+        String s = BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
+        stringSet.remove(s);
+        player.setData(ClientAttReg.record, stringSet);
     }
     @Override
     public boolean mayPickup(Player player) {

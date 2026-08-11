@@ -2,11 +2,23 @@ package com.ytgld.chest_item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.ytgld.chest_item.items.ClientAttReg;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec3;
 
 public class HandlerClient {
     public static boolean showOutline = false;
     public static boolean showWarped = false;
+
+    public static boolean has(Player player, Item item){
+        String s = BuiltInRegistries.ITEM.getKey(item).toString();
+        return player.getData(ClientAttReg.record.get()).contains(s);
+    }
+
+
+
 
     public static void renderBlood(PoseStack.Pose poseStack, VertexConsumer vertexConsumer, Vec3 start, Vec3 end, float a, float r) {
         int segmentCount = 16; // 圆柱横向细分数

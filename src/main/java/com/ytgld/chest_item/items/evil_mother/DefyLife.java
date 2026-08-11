@@ -28,6 +28,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.logging.Level;
 
 /**
  * 违命抗衡
@@ -73,7 +74,10 @@ public class DefyLife extends EvilMother{
                                 if (player.level() instanceof ServerLevel level) {
                                     if (compoundTag.getBoolean(canUse)) {
                                         player.getLastDeathLocation().ifPresent((globalPos -> {
-                                            player.teleportTo(level,globalPos.pos().getX(), globalPos.pos().getY(),globalPos.pos().getZ(), Set.of(),0,0);
+                                            ServerLevel level1 =level.getServer().getLevel(globalPos.dimension());
+                                            if (level1 != null) {
+                                                player.teleportTo(level1,globalPos.pos().getX(), globalPos.pos().getY(),globalPos.pos().getZ(), Set.of(),0,0);
+                                            }
                                         }));
                                         break;
                                     }

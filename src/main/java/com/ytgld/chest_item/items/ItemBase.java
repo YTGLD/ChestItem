@@ -24,6 +24,9 @@ public class ItemBase extends Item implements Terror,IDoAttribute {
     public ItemBase(Properties properties) {
         super(properties);
     }
+    public void tick(Player player, ItemStack stack){
+
+    }
 
     @Override
     public @NotNull Component getName(@NotNull ItemStack stack) {

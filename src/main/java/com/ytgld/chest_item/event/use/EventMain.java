@@ -495,10 +495,12 @@ public class EventMain {
 
         Player living = event.player;
 
-        ShieldRenderHandler.tickShield(living);
+        if (RottingSubstance.notHeal(living)) {
+            ShieldRenderHandler.tickShield(living);
+        }
         upDataHyperplasiaCooldown(living);
 
-        if (ShieldRenderHandler.canHeal(living)){
+        if (ShieldRenderHandler.canHeal(living) && RottingSubstance.notHeal(living)){
             int cooldown = living.getData(AttReg.hyperplasiaCooldownAttachmentType);
             if (cooldown <= 0) {
                 AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
@@ -518,7 +520,7 @@ public class EventMain {
                 }
             }
         }
-        if (ShieldRenderHandler.canHeal(living)){
+        if (ShieldRenderHandler.canHeal(living)&& RottingSubstance.notHeal(living)){
             AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
             if (attributeInstance != null ) {
                 float timeModify = (float) living.getAttributeValue(AttReg.chaos_armor_speed);
@@ -542,7 +544,7 @@ public class EventMain {
             }
         }
         upDataShadowCooldown(living);
-        if (ShieldRenderHandler.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
+        if (ShieldRenderHandler.canHeal(living) && RottingSubstance.notHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
             if (living.getData(AttReg.shadow_shield_cooldown_dataAttachmentType) <= 0) {
                 AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
                 AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);

@@ -12,6 +12,7 @@ import com.ytgld.chest_item.event.key.UseCuriosHandler;
 import com.ytgld.chest_item.event.loot.Loots;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.ClientAttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.memory.MemoryAttreg;
 import com.ytgld.chest_item.items.memory.MemoryEvent;
@@ -83,6 +84,7 @@ public class Chestitem {
         MemoryItems.ITEMS.register(modEventBus);
         NeoForge.EVENT_BUS.register(new MemoryEvent());
         MemoryAttreg.REGISTRY.register(modEventBus);
+        ClientAttReg.ATTACHMENT_TYPES.register(modEventBus);
 
         ReinforcedDataHandler.ATTACHMENT_TYPES.register(modEventBus);
         ReinforcedAttreg.REGISTRY.register(modEventBus);
