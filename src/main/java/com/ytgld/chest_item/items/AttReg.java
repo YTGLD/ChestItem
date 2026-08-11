@@ -43,7 +43,10 @@ public class AttReg {
                     .build()
     );
 
-
+    public static final Supplier<AttachmentType<Float>> not_heal = ATTACHMENT_TYPES.register(
+            "not_heal", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler())
+                    .serialize(Codec.FLOAT.fieldOf("not_heal").codec()).build()
+    );
 
 
     public static final DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, Chestitem.MODID);

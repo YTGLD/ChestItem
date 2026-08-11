@@ -34,13 +34,12 @@ public class RageRender {
                 time++;
                 if (player.attackAnim > 0) {
                     alpha = 255;
-                    showTime= 200;
-                }else if (showTime > 0){
-                    showTime --;
+                    showTime = 60;
                 }
-
-
-                if (player.attackAnim <= 0 && showTime <= 0) {
+                if (showTime > 0) {
+                    showTime--;
+                }
+                if (showTime <= 0) {
                     if (alpha > 0) {
                         alpha -= 5;
                     }

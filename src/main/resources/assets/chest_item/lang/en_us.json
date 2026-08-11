@@ -1264,6 +1264,70 @@
   "item.chest_item.diffusion.string.0": "增加%d%%的获取经验值",
   "item.chest_item.diffusion.string.1":"战利品箱有%d%%的概率额外发现一个神秘金属板",
 
+  "item.chest_item.rotting_substance": "Rotting Substance",
+  "item.chest_item.rotting_substance.string.0": "Sacrifice all shields in exchange for pure resistance and damage",
+
+  "chest_item.book.defeat_the_army.main": "Defeat the Army",
+  "chest_item.book.defeat_the_army.1": "This item grants movement speed, attack speed, erosion armor value, and other attributes after the player loses health. The default attribute multiplier is 1.0 (can be adjusted in the configuration page)",
+  "chest_item.book.defeat_the_army.2": "This item can only be obtained through crafting",
+
+  "chest_item.book.shield_engine.main": "Shield Engine",
+  "chest_item.book.shield_engine.1": "This item grants resistance proportionally when the player loses a certain amount of health (can be adjusted in the configuration page)",
+  "chest_item.book.shield_engine.2": "This item can only be obtained through crafting",
+
+  "chest_item.book.mass_energy_converter.main": "Mass-Energy Converter",
+  "chest_item.book.mass_energy_converter.1": "The Mass-Energy Converter is an upgraded version of the Shield Engine. It provides a resistance bonus from a smaller health loss ratio than before, while also adding a damage bonus (can be adjusted in the configuration page)",
+  "chest_item.book.mass_energy_converter.2": "This item can only be obtained through crafting",
+
+  "chest_item.book.qualitative_components.main": "Qualitative Components",
+  "chest_item.book.qualitative_components.1": "This item's effect is simple and straightforward: it provides a small amount of general speed bonus (can be adjusted in the configuration page)",
+  "chest_item.book.qualitative_components.2": "This item can only be obtained through crafting",
+
+  "chest_item.book.alienation_diodes.main": "Alienation Diodes",
+  "chest_item.book.alienation_diodes.1": "This item increases critical damage slightly. Critical hits can directly restore a certain amount of health (can be adjusted in the configuration page)",
+  "chest_item.book.alienation_diodes.2": "This item can only be obtained through crafting",
+
+  "chest_item.book.mother_remains.main": "Lord of Evil",
+  "chest_item.book.mother_remains.1": "The Remains of the Evil Mother are the mother of evil",
+  "chest_item.book.mother_remains.2": "The creator of malicious thoughts.....",
+
+  "chest_item.book.evil_belt.main": "Knockback Resistance",
+  "chest_item.book.evil_belt.1": "Provides knockback resistance that grants immunity to most knockback effects",
+  "chest_item.book.evil_belt.2": "Obtained by fusing Heavy Stone with the Remains of the Evil Mother",
+
+  "chest_item.book.the_kill.main": "Cruel Slaughter of the Heavens",
+  "chest_item.book.the_kill.1": "Sweeping attacks may trigger consecutive slashes",
+  "chest_item.book.the_kill.2": "The damage of consecutive slashes is determined by the held item and damage attributes",
+  "chest_item.book.the_kill.3": "Obtained by fusing Nether Alloy with the Remains of the Evil Mother",
+
+  "chest_item.book.annual_plate.main": "A Fatal Strike",
+  "chest_item.book.annual_plate.1": "Attacks have a chance to deal massive critical damage",
+  "chest_item.book.annual_plate.2": "Obtained through crafting, and can be burned into the Remains of the Evil Mother",
+
+  "chest_item.book.silent_device.main": "Material Enhancement",
+  "chest_item.book.silent_device.1": "Right-click to remove an enhancement component",
+  "chest_item.book.silent_device.2": "Can also be worn as an accessory",
+
+  "chest_item.book.excite.main": "Evil Energy Stimulation",
+  "chest_item.book.excite.1": "The recovery speed of the Corrupted Heart is increased",
+  "chest_item.book.excite.2": "Can be found in loot chests when sanity is reduced",
+
+  "chest_item.book.strengthen.main": "Risk Everything",
+  "chest_item.book.strengthen.1": "Creates reinforcement when the Corrupted Heart is shattered",
+  "chest_item.book.strengthen.2": "Can be found in loot chests when sanity is reduced",
+
+  "chest_item.book.contingency.main": "An Incredible Transformation",
+  "chest_item.book.contingency.1": "The Corrupted Heart generates additional corruption power when shattered",
+  "chest_item.book.contingency.2": "Can be found in loot chests when sanity is reduced",
+
+  "chest_item.book.dynamic.main": "A Desperate Struggle",
+  "chest_item.book.dynamic.1": "The Corrupted Heart creates a violent explosion at the moment it is shattered",
+  "chest_item.book.dynamic.2": "Can be found in loot chests when sanity is reduced",
+
+  "chest_item.book.activity.main": "Waiting for Death",
+  "chest_item.book.activity.1": "The Corrupted Heart gains health regeneration when shattered",
+  "chest_item.book.activity.2": "Can be found in loot chests when sanity is reduced",
+
   "sound.chest_item.sword" : "剑气：斩击",
   "sound.chest_item.kill" : "剑气：斩杀",
   "sound.chest_item.fly_sword" : "剑气：逸散",

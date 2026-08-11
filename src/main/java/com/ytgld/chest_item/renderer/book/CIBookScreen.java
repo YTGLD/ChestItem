@@ -574,7 +574,8 @@ public class CIBookScreen extends Screen {
     public enum ThePage{
         BASE(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/base.png")),
         BLACK(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/black.png")),
-        MEAT(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/meat.png"));
+        MEAT(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/meat.png")),
+        EVILMOTHER(ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"textures/gui/book/evil.png"));
         private final ResourceLocation identifier;
         ThePage(ResourceLocation identifier){
             this.identifier = identifier;

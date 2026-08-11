@@ -39,7 +39,7 @@ public class ItemBase extends Item implements Terror,IDoAttribute {
 
     }
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipAdder, TooltipFlag flag) {
+    public  void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipAdder, TooltipFlag flag) {
         text(stack, tooltipAdder, flag);
     }
     @Override

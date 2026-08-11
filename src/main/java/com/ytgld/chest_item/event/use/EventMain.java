@@ -55,13 +55,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -285,6 +284,8 @@ public class EventMain {
         LeadOfEnlightenment.die(event);
         ShadowShieldHandler.ShadowShield(event);
         WarGodCommand.notDie(event);
+        RottingSubstance.damage(event);
+
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);
             if (resistance != null) {
@@ -494,13 +495,12 @@ public class EventMain {
         Warmaker.tick(event);
 
         Player living = event.player;
-
-        if (RottingSubstance.notHeal(living)) {
+        if (RottingSubstance.canHeal(living) && !living.level().isClientSide()) {
             ShieldRenderHandler.tickShield(living);
         }
         upDataHyperplasiaCooldown(living);
 
-        if (ShieldRenderHandler.canHeal(living) && RottingSubstance.notHeal(living)){
+        if (ShieldRenderHandler.canHeal(living) && RottingSubstance.canHeal(living) && !living.level().isClientSide()){
             int cooldown = living.getData(AttReg.hyperplasiaCooldownAttachmentType);
             if (cooldown <= 0) {
                 AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
@@ -520,7 +520,7 @@ public class EventMain {
                 }
             }
         }
-        if (ShieldRenderHandler.canHeal(living)&& RottingSubstance.notHeal(living)){
+        if (ShieldRenderHandler.canHeal(living)&& RottingSubstance.canHeal(living) && !living.level().isClientSide()){
             AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
             if (attributeInstance != null ) {
                 float timeModify = (float) living.getAttributeValue(AttReg.chaos_armor_speed);
@@ -544,7 +544,7 @@ public class EventMain {
             }
         }
         upDataShadowCooldown(living);
-        if (ShieldRenderHandler.canHeal(living) && RottingSubstance.notHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
+        if (ShieldRenderHandler.canHeal(living) && RottingSubstance.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living) && !living.level().isClientSide()) {
             if (living.getData(AttReg.shadow_shield_cooldown_dataAttachmentType) <= 0) {
                 AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
                 AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
