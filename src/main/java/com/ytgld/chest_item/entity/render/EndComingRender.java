@@ -49,17 +49,17 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
-        collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
+        collector.submitCustomGeometry(poseStack, MRender.endBlackOutline, (pose, bufferSource) -> {
             setT(pose, entity, bufferSource);
         });
-        collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
+        collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
             setT(pose, entity, bufferSource);
         });
 
-        collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
+        collector.submitCustomGeometry(poseStack, MRender.endBlackOutline, (pose, bufferSource) -> {
             renderSphere1(pose, bufferSource, 0, 0.44f);
         });
-        collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
+        collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
             renderSphere1(pose, bufferSource, 0, 0.44f);
         });
         poseStack.popPose();

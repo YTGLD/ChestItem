@@ -51,10 +51,10 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
 
         if (!entity.entityTags().contains(EndComing.isTrial)) {
-            collector.submitCustomGeometry(poseStack, MRender.endBlack(true), (pose, bufferSource) -> {
+            collector.submitCustomGeometry(poseStack, MRender.endBlackOutline, (pose, bufferSource) -> {
                 setT2(pose, entity, bufferSource);
             });
-            collector.submitCustomGeometry(poseStack, MRender.endBlack(false), (pose, bufferSource) -> {
+            collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
                 setT2(pose, entity, bufferSource);
             });
         }
@@ -62,10 +62,10 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
 
         if (entity.canSee) {
             if (!entity.entityTags().contains(EndComing.isTrial)) {
-                collector.submitCustomGeometry(poseStack, MRender.red(true), (pose, bufferSource) -> {
+                collector.submitCustomGeometry(poseStack, MRender.endBlackOutline, (pose, bufferSource) -> {
                     renderSphere1(pose, bufferSource, 0, 0.15f);
                 });
-                collector.submitCustomGeometry(poseStack, MRender.red(false), (pose, bufferSource) -> {
+                collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
                     renderSphere1(pose, bufferSource, 0, 0.15f);
                 });
             }

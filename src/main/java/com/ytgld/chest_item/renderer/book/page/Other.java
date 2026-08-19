@@ -326,33 +326,5 @@ public class Other implements RegisterBookPage {
                         itemBase.color(InitItems.Kaolinite_.asItem().getDefaultInstance())));
             }
         }
-        {
-            if (InitItems.IronHeart_.asItem() instanceof ItemBase itemBase) {
-                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.IronHeart_.asItem(), new Vec2(24, 292),
-                        Component.translatable("chest_item.book.iron_heart.main"),
-                        List.of(
-                                Component.translatable("chest_item.book.iron_heart.1"),
-                                Component.translatable("chest_item.book.iron_heart.2")
-                        ),
-                        Light.ARGB.color(255, 255, 255, 255),
-                        Light.ARGB.color(255, 150, 150, 150),
-                        CIBookScreen.ThePage.BASE,
-                        itemBase.color(InitItems.IronHeart_.asItem().getDefaultInstance())));
-            }
-        }
-        {
-            if (InitItems.IronCube_.asItem() instanceof ItemBase itemBase) {
-                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.IronCube_.asItem(), new Vec2(-24, 292),
-                        Component.translatable("chest_item.book.iron_cube.main"),
-                        List.of(
-                                Component.translatable("chest_item.book.iron_cube.1"),
-                                Component.translatable("chest_item.book.iron_cube.2")
-                        ),
-                        Light.ARGB.color(255, 255, 255, 255),
-                        Light.ARGB.color(255, 150, 150, 150),
-                        CIBookScreen.ThePage.BASE,
-                        itemBase.color(InitItems.IronCube_.asItem().getDefaultInstance())));
-            }
-        }
     }
 }

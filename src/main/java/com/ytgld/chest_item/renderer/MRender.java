@@ -10,7 +10,6 @@ import com.mojang.blaze3d.platform.CompareOp;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.renderer.outline.ILevelRendererWarped;
-import com.ytgld.chest_item.renderer.outline.IWarped;
 import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BindGroupLayouts;
@@ -99,10 +98,6 @@ public abstract class MRender {
         return ITEM_CUTOUT(texture,outline);
     }
 
-
-    public static RenderType red(boolean isOutline){
-        return endBlack(isOutline);
-    }
     public static RenderType colorOutline(boolean isOutline){
         if (isOutline){
             return RenderType.create(
@@ -163,22 +158,21 @@ public abstract class MRender {
                         .setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
                         .createRenderSetup());
     }
-    public static RenderType endBlack(boolean isOutline){
-        if (isOutline){
-            return RenderType.create(
-                    "end_gateway",
-                    RenderSetup.builder(RenderPipeline.builder(RenderPs.END_PORTAL_SNIPPET).withLocation("pipeline/end_portal").withShaderDefine("PORTAL_LAYERS", 15).build()).setOutputTarget(outline2)
-                            .withTexture("Sampler0", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
-                            .withTexture("Sampler1", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
-                            .createRenderSetup());
-        }
-        return RenderType.create(
+
+    public static RenderType endBlackOutline = RenderType.create(
+            "end_gateway",
+            RenderSetup.builder(RenderPipeline.builder(RenderPs.END_PORTAL_SNIPPET).withLocation("pipeline/end_portal").withShaderDefine("PORTAL_LAYERS", 15).build()).setOutputTarget(outline2)
+                    .withTexture("Sampler0", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
+                    .withTexture("Sampler1", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
+                    .createRenderSetup());
+
+
+    public static RenderType endBlack =RenderType.create(
                 "end_gateway",
                 RenderSetup.builder(RenderPipeline.builder(RenderPs.END_PORTAL_SNIPPET2).withLocation("pipeline/end_portal").withShaderDefine("PORTAL_LAYERS", 15).build())
                         .withTexture("Sampler0", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"))
                         .withTexture("Sampler1", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red.png"))
                         .createRenderSetup());
-    }
     public static RenderType line(boolean isOutline) {
         if (isOutline) {
             return RenderType.create(

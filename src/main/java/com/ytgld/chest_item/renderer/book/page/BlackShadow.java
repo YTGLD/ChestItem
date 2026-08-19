@@ -44,6 +44,19 @@ public class BlackShadow implements RegisterBookPage {
                         itemBase.color(InitItems.ShadowMint_.asItem().getDefaultInstance())));
             }
         }{
+            if (InitItems.DefeatTheArmy_.asItem() instanceof ItemBase itemBase) {
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.DefeatTheArmy_.asItem(), new Vec2(-64,-40),
+                        Component.translatable("chest_item.book.defeat_the_army.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.defeat_the_army.1"),
+                                Component.translatable("chest_item.book.defeat_the_army.2")
+                        ),
+                        Light.ARGB.color(255, 255, 255, 255),
+                        Light.ARGB.color(255, 150, 150, 150),
+                        CIBookScreen.ThePage.BLACK,
+                        itemBase.color(InitItems.DefeatTheArmy_.asItem().getDefaultInstance())));
+            }
+        }{
             list.add(new CIBookScreen.CIBookGuiAdd(InitItems.WallowAxe_.asItem(), new Vec2(-64,60),
                     Component.translatable("chest_item.book.wallow_axe.main"),
                     List.of(

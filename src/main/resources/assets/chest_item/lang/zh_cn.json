@@ -1374,6 +1374,70 @@
   "item.chest_item.diffusion.string.1":"战利品箱有%d%%的概率额外发现一个神秘金属板",
 
 
+  "chest_item.book.defeat_the_army.main": "破军",
+  "chest_item.book.defeat_the_army.1": "这个物品在玩家损失生命值后给予移动速度，攻击速度，侵蚀装甲值等属性，属性倍率默认1.0（可自行配置页面调整）",
+  "chest_item.book.defeat_the_army.2": "这个物品只能合成获得",
+
+  "chest_item.book.shield_engine.main": "盾御引擎",
+  "chest_item.book.shield_engine.1": "这个物品在玩家损失一定生命值时按比例给予抗性（可自行配置页面调整）",
+  "chest_item.book.shield_engine.2": "这个物品只能通过合成获得",
+
+  "chest_item.book.mass_energy_converter.main": "质能转换器",
+  "chest_item.book.mass_energy_converter.1": "质能转换器是盾御引擎的升级版，在比原先功能更少的损失生命值比例获得抗性加成外，多出一条伤害加成（可自行配置页面调整）",
+  "chest_item.book.mass_energy_converter.2": "这个物品只能通过合成获得",
+
+  "chest_item.book.qualitative_components.main": "质化组件",
+  "chest_item.book.qualitative_components.1": "这个物品效果朴实无华，少量的通用速度加成（可自行配置页面调整）",
+  "chest_item.book.qualitative_components.2": "这个物品只能通过合成获得",
+
+  "chest_item.book.alienation_diodes.main": "异化二极管",
+  "chest_item.book.alienation_diodes.1": "这个物品增加少量的暴击伤害加成，暴击可以直接恢复一定血量(可自行配置页面调整）",
+  "chest_item.book.alienation_diodes.2": "这个物品只能通过合成获得",
+
+
+  "chest_item.book.mother_remains.main": "邪恶之主",
+  "chest_item.book.mother_remains.1": "邪母残骸是邪恶的母亲",
+  "chest_item.book.mother_remains.2": "恶念的造物者.....",
+
+  "chest_item.book.evil_belt.main": "抵御击退",
+  "chest_item.book.evil_belt.1": "提供可以免疫大多数击退的击退抗性",
+  "chest_item.book.evil_belt.2": "由重石与邪母残骸融合获取",
+
+  "chest_item.book.the_kill.main": "苍天的残忍杀戮",
+  "chest_item.book.the_kill.1": "横扫攻击可能触发连斩",
+  "chest_item.book.the_kill.2": "连斩的伤害由手持物品和伤害属性决定",
+  "chest_item.book.the_kill.3": "由地狱的合金与邪母残骸融合获取",
+
+  "chest_item.book.annual_plate.main": "致命的一击",
+  "chest_item.book.annual_plate.1": "攻击有可能造成高额暴击伤害",
+  "chest_item.book.annual_plate.2": "合成获取，可以烧成邪母残骸",
+
+  "chest_item.book.silent_device.main": "物质增强",
+  "chest_item.book.silent_device.1": "右键取下一个增强件",
+  "chest_item.book.silent_device.2": "也可作为饰品佩戴",
+
+
+  "chest_item.book.excite.main": "激发邪恶的能量",
+  "chest_item.book.excite.1": "腐堕之心的恢复速度得以提高",
+  "chest_item.book.excite.2": "可在理智降低时在战利品箱子里发现",
+
+  "chest_item.book.strengthen.main": "放手一搏",
+  "chest_item.book.strengthen.1": "在腐堕之心被击碎时产生加强",
+  "chest_item.book.strengthen.2": "可在理智降低时在战利品箱子里发现",
+
+  "chest_item.book.contingency.main": "不可思议的转变",
+  "chest_item.book.contingency.1": "腐堕之心在击碎时产生额外的腐堕力量",
+  "chest_item.book.contingency.2": "可在理智降低时在战利品箱子里发现",
+
+  "chest_item.book.dynamic.main": "鱼死网破",
+  "chest_item.book.dynamic.1": "腐堕之心在击碎瞬间产生剧烈爆炸",
+  "chest_item.book.dynamic.2": "可在理智降低时在战利品箱子里发现",
+
+  "chest_item.book.activity.main": "等待死亡来临",
+  "chest_item.book.activity.1": "腐堕之心在击碎瞬间获得生命恢复",
+  "chest_item.book.activity.2": "可在理智降低时在战利品箱子里发现",
+
+
   "chest_item.eternal_vows": "永恒誓令",
 
   "chest_item.book.test.main": "箱子里的小饰品",
