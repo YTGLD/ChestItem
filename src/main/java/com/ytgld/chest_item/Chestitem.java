@@ -1,6 +1,7 @@
 package com.ytgld.chest_item;
 
 import com.ytgld.chest_item.config.ModLanguageProvider;
+import com.ytgld.chest_item.crafting.ModRecipes;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.event.Keys;
@@ -14,6 +15,7 @@ import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.ClientAttReg;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.ToolTipSpiritItem;
 import com.ytgld.chest_item.items.memory.MemoryAttreg;
 import com.ytgld.chest_item.items.memory.MemoryEvent;
 import com.ytgld.chest_item.items.memory.MemoryItems;
@@ -52,7 +54,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
@@ -85,6 +86,9 @@ public class Chestitem {
         NeoForge.EVENT_BUS.register(new MemoryEvent());
         MemoryAttreg.REGISTRY.register(modEventBus);
         ClientAttReg.ATTACHMENT_TYPES.register(modEventBus);
+
+        ModRecipes.SERIALIZERS.register(modEventBus);
+        ModRecipes.TYPES.register(modEventBus);
 
         ReinforcedDataHandler.ATTACHMENT_TYPES.register(modEventBus);
         ReinforcedAttreg.REGISTRY.register(modEventBus);
@@ -168,6 +172,7 @@ public class Chestitem {
         public static void RegisterClientTooltipComponentFactoriesEvent(RegisterClientTooltipComponentFactoriesEvent event){
             event.register(SkillTooltip.class, Function.identity());
             event.register(BigTooltip.class, Function.identity());
+            event.register(ToolTipSpiritItem.class, Function.identity());
         }
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent evt) {

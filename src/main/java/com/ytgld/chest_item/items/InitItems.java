@@ -13,6 +13,7 @@ import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
+import com.ytgld.chest_item.items.evil_mother.soul.SoulBottle;
 import com.ytgld.chest_item.items.other.blood.BoneHead;
 import com.ytgld.chest_item.items.other.blood.GodBlood;
 import com.ytgld.chest_item.items.other.blood.LifeCrystal;
@@ -28,6 +29,7 @@ import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import com.ytgld.chest_item.items.tool.WallowAxe;
+import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -265,6 +267,23 @@ public class    InitItems {
 
     public static final DeferredItem<@NotNull Item> WallowAxe_ = register("wallow_axe",
             (Identifier)-> new WallowAxe(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<@NotNull Item> SoulBottle_ = register("soul_bottle",
+            (Identifier)-> new SoulBottle(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> BloodSoul_ = ITEMS.registerItem("blood_soul",
+            Item::new);
+
+    public static final DeferredItem<Item> SpiritSoul_ = ITEMS.registerItem("spirit_soul",
+            Item::new);
+
+    public static final DeferredItem<Item> CelestialSoul_ = ITEMS.registerItem("celestial_soul",
+            Item::new);
+
+    public static final DeferredItem<Item> DeathSoul_ = ITEMS.registerItem("death_soul",
+            Item::new);
+
+    public static final DeferredItem<Item> MagicSoul_ = ITEMS.registerItem("magic_soul",
+            Item::new);
 
 
     public static final DeferredItem<Item> Pod_ = register("pod",
@@ -415,6 +434,7 @@ public class    InitItems {
                     output.accept(InitItems.DemonLord_);
                     output.accept(InitItems.WarGodCommand_);
                     output.accept(InitItems.RottingSubstance_);
+                    output.accept(InitItems.SoulBottle_);
 
 
                 }).build());

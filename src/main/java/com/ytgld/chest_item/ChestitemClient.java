@@ -3,6 +3,7 @@ package com.ytgld.chest_item;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.ytgld.chest_item.crafting.ModRecipeCache;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.c.AttackEndComingRenderer;
 import com.ytgld.chest_item.entity.c.EndComingRenderer;
@@ -33,6 +34,8 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.io.IOException;
+
+import static com.ytgld.chest_item.crafting.ModRecipeCache.SOUL_RECIPES;
 
 @Mod(value = Chestitem.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = Chestitem.MODID, value = Dist.CLIENT)
@@ -132,6 +135,9 @@ public class ChestitemClient{
         }
     }
 
-
+    @SubscribeEvent
+    public static void event(RecipesUpdatedEvent event) {
+        ModRecipeCache.event(event);
+    }
 
 }

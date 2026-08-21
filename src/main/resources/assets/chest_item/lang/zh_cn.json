@@ -1419,6 +1419,17 @@
   "chest_item.book.activity.1": "腐堕之心在击碎瞬间获得生命恢复",
   "chest_item.book.activity.2": "可在理智降低时在战利品箱子里发现",
 
+  "chest_item.jei.recipe": "工作台合成",
+
+  "item.chest_item.blood_soul": "血魂",
+  "item.chest_item.spirit_soul": "灵魂",
+  "item.chest_item.death_soul": "亡魂",
+  "item.chest_item.magic_soul": "魔魂",
+  "item.chest_item.celestial_soul": "仙魂",
+
+
+  "item.chest_item.soul_bottle": "灵魂瓶",
+
 
   "sound.chest_item.sword" : "剑气：斩击",
   "sound.chest_item.kill" : "剑气：斩杀",

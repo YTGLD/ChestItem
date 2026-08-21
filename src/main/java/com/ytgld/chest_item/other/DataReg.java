@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.other;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.crafting.SetSoulData;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +13,9 @@ public class DataReg {
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> tag =
             REGISTRY.register("tag",()-> DataComponentType.<CompoundTag>builder().persistent(CompoundTag.CODEC).build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SetSoulData>> soulMap =
+            REGISTRY.register("soul_map",() -> DataComponentType.<SetSoulData>builder().persistent(SetSoulData.CODEC).build());
 
 }
 
