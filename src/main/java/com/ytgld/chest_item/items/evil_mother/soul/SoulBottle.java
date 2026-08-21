@@ -48,6 +48,7 @@ public class SoulBottle extends EvilMother {
                             integer = 0;
                         }
                         setSoulData.soulMap().put(name, integer + spiritItem.count());
+                        return;
                     }
                 }
             }

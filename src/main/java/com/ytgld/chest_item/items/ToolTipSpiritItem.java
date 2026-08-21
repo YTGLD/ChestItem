@@ -41,19 +41,17 @@ public class ToolTipSpiritItem implements ClientTooltipComponent, TooltipCompone
 
     public void extractImage(Font font, int x, int y, int w, int h, GuiGraphicsExtractor graphics) {
         Set<Item> getAll = SetSoulData.getAllSpirit(stack);
-        int imageSize= 16;
+        int offset = -1;
         graphics.pose().pushMatrix();
-//        for (int j = 0; j < setSoulData.soulMap().size(); j++) {
-//            graphics.blit(RenderPipelines.GUI_TEXTURED,
-//                    Identifier.fromNamespaceAndPath(TheMagicChest.MODID, "textures/gui/slot.png"),
-//                    x + j * 16, y, 0, 0, imageSize, imageSize, imageSize, imageSize);
-//        }
         if (!getAll.isEmpty()) {
             for (int j = 0; j < getAll.size(); j++) {
-                graphics.item(getAll.stream().toList().get(j).getDefaultInstance(), x + j * 16, y);
-                int io = setSoulData.soulMap().get(BuiltInRegistries.ITEM.getKey(getAll.stream().toList().get(j)).toString());
-                graphics.text(Minecraft.getInstance().font, Component.literal(String.valueOf(io)),
-                        x + j * 16, y + 12,0xffffffff,true);
+                if (!getAll.stream().toList().get(j).getDefaultInstance().isEmpty()) {
+                    offset++;
+                    graphics.item(getAll.stream().toList().get(j).getDefaultInstance(), x + offset * 16, y);
+                    int io = setSoulData.soulMap().get(BuiltInRegistries.ITEM.getKey(getAll.stream().toList().get(j)).toString());
+                    graphics.text(Minecraft.getInstance().font, Component.literal(String.valueOf(io)),
+                            x + offset * 16, y + 12, 0xffffffff, true);
+                }
             }
         }
         graphics.pose().popMatrix();
