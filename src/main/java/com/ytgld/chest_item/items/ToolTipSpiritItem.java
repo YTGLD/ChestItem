@@ -42,13 +42,17 @@ public class ToolTipSpiritItem implements ClientTooltipComponent, TooltipCompone
     @Override
     public void renderImage(Font font, int x, int y, GuiGraphics graphics) {
         Set<Item> getAll = SetSoulData.getAllSpirit(stack);
+        int offset = -1;
         graphics.pose().pushPose();
         if (!getAll.isEmpty()) {
             for (int j = 0; j < getAll.size(); j++) {
-                graphics.renderItem(getAll.stream().toList().get(j).getDefaultInstance(), x + j * 16, y);
-                int io = setSoulData.soulMap().get(BuiltInRegistries.ITEM.getKey(getAll.stream().toList().get(j)).toString());
-                graphics.drawString(Minecraft.getInstance().font, Component.literal(String.valueOf(io)),
-                        x + j * 16, y + 12,0xffffffff,true);
+                if (!getAll.stream().toList().get(j).getDefaultInstance().isEmpty()) {
+                    offset++;
+                    graphics.renderItem(getAll.stream().toList().get(j).getDefaultInstance(), x + offset * 16, y);
+                    int io = setSoulData.soulMap().get(BuiltInRegistries.ITEM.getKey(getAll.stream().toList().get(j)).toString());
+                    graphics.drawString(Minecraft.getInstance().font, Component.literal(String.valueOf(io)),
+                            x + offset * 16, y + 12, 0xffffffff, true);
+                }
             }
         }
         graphics.pose().popPose();

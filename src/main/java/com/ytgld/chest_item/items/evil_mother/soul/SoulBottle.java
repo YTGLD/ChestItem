@@ -30,7 +30,7 @@ public class SoulBottle extends EvilMother {
         return 0;
     }
 
-    public static void addSoul(Player player, Item spiritItem) {
+    public static void addSoul(Player player, ItemStack spiritItem) {
         ChestInventory chestInventory = Handler.getItem(player);
         if (chestInventory != null) {
             for (int i = 0; i < chestInventory.getContainerSize(); i++) {
@@ -39,14 +39,16 @@ public class SoulBottle extends EvilMother {
                     if (stack.get(DataReg.soulMap) == null) {
                         stack.set(DataReg.soulMap, new SetSoulData(new HashMap<>()));
                     }
-                    String name = BuiltInRegistries.ITEM.getKey(spiritItem).toString();
+                    Item item = spiritItem.getItem();
+                    String name = BuiltInRegistries.ITEM.getKey(item).toString();
                     SetSoulData setSoulData = stack.get(DataReg.soulMap);
                     if (setSoulData != null) {
                         Integer integer = setSoulData.soulMap().get(name);
                         if (integer == null) {
                             integer = 0;
                         }
-                        setSoulData.soulMap().put(name, integer + 1);
+                        setSoulData.soulMap().put(name, integer + spiritItem.getCount());
+                        return;
                     }
                 }
             }

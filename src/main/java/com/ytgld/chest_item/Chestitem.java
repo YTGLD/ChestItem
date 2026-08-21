@@ -6,6 +6,7 @@ import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.OppressionHandler;
+import com.ytgld.chest_item.event.SoulBottleHandler;
 import com.ytgld.chest_item.event.activated.EventHandler;
 import com.ytgld.chest_item.event.key.ChestNetworkHandler;
 import com.ytgld.chest_item.event.key.ClientEvent;
@@ -89,6 +90,7 @@ public class Chestitem {
 
         ModRecipes.SERIALIZERS.register(modEventBus);
         ModRecipes.TYPES.register(modEventBus);
+        NeoForge.EVENT_BUS.register(new SoulBottleHandler());
 
         ReinforcedDataHandler.ATTACHMENT_TYPES.register(modEventBus);
         ReinforcedAttreg.REGISTRY.register(modEventBus);
