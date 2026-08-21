@@ -15,6 +15,7 @@ import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
 import com.ytgld.chest_item.items.evil_mother.decay.DecayFruit;
+import com.ytgld.chest_item.items.evil_mother.soul.SoulBottle;
 import com.ytgld.chest_item.items.other.blood.BoneHead;
 import com.ytgld.chest_item.items.other.blood.GodBlood;
 import com.ytgld.chest_item.items.other.blood.LifeCrystal;
@@ -272,6 +273,29 @@ public class InitItems {
             (Identifier)-> new AnnualPlate(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
     public static final DeferredItem<@NotNull Item> FearGreatsword_ = register("fear_greatsword",
             (Identifier)-> new FearGreatsword(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<Item> BloodSoul_ = register("blood_soul",
+            (Identifier)-> new Item(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+
+    public static final DeferredItem<Item> SpiritSoul_ = register("spirit_soul",
+            (Identifier)-> new Item(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<Item> CelestialSoul_ = register("celestial_soul",
+            (Identifier)-> new Item(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<Item> DeathSoul_ = register("death_soul",
+            (Identifier)-> new Item(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<Item> MagicSoul_ = register("magic_soul",
+            (Identifier)-> new Item(new Item.Properties().setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<Item> SoulBottle_ = register("soul_bottle",
+            (Identifier)-> new SoulBottle(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+
+
+
 
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);

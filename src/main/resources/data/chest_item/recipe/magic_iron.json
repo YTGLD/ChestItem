@@ -1,0 +1,17 @@
+{
+  "type": "chest_item:soul_crafting",
+
+  "ingredients": [
+    "chest_item:soul_bottle",
+    "minecraft:iron_ingot"
+  ],
+
+  "soul_cost": {
+    "chest_item:celestial_soul": 8,
+    "chest_item:magic_soul": 8
+  },
+
+  "result": "chest_item:magic_iron",
+
+  "count": 1
+}

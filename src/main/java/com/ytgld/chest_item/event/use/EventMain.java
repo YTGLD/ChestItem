@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.OwnerLead;
+import com.ytgld.chest_item.crafting.CraftingHandler;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.event.OppressionHandler;
 import com.ytgld.chest_item.event.Keys;
@@ -945,5 +946,8 @@ public class EventMain {
 
         }
     }
-
+    @SubscribeEvent
+    public void event(PlayerEvent.ItemCraftedEvent event){
+        CraftingHandler.onCraft(event);
+    }
 }

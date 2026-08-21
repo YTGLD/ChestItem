@@ -1,5 +1,6 @@
 package com.ytgld.chest_item;
 
+import com.ytgld.chest_item.crafting.ModRecipeCache;
 import com.ytgld.chest_item.event.Keys;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
@@ -168,4 +169,11 @@ public class ChestitemClient{
     public static void onGatherData(GatherDataEvent.Client event) {
         event.createProvider(InitItems.TagsProvider::new);
     }
+
+
+    @SubscribeEvent
+    public static void event(RecipesReceivedEvent event) {
+        ModRecipeCache.event(event);
+    }
+
 }

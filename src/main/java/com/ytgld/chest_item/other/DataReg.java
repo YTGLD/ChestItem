@@ -12,6 +12,8 @@ public class DataReg {
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<AttributeDataType>> attributeType =
             REGISTRY.register("attribute",()-> DataComponentType.<AttributeDataType>builder().persistent(AttributeDataType.CODEC).build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SetSoulData>> soulMap =
+            REGISTRY.register("soul_map",() -> DataComponentType.<SetSoulData>builder().persistent(SetSoulData.CODEC).build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> tag =
             REGISTRY.register("tag",()-> DataComponentType.<CompoundTag>builder().persistent(CompoundTag.CODEC).build());

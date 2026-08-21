@@ -1,6 +1,7 @@
 package com.ytgld.chest_item;
 
 import com.ytgld.chest_item.config.ModLanguageProvider;
+import com.ytgld.chest_item.crafting.ModRecipes;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.render.*;
@@ -14,6 +15,7 @@ import com.ytgld.chest_item.event.loot.Loots;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.ToolTipSpiritItem;
 import com.ytgld.chest_item.items.memory.MemoryAttreg;
 import com.ytgld.chest_item.event.use.MemoryEvent;
 import com.ytgld.chest_item.items.memory.MemoryItems;
@@ -79,6 +81,8 @@ public class Chestitem {
         MemoryItems.ITEMS.register(modEventBus);
         NeoForge.EVENT_BUS.register(new MemoryEvent());
         MemoryAttreg.REGISTRY.register(modEventBus);
+        ModRecipes.SERIALIZERS.register(modEventBus);
+        ModRecipes.TYPES.register(modEventBus);
 
         ReinforcedDataHandler.ATTACHMENT_TYPES.register(modEventBus);
         ReinforcedAttreg.REGISTRY.register(modEventBus);
@@ -134,6 +138,7 @@ public class Chestitem {
             event.register(SkillTooltip.class, Function.identity());
             event.register(BigTooltip.class, Function.identity());
             event.register(ImageTooltip.class, Function.identity());
+            event.register(ToolTipSpiritItem.class, Function.identity());
         }
         @SubscribeEvent // on the mod event bus
         public static void gatherData(GatherDataEvent.Client event) {

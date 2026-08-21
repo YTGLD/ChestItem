@@ -1370,7 +1370,20 @@
 
   "chest_item.eternal_vows": "Eternal vows",
 
-"chest_item.book.test.main": "Small trinket in the box",
+  "chest_item.jei.recipe": "工作台合成",
+
+  "item.chest_item.blood_soul": "血魂",
+  "item.chest_item.spirit_soul": "灵魂",
+  "item.chest_item.death_soul": "亡魂",
+  "item.chest_item.magic_soul": "魔魂",
+  "item.chest_item.celestial_soul": "仙魂",
+
+
+  "item.chest_item.soul_bottle": "灵魂瓶",
+  "item.chest_item.soul_bottle.tooltip.1": "收集那些飞散的灵魂，多收集一些",
+
+
+  "chest_item.book.test.main": "Small trinket in the box",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
   "chest_item.book.test.2": "Contributor: Qiuji",
   "chest_item.book.not": "No additional description......",
