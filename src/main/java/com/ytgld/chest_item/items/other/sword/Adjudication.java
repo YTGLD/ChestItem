@@ -57,7 +57,11 @@ public class Adjudication extends ItemBase {
     public static void addSword(LivingDamageEvent.Pre event){
         if (event.getSource().getEntity() instanceof Player player) {
             if (Handler.has(player, InitItems.Adjudication_.asItem())) {
+
                 int number = ConfigItem.intValue.getAsInt();
+                if (Handler.has(player, InitItems.SwordHeart_.asItem())){
+                    number *= 2;
+                }
                 if (!player.getCooldowns().isOnCooldown(InitItems.Adjudication_.asItem().getDefaultInstance())) {
 
                     event.getEntity().setData(AttReg.swordIntent.get(),

@@ -31,6 +31,7 @@ import com.ytgld.chest_item.items.meet.*;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.other.sword.Adjudication;
+import com.ytgld.chest_item.items.evil_mother.decay.SwordHeart;
 import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import com.ytgld.chest_item.items.tool.EvilAxe;
 import com.ytgld.chest_item.items.tool.FearGreatsword;
@@ -293,6 +294,8 @@ public class InitItems {
     public static final DeferredItem<Item> SoulBottle_ = register("soul_bottle",
             (Identifier)-> new SoulBottle(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
+    public static final DeferredItem<Item> SwordHeart_ = register("sword_heart",
+            (Identifier)-> new SwordHeart(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
 
@@ -443,6 +446,7 @@ public class InitItems {
                     output.accept(InitItems.WarGodCommand_);
                     output.accept(InitItems.DemonLord_);
                     output.accept(InitItems.Triangle_);
+                    output.accept(InitItems.SwordHeart_);
 
 
 
@@ -476,6 +480,7 @@ public class InitItems {
                     WarGodCommand_.getKey(),
                     DemonLord_.getKey(),
                     Triangle_.getKey(),
+                    ScarHeart_.getKey(),
                     ReinforcedItems.SilentDevice_.getKey(),
                     ReinforcedItems.Accelerated_.getKey(),
                     ReinforcedItems.Excite_.getKey(),

@@ -49,17 +49,23 @@ public class SwordRenderObject extends WorldRenderObject {
         if (imageNumber < 1) {
             imageNumber = 1;
         }
+        int as = (color >> 24) & 0xFF;
+        int rs = (color >> 16) & 0xFF;
+        int gs = (color >> 8) & 0xFF;
+        int bs = color & 0xFF;
 
+        int newAlpha = maxTime - age;
         render(poseStack,collector,size,
                 RenderObjects.renderTypeFunctionLive.apply(
                         integerIdentifierMap().get(imageNumber)
                 ),
-                color);
+                Light.ARGB.color(newAlpha * 5,rs,gs,bs));
         render(poseStack,collector,size,
                 RenderObjects.renderTypeFunctionLiveOutline.apply(
                         integerIdentifierMap().get(imageNumber)
                 ),
-                color);
+                Light.ARGB.color(newAlpha * 5,rs,gs,bs));
+
         poseStack.popPose();
     }
 

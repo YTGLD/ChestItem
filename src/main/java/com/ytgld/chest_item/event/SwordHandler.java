@@ -7,6 +7,7 @@ import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.renderer.particle.other.SwordEnergyOption;
 import com.ytgld.chest_item.sounds.Sounds;
+import com.ytgld.chest_item.utils.AddUtil;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.registries.Registries;
@@ -43,7 +44,7 @@ public class SwordHandler {
                         RandomSource randomSource = living.getRandom();
                         Vec3 vec3 = new Vec3(randomSource.nextInt(-25, 25), randomSource.nextInt(-360, 360), randomSource.nextInt(-25, 25));
                         serverLevel.sendParticles(SwordEnergyOption.createSwordEnergyOption(Particles.SwordEnergyOption_.get(),
-                                        vec3, false, Light.ARGB.color(255, 255, 255, 255), 10),
+                                        vec3, true, Light.ARGB.color(255, 255, 255, 255), 10),
                                 living.getX(), living.getY() + 1, living.getZ(), 1, 0.5f, 0,0.5f,0);
                     }
                     if (entity != null) {
@@ -133,26 +134,8 @@ public class SwordHandler {
             if (swordIntent > 0) {
                 if (living.tickCount % 2 == 0) {
                     LivingEntity entity = living.getLastHurtByMob();
-
-                    if (living.level() instanceof ServerLevel level) {
-                        RandomSource randomSource = living.getRandom();
-                        Vec3 axis = new Vec3(randomSource.nextInt(-25, 25), randomSource.nextInt(-360, 360), randomSource.nextInt(-25, 25));
-                        int color = Light.ARGB.color(255,165,215,230);
-                        float size = randomSource.nextInt(15,25);
-                        level.sendParticles(SwordEnergyOption.createSwordEnergyOption(Particles.SwordEnergyOption_.get(),
-                                        axis, true, color, size),
-                                living.getX(), living.getY() + 1.25f, living.getZ(), 1, 0, 0,0,0);
-
-                        if (swordIntent == 1 && randomSource.nextInt(100) <= 25) {
-                            List<ParticleOptions> options = getSwordParticles();
-                            int rNext = randomSource.nextInt(options.size());
-                            level.sendParticles(options.get(rNext),
-                                    living.getX(), living.getEyeY() + 0.1f, living.getZ(), 1, 0, 0,0,0);
-
-                        }
-                    }
-
                     if (entity instanceof Player player) {
+                        addMan(living,swordIntent,player);
                         living.invulnerableTime = 0;
                         living.hurt(living.damageSources().playerAttack(player),
                                 (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE) / 2
@@ -166,8 +149,12 @@ public class SwordHandler {
                             living.level().playSound(null, living.getX(), living.getY(), living.getZ(),
                                     Sounds.Kill.value(), SoundSource.PLAYERS, 0.75f, 1);
                         }
-
-                        living.setData(AttReg.swordIntent.get(), swordIntent - 1);
+                        if (Handler.has(player, InitItems.SwordHeart_.asItem())) {
+                            AddUtil.addSword(player,living);
+                            if (player.getRandom().nextInt(100) <= 70) {
+                                living.setData(AttReg.swordIntent.get(), swordIntent - 1);
+                            }
+                        }
                     }else {
                         living.invulnerableTime = 0;
                         living.hurt(living.damageSources().magic(),
@@ -183,6 +170,27 @@ public class SwordHandler {
             }
         }
     }
+    private static void addMan(LivingEntity living,int swordIntent,Player player){
+        if (living.level() instanceof ServerLevel level) {
+            RandomSource randomSource = living.getRandom();
+            Vec3 axis = new Vec3(randomSource.nextInt(-25, 25), randomSource.nextInt(-360, 360), randomSource.nextInt(-25, 25));
+            int color = Light.ARGB.color(255,165,215,230);
+            float size = randomSource.nextInt(15,25);
+            level.sendParticles(SwordEnergyOption.createSwordEnergyOption(Particles.SwordEnergyOption_.get(),
+                            axis, true, color, size),
+                    living.getX(), living.getY() + 1.25f, living.getZ(), 1, 0, 0,0,0);
+
+            if (!Handler.has(player, InitItems.SwordHeart_.asItem())) {
+                if (swordIntent == 1 && randomSource.nextInt(100) <= 25) {
+                    List<ParticleOptions> options = getSwordParticles();
+                    int rNext = randomSource.nextInt(options.size());
+                    level.sendParticles(options.get(rNext),
+                            living.getX(), living.getEyeY() + 0.1f, living.getZ(), 1, 0, 0, 0, 0);
+
+                }
+            }
+        }
+    }
     public static List<ParticleOptions> getSwordParticles(){
         return List.of(Particles.sword_shadow_1.get(),
                 Particles.sword_shadow_2.get(),
@@ -190,6 +198,11 @@ public class SwordHandler {
                 Particles.sword_shadow_4.get());
     }
     public static void swordEnemy(LivingEntity living,int residual,@Nullable Player player){
+        if (player != null) {
+            if (Handler.has(player, InitItems.SwordHeart_.asItem())) {
+                return;
+            }
+        }
         if (!living.isAlive()) {
             Vec3 playerPos = living.position().add(0, 1.5f, 0);
             int range = 4;
