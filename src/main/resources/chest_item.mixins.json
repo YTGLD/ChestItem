@@ -31,6 +31,7 @@
     "cilent.guiparticles.ScreenMixin",
     "cilent.hud.GuiMixin",
     "cilent.model.GuiGraphicsExtractorMixin",
-    "outline.BlackMixin"
+    "outline.BlackMixin",
+    "util.LevelRendererMixin"
   ]
 }

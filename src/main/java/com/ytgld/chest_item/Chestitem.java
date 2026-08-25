@@ -33,7 +33,7 @@ import com.ytgld.chest_item.sounds.CISoundDefinitionsProvider;
 import com.ytgld.chest_item.sounds.Sounds;
 import com.ytgld.chest_item.tip.SkillEvent;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
-import net.minecraft.resources.Identifier;
+import com.ytgld.chest_item.utils.UtilEvent;import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -88,6 +88,9 @@ public class Chestitem {
         ReinforcedAttreg.REGISTRY.register(modEventBus);
         NeoForge.EVENT_BUS.register(new ReinforcedEvent());
         ReinforcedItems.ITEMS.register(modEventBus);
+
+        NeoForge.EVENT_BUS.register(new UtilEvent());
+
 
         NeoForge.EVENT_BUS.addListener(PlayerEvent.Clone.class, event -> {
             if (event.isWasDeath() && event.getOriginal().hasData(TheMemoryDataHandler.mStringSetData)) {
