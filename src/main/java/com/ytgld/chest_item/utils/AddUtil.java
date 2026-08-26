@@ -16,21 +16,15 @@ import javax.annotation.Nullable;
 
 public class AddUtil {
 
-    public static void addSword(
-            @Nullable Player player,
-            LivingEntity living
-    ) {
+    public static void addSword(@Nullable Player player, LivingEntity living) {
         int color = Light.ARGB.color(255, 150, 220, 250);
-
         if (player != null) {
             int san = (int) (player.getAttributeBaseValue(AttReg.theSanity) - player.getAttributeValue(AttReg.theSanity));
-
             if (san >= 10) {
                 living.addEffect(new MobEffectInstance(Effects.EvilErosion, 200, 1));
                 color = Light.ARGB.color(255, 0, 255, 150);
             }
         }
-
         RandomSource random = living.getRandom();
 
         float rotationX =  Mth.nextInt(random, -360, 360);
@@ -38,25 +32,14 @@ public class AddUtil {
         float rotationZ = Mth.nextInt(random, -360, 360);
 
         SwordRenderPacket packet = new SwordRenderPacket(
-                living.getX(),
-                living.getEyeY(),
-                living.getZ(),
-
-                rotationX,
-                rotationY,
-                rotationZ,
-
-                color,
-                2
+                living.getX(), living.getEyeY(), living.getZ(),
+                rotationX, rotationY, rotationZ,
+                color, 2
         );
 
         sendToNearbyPlayers(living, packet, 64.0);
     }
-    private static void sendToNearbyPlayers(
-            LivingEntity entity,
-            SwordRenderPacket packet,
-            double range
-    ) {
+    private static void sendToNearbyPlayers(LivingEntity entity, SwordRenderPacket packet,double range ){
         if (!(entity.level() instanceof ServerLevel serverLevel)) {
             return;
         }
