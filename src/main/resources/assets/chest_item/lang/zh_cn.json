@@ -1451,6 +1451,14 @@
 
 
 
+  "item.chest_item.sword_heart": "腐堕剑心",
+  "item.chest_item.sword_heart.string.1": "无法再制造出飞散的剑气",
+  "item.chest_item.sword_heart.string.2": "作为补偿，剑气造成伤害时有概率再次凝聚能量",
+  "item.chest_item.sword_heart.string.3": "并且剑气被腐化后施加邪母之拒",
+  "item.chest_item.sword_heart.string.4": "增加100%苍戮和审判之剑的连斩次数",
+
+
+
   "chest_item.eternal_vows": "永恒誓令",
 
   "chest_item.book.test.main": "箱子里的小饰品",

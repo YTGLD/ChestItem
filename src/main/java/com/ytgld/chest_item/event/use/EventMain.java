@@ -7,10 +7,7 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.crafting.CraftingHandler;
 import com.ytgld.chest_item.effect.Effects;
-import com.ytgld.chest_item.event.OppressionHandler;
-import com.ytgld.chest_item.event.Keys;
-import com.ytgld.chest_item.event.ShiedHandler;
-import com.ytgld.chest_item.event.SwordHandler;
+import com.ytgld.chest_item.event.*;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
@@ -589,10 +586,10 @@ public class EventMain {
         FissionEmblem.tick(event);
         Warmaker.tick(event);
         Player living = event.player;
-        ShieldRenderHandler.tickShield(living);
+        PainShieldHandler.tickShield(living);
         upDataHyperplasiaCooldown(living);
 
-        if (ShieldRenderHandler.canHeal(living)){
+        if (PainShieldHandler.canHeal(living)){
             int cooldown = living.getData(AttReg.hyperplasiaCooldownAttachmentType);
             if (cooldown <= 0) {
                 AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
@@ -612,7 +609,7 @@ public class EventMain {
                 }
             }
         }
-        if (ShieldRenderHandler.canHeal(living)){
+        if (PainShieldHandler.canHeal(living)){
             AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
             if (attributeInstance != null ) {
                 float timeModify = (float) living.getAttributeValue(AttReg.chaos_armor_speed);
@@ -636,7 +633,7 @@ public class EventMain {
             }
         }
         upDataShadowCooldown(living);
-        if (ShieldRenderHandler.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
+        if (PainShieldHandler.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
             if (living.getData(AttReg.shadow_shield_cooldown_dataAttachmentType) <= 0) {
                 AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
                 AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);

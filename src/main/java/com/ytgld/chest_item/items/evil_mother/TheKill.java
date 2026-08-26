@@ -69,9 +69,13 @@ public class TheKill extends EvilMother{
                     if (Mth.nextInt(RandomSource.create(),0,100) <= ConfigItem.intValue.getAsInt()){
                         Entity entity = event.getTarget();
                         if (entity instanceof LivingEntity living) {
-                            int s = (int)(float)living.getData(AttReg.slashing.get());
-                            living.setData(AttReg.slashing.get(),(float)ConfigItem.intValue2.getAsInt());
-                            player.getCooldowns().addCooldown(InitItems.TheKill_.asItem().getDefaultInstance(),ConfigItem.intValue2.getAsInt() * 20);
+//                            int s = (int)(float)living.getData(AttReg.slashing.get());
+                            float value = (float)ConfigItem.intValue2.getAsInt();
+                            if (Handler.has(player, InitItems.SwordHeart_.asItem())){
+                                value *= 2;
+                            }
+                            living.setData(AttReg.slashing.get(),value);
+                            player.getCooldowns().addCooldown(InitItems.TheKill_.asItem().getDefaultInstance(), (int) (value * 20));
                         }
                     }
                 }

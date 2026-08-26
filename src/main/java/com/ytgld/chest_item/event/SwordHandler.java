@@ -154,6 +154,8 @@ public class SwordHandler {
                             if (player.getRandom().nextInt(100) <= 70) {
                                 living.setData(AttReg.swordIntent.get(), swordIntent - 1);
                             }
+                        }else {
+                            living.setData(AttReg.swordIntent.get(), swordIntent - 1);
                         }
                     }else {
                         living.invulnerableTime = 0;

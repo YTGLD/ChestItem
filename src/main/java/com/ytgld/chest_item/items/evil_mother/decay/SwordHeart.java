@@ -1,6 +1,12 @@
 package com.ytgld.chest_item.items.evil_mother.decay;
 
 import com.ytgld.chest_item.items.evil_mother.EvilMother;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+
+import java.util.function.Consumer;
 
 /**
  * 腐堕剑心
@@ -9,16 +15,25 @@ import com.ytgld.chest_item.items.evil_mother.EvilMother;
  * <p>
  * 作为补偿，剑气造成伤害时有概率再次凝聚能量
  * <p>
- * 增加100%连斩次数
+ * 并且剑气被腐化后施加邪母之拒
+ * <p>
+ * 增加100%苍戮和审判之剑的连斩次数
  */
 public class SwordHeart extends EvilMother {
     public SwordHeart(Properties properties) {
         super(properties);
     }
-
-
     @Override
     public int getSanity() {
-        return 0;
+        return -7;
+    }
+
+    @Override
+    public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+        super.text(stack, tooltipComponents, flag);
+        tooltipComponents.accept(Component.translatable("item.chest_item.sword_heart.string.1").withStyle(Style.EMPTY.withColor(color)));
+        tooltipComponents.accept(Component.translatable("item.chest_item.sword_heart.string.2").withStyle(Style.EMPTY.withColor(color)));
+        tooltipComponents.accept(Component.translatable("item.chest_item.sword_heart.string.3").withStyle(Style.EMPTY.withColor(color)));
+        tooltipComponents.accept(Component.translatable("item.chest_item.sword_heart.string.4").withStyle(Style.EMPTY.withColor(color)));
     }
 }

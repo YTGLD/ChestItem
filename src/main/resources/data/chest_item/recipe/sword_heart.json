@@ -1,0 +1,19 @@
+{
+  "type": "chest_item:soul_crafting",
+
+  "ingredients": [
+    "chest_item:mother_remains",
+    "minecraft:netherite_sword"
+  ],
+
+  "soul_cost": {
+    "chest_item:spirit_soul": 48,
+    "chest_item:death_soul": 32,
+    "chest_item:magic_soul": 16,
+    "chest_item:celestial_soul": 8
+  },
+
+  "result": "chest_item:sword_heart",
+
+  "count": 1
+}

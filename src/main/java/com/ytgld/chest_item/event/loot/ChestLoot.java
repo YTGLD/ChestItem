@@ -5,6 +5,7 @@ import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.ytgld.chest_item.event.SoulBottleHandler;
 import com.ytgld.chest_item.items.other.Battery;
 import com.ytgld.chest_item.items.reinforced.items.Diffusion;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -43,6 +44,7 @@ public class ChestLoot extends LootModifier {
             if (entity != null) {
                 Diffusion.addLoot(objectArrayList,lootContext,entity);
                 Battery.objectArrayList(objectArrayList, entity);
+                SoulBottleHandler.loot(entity);
             }
         }
         return objectArrayList;
