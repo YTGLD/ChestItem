@@ -27,6 +27,7 @@ import com.ytgld.chest_item.renderer.particle.sword.SwordShadow1;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow2;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow3;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow4;
+import com.ytgld.chest_item.utils.RenderObjectManager;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
@@ -64,6 +65,7 @@ public class ChestitemClient{
         ShieldRenderHandler.tick(event);
         BlackShieldRenderHandler.tick(event);
         BlackParticlesAdd.tick();
+        RenderObjectManager.event(event);
     }
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiLayersEvent event) {

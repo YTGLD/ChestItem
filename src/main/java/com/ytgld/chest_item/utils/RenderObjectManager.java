@@ -3,7 +3,7 @@ package com.ytgld.chest_item.utils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
-import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,16 +26,17 @@ public final class RenderObjectManager {
         while (iterator.hasNext()) {
             WorldRenderObject object = iterator.next();
 
-            object.tick();
-            object.age++;
-
             if (object.age >= object.maxTime) {
                 iterator.remove();
+                continue;
             }
+
+            object.clientTick();
+            object.age++;
         }
     }
 
-    public static void event(LevelTickEvent.Pre event) {
+    public static void event(ClientTickEvent.Pre event) {
         tick();
     }
 

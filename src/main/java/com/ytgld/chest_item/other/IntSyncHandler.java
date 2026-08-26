@@ -10,22 +10,13 @@ public class IntSyncHandler implements AttachmentSyncHandler<Integer> {
 
     @Override
     public void write(RegistryFriendlyByteBuf buf, Integer attachment, boolean initialSync) {
-        if (initialSync) {
-            buf.writeInt(attachment);
-        } else {
-            buf.writeInt(attachment);
-        }
+        buf.writeInt(attachment);
     }
 
     @Override
     @Nullable
     public Integer read(IAttachmentHolder holder, RegistryFriendlyByteBuf buf, @Nullable Integer previousValue) {
-        Integer newValue = buf.readInt();
-        if (previousValue == null) {
-            return newValue;
-        } else {
-            return newValue;
-        }
+        return buf.readInt();
     }
 
     @Override

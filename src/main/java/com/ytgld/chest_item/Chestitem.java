@@ -34,7 +34,9 @@ import com.ytgld.chest_item.sounds.CISoundDefinitionsProvider;
 import com.ytgld.chest_item.sounds.Sounds;
 import com.ytgld.chest_item.tip.SkillEvent;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
-import com.ytgld.chest_item.utils.UtilEvent;import net.minecraft.resources.Identifier;
+import com.ytgld.chest_item.utils.UtilEvent;
+import com.ytgld.chest_item.utils.network.SwordRenderPacket;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -135,6 +137,7 @@ public class Chestitem {
         UseCuriosHandler.register(evt.registrar("1.0"));
         MysteriousMetal.register(evt);
         OppressionHandler.register(evt);
+        SwordRenderPacket.registerPayloads(evt);
     }
     @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {

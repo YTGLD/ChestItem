@@ -1,22 +1,18 @@
 package com.ytgld.chest_item.utils.dout;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.HandlerClient;
-import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.utils.RenderObjects;
 import com.ytgld.chest_item.utils.WorldRenderObject;
-import net.minecraft.client.Camera;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 
 import java.util.HashMap;
@@ -24,13 +20,26 @@ import java.util.Map;
 
 public class SwordRenderObject extends WorldRenderObject {
     public Vec3 pitch;
-    public float size;
+    public float size = 1;
     public int color = 0xffffffff;
     public SwordRenderObject(Vec3 vec3,Vec3 pitch,float size) {
         super(vec3);
-        this.maxTime = 50;
+        this.maxTime = 25;
         this.pitch = pitch;
         this.size = size;
+    }
+
+    public int imageNumber = 1;
+    public int newAlpha;
+
+    @Override
+    public void clientTick() {
+        super.clientTick();
+        imageNumber = age / 5;
+        if (imageNumber < 1) {
+            imageNumber = 1;
+        }
+        newAlpha = maxTime - age;
     }
 
     @Override
@@ -45,26 +54,22 @@ public class SwordRenderObject extends WorldRenderObject {
                 position.y - cameraPos.y,
                 position.z - cameraPos.z
         );
-        int imageNumber = age / 10;
-        if (imageNumber < 1) {
-            imageNumber = 1;
-        }
+
         int as = (color >> 24) & 0xFF;
         int rs = (color >> 16) & 0xFF;
         int gs = (color >> 8) & 0xFF;
         int bs = color & 0xFF;
 
-        int newAlpha = maxTime - age;
         render(poseStack,collector,size,
                 RenderObjects.renderTypeFunctionLive.apply(
                         integerIdentifierMap().get(imageNumber)
                 ),
-                Light.ARGB.color(newAlpha * 5,rs,gs,bs));
+                Light.ARGB.color(newAlpha * 10,rs,gs,bs));
         render(poseStack,collector,size,
                 RenderObjects.renderTypeFunctionLiveOutline.apply(
                         integerIdentifierMap().get(imageNumber)
                 ),
-                Light.ARGB.color(newAlpha * 5,rs,gs,bs));
+                Light.ARGB.color(newAlpha * 10,rs,gs,bs));
 
         poseStack.popPose();
     }

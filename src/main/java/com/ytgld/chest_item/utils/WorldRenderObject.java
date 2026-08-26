@@ -3,7 +3,8 @@ package com.ytgld.chest_item.utils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
-import net.minecraft.world.phys.Vec3;import org.joml.Vector3f;import java.util.Vector;
+import net.minecraft.world.phys.Vec3;import org.joml.Vector3f;
+
 public abstract class WorldRenderObject {
 
     protected int age = 0;
@@ -29,7 +30,7 @@ public abstract class WorldRenderObject {
             float partialTick
     );
 
-    public void tick() {
+    public void clientTick() {
         previousPosition = position;
 
         // 移动
@@ -40,7 +41,5 @@ public abstract class WorldRenderObject {
         );
 
         vector3f.mul(0.9f);
-
-        age++;
     }
 }
