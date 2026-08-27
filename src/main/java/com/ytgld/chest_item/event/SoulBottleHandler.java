@@ -31,31 +31,31 @@ public class SoulBottleHandler {
 
     @SubscribeEvent
     public void giveBottle(PlayerEvent.PlayerChangedDimensionEvent event) {
-        if (event.getEntity() instanceof Player player) {
-            Set<String> tags = player.entityTags();
-            if (tags.contains(finalGive)) {
-                return;
-            }
-            ResourceKey<Level> eventTo = event.getTo();
-            if (player.level() instanceof ServerLevel serverLevel) {
-                Level level = serverLevel.getServer().getLevel(eventTo);
-                if (level != null && level.dimension().isFor(Level.NETHER.registryKey())) {
-                    if (!tags.contains(finalGive)) {
-                        ChestInventory chestInventory= Handler.getItem(player);
-                        if (chestInventory != null) {
-                            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                                ItemStack stack= chestInventory.getItem(i);
-                                if (stack.isEmpty()) {
-                                    chestInventory.setItem(i,new ItemStack(InitItems.SoulBottle_.asItem()));
-                                    player.addTag(finalGive);
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        if (event.getEntity() instanceof Player player) {
+//            Set<String> tags = player.entityTags();
+//            if (tags.contains(finalGive)) {
+//                return;
+//            }
+//            ResourceKey<Level> eventTo = event.getTo();
+//            if (player.level() instanceof ServerLevel serverLevel) {
+//                Level level = serverLevel.getServer().getLevel(eventTo);
+//                if (level != null && level.dimension().isFor(Level.NETHER.registryKey())) {
+//                    if (!tags.contains(finalGive)) {
+//                        ChestInventory chestInventory= Handler.getItem(player);
+//                        if (chestInventory != null) {
+//                            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+//                                ItemStack stack= chestInventory.getItem(i);
+//                                if (stack.isEmpty()) {
+//                                    chestInventory.setItem(i,new ItemStack(InitItems.SoulBottle_.asItem()));
+//                                    player.addTag(finalGive);
+//                                    return;
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     public static void loot(Entity entity){
         if (entity instanceof Player player) {

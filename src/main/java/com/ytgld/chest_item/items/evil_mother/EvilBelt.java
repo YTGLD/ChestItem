@@ -38,14 +38,14 @@ public class EvilBelt extends EvilMother{
     }
 
     public static void  push(Entity entity , CallbackInfo cir){
-        if (entity instanceof Player player && !player.level().isClientSide()) {
+        if (entity instanceof Player player) {
             if (Handler.has(player, InitItems.EvilBelt_.asItem())) {
                 cir.cancel();
             }
         }
     }
     public static void  canBeCollidedWith(Entity entity , CallbackInfoReturnable<Boolean> cir){
-        if (entity instanceof Player player && !player.level().isClientSide()) {
+        if (entity instanceof Player player) {
             if (Handler.has(player, InitItems.EvilBelt_.asItem())) {
                 cir.setReturnValue(true);
             }
