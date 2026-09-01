@@ -855,8 +855,8 @@
 
   "item.chest_item.lead_of_enlightenment": "Lead of enlightenment",
   "advancements.chest_item.lead_of_enlightenment": "The bloom of the flower of the way",
-  "item.chest_item.lead_of_enlightenment.string.0": "The ancient seal gradually loosened...",
-  "item.chest_item.lead_of_enlightenment.string.1": "Can be used to unlock the following items：",
+  "item.chest_item.lead_of_enlightenment.string.0": "累计受到的伤害：",
+  "item.chest_item.lead_of_enlightenment.string.1": "累计造成的杀孽：",
 "item.chest_item.chaos_fortress": "Chaos Fortress",
   "advancements.chest_item.chaos_fortress": "endless pain",
   "item.chest_item.chaos_fortress.string.0": "The will of the lead of enlightenment is calling, take it, and bear the suffering of this world to create this supreme power",

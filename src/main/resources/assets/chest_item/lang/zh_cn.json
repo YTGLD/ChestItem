@@ -919,8 +919,8 @@
 
   "item.chest_item.lead_of_enlightenment": "启明之铅",
   "advancements.chest_item.lead_of_enlightenment": "合道之花的绽放",
-  "item.chest_item.lead_of_enlightenment.string.0": "远古的封印渐渐松动...",
-  "item.chest_item.lead_of_enlightenment.string.1": "可用于解锁下列物品：",
+  "item.chest_item.lead_of_enlightenment.string.0": "累计承受的伤害：",
+  "item.chest_item.lead_of_enlightenment.string.1": "累计造成的杀孽：",
 
   "item.chest_item.warmaker": "战争缔造者",
   "advancements.chest_item.warmaker": "虚妄血海",
@@ -1322,7 +1322,7 @@
   "sound.chest_item.fly_sword" : "剑气：逸散",
 
   "item.chest_item.oblivion": "遗忘药剂",
-  "chest_item.book.oblivion.1": "使用后可忘却所有信仰",
+  "chest_item.book.oblivion.1": "使用后可忘却所有的永恒奴印和信仰",
 
   "chest_item.book.iron_heart.main": "不稳定脉冲器",
   "chest_item.book.iron_heart.1": "这个物品提供大量基础近战伤害，并使所有伤害随机化",

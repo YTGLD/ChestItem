@@ -1,5 +1,7 @@
 package com.ytgld.chest_item.items.memory;
 
+import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.other.ChestInventory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -23,11 +25,28 @@ public class Oblivion extends Item {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        player.setData(TheMemoryDataHandler.mStringSetData,new HashSet<>());
-        player.getItemInHand(hand).shrink(1);
+        player.startUsingItem(hand);
+
         return super.use(level, player, hand);
     }
 
+    @Override
+    public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity) {
+        if (entity instanceof Player player) {
+            player.setData(TheMemoryDataHandler.mStringSetData, new HashSet<>());
+
+            ChestInventory inventory = Handler.getItem(player);
+
+            if (inventory != null) {
+                inventory.setItem(9,ItemStack.EMPTY);
+                inventory.setItem(10,ItemStack.EMPTY);
+                inventory.setItem(11,ItemStack.EMPTY);
+            }
+
+            itemStack.shrink(1);
+        }
+        return itemStack;
+    }
 
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {

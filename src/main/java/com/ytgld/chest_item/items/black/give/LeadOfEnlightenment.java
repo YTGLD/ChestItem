@@ -9,15 +9,19 @@ import com.ytgld.chest_item.items.black.ITheChaos;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
 
@@ -73,7 +77,7 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
                         }
                         if (component != null) {
                             component.putInt(hurtGiveChaosFortress,
-                                    (int) (component.getIntOr(hurtGiveChaosFortress,0 )+ event.getNewDamage()));
+                                    (int) (component.getIntOr(hurtGiveChaosFortress,0 ) + 1 + event.getNewDamage()));
                             return;
                         }else {
                             stack.set(DataReg.tag,new CompoundTag());
@@ -115,5 +119,21 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
             return component.getIntOr(tag,0 ) >= max;
         }
         return false;
+    }
+
+    @Override
+    public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+        super.text(stack, tooltipComponents, flag);
+        CompoundTag component = stack.get(DataReg.tag);
+        if (component != null) {
+            tooltipComponents.accept(Component.translatable("item.chest_item.lead_of_enlightenment.string.0").append(
+                    String.valueOf(component.getIntOr(hurtGiveChaosFortress,0))
+            ).setStyle(Style.EMPTY.withColor(color(stack))));
+
+
+            tooltipComponents.accept(Component.translatable("item.chest_item.lead_of_enlightenment.string.1").append(
+                    String.valueOf(component.getIntOr(killWarmaker,0))
+            ).setStyle(Style.EMPTY.withColor(color(stack))));
+        }
     }
 }
