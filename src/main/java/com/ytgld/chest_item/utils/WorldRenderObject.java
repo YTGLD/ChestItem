@@ -3,6 +3,7 @@ package com.ytgld.chest_item.utils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;import org.joml.Vector3f;
 
 public abstract class WorldRenderObject {
@@ -10,6 +11,7 @@ public abstract class WorldRenderObject {
     protected int age = 0;
     protected int maxTime = 10;
 
+    protected RandomSource source  = RandomSource.create();
     protected Vec3 position;
     protected Vec3 previousPosition;
 

@@ -5,13 +5,17 @@ import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.renderer.light.Light;
+import com.ytgld.chest_item.utils.RenderObjectManager;
 import com.ytgld.chest_item.utils.RenderObjects;
 import com.ytgld.chest_item.utils.WorldRenderObject;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
@@ -20,11 +24,13 @@ import org.joml.Vector3d;
 public class WrathHeavenRenderObject extends WorldRenderObject {
     public int color = 0xffffffff;
     public float size = 1;
-    public WrathHeavenRenderObject(Vec3 position,int color,float size) {
+    public boolean hasDown;
+    public WrathHeavenRenderObject(Vec3 position,int color,float size,boolean hasDown) {
         super(position);
         this.color = color;
         this.size = size;
         this.maxTime = 500;
+        this.hasDown = hasDown;
     }
     public int newAlpha = 0;
 
@@ -56,7 +62,15 @@ public class WrathHeavenRenderObject extends WorldRenderObject {
                 position.z - cameraPos.z
         );
 
-
+        if (age % 2 == 1 && newAlpha > 0) {
+            StarRenderObject starRenderObject = new StarRenderObject(
+                    position.add(Math.cos(age / 2f) * size / 1.5f,0,Math.sin(age / 2f) * size / 1.5f), new Vec3(source.nextFloat() * 360, source.nextFloat() * 360, source.nextFloat() * 360),
+                    1, hasDown
+            );
+            starRenderObject.color = color;
+            RenderObjectManager.add(starRenderObject);
+        }
+        renderText(poseStack, collector, partialTick);
         doRender(poseStack, collector, partialTick);
         rednerStar(poseStack, collector, partialTick);
 
@@ -65,18 +79,59 @@ public class WrathHeavenRenderObject extends WorldRenderObject {
 
         poseStack.popPose();
     }
+    private void renderText(PoseStack poseStack, SubmitNodeCollector collector, float partialTick) {
+        poseStack.pushPose();
+        poseStack.translate(0,8,0);
+        renderText(poseStack, collector, partialTick,Identifier.fromNamespaceAndPath(
+                Chestitem.MODID,"textures/render_object/text_2.png"
+        ));
+        poseStack.popPose();
+
+
+        poseStack.pushPose();
+        poseStack.translate(0,2,0);
+        renderText(poseStack, collector, partialTick,Identifier.fromNamespaceAndPath(
+                Chestitem.MODID,"textures/render_object/text_4.png"
+        ));
+        poseStack.popPose();
+    }
+    private void renderText(PoseStack poseStack, SubmitNodeCollector collector, float partialTick,Identifier identifier){
+        if (!hasDown) {
+
+            poseStack.pushPose();
+            Quaternionf quaternionf = new Quaternionf();
+            Quaternionf rotation = new Quaternionf();
+            SingleQuadParticle.FacingCameraMode.LOOKAT_Y.setRotation(rotation, Minecraft.getInstance().gameRenderer.mainCamera(),
+                    partialTick);
+            rotation.rotateZ(Mth.lerp(partialTick, 0, 0));
+            poseStack.mulPose(quaternionf);
+            int as = (color >> 24) & 0xFF;
+            int rs = (color >> 16) & 0xFF;
+            int gs = (color >> 8) & 0xFF;
+            int bs = color & 0xFF;
+            render(poseStack, collector, 4,
+                    RenderObjects.renderTypeFunctionLive.apply(
+                            identifier
+                    ),
+                    Light.ARGB.color(newAlpha, rs, gs, bs));
+            poseStack.popPose();
+
+        }
+
+
+    }
 
     private void doRender(PoseStack poseStack, SubmitNodeCollector collector, float partialTick){
 
         poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees((age + partialTick) / 10f));
+        poseStack.mulPose(Axis.YP.rotationDegrees((age + partialTick) / 5f));
         renderAll(poseStack, collector,Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/wrath_heaven_2.png"));
 
         poseStack.popPose();
 
 
         poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees(-(age + partialTick) / 10f));
+        poseStack.mulPose(Axis.YP.rotationDegrees(-(age + partialTick) / 5f));
         renderAll(poseStack, collector,Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/wrath_heaven_1.png"));
         poseStack.popPose();
     }

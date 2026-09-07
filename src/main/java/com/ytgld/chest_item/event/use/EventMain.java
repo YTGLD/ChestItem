@@ -99,6 +99,7 @@ import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.GatherSkippedAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
+import net.neoforged.neoforge.event.enchanting.EnchantedEntityLootEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
@@ -942,6 +943,10 @@ public class EventMain {
             }
 
         }
+    }
+    @SubscribeEvent
+    public void event(EnchantedEntityLootEvent event) {
+        EntityLootingHandler.event(event);
     }
     @SubscribeEvent
     public void event(PlayerEvent.ItemCraftedEvent event){
