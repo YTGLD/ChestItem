@@ -316,7 +316,11 @@ public class EventMain {
                 float value = (float) resistance.getValue();
                 float base = (float) resistance.getBaseValue();
                 if (value != base) {
-                    event.setNewDamage(event.getNewDamage() * ((1 - value) + 1));
+                    float damage = ((1 - value) + 1);
+                    if (damage < 0.2) {
+                        damage = 0.2f;
+                    }
+                    event.setNewDamage(event.getNewDamage() * damage);
                 }
             }
         }

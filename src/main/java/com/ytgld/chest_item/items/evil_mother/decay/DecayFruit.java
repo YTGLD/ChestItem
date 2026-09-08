@@ -4,12 +4,14 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
+import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.AttributeDataType;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -68,21 +70,44 @@ public class DecayFruit extends DecayItem{
             );
         }
     }
+
+    private static final String number = "DecayFruitNumber";
+
     public static boolean overrideStacked(ItemStack fruit, ItemStack me, Player player, boolean org) {
-        if (!me.isEmpty()) {
-            if (fruit.is(InitItems.DecayFruit_.asItem())) {
-                AttributeDataType attributeDataType = me.get(DataReg.attributeType);
-                if (attributeDataType == null) {
-                    player.level().playSound(null, player.blockPosition(), SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.PLAYERS, 1, 1);
+        if (!player.getCooldowns().isOnCooldown(InitItems.DecayFruit_.asItem().getDefaultInstance())) {
+            if (!me.isEmpty() && !me.is(InitItems.DecayFruit_.asItem())) {
+                if (fruit.is(InitItems.DecayFruit_.asItem())) {
+                    CompoundTag tag = me.get(DataReg.tag);
+                    if (tag == null) {
+                        me.set(DataReg.tag, new CompoundTag());
+                    }
                     AttributeDataType doIt = new AttributeDataType(List.of());
-                    me.set(DataReg.attributeType, addAttributeType(player, doIt));
-                    fruit.shrink(1);
-                    return true;
+                    if (tag != null) {
+                        tag.putInt(number, tag.getIntOr(number, 0) + 1);
+
+                        AttributeDataType newAtt = addAttributeType(player, doIt);
+                        int size = tag.getIntOr(number, 0);
+                        float res = -size / 160f;
+
+                        newAtt.modifiers().add(new AttributeDataType.Entry(
+                                AttReg.resistance, new AttributeModifier(
+                                Identifier.fromNamespaceAndPath(Chestitem.MODID, "decay_fruit_attriubte_res"),
+                                res, AttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                        )));
+                        me.set(DataReg.attributeType, newAtt);
+                        player.getCooldowns().addCooldown(InitItems.DecayFruit_.asItem().getDefaultInstance(),10);
+                        player.level().playSound(null, player.blockPosition(), SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.PLAYERS, 1, 1);
+                        fruit.shrink(1);
+                        return true;
+                    }
                 }
             }
         }
         return org;
     }
+
+
+
     public static AttributeDataType addAttributeType(Player player, AttributeDataType attributeDataType){
         Set<String> blacklist = new HashSet<>();
         for (String aaa : ConfigItem.intValue.get()) {

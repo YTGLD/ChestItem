@@ -61,7 +61,7 @@ public class AttReg {
         return new RangedAttribute("attribute.name.chest_item.xp_drop", 1, -1024, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> resistance = REGISTRY.register("resistance",()->{
-        return new RangedAttribute("attribute.name.chest_item.resistance", 1, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.resistance", 1, 0, 1.8).setSyncable(true);
     });
     public static final Supplier<AttachmentType<Integer>> swordIntent = ATTACHMENT_TYPES.register(
             "sword_intent", () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler()).serialize(Codec.INT.

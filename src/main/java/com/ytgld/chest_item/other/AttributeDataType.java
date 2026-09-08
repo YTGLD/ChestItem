@@ -21,7 +21,7 @@ public record AttributeDataType(List<Entry> modifiers)  {
 
 
     public static class Builder {
-        private final List<Entry> entries = new ArrayList<>();
+        public final List<Entry> entries = new ArrayList<>();
         Builder() {
         }
         public Builder add(Holder<Attribute> attribute, AttributeModifier modifier) {
