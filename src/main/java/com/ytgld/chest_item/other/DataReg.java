@@ -17,6 +17,11 @@ public class DataReg {
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> tag =
             REGISTRY.register("tag",()-> DataComponentType.<CompoundTag>builder().persistent(CompoundTag.CODEC).build());
+
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<EvilGiftData>> evil_gift =
+            REGISTRY.register("evil_gift",() -> DataComponentType.<EvilGiftData>builder().persistent(EvilGiftData.CODEC).build());
+
 }
 
 

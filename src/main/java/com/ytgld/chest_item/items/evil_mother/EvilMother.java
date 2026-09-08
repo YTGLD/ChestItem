@@ -7,6 +7,7 @@ import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.renderer.RenderEvilGift;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -17,12 +18,14 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Optional;
 
 public abstract class EvilMother extends ItemBase implements IEvil {
     public EvilMother(Properties properties) {
@@ -32,6 +35,14 @@ public abstract class EvilMother extends ItemBase implements IEvil {
     @Override
     public int color(ItemStack stack) {
         return color;
+    }
+
+    @Override
+    public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
+        if (!canHasEvilGift(itemStack).isEmpty()) {
+            return Optional.of(new RenderEvilGift(itemStack,this));
+        }
+        return super.getTooltipImage(itemStack);
     }
 
     @ConfigPlugin

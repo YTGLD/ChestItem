@@ -29,6 +29,7 @@ import com.ytgld.chest_item.event.use.ReinforcedEvent;
 import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.renderer.RenderEvilGift;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.sounds.CISoundDefinitionsProvider;
 import com.ytgld.chest_item.sounds.Sounds;
@@ -147,6 +148,7 @@ public class Chestitem {
             event.register(BigTooltip.class, Function.identity());
             event.register(ImageTooltip.class, Function.identity());
             event.register(ToolTipSpiritItem.class, Function.identity());
+            event.register(RenderEvilGift.class, Function.identity());
         }
         @SubscribeEvent // on the mod event bus
         public static void gatherData(GatherDataEvent.Client event) {

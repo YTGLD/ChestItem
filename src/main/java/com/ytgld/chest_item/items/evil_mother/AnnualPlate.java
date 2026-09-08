@@ -4,6 +4,10 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
+import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.other.EvilGiftData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
@@ -26,7 +30,9 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -205,5 +211,30 @@ public class AnnualPlate extends EvilMother{
     @Override
     public int getSanity() {
         return -4;
+    }
+
+    @Override
+    public int maxGiftNumber(ItemStack stack) {
+        return 1;
+    }
+
+    @Override
+    public HashSet<EvilGiftBase> theGiftBase(ItemStack stack) {
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
+
+        if (stack.get(DataReg.tag) != null) {
+            evilGiftBases.add(EvilGifts.rottenUtensils);
+        }
+        stack.set(DataReg.evil_gift.get(),stack.get(DataReg.evil_gift.get()));
+
+
+        return evilGiftBases;
+    }
+
+    @Override
+    public HashSet<EvilGiftBase> canHasEvilGift(ItemStack stack) {
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
+        evilGiftBases.add(EvilGifts.rottenUtensils);
+        return evilGiftBases;
     }
 }

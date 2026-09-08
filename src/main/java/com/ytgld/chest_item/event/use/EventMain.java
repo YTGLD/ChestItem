@@ -24,6 +24,8 @@ import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.IEvilGift;
 import com.ytgld.chest_item.items.other.blood.BoneHead;
 import com.ytgld.chest_item.items.other.blood.GodBlood;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
@@ -189,14 +191,27 @@ public class EventMain {
                     }
                 }
             }
-            if (stack.getItem() instanceof Terror terror) {
-                Multimap<Holder<Attribute>, AttributeModifier> attributes = terror.muAttribute(player,stack);
+            if (stack.getItem() instanceof ItemBase base) {
+                Multimap<Holder<Attribute>, AttributeModifier> attributes = base.muAttribute(player,stack);
                 if (attributes != null) {
                     if (attributeDataType != null){
                         for (AttributeDataType.Entry entry :attributeDataType.modifiers()){
                             attributes.put(entry.attribute(),entry.modifier());
                         }
                     }
+                    if (base instanceof IEvilGift iEvilGift) {
+                        HashSet<EvilGiftBase> hashSet =iEvilGift.theGiftBase(stack);
+                        if (!hashSet.isEmpty()) {
+                            for (EvilGiftBase evilGiftBase : hashSet.stream().toList()) {
+                                EvilGiftBase.AttHolderModify attHolderModify = evilGiftBase.attHolderModify();
+                                for (Holder<Attribute> attributeHolder : attHolderModify.multimap().keySet()) {
+                                    AttributeModifier modifier = attHolderModify.multimap().get(attributeHolder);
+                                    attributes.put(attributeHolder, modifier);
+                                }
+                            }
+                        }
+                    }
+
                     if (!attributes.isEmpty()) {
                         attributes.values().removeIf(modifier -> skipped.isSkipped(modifier.id()));
                         evt.addTooltipLines(Component.empty());
