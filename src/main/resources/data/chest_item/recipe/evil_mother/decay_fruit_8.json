@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A":  "chest_item:mother_remains",
+    "B":  "minecraft:enchanted_golden_apple"
+  },
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "result": {
+    "count": 8,
+    "id": "chest_item:decay_fruit"
+  }
+}

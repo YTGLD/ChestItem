@@ -6,9 +6,15 @@ import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+
+import java.util.function.Consumer;
 
 public class BrassCoins extends ItemBase {
 
@@ -40,7 +46,22 @@ public class BrassCoins extends ItemBase {
         }
     }
 
-    public static boolean isTrue (ItemStack aBrassCoins,int max){
+    @Override
+    public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+        super.text(stack, tooltipComponents, flag);
+        CompoundTag component = stack.get(DataReg.tag);
+        int c = 0XFFCD853F;
+        if (component != null){
+            tooltipComponents.accept(Component.translatable("stat.minecraft.mob_kills")
+                    .append(": "+ component.getIntOr(kill, 0)).setStyle(Style.EMPTY.withColor(c)));
+        }else {
+            tooltipComponents.accept(Component.translatable("stat.minecraft.mob_kills")
+                    .append(": "+ 0).setStyle(Style.EMPTY.withColor(c)));
+        }
+
+    }
+
+    public static boolean isTrue (ItemStack aBrassCoins, int max){
         CompoundTag component = aBrassCoins.get(DataReg.tag);
         if (component != null) {
             return component.getIntOr(kill,0) >= max;

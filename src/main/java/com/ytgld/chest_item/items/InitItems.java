@@ -448,6 +448,7 @@ public class InitItems {
                     output.accept(InitItems.Triangle_);
                     output.accept(InitItems.SwordHeart_);
                     output.accept(InitItems.SoulBottle_);
+                    output.accept(InitItems.DecayFruit_);
 
 
 
