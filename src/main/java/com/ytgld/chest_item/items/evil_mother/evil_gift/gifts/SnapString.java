@@ -1,20 +1,18 @@
-package com.ytgld.chest_item.items.evil_mother.evil_gift;
+package com.ytgld.chest_item.items.evil_mother.evil_gift.gifts;
 
-import com.google.common.collect.HashMultimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
-import net.minecraft.core.Holder;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 import java.util.HashMap;
 
-public class RottenUtensils extends EvilGiftBase{
+public class SnapString extends EvilGiftBase {
 
     @Override
-    public String id() {
-        return "rotten_utensils";
+    public Identifier id() {
+        return Identifier.fromNamespaceAndPath(Chestitem.MODID,"snap_string");
     }
 
     @Override
@@ -27,8 +25,8 @@ public class RottenUtensils extends EvilGiftBase{
         AttHolderModify attHolderModify = new AttHolderModify(new HashMap<>());
 
         attHolderModify.multimap().put( AttReg.theSanity,
-                new AttributeModifier(Identifier.fromNamespaceAndPath(Chestitem.MODID,this.id()),
-                        -1, AttributeModifier.Operation.ADD_VALUE));
+                new AttributeModifier(this.id(),
+                        3, AttributeModifier.Operation.ADD_VALUE));
 
 
         return attHolderModify;

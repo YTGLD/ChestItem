@@ -71,7 +71,7 @@ public abstract class PlayerMixin implements IPlayer {
                     }
                     if (itemBase instanceof IEvilGift iEvilGift) {
                         HashSet<EvilGiftBase> hashSet =iEvilGift.theGiftBase(stack);
-                        if (!hashSet.isEmpty()) {
+                        if (hashSet !=null &&!hashSet.isEmpty()) {
                             for (EvilGiftBase evilGiftBase : hashSet.stream().toList()) {
                                 EvilGiftBase.AttHolderModify attHolderModify = evilGiftBase.attHolderModify();
                                 for (Holder<Attribute> attributeHolder : attHolderModify.multimap().keySet()) {

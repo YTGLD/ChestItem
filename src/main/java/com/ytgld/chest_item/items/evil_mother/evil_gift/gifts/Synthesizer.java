@@ -1,0 +1,43 @@
+package com.ytgld.chest_item.items.evil_mother.evil_gift.gifts;
+
+import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+
+import java.util.HashMap;
+
+public class Synthesizer extends EvilGiftBase {
+
+    @Override
+    public Identifier id() {
+        return Identifier.fromNamespaceAndPath(Chestitem.MODID,"synthesizer");
+    }
+
+    @Override
+    public Identifier image() {
+        return EvilGiftBase.theMixinImage(id());
+    }
+
+    @Override
+    public AttHolderModify attHolderModify() {
+        AttHolderModify attHolderModify = new AttHolderModify(new HashMap<>());
+
+        attHolderModify.multimap().put( AttReg.theSanity,
+                new AttributeModifier(this.id(),
+                        -1, AttributeModifier.Operation.ADD_VALUE));
+
+        attHolderModify.multimap().put( AttReg.looting,
+                new AttributeModifier(this.id(),
+                        1, AttributeModifier.Operation.ADD_VALUE));
+
+        attHolderModify.multimap().put( AttReg.fortune,
+                new AttributeModifier(this.id(),
+                        1, AttributeModifier.Operation.ADD_VALUE));
+
+
+        return attHolderModify;
+    }
+}
+

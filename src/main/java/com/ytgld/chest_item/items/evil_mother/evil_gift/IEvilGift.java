@@ -1,20 +1,37 @@
 package com.ytgld.chest_item.items.evil_mother.evil_gift;
 
+import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.other.EvilGiftData;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public interface IEvilGift {
-    HashSet<EvilGiftBase> theGiftBase(ItemStack stack);
-    HashSet<EvilGiftBase> canHasEvilGift(ItemStack stack);
+
+    HashSet<EvilGiftBase> canHasEvilGift();
     int maxGiftNumber(ItemStack stack);
 
 
+    default HashSet<EvilGiftBase> theGiftBase(ItemStack stack){
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
 
+        EvilGiftData evilGiftData = evilData(stack);
+        Registry<EvilGiftBase> registry =  EvilGifts.GiftRegister;
+        if (evilGiftData == null) {
+            return evilGiftBases;
+        }
+        for (String string : evilGiftData.hashSet()){
+            EvilGiftBase evilGiftBase =
+                    registry.getValue(Identifier.parse(
+                            string
+                    ));
+            evilGiftBases.add(evilGiftBase);
+        }
+        return evilGiftBases;
+    }
     default EvilGiftData evilData(ItemStack stack){
         EvilGiftData data = stack.get(DataReg.evil_gift.get());
         if (data == null) {
@@ -27,11 +44,15 @@ public interface IEvilGift {
     static void addGift(ItemStack stack , EvilGiftBase giftBase){
         EvilGiftData evilGiftData = stack.get(DataReg.evil_gift.get());
         if (stack.getItem() instanceof IEvilGift gift &&  evilGiftData != null) {
-            if (!gift.canHasEvilGift(stack).contains(giftBase)) {
+            if (!gift.canHasEvilGift().contains(giftBase)) {
+                return;
+            }
+            if (gift.theGiftBase(stack).contains(giftBase)) {
                 return;
             }
             if (evilGiftData.hashSet().size() < gift.maxGiftNumber(stack)) {
-                evilGiftData.add(giftBase.id());
+                evilGiftData.add(giftBase.id().toString());
+                upData(stack);
             }
         }
     }
@@ -41,6 +62,9 @@ public interface IEvilGift {
             return evilGiftData.hashSet().contains(giftBase.id());
         }
         return false;
+    }
+    static void upData(ItemStack stack){
+        stack.set(DataReg.evil_gift.get(),stack.get(DataReg.evil_gift.get()));
     }
 
 }

@@ -39,7 +39,7 @@ public abstract class EvilMother extends ItemBase implements IEvil {
 
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
-        if (!canHasEvilGift(itemStack).isEmpty()) {
+        if (!canHasEvilGift().isEmpty()) {
             return Optional.of(new RenderEvilGift(itemStack,this));
         }
         return super.getTooltipImage(itemStack);

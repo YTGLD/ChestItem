@@ -6,8 +6,8 @@ import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.IEvilGift;
 import com.ytgld.chest_item.other.DataReg;
-import com.ytgld.chest_item.other.EvilGiftData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
@@ -32,7 +32,6 @@ import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -202,6 +201,12 @@ public class AnnualPlate extends EvilMother{
     }
 
     @Override
+    public void tick(Player player, ItemStack stack) {
+        super.tick(player, stack);
+        IEvilGift.addGift(stack,EvilGifts.rotten_utensils.get());
+    }
+
+    @Override
     public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         super.text(stack, tooltipComponents, flag);
         tooltipComponents.accept(Component.translatable("item.chest_item.annual_plate.string.0", ConfigItem.intValue.getAsInt(), TheKill.ConfigItem.intValue2.getAsInt()).withStyle(Style.EMPTY.withColor(color)));
@@ -219,22 +224,9 @@ public class AnnualPlate extends EvilMother{
     }
 
     @Override
-    public HashSet<EvilGiftBase> theGiftBase(ItemStack stack) {
+    public HashSet<EvilGiftBase> canHasEvilGift() {
         HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
-
-        if (stack.get(DataReg.tag) != null) {
-            evilGiftBases.add(EvilGifts.rottenUtensils);
-        }
-        stack.set(DataReg.evil_gift.get(),stack.get(DataReg.evil_gift.get()));
-
-
-        return evilGiftBases;
-    }
-
-    @Override
-    public HashSet<EvilGiftBase> canHasEvilGift(ItemStack stack) {
-        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
-        evilGiftBases.add(EvilGifts.rottenUtensils);
+        evilGiftBases.add(EvilGifts.rotten_utensils.get());
         return evilGiftBases;
     }
 }

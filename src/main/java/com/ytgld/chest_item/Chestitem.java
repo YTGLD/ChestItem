@@ -17,6 +17,7 @@ import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ToolTipSpiritItem;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import com.ytgld.chest_item.items.memory.MemoryAttreg;
 import com.ytgld.chest_item.event.use.MemoryEvent;
 import com.ytgld.chest_item.items.memory.MemoryItems;
@@ -53,6 +54,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistriesSetup;
 
 import java.util.function.Function;
 
@@ -96,6 +98,9 @@ public class Chestitem {
 
         NeoForge.EVENT_BUS.register(new UtilEvent());
 
+
+        modEventBus.addListener(EvilGifts::event);
+        EvilGifts.REGISTER.register(modEventBus);
 
         NeoForge.EVENT_BUS.addListener(PlayerEvent.Clone.class, event -> {
             if (event.isWasDeath() && event.getOriginal().hasData(TheMemoryDataHandler.mStringSetData)) {

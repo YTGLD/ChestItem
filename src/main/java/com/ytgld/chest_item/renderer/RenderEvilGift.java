@@ -3,19 +3,16 @@ package com.ytgld.chest_item.renderer;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.IEvilGift;
-import com.ytgld.chest_item.other.EvilGiftData;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class RenderEvilGift implements ClientTooltipComponent, TooltipComponent {
     private final ItemStack stack;
@@ -28,7 +25,7 @@ public class RenderEvilGift implements ClientTooltipComponent, TooltipComponent 
     @Override
     public int getHeight(Font font) {
         int a = 0;
-        if (!iEvilGift.canHasEvilGift(stack).isEmpty()) {
+        if (!iEvilGift.canHasEvilGift().isEmpty()) {
             a += 24;
         }
         return a;

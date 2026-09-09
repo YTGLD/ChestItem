@@ -10,13 +10,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import java.util.HashMap;
 
 public abstract class EvilGiftBase {
-    public abstract String id();
+    public abstract Identifier id();
     public abstract Identifier image();
     public abstract AttHolderModify attHolderModify();
 
 
-    static Identifier theMixinImage(String string){
-        return Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/evil_mother/" + string + ".png");
+    protected static Identifier theMixinImage(Identifier identifier){
+        return Identifier.fromNamespaceAndPath(identifier.getNamespace(),"textures/evil_mother/" + identifier.getPath() + ".png");
     }
 
     public record AttHolderModify(HashMap<Holder<Attribute> , AttributeModifier> multimap){}
