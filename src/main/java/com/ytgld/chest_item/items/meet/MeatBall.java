@@ -1,16 +1,12 @@
 package com.ytgld.chest_item.items.meet;
 
-import com.mojang.datafixers.kinds.IdF;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
-import com.ytgld.chest_item.items.Meat;
-import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;

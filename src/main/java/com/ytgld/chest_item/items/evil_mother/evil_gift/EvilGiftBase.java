@@ -12,7 +12,9 @@ import java.util.HashMap;
 public abstract class EvilGiftBase {
     public abstract Identifier id();
     public abstract Identifier image();
-    public abstract AttHolderModify attHolderModify();
+    public AttHolderModify attHolderModify(){
+        return new AttHolderModify(new HashMap<>());
+    }
 
     public void tickGift(Player player, ItemStack stack){
 

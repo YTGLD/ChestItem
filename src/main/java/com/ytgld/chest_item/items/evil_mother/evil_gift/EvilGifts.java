@@ -1,10 +1,7 @@
 package com.ytgld.chest_item.items.evil_mother.evil_gift;
 
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.Dawn;
-import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.RottenUtensils;
-import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.SnapString;
-import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.Synthesizer;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -20,6 +17,7 @@ public final class EvilGifts {
     public static DeferredHolder<EvilGiftBase, ?> dawn = REGISTER.register("dawn", Dawn::new);
     public static DeferredHolder<EvilGiftBase, ?> snap_string = REGISTER.register("snap_string", SnapString::new);
     public static DeferredHolder<EvilGiftBase, ?> synthesizer = REGISTER.register("synthesizer", Synthesizer::new);
+    public static DeferredHolder<EvilGiftBase, ?> evil_stomach = REGISTER.register("evil_stomach", EvilStomach::new);
 
     public static void event(NewRegistryEvent event){
         event.register(GiftRegister);

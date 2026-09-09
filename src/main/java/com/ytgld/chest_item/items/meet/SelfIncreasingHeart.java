@@ -9,7 +9,6 @@ import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
-import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.tip.an_element.SkillList;

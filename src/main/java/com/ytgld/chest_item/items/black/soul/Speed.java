@@ -9,7 +9,7 @@ import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.Meat;
+import com.ytgld.chest_item.items.meet.Meat;
 import com.ytgld.chest_item.items.black.TheSoul;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;

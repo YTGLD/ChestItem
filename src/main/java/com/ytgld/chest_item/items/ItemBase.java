@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class ItemBase extends Item implements Terror{
+public class ItemBase extends Item implements Terror,OtherGift{
     public ItemBase(Properties properties) {
         super(properties);
     }

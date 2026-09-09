@@ -1,7 +1,6 @@
 package com.ytgld.chest_item.items.meet;
 
 import com.ytgld.chest_item.items.ItemBase;
-import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.items.gold.ArmorStone;
 import com.ytgld.chest_item.items.gold.LifeStone;
 import com.ytgld.chest_item.items.gold.StrongerStone;

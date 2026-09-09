@@ -1,7 +1,6 @@
 package com.ytgld.chest_item.items.meet;
 
 import com.ytgld.chest_item.items.ItemBase;
-import com.ytgld.chest_item.items.Meat;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
