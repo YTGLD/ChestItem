@@ -38,7 +38,8 @@ public class EvilThoughtsForgeDreams extends ItemBlackShadow {
     
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack, Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-        float bs = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+        float bs = (float) player.getAttributeValue(AttReg.hyperplasia);
+
         modifiers.put(AttReg.shadow_shield, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.EvilThoughtsForgeDreams_.asItem().getDescriptionId()),
                 bs/2, AttributeModifier.Operation.ADD_VALUE));

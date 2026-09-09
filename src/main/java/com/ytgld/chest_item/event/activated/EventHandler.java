@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.event.activated;
 
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.event.GiveEvilGiftHandler;
 import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.ItemBase;
@@ -45,6 +46,7 @@ public class EventHandler {
                 ItemStack stack = chestInventory.getItem(i);
                 if (stack.getItem() instanceof ItemBase itemBase) {
                     itemBase.tick(player,stack);;
+                    GiveEvilGiftHandler.tick(stack,player);
                 }
             }
         }
