@@ -1410,10 +1410,28 @@
   "chest_item.book.synthesizer.4": "使持有者更加幸运但更加癫狂",
 
   "chest_item.book.evil_stomach.main": "邪母胃",
-  "chest_item.book.evil_stomach.1": "当理智降低到正常水平以下",
+  "chest_item.book.evil_stomach.1": "当理智降低到0以下",
   "chest_item.book.evil_stomach.2": "并且持有者因饥饿而死",
   "chest_item.book.evil_stomach.3": "则令某些物品产生第二意识",
   "chest_item.book.evil_stomach.4": "消耗经验值缓慢使持有者饱腹",
+
+  "chest_item.book.unclean_coins.main": "不洁硬币",
+  "chest_item.book.unclean_coins.1": "当理智降低到0以下",
+  "chest_item.book.unclean_coins.2": "并且持有者吃下一个附魔金苹果时",
+  "chest_item.book.unclean_coins.3": "令一些物品吸收金苹果的能量",
+  "chest_item.book.unclean_coins.4": "使得物品增生出新的组织从而增加生命值",
+
+  "chest_item.book.factory.main": "反应工厂",
+  "chest_item.book.factory.1": "当理智降低到0以下",
+  "chest_item.book.factory.2": "并且持有者携带经验反应炉死亡时",
+  "chest_item.book.factory.3": "将令一些物品产生反应",
+  "chest_item.book.factory.4": "从而自发产生经验值",
+
+  "chest_item.book.fortress_cone.main": "要塞角锥",
+  "chest_item.book.fortress_cone.1": "当理智降低到0以下",
+  "chest_item.book.fortress_cone.2": "在持有者存在5级以上的增生状态",
+  "chest_item.book.fortress_cone.3": "且佩戴钢铁之心后食用金苹果进行“侵蚀”",
+  "chest_item.book.fortress_cone.4": "侵蚀后的相关物品在吃下食物后治愈持有者",
 
   "chest_item.book.snap_string.main": "断弦之铅",
   "chest_item.book.snap_string.1": "理智在正常状态下时",

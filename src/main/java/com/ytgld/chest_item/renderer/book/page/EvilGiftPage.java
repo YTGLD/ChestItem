@@ -83,6 +83,49 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
                         evilMother.theColor()));
+
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 5, aInt * 3),
+                        Component.translatable("chest_item.book.unclean_coins.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.unclean_coins.1"),
+                                Component.translatable("chest_item.book.unclean_coins.2"),
+                                Component.translatable("chest_item.book.unclean_coins.3"),
+                                Component.translatable("chest_item.book.unclean_coins.4")
+                        ),
+                        Light.ARGB.color(255, 160, 240, 210),
+                        Light.ARGB.color(255, 80,120,105),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor()));
+
+
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 6, aInt * 3),
+                        Component.translatable("chest_item.book.factory.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.factory.1"),
+                                Component.translatable("chest_item.book.factory.2"),
+                                Component.translatable("chest_item.book.factory.3"),
+                                Component.translatable("chest_item.book.factory.4")
+                        ),
+                        Light.ARGB.color(255, 160, 240, 210),
+                        Light.ARGB.color(255, 80,120,105),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor()));
+
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 6, aInt * 4),
+                        Component.translatable("chest_item.book.fortress_cone.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.fortress_cone.1"),
+                                Component.translatable("chest_item.book.fortress_cone.2"),
+                                Component.translatable("chest_item.book.fortress_cone.3"),
+                                Component.translatable("chest_item.book.fortress_cone.4")
+                        ),
+                        Light.ARGB.color(255, 160, 240, 210),
+                        Light.ARGB.color(255, 80,120,105),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor()));
             }
         }
     }

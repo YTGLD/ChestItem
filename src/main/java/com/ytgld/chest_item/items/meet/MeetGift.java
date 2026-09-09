@@ -12,6 +12,9 @@ public interface MeetGift extends OtherGift {
     default HashSet<EvilGiftBase> canHasEvilGift(){
         HashSet<EvilGiftBase> set = new HashSet<>();
         set.add(EvilGifts.evil_stomach.get());
+        set.add(EvilGifts.factory.get());
+        set.add(EvilGifts.unclean_coins.get());
+        set.add(EvilGifts.fortress_cone.get());
         return set;
     }
 

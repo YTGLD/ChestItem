@@ -1,35 +1,40 @@
-package com.ytgld.chest_item.items.evil_mother.evil_gift.gifts;
+package com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.meat;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.IEvilGift;
 import com.ytgld.chest_item.other.ChestInventory;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+
+import java.util.HashMap;
 
 /**
- * 邪母胃
+ * 反应工厂
  * <p>
  * 当理智降低到正常水平以下
  * <p>
- * 并且持有者因饥饿而死
+ * 并且持有者携带经验反应炉死亡时
  * <p>
- * 则令某些物品产生第二意识
+ * 将令一些物品产生反应
  * <p>
- * 消耗经验值缓慢使持有者饱腹
- *
- *
+ * 从而自发产生经验值
  */
-public class EvilStomach extends EvilGiftBase {
+public class Factory extends EvilGiftBase {
     @Override
     public Identifier id() {
-        return Identifier.fromNamespaceAndPath(Chestitem.MODID,"evil_stomach");
+        return Identifier.fromNamespaceAndPath(Chestitem.MODID,"factory");
     }
 
     @Override
@@ -40,6 +45,7 @@ public class EvilStomach extends EvilGiftBase {
     @Override
     public void tickGift(Player player, ItemStack stack) {
         super.tickGift(player, stack);
+
         int san = (int) EvilMother.getSanValue(player);
         //10
         int baseSan = (int) EvilMother.getSanValueBase(player);
@@ -54,30 +60,37 @@ public class EvilStomach extends EvilGiftBase {
             time = 10;
         }
         if (player.tickCount % time == 1) {
-            if (player.experienceLevel > 0) {
-                int xp = -2;
-                int food = 1;
-                float saturation = 0.5f;
-
-                player.giveExperiencePoints(xp);
-                player.getFoodData().eat(food,saturation);
-            }
+            int xp = 1;
+            player.giveExperiencePoints(xp);
         }
     }
 
+    @Override
+    public AttHolderModify attHolderModify() {
+        AttHolderModify attHolderModify = new AttHolderModify(new HashMap<>());
+
+        attHolderModify.multimap().put(Attributes.MAX_HEALTH,
+                new AttributeModifier(this.id(),
+                        -0.05f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+
+        return attHolderModify;
+    }
+
+
     public static void event(LivingDeathEvent event){
-        if (event.getEntity() instanceof Player player && event.getSource().is(DamageTypes.STARVE)) {
-            if (!(EvilMother.getSanValue(player) < 10)) {
+        if (event.getEntity() instanceof Player player) {
+            if (!(EvilMother.getSanValue(player) < 0)) {
                 return;
             }
-
+            if (!Handler.has(player, InitItems.NuclearReaction_.asItem())) {
+                return;
+            }
             ChestInventory chestInventory = Handler.getItem(player);
             if (chestInventory != null) {
                 for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                     ItemStack stack = chestInventory.getItem(i);
                     if (stack.getItem() instanceof IEvilGift iEvilGift) {
-                        iEvilGift.addGift(stack, EvilGifts.evil_stomach.get());
-                        if (iEvilGift.maxGiftNumber(stack) > 0) {
+                        if (iEvilGift.addGift(stack, EvilGifts.factory.get())) {
                             break;
                         }
                     }
@@ -86,3 +99,4 @@ public class EvilStomach extends EvilGiftBase {
         }
     }
 }
+

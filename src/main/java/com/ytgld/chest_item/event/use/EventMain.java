@@ -555,6 +555,7 @@ public class EventMain {
                     //1.8 (max)
                     apply *= 5f;
                     float damage = event.getAmount() + apply;
+                    damage = Math.max(0,damage);
                     event.setAmount(damage);
                 }
             }
@@ -569,6 +570,7 @@ public class EventMain {
                     float apply = Mth.nextFloat(RandomSource.create(), -v1,v1*1.2f);
                     apply *= 6f;
                     float damage = event.getAmount() + apply;
+                    damage = Math.max(0,damage);
                     event.setAmount(damage);
                 }
             }
@@ -694,6 +696,7 @@ public class EventMain {
         SelfIncreasingHeart.tick(event);
         SpeedHeart.eat(event);
         Glutton.eatFinish(event);
+        GiveEvilGiftHandler.event(event);
     }
     @SubscribeEvent
     public void LeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {

@@ -2,6 +2,10 @@ package com.ytgld.chest_item.items.evil_mother.evil_gift;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.*;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.meat.EvilStomach;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.meat.Factory;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.meat.FortressCone;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.meat.UncleanCoins;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -18,6 +22,9 @@ public final class EvilGifts {
     public static DeferredHolder<EvilGiftBase, ?> snap_string = REGISTER.register("snap_string", SnapString::new);
     public static DeferredHolder<EvilGiftBase, ?> synthesizer = REGISTER.register("synthesizer", Synthesizer::new);
     public static DeferredHolder<EvilGiftBase, ?> evil_stomach = REGISTER.register("evil_stomach", EvilStomach::new);
+    public static DeferredHolder<EvilGiftBase, ?> unclean_coins = REGISTER.register("unclean_coins", UncleanCoins::new);
+    public static DeferredHolder<EvilGiftBase, ?> factory = REGISTER.register("factory", Factory::new);
+    public static DeferredHolder<EvilGiftBase, ?> fortress_cone = REGISTER.register("fortress_cone", FortressCone::new);
 
     public static void event(NewRegistryEvent event){
         event.register(GiftRegister);

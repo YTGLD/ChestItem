@@ -54,8 +54,7 @@ public class Dawn extends EvilGiftBase {
                 for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                     ItemStack stack = chestInventory.getItem(i);
                     if (stack.getItem() instanceof IEvilGift iEvilGift) {
-                        iEvilGift.addGift(stack, EvilGifts.dawn.get());
-                        if (iEvilGift.maxGiftNumber(stack) > 0) {
+                        if (iEvilGift.addGift(stack, EvilGifts.dawn.get())) {
                             break;
                         }
                     }
