@@ -55,7 +55,9 @@ public class RottenUtensils extends EvilGiftBase {
                     ItemStack stack = chestInventory.getItem(i);
                     if (stack.getItem() instanceof IEvilGift iEvilGift) {
                         iEvilGift.addGift(stack, EvilGifts.rotten_utensils.get());
-                        break;
+                        if (iEvilGift.maxGiftNumber(stack) > 0) {
+                            break;
+                        }
                     }
                 }
             }

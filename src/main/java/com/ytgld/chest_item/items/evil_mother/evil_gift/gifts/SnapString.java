@@ -62,7 +62,9 @@ public class SnapString extends EvilGiftBase {
                         ItemStack stack = chestInventory.getItem(i);
                         if (stack.getItem() instanceof IEvilGift iEvilGift) {
                             iEvilGift.addGift(stack, EvilGifts.snap_string.get());
-                            break;
+                            if (iEvilGift.maxGiftNumber(stack) > 0) {
+                                break;
+                            }
                         }
                     }
                 }

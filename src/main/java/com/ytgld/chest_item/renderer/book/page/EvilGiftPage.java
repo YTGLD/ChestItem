@@ -69,6 +69,20 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
                         evilMother.theColor()));
+
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 5, aInt * 4),
+                        Component.translatable("chest_item.book.evil_stomach.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.evil_stomach.1"),
+                                Component.translatable("chest_item.book.evil_stomach.2"),
+                                Component.translatable("chest_item.book.evil_stomach.3"),
+                                Component.translatable("chest_item.book.evil_stomach.4")
+                        ),
+                        Light.ARGB.color(255, 160, 240, 210),
+                        Light.ARGB.color(255, 80,120,105),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor()));
             }
         }
     }

@@ -1409,6 +1409,12 @@
   "chest_item.book.synthesizer.3": "会激发自身的力量",
   "chest_item.book.synthesizer.4": "使持有者更加幸运但更加癫狂",
 
+  "chest_item.book.evil_stomach.main": "邪母胃",
+  "chest_item.book.evil_stomach.1": "当理智降低到正常水平以下",
+  "chest_item.book.evil_stomach.2": "并且持有者因饥饿而死",
+  "chest_item.book.evil_stomach.3": "则令某些物品产生第二意识",
+  "chest_item.book.evil_stomach.4": "消耗经验值缓慢使持有者饱腹",
+
   "chest_item.book.snap_string.main": "断弦之铅",
   "chest_item.book.snap_string.1": "理智在正常状态下时",
   "chest_item.book.snap_string.2": "杀死凋零会将自身的",

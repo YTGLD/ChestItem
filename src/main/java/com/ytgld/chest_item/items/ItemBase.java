@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.items.black.chaos_item.RunawayLining;
 import com.ytgld.chest_item.other.DataReg;
+import com.ytgld.chest_item.renderer.RenderEvilGift;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -14,6 +15,7 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -21,6 +23,7 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class ItemBase extends Item implements Terror,OtherGift{
@@ -31,6 +34,15 @@ public class ItemBase extends Item implements Terror,OtherGift{
     public void tick(Player player, ItemStack stack){
 
     }
+
+    @Override
+    public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
+        if (maxGiftNumber(itemStack) > 0) {
+            return Optional.of(new RenderEvilGift(itemStack,this));
+        }
+        return super.getTooltipImage(itemStack);
+    }
+
     @Override
     public @NotNull Component getName(@NotNull ItemStack stack) {
         Component component = super.getName(stack);
