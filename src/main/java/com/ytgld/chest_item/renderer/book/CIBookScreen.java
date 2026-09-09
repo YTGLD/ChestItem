@@ -180,17 +180,6 @@ public class CIBookScreen extends Screen {
     }
     public RandomSource source = RandomSource.create();
     public void addPart(int x, int y, BlackKey.ColorImage colorImage){
-        float s = 1.2f;
-        int xo = (int) ((this.width - 255 * s) / 2);
-        int yo = (int) ((this.height - 155 * (s)) / 2);
-
-        if (EventMain.time % 2 ==0) {
-
-            BlackParticlesAdd.markSeen((int) (xo + x * s), (int) (yo + y * s), new BlackKey.ImageColorAndRenderPipeline(32,
-                    colorImage,
-                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/all.png"), MRender.RenderPs.GUI_TEXTURED,
-                    new Vector2f(), new Vector2f(Mth.nextFloat(source,-0.025f,0.025f), Mth.nextFloat(source,-0.1f,-0.15f)), new Vector2f(), false));
-        }
     }
     @Override
     public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {

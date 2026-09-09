@@ -1389,6 +1389,32 @@
   "item.chest_item.soul_bottle.tooltip.1": "收集那些飞散的灵魂，多收集一些",
 
 
+
+  "chest_item.book.rotten_utensils.main": "腐烂器具",
+  "chest_item.book.rotten_utensils.1": "在理智降低到负数并",
+  "chest_item.book.rotten_utensils.2": "触发不死图腾后产生邪母嬗变...",
+  "chest_item.book.rotten_utensils.3": "邪母嬗变一旦触发相关的",
+  "chest_item.book.rotten_utensils.4": "邪母物品就会减少更多的理智",
+
+  "chest_item.book.dawn.main": "启明金属",
+  "chest_item.book.dawn.1": "在理智降低到-10以下时死亡",
+  "chest_item.book.dawn.2": "所佩戴的启明之铅会将力量分散",
+  "chest_item.book.dawn.3": "目标为邪母物品时",
+  "chest_item.book.dawn.4": "会使持有者恢复部分神智",
+
+
+  "chest_item.book.synthesizer.main": "邪念合成器",
+  "chest_item.book.synthesizer.1": "理智高于10点时",
+  "chest_item.book.synthesizer.2": "一旦死亡所佩戴的邪母物品",
+  "chest_item.book.synthesizer.3": "会激发自身的力量",
+  "chest_item.book.synthesizer.4": "使持有者更加幸运但更加癫狂",
+
+  "chest_item.book.snap_string.main": "断弦之铅",
+  "chest_item.book.snap_string.1": "理智在正常状态下时",
+  "chest_item.book.snap_string.2": "杀死凋零会将自身的",
+  "chest_item.book.snap_string.3": "邪母因果斩去，持有者",
+  "chest_item.book.snap_string.4": "将更加癫狂并更容易获取资源",
+
   "chest_item.book.test.main": "Small trinket in the box",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
   "chest_item.book.test.2": "Contributor: Qiuji",

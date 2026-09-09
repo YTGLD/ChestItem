@@ -2,6 +2,8 @@ package com.ytgld.chest_item.items.evil_mother;
 
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
@@ -12,6 +14,7 @@ import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.HashSet;
 import java.util.function.Consumer;
 
 /**
@@ -64,4 +67,18 @@ public class EvilBelt extends EvilMother{
     public int getSanity() {
         return -4;
     }
+
+
+    @Override
+    public int maxGiftNumber(ItemStack stack) {
+        return 2;
+    }
+    @Override
+    public HashSet<EvilGiftBase> canHasEvilGift() {
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
+        evilGiftBases.add(EvilGifts.dawn.get());
+        evilGiftBases.add(EvilGifts.rotten_utensils.get());
+        return evilGiftBases;
+    }
+
 }

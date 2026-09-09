@@ -9,6 +9,8 @@ import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -27,6 +29,7 @@ import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.DoubleToIntFunction;
@@ -211,4 +214,18 @@ public class WarGodCommand extends EvilMother {
             }
             return false;
         }
+
+
+    @Override
+    public int maxGiftNumber(ItemStack stack) {
+        return 1;
     }
+    @Override
+    public HashSet<EvilGiftBase> canHasEvilGift() {
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
+        evilGiftBases.add(EvilGifts.synthesizer.get());
+        evilGiftBases.add(EvilGifts.snap_string.get());
+        return evilGiftBases;
+    }
+
+}

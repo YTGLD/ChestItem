@@ -6,6 +6,8 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import net.minecraft.core.Holder;
@@ -25,6 +27,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -154,6 +157,19 @@ public class DefyLife extends EvilMother{
     }
     @Override
     public int getSanity() {
-        return -5;
+        return 0;
     }
+
+    @Override
+    public int maxGiftNumber(ItemStack stack) {
+        return 1;
+    }
+    @Override
+    public HashSet<EvilGiftBase> canHasEvilGift() {
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
+        evilGiftBases.add(EvilGifts.synthesizer.get());
+        evilGiftBases.add(EvilGifts.snap_string.get());
+        return evilGiftBases;
+    }
+
 }

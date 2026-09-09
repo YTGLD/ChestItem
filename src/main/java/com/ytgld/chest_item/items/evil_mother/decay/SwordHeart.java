@@ -1,11 +1,14 @@
 package com.ytgld.chest_item.items.evil_mother.decay;
 
 import com.ytgld.chest_item.items.evil_mother.EvilMother;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
+import java.util.HashSet;
 import java.util.function.Consumer;
 
 /**
@@ -35,5 +38,16 @@ public class SwordHeart extends EvilMother {
         tooltipComponents.accept(Component.translatable("item.chest_item.sword_heart.string.2").withStyle(Style.EMPTY.withColor(color)));
         tooltipComponents.accept(Component.translatable("item.chest_item.sword_heart.string.3").withStyle(Style.EMPTY.withColor(color)));
         tooltipComponents.accept(Component.translatable("item.chest_item.sword_heart.string.4").withStyle(Style.EMPTY.withColor(color)));
+    }
+
+    @Override
+    public int maxGiftNumber(ItemStack stack) {
+        return 1;
+    }
+    @Override
+    public HashSet<EvilGiftBase> canHasEvilGift() {
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
+        evilGiftBases.add(EvilGifts.dawn.get());
+        return evilGiftBases;
     }
 }

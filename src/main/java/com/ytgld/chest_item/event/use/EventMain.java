@@ -286,6 +286,7 @@ public class EventMain {
         Warmaker.die(event);
         LeadOfEnlightenment.die(event);
         ChaosFortress.killArmor(event);
+        GiveEvilGiftHandler.event(event);
     }
     @SubscribeEvent
     public void CriticalHitEvent(CriticalHitEvent event){
@@ -297,6 +298,7 @@ public class EventMain {
     @SubscribeEvent
     public  void dieTotem(LivingUseTotemEvent event) {
         ChaosFortress.dieTotem(event);
+        GiveEvilGiftHandler.event(event);
     }
 
     @SubscribeEvent

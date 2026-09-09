@@ -5,6 +5,8 @@ import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.Mth;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.player.SweepAttackEvent;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -93,5 +96,17 @@ public class TheKill extends EvilMother{
     @Override
     public int getSanity() {
         return -3;
+    }
+
+    @Override
+    public int maxGiftNumber(ItemStack stack) {
+        return 1;
+    }
+    @Override
+    public HashSet<EvilGiftBase> canHasEvilGift() {
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
+        evilGiftBases.add(EvilGifts.dawn.get());
+        evilGiftBases.add(EvilGifts.rotten_utensils.get());
+        return evilGiftBases;
     }
 }

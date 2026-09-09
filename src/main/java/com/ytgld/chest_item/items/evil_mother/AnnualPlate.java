@@ -199,13 +199,6 @@ public class AnnualPlate extends EvilMother{
     private static double getKnockbackPower(Entity attacker, LivingEntity nearby, Vec3 direction) {
         return ((double)3.5F - direction.length()) * (double)0.7F * (double)(attacker.fallDistance > (double)5.0F ? 2 : 1) * ((double)1.0F - nearby.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
     }
-
-    @Override
-    public void tick(Player player, ItemStack stack) {
-        super.tick(player, stack);
-        IEvilGift.addGift(stack,EvilGifts.rotten_utensils.get());
-    }
-
     @Override
     public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         super.text(stack, tooltipComponents, flag);

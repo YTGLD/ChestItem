@@ -6,6 +6,8 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.black.ChaosConstructor;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import com.ytgld.chest_item.tip.an_element.SkillList;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import com.ytgld.chest_item.tip.an_element.extend.SkillBase;
@@ -23,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -35,7 +38,7 @@ public class DemonLord extends EvilMother implements SkillList {
 
     @Override
     public int getSanity() {
-        return -5;
+        return 0;
     }
 
     @Override
@@ -86,5 +89,16 @@ public class DemonLord extends EvilMother implements SkillList {
     }
 
 
+    @Override
+    public int maxGiftNumber(ItemStack stack) {
+        return 1;
+    }
+    @Override
+    public HashSet<EvilGiftBase> canHasEvilGift() {
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
+        evilGiftBases.add(EvilGifts.synthesizer.get());
+        evilGiftBases.add(EvilGifts.snap_string.get());
+        return evilGiftBases;
+    }
 
 }

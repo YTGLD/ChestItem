@@ -41,16 +41,16 @@ public interface IEvilGift {
     }
 
 
-    static void addGift(ItemStack stack , EvilGiftBase giftBase){
+    default void addGift(ItemStack stack , EvilGiftBase giftBase){
         EvilGiftData evilGiftData = stack.get(DataReg.evil_gift.get());
-        if (stack.getItem() instanceof IEvilGift gift &&  evilGiftData != null) {
-            if (!gift.canHasEvilGift().contains(giftBase)) {
+        if (evilGiftData != null) {
+            if (!canHasEvilGift().contains(giftBase)) {
                 return;
             }
-            if (gift.theGiftBase(stack).contains(giftBase)) {
+            if (theGiftBase(stack).contains(giftBase)) {
                 return;
             }
-            if (evilGiftData.hashSet().size() < gift.maxGiftNumber(stack)) {
+            if (evilGiftData.hashSet().size() < maxGiftNumber(stack)) {
                 evilGiftData.add(giftBase.id().toString());
                 upData(stack);
             }
