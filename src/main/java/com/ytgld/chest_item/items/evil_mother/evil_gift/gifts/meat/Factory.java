@@ -65,18 +65,6 @@ public class Factory extends EvilGiftBase {
         }
     }
 
-    @Override
-    public AttHolderModify attHolderModify() {
-        AttHolderModify attHolderModify = new AttHolderModify(new HashMap<>());
-
-        attHolderModify.multimap().put(Attributes.MAX_HEALTH,
-                new AttributeModifier(this.id(),
-                        -0.05f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
-        return attHolderModify;
-    }
-
-
     public static void event(LivingDeathEvent event){
         if (event.getEntity() instanceof Player player) {
             if (!(EvilMother.getSanValue(player) < 0)) {

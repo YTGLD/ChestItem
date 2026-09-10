@@ -7,14 +7,30 @@ import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.phys.Vec2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AddBookPage
 public class EvilGiftPage implements RegisterBookPage {
 
     private final int aInt = 24;
+    private List<Component> components (){
+        List<Component> list = new ArrayList<>();
+        list.add(Component.translatable("chest_item.book.evil_gift.main.1").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.2").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.3").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.literal(""));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.4").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.5").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.6").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.literal(""));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.7").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.8").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        return list;
+    }
     @Override
     public void addPage(List<CIBookScreen.CIBookGuiAdd> list) {
         {
@@ -30,7 +46,7 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
-                        evilMother.theColor()));
+                        evilMother.theColor(),components()));
                 list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 4, aInt * 2),
                         Component.translatable("chest_item.book.dawn.main"),
                         List.of(
@@ -42,7 +58,7 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
-                        evilMother.theColor()));
+                        evilMother.theColor(),components()));
 
                 list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 3, aInt * 3),
                         Component.translatable("chest_item.book.synthesizer.main"),
@@ -55,7 +71,7 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
-                        evilMother.theColor()));
+                        evilMother.theColor(),components()));
 
                 list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 4, aInt * 3),
                         Component.translatable("chest_item.book.snap_string.main"),
@@ -68,7 +84,7 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
-                        evilMother.theColor()));
+                        evilMother.theColor(),components()));
 
 
                 list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 5, aInt * 4),
@@ -82,7 +98,7 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
-                        evilMother.theColor()));
+                        evilMother.theColor(),components()));
 
 
                 list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 5, aInt * 3),
@@ -96,7 +112,7 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
-                        evilMother.theColor()));
+                        evilMother.theColor(),components()));
 
 
 
@@ -111,7 +127,7 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
-                        evilMother.theColor()));
+                        evilMother.theColor(),components()));
 
 
                 list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MotherRemains_.asItem(), new Vec2(aInt * 6, aInt * 4),
@@ -125,7 +141,7 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
-                        evilMother.theColor()));
+                        evilMother.theColor(),components()));
             }
         }
     }

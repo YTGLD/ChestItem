@@ -1439,6 +1439,18 @@
   "chest_item.book.snap_string.3": "邪母因果斩去，持有者",
   "chest_item.book.snap_string.4": "将更加癫狂并更容易获取资源",
 
+
+
+
+  "chest_item.book.evil_gift.main.1": "一些物品自带1~2个邪母槽位",
+  "chest_item.book.evil_gift.main.2": "物品在玩家完成某些事情的情况下",
+  "chest_item.book.evil_gift.main.3": "可以生长出一块邪母组件",
+  "chest_item.book.evil_gift.main.4": "每个物品自行绑定某些邪母组件",
+  "chest_item.book.evil_gift.main.5": "也就是说每个物品可获取",
+  "chest_item.book.evil_gift.main.6": "的邪母组件种类是固定的",
+  "chest_item.book.evil_gift.main.7": "邪母组件没办法扣下来",
+  "chest_item.book.evil_gift.main.8": "邪母组件会在物品的最上方显示出来",
+
   "chest_item.book.test.main": "Small trinket in the box",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
   "chest_item.book.test.2": "Contributor: Qiuji",

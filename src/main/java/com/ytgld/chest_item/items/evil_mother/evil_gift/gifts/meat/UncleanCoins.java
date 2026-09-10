@@ -46,10 +46,6 @@ public class UncleanCoins extends EvilGiftBase {
     public AttHolderModify attHolderModify() {
         AttHolderModify attHolderModify = new AttHolderModify(new HashMap<>());
 
-        attHolderModify.multimap().put( AttReg.heal,
-                new AttributeModifier(this.id(),
-                        -0.05f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-
         attHolderModify.multimap().put(Attributes.MAX_HEALTH,
                 new AttributeModifier(this.id(),
                         2, AttributeModifier.Operation.ADD_VALUE));
