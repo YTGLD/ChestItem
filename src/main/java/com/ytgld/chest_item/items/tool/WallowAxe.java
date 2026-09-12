@@ -1,5 +1,7 @@
 package com.ytgld.chest_item.items.tool;
 
+import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.IBlackLight;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.black.ITheChaos;
@@ -23,6 +25,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.SimpleTier;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 
 import java.util.List;
@@ -54,6 +57,28 @@ public class WallowAxe extends AxeItem implements IBlackLight , ITheChaos {
         return co;
     }
 
+    public static void damage(LivingDamageEvent.Pre event) {
+        if (event.getSource().getEntity() instanceof Player player) {
+            if (event.getEntity().getMainHandItem().is(InitItems.WallowAxe_.get())) {
+                if (Handler.has(player, InitItems.DryBones_.asItem())) {
+                    float vValue = (float) player.getAttributeValue(AttReg.shadow_shield);
+                    float attachment = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+
+                    float a = attachment / vValue;
+
+                    if (a > 0.25f) {
+                        event.setNewDamage(event.getNewDamage() * 1.5f);
+
+                        float c = attachment - vValue * 0.25f;
+                        if (c < 0) {
+                            c = 0;
+                        }
+                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, c);
+                    }
+                }
+            }
+        }
+    }
     public static void cit(CriticalHitEvent event){
         if (event.isCriticalHit()) {
             if (event.getEntity().getMainHandItem().is(InitItems.WallowAxe_.get())) {
@@ -138,6 +163,11 @@ public class WallowAxe extends AxeItem implements IBlackLight , ITheChaos {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("item.chest_item.wallow_axe.string.1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.add(Component.literal(""));
+        tooltipComponents.add(Component.translatable("item.chest_item.wallow_axe.string.2").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.add(Component.literal(""));
+        tooltipComponents.add(Component.translatable("item.chest_item.wallow_axe.string.3").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
+        tooltipComponents.add(Component.translatable("item.chest_item.wallow_axe.string.4").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0X806A5ACD))));
     }
     @Override
     public int getBarColor(ItemStack stack) {

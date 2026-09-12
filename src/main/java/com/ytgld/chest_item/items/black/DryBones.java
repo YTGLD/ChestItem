@@ -69,6 +69,27 @@ public class DryBones extends ItemBlackShadow {
         float s =0;
         float d =0;
         float f =0;
+        float axe = 0f;
+        if (player.getMainHandItem().is(InitItems.WallowAxe_.asItem())) {
+            axe = 0.2f;
+        }
+        modifiers.put(AttReg.heal, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+
+        modifiers.put(Attributes.ARMOR, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+
+        modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        modifiers.put(Attributes.ATTACK_SPEED, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
+                InitItems.WallowAxe_.asItem().getDescriptionId()),
+                axe, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         AttributeInstance attributeInstance_hyperplasia = player.getAttribute(AttReg.hyperplasia);
         AttributeInstance attributeInstance_shadow_shield = player.getAttribute(AttReg.shadow_shield);
@@ -89,6 +110,13 @@ public class DryBones extends ItemBlackShadow {
                     f = ConfigItem.intValue.get().floatValue();
                 }
             }
+        }
+
+        if (player.getMainHandItem().is(InitItems.WallowAxe_.asItem())) {
+            a =0;
+            s =0;
+            d =0;
+            f =0;
         }
 
         modifiers.put(Attributes.ARMOR, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +

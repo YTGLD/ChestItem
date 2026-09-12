@@ -286,6 +286,7 @@ public class EventMain {
         ShadowShieldHandler.ShadowShield(event);
         WarGodCommand.notDie(event);
         RottingSubstance.damage(event);
+        WallowAxe.damage(event);
 
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);

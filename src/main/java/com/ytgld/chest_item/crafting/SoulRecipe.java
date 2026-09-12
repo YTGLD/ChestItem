@@ -15,6 +15,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
@@ -209,7 +210,7 @@ public class SoulRecipe implements CraftingRecipe{
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider provider) {
-        return null;
+        return Items.AIR.getDefaultInstance();
     }
 
     private boolean checkSoulBottle(CraftingInput input) {
