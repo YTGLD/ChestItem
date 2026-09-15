@@ -3,6 +3,7 @@ package com.ytgld.chest_item.items.black;
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.LaserColumn;
+import com.ytgld.chest_item.entity.Reactor;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.items.SkillItem;
@@ -16,10 +17,10 @@ public class Test extends ItemBlackShadow implements SkillItem {
         if (Handler.has(player, InitItems.Test_.asItem())) {
             if (!player.level().isClientSide()) {
                 if (!player.getCooldowns().isOnCooldown(InitItems.Test_.asItem().getDefaultInstance())) {
-                    LaserColumn laserColumn = new LaserColumn(Entitys.LaserColumn_.get(),player.level());
-                    laserColumn.setPos(player.position());
-                    laserColumn.setOwner(player);
-                    player.level().addFreshEntity(laserColumn);
+                    Reactor reactor = new Reactor(Entitys.Reactor_.get(),player.level());
+                    reactor.setPos(player.position());
+                    reactor.setOwner(player);
+                    player.level().addFreshEntity(reactor);
                     player.getCooldowns().addCooldown(InitItems.Test_.asItem().getDefaultInstance(),1200);
                 }
             }

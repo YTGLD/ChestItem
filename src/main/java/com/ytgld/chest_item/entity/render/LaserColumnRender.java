@@ -30,57 +30,57 @@ public class LaserColumnRender extends EntityRenderer<LaserColumn, LaserColumnRe
 
     @Override
     public void submit(LaserColumnRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState cameraRenderState) {
-        super.submit(renderState, poseStack, nodeCollector, cameraRenderState);
-        LaserColumn entity = renderState.entity;
-        HandlerClient.showOutline = true;
-        HandlerClient.doPass = true;
-        int posOffset  = 0;
-        float s =600 -  entity.tickCount;
-        float ss = Math.min(40,s);
-        ss /= 40f;
-        float timeC = ss;
-
-
-        float a =entity.tickCount;
-        float c = Math.min(10,a);
-        c /= 10f;
-        float time=  c;
-        double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
-        double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());
-        double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
-        if (entity.canSee) {
-            poseStack.pushPose();
-            poseStack.mulPose(Axis.YP.rotationDegrees((entity.tickCount + (renderState.partialTick * 4) * 4)));
-            poseStack.translate(entity.getX() - x, entity.getY() - y, entity.getZ() - z);
-            nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
-                pose.translate(0, 40 + posOffset, 0);
-                pose.scale(1 * time * timeC, 20, 1 * time * timeC);
-                renderSphere1(pose, bufferSource, 100, 3.25f, Light.ARGB.color(255, 100, 50, 255));
-            });
-            nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
-                pose.scale(2 * time * timeC, 0.2f, 2 * time * timeC);
-                renderSphere1(pose, bufferSource, 100, 3, Light.ARGB.color(100, 255, 100, 0));
-            });
-            poseStack.popPose();
-        }
-        if (entity.canSee) {
-            for (int i = 0; i < 8; i++) {
-                poseStack.pushPose();
-                poseStack.mulPose(Axis.YP.rotationDegrees(entity.tickCount * 4 + (i * 45)));
-                poseStack.translate(entity.getX() - x, entity.getY() - y, entity.getZ() - z);
-                nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
-                    pose.translate(4, 25 + posOffset, 0);
-                    pose.scale(1 * time * timeC, 50, 1 * time * timeC);
-                    renderSphere1(pose, bufferSource, 100, 0.8f, Light.ARGB.color(255, 15, 35, 200));
-                });
-                nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
-                    pose.translate(4, 0, 0);
-                    pose.scale(2 * time * timeC, 1, 2 * time * timeC);
-                    renderSphere1(pose, bufferSource, 100, 1, Light.ARGB.color(255, 150, 0, 150));
-                });
-                poseStack.popPose();
-            }
-        }
+//        super.submit(renderState, poseStack, nodeCollector, cameraRenderState);
+//        LaserColumn entity = renderState.entity;
+//        HandlerClient.showOutline = true;
+//        HandlerClient.doPass = true;
+//        int posOffset  = 0;
+//        float s =600 -  entity.tickCount;
+//        float ss = Math.min(40,s);
+//        ss /= 40f;
+//        float timeC = ss;
+//
+//
+//        float a =entity.tickCount;
+//        float c = Math.min(10,a);
+//        c /= 10f;
+//        float time=  c;
+//        double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
+//        double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());
+//        double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
+//        if (entity.canSee) {
+//            poseStack.pushPose();
+//            poseStack.mulPose(Axis.YP.rotationDegrees((entity.tickCount + (renderState.partialTick * 4) * 4)));
+//            poseStack.translate(entity.getX() - x, entity.getY() - y, entity.getZ() - z);
+//            nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+//                pose.translate(0, 40 + posOffset, 0);
+//                pose.scale(1 * time * timeC, 20, 1 * time * timeC);
+//                renderSphere1(pose, bufferSource, 100, 3.25f, Light.ARGB.color(255, 100, 50, 255));
+//            });
+//            nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+//                pose.scale(2 * time * timeC, 0.2f, 2 * time * timeC);
+//                renderSphere1(pose, bufferSource, 100, 3, Light.ARGB.color(100, 255, 100, 0));
+//            });
+//            poseStack.popPose();
+//        }
+//        if (entity.canSee) {
+//            for (int i = 0; i < 8; i++) {
+//                poseStack.pushPose();
+//                poseStack.mulPose(Axis.YP.rotationDegrees(entity.tickCount * 4 + (i * 45)));
+//                poseStack.translate(entity.getX() - x, entity.getY() - y, entity.getZ() - z);
+//                nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+//                    pose.translate(4, 25 + posOffset, 0);
+//                    pose.scale(1 * time * timeC, 50, 1 * time * timeC);
+//                    renderSphere1(pose, bufferSource, 100, 0.8f, Light.ARGB.color(255, 15, 35, 200));
+//                });
+//                nodeCollector.submitCustomGeometry(poseStack, MRender.colorOutline(true), (pose, bufferSource) -> {
+//                    pose.translate(4, 0, 0);
+//                    pose.scale(2 * time * timeC, 1, 2 * time * timeC);
+//                    renderSphere1(pose, bufferSource, 100, 1, Light.ARGB.color(255, 150, 0, 150));
+//                });
+//                poseStack.popPose();
+//            }
+//        }
     }
     public void renderSphere1(@NotNull PoseStack.Pose matrices, @NotNull VertexConsumer vertexConsumer, int light, float s ,int color) {
         int stacks = 25; // 垂直方向的分割数

@@ -169,6 +169,7 @@ public class Chestitem {
             event.registerEntityRenderer(Entitys.TheHyperplasia_.get(), TheHyperplasiaRender::new);
             event.registerEntityRenderer(Entitys.EvilMotherSpirit_.get(), EvilMotherSpiritRender::new);
             event.registerEntityRenderer(Entitys.ChaosCube_.get(), ChaosCubeRender::new);
+            event.registerEntityRenderer(Entitys.Reactor_.get(), ReactorRender::new);
         }
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent evt) {

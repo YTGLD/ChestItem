@@ -349,6 +349,7 @@
   "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
   "entity.chest_item.laser_column": "???",
   "entity.chest_item.hyperplasia": "?",
+  "entity.chest_item.reactor": "reactor",
   "entity.chest_item.spirit": "???",
   "event.chest_item.equip": "When placed in a magic box：",
   "item.chest_item.reinforced.equipped": "You can right-click to equip it",

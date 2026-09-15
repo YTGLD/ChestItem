@@ -537,44 +537,6 @@ public class EventMain {
         Samsara.event(event);
         Chaos.event(event);
         ChaosFortress.hurtBy2(event);
-
-        if (event.getSource().getEntity() instanceof LivingEntity living){
-            //1.3
-            AttributeInstance instability = living.getAttribute(AttReg.instability);
-            if (instability != null) {
-                //1.3
-                float value = (float) instability.getValue();
-
-                float v1 = value - 1;
-                //0.3
-                if (v1>0) {
-                    //-0.15
-                    //0.36
-                    float apply = Mth.nextFloat(RandomSource.create(), -v1 * 0.5f,v1*1.2f);
-                    //0.75 (min)
-                    //1.8 (max)
-                    apply *= 5f;
-                    float damage = event.getAmount() + apply;
-                    damage = Math.max(0,damage);
-                    event.setAmount(damage);
-                }
-            }
-
-            AttributeInstance instability_low = living.getAttribute(AttReg.instability_low);
-            if (instability_low != null) {
-                //1.3
-                float value = (float) instability_low.getValue();
-
-                float v1 = value - 1;
-                if (v1>0) {
-                    float apply = Mth.nextFloat(RandomSource.create(), -v1,v1*1.2f);
-                    apply *= 6f;
-                    float damage = event.getAmount() + apply;
-                    damage = Math.max(0,damage);
-                    event.setAmount(damage);
-                }
-            }
-        }
     }
     @SubscribeEvent
     public void LivingChangeTargetEvent(LivingChangeTargetEvent event){

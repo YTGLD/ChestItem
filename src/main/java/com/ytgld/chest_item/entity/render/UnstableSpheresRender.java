@@ -11,6 +11,8 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -47,10 +49,7 @@ public class UnstableSpheresRender extends EntityRenderer<UnstableSpheres, Unsta
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
 
-        collector.submitCustomGeometry(poseStack,MRender.colorOutline(true),(pose, bufferSource) -> {
-            setT2(pose, entity, bufferSource);
-        });
-        collector.submitCustomGeometry(poseStack,MRender.colorOutline(false),(pose, bufferSource) -> {
+        collector.submitCustomGeometry(poseStack, RenderTypes.lines(),(pose, bufferSource) -> {
             setT2(pose, entity, bufferSource);
         });
 

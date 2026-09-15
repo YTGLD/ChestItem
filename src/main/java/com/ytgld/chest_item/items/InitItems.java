@@ -300,6 +300,10 @@ public class InitItems {
 
 
 
+
+    public static final DeferredItem<Item> Reactor_ = register("reactor",
+            (Identifier)-> new Item(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
     }

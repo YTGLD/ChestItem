@@ -98,31 +98,25 @@ public abstract class MRender {
         return ITEM_CUTOUT(texture,outline);
     }
 
-    public static RenderType colorOutline(boolean isOutline){
-        if (isOutline){
-            return RenderType.create(
-                    "lightning", RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
-                                    .withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
-                                    .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
-                                    .withDepthStencilState(DepthStencilState.DEFAULT)
-                                    .withPrimitiveTopology(PrimitiveTopology.QUADS)
-                                    .withVertexBinding(0, DefaultVertexFormat.POSITION_COLOR).withCull(false).build())
-                            .setOutputTarget(outline2).sortOnUpload().createRenderSetup()
-            );
-        }
-        return RenderType.create(
-                "lightning",
-                RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning").
-                                withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
-                                .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
-                                .withPrimitiveTopology(PrimitiveTopology.QUADS)
-                                .withVertexBinding(0,DefaultVertexFormat.POSITION_COLOR)
-                                .withDepthStencilState(DepthStencilState.DEFAULT)
-                                .withDepthStencilState(DepthStencilState.DEFAULT).withCull(false).build()
-       )
-                        .sortOnUpload().createRenderSetup());
+    public static RenderType colorOutline = RenderType.create(
+            "lightning", RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
+                            .withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
+                            .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
+                            .withDepthStencilState(DepthStencilState.DEFAULT)
+                            .withPrimitiveTopology(PrimitiveTopology.QUADS)
+                            .withVertexBinding(0, DefaultVertexFormat.POSITION_COLOR).withCull(false).build())
+                    .setOutputTarget(outline2).sortOnUpload().createRenderSetup()
+    );
 
-    }
+    public static RenderType colorNotOutline = RenderType.create(
+            "lightning", RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
+                            .withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
+                            .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
+                            .withDepthStencilState(DepthStencilState.DEFAULT)
+                            .withPrimitiveTopology(PrimitiveTopology.QUADS)
+                            .withVertexBinding(0, DefaultVertexFormat.POSITION_COLOR).withCull(false).build())
+                    .sortOnUpload().createRenderSetup()
+    );
 
     public static RenderType colorOutlineLines(boolean isOutline){
         RenderPipeline.Snippet renderPipeline =   RenderPipeline.builder(MATRICES_FOG_SNIPPET)

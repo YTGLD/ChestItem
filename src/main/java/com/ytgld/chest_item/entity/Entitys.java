@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ambient.Bat;
+import net.minecraft.world.entity.animal.golem.IronGolem;
 import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -38,6 +39,10 @@ public class Entitys {
             EntityType.Builder.of(EvilMotherSpirit::new, MobCategory.MISC).sized(0.01f, 0.01f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
                     Identifier.fromNamespaceAndPath(Chestitem.MODID, "spirit"))));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<Reactor>> Reactor_ = REGISTRY.register("reactor", () ->
+            EntityType.Builder.of(Reactor::new, MobCategory.MISC).sized(1, 1).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "reactor"))));
+
 
     public static final DeferredHolder<EntityType<?>, EntityType<ChaosCube>> ChaosCube_ = REGISTRY.register("chaos_cube", () ->
             EntityType.Builder.of(ChaosCube::new, MobCategory.MISC).sized(0.8f, 0.8f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
@@ -48,5 +53,6 @@ public class Entitys {
         event.put(Entitys.EndComing_.get(), Bat.createAttributes().build());
         event.put(Entitys.LaserColumn_.get(), Zombie.createAttributes().build());
         event.put(Entitys.ChaosCube_.get(), Zombie.createAttributes().build());
+        event.put(Entitys.Reactor_.get(), IronGolem.createAttributes().build());
     }
 }
