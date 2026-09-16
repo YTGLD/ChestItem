@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/shadow_mint",
+  "criteria": {
+    "corruption_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:corruption_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:corruption_crystal"
+    },
+    "title": {
+      "translate": "item.chest_item.corruption_crystal.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "corruption_crystal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

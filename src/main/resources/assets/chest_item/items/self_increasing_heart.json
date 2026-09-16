@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "chest_item:item/self_increasing_heart"
+  }
+}

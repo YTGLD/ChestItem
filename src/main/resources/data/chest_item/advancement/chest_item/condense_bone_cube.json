@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/bone_head",
+  "criteria": {
+    "condense_bone_cube": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:condense_bone_cube"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:condense_bone_cube"
+    },
+    "title": {
+      "translate": "item.chest_item.condense_bone_cube.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "condense_bone_cube"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

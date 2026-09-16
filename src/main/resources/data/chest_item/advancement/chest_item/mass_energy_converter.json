@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/qualitative_components",
+  "criteria": {
+    "mass_energy_converter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:mass_energy_converter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:mass_energy_converter"
+    },
+    "title": {
+      "translate": "item.chest_item.mass_energy_converter.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "mass_energy_converter"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/stronger_stone",
+  "criteria": {
+    "knife": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:knife"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:knife"
+    },
+    "title": {
+      "translate": "item.chest_item.knife.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "knife"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/eye_book",
+  "criteria": {
+    "lead_of_enlightenment": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:lead_of_enlightenment"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "item.chest_item.lead_of_enlightenment.string.0"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:lead_of_enlightenment"
+    },
+    "title": {
+      "translate": "advancements.chest_item.lead_of_enlightenment"
+    }
+  },
+  "requirements": [
+    [
+      "lead_of_enlightenment"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

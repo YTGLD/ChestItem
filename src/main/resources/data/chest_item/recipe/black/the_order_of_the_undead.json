@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:crying_obsidian",
+    "B": "chest_item:blood",
+    "C": "minecraft:skeleton_skull"
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:the_order_of_the_undead"
+  }
+}

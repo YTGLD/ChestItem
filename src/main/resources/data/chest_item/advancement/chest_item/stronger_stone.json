@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/life_stone",
+  "criteria": {
+    "stronger_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:stronger_stone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:stronger_stone"
+    },
+    "title": {
+      "translate": "item.chest_item.stronger_stone.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "stronger_stone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

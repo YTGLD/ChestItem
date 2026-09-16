@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/root",
+  "criteria": {
+    "lead": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:lead"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:lead"
+    },
+    "title": {
+      "translate": "item.chest_item.lead.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "lead"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

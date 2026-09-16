@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/gold_cheese",
+  "criteria": {
+    "the_end_is_coming": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:the_end_is_coming"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:the_end_is_coming"
+    },
+    "title": {
+      "translate": "item.chest_item.the_end_is_coming.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "the_end_is_coming"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

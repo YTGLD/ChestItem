@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "chest_item:condense_bone_cube",
+    "B": "minecraft:shield",
+    "C": "minecraft:diamond"
+  },
+  "pattern": [
+    "AAA",
+    "ACA",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:stabilizing_device"
+  }
+}

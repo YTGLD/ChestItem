@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:quartz_block",
+    "B": "chest_item:condense_bone_cube",
+    "C": "minecraft:diamond"
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:qualitative_components"
+  }
+}

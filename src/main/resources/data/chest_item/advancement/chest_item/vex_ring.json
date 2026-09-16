@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/ring",
+  "criteria": {
+    "vex_ring": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:vex_ring"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:vex_ring"
+    },
+    "title": {
+      "translate": "item.chest_item.vex_ring.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "vex_ring"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

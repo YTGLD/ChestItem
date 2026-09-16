@@ -1,0 +1,60 @@
+{
+  "fly_sword": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:fly_sword",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.fly_sword"
+  },
+  "heart": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:heart",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.heart"
+  },
+  "kill": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:kill",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.kill"
+  },
+  "laser_column": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:laser_column",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.sound_1"
+  },
+  "sword": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:sword1",
+        "stream": true
+      },
+      {
+        "name": "chest_item:sword2",
+        "stream": true
+      },
+      {
+        "name": "chest_item:sword3",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.sword"
+  }
+}

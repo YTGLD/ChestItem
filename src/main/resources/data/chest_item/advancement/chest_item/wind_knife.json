@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/knife",
+  "criteria": {
+    "wind_knife": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:wind_knife"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:wind_knife"
+    },
+    "title": {
+      "translate": "item.chest_item.wind_knife.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "wind_knife"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

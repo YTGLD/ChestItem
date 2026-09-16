@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "chest_item:item/fear_greatsword_glow"
+  }
+}

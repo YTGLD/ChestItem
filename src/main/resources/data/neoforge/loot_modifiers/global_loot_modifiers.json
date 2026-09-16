@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "entries": [
+
+    "chest_item:loot",
+    "chest_item:reinforced_loot"
+
+  ]
+}

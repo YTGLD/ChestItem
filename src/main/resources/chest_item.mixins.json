@@ -1,0 +1,39 @@
+{
+  "required": true,
+  "package": "com.ytgld.chest_item.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ApplyBonusCountMixin",
+    "EntityMixin",
+    "ExperienceOrbMixin",
+    "FoodDataMixin",
+    "ItemStackMixin",
+    "LivingEntityMixin",
+    "MobEffectInstanceMixin",
+    "PlayerMixin",
+    "ServerPlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "client": [
+    "cilent.AbstractContainerScreenMixin",
+    "cilent.AddBlackShadowMixin",
+    "cilent.AvatarRenderStateMixin",
+    "cilent.GuiGraphicsExtractorMixin",
+    "cilent.ParticleEngineMixin",
+    "cilent.RenderBlackShadowMixin",
+    "cilent.decay.GuiGraphicsExtractorMixin",
+    "cilent.guiparticles.ScreenMixin",
+    "cilent.hud.GuiMixin",
+    "cilent.model.GuiGraphicsExtractorMixin",
+    "outline.LevelRendererMixin",
+    "outline.PreparedFrameMixin",
+    "outline.SubmitNodeCollectionMixin",
+    "outline.SubmitNodeStorageMixin",
+    "util.LevelRendererMixin"
+  ]
+}

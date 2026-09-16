@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:copper_block",
+    "B": "minecraft:golden_sword",
+    "C": "minecraft:gold_ingot",
+
+    "D": "chest_item:complete",
+    "E": "minecraft:netherite_ingot",
+
+    "F": "minecraft:ghast_tear"
+  },
+  "pattern": [
+    "ADA",
+    "CBC",
+    "FEF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:defeat_the_army"
+  }
+}

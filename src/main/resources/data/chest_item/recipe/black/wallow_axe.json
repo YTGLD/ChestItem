@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:crying_obsidian",
+    "B": "minecraft:netherite_axe",
+    "C": "minecraft:skeleton_skull",
+    "D": "chest_item:complete",
+    "E": "chest_item:shield_engine"
+  },
+  "pattern": [
+    "AEA",
+    "DBD",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:wallow_axe"
+  }
+}

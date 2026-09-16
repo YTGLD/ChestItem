@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "chest_item:model",
+    "model": "chest_item:item/evil_axe",
+    "identifier": "chest_item:textures/item/evil_axe_glow.png"
+  }
+}

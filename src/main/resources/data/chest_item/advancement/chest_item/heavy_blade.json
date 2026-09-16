@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/wind_knife",
+  "criteria": {
+    "heavy_blade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:heavy_blade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:heavy_blade"
+    },
+    "title": {
+      "translate": "item.chest_item.heavy_blade.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "heavy_blade"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

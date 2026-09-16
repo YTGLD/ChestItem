@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/meatball",
+  "criteria": {
+    "stomach": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:stomach"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:stomach"
+    },
+    "title": {
+      "translate": "item.chest_item.stomach.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "stomach"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

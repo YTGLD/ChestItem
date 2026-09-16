@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/heart",
+  "criteria": {
+    "imitation_biomass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:imitation_biomass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:imitation_biomass"
+    },
+    "title": {
+      "translate": "item.chest_item.imitation_biomass.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "imitation_biomass"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

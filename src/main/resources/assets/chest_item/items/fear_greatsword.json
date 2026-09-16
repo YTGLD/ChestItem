@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "chest_item:model",
+    "model": "chest_item:item/fear_greatsword",
+    "identifier": "chest_item:textures/item/fear_greatsword_glow.png"
+  }
+}

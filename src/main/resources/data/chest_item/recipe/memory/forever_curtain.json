@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "chest_item:drifting_bottles",
+    "B": "#minecraft:meat",
+    "C": "chest_item:heart",
+    "D": "chest_item:flesh_and_blood_gears"
+  },
+  "pattern": [
+    "BCB",
+    "CAC",
+    "BDB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:forever_curtain"
+  }
+}

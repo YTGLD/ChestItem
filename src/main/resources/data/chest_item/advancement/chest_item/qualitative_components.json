@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/alienation_diodes",
+  "criteria": {
+    "qualitative_components": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:qualitative_components"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:qualitative_components"
+    },
+    "title": {
+      "translate": "item.chest_item.qualitative_components.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "qualitative_components"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

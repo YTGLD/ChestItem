@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A":  "chest_item:mother_remains",
+    "B":  "minecraft:echo_shard",
+    "C":  "chest_item:end_effect",
+    "D":  "minecraft:brewing_stand"
+  },
+  "pattern": [
+    "ABA",
+    "ACA",
+    "BDB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:distillation"
+  }
+}

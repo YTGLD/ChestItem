@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "chest_item:magic_iron",
+    "B": "chest_item:drifting_bottles",
+    "C": "minecraft:nether_star"
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:oblivion"
+  }
+}

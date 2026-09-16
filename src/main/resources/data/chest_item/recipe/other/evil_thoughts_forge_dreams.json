@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:obsidian",
+    "A": "chest_item:heart",
+    "C": "chest_item:complete",
+    "D": "minecraft:soul_sand"
+  },
+  "pattern": [
+    "BBB",
+    "BAB",
+    "DCD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:evil_thoughts_forge_dreams"
+  }
+}

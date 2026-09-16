@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:obsidian",
+    "B": "chest_item:pod",
+    "C": "minecraft:netherite_scrap",
+    "D": "minecraft:spider_eye"
+  },
+  "pattern": [
+    "ACA",
+    "CBC",
+    "ADA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:one_eye_spider"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/stomach",
+  "criteria": {
+    "god_apple": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:god_apple"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:god_apple"
+    },
+    "title": {
+      "translate": "item.chest_item.god_apple.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "god_apple"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

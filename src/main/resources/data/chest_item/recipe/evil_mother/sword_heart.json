@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A":  "chest_item:mother_remains",
+    "B":  "minecraft:nether_star",
+    "C":  "minecraft:netherite_sword"
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:sword_heart"
+  }
+}

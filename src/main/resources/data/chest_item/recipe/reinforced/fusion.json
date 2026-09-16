@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "chest_item:mother_remains",
+    "B": "minecraft:echo_shard",
+    "C": "minecraft:heart_of_the_sea",
+    "D": "minecraft:netherite_ingot"
+  },
+  "pattern": [
+    "ABA",
+    "ACA",
+    "ADA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:fusion"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "chest_item:chest_item/knife",
+  "criteria": {
+    "gold_cheese": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:gold_cheese"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "chest_item:gold_cheese"
+    },
+    "title": {
+      "translate": "item.chest_item.gold_cheese.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "gold_cheese"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

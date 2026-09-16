@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:iron_block",
+    "A": "chest_item:iron_heart",
+    "C": "chest_item:complete"
+  },
+  "pattern": [
+    " B ",
+    "BAB",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:iron_cube"
+  }
+}

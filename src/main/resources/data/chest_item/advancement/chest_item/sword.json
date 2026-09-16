@@ -1,0 +1,33 @@
+{
+  "parent": "chest_item:chest_item/nine_dome",
+  "criteria": {
+    "sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": "chest_item:sword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.chest_item.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chest_item:sword"
+    },
+    "title": {
+      "translate": "item.chest_item.sword.string.0"
+    }
+  },
+  "requirements": [
+    [
+      "sword"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

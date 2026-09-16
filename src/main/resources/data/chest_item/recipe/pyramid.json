@@ -1,0 +1,20 @@
+{
+  "type": "chest_item:soul_crafting",
+
+  "ingredients": [
+    "chest_item:soul_bottle",
+    "chest_item:mother_remains",
+    "chest_item:mother_remains",
+    "chest_item:mother_remains",
+    "minecraft:iron_ingot"
+  ],
+
+  "soul_cost": {
+    "chest_item:spirit_soul": 16,
+    "chest_item:death_soul": 16
+  },
+
+  "result": "chest_item:triangle",
+
+  "count": 1
+}
