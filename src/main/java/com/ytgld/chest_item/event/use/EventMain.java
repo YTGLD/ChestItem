@@ -126,6 +126,7 @@ public class EventMain {
        SwordHandler.tickAttackHurt(event);
         EvilMother.attrib(event);
         Fusion.event(event);
+        GiveEvilGiftHandler.event(event);
     }
     @SubscribeEvent
     public void  knock(LivingKnockBackEvent event){
@@ -905,6 +906,10 @@ public class EventMain {
             }
 
         }
+    }
+    @SubscribeEvent
+    public void event(PlayerInteractEvent.EntityInteract event) {
+        UseItemToReactorHandler.event(event);
     }
     @SubscribeEvent
     public void event(EnchantedEntityLootEvent event) {

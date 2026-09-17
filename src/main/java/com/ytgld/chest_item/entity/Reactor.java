@@ -2,7 +2,9 @@ package com.ytgld.chest_item.entity;
 
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.black.Test;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.reactor.Calciner;
+import com.ytgld.chest_item.items.other.Agreement;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -20,6 +22,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -59,57 +62,66 @@ public class Reactor extends TamableAnimal {
         isInReactor = !entities.isEmpty();
 
         for (ItemEntity entity : entities) {
-            if (entity.tickCount % 5 != 1) {
-                continue;
-            }
-
-            ItemStack stack = entity.getItem();
-
-            if (stack.isEmpty()) {
-                continue;
-            }
-
-            if (!(this.level() instanceof ServerLevel level)) {
-                continue;
-            }
-            SingleRecipeInput input = new SingleRecipeInput(stack);
-
-            Optional<RecipeHolder<SmeltingRecipe>> recipe = level.recipeAccess()
-                    .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(stack), level);
-
-            if (recipe.isEmpty()) {
-                continue;
-            }
-            ItemStack result = recipe.get().value().assemble(input);
-            if (result.isEmpty()) {
-                continue;
-            }else {
-                if (tickCount % 20 == 1) {
-                    level.playSound(null, this.blockPosition(), SoundEvents.LAVA_AMBIENT, SoundSource.BLOCKS, 1, 1);
+            if (entity.tickCount > 10) {
+                if (entity.tickCount % 5 != 1) {
+                    continue;
                 }
-            }
-            stack.shrink(1);
-            ItemEntity resultEntity = new ItemEntity(
-                    level,
-                    entity.getX(),
-                    entity.getY(),
-                    entity.getZ(),
-                    result.copy()
-            );
-            level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
-                            new Vec3(0, 0.05, 0), true, Light.ARGB.color(255, 100, 255, 50), 2),
-                    resultEntity.getX(), resultEntity.getY() + 0.5f, resultEntity.getZ(), 1, 0, 0, 0, 0);
-            ExperienceOrb experienceOrb = new ExperienceOrb(level,resultEntity.getX(),resultEntity.getY(),resultEntity.getZ(),
-                    (int)(recipe.get().value().experience() + 1) * 3);
-            level.addFreshEntity(experienceOrb);
 
-            resultEntity.setDeltaMovement(entity.getDeltaMovement());
-            level.playSound(null,resultEntity.blockPosition(),SoundEvents.LAVA_POP, SoundSource.BLOCKS,1,1);
-            level.addFreshEntity(resultEntity);
+                ItemStack stack = entity.getItem();
 
+                if (stack.isEmpty()) {
+                    continue;
+                }
 
-            if (stack.isEmpty()) {
-                entity.discard();
+                if (!(this.level() instanceof ServerLevel level)) {
+                    continue;
+                }
+                SingleRecipeInput input = new SingleRecipeInput(stack);
+
+                Optional<RecipeHolder<SmeltingRecipe>> recipe = level.recipeAccess()
+                        .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(stack), level);
+
+                if (recipe.isEmpty()) {
+                    continue;
+                }
+                ItemStack result = recipe.get().value().assemble(input);
+                if (result.isEmpty() || result.is(stack.getItem())) {
+                    continue;
+                } else {
+                    if (tickCount % 20 == 1) {
+                        level.playSound(null, this.blockPosition(), SoundEvents.LAVA_AMBIENT, SoundSource.BLOCKS, 1, 1);
+                    }
+                }
+                stack.shrink(1);
+                ItemEntity resultEntity = new ItemEntity(
+                        level,
+                        entity.getX(),
+                        entity.getY(),
+                        entity.getZ(),
+                        result.copy()
+                );
+                level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                new Vec3(0, 0.05, 0), true, Light.ARGB.color(255, 100, 255, 50), 2),
+                        resultEntity.getX(), resultEntity.getY() + 0.5f, resultEntity.getZ(), 1, 0, 0, 0, 0);
+                ExperienceOrb experienceOrb = new ExperienceOrb(level, resultEntity.getX(), resultEntity.getY(), resultEntity.getZ(),
+                        (int) (recipe.get().value().experience() + 1) * 3);
+                level.addFreshEntity(experienceOrb);
+
+                resultEntity.setDeltaMovement(entity.getDeltaMovement());
+                level.playSound(null, resultEntity.blockPosition(), SoundEvents.LAVA_POP, SoundSource.BLOCKS, 1, 1);
+                level.addFreshEntity(resultEntity);
+
+                if (this.getOwner() instanceof Player player && !player.level().isClientSide()){
+                    CompoundTag compoundTag = player.getPersistentData();
+                    if (compoundTag.getIntOr(Calciner.fireNumber,0) < 100) {
+                        compoundTag.putInt(Calciner.fireNumber,
+                                compoundTag.getIntOr(Calciner.fireNumber, 0) + 1);
+                    }
+                }
+                if (stack.isEmpty()) {
+
+                    entity.discard();
+                }
             }
         }
 
@@ -125,7 +137,7 @@ public class Reactor extends TamableAnimal {
         }
         if (this.getOwner() instanceof Player player) {
             if (!this.level().isClientSide() && teleportCooldown <= 0) {
-                if (player.position().distanceTo(this.position()) > 25) {
+                if (player.position().distanceTo(this.position()) > 12.5f) {
                     if (this.teleportSomewhere(player)) {
                         this.teleportCooldown = 20;
                     }
@@ -145,11 +157,11 @@ public class Reactor extends TamableAnimal {
                     if (!player.level().isClientSide()) {
                         for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                             ItemStack stack = chestInventory.getItem(i);
-                            if (stack.is(InitItems.Test_)) {
+                            if (stack.is(InitItems.Agreement_)) {
                                 canLive = true;
                                 CompoundTag compoundTag = stack.get(DataReg.tag);
                                 if (compoundTag != null) {
-                                    if (!compoundTag.getBooleanOr(Test.chestHasReactor, false)) {
+                                    if (!compoundTag.getBooleanOr(Agreement.chestHasReactor, false)) {
                                         canLive = false;
                                     }
                                 }
@@ -263,6 +275,7 @@ public class Reactor extends TamableAnimal {
             return !movingPistonInOurCurrentPosition;
         }
     }
+
     @Override
     public boolean isFood(ItemStack itemStack) {
         return false;

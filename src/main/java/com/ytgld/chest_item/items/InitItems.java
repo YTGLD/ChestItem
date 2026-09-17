@@ -262,6 +262,8 @@ public class InitItems {
 
     public static final DeferredItem<@NotNull Item> DecayFruit_ = register("decay_fruit",
             (Identifier)-> new DecayFruit(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<@NotNull Item> Agreement_ = register("agreement",
+            (Identifier)-> new Agreement(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
     public static final DeferredItem<@NotNull Item> MotherRemains_ = register("mother_remains",
@@ -457,6 +459,7 @@ public class InitItems {
 
 
                     output.accept(InitItems.Adjudication_);
+                    output.accept(InitItems.Agreement_);
 
                 }).build());
 

@@ -142,6 +142,34 @@ public class EvilGiftPage implements RegisterBookPage {
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
                         evilMother.theColor(),components()));
+
+
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.CondenseBoneCube_.asItem(), new Vec2(aInt * 7, aInt * 3),
+                        Component.translatable("chest_item.book.destruction.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.destruction.1"),
+                                Component.translatable("chest_item.book.destruction.2"),
+                                Component.translatable("chest_item.book.destruction.3"),
+                                Component.translatable("chest_item.book.destruction.4")
+                        ),
+                        Light.ARGB.color(255, 100, 255, 50),
+                        Light.ARGB.color(255, 50,128,25),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor(),components()));
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.CondenseBoneCube_.asItem(), new Vec2(aInt * 7, aInt * 4),
+                        Component.translatable("chest_item.book.calciner.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.calciner.1"),
+                                Component.translatable("chest_item.book.calciner.2"),
+                                Component.translatable("chest_item.book.calciner.3"),
+                                Component.translatable("chest_item.book.calciner.4")
+                        ),
+                        Light.ARGB.color(255, 100, 255, 50),
+                        Light.ARGB.color(255, 50,128,25),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor(),components()));
             }
         }
     }

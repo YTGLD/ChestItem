@@ -2,6 +2,7 @@ package com.ytgld.chest_item.event.key;
 
 import com.ytgld.chest_item.items.black.Test;
 import com.ytgld.chest_item.items.black.celestial.Blood;
+import com.ytgld.chest_item.items.other.Agreement;
 import com.ytgld.chest_item.items.other.end.TheEndIsComing;
 import com.ytgld.chest_item.tip.an_element.elements.PlagueSpores;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +23,7 @@ public class UseCuriosHandler {
                 TheEndIsComing.event(player);
                 PlagueSpores.useSkill(player);
                 Blood.onKeyIsDown(player);
-                Test.onKeyIsDown(player);
+                Agreement.onKeyIsDown(player);
             });
         }
     }

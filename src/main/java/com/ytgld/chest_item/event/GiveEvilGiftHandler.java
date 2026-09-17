@@ -7,11 +7,14 @@ import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.meat.EvilStomach;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.meat.Factory;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.meat.FortressCone;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.meat.UncleanCoins;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.reactor.Calciner;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.reactor.Destruction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.HashSet;
 
@@ -22,6 +25,10 @@ public class GiveEvilGiftHandler {
         SnapString.event(event);
         EvilStomach.event(event);
         Factory.event(event);
+        Destruction.event(event);
+    }
+    public static void event(EntityTickEvent.Post event){
+        Calciner.event(event);
     }
     public static void event(LivingUseTotemEvent event){
         RottenUtensils.event(event);

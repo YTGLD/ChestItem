@@ -108,7 +108,7 @@ public class CIBookScreen extends Screen {
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        if (event.button() == 0) {
+        if (event.button() == 1) {
             if (!isMouseClicked) {
                 dragging = true;
                 lastMouseX = event.x();
@@ -150,8 +150,8 @@ public class CIBookScreen extends Screen {
             targetOffsetX += (float) (mouseX - lastMouseX) * DRAG_SPEED;
             targetOffsetY += (float) (mouseY - lastMouseY) * DRAG_SPEED;
             int size = 350;
-            targetOffsetX = Math.max(-size, Math.min(targetOffsetX, size));
-            targetOffsetY = Math.max(-size, Math.min(targetOffsetY, size));
+            targetOffsetX = Math.clamp(targetOffsetX, -size, size);
+            targetOffsetY = Math.clamp(targetOffsetY, -size, size);
             lastMouseX = mouseX;
             lastMouseY = mouseY;
             return true;
