@@ -61,6 +61,11 @@ public class CIBookScreen extends Screen {
     private static final Identifier item_star = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item/star.png");
     private static final Identifier frame = Identifier.fromNamespaceAndPath(Chestitem.MODID, "frame");
     private static final Identifier frame_black = Identifier.fromNamespaceAndPath(Chestitem.MODID, "frame_black");
+
+    private static final Identifier evil_book_main = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/evil_book_main.png");
+    private static final Identifier evil_book_main_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/evil_book_main_back.png");
+
+
     private static final Component TITLE = Component.translatable("advancements.chest_item.root.title");
     private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
     private final Player player;
@@ -182,9 +187,9 @@ public class CIBookScreen extends Screen {
     public void addPart(int x, int y, BlackKey.ColorImage colorImage) {
     }
 
-    private static int smallAlpha = 0;
+    private int smallAlpha = 0;
     public int time = 0;
-
+    private int evilAlpha = 0;
     @Override
     public void tick() {
         super.tick();
@@ -194,13 +199,23 @@ public class CIBookScreen extends Screen {
                 smallAlpha += 20;
                 smallAlpha = Math.min(255,smallAlpha);
             }
+            if (lastGuiAdd.item instanceof IEvil) {
+                if (evilAlpha < 255) {
+                    evilAlpha += 25;
+                    evilAlpha = Math.min(255,evilAlpha);
+                }
+            }else {
+                if (evilAlpha > 0) {
+                    evilAlpha -= 25;
+                    evilAlpha = Math.max(0,evilAlpha);
+                }
+            }
         }else {
             if (smallAlpha > 0) {
                 smallAlpha -= 20;
                 smallAlpha = Math.max(0,smallAlpha);
             }
         }
-
     }
     public ItemStack lastItemOnUse = ItemStack.EMPTY;
 
@@ -227,7 +242,7 @@ public class CIBookScreen extends Screen {
                 Light.ARGB.color((int) (smallAlpha / 1.5f),255,255,255));
 
 
-        if (!(lastItemOnUse.getItem() instanceof EvilMother)) {
+        if (!(lastItemOnUse.getItem() instanceof IEvil)) {
             graphics.blit(RenderPipelines.GUI_TEXTURED, back_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
                     Light.ARGB.color(smallAlpha, 255, 255, 255));
             graphics.blit(RenderPipelines.GUI_TEXTURED, book_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
@@ -237,11 +252,11 @@ public class CIBookScreen extends Screen {
                     Light.ARGB.color(smallAlpha, 255, 255, 255));
             graphics.blit(RenderPipelines.GUI_TEXTURED, evil_book_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
                     Light.ARGB.color(smallAlpha, 255, 255, 255));
-            int color = IEvil.color;
+            int color = Light.ARGB.color(255,70,240,210);
             int as = (color >> 24) & 0xFF;
-            int rs = (int) (((color >> 16) & 0xFF) / 2f);
-            int gs = (int) (((color >> 8) & 0xFF) / 2f);
-            int bs = (int) ((color & 0xFF) / 2f);
+            int rs = ((color >> 16) & 0xFF);
+            int gs = ((color >> 8) & 0xFF);
+            int bs = (color & 0xFF);
             BlackKey.ColorImage colorImage = new BlackKey.ColorImage(smallAlpha, rs, gs, bs);
             BlackParticlesAdd.markSeen(
                     (int) ((this.width - 118 * s) / 2),
@@ -317,14 +332,24 @@ public class CIBookScreen extends Screen {
         }
     }
 
+
     public void extractWindow(GuiGraphicsExtractor graphics, int xo, int yo, int mouseX, int mouseY) {
         float s = 1.2f;
-        graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, evil_book_main_back, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s),
+                Light.ARGB.color(evilAlpha ,255,255,255));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s),
+                Light.ARGB.color(255 - evilAlpha, 255,255,255));
+
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addItem(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
         }
+
         graphics.blit(RenderPipelines.GUI_TEXTURED, look_black, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
-        graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, evil_book_main, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s),
+                Light.ARGB.color(evilAlpha ,255,255,255));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s),
+                Light.ARGB.color(255 - evilAlpha, 255,255,255));
+
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addText(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
         }
