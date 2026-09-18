@@ -63,6 +63,7 @@ public class Agreement extends ItemBase {
         HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
         evilGiftBases.add(EvilGifts.destruction.get());
         evilGiftBases.add(EvilGifts.calciner.get());
+        evilGiftBases.add(EvilGifts.enmity.get());
         return evilGiftBases;
     }
 

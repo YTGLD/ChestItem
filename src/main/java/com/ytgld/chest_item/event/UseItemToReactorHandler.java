@@ -8,6 +8,8 @@ import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.IEvilGift;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.reactor.Calciner;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.reactor.Destruction;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.reactor.Enmity;
+import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.other.ChestInventory;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -39,6 +41,15 @@ public class UseItemToReactorHandler {
                     addFoodOrNumber(reactor, stack, 1);
                 }
                 giveGift(reactor, EvilGifts.calciner.get(),
+                        not);
+            }
+            if (!stack.isEmpty()) {
+                boolean not  = food(reactor, MemoryItems.Protest_.asItem()) >= Enmity.max;
+
+                if (!not && stack.is(MemoryItems.Protest_)) {
+                    addFoodOrNumber(reactor, stack, 1);
+                }
+                giveGift(reactor, EvilGifts.enmity.get(),
                         not);
             }
         }

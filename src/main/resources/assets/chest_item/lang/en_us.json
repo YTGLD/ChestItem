@@ -1470,6 +1470,12 @@
   "chest_item.book.calciner.3": "燃烧物品获得属性并恢复生命但随时间流逝",
   "chest_item.book.calciner.4": "属性包括经验获取,挖掘速度,时运",
 
+  "chest_item.book.enmity.main": "仇恨插件",
+  "chest_item.book.enmity.1": "给反应炉“喂食”瓶子<抗旨>再用任意物品右键",
+  "chest_item.book.enmity.2": "会使反应炉激活仇恨组件",
+  "chest_item.book.enmity.3": "使得反应炉吸引附近怪物仇恨",
+  "chest_item.book.enmity.4": "且反应炉自我恢复和难以破坏",
+
   "chest_item.book.test.main": "Small trinket in the box",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
   "chest_item.book.test.2": "Contributor: Qiuji",

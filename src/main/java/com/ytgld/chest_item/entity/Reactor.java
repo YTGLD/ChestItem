@@ -4,6 +4,7 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.reactor.Calciner;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.gifts.reactor.Enmity;
 import com.ytgld.chest_item.items.other.Agreement;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
@@ -49,6 +50,9 @@ public class Reactor extends TamableAnimal {
     @Override
     public void tick() {
         super.tick();
+
+        Enmity.doEnmity(this);
+
         Vec3 playerPos = this.position().add(0, 1, 0);
         int range = 2;
 

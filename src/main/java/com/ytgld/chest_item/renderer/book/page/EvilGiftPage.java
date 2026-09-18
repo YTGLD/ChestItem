@@ -145,7 +145,7 @@ public class EvilGiftPage implements RegisterBookPage {
 
 
 
-                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.CondenseBoneCube_.asItem(), new Vec2(aInt * 7, aInt * 3),
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MAGIC_IRON.asItem(), new Vec2(aInt * 7, aInt * 3),
                         Component.translatable("chest_item.book.destruction.main"),
                         List.of(
                                 Component.translatable("chest_item.book.destruction.1"),
@@ -153,12 +153,12 @@ public class EvilGiftPage implements RegisterBookPage {
                                 Component.translatable("chest_item.book.destruction.3"),
                                 Component.translatable("chest_item.book.destruction.4")
                         ),
-                        Light.ARGB.color(255, 100, 255, 50),
-                        Light.ARGB.color(255, 50,128,25),
+                        Light.ARGB.color(255, 200,200,255),
+                        Light.ARGB.color(255, 100,100,128),
                         CIBookScreen.ThePage.EVILMOTHER,
                         evilMother.theColor(),components()));
 
-                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.CondenseBoneCube_.asItem(), new Vec2(aInt * 7, aInt * 4),
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MAGIC_IRON.asItem(), new Vec2(aInt * 7, aInt * 4),
                         Component.translatable("chest_item.book.calciner.main"),
                         List.of(
                                 Component.translatable("chest_item.book.calciner.1"),
@@ -166,8 +166,21 @@ public class EvilGiftPage implements RegisterBookPage {
                                 Component.translatable("chest_item.book.calciner.3"),
                                 Component.translatable("chest_item.book.calciner.4")
                         ),
-                        Light.ARGB.color(255, 100, 255, 50),
-                        Light.ARGB.color(255, 50,128,25),
+                        Light.ARGB.color(255, 200,200,255),
+                        Light.ARGB.color(255, 100,100,128),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor(),components()));
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MAGIC_IRON.asItem(), new Vec2(aInt * 8, aInt * 3),
+                        Component.translatable("chest_item.book.enmity.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.enmity.1"),
+                                Component.translatable("chest_item.book.enmity.2"),
+                                Component.translatable("chest_item.book.enmity.3"),
+                                Component.translatable("chest_item.book.enmity.4")
+                        ),
+                        Light.ARGB.color(255, 200,200,255),
+                        Light.ARGB.color(255, 100,100,128),
                         CIBookScreen.ThePage.EVILMOTHER,
                         evilMother.theColor(),components()));
             }
