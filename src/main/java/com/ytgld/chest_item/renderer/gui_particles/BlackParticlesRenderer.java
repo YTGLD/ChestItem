@@ -62,7 +62,7 @@ public class BlackParticlesRenderer {
         pose.translate(px, py);
 
         if (canRotate) {
-            pose.rotate(deltaTime * 50f * (float)Math.PI);
+            pose.rotate(deltaTime / 10f);
         }
 
         pose.translate(-px, -py);
