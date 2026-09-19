@@ -3,6 +3,7 @@ package com.ytgld.chest_item.renderer.book;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.items.evil_mother.IEvil;
 import com.ytgld.chest_item.items.meet.Meat;
@@ -68,10 +69,14 @@ public class CIBookScreen extends Screen {
 
     private static final Identifier meat_book_main = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/meat_book_main.png");
     private static final Identifier meat_book_main_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/meat_book_main_back.png");
-
     private static final Identifier meat_book_small = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/meat_book_small.png");
     private static final Identifier meat_book_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/meat_book_back.png");
 
+
+    private static final Identifier black_book_main = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_book_main.png");
+    private static final Identifier black_book_main_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_book_main_back.png");
+    private static final Identifier black_book_small = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_book_small.png");
+    private static final Identifier black_book_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_book_back.png");
 
     private static final Component TITLE = Component.translatable("advancements.chest_item.root.title");
     private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
@@ -199,16 +204,21 @@ public class CIBookScreen extends Screen {
     private enum BookStyle {
         WINDOW,
         EVIL,
-        MEAT
+        MEAT,
+        BLACK
     }
 
     private BookStyle bookStyle = BookStyle.WINDOW;
+    private int backAlpha = 255;
+
 
     private int evilAlpha = 0;
     private int meatAlpha = 0;
+    private int blackAlpha = 0;
 
     private int evilTargetAlpha = 0;
     private int meatTargetAlpha = 0;
+    private int blackTargetAlpha = 0;
     private void setBookStyle(BookStyle style) {
         bookStyle = style;
 
@@ -216,15 +226,24 @@ public class CIBookScreen extends Screen {
             case EVIL -> {
                 evilTargetAlpha = 255;
                 meatTargetAlpha = 0;
+                blackTargetAlpha = 0;
             }
             case MEAT -> {
                 evilTargetAlpha = 0;
+                blackTargetAlpha = 0;
                 meatTargetAlpha = 255;
+            }
+            case BLACK -> {
+                evilTargetAlpha = 0;
+                meatTargetAlpha = 0;
+                blackTargetAlpha = 255;
             }
             case WINDOW -> {
                 evilTargetAlpha = 0;
                 meatTargetAlpha = 0;
+                blackTargetAlpha = 0;
             }
+
         }
     }
     @Override
@@ -237,13 +256,11 @@ public class CIBookScreen extends Screen {
                 smallAlpha += 20;
                 smallAlpha = Math.min(255, smallAlpha);
             }
-
-            if (lastGuiAdd.item instanceof IEvil) {
-                setBookStyle(BookStyle.EVIL);
-            } else if (lastGuiAdd.item instanceof Meat) {
-                setBookStyle(BookStyle.MEAT);
-            }else {
-                setBookStyle(BookStyle.WINDOW);
+            switch (lastGuiAdd.item) {
+                case IEvil iEvil -> setBookStyle(BookStyle.EVIL);
+                case Meat meat -> setBookStyle(BookStyle.MEAT);
+                case ItemBlackShadow itemBlackShadow -> setBookStyle(BookStyle.BLACK);
+                case null, default -> setBookStyle(BookStyle.WINDOW);
             }
         } else {
             if (smallAlpha > 0) {
@@ -254,6 +271,7 @@ public class CIBookScreen extends Screen {
 
         evilAlpha = smoothAlpha(evilAlpha, evilTargetAlpha);
         meatAlpha = smoothAlpha(meatAlpha, meatTargetAlpha);
+        blackAlpha = smoothAlpha(blackAlpha, blackTargetAlpha);
     }
 
     private int smoothAlpha(int current, int target) {
@@ -332,6 +350,11 @@ public class CIBookScreen extends Screen {
                     Light.ARGB.color(smallAlpha, 255, 255, 255));
             graphics.blit(RenderPipelines.GUI_TEXTURED, meat_book_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
                     Light.ARGB.color(smallAlpha, 255, 255, 255));
+        }else if (lastItemOnUse.getItem() instanceof ItemBlackShadow){
+            graphics.blit(RenderPipelines.GUI_TEXTURED, black_book_back, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
+            graphics.blit(RenderPipelines.GUI_TEXTURED, black_book_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
         }else {
             graphics.blit(RenderPipelines.GUI_TEXTURED, back_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
                     Light.ARGB.color(smallAlpha, 255, 255, 255));
@@ -398,16 +421,18 @@ public class CIBookScreen extends Screen {
             case WINDOW -> 255;
             case EVIL -> 255 - evilAlpha;
             case MEAT -> 255 - meatAlpha;
+            case BLACK -> 255 - blackAlpha;
         };
         int width = (int) (255 * s);
         int height = (int) (155 * s);
         int texWidth = (int) (256 * s);
         int texHeight = (int) (256 * s);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(255, 255, 255, 255));
 
         graphics.blit(RenderPipelines.GUI_TEXTURED, evil_book_main_back, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(evilAlpha, 255, 255, 255));
         graphics.blit(RenderPipelines.GUI_TEXTURED, meat_book_main_back, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(meatAlpha, 255, 255, 255));
-        int backAlpha = Math.max(0, 255 - Math.max(evilAlpha, meatAlpha));
-        graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(backAlpha, 255, 255, 255));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, black_book_main_back, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(blackAlpha, 255, 255, 255));
+
 
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addItem(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
@@ -416,6 +441,7 @@ public class CIBookScreen extends Screen {
         graphics.blit(RenderPipelines.GUI_TEXTURED, look_black, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight);
         graphics.blit(RenderPipelines.GUI_TEXTURED,evil_book_main, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(evilAlpha, 255, 255, 255));
         graphics.blit(RenderPipelines.GUI_TEXTURED, meat_book_main, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(meatAlpha, 255, 255, 255));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, black_book_main, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(blackAlpha, 255, 255, 255));
 
         graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(windowAlpha, 255, 255, 255));
         for (CIBookGuiAdd ciBookGuiAdd : list) {
