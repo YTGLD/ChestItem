@@ -1478,6 +1478,8 @@
 
   "chest_item.book.test.main": "Small trinket in the box",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
+  "chest_item.book.test.3": "看看箱子里有什么？",
+  "chest_item.book.test.4": "面向深渊",
   "chest_item.book.test.2": "Contributor: Qiuji",
   "chest_item.book.not": "No additional description......",
   "chest_item.book.mouse": "Click to view details"

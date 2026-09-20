@@ -2,13 +2,12 @@ package com.ytgld.chest_item.renderer;
 
 import com.mojang.blaze3d.PrimitiveTopology;
 import com.mojang.blaze3d.opengl.GlStateManager;
-import com.mojang.blaze3d.pipeline.BlendFunction;
-import com.mojang.blaze3d.pipeline.ColorTargetState;
-import com.mojang.blaze3d.pipeline.DepthStencilState;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.pipeline.*;
 import com.mojang.blaze3d.platform.CompareOp;
+import com.mojang.blaze3d.shaders.UniformType;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.renderer.outline.ILevelRendererWarped;
 import com.ytgld.chest_item.renderer.outline.MFramebufferBlack;
 import net.minecraft.client.Minecraft;
@@ -91,6 +90,32 @@ public abstract class MRender {
                 .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
                 .createRenderSetup());
     }
+    private static final RenderPipeline.Snippet GUI_TEXTURED_SNIPPET =
+            RenderPipeline.builder(GLOBALS_SNIPPET)
+                    .withBindGroupLayout(BindGroupLayouts.MATRICES_PROJECTION)
+                    .withVertexShader(Identifier.fromNamespaceAndPath(
+                            Chestitem.MODID, "core/vows"))
+                    .withFragmentShader(Identifier.fromNamespaceAndPath(
+                            Chestitem.MODID, "core/vows"))
+                    .withBindGroupLayout(BindGroupLayouts.SAMPLER0)
+                    .withBindGroupLayout(BindGroupLayout.builder().withUniform(
+                            "ChestVowsGlobals", UniformType.UNIFORM_BUFFER).build())
+                    .withVertexBinding(0, DefaultVertexFormat.POSITION_TEX_COLOR)
+                    .withPrimitiveTopology(PrimitiveTopology.QUADS)
+                    .buildSnippet();
+    public static final RenderPipeline VowGlow =
+            (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).withColorTargetState(new ColorTargetState(new BlendFunction(
+                            SRC_ALPHA,
+                            ONE,
+                            ONE,
+                            ZERO))).
+                    withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/vows_glow")).build());
+
+    public static final RenderPipeline Vow =
+            (RenderPipeline.builder(GUI_TEXTURED_SNIPPET)
+                    .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT)).
+                    withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/vows")).build());
+
     public static RenderType cutoutItemSheet() {
         return itemCutout(TextureAtlas.LOCATION_ITEMS,true);
     }
