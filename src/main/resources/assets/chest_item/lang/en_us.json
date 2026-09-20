@@ -1452,6 +1452,30 @@
   "chest_item.book.evil_gift.main.7": "邪母组件没办法扣下来",
   "chest_item.book.evil_gift.main.8": "邪母组件会在物品的最上方显示出来",
 
+  "item.chest_item.agreement": "烧炼协议",
+  "item.chest_item.agreement.string.1": "按下绑定键召唤一个反应炉",
+  "item.chest_item.agreement.string.2": "反应炉烧制速度极快，且产生3倍经验值",
+
+
+
+  "chest_item.book.destruction.main": "湮灭装置",
+  "chest_item.book.destruction.1": "给反应炉“喂食”16块TNT",
+  "chest_item.book.destruction.2": "会使反应炉激活毁灭组件",
+  "chest_item.book.destruction.3": "在反应炉被意外摧毁时",
+  "chest_item.book.destruction.4": "产生巨大的爆炸",
+
+  "chest_item.book.calciner.main": "转换煅烧器",
+  "chest_item.book.calciner.1": "给反应炉“喂食”32枚钻石",
+  "chest_item.book.calciner.2": "会使反应炉激活挖矿组件",
+  "chest_item.book.calciner.3": "燃烧物品获得属性并恢复生命但随时间流逝",
+  "chest_item.book.calciner.4": "属性包括经验获取,挖掘速度,时运",
+
+  "chest_item.book.enmity.main": "仇恨插件",
+  "chest_item.book.enmity.1": "给反应炉“喂食”瓶子<抗旨>再用任意物品右键",
+  "chest_item.book.enmity.2": "会使反应炉激活仇恨组件",
+  "chest_item.book.enmity.3": "使得反应炉吸引附近怪物仇恨",
+  "chest_item.book.enmity.4": "且反应炉自我恢复和难以破坏",
+
   "chest_item.book.test.main": "Small trinket in the box",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
   "chest_item.book.test.2": "Contributor: Qiuji",

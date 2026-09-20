@@ -931,6 +931,10 @@ public class EventMain {
         }
     }
     @SubscribeEvent
+    public void event(PlayerInteractEvent.EntityInteract event) {
+        UseItemToReactorHandler.event(event);
+    }
+    @SubscribeEvent
     public void event(EnchantedEntityLootEvent event) {
         EntityLootingHandler.event(event);
     }

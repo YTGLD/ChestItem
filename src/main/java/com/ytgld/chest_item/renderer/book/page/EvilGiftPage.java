@@ -19,16 +19,16 @@ public class EvilGiftPage implements RegisterBookPage {
     private final int aInt = 24;
     private List<Component> components (){
         List<Component> list = new ArrayList<>();
-        list.add(Component.translatable("chest_item.book.evil_gift.main.1").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
-        list.add(Component.translatable("chest_item.book.evil_gift.main.2").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
-        list.add(Component.translatable("chest_item.book.evil_gift.main.3").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.1").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,160, 240, 210))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.2").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,160, 240, 210))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.3").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,160, 240, 210))));
         list.add(Component.literal(""));
-        list.add(Component.translatable("chest_item.book.evil_gift.main.4").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
-        list.add(Component.translatable("chest_item.book.evil_gift.main.5").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
-        list.add(Component.translatable("chest_item.book.evil_gift.main.6").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.4").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,160, 240, 210))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.5").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,160, 240, 210))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.6").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,160, 240, 210))));
         list.add(Component.literal(""));
-        list.add(Component.translatable("chest_item.book.evil_gift.main.7").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
-        list.add(Component.translatable("chest_item.book.evil_gift.main.8").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,200,200,200))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.7").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,160, 240, 210))));
+        list.add(Component.translatable("chest_item.book.evil_gift.main.8").withStyle(Style.EMPTY.withColor(Light.ARGB.color(255,160, 240, 210))));
         return list;
     }
     @Override
@@ -140,6 +140,47 @@ public class EvilGiftPage implements RegisterBookPage {
                         ),
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor(),components()));
+
+
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MAGIC_IRON.asItem(), new Vec2(aInt * 7, aInt * 3),
+                        Component.translatable("chest_item.book.destruction.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.destruction.1"),
+                                Component.translatable("chest_item.book.destruction.2"),
+                                Component.translatable("chest_item.book.destruction.3"),
+                                Component.translatable("chest_item.book.destruction.4")
+                        ),
+                        Light.ARGB.color(255, 200,200,255),
+                        Light.ARGB.color(255, 100,100,128),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor(),components()));
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MAGIC_IRON.asItem(), new Vec2(aInt * 7, aInt * 4),
+                        Component.translatable("chest_item.book.calciner.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.calciner.1"),
+                                Component.translatable("chest_item.book.calciner.2"),
+                                Component.translatable("chest_item.book.calciner.3"),
+                                Component.translatable("chest_item.book.calciner.4")
+                        ),
+                        Light.ARGB.color(255, 200,200,255),
+                        Light.ARGB.color(255, 100,100,128),
+                        CIBookScreen.ThePage.EVILMOTHER,
+                        evilMother.theColor(),components()));
+
+                list.add(new CIBookScreen.CIBookGuiAdd(InitItems.MAGIC_IRON.asItem(), new Vec2(aInt * 8, aInt * 3),
+                        Component.translatable("chest_item.book.enmity.main"),
+                        List.of(
+                                Component.translatable("chest_item.book.enmity.1"),
+                                Component.translatable("chest_item.book.enmity.2"),
+                                Component.translatable("chest_item.book.enmity.3"),
+                                Component.translatable("chest_item.book.enmity.4")
+                        ),
+                        Light.ARGB.color(255, 200,200,255),
+                        Light.ARGB.color(255, 100,100,128),
                         CIBookScreen.ThePage.EVILMOTHER,
                         evilMother.theColor(),components()));
             }

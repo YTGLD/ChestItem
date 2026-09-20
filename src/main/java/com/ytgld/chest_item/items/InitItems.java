@@ -298,6 +298,8 @@ public class InitItems {
             (Identifier)-> new SwordHeart(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
+    public static final DeferredItem<@NotNull Item> Agreement_ = register("agreement",
+            (Identifier)-> new Agreement(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
 
@@ -457,6 +459,7 @@ public class InitItems {
 
 
                     output.accept(InitItems.Adjudication_);
+                    output.accept(InitItems.Agreement_);
 
                 }).build());
 

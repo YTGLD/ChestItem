@@ -1,21 +1,25 @@
-package com.ytgld.chest_item.items.black;
+package com.ytgld.chest_item.items.other;
 
 import com.ytgld.chest_item.Handler;
-import com.ytgld.chest_item.entity.EndComing;
 import com.ytgld.chest_item.entity.Entitys;
-import com.ytgld.chest_item.entity.LaserColumn;
 import com.ytgld.chest_item.entity.Reactor;
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.ItemBlackShadow;
-import com.ytgld.chest_item.items.SkillItem;
+import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
+import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGifts;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
-public class Test extends ItemBlackShadow implements SkillItem {
-    public Test(Properties properties) {
+import java.util.HashSet;
+
+public class Agreement extends ItemBase {
+    public Agreement(Properties properties) {
         super(properties);
     }
     public static final String chestHasReactor= "ChestHasReactor";
@@ -25,7 +29,7 @@ public class Test extends ItemBlackShadow implements SkillItem {
             if (!player.level().isClientSide()) {
                 for (int i = 0; i < chestInventory.getContainerSize(); i++) {
                     ItemStack stack = chestInventory.getItem(i);
-                    if (stack.is(InitItems.Test_)) {
+                    if (stack.is(InitItems.Agreement_)) {
                         CompoundTag compoundTag = stack.get(DataReg.tag);
                         if (compoundTag!=null) {
                             if (!compoundTag.getBooleanOr(chestHasReactor,false)) {
@@ -47,4 +51,25 @@ public class Test extends ItemBlackShadow implements SkillItem {
             }
         }
     }
+
+    @Override
+    public int maxGiftNumber(ItemStack stack) {
+        return 3;
+    }
+
+    @Override
+    public HashSet<EvilGiftBase> canHasEvilGift() {
+        HashSet<EvilGiftBase> evilGiftBases = new HashSet<>();
+        evilGiftBases.add(EvilGifts.destruction.get());
+        evilGiftBases.add(EvilGifts.calciner.get());
+        evilGiftBases.add(EvilGifts.enmity.get());
+        return evilGiftBases;
+    }
+
+    @Override
+    public void text(ItemStack stack, java.util.function.Consumer<Component> tooltipComponents, TooltipFlag flag){
+        tooltipComponents.accept(Component.translatable("item.chest_item.agreement.string.1").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.accept(Component.translatable("item.chest_item.agreement.string.2").withStyle(ChatFormatting.GOLD));
+    }
 }
+

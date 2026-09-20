@@ -4,6 +4,9 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.event.use.EventMain;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.ItemBlackShadow;
+import com.ytgld.chest_item.items.evil_mother.IEvil;
+import com.ytgld.chest_item.items.meet.Meat;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.BookPageFinder;
@@ -37,6 +40,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec2;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import org.joml.Matrix3x2fStack;
 import org.joml.Vector2f;
 import org.jspecify.annotations.NonNull;
@@ -47,7 +51,10 @@ public class CIBookScreen extends Screen {
     private static final Identifier back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/back.png");
     private static final Identifier look_black = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/look_black.png");
     private static final Identifier back_small = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/back_small.png");
+    private static final Identifier back_small_black = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_all.png");
     private static final Identifier book_small = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/book_small.png");
+    private static final Identifier evil_book_small = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/evil_book_small.png");
+    private static final Identifier evil_book_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/evil_book_back.png");
     private static final Identifier glow = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/all.png");
     private static final Identifier shadow_2 = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/shadow/black_2.png");
     private static final Identifier shadow_3 = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/shadow/black_3.png");
@@ -55,6 +62,21 @@ public class CIBookScreen extends Screen {
     private static final Identifier item_star = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item/star.png");
     private static final Identifier frame = Identifier.fromNamespaceAndPath(Chestitem.MODID, "frame");
     private static final Identifier frame_black = Identifier.fromNamespaceAndPath(Chestitem.MODID, "frame_black");
+
+    private static final Identifier evil_book_main = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/evil_book_main.png");
+    private static final Identifier evil_book_main_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/evil_book_main_back.png");
+
+    private static final Identifier meat_book_main = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/meat_book_main.png");
+    private static final Identifier meat_book_main_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/meat_book_main_back.png");
+    private static final Identifier meat_book_small = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/meat_book_small.png");
+    private static final Identifier meat_book_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/meat_book_back.png");
+
+
+    private static final Identifier black_book_main = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_book_main.png");
+    private static final Identifier black_book_main_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_book_main_back.png");
+    private static final Identifier black_book_small = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_book_small.png");
+    private static final Identifier black_book_back = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_book_back.png");
+
     private static final Component TITLE = Component.translatable("advancements.chest_item.root.title");
     private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
     private final Player player;
@@ -118,6 +140,7 @@ public class CIBookScreen extends Screen {
                     isMouseClicked = true;
                     lastGuiAdd = clicked;
                     lastItem = clicked.item;
+                    lastItemOnUse = clicked.item.getDefaultInstance();
                 }
             }
         } else {
@@ -150,8 +173,8 @@ public class CIBookScreen extends Screen {
             targetOffsetX += (float) (mouseX - lastMouseX) * DRAG_SPEED;
             targetOffsetY += (float) (mouseY - lastMouseY) * DRAG_SPEED;
             int size = 350;
-            targetOffsetX = Math.max(-size, Math.min(targetOffsetX, size));
-            targetOffsetY = Math.max(-size, Math.min(targetOffsetY, size));
+            targetOffsetX = Math.clamp(targetOffsetX, -size, size);
+            targetOffsetY = Math.clamp(targetOffsetY, -size, size);
             lastMouseX = mouseX;
             lastMouseY = mouseY;
             return true;
@@ -175,6 +198,94 @@ public class CIBookScreen extends Screen {
     public void addPart(int x, int y, BlackKey.ColorImage colorImage) {
     }
 
+    private int smallAlpha = 0;
+    public int time = 0;
+    private enum BookStyle {
+        WINDOW,
+        EVIL,
+        MEAT,
+        BLACK
+    }
+
+    private BookStyle bookStyle = BookStyle.WINDOW;
+    private int backAlpha = 255;
+
+
+    private int evilAlpha = 0;
+    private int meatAlpha = 0;
+    private int blackAlpha = 0;
+
+    private int evilTargetAlpha = 0;
+    private int meatTargetAlpha = 0;
+    private int blackTargetAlpha = 0;
+    private void setBookStyle(BookStyle style) {
+        bookStyle = style;
+
+        switch (style) {
+            case EVIL -> {
+                evilTargetAlpha = 255;
+                meatTargetAlpha = 0;
+                blackTargetAlpha = 0;
+            }
+            case MEAT -> {
+                evilTargetAlpha = 0;
+                blackTargetAlpha = 0;
+                meatTargetAlpha = 255;
+            }
+            case BLACK -> {
+                evilTargetAlpha = 0;
+                meatTargetAlpha = 0;
+                blackTargetAlpha = 255;
+            }
+            case WINDOW -> {
+                evilTargetAlpha = 0;
+                meatTargetAlpha = 0;
+                blackTargetAlpha = 0;
+            }
+
+        }
+    }
+    @Override
+    public void tick() {
+        super.tick();
+        time++;
+
+        if (isMouseClicked && lastGuiAdd != null) {
+            if (smallAlpha < 255) {
+                smallAlpha += 20;
+                smallAlpha = Math.min(255, smallAlpha);
+            }
+            switch (lastGuiAdd.item) {
+                case IEvil iEvil -> setBookStyle(BookStyle.EVIL);
+                case Meat meat -> setBookStyle(BookStyle.MEAT);
+                case ItemBlackShadow itemBlackShadow -> setBookStyle(BookStyle.BLACK);
+                case null, default -> setBookStyle(BookStyle.WINDOW);
+            }
+        } else {
+            if (smallAlpha > 0) {
+                smallAlpha -= 20;
+                smallAlpha = Math.max(0, smallAlpha);
+            }
+        }
+
+        evilAlpha = smoothAlpha(evilAlpha, evilTargetAlpha);
+        meatAlpha = smoothAlpha(meatAlpha, meatTargetAlpha);
+        blackAlpha = smoothAlpha(blackAlpha, blackTargetAlpha);
+    }
+
+    private int smoothAlpha(int current, int target) {
+        if (current < target) {
+            return Math.min(current + 15, target);
+        }
+
+        if (current > target) {
+            return Math.max(current - 15, target);
+        }
+
+        return current;
+    }
+    public ItemStack lastItemOnUse = ItemStack.EMPTY;
+
     @Override
     public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
@@ -189,18 +300,101 @@ public class CIBookScreen extends Screen {
         graphics.nextStratum();
         graphics.nextStratum();
         this.extractWindow(graphics, xo, yo, mouseX, mouseY);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, back_small_black,
+                (int) ((this.width - 1024 * s) / 2), (int) ((this.height - 1024 * s) / 2),
+
+                0.0F, 0.0F,
+                (int) (1024 * s), (int) (1024 * s), (int) (1024 * s), (int) (1024 * s),
+
+                Light.ARGB.color((int) (smallAlpha / 1.5f),255,255,255));
+
+
+        if (lastItemOnUse.getItem() instanceof IEvil) {
+
+
+            graphics.blit(RenderPipelines.GUI_TEXTURED, evil_book_back, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
+            graphics.blit(RenderPipelines.GUI_TEXTURED, evil_book_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
+
+
+            int color = Light.ARGB.color(255,70,240,210);
+            int as = (color >> 24) & 0xFF;
+            int rs = ((color >> 16) & 0xFF);
+            int gs = ((color >> 8) & 0xFF);
+            int bs = (color & 0xFF);
+            BlackKey.ColorImage colorImage = new BlackKey.ColorImage(smallAlpha, rs, gs, bs);
+            BlackParticlesAdd.markSeen(
+                    (int) ((this.width - 118 * s) / 2),
+                    (int) ((this.height - 110 * s) / 2),
+                    new BlackKey.ImageColorAndRenderPipeline(16,
+                            colorImage,
+                            Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/all.png"),
+                            MRender.RenderPs.GUI_TEXTURED,
+                            new Vector2f(),
+                            new Vector2f(0,-0.1f),
+                            new Vector2f(), false), 50);
+            BlackParticlesAdd.markSeen(
+                    (int) ((this.width + 118 * s) / 2),
+                    (int) ((this.height - 110 * s) / 2),
+                    new BlackKey.ImageColorAndRenderPipeline(16,
+                            colorImage,
+                            Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/all.png"),
+                            MRender.RenderPs.GUI_TEXTURED,
+                            new Vector2f(),
+                            new Vector2f(0,-0.1f),
+                            new Vector2f(), true), 50);
+        }else if (lastItemOnUse.getItem() instanceof Meat){
+            graphics.blit(RenderPipelines.GUI_TEXTURED, meat_book_back, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
+            graphics.blit(RenderPipelines.GUI_TEXTURED, meat_book_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
+        }else if (lastItemOnUse.getItem() instanceof ItemBlackShadow){
+            graphics.blit(RenderPipelines.GUI_TEXTURED, black_book_back, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
+            graphics.blit(RenderPipelines.GUI_TEXTURED, black_book_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
+        }else {
+            graphics.blit(RenderPipelines.GUI_TEXTURED, back_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
+            graphics.blit(RenderPipelines.GUI_TEXTURED, book_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s),
+                    Light.ARGB.color(smallAlpha, 255, 255, 255));
+        }
+
+
         if (isMouseClicked && lastGuiAdd != null) {
-            graphics.blit(RenderPipelines.GUI_TEXTURED, back_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s));
-            graphics.blit(RenderPipelines.GUI_TEXTURED, book_small, (int) ((this.width - 128 * s) / 2), (int) ((this.height - 128 * s) / 2), 0.0F, 0.0F, (int) (128 * s), (int) (128 * s), (int) (128 * s), (int) (128 * s));
             ItemStack stack = lastGuiAdd.item.getDefaultInstance();
             if (!stack.isEmpty()) {
+//                for (int i = 0; i < 6; i++) {
+//                    if (stack.getItem() instanceof ItemBase itemBase && time % 2 == 1) {
+//
+//                        int color = itemBase.color(stack);
+//
+//                        int as = (color >> 24) & 0xFF;
+//                        int rs = (int) (((color >> 16) & 0xFF));
+//                        int gs = (int) (((color >> 8) & 0xFF) );
+//                        int bs = (int) ((color & 0xFF) );
+//                        float speed = 80f;
+//                        BlackKey.ColorImage colorImage = new BlackKey.ColorImage(smallAlpha, rs, gs, bs);
+//                        BlackParticlesAdd.markSeen(
+//                                (int) (graphics.guiWidth() / 2f + Math.cos(time / speed + i * 45) * 120),
+//                                (int) (graphics.guiHeight() / 2f + Math.sin(time  / speed + i * 45) * 120),
+//                                new BlackKey.ImageColorAndRenderPipeline(8,
+//                                        colorImage,
+//                                        Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/cube.png"),
+//                                        MRender.RenderPs.GUI_TEXTURED,
+//                                        new Vector2f(),
+//                                        new Vector2f(),
+//                                        new Vector2f(), true), 5);
+//                    }
+//                }
                 Optional<TooltipComponent> image = stack.getTooltipImage();
                 List<Component> lines = Screen.getTooltipFromItem(minecraft, stack);
                 List<ClientTooltipComponent> components = new ArrayList<>();
                 image.ifPresent(img -> components.add(ClientTooltipComponent.create(img)));
                 for (Component line : lines) {
                     components.add(ClientTooltipComponent.create(line.getVisualOrderText()));
-                } /* * 这里只渲染当前选中的条目。 * * 原来这里遍历 list，会导致每一个条目的 * otherText 都被绘制一遍。 */
+                }
                 List<Component> component = lastGuiAdd.otherText;
                 if (!component.isEmpty()) {
                     for (int i = 0; i < component.size(); i++) {
@@ -209,7 +403,7 @@ public class CIBookScreen extends Screen {
                 } else {
                     graphics.text(Minecraft.getInstance().font, Component.translatable("chest_item.book.not"), width / 2 - 72, height / 2 - 48, Light.ARGB.color(255, 200, 200, 200));
                 }
-                int itemX = width / 2 - 7;
+                int itemX = width / 2 - 8;
                 int itemY = height / 2 - 74;
                 graphics.item(stack, itemX, itemY);
                 if (mouseX >= itemX - 16 && mouseX <= itemX + 16 && mouseY >= itemY - 16 && mouseY <= itemY + 16) {
@@ -219,25 +413,41 @@ public class CIBookScreen extends Screen {
         }
     }
 
+
     public void extractWindow(GuiGraphicsExtractor graphics, int xo, int yo, int mouseX, int mouseY) {
         float s = 1.2f;
-        graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
+        int windowAlpha = switch (bookStyle) {
+            case WINDOW -> 255;
+            case EVIL -> 255 - evilAlpha;
+            case MEAT -> 255 - meatAlpha;
+            case BLACK -> 255 - blackAlpha;
+        };
+        int width = (int) (255 * s);
+        int height = (int) (155 * s);
+        int texWidth = (int) (256 * s);
+        int texHeight = (int) (256 * s);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, back, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(255, 255, 255, 255));
+
+        graphics.blit(RenderPipelines.GUI_TEXTURED, evil_book_main_back, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(evilAlpha, 255, 255, 255));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, meat_book_main_back, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(meatAlpha, 255, 255, 255));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, black_book_main_back, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(blackAlpha, 255, 255, 255));
+
+
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addItem(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
         }
-        graphics.blit(RenderPipelines.GUI_TEXTURED, look_black, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
-        graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, (int) (255 * s), (int) (155 * s), (int) (256 * s), (int) (256 * s));
+
+        graphics.blit(RenderPipelines.GUI_TEXTURED, look_black, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight);
+        graphics.blit(RenderPipelines.GUI_TEXTURED,evil_book_main, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(evilAlpha, 255, 255, 255));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, meat_book_main, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(meatAlpha, 255, 255, 255));
+        graphics.blit(RenderPipelines.GUI_TEXTURED, black_book_main, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(blackAlpha, 255, 255, 255));
+
+        graphics.blit(RenderPipelines.GUI_TEXTURED, window, xo, yo, 0.0F, 0.0F, width, height, texWidth, texHeight, Light.ARGB.color(windowAlpha, 255, 255, 255));
         for (CIBookGuiAdd ciBookGuiAdd : list) {
             addText(ciBookGuiAdd, graphics, xo, yo, mouseX, mouseY);
         }
     }
-    public int time = 0;
 
-    @Override
-    public void tick() {
-        super.tick();
-        time++;
-    }
 
     public void addItem(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY) {
         int centerX = (int) (windowLeft + 252 / 2f + ciBookGuiAdd.vecPos.x + offsetX);
@@ -278,7 +488,7 @@ public class CIBookScreen extends Screen {
             graphics.blit(MRender.RenderPs.GUI_TEXTURED, shadow_2, 0, 0, 0, 0, sss, sss, sss, sss, Light.ARGB.color(alpha, rs, gs, bs));
             graphics.blit(MRender.RenderPs.GUI_TEXTURED, shadow_3, 0, 0, 0, 0, sss, sss, sss, sss, Light.ARGB.color(alpha, rs, gs, bs));
         }else {
-            BlackKey.ColorImage colorImage = new BlackKey.ColorImage(alpha, 70,240,210);
+            BlackKey.ColorImage colorImage = new BlackKey.ColorImage(Math.min(255 - smallAlpha,alpha), 70,240,210);
 
             float cs = 10f;
             int sizeS = 16;
@@ -387,7 +597,8 @@ public class CIBookScreen extends Screen {
             }
         }
     }
-
+    public static void event(ClientTickEvent.Pre event){
+    }
     @AddBookPage
     public static class AddPageClass implements RegisterBookPage {
         @Override
@@ -501,4 +712,5 @@ public class CIBookScreen extends Screen {
             return identifier;
         }
     }
+
 }

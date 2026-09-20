@@ -1460,7 +1460,72 @@
 
 
 
+  "item.chest_item.agreement": "烧炼协议",
+  "item.chest_item.agreement.string.1": "按下绑定键召唤一个反应炉",
+  "item.chest_item.agreement.string.2": "反应炉烧制速度极快，且产生3倍经验值",
+
   "chest_item.eternal_vows": "永恒誓令",
+
+  "chest_item.book.rotten_utensils.main": "腐烂器具",
+  "chest_item.book.rotten_utensils.1": "在理智降低到负数并",
+  "chest_item.book.rotten_utensils.2": "触发不死图腾后产生邪母嬗变...",
+  "chest_item.book.rotten_utensils.3": "邪母嬗变一旦触发相关的",
+  "chest_item.book.rotten_utensils.4": "邪母物品就会减少更多的理智",
+
+  "chest_item.book.dawn.main": "启明金属",
+  "chest_item.book.dawn.1": "在理智降低到-10以下时死亡",
+  "chest_item.book.dawn.2": "所佩戴的启明之铅会将力量分散",
+  "chest_item.book.dawn.3": "目标为邪母物品时",
+  "chest_item.book.dawn.4": "会使持有者恢复部分神智",
+
+
+  "chest_item.book.synthesizer.main": "邪念合成器",
+  "chest_item.book.synthesizer.1": "理智高于10点时",
+  "chest_item.book.synthesizer.2": "一旦死亡所佩戴的邪母物品",
+  "chest_item.book.synthesizer.3": "会激发自身的力量",
+  "chest_item.book.synthesizer.4": "使持有者更加幸运但更加癫狂",
+
+  "chest_item.book.evil_stomach.main": "邪母胃",
+  "chest_item.book.evil_stomach.1": "当理智降低到0以下",
+  "chest_item.book.evil_stomach.2": "并且持有者因饥饿而死",
+  "chest_item.book.evil_stomach.3": "则令某些物品产生第二意识",
+  "chest_item.book.evil_stomach.4": "消耗经验值缓慢使持有者饱腹",
+
+  "chest_item.book.unclean_coins.main": "不洁硬币",
+  "chest_item.book.unclean_coins.1": "当理智降低到0以下",
+  "chest_item.book.unclean_coins.2": "并且持有者吃下一个附魔金苹果时",
+  "chest_item.book.unclean_coins.3": "令一些物品吸收金苹果的能量",
+  "chest_item.book.unclean_coins.4": "使得物品增生出新的组织从而增加生命值",
+
+  "chest_item.book.factory.main": "反应工厂",
+  "chest_item.book.factory.1": "当理智降低到0以下",
+  "chest_item.book.factory.2": "并且持有者携带经验反应炉死亡时",
+  "chest_item.book.factory.3": "将令一些物品产生反应",
+  "chest_item.book.factory.4": "从而自发产生经验值",
+
+  "chest_item.book.fortress_cone.main": "要塞角锥",
+  "chest_item.book.fortress_cone.1": "当理智降低到0以下",
+  "chest_item.book.fortress_cone.2": "在持有者存在5级以上的增生状态",
+  "chest_item.book.fortress_cone.3": "且佩戴钢铁之心后食用金苹果进行“侵蚀”",
+  "chest_item.book.fortress_cone.4": "侵蚀后的相关物品在吃下食物后治愈持有者",
+
+  "chest_item.book.snap_string.main": "断弦之铅",
+  "chest_item.book.snap_string.1": "理智在正常状态下时",
+  "chest_item.book.snap_string.2": "杀死凋零会将自身的",
+  "chest_item.book.snap_string.3": "邪母因果斩去，持有者",
+  "chest_item.book.snap_string.4": "将更加癫狂并更容易获取资源",
+
+
+
+
+  "chest_item.book.evil_gift.main.1": "一些物品自带1~2个邪母槽位",
+  "chest_item.book.evil_gift.main.2": "物品在玩家完成某些事情的情况下",
+  "chest_item.book.evil_gift.main.3": "可以生长出一块邪母组件",
+  "chest_item.book.evil_gift.main.4": "每个物品自行绑定某些邪母组件",
+  "chest_item.book.evil_gift.main.5": "也就是说每个物品可获取",
+  "chest_item.book.evil_gift.main.6": "的邪母组件种类是固定的",
+  "chest_item.book.evil_gift.main.7": "邪母组件没办法扣下来",
+  "chest_item.book.evil_gift.main.8": "邪母组件会在物品的最上方显示出来",
 
   "chest_item.book.test.main": "箱子里的小饰品",
   "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
