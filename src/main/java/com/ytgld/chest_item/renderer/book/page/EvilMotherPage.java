@@ -9,6 +9,7 @@ import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.phys.Vec2;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class EvilMotherPage implements RegisterBookPage {
 
 
     private final int aInt = 24;
+
     @Override
     public void addPage(List<CIBookScreen.CIBookGuiAdd> list) {
         {
@@ -31,7 +33,13 @@ public class EvilMotherPage implements RegisterBookPage {
                         Light.ARGB.color(255, 160, 240, 210),
                         Light.ARGB.color(255, 80,120,105),
                         CIBookScreen.ThePage.EVILMOTHER,
-                        evilMother.theColor()));
+                        evilMother.theColor(),
+                        List.of(
+                                Component.translatable("chest_item.book.evil_mother").setStyle(Style.EMPTY.withColor(
+                                        Light.ARGB.color(255, 160, 240, 210)
+                                ))
+                                ),
+                        true));
             }
         }{
             if (InitItems.EvilBelt_.asItem() instanceof EvilMother evilMother) {

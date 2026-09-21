@@ -67,16 +67,29 @@ public abstract class MRender {
                             .withVertexBinding(0, DefaultVertexFormat.POSITION_COLOR).withCull(false).build())
                     .sortOnUpload().createRenderSetup()
     );
+    public static final RenderPipeline.Snippet GUI_TEXTURED_SNIPPET =
+            RenderPipeline.builder(GLOBALS_SNIPPET).
+            withBindGroupLayout(BindGroupLayouts.PROJECTION)
+                    .withVertexShader(Identifier.fromNamespaceAndPath(
+                    Chestitem.MODID, "core/vows"))
+            .withFragmentShader(Identifier.fromNamespaceAndPath(
+                    Chestitem.MODID, "core/vows"))
+            .withBindGroupLayout(BindGroupLayouts.SAMPLER0).withColorTargetState(new ColorTargetState(new BlendFunction(
+                    SRC_ALPHA,
+                    ONE,
+                    ONE,
+                    ZERO))).withBindGroupLayout(BindGroupLayouts.DYNAMIC_TRANSFORMS) .withBindGroupLayout(BindGroupLayout.builder().withUniform(
+                    "ChestVowsGlobals", UniformType.UNIFORM_BUFFER).build())
+            .withVertexBinding(0, DefaultVertexFormat.POSITION_TEX_COLOR).withPrimitiveTopology(PrimitiveTopology.QUADS).buildSnippet();
 
-    public static RenderType colorNotOutline = RenderType.create(
-            "lightning", RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
-                            .withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
-                            .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
-                            .withDepthStencilState(DepthStencilState.DEFAULT)
-                            .withPrimitiveTopology(PrimitiveTopology.QUADS)
-                            .withVertexBinding(0, DefaultVertexFormat.POSITION_COLOR).withCull(false).build())
-                    .sortOnUpload().createRenderSetup()
-    );
+    public static final RenderPipeline VowGlow =
+            (RenderPipeline.builder(GUI_TEXTURED_SNIPPET).withColorTargetState(new ColorTargetState(new BlendFunction(
+                            SRC_ALPHA,
+                            ONE,
+                            ONE,
+                            ZERO))).
+                    withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/vows_glow")).build());
+
 
     public static RenderType endBlackOutline = RenderType.create(
             "end_gateway",

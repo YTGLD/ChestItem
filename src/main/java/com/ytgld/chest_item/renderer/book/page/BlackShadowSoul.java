@@ -7,6 +7,7 @@ import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.phys.Vec2;
 
 import java.util.List;
@@ -111,7 +112,12 @@ public class BlackShadowSoul implements RegisterBookPage {
                         Light.ARGB.color(255, 255, 255, 255),
                         Light.ARGB.color(255, 150, 150, 150),
                         CIBookScreen.ThePage.BLACK,
-                        imprintOfTheSoul.soulColor()));
+                        imprintOfTheSoul.soulColor(),List.of(
+                        Component.translatable("chest_item.book.chaos").setStyle(Style.EMPTY.withColor(
+                                Light.ARGB.color(255, 240, 50, 200)
+                        ))
+                ),
+                        true));
             }
         }
     }
