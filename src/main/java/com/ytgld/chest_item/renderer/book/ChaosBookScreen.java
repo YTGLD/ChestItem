@@ -2,6 +2,7 @@ package com.ytgld.chest_item.renderer.book;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.black.celestial.CommonCelestial;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
@@ -58,6 +59,9 @@ public class ChaosBookScreen extends Screen {
     public static final Identifier black_item = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_item.png");
     public static Identifier itemImage (Item item){
         Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
+        if (item instanceof CommonCelestial celestial) {
+            return celestial.img(item.getDefaultInstance());
+        }
         return Identifier.fromNamespaceAndPath(itemId.getNamespace(),
                 "textures/item/" + itemId.getPath() + ".png");
     };
@@ -148,8 +152,8 @@ public class ChaosBookScreen extends Screen {
                                     Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/cube.png"),
                                     MRender.RenderPs.GUI_TEXTURED,
                                     new Vector2f(),
-                                    new Vector2f(0,-0.01f),
-                                    new Vector2f(), true), 5);
+                                    new Vector2f(0,-0.007f),
+                                    new Vector2f(), true), 5, textAlpha);
                 }
 
             }
@@ -196,7 +200,7 @@ public class ChaosBookScreen extends Screen {
                 Identifier.fromNamespaceAndPath(
                         Chestitem.MODID,"textures/gui/color.png"
                 ), 0,0, 0, 0,
-                sss, sss, sss, sss,ciBookGuiAdd.colorText);
+                sss, sss, sss, sss,ciBookGuiAdd.lightColor);
         pose.popMatrix();
 
         pose.pushMatrix();

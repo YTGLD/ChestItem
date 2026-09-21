@@ -456,6 +456,9 @@ public class CIBookScreen extends Screen {
 
 
     public void addItem(CIBookGuiAdd ciBookGuiAdd, GuiGraphicsExtractor graphics, int windowLeft, int windowTop, int mouseX, int mouseY) {
+        if (ciBookGuiAdd.isInOther()) {
+            return;
+        }
         int centerX = (int) (windowLeft + 252 / 2f + ciBookGuiAdd.vecPos.x + offsetX);
         int centerY = (int) (windowTop + 140 / 2f + ciBookGuiAdd.vecPos.y + offsetY);
         int windowRight = windowLeft + 255;
@@ -662,7 +665,12 @@ public class CIBookScreen extends Screen {
     public static class AddPageClass implements RegisterBookPage {
         @Override
         public void addPage(List<CIBookGuiAdd> list) {
-            list.add(new CIBookGuiAdd(Items.CHEST, new Vec2(0, 0), Component.translatable("chest_item.book.test.main"), List.of(Component.translatable("chest_item.book.test.1"), Component.translatable("chest_item.book.test.2")), Light.ARGB.color(255, 255, 255, 255), Light.ARGB.color(255, 150, 150, 150), ThePage.BASE, Light.ARGB.color(255, 255, 255, 100)));
+            list.add(new CIBookGuiAdd(Items.CHEST, new Vec2(0, 0), Component.translatable("chest_item.book.test.main"),
+                    List.of(Component.translatable("chest_item.book.test.1"),
+                            Component.translatable("chest_item.book.test.2")),
+                    Light.ARGB.color(255, 100,50,255),
+                    Light.ARGB.color(255, 50, 50, 50),
+                    ThePage.BASE, Light.ARGB.color(255, 255, 255, 100)));
         }
     }
 

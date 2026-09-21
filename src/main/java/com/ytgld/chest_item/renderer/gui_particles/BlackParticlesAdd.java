@@ -16,6 +16,7 @@ public class BlackParticlesAdd {
             s.lifeTime =  s.lifeTime + 1;
             if (time - s.lastSeenTick <= KEEP_ALIVE) {
             } else {
+                s.blurAlpha = Math.max(0, s.blurAlpha - s.downAlpha);
                 s.alpha = Math.max(0, s.alpha - s.downAlpha);
             }
         }
@@ -34,6 +35,13 @@ public class BlackParticlesAdd {
         BlackKey key = new BlackKey(x, y,imageColorAndRenderPipeline);
         STATES.computeIfAbsent(key,
                 k -> new BlackState(imageColorAndRenderPipeline.color().a(), BlackParticlesAdd.time, x, y,imageColorAndRenderPipeline,downAlpha)
+        ).lastSeenTick = BlackParticlesAdd.time;
+    }
+
+    public static void markSeen(int x, int y, BlackKey.ImageColorAndRenderPipeline imageColorAndRenderPipeline,int downAlpha,int blurAlpha) {
+        BlackKey key = new BlackKey(x, y,imageColorAndRenderPipeline);
+        STATES.computeIfAbsent(key,
+                k -> new BlackState(imageColorAndRenderPipeline.color().a(), BlackParticlesAdd.time, x, y,imageColorAndRenderPipeline,downAlpha,blurAlpha)
         ).lastSeenTick = BlackParticlesAdd.time;
     }
     public static Map<BlackKey, BlackState> all() {
