@@ -7,6 +7,7 @@ import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.phys.Vec2;
 
 import java.util.List;
@@ -112,7 +113,12 @@ public class Meat implements RegisterBookPage {
                         Light.ARGB.color(255, 255, 255, 255),
                         Light.ARGB.color(255, 150, 150, 150),
                         CIBookScreen.ThePage.MEAT,
-                        itemBase.color(InitItems.ScarHeart_.asItem().getDefaultInstance())));
+                        itemBase.color(InitItems.ScarHeart_.asItem().getDefaultInstance()),List.of(
+                                Component.translatable("chest_item.book.meat").setStyle(Style.EMPTY.withColor(
+                                        Light.ARGB.color(255, 240, 150, 5)
+                                ))
+                        ),
+                        true));
             }
         }{
             if (InitItems.LifeCoin_.asItem() instanceof ItemBase itemBase) {

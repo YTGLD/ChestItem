@@ -21,16 +21,19 @@ public class ChaosPage implements RegisterBookPage {
                 Component.translatable("chest_item.book.warmaker.main"),
                 List.of(
                         Component.translatable("chest_item.book.warmaker.1"),
+                        Component.literal(""),
                         Component.translatable("chest_item.book.warmaker.2"),
                         Component.translatable("chest_item.book.warmaker.3"),
                         Component.translatable("chest_item.book.warmaker.4"),
-                        Component.translatable("chest_item.book.warmaker.5")
+                        Component.literal(""),
+                        Component.translatable("chest_item.book.warmaker.5"),
+                        Component.translatable("chest_item.book.warmaker.6")
                 ),
                 Light.ARGB.color(255, 100, 40, 255),
                 Light.ARGB.color(255, 100, 40, 255),
                 CIBookScreen.ThePage.BLACK,
                 color,List.of(
-                        Component.translatable("chest_item.book.warmaker.other")
-        ),true));
+
+        ),true,true));
     }
 }

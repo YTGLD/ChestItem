@@ -8,6 +8,7 @@ import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -65,5 +66,10 @@ public class ScarHeart  extends ItemBase implements Meat {
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
         return doAttribute(stack, player);
+    }
+
+    @Override
+    public int color(ItemStack stack) {
+        return Light.ARGB.color(255, 240, 150, 5);
     }
 }

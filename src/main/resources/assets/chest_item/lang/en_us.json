@@ -1476,11 +1476,26 @@
   "chest_item.book.enmity.3": "使得反应炉吸引附近怪物仇恨",
   "chest_item.book.enmity.4": "且反应炉自我恢复和难以破坏",
 
+  "chest_item.book.warmaker.main": "战争缔造者",
+  "chest_item.book.warmaker.1": "它象征着永不妥协的力量.....",
+  "chest_item.book.warmaker.2": "当你携带着启明之铅造成足够多的杀戮时...",
+  "chest_item.book.warmaker.3": "这铅体的血腥，嗜杀之力将彻底爆发",
+  "chest_item.book.warmaker.4": "最终不可控的演变为战争缔造者",
+
+  "chest_item.book.warmaker.5": "激发魔化后的启明之铅会在杀戮时不断变强",
+  "chest_item.book.warmaker.6": "同时带来没有尽头的杀孽...",
+
+
+
+
   "chest_item.book.test.main": "Small trinket in the box",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
   "chest_item.book.test.3": "看看箱子里有什么？",
-  "chest_item.book.test.4": "面向深渊",
   "chest_item.book.test.2": "Contributor: Qiuji",
+
+  "chest_item.book.chaos": "面向深渊",
   "chest_item.book.not": "No additional description......",
-  "chest_item.book.mouse": "Click to view details"
+  "chest_item.book.mouse": "Click to view details",
+  "chest_item.book.evil_mother": "邪恶的造物者——邪母",
+  "chest_item.book.meat": "疤痕的增生——对不可能说不"
 }

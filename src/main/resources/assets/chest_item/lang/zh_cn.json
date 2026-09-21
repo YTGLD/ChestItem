@@ -1530,8 +1530,8 @@
   "chest_item.book.test.main": "箱子里的小饰品",
   "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
   "chest_item.book.test.2": "贡献者：秋季",
-  "chest_item.book.test.3": "看看箱子里有什么？",
   "chest_item.book.not": "右键关闭详细界面",
-  "chest_item.book.mouse": "点击查看详情"
-
+  "chest_item.book.mouse": "点击查看详情",
+  "chest_item.book.chaos": "面向深渊",
+  "chest_item.book.evil_mother": "邪恶的造物者——邪母"
 }
