@@ -130,6 +130,10 @@ public class ChestitemClient{
                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"whirlpool"),
                     DefaultVertexFormat.POSITION_TEX_COLOR), MRender::setWhirlpool);
 
+
+            event.registerShader(new ShaderInstance(event.getResourceProvider(),
+                    ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,"vows"),
+                    DefaultVertexFormat.POSITION_TEX_COLOR), MRender::setVows);
         }catch (IOException exception){
             exception.printStackTrace();
         }

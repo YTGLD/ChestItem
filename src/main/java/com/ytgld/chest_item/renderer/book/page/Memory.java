@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.renderer.book.page;
 
-import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.memory.MemoryBase;
 import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.renderer.book.CIBookScreen;
@@ -8,9 +7,6 @@ import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
 import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
 
 import java.util.List;

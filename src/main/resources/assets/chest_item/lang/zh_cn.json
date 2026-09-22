@@ -1203,12 +1203,6 @@
   "chest_item.book.ring.1": "这个物品提供一级急迫加成（可自行配置界面调整）",
   "chest_item.book.ring.2": "矿工戒指发现在大多数地牢，矿井，远古城市，试炼大厅的箱子或宝库里",
 
-  "chest_item.book.test.main": "箱子里的小饰品",
-  "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
-  "chest_item.book.test.2": "贡献者：秋季",
-  "chest_item.book.not": "右键关闭详细界面",
-  "chest_item.book.mouse": "点击查看详情",
-
   "chest_item.book.fission.main": "裂变体",
   "chest_item.book.fission.1": "这个物品有两个技能",
   "chest_item.book.fission.2": "第一个按下技能键释放孢子，根据技能等级决定生效半径，初始为1",
@@ -1430,11 +1424,21 @@
 
   "item.chest_item.soul_bottle": "灵魂瓶",
 
+  "chest_item.book.test.main": "通往深渊的门户",
 
   "sound.chest_item.sword" : "剑气：斩击",
   "sound.chest_item.kill" : "剑气：斩杀",
   "sound.chest_item.fly_sword" : "剑气：逸散",
   "chest_item.book.eye_book.main": "长眼睛的书",
   "chest_item.book.eye_book.1": "这个物品提供永久夜视效果",
-  "chest_item.book.eye_book.2": "长眼睛的书发现在多数地牢，矿井，远古城市等战利品箱子或宝库当中"
+  "chest_item.book.eye_book.2": "长眼睛的书发现在多数地牢，矿井，远古城市等战利品箱子或宝库当中",
+
+
+
+
+
+  "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
+  "chest_item.book.test.2": "贡献者：秋季",
+  "chest_item.book.not": "右键关闭详细界面",
+  "chest_item.book.mouse": "点击查看详情"
 }

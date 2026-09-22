@@ -28,7 +28,7 @@ public class BlackParticlesRenderer {
 
         boolean rot = state.imageColorAndRenderPipeline.rot();
         addCom((state.lifeTime), guiGraphics, pose, x, y,state,alpha,size,identifier,true,rot);
-        addCom((state.lifeTime), guiGraphics, pose, x, y,state,alpha / 10,size * 2,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
+        addCom((state.lifeTime), guiGraphics, pose, x, y,state,state.blurAlpha,size * 2,ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,
                 "textures/item_glowing/all.png"),false,false);
     }
 
@@ -54,7 +54,6 @@ public class BlackParticlesRenderer {
         Vector2f position = state.imageColorAndRenderPipeline.position();
         Vector2f velocity = state.imageColorAndRenderPipeline.velocity();
         Vector2f acceleration = state.imageColorAndRenderPipeline.acceleration();
-
         velocity.fma(deltaTime, acceleration);
         position.fma(deltaTime, velocity);
         float px = x + position.x;
@@ -65,7 +64,7 @@ public class BlackParticlesRenderer {
         pose.translate(px, py,0);
 
         if (canRotate) {
-            pose.mulPose(Axis.ZN.rotationDegrees(deltaTime * 50f * (float)Math.PI));
+            pose.mulPose(Axis.ZN.rotationDegrees(deltaTime * 5));
         }
 
         pose.translate(-px, -py,0);

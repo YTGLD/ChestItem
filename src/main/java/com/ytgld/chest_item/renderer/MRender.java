@@ -3,6 +3,7 @@ package com.ytgld.chest_item.renderer;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -86,6 +87,22 @@ public abstract class MRender extends RenderType {
     private static ShaderInstance liveShaderInstance;
     private static ShaderInstance liveShaderInstance_slowness;
     private static ShaderInstance whirlpool;
+    public static ShaderInstance vows;
+
+    public static void setVows(ShaderInstance vows) {
+        MRender.vows = vows;
+    }
+
+    private static final long START_TIME = System.nanoTime();
+    public static ShaderInstance getVows() {
+        ShaderInstance shaderInstance = vows ;
+        float time = (System.nanoTime() - START_TIME) / 1_000_000_000.0F;
+        Uniform uniform = shaderInstance.getUniform("Time");
+        if (uniform != null) {
+            uniform.set(time);
+        }
+        return shaderInstance;
+    }
     public static void setShaderInstance_liveShaderInstance(ShaderInstance live) {
         liveShaderInstance = live;
     }
