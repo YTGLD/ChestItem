@@ -139,7 +139,7 @@ public class CIBookScreen extends Screen {
                 lastMouseX = event.x();
                 lastMouseY = event.y();
                 CIBookGuiAdd clicked = findEntryAt(event.x(), event.y());
-                if (clicked != null) {
+                if (clicked != null && !clicked.isInOther()) {
                     isMouseClicked = true;
                     lastGuiAdd = clicked;
                     lastItem = clicked.item;
