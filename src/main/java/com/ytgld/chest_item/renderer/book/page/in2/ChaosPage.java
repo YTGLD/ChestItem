@@ -1,7 +1,6 @@
 package com.ytgld.chest_item.renderer.book.page.in2;
 
 import com.ytgld.chest_item.items.InitItems;
-import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.items.black.celestial.CommonCelestial;
 import com.ytgld.chest_item.renderer.book.CIBookScreen;
 import com.ytgld.chest_item.renderer.book.tool.AddBookPage;
@@ -9,6 +8,7 @@ import com.ytgld.chest_item.renderer.book.tool.RegisterBookPage;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec2;
 
 import java.util.List;
@@ -19,6 +19,17 @@ public class ChaosPage implements RegisterBookPage {
     private final int color = Light.ARGB.color(255,100, 40, 255);
     @Override
     public void addPage(List<CIBookScreen.CIBookGuiAdd> list){
+        addCelestialText(list);
+        addChaosText(list);
+    }
+    public static int theCColor(Item item){
+        if (item instanceof CommonCelestial celestial) {
+            return celestial.color(item.getDefaultInstance());
+        }
+        return 0;
+    }
+    private void addChaosText(List<CIBookScreen.CIBookGuiAdd> list) {
+        addCelestialText(list);
         list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Warmaker_.asItem(), new Vec2(0, 0),
                 Component.translatable("chest_item.book.warmaker.main"),
                 List.of(
@@ -55,8 +66,38 @@ public class ChaosPage implements RegisterBookPage {
                 CIBookScreen.ThePage.BLACK,
                 color,List.of(),true,true));
 
+        list.add(new CIBookScreen.CIBookGuiAdd(Items.APPLE.asItem(), new Vec2(aInt * 2, 0),
+                Component.translatable("chest_item.book.emperor_cup.main"),
+                List.of(
+                        Component.translatable("chest_item.book.emperor_cup.text")
+                ),
+                Light.ARGB.color(255, 100, 40, 255),
+                Light.ARGB.color(255, 100, 40, 255),
+                CIBookScreen.ThePage.BLACK,
+                color,List.of(),true,true));
 
-        list.add(new CIBookScreen.CIBookGuiAdd(InitItems.LeadOfEnlightenment_.asItem(), new Vec2(aInt * 3, -aInt * 1.5f),
+        list.add(new CIBookScreen.CIBookGuiAdd(Items.ROTTEN_FLESH.asItem(), new Vec2(aInt * 3, 0),
+                Component.translatable("chest_item.book.great_token.main"),
+                List.of(
+                        Component.translatable("chest_item.book.great_token.text")
+                ),
+                Light.ARGB.color(255, 100, 40, 255),
+                Light.ARGB.color(255, 100, 40, 255),
+                CIBookScreen.ThePage.BLACK,
+                color,List.of(),true,true));
+
+        list.add(new CIBookScreen.CIBookGuiAdd(Items.BONE.asItem(), new Vec2(aInt * 4, 0),
+                Component.translatable("chest_item.book.three_realms.main"),
+                List.of(
+                        Component.translatable("chest_item.book.three_realms.text")
+                ),
+                Light.ARGB.color(255, 100, 40, 255),
+                Light.ARGB.color(255, 100, 40, 255),
+                CIBookScreen.ThePage.BLACK,
+                color,List.of(),true,true));
+
+
+        list.add(new CIBookScreen.CIBookGuiAdd(InitItems.LeadOfEnlightenment_.asItem(), new Vec2(aInt * 3, -aInt * 2),
                 Component.translatable("chest_item.book.lead_of_enlightenment.main"),
                 List.of(
                         Component.translatable("chest_item.book.lead_of_enlightenment.1"),
@@ -77,7 +118,10 @@ public class ChaosPage implements RegisterBookPage {
 
 
 
+    }
 
+
+    private void addCelestialText(List<CIBookScreen.CIBookGuiAdd> list){
         list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Blood_.asItem(), new Vec2(0 - aInt, aInt),
                 Component.translatable("chest_item.book.blood.main"),
                 List.of(
@@ -165,11 +209,5 @@ public class ChaosPage implements RegisterBookPage {
                 Light.ARGB.color(255, 100, 40, 255),
                 CIBookScreen.ThePage.BLACK,
                 theCColor(InitItems.Samsara_.asItem()),List.of(),true,true));
-    }
-    public static int theCColor(Item item){
-        if (item instanceof CommonCelestial celestial) {
-            return celestial.color(item.getDefaultInstance());
-        }
-        return 0;
     }
 }

@@ -1551,8 +1551,6 @@
   "chest_item.book.samsara.6": "可能在一些怪物看守的地方发现",
 
 
-
-
   "chest_item.book.lead_of_enlightenment.main": "启明之铅",
   "chest_item.book.lead_of_enlightenment.1": "一块未知且沉眠的神秘金属",
 
@@ -1564,6 +1562,16 @@
   "chest_item.book.lead_of_enlightenment.6": "“为什么，到底是什么在驱使你继续战斗！”",
   "chest_item.book.lead_of_enlightenment.7": "“你我皆是大帝，为什么我永远被你踩在脚下”",
   "chest_item.book.lead_of_enlightenment.8": "“既然你不愿加入魔族，那就给我死吧！”",
+
+  "chest_item.book.emperor_cup.main": "帝王槃",
+  "chest_item.book.emperor_cup.text": "曾承载着悟道茶的天品圣杯\n也承载着无尽的腥风血雨\n\n后来帝君以某种手段将其封印在启明之铅中\n但封印会在启明之铅吸收足够多的经验后瓦解\n\n这个时代..只能有一位大帝\n除非...血雨落——大帝陨！",
+
+  "chest_item.book.great_token.main": "合道令",
+  "chest_item.book.great_token.text": "合道令是通往仙道之门的钥匙\n传闻踏足仙道门可真正合道，成就无上道果\n\n这神秘的启明之铅或是合道的媒介\n相传献祭足够多的凋灵即可激活这铅体的力量\n届时仙道法则将重新铸造铅体为合道令...\n\n持此令者...将一步登天！",
+
+  "chest_item.book.three_realms.main": "三界召",
+  "chest_item.book.three_realms.text": "混沌大战时期，那一战打碎了天地\n诞生了冥，凡，仙三界\n而此令则是穿越三界壁垒的通行证\n\n唯有携带启明之铅前往终界之地杀死恶龙\n才有资格拥有此令\n\n天衍帝君曾预言：“终界之地的恶龙一旦死去\n三界必定迎来天人五衰，届时将生灵涂炭，民不聊生”",
+
 
   "chest_item.book.test.main": "通往深渊的门户",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",

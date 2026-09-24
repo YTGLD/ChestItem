@@ -139,7 +139,7 @@ public class CIBookScreen extends Screen {
                 lastMouseX = event.x();
                 lastMouseY = event.y();
                 CIBookGuiAdd clicked = findEntryAt(event.x(), event.y());
-                if (clicked != null && !clicked.isInOther()) {
+                if (clicked != null) {
                     isMouseClicked = true;
                     lastGuiAdd = clicked;
                     lastItem = clicked.item;
@@ -167,6 +167,9 @@ public class CIBookScreen extends Screen {
             int centerX = (int) (xo + 252 / 2f + ciBookGuiAdd.vecPos.x + offsetX);
             int centerY = (int) (yo + 140 / 2f + ciBookGuiAdd.vecPos.y + offsetY);
             if (mouseX >= centerX - 10 && mouseX <= centerX + 10 && mouseY >= centerY - 10 && mouseY <= centerY + 10) {
+                if (ciBookGuiAdd.isInOther()) {
+                    continue;
+                }
                 return ciBookGuiAdd;
             }
         }
