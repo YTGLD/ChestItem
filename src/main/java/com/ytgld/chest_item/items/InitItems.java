@@ -5,9 +5,7 @@ import com.ytgld.chest_item.MysteriousMetal;
 import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
-import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
-import com.ytgld.chest_item.items.black.chaos_item.RunawayLining;
-import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
+import com.ytgld.chest_item.items.black.chaos_item.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
 import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
@@ -306,6 +304,13 @@ public class InitItems {
     public static final DeferredItem<Item> Reactor_ = register("reactor",
             (Identifier)-> new Item(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
+    public static final DeferredItem<Item> EmperorCup_ = register("emperor_cup",
+            (Identifier)-> new EmperorCup(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<Item> GreatToken_ = register("great_token",
+            (Identifier)-> new GreatToken(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+    public static final DeferredItem<Item> ThreeRealms_ = register("three_realms",
+            (Identifier)-> new ThreeRealms(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
     public static DeferredItem<@NotNull Item> register(String name, Function<Identifier, ? extends Item> func) {
         return ITEMS.register(name,func);
     }
@@ -413,11 +418,14 @@ public class InitItems {
                     output.accept(InitItems.OneEyedSpider_);
                     output.accept(InitItems.LeadOfEnlightenment_);
                     output.accept(InitItems.DefeatTheArmy_);
-                    output.accept(InitItems.Warmaker_);
-                    output.accept(InitItems.ChaosFortress_);
                     output.accept(InitItems.ActualSuffering_);
                     output.accept(InitItems.WallowAxe_);
 
+//                    output.accept(InitItems.Warmaker_);
+//                    output.accept(InitItems.ChaosFortress_);
+//                    output.accept(InitItems.EmperorCup_);
+//                    output.accept(InitItems.GreatToken_);
+//                    output.accept(InitItems.ThreeRealms_);
 
 
                     output.accept(InitItems.DevilCoins_);

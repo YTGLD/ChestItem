@@ -66,7 +66,7 @@ public class ChaosPage implements RegisterBookPage {
                 CIBookScreen.ThePage.BLACK,
                 color,List.of(),true,true));
 
-        list.add(new CIBookScreen.CIBookGuiAdd(Items.APPLE.asItem(), new Vec2(aInt * 2, 0),
+        list.add(new CIBookScreen.CIBookGuiAdd(InitItems.EmperorCup_.asItem(), new Vec2(aInt * 2, 0),
                 Component.translatable("chest_item.book.emperor_cup.main"),
                 List.of(
                         Component.translatable("chest_item.book.emperor_cup.text")
@@ -76,7 +76,7 @@ public class ChaosPage implements RegisterBookPage {
                 CIBookScreen.ThePage.BLACK,
                 color,List.of(),true,true));
 
-        list.add(new CIBookScreen.CIBookGuiAdd(Items.ROTTEN_FLESH.asItem(), new Vec2(aInt * 3, 0),
+        list.add(new CIBookScreen.CIBookGuiAdd(InitItems.GreatToken_.asItem(), new Vec2(aInt * 3, 0),
                 Component.translatable("chest_item.book.great_token.main"),
                 List.of(
                         Component.translatable("chest_item.book.great_token.text")
@@ -86,7 +86,7 @@ public class ChaosPage implements RegisterBookPage {
                 CIBookScreen.ThePage.BLACK,
                 color,List.of(),true,true));
 
-        list.add(new CIBookScreen.CIBookGuiAdd(Items.BONE.asItem(), new Vec2(aInt * 4, 0),
+        list.add(new CIBookScreen.CIBookGuiAdd(InitItems.ThreeRealms_.asItem(), new Vec2(aInt * 4, 0),
                 Component.translatable("chest_item.book.three_realms.main"),
                 List.of(
                         Component.translatable("chest_item.book.three_realms.text")
