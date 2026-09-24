@@ -211,7 +211,7 @@ public class ChaosBookScreen extends Screen {
         pose.popMatrix();
     }
 
-    private static final float TEXT_COLOR_RADIUS = 60f;
+    private static final float TEXT_COLOR_RADIUS = 80f;
     public void addText(
             CIBookScreen.CIBookGuiAdd ciBookGuiAdd,
             GuiGraphicsExtractor graphics,
@@ -360,7 +360,7 @@ public class ChaosBookScreen extends Screen {
         float g = rgb[1];
         float b = rgb[2];
 
-        float highlight = p * 0.5f;
+        float highlight = p * 0.8f;
 
         r = Mth.lerp(highlight, r, 255.0f);
         g = Mth.lerp(highlight, g, 255.0f);
