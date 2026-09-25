@@ -50,8 +50,9 @@ public class OwnerLead extends ItemBase {
 
         return modifiers;
     }
+
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+    public void text(ItemStack stack, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         CompoundTag compoundTag =stack.get(DataReg.tag);
         if (compoundTag!=null) {
             tooltipComponents.accept(Component.literal(compoundTag.getStringOr(name,"null")).append(Component.literal("的礼物！").withStyle(ChatFormatting.GOLD)));

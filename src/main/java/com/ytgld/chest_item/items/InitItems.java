@@ -8,7 +8,7 @@ import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.chaos_item.*;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
-import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
+import com.ytgld.chest_item.items.black.chaos_item.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;

@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.black.give;
+package com.ytgld.chest_item.items.black.chaos_item;
 
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
@@ -14,11 +14,13 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -27,6 +29,7 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
 
     public static final String killWarmaker = "killWarmaker";
     public static final String hurtGiveChaosFortress = "hurtGiveChaosFortress";
+    public static final String xpGiveEmperorCup = "xpGiveEmperorCup";
 
     public LeadOfEnlightenment(Properties properties) {
         super(properties);
@@ -39,6 +42,7 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
         }
         public static ModConfigSpec.IntValue intValue ;
         public static ModConfigSpec.IntValue intValue2 ;
+        public static ModConfigSpec.IntValue intValue3 ;
         @Override
         public void config(ModConfigSpec.Builder builder) {
             builder.push("LeadOfEnlightenment");
@@ -46,6 +50,8 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
                     .defineInRange("number",3000,1,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.LeadOfEnlightenment2")
                     .defineInRange("number2",500,1,Integer.MAX_VALUE);
+            intValue3 =  builder.translation("chest_item.config.LeadOfEnlightenment3")
+                    .defineInRange("number3",10000,0,Integer.MAX_VALUE);
             builder.pop();
         }
 
@@ -55,9 +61,39 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
                     new CIString("LeadOfEnlightenment",
                             "启明之铅","需要受到多少伤害来获取“”混沌要塞之护"),
                     new CIString("LeadOfEnlightenment2",
-                            "启明之铅2","需要杀死多少生物来获取“战争缔造者”")
+                            "启明之铅2","需要杀死多少生物来获取“战争缔造者”"),
+                    new CIString("LeadOfEnlightenment3",
+                            "启明之铅3","需要多少经验值才能解锁“帝王槃”")
 
             );
+        }
+    }
+    public static void event(PlayerXpEvent.PickupXp event){
+        if (event.getEntity() instanceof Player player){
+            Item item = InitItems.EmperorCup_.asItem();
+            ChestInventory chestInventory = Handler.getItem(player);
+            if (Handler.has(player, item)) {
+                return;
+            }
+            if (chestInventory != null) {
+                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                    ItemStack stack = chestInventory.getItem(i);
+                    if (stack.is(InitItems.LeadOfEnlightenment_)) {
+                        CompoundTag component = stack.get(DataReg.tag);
+                        if (isTrue(stack, ConfigItem.intValue3.get(),xpGiveEmperorCup)) {
+                            player.level().playSound(null,player.blockPosition(), SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.AMBIENT);
+                            chestInventory.setItem(i,new ItemStack(item));
+                        }
+                        if (component != null) {
+                            component.putInt(xpGiveEmperorCup,
+                                    (int) (component.getIntOr(xpGiveEmperorCup,0 ) + 1 + event.getOrb().getValue()));
+                            return;
+                        }else {
+                            stack.set(DataReg.tag,new CompoundTag());
+                        }
+                    }
+                }
+            }
         }
     }
     public static void die(LivingDamageEvent.Pre event){
@@ -128,6 +164,10 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
         if (component != null) {
             tooltipComponents.accept(Component.translatable("item.chest_item.lead_of_enlightenment.string.0").append(
                     String.valueOf(component.getIntOr(hurtGiveChaosFortress,0))
+            ).setStyle(Style.EMPTY.withColor(color(stack))));
+
+            tooltipComponents.accept(Component.translatable("item.chest_item.lead_of_enlightenment.string.2").append(
+                    String.valueOf(component.getIntOr(xpGiveEmperorCup,0))
             ).setStyle(Style.EMPTY.withColor(color(stack))));
 
 

@@ -2,6 +2,7 @@ package com.ytgld.chest_item.items;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.black.chaos_item.RunawayLining;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.RenderEvilGift;
@@ -12,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +35,9 @@ public class ItemBase extends Item implements Terror,OtherGift{
 
     public void tick(Player player, ItemStack stack){
 
+    }
+    public Identifier identifier(){
+        return Identifier.fromNamespaceAndPath(Chestitem.MODID,this.getDescriptionId());
     }
 
     @Override
@@ -67,7 +72,7 @@ public class ItemBase extends Item implements Terror,OtherGift{
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+    public final void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         text(stack, tooltipComponents, flag);
     }
 

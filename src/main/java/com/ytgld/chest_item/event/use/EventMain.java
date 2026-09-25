@@ -1,6 +1,5 @@
 package com.ytgld.chest_item.event.use;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
@@ -18,9 +17,10 @@ import com.ytgld.chest_item.items.black.celestial.Chaos;
 import com.ytgld.chest_item.items.black.celestial.CommonCelestial;
 import com.ytgld.chest_item.items.black.celestial.Samsara;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
+import com.ytgld.chest_item.items.black.chaos_item.EmperorCup;
 import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
-import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
+import com.ytgld.chest_item.items.black.chaos_item.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
@@ -47,33 +47,17 @@ import com.ytgld.chest_item.items.reinforced.meat.ComplexComponents;
 import com.ytgld.chest_item.items.tool.WallowAxe;
 import com.ytgld.chest_item.other.AttributeDataType;
 import com.ytgld.chest_item.other.DataReg;
-import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.renderer.particle.other.Particles;
-import com.ytgld.chest_item.renderer.particle.other.SwordEnergyOption;
 import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
-import net.minecraft.resources.Identifier;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -81,21 +65,15 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.AddAttributeTooltipsEvent;
@@ -273,6 +251,7 @@ public class EventMain {
         LifeStone.tick(event);
         Silent.livingHealEventSilent_(event);
         WarGodCommand.healOFf(event);
+        EmperorCup.event(event);
     }
     @SubscribeEvent
     public void LivingDeathEvent(PlayerEvent.PlayerRespawnEvent event){
@@ -929,6 +908,16 @@ public class EventMain {
             }
 
         }
+    }
+
+
+    @SubscribeEvent
+    public void PickupXp(PlayerXpEvent.PickupXp event){
+        LeadOfEnlightenment.event(event);
+    }
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void eventLivingDamageEvent(LivingDamageEvent.Pre event) {
+        EmperorCup.event(event);
     }
     @SubscribeEvent
     public void event(PlayerInteractEvent.EntityInteract event) {
