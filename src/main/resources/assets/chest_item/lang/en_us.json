@@ -858,7 +858,8 @@
   "advancements.chest_item.lead_of_enlightenment": "The bloom of the flower of the way",
   "item.chest_item.lead_of_enlightenment.string.0": "累计受到的伤害：",
   "item.chest_item.lead_of_enlightenment.string.1": "累计造成的杀孽：",
-"item.chest_item.chaos_fortress": "Chaos Fortress",
+  "item.chest_item.lead_of_enlightenment.string.2": "累计获得经验值：",
+  "item.chest_item.chaos_fortress": "Chaos Fortress",
   "advancements.chest_item.chaos_fortress": "endless pain",
   "item.chest_item.chaos_fortress.string.0": "The will of the lead of enlightenment is calling, take it, and bear the suffering of this world to create this supreme power",
   "item.chest_item.chaos_fortress.string.1": "The flower of the path is gradually withering....",
@@ -1476,9 +1477,9 @@
   "chest_item.book.enmity.3": "使得反应炉吸引附近怪物仇恨",
   "chest_item.book.enmity.4": "且反应炉自我恢复和难以破坏",
 
-
   "chest_item.book.warmaker.main": "战争缔造者",
   "chest_item.book.warmaker.1": "它象征着永不妥协的力量.....",
+
   "chest_item.book.warmaker.2": "当你携带着启明之铅造成足够多的杀戮时...",
   "chest_item.book.warmaker.3": "这铅体的血腥，嗜杀之力将彻底爆发",
   "chest_item.book.warmaker.4": "最终不可控的演变为战争缔造者",
@@ -1487,8 +1488,101 @@
   "chest_item.book.warmaker.6": "同时带来没有尽头的杀孽...",
 
 
+  "chest_item.book.chaos_fortress.main": "混沌要塞之护",
+  "chest_item.book.chaos_fortress.1": "坠入红尘的仙人...他守护这一方的天地",
 
-  "chest_item.book.test.main": "Small trinket in the box",
+  "chest_item.book.chaos_fortress.2": "当携带启明之铅受到足够多的痛楚与伤痛...",
+  "chest_item.book.chaos_fortress.3": "铅体的封印将彻底释放",
+  "chest_item.book.chaos_fortress.4": "最终会变化为混沌要塞之护",
+
+  "chest_item.book.chaos_fortress.5": "相传这块金属的锻造者...",
+  "chest_item.book.chaos_fortress.6": "乃是一位混沌体大成的无上大能!",
+  "chest_item.book.chaos_fortress.7": "却不知为何将它封印在铅体之内...",
+  "chest_item.book.chaos_fortress.8": "也不知混沌仙帝是否就是此位大能...",
+
+  "chest_item.book.blood.main": "仙法：血魔解体",
+
+  "chest_item.book.blood.1": "此法曾是一方宗门的不传秘法",
+  "chest_item.book.blood.2": "被大帝偶然所得",
+
+  "chest_item.book.blood.3": "其效果为短暂舍去一身生命力",
+  "chest_item.book.blood.4": "换取持续时间不短的近战能力",
+  "chest_item.book.blood.5": "以及开启之后有短暂的吸取",
+  "chest_item.book.blood.6": "敌人生命力的能力且近战能力保留",
+
+  "chest_item.book.blood.7": "此法被混沌仙帝散布九天",
+  "chest_item.book.blood.8": "可能在一些怪物看守的地方发现",
+
+
+  "chest_item.book.chaos.main": "仙法：混沌体",
+  "chest_item.book.chaos.1": "该法门是大帝立于混沌中参悟",
+  "chest_item.book.chaos.2": "结合自身的混沌道体所创",
+
+  "chest_item.book.chaos.3": "此法与混沌道体重名，可抵御万界生灵的攻击而不败",
+
+  "chest_item.book.chaos.4": "此法被混沌仙帝散布九天",
+  "chest_item.book.chaos.5": "可能在一些怪物看守的地方发现",
+
+  "chest_item.book.nine_dome.main": "仙法：九转血魔体",
+
+  "chest_item.book.nine_dome.1": "该法门是大帝阅读血魔解体后",
+  "chest_item.book.nine_dome.2": "若有所感而创",
+
+  "chest_item.book.nine_dome.3": "该魔非彼魔，获得者可使自身生命力大涨且无副作用",
+
+  "chest_item.book.nine_dome.4": "此法被混沌仙帝散布九天",
+  "chest_item.book.nine_dome.5": "可能在一些怪物看守的地方发现",
+
+  "chest_item.book.sword.main": "仙法：剑体",
+  "chest_item.book.sword.1": "大帝曾说。招式之间，唯快足以",
+
+  "chest_item.book.sword.2": "如此世界有了一门提升获得者速度的法门",
+
+  "chest_item.book.sword.3": "此法被混沌仙帝散布九天",
+  "chest_item.book.sword.4": "可能在一些怪物看守的地方发现",
+
+  "chest_item.book.samsara.main": "仙法：轮回道体",
+  "chest_item.book.samsara.1": "轮回道体是大帝入凡间所创，",
+  "chest_item.book.samsara.2": "其乃一门不染因果，",
+
+  "chest_item.book.samsara.3": "若是诸般袭扰还会品尝自身所结恶果的高深法门，",
+  "chest_item.book.samsara.4": "可惜寻常人等只得使出百分之一的效果",
+
+  "chest_item.book.samsara.5": "此法被混沌仙帝散布九天",
+  "chest_item.book.samsara.6": "可能在一些怪物看守的地方发现",
+
+
+  "chest_item.book.lead_of_enlightenment.main": "启明之铅",
+  "chest_item.book.lead_of_enlightenment.1": "一块未知且沉眠的神秘金属",
+
+  "chest_item.book.lead_of_enlightenment.2": "启明之铅由物质的珍贵残骸重新组成",
+  "chest_item.book.lead_of_enlightenment.3": "异界的发光石头似乎激活了这些废料",
+  "chest_item.book.lead_of_enlightenment.4": "未知的力量似乎想让它激活，但这还不够",
+
+  "chest_item.book.lead_of_enlightenment.5": "“你的帝躯早已腐败，元婴已废”",
+  "chest_item.book.lead_of_enlightenment.6": "“为什么，到底是什么在驱使你继续战斗！”",
+  "chest_item.book.lead_of_enlightenment.7": "“你我皆是大帝，为什么我永远被你踩在脚下”",
+  "chest_item.book.lead_of_enlightenment.8": "“既然你不愿加入魔族，那就给我死吧！”",
+
+  "chest_item.book.emperor_cup.main": "帝王槃",
+  "chest_item.book.emperor_cup.text": "曾承载着悟道茶的天品圣杯\n也承载着无尽的腥风血雨\n\n后来帝君以某种手段将其封印在启明之铅中\n但封印会在启明之铅吸收足够多的经验后瓦解\n\n这个时代..只能有一位大帝\n除非...血雨落——大帝陨！",
+
+  "chest_item.book.great_token.main": "合道令",
+  "chest_item.book.great_token.text": "合道令是通往仙道之门的钥匙\n传闻踏足仙道门可真正合道，成就无上道果\n\n这神秘的启明之铅或是合道的媒介\n相传献祭足够多的凋灵即可激活这铅体的力量\n届时仙道法则将重新铸造铅体为合道令...\n\n持此令者...将一步登天！",
+
+  "chest_item.book.three_realms.main": "三界召",
+  "chest_item.book.three_realms.text": "混沌大战时期，那一战打碎了天地\n诞生了冥，凡，仙三界\n而此令则是穿越三界壁垒的通行证\n\n唯有携带启明之铅前往终界之地杀死恶龙\n才有资格拥有此令\n\n天衍帝君曾预言：“终界之地的恶龙一旦死去\n三界必定迎来天人五衰，届时将生灵涂炭，民不聊生”",
+
+  "item.chest_item.emperor_cup": "帝王槃",
+  "item.chest_item.emperor_cup.string.1": "将受到的伤害转移到此物当中",
+  "item.chest_item.emperor_cup.string.2": "最多可容纳%d点伤害",
+  "item.chest_item.emperor_cup.string.3": "若达到上限则将伤害平均分配给玩家和附近的实体",
+  "item.chest_item.emperor_cup.string.4": "并给予玩家%d秒无敌",
+  "item.chest_item.emperor_cup.string.5": "此物可随时间减少内部寄存伤害的数量",
+  "item.chest_item.emperor_cup.string.6": "四种护盾将陷入混沌中而无法使用",
+  "item.chest_item.emperor_cup.string.7": "在无敌帧期间无法受到治疗",
+
+  "chest_item.book.test.main": "通往深渊的门户",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
   "chest_item.book.test.3": "看看箱子里有什么？",
   "chest_item.book.test.2": "Contributor: Qiuji",

@@ -36,6 +36,7 @@
     "outline.PreparedFrameMixin",
     "outline.SubmitNodeCollectionMixin",
     "outline.SubmitNodeStorageMixin",
+    "update.LevelRendererMixin",
     "util.LevelRendererMixin"
   ]
 }

@@ -2,6 +2,7 @@ package com.ytgld.chest_item.renderer.book;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.items.ItemBase;
+import com.ytgld.chest_item.items.black.celestial.CommonCelestial;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
 import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
@@ -57,6 +58,9 @@ public class ChaosBookScreen extends Screen {
     public static final Identifier black_item = Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/gui/book/black_item.png");
     public static Identifier itemImage (Item item){
         Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
+        if (item instanceof CommonCelestial celestial) {
+            return celestial.img(item.getDefaultInstance());
+        }
         return Identifier.fromNamespaceAndPath(itemId.getNamespace(),
                 "textures/item/" + itemId.getPath() + ".png");
     };
@@ -147,8 +151,8 @@ public class ChaosBookScreen extends Screen {
                                     Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/cube.png"),
                                     MRender.RenderPs.GUI_TEXTURED,
                                     new Vector2f(),
-                                    new Vector2f(0,-0.01f),
-                                    new Vector2f(), true), 5);
+                                    new Vector2f(0,-0.007f),
+                                    new Vector2f(), true), 5, textAlpha);
                 }
 
             }
@@ -195,7 +199,7 @@ public class ChaosBookScreen extends Screen {
                 Identifier.fromNamespaceAndPath(
                         Chestitem.MODID,"textures/gui/color.png"
                 ), 0,0, 0, 0,
-                sss, sss, sss, sss,ciBookGuiAdd.colorText);
+                sss, sss, sss, sss,ciBookGuiAdd.lightColor);
         pose.popMatrix();
 
         pose.pushMatrix();
@@ -205,8 +209,7 @@ public class ChaosBookScreen extends Screen {
         graphics.item(stack, 0, 0);
         pose.popMatrix();
     }
-
-    private static final float TEXT_COLOR_RADIUS = 60f;
+    private static final float TEXT_COLOR_RADIUS = 80f;
     public void addText(
             CIBookScreen.CIBookGuiAdd ciBookGuiAdd,
             GuiGraphicsExtractor graphics,
@@ -216,22 +219,50 @@ public class ChaosBookScreen extends Screen {
             int mouseY
     ) {
         Minecraft mc = Minecraft.getInstance();
+
         if (!isMouseClicked) {
             return;
         }
+
+        float textX = windowLeft + 20;
+        float textY = windowTop + 30;
+
         graphics.pose().pushMatrix();
-        renderColorfulText(graphics, mc.font, ciBookGuiAdd.mainText, windowLeft + 20, windowTop + 30,
-                ciBookGuiAdd.colorMain, mouseX, mouseY,
+
+        int mainLines = renderColorfulText(
+                graphics,
+                mc.font,
+                ciBookGuiAdd.mainText,
+                textX,
+                textY,
+                ciBookGuiAdd.colorMain,
+                mouseX,
+                mouseY,
                 1.5f
         );
+
         graphics.pose().popMatrix();
-        for (int i = 0; i < ciBookGuiAdd.text.size(); i++) {
-            Component text = ciBookGuiAdd.text.get(i);
-            renderColorfulText(graphics, mc.font, text, windowLeft + 20, windowTop + 30 + (i + 1) * 12,
-                    ciBookGuiAdd.colorText, mouseX, mouseY, 1.5f);
+
+        float currentY = textY + mainLines * mc.font.lineHeight * 1.5f;
+
+        for (Component text : ciBookGuiAdd.text) {
+
+            int lineCount = renderColorfulText(
+                    graphics,
+                    mc.font,
+                    text,
+                    textX,
+                    currentY,
+                    ciBookGuiAdd.colorText,
+                    mouseX,
+                    mouseY,
+                    1.5f
+            );
+
+            currentY += lineCount * mc.font.lineHeight * 1.5f;
         }
     }
-    private void renderColorfulText(
+    private int renderColorfulText(
             GuiGraphicsExtractor graphics,
             Font font,
             Component component,
@@ -245,14 +276,28 @@ public class ChaosBookScreen extends Screen {
         String text = component.getString();
 
         float currentX = x;
+        float currentY = y;
+
+        float lineHeight = font.lineHeight * scale;
+
+        int lineCount = 1;
 
         for (int i = 0; i < text.length(); i++) {
-            String character = String.valueOf(text.charAt(i));
+            char c = text.charAt(i);
+
+            if (c == '\n') {
+                currentX = x;
+                currentY += lineHeight;
+                lineCount++;
+                continue;
+            }
+
+            String character = String.valueOf(c);
 
             float charWidth = font.width(character) * scale;
 
             float centerX = currentX + charWidth * 0.5f;
-            float centerY = y + font.lineHeight * scale * 0.5f;
+            float centerY = currentY + lineHeight * 0.5f;
 
             float dx = mouseX - centerX;
             float dy = mouseY - centerY;
@@ -266,10 +311,20 @@ public class ChaosBookScreen extends Screen {
             );
 
             int color = makeColorVivid(originalColor, proximity);
-            graphics.text(font, character, (int) currentX, (int) y, color,false);
+
+            graphics.text(
+                    font,
+                    character,
+                    (int) currentX,
+                    (int) currentY,
+                    color,
+                    false
+            );
 
             currentX += charWidth;
         }
+
+        return lineCount;
     }
     private static int makeColorVivid(int color, float proximity) {
         int alpha = (color >> 24) & 0xFF;
@@ -303,7 +358,7 @@ public class ChaosBookScreen extends Screen {
         float g = rgb[1];
         float b = rgb[2];
 
-        float highlight = p * 0.5f;
+        float highlight = p * 0.8f;
 
         r = Mth.lerp(highlight, r, 255.0f);
         g = Mth.lerp(highlight, g, 255.0f);

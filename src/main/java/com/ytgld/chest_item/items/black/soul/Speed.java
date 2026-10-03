@@ -16,6 +16,7 @@ import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -79,7 +80,11 @@ public class Speed extends TheSoul {
     }
     public static void give(ChestInventory chestInventory,Player player){
         Set<Item> set = new HashSet<>();
-
+        Set<String> strings = player.getData(AttReg.itemRecord.get());
+        String speed = BuiltInRegistries.ITEM.getKey(InitItems.Speed_.get()).toString();
+        if (strings.contains(speed)) {
+            return;
+        }
         for (int i = 0; i < chestInventory.getContainerSize(); i++) {
             ItemStack stack = chestInventory.getItem(i);
             if (stack.is(InitItems.Speed_)) {

@@ -11,6 +11,7 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.renderer.outline.ISubmitReactorGlow;
+import com.ytgld.chest_item.renderer.warp.ChestItemFrameGraph;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -54,10 +55,22 @@ public class ReactorRender extends EntityRenderer<Reactor, ReactorRenderState> {
 
     @Override
     public void submit(ReactorRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
-        HandlerClient.showOutline = true;
-        HandlerClient.doPass = true;
-
+//        HandlerClient.showOutline = true;
+//        HandlerClient.doPass = true;
+        int age = renderState.entity.tickCount;
+        if (age > 100) {
+            age = 100;
+        }
+        float value = age / 25f;
         Reactor entity = renderState.entity;
+        ChestItemFrameGraph.putWarpedVec3(new ChestItemFrameGraph.WarpedVec3(
+                entity.position().add(0,1,0),
+                value,
+                1 * value,
+                5 * value,
+                1 * value
+        ));
+
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
         double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());

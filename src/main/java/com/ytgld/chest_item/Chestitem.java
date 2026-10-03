@@ -130,7 +130,7 @@ public class Chestitem {
         NeoForge.EVENT_BUS.register(new SkillEvent());
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ConfigC.fc);
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.fc);
+        modContainer.registerConfig(ModConfig.Type.LOCAL, Config.fc);
 
     }
     private void registerPayloadHandler(final RegisterPayloadHandlersEvent evt) {

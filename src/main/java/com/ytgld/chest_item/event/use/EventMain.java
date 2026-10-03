@@ -17,9 +17,10 @@ import com.ytgld.chest_item.items.black.celestial.Chaos;
 import com.ytgld.chest_item.items.black.celestial.CommonCelestial;
 import com.ytgld.chest_item.items.black.celestial.Samsara;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
+import com.ytgld.chest_item.items.black.chaos_item.EmperorCup;
 import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
-import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
+import com.ytgld.chest_item.items.black.chaos_item.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
@@ -69,6 +70,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -250,6 +252,7 @@ public class EventMain {
         LifeStone.tick(event);
         Silent.livingHealEventSilent_(event);
         WarGodCommand.healOFf(event);
+        EmperorCup.event(event);
     }
     @SubscribeEvent
     public void LivingDeathEvent(PlayerEvent.PlayerRespawnEvent event){
@@ -906,6 +909,15 @@ public class EventMain {
             }
 
         }
+    }
+
+    @SubscribeEvent
+    public void PickupXp(PlayerXpEvent.PickupXp event){
+        LeadOfEnlightenment.event(event);
+    }
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void eventLivingDamageEvent(LivingDamageEvent.Pre event) {
+        EmperorCup.event(event);
     }
     @SubscribeEvent
     public void event(PlayerInteractEvent.EntityInteract event) {
