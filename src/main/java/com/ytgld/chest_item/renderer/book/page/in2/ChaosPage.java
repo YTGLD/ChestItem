@@ -15,9 +15,20 @@ import java.util.List;
 @AddBookPage
 public class ChaosPage implements RegisterBookPage {
     private final int aInt = 24;
-    private final int color = Light.ARGB.color(255,100, 40, 255);
+    private final int color = Light.ARGB.color(255,160, 80, 255);
     @Override
     public void addPage(List<CIBookScreen.CIBookGuiAdd> list){
+        addCelestialText(list);
+        addChaosText(list);
+    }
+    public static int theCColor(Item item){
+        if (item instanceof TheCelestial celestial) {
+            return celestial.color(item.getDefaultInstance());
+        }
+        return 0;
+    }
+    private void addChaosText(List<CIBookScreen.CIBookGuiAdd> list) {
+        addCelestialText(list);
         list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Warmaker_.asItem(), new Vec2(0, 0),
                 Component.translatable("chest_item.book.warmaker.main"),
                 List.of(
@@ -30,8 +41,8 @@ public class ChaosPage implements RegisterBookPage {
                         Component.translatable("chest_item.book.warmaker.5"),
                         Component.translatable("chest_item.book.warmaker.6")
                 ),
-                Light.ARGB.color(255, 100, 40, 255),
-                Light.ARGB.color(255, 100, 40, 255),
+                color,
+                color,
                 CIBookScreen.ThePage.BLACK,
                 color,List.of(),true,true));
 
@@ -49,13 +60,23 @@ public class ChaosPage implements RegisterBookPage {
                         Component.translatable("chest_item.book.chaos_fortress.7"),
                         Component.translatable("chest_item.book.chaos_fortress.8")
                 ),
-                Light.ARGB.color(255, 100, 40, 255),
-                Light.ARGB.color(255, 100, 40, 255),
+                color,
+                color,
+                CIBookScreen.ThePage.BLACK,
+                color,List.of(),true,true));
+
+        list.add(new CIBookScreen.CIBookGuiAdd(InitItems.EmperorCup_.asItem(), new Vec2(aInt * 2, 0),
+                Component.translatable("chest_item.book.emperor_cup.main"),
+                List.of(
+                        Component.translatable("chest_item.book.emperor_cup.text")
+                ),
+                color,
+                color,
                 CIBookScreen.ThePage.BLACK,
                 color,List.of(),true,true));
 
 
-        list.add(new CIBookScreen.CIBookGuiAdd(InitItems.LeadOfEnlightenment_.asItem(), new Vec2(aInt * 3, -aInt * 1.5f),
+        list.add(new CIBookScreen.CIBookGuiAdd(InitItems.LeadOfEnlightenment_.asItem(), new Vec2(aInt * 3, -aInt * 2),
                 Component.translatable("chest_item.book.lead_of_enlightenment.main"),
                 List.of(
                         Component.translatable("chest_item.book.lead_of_enlightenment.1"),
@@ -69,14 +90,17 @@ public class ChaosPage implements RegisterBookPage {
                         Component.translatable("chest_item.book.lead_of_enlightenment.7"),
                         Component.translatable("chest_item.book.lead_of_enlightenment.8")
                 ),
-                Light.ARGB.color(255, 100, 40, 255),
-                Light.ARGB.color(255, 100, 40, 255),
+                color,
+                color,
                 CIBookScreen.ThePage.BLACK,
                 color,List.of(),true,true));
 
 
 
+    }
 
+
+    private void addCelestialText(List<CIBookScreen.CIBookGuiAdd> list){
         list.add(new CIBookScreen.CIBookGuiAdd(InitItems.Blood_.asItem(), new Vec2(0 - aInt, aInt),
                 Component.translatable("chest_item.book.blood.main"),
                 List.of(
@@ -91,8 +115,8 @@ public class ChaosPage implements RegisterBookPage {
                         Component.translatable("chest_item.book.blood.7"),
                         Component.translatable("chest_item.book.blood.8")
                 ),
-                Light.ARGB.color(255, 100, 40, 255),
-                Light.ARGB.color(255, 100, 40, 255),
+                color,
+                color,
                 CIBookScreen.ThePage.BLACK,
                 theCColor(InitItems.Blood_.asItem()),List.of(),true,true));
 
@@ -108,8 +132,8 @@ public class ChaosPage implements RegisterBookPage {
                         Component.translatable("chest_item.book.chaos.4"),
                         Component.translatable("chest_item.book.chaos.5")
                 ),
-                Light.ARGB.color(255, 100, 40, 255),
-                Light.ARGB.color(255, 100, 40, 255),
+                color,
+                color,
                 CIBookScreen.ThePage.BLACK,
                 theCColor(InitItems.Chaos_.asItem()),List.of(),true,true));
 
@@ -125,8 +149,8 @@ public class ChaosPage implements RegisterBookPage {
                         Component.translatable("chest_item.book.nine_dome.4"),
                         Component.translatable("chest_item.book.nine_dome.5")
                 ),
-                Light.ARGB.color(255, 100, 40, 255),
-                Light.ARGB.color(255, 100, 40, 255),
+                color,
+                color,
                 CIBookScreen.ThePage.BLACK,
                 theCColor(InitItems.NineDome_.asItem()),List.of(),true,true));
 
@@ -141,8 +165,8 @@ public class ChaosPage implements RegisterBookPage {
                         Component.translatable("chest_item.book.sword.3"),
                         Component.translatable("chest_item.book.sword.4")
                 ),
-                Light.ARGB.color(255, 100, 40, 255),
-                Light.ARGB.color(255, 100, 40, 255),
+                color,
+                color,
                 CIBookScreen.ThePage.BLACK,
                 theCColor(InitItems.Sword_.asItem()),List.of(),true,true));
 
@@ -160,15 +184,9 @@ public class ChaosPage implements RegisterBookPage {
                         Component.translatable("chest_item.book.samsara.5"),
                         Component.translatable("chest_item.book.samsara.6")
                 ),
-                Light.ARGB.color(255, 100, 40, 255),
-                Light.ARGB.color(255, 100, 40, 255),
+                color,
+                color,
                 CIBookScreen.ThePage.BLACK,
                 theCColor(InitItems.Samsara_.asItem()),List.of(),true,true));
-    }
-    public static int theCColor(Item item){
-        if (item instanceof TheCelestial celestial) {
-            return celestial.color(item.getDefaultInstance());
-        }
-        return 0;
     }
 }

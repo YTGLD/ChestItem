@@ -2,12 +2,14 @@ package com.ytgld.chest_item.items;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -26,6 +28,10 @@ public class ItemBase extends Item implements Terror,IDoAttribute {
     }
     public void tick(Player player, ItemStack stack){
 
+    }
+
+    public ResourceLocation identifier(){
+        return ResourceLocation.fromNamespaceAndPath(Chestitem.MODID,this.getDescriptionId());
     }
 
     @Override

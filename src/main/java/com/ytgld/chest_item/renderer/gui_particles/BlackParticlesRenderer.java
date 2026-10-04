@@ -6,8 +6,10 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.renderer.MGuiGraphics;
 import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import org.joml.Vector2f;
 
 import java.util.Map;
@@ -45,19 +47,38 @@ public class BlackParticlesRenderer {
             boolean downSize,
             boolean canRotate
     ) {
+
+        float partialTick =
+                Minecraft.getInstance()
+                        .getTimer()
+                        .getGameTimeDeltaPartialTick(false);
+
+        Vector2f position =
+                state.imageColorAndRenderPipeline.position();
+
+        Vector2f previous =
+                state.previousPosition;
+
+        float px = x + Mth.lerp(
+                partialTick,
+                previous.x,
+                position.x
+        );
+
+        float py = y + Mth.lerp(
+                partialTick,
+                previous.y,
+                position.y
+        );
+
+
+
+
         BlackKey.ColorImage color = state.imageColorAndRenderPipeline.color();
 
         if (downSize) {
             size = (int) (size * alpha / 255f);
         }
-
-        Vector2f position = state.imageColorAndRenderPipeline.position();
-        Vector2f velocity = state.imageColorAndRenderPipeline.velocity();
-        Vector2f acceleration = state.imageColorAndRenderPipeline.acceleration();
-        velocity.fma(deltaTime, acceleration);
-        position.fma(deltaTime, velocity);
-        float px = x + position.x;
-        float py = y + position.y;
 
         pose.pushPose();
 
@@ -70,10 +91,13 @@ public class BlackParticlesRenderer {
         pose.translate(-px, -py,0);
 
         pose.translate(px - size / 2f, py - size / 2f,0);
+
         new MGuiGraphics.GUI(state.imageColorAndRenderPipeline.shadowImage().shaderInstanceSupplier(),
                 state.imageColorAndRenderPipeline.shadowImage().light()).blit(guiGraphics,image,
-                0,0,
-                0,0,
+                0,
+                0,
+                0,
+                0,
                 size,
                 size,
                 size,
@@ -83,7 +107,9 @@ public class BlackParticlesRenderer {
                         color.r(),
                         color.g(),
                         color.b()
-                ));
+                )
+        );
+
         pose.popPose();
     }
 }

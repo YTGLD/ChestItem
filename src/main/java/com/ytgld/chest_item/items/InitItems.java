@@ -6,10 +6,11 @@ import com.ytgld.chest_item.OwnerLead;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
+import com.ytgld.chest_item.items.black.chaos_item.EmperorCup;
 import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
 import com.ytgld.chest_item.items.black.give.DevilCoins;
-import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
+import com.ytgld.chest_item.items.black.chaos_item.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
@@ -29,12 +30,12 @@ import com.ytgld.chest_item.items.memory.MemoryItems;
 import com.ytgld.chest_item.items.other.*;
 import com.ytgld.chest_item.items.reinforced.ReinforcedItems;
 import com.ytgld.chest_item.items.tool.WallowAxe;
-import com.ytgld.chest_item.renderer.light.Light;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -289,6 +290,10 @@ public class    InitItems {
     public static final DeferredItem<Item> Pod_ = register("pod",
             (resourceLocation)-> new Pod(new Item.Properties().stacksTo(1)));
 
+
+    public static final DeferredItem<Item> EmperorCup_ = register("emperor_cup",
+            (Identifier)-> new EmperorCup(new Item.Properties().stacksTo(1)));
+
     public static DeferredItem<Item> register(String name, Function<ResourceLocation, ? extends Item> func) {
         return ITEMS.register(name,func);
     }
@@ -395,8 +400,6 @@ public class    InitItems {
                     output.accept(InitItems.OneEyedSpider_);
                     output.accept(InitItems.LeadOfEnlightenment_);
                     output.accept(InitItems.DefeatTheArmy_);
-                    output.accept(InitItems.Warmaker_);
-                    output.accept(InitItems.ChaosFortress_);
                     output.accept(InitItems.ActualSuffering_);
                     output.accept(InitItems.WallowAxe_);
 

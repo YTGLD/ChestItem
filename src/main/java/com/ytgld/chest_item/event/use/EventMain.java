@@ -15,9 +15,10 @@ import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.*;
 import com.ytgld.chest_item.items.black.celestial.*;
 import com.ytgld.chest_item.items.black.chaos_item.ChaosFortress;
+import com.ytgld.chest_item.items.black.chaos_item.EmperorCup;
 import com.ytgld.chest_item.items.black.chaos_item.Warmaker;
 import com.ytgld.chest_item.items.black.give.BrassCoins;
-import com.ytgld.chest_item.items.black.give.LeadOfEnlightenment;
+import com.ytgld.chest_item.items.black.chaos_item.LeadOfEnlightenment;
 import com.ytgld.chest_item.items.black.soul.*;
 import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
@@ -56,12 +57,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -243,6 +244,7 @@ public class EventMain {
         LifeStone.tick(event);
         Silent.livingHealEventSilent_(event);
         WarGodCommand.healOFf(event);
+        EmperorCup.event(event);
     }
     @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event){
@@ -861,6 +863,15 @@ public class EventMain {
             }
 
         }
+    }
+
+    @SubscribeEvent
+    public void PickupXp(PlayerXpEvent.PickupXp event){
+        LeadOfEnlightenment.event(event);
+    }
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void eventLivingDamageEvent(LivingDamageEvent.Pre event) {
+        EmperorCup.event(event);
     }
     @SubscribeEvent
     public void event(PlayerEvent.ItemCraftedEvent event){

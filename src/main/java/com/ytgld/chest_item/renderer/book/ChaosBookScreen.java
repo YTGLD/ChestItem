@@ -157,7 +157,7 @@ public class ChaosBookScreen extends Screen {
                                     ResourceLocation.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/cube.png"),
                                     new BlackKey.ShadowImage(CIStateShardsHasBlack::getHasBlock, true),
                                     new Vector2f(),
-                                    new Vector2f(0,-0.007f),
+                                    new Vector2f(0,-0.02f),
                                     new Vector2f(), true), 7, textAlpha);
                 }
 
@@ -217,7 +217,7 @@ public class ChaosBookScreen extends Screen {
         pose.popPose();
     }
 
-    private static final float TEXT_COLOR_RADIUS = 60f;
+    private static final float TEXT_COLOR_RADIUS = 80f;
     public void addText(
             CIBookScreen.CIBookGuiAdd ciBookGuiAdd,
             GuiGraphics graphics,
@@ -227,22 +227,50 @@ public class ChaosBookScreen extends Screen {
             int mouseY
     ) {
         Minecraft mc = Minecraft.getInstance();
+
         if (!isMouseClicked) {
             return;
         }
+
+        float textX = windowLeft + 20;
+        float textY = windowTop + 30;
+
         graphics.pose().pushPose();
-        renderColorfulText(graphics, mc.font, ciBookGuiAdd.mainText, windowLeft + 20, windowTop + 30,
-                ciBookGuiAdd.colorMain, mouseX, mouseY,
+
+        int mainLines = renderColorfulText(
+                graphics,
+                mc.font,
+                ciBookGuiAdd.mainText,
+                textX,
+                textY,
+                ciBookGuiAdd.colorMain,
+                mouseX,
+                mouseY,
                 1.5f
         );
+
         graphics.pose().popPose();
-        for (int i = 0; i < ciBookGuiAdd.text.size(); i++) {
-            Component text = ciBookGuiAdd.text.get(i);
-            renderColorfulText(graphics, mc.font, text, windowLeft + 20, windowTop + 30 + (i + 1) * 12,
-                    ciBookGuiAdd.colorText, mouseX, mouseY, 1.5f);
+
+        float currentY = textY + mainLines * mc.font.lineHeight * 1.5f;
+
+        for (Component text : ciBookGuiAdd.text) {
+
+            int lineCount = renderColorfulText(
+                    graphics,
+                    mc.font,
+                    text,
+                    textX,
+                    currentY,
+                    ciBookGuiAdd.colorText,
+                    mouseX,
+                    mouseY,
+                    1.5f
+            );
+
+            currentY += lineCount * mc.font.lineHeight * 1.5f;
         }
     }
-    private void renderColorfulText(
+    private int renderColorfulText(
             GuiGraphics graphics,
             Font font,
             Component component,
@@ -256,14 +284,28 @@ public class ChaosBookScreen extends Screen {
         String text = component.getString();
 
         float currentX = x;
+        float currentY = y;
+
+        float lineHeight = font.lineHeight * scale;
+
+        int lineCount = 1;
 
         for (int i = 0; i < text.length(); i++) {
-            String character = String.valueOf(text.charAt(i));
+            char c = text.charAt(i);
+
+            if (c == '\n') {
+                currentX = x;
+                currentY += lineHeight;
+                lineCount++;
+                continue;
+            }
+
+            String character = String.valueOf(c);
 
             float charWidth = font.width(character) * scale;
 
             float centerX = currentX + charWidth * 0.5f;
-            float centerY = y + font.lineHeight * scale * 0.5f;
+            float centerY = currentY + lineHeight * 0.5f;
 
             float dx = mouseX - centerX;
             float dy = mouseY - centerY;
@@ -277,10 +319,20 @@ public class ChaosBookScreen extends Screen {
             );
 
             int color = makeColorVivid(originalColor, proximity);
-            graphics.drawString(font, character, (int) currentX, (int) y, color,false);
+
+            graphics.drawString(
+                    font,
+                    character,
+                    (int) currentX,
+                    (int) currentY,
+                    color,
+                    false
+            );
 
             currentX += charWidth;
         }
+
+        return lineCount;
     }
     private static int makeColorVivid(int color, float proximity) {
         int alpha = (color >> 24) & 0xFF;
@@ -314,7 +366,7 @@ public class ChaosBookScreen extends Screen {
         float g = rgb[1];
         float b = rgb[2];
 
-        float highlight = p * 0.5f;
+        float highlight = p * 0.8f;
 
         r = Mth.lerp(highlight, r, 255.0f);
         g = Mth.lerp(highlight, g, 255.0f);

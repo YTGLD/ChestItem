@@ -16,8 +16,8 @@
   "chest_item.config.Bluster2": "受伤倍率",
   "chest_item.config.BoneHead": "额外的吃东西速度",
   "chest_item.config.Chaos": "受伤倍率",
-  "chest_item.config.ChaosConstructor": "受伤累计的最大抗性",
-  "chest_item.config.ChaosConstructor2": "增加的侵蚀装甲",
+  "chest_item.config.ChaosConstructor": "最大抗性",
+  "chest_item.config.ChaosConstructor2": "侵蚀装甲",
   "chest_item.config.ChaosFortress": "免疫低于这个值的伤害",
   "chest_item.config.ChaosFortress2": "增加的魔法伤害",
   "chest_item.config.ChaosFortress3": "伤害倍率",
@@ -31,6 +31,9 @@
   "chest_item.config.Contradiction2": "最大抗性上限",
   "chest_item.config.Crave": "每隔多少刻减少一次对异常饥饿的抗性",
   "chest_item.config.Crave2": "每次触发异常饥饿所消耗的饥饿值和饱和度",
+  "chest_item.config.DecayFruit": "属性黑名单",
+  "chest_item.config.DecayFruit2": "属性最小值",
+  "chest_item.config.DecayFruit3": "属性最大值",
   "chest_item.config.DefeatTheArmy": "属性倍率",
   "chest_item.config.Diffusion": "额外经验值获取",
   "chest_item.config.Diffusion2": "战利品里的神秘金属板的发现概率",
@@ -54,7 +57,7 @@
   "chest_item.config.GodBlood": "基础加成",
   "chest_item.config.GodBlood2": "缓慢时间（施加）",
   "chest_item.config.GoldCheese": "附魔等级加成",
-  "chest_item.config.GoldCheese2": "额外的经验掉落",
+  "chest_item.config.GoldCheese2": "附魔等级加成",
   "chest_item.config.HardwoodTotemPole": "触发概率",
   "chest_item.config.HeavyBlade": "最大增生组织提供伤害",
   "chest_item.config.HeavyBlade2": "最大护甲提供伤害",
@@ -122,6 +125,9 @@
   "chest_item.config.TheKill2": "连斩次数",
   "chest_item.config.TheOrderOfTheUndead": "伤害（物理）",
   "chest_item.config.TheOrderOfTheUndead2": "饥饿速度",
+  "chest_item.config.Triangle": "基础伤害",
+  "chest_item.config.Triangle2": "每次受伤减少的伤害",
+  "chest_item.config.Triangle3": "伤害最低减少的值",
   "chest_item.config.UndeadRune": "加成",
   "chest_item.config.UndeadRune2": "减益",
   "chest_item.config.War": "受到伤害倍率",
@@ -130,7 +136,6 @@
   "chest_item.config.WarGodCommand2": "损失生命值带来其属性的倍率",
   "chest_item.config.WarGodCommand3": "规避必死伤害的概率",
   "chest_item.config.Warmaker": "最低生命值",
-  "chest_item.config.Warmaker2": "是否在倒计时结束时扣血",
   "chest_item.config.WindKnife": "最小伤害",
   "chest_item.config.WindKnife2": "最大伤害",
   "chest_item.configuration.Accelerated": "加速衬件",
@@ -150,8 +155,8 @@
   "chest_item.configuration.Bluster2": "信仰嫉灭2",
   "chest_item.configuration.BoneHead": "无厌之骸骨",
   "chest_item.configuration.Chaos": "混沌体",
-  "chest_item.configuration.ChaosConstructor": "混沌构造器",
-  "chest_item.configuration.ChaosConstructor2": "混沌构造器2",
+  "chest_item.configuration.ChaosConstructor": "混沌构件",
+  "chest_item.configuration.ChaosConstructor2": "混沌构件2",
   "chest_item.configuration.ChaosFortress": "混沌要塞之护",
   "chest_item.configuration.ChaosFortress2": "混沌要塞之护2",
   "chest_item.configuration.ChaosFortress3": "混沌要塞之护3",
@@ -165,6 +170,9 @@
   "chest_item.configuration.Contradiction2": "信仰矛盾2",
   "chest_item.configuration.Crave": "信仰：渴求",
   "chest_item.configuration.Crave2": "信仰：渴求2",
+  "chest_item.configuration.DecayFruit": "万灵尸香果",
+  "chest_item.configuration.DecayFruit2": "万灵尸香果2",
+  "chest_item.configuration.DecayFruit3": "万灵尸香果3",
   "chest_item.configuration.DefeatTheArmy": "破军",
   "chest_item.configuration.Diffusion": "弥散机件",
   "chest_item.configuration.Diffusion2": "弥散机件2",
@@ -256,6 +264,9 @@
   "chest_item.configuration.TheKill2": "苍戮2",
   "chest_item.configuration.TheOrderOfTheUndead": "亡者号令",
   "chest_item.configuration.TheOrderOfTheUndead2": "亡者号令2",
+  "chest_item.configuration.Triangle": "古朽三角",
+  "chest_item.configuration.Triangle2": "古朽三角2",
+  "chest_item.configuration.Triangle3": "古朽三角3",
   "chest_item.configuration.UndeadRune": "亡灵符石",
   "chest_item.configuration.UndeadRune2": "亡灵符石2",
   "chest_item.configuration.War": "信仰战争",
@@ -264,7 +275,6 @@
   "chest_item.configuration.WarGodCommand2": "军神之令1",
   "chest_item.configuration.WarGodCommand3": "军神之令2",
   "chest_item.configuration.Warmaker": "战争缔造者",
-  "chest_item.configuration.Warmaker2": "战争缔造者2",
   "chest_item.configuration.WindKnife": "罡风刀环",
   "chest_item.configuration.WindKnife2": "罡风刀环2",
 
@@ -339,6 +349,7 @@
   "entity.chest_item.attack_end_coming": "The sphere of the end of the world",
   "entity.chest_item.laser_column": "???",
   "entity.chest_item.hyperplasia": "?",
+  "entity.chest_item.reactor": "reactor",
   "entity.chest_item.spirit": "???",
   "event.chest_item.equip": "When placed in a magic box：",
   "item.chest_item.reinforced.equipped": "You can right-click to equip it",
@@ -392,7 +403,7 @@
   "attribute.name.chest_item.shield_cooldown": "Shattering reaction time",
   "attribute.name.chest_item.hyperplasia_cooldown": "Dormant time",
   "attribute.name.chest_item.shadow_shield_conversion": "Shadow transformation",
-  "attribute.name.chest_item.oppression": "oppression",
+  "attribute.name.chest_item.oppression": "Oppression",
 
 
   "itemGroup.chest_item": "Trinkets in the chest",
@@ -845,9 +856,10 @@
 
   "item.chest_item.lead_of_enlightenment": "Lead of enlightenment",
   "advancements.chest_item.lead_of_enlightenment": "The bloom of the flower of the way",
-  "item.chest_item.lead_of_enlightenment.string.0": "The ancient seal gradually loosened...",
-  "item.chest_item.lead_of_enlightenment.string.1": "Can be used to unlock the following items：",
-"item.chest_item.chaos_fortress": "Chaos Fortress",
+  "item.chest_item.lead_of_enlightenment.string.0": "累计受到的伤害：",
+  "item.chest_item.lead_of_enlightenment.string.1": "累计造成的杀孽：",
+  "item.chest_item.lead_of_enlightenment.string.2": "累计获得经验值：",
+  "item.chest_item.chaos_fortress": "Chaos Fortress",
   "advancements.chest_item.chaos_fortress": "endless pain",
   "item.chest_item.chaos_fortress.string.0": "The will of the lead of enlightenment is calling, take it, and bear the suffering of this world to create this supreme power",
   "item.chest_item.chaos_fortress.string.1": "The flower of the path is gradually withering....",
@@ -1141,93 +1153,118 @@
 "chest_item.book.ring.main": "Miner ring",
   "chest_item.book.ring.1": "This item provides a level 1 urgent bonus (can be adjusted by configuring the interface yourself)",
   "chest_item.book.ring.2": "Miner rings found in most dungeons, mines, ancient cities, trial halls, chests, or vaults.",
-"chest_item.book.fission.main": "Fission",
+  "chest_item.book.bluster_tooltip.1": "After swearing, damage increases by 100%",
+  "chest_item.book.bluster_tooltip.2": "But damage taken is also increased by 100%",
+
+  "chest_item.book.contradiction_tooltip.1": "After swearing, shadow shields cannot be restored naturally",
+  "chest_item.book.contradiction_tooltip.2": "But for every 1 point of Shadow Shield, you gain 0.1 damage resistance.",
+
+  "chest_item.book.extreme_tooltip.1": "After swearing, experience drop increases by 200%",
+  "chest_item.book.extreme_tooltip.2": "But damage taken will also be increased by 100%",
+  "chest_item.book.extreme_tooltip.3": "Reduces all experience dropped by 1%",
+
+  "chest_item.book.forever_curtain_tooltip.1": "After swearing, increases trauma by 10 and naturally recovers",
+  "chest_item.book.forever_curtain_tooltip.2": "But when the wound is removed, the pain buff is removed",
+
+  "chest_item.book.martyrdom_tooltip.1": "After swearing, explosion strength increases by 85%",
+  "chest_item.book.martyrdom_tooltip.2": "Explosion damage received simultaneously increased by 200%",
+
+  "chest_item.book.peace_tooltip.1": "After the oath, most creatures will be neutral with you",
+  "chest_item.book.peace_tooltip.2": "But damage reduced by 30%",
+
+  "chest_item.book.war_tooltip.1": "After the oath, 70% of the damage received is converted into the next attack damage.",
+  "chest_item.book.war_tooltip.2": "But damage taken increases by 50%",
+
+  "chest_item.book.the_fox_tooltip.1": "After swearing, most attributes gain bonuses",
+  "chest_item.book.the_fox_tooltip.2": "Reduced health will decrease most attributes and volume",
+
+  "chest_item.book.protest_tooltip.1": "After swearing, weaken or damage to creatures that hate you",
+  "chest_item.book.protest_tooltip.2": "But a large area of creatures will actively attack you",
+
+  "chest_item.book.crave_tooltip.1": "After swearing, eat food to gain bonuses",
+  "chest_item.book.crave_tooltip.2": "But if you go without eating for a long time, you get hungry quickly",
+  "chest_item.book.memory.back": "信仰",
+  "chest_item.book.memory": "By default, there are up to three types of vows of faith",
+ "chest_item.book.fission.main": "Fission",
   "chest_item.book.fission.1": "This item has two skills",
   "chest_item.book.fission.2": "The first to press the skill key releases the spore. The effective radius depends on the skill level, starting at 1",
   "chest_item.book.fission.3": "The second skill is a passive skill. Attacks may cause poison, and attacking poisoned creatures deals an additional 20% damage. The initial poison chance is 10%",
   "chest_item.book.fission.4": "Fission found in most dungeons, mines, ancient cities, and loot chests or vaults",
 
-"chest_item.book.conch.main": "Lightning Conch",
+  "chest_item.book.conch.main": "Lightning Conch",
   "chest_item.book.conch.1": "This item causes any damage you deal to be an area attack, and area damage is passive damage.",
   "chest_item.book.conch.2": "Lightning Conch found in most dungeons, mines, ancient cities, and other loot items",
 
-"chest_item.book.lead.main": "Malicious Lead",
+  "chest_item.book.lead.main": "Malicious Lead",
   "chest_item.book.lead.1": "This item will definitely crit on your third attack (default) (you can adjust the number of attacks on the interface as you wish)",
   "chest_item.book.lead.2": "Malicious heavy lead found in most dungeons, mines, ancient cities, and loot chests or vaults.",
 
-"chest_item.book.god_blood.main": "Speed Force",
+  "chest_item.book.god_blood.main": "Speed Force",
   "chest_item.book.god_blood.1": "This item provides a small amount of movement and attack speed (can be adjusted via interface settings)",
   "chest_item.book.god_blood.2": "Speed Force found in most dungeons, mines, ancient cities, and other loot chests or vaults.",
 
-"chest_item.book.stone.main": "heavy stone",
+  "chest_item.book.stone.main": "heavy stone",
   "chest_item.book.stone.1": "This item provides five armor, two tenacity, and a large amount of knockback resistance.",
   "chest_item.book.stone.2": "Heavy stones are found in most dungeons, mines, ancient cities, and loot chests or vaults.",
 
-"chest_item.book.drug_heal.main": "Healing Medicine Pot",
+  "chest_item.book.drug_heal.main": "Healing Medicine Pot",
   "chest_item.book.drug_heal.1": "This item provides a small health bonus",
   "chest_item.book.drug_heal.2": "This item also has an extra effect, granting health recovery when worn in a magic box.",
   "chest_item.book.drug_heal.3": "Healing pots found in most dungeons, mines, ancient cities, and loot chests or vaults.",
 
-"chest_item.book.gold_cheese.main": "Golden cheese",
+  "chest_item.book.gold_cheese.main": "Golden cheese",
   "chest_item.book.gold_cheese.1": "This item increases the enchantment level of the Golden Tool, greatly increasing the experience gained from killing monsters with the Golden Tool, and has a chance to drop gold.",
   "chest_item.book.gold_cheese.2": "Gold cheese is found in most dungeons, mines, ancient cities, and loot chests or vaults.",
 
-"chest_item.book.the_end_is_coming.main": "The End of the World Descends",
+  "chest_item.book.the_end_is_coming.main": "The End of the World Descends",
   "chest_item.book.the_end_is_coming.1": "Press the skill key on this item to summon a bionic blood spirit to fight for you",
   "chest_item.book.the_end_is_coming.2": "It can only be synthesized",
 
-"chest_item.book.end_effect.main": "Doomsday Potion",
+  "chest_item.book.end_effect.main": "Doomsday Potion",
   "chest_item.book.end_effect.1": "This item changes the Blood Spirit's attack state, reduces attack speed, and increases attack damage.",
   "chest_item.book.end_effect.2": "It also has a skill that gradually increases the blood spirit's damage and attack speed, and is not affected by distance or collision.",
   "chest_item.book.end_effect.3": "It can only be synthesized",
 
-"chest_item.book.battery.main": "Rechargeable battery",
+  "chest_item.book.battery.main": "Rechargeable battery",
   "chest_item.book.battery.1": "This item has an effect that opens loot boxes and grants experience. The more items in the box, the more experience you get.",
   "chest_item.book.battery.2": "Charging batteries are found in most dungeons, mines, ancient cities, and loot chests or vaults.",
 
-"chest_item.book.nuclear_reaction.main": "Experience Nuclear Reactor",
+  "chest_item.book.nuclear_reaction.main": "Experience Nuclear Reactor",
   "chest_item.book.nuclear_reaction.1": "This item provides a certain experience drop bonus, with a chance to triple the experience drop bonus, allowing for rapid experience absorption.",
   "chest_item.book.nuclear_reaction.2": "It can only be synthesized",
 
-"chest_item.book.kaolinite.main": "Energy-Absorbing Kaolinite",
+  "chest_item.book.kaolinite.main": "Energy-Absorbing Kaolinite",
   "chest_item.book.kaolinite.1": "This item absorbs experience to repair equipment",
   "chest_item.book.kaolinite.2": "Energy-absorbing kaolinite has been found in most dungeons, mines, ancient cities, and loot chests or vaults.",
 
-"chest_item.book.wind_knife.main": "Gangfeng Knife Ring",
+  "chest_item.book.wind_knife.main": "Gangfeng Knife Ring",
   "chest_item.book.wind_knife.1": "This item causes your damage to fluctuate between 90% and 150%",
   "chest_item.book.wind_knife.2": "If your experience level is 10 or higher, each damage will tick at the maximum damage increase.",
   "chest_item.book.wind_knife.3": "It can only be obtained by synthesizing",
 
-"chest_item.book.eye_book.main": "The book with long eyes",
+  "chest_item.book.eye_book.main": "The book with long eyes",
   "chest_item.book.eye_book.1": "This item provides permanent night vision",
   "chest_item.book.eye_book.2": "Books with long eyes are found in most dungeons, mines, ancient cities, and loot chests or vaults.",
-"chest_item.book.bluster_tooltip.1": "After swearing, damage increases by 100%",
-  "chest_item.book.bluster_tooltip.2": "But damage taken is also increased by 100%",
 
-"chest_item.book.contradiction_tooltip.1": "After swearing, shadow shields cannot be restored naturally",
-  "chest_item.book.contradiction_tooltip.2": "But for every 1 point of Shadow Shield, you gain 0.1 damage resistance.",
+"item.chest_item.adjudication": "Sword of Judgment",
+  "item.chest_item.adjudication.string.0": "The attack triggers a multi-hit combo and enters %d second cooldown",
+  "item.chest_item.adjudication.string.1": "The scattered residual sword energy will regather its energy",
 
-"chest_item.book.extreme_tooltip.1": "After swearing, experience drop increases by 200%",
-  "chest_item.book.extreme_tooltip.2": "But damage taken will also be increased by 100%",
-  "chest_item.book.extreme_tooltip.3": "Reduces all experience dropped by 1%",
+"sound.chest_item.sword" : "Sword Qi: Slash",
+  "sound.chest_item.kill" : "Sword Qi: Slash",
+  "sound.chest_item.fly_sword" : "Sword Qi: Scatter",
 
-"chest_item.book.forever_curtain_tooltip.1": "After swearing, increases trauma by 10 and naturally recovers",
-  "chest_item.book.forever_curtain_tooltip.2": "But when the wound is removed, the pain buff is removed",
+"item.chest_item.oblivion": "Forgetfulness Potion",
+  "chest_item.book.oblivion.1": "After use, you can forget all your beliefs",
 
-"chest_item.book.martyrdom_tooltip.1": "After swearing, explosion strength increases by 85%",
-  "chest_item.book.martyrdom_tooltip.2": "Explosion damage received simultaneously increased by 200%",
+"chest_item.book.iron_heart.main": "Unstable pulsar",
+  "chest_item.book.iron_heart.1": "This item provides a large amount of base melee damage and randomizes all damage.",
+  "chest_item.book.iron_heart.2": "This item can only be obtained by crafting",
 
-"chest_item.book.peace_tooltip.1": "After the oath, most creatures will be neutral with you",
-  "chest_item.book.peace_tooltip.2": "But damage reduced by 30%",
+"chest_item.book.iron_cube.main": "Tough Cube",
+  "chest_item.book.iron_cube.1": "This item has a certain degree of stable and unstable pulse random damage, but the cost is to reduce a large amount of armor value, and overall damage is increased.",
+  "chest_item.book.iron_cube.2": "This item can only be obtained through synthesis",
 
-"chest_item.book.war_tooltip.1": "After the oath, 70% of the damage received is converted into the next attack damage.",
-  "chest_item.book.war_tooltip.2": "But damage taken increases by 50%",
-
-"chest_item.book.the_fox_tooltip.1": "After swearing, most attributes gain bonuses",
-  "chest_item.book.the_fox_tooltip.2": "Reduced health will decrease most attributes and volume",
-
-"chest_item.book.protest_tooltip.1": "After swearing, weaken or damage to creatures that hate you",
-  "chest_item.book.protest_tooltip.2": "But a large area of creatures will actively attack you",
 
   "item.chest_item.defy_life": "Defying orders and resisting",
   "item.chest_item.defy_life.string.1": "Multiple deaths in a short period of time will make you stronger, with a maximum of 10 layers added",
@@ -1247,25 +1284,33 @@
   "item.chest_item.war_god_command.string.4": "The holder of this command has a %d%% probability of avoiding fatal damage received",
   "item.chest_item.war_god_command.string.5": "This token conflicts with the military",
 
+  "item.chest_item.triangle": "Ancient Decayed Triangle",
+  "item.chest_item.triangle.string.1": "Increases damage by %d%%",
+  "item.chest_item.triangle.string.2": "Reduces rewards by %d%% when taking damage",
+  "item.chest_item.triangle.string.3": "Minimum reduced to -%d%%, recovers over time",
+  "item.chest_item.decay_fruit": "Universal Corpse Fragrant Fruit",
 
-  "item.chest_item.distillation": "腐化蒸馏器",
-  "item.chest_item.distillation.string.0": "对自身施加的正面药水效果时长增加%d%%",
-  "item.chest_item.distillation.string.1":"对自身施加的负面药水效果时长降低%d%%",
+
+  "item.chest_item.distillation": "Corruption Distiller",
+  "item.chest_item.distillation.string.0": "Increases the duration of positive potion effects applied to yourself by %d%%",
+  "item.chest_item.distillation.string.1": "Reduces the duration of negative potion effects applied to yourself by %d%%",
 
 
-  "item.chest_item.mystery_liner": "神秘衬件",
-  "item.chest_item.mystery_liner.string.0": "增加%d附魔物品的附魔等级",
+  "item.chest_item.mystery_liner": "Mysterious Lining",
+  "item.chest_item.mystery_liner.string.0": "Increases the enchantment level of enchanted items by %d",
 
-  "item.chest_item.fusion": "融合引擎",
-  "item.chest_item.fusion.string.0": "宠物或召唤物获得%d%%主人的护甲值和生命值加成",
-  "item.chest_item.fusion.string.1":"宠物或召唤物会每隔%d秒恢复少量生命值",
 
-  "item.chest_item.diffusion": "弥散机件",
-  "item.chest_item.diffusion.string.0": "增加%d%%的获取经验值",
-  "item.chest_item.diffusion.string.1":"战利品箱有%d%%的概率额外发现一个神秘金属板",
+  "item.chest_item.fusion": "Fusion Engine",
+  "item.chest_item.fusion.string.0": "Pets or summons gain %d%% of the owner's armor and health as bonuses",
+  "item.chest_item.fusion.string.1": "Pets or summons recover a small amount of health every %d seconds",
 
-  "item.chest_item.rotting_substance": "Rotting Substance",
-  "item.chest_item.rotting_substance.string.0": "Sacrifice all shields in exchange for pure resistance and damage",
+
+  "item.chest_item.diffusion": "Diffusion Mechanism",
+  "item.chest_item.diffusion.string.0": "Increases experience gained by %d%%",
+  "item.chest_item.diffusion.string.1": "Loot chests have a %d%% chance to additionally contain a mysterious metal plate",
+
+  "item.chest_item.rotting_substance": "腐烂物质",
+  "item.chest_item.rotting_substance.string.0": "舍弃所有的护盾来换取纯粹的抗性与伤害",
 
   "chest_item.book.defeat_the_army.main": "Defeat the Army",
   "chest_item.book.defeat_the_army.1": "This item grants movement speed, attack speed, erosion armor value, and other attributes after the player loses health. The default attribute multiplier is 1.0 (can be adjusted in the configuration page)",
@@ -1328,6 +1373,8 @@
   "chest_item.book.activity.1": "The Corrupted Heart gains health regeneration when shattered",
   "chest_item.book.activity.2": "Can be found in loot chests when sanity is reduced",
 
+  "chest_item.eternal_vows": "Eternal vows",
+
   "chest_item.jei.recipe": "工作台合成",
 
   "item.chest_item.blood_soul": "血魂",
@@ -1336,24 +1383,102 @@
   "item.chest_item.magic_soul": "魔魂",
   "item.chest_item.celestial_soul": "仙魂",
 
+  "item.chest_item.sword_heart": "腐堕剑心",
+  "item.chest_item.sword_heart.string.1": "无法再制造出飞散的剑气",
+  "item.chest_item.sword_heart.string.2": "作为补偿，剑气造成伤害时有概率再次凝聚能量",
+  "item.chest_item.sword_heart.string.3": "并且剑气被腐化后施加邪母之拒",
+  "item.chest_item.sword_heart.string.4": "增加100%苍戮和审判之剑的连斩次数",
+
 
   "item.chest_item.soul_bottle": "灵魂瓶",
   "item.chest_item.soul_bottle.tooltip.1": "收集那些飞散的灵魂，多收集一些",
 
 
-  "sound.chest_item.sword" : "剑气：斩击",
-  "sound.chest_item.kill" : "剑气：斩杀",
-  "sound.chest_item.fly_sword" : "剑气：逸散",
-"chest_item.book.crave_tooltip.1": "After swearing, eat food to gain bonuses",
-  "chest_item.book.crave_tooltip.2": "But if you go without eating for a long time, you get hungry quickly",
-  "chest_item.book.memory.back": "信仰",
-"item.chest_item.adjudication": "Sword of Judgment",
-  "item.chest_item.adjudication.string.0": "The attack triggers a multi-hit combo and enters %d second cooldown",
-  "item.chest_item.adjudication.string.1": "The scattered residual sword energy will regather its energy",
-"chest_item.book.memory": "Default faith swears up to 3 types",
+
+  "chest_item.book.rotten_utensils.main": "腐烂器具",
+  "chest_item.book.rotten_utensils.1": "在理智降低到负数并",
+  "chest_item.book.rotten_utensils.2": "触发不死图腾后产生邪母嬗变...",
+  "chest_item.book.rotten_utensils.3": "邪母嬗变一旦触发相关的",
+  "chest_item.book.rotten_utensils.4": "邪母物品就会减少更多的理智",
+
+  "chest_item.book.dawn.main": "启明金属",
+  "chest_item.book.dawn.1": "在理智降低到-10以下时死亡",
+  "chest_item.book.dawn.2": "所佩戴的启明之铅会将力量分散",
+  "chest_item.book.dawn.3": "目标为邪母物品时",
+  "chest_item.book.dawn.4": "会使持有者恢复部分神智",
+
+
+  "chest_item.book.synthesizer.main": "邪念合成器",
+  "chest_item.book.synthesizer.1": "理智高于10点时",
+  "chest_item.book.synthesizer.2": "一旦死亡所佩戴的邪母物品",
+  "chest_item.book.synthesizer.3": "会激发自身的力量",
+  "chest_item.book.synthesizer.4": "使持有者更加幸运但更加癫狂",
+
+  "chest_item.book.evil_stomach.main": "邪母胃",
+  "chest_item.book.evil_stomach.1": "当理智降低到0以下",
+  "chest_item.book.evil_stomach.2": "并且持有者因饥饿而死",
+  "chest_item.book.evil_stomach.3": "则令某些物品产生第二意识",
+  "chest_item.book.evil_stomach.4": "消耗经验值缓慢使持有者饱腹",
+
+  "chest_item.book.unclean_coins.main": "不洁硬币",
+  "chest_item.book.unclean_coins.1": "当理智降低到0以下",
+  "chest_item.book.unclean_coins.2": "并且持有者吃下一个附魔金苹果时",
+  "chest_item.book.unclean_coins.3": "令一些物品吸收金苹果的能量",
+  "chest_item.book.unclean_coins.4": "使得物品增生出新的组织从而增加生命值",
+
+  "chest_item.book.factory.main": "反应工厂",
+  "chest_item.book.factory.1": "当理智降低到0以下",
+  "chest_item.book.factory.2": "并且持有者携带经验反应炉死亡时",
+  "chest_item.book.factory.3": "将令一些物品产生反应",
+  "chest_item.book.factory.4": "从而自发产生经验值",
+
+  "chest_item.book.fortress_cone.main": "要塞角锥",
+  "chest_item.book.fortress_cone.1": "当理智降低到0以下",
+  "chest_item.book.fortress_cone.2": "在持有者存在5级以上的增生状态",
+  "chest_item.book.fortress_cone.3": "且佩戴钢铁之心后食用金苹果进行“侵蚀”",
+  "chest_item.book.fortress_cone.4": "侵蚀后的相关物品在吃下食物后治愈持有者",
+
+  "chest_item.book.snap_string.main": "断弦之铅",
+  "chest_item.book.snap_string.1": "理智在正常状态下时",
+  "chest_item.book.snap_string.2": "杀死凋零会将自身的",
+  "chest_item.book.snap_string.3": "邪母因果斩去，持有者",
+  "chest_item.book.snap_string.4": "将更加癫狂并更容易获取资源",
 
 
 
+
+  "chest_item.book.evil_gift.main.1": "一些物品自带1~2个邪母槽位",
+  "chest_item.book.evil_gift.main.2": "物品在玩家完成某些事情的情况下",
+  "chest_item.book.evil_gift.main.3": "可以生长出一块邪母组件",
+  "chest_item.book.evil_gift.main.4": "每个物品自行绑定某些邪母组件",
+  "chest_item.book.evil_gift.main.5": "也就是说每个物品可获取",
+  "chest_item.book.evil_gift.main.6": "的邪母组件种类是固定的",
+  "chest_item.book.evil_gift.main.7": "邪母组件没办法扣下来",
+  "chest_item.book.evil_gift.main.8": "邪母组件会在物品的最上方显示出来",
+
+  "item.chest_item.agreement": "烧炼协议",
+  "item.chest_item.agreement.string.1": "按下绑定键召唤一个反应炉",
+  "item.chest_item.agreement.string.2": "反应炉烧制速度极快，且产生3倍经验值",
+
+
+
+  "chest_item.book.destruction.main": "湮灭装置",
+  "chest_item.book.destruction.1": "给反应炉“喂食”16块TNT",
+  "chest_item.book.destruction.2": "会使反应炉激活毁灭组件",
+  "chest_item.book.destruction.3": "在反应炉被意外摧毁时",
+  "chest_item.book.destruction.4": "产生巨大的爆炸",
+
+  "chest_item.book.calciner.main": "转换煅烧器",
+  "chest_item.book.calciner.1": "给反应炉“喂食”32枚钻石",
+  "chest_item.book.calciner.2": "会使反应炉激活挖矿组件",
+  "chest_item.book.calciner.3": "燃烧物品获得属性并恢复生命但随时间流逝",
+  "chest_item.book.calciner.4": "属性包括经验获取,挖掘速度,时运",
+
+  "chest_item.book.enmity.main": "仇恨插件",
+  "chest_item.book.enmity.1": "给反应炉“喂食”瓶子<抗旨>再用任意物品右键",
+  "chest_item.book.enmity.2": "会使反应炉激活仇恨组件",
+  "chest_item.book.enmity.3": "使得反应炉吸引附近怪物仇恨",
+  "chest_item.book.enmity.4": "且反应炉自我恢复和难以破坏",
 
   "chest_item.book.warmaker.main": "战争缔造者",
   "chest_item.book.warmaker.1": "它象征着永不妥协的力量.....",
@@ -1430,8 +1555,6 @@
   "chest_item.book.samsara.6": "可能在一些怪物看守的地方发现",
 
 
-
-
   "chest_item.book.lead_of_enlightenment.main": "启明之铅",
   "chest_item.book.lead_of_enlightenment.1": "一块未知且沉眠的神秘金属",
 
@@ -1443,6 +1566,24 @@
   "chest_item.book.lead_of_enlightenment.6": "“为什么，到底是什么在驱使你继续战斗！”",
   "chest_item.book.lead_of_enlightenment.7": "“你我皆是大帝，为什么我永远被你踩在脚下”",
   "chest_item.book.lead_of_enlightenment.8": "“既然你不愿加入魔族，那就给我死吧！”",
+
+  "chest_item.book.emperor_cup.main": "帝王槃",
+  "chest_item.book.emperor_cup.text": "曾承载着悟道茶的天品圣杯\n也承载着无尽的腥风血雨\n\n后来帝君以某种手段将其封印在启明之铅中\n但封印会在启明之铅吸收足够多的经验后瓦解\n\n这个时代..只能有一位大帝\n除非...血雨落——大帝陨！",
+
+  "chest_item.book.great_token.main": "合道令",
+  "chest_item.book.great_token.text": "合道令是通往仙道之门的钥匙\n传闻踏足仙道门可真正合道，成就无上道果\n\n这神秘的启明之铅或是合道的媒介\n相传献祭足够多的凋灵即可激活这铅体的力量\n届时仙道法则将重新铸造铅体为合道令...\n\n持此令者...将一步登天！",
+
+  "chest_item.book.three_realms.main": "三界召",
+  "chest_item.book.three_realms.text": "混沌大战时期，那一战打碎了天地\n诞生了冥，凡，仙三界\n而此令则是穿越三界壁垒的通行证\n\n唯有携带启明之铅前往终界之地杀死恶龙\n才有资格拥有此令\n\n天衍帝君曾预言：“终界之地的恶龙一旦死去\n三界必定迎来天人五衰，届时将生灵涂炭，民不聊生”",
+
+  "item.chest_item.emperor_cup": "帝王槃",
+  "item.chest_item.emperor_cup.string.1": "将受到的伤害转移到此物当中",
+  "item.chest_item.emperor_cup.string.2": "最多可容纳%d点伤害",
+  "item.chest_item.emperor_cup.string.3": "若达到上限则将伤害平均分配给玩家和附近的实体",
+  "item.chest_item.emperor_cup.string.4": "并给予玩家%d秒无敌",
+  "item.chest_item.emperor_cup.string.5": "此物可随时间减少内部寄存伤害的数量",
+  "item.chest_item.emperor_cup.string.6": "四种护盾将陷入混沌中而无法使用",
+  "item.chest_item.emperor_cup.string.7": "在无敌帧期间无法受到治疗",
 
   "chest_item.book.test.main": "通往深渊的门户",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
