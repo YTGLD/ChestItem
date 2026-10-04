@@ -55,13 +55,12 @@ public class ReactorRender extends EntityRenderer<Reactor, ReactorRenderState> {
 
     @Override
     public void submit(ReactorRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
-//        HandlerClient.showOutline = true;
-//        HandlerClient.doPass = true;
+        HandlerClient.showRenderWarped = true;
         int age = renderState.entity.tickCount;
         if (age > 100) {
             age = 100;
         }
-        float value = age / 25f;
+        float value = age / 50f;
         Reactor entity = renderState.entity;
         ChestItemFrameGraph.putWarpedVec3(new ChestItemFrameGraph.WarpedVec3(
                 entity.position().add(0,1,0),

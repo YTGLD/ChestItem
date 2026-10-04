@@ -12,7 +12,6 @@ public class HandlerClient {
 
 
     public static boolean showRenderWarped = false;
-    public static boolean doPassWarped = false;
 
 
 

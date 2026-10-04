@@ -298,7 +298,7 @@ void main()
         float centerDistortion =
         mix(
             0.30,
-            1.0,
+            0.5,
             radial
         );
 
@@ -391,8 +391,8 @@ void main()
 
         noiseUV +=
         vec2(
-        GameTime * 100.0 * 0.25,
-        GameTime * 100.0 * 0.18
+        GameTime * 150.0 * 0.25,
+        GameTime * 150.0 * 0.18
         );
 
 
@@ -416,8 +416,8 @@ void main()
         fbm(
             noiseUV * 1.8 +
             vec2(
-            -GameTime * 100.0 * 0.15,
-            GameTime * 100.0 * 0.27
+            -GameTime * 150.0 * 0.15,
+            GameTime * 150.0 * 0.27
             )
         );
 
@@ -476,7 +476,7 @@ void main()
         sin(
             distance * 110.0
             -
-            GameTime * 100.0 * 18.0
+            GameTime * 150.0 * 18.0
         );
 
 
@@ -520,10 +520,10 @@ void main()
 
         vec2 waterDirection =
         noiseDirection *
-        (0.90 - radialDirection * 0.20)
+        (0.5 - radialDirection * 0.20)
         +
         direction *
-        (0.10 + radialDirection * 0.20);
+        (0.5 + radialDirection * 0.20);
 
 
         waterDirection =
@@ -607,7 +607,7 @@ void main()
             edge *
             centerDistortion *
             WarpPosition[i].w *
-            distanceFactor
+            distanceFactor * 10
         );
 
     /*
@@ -729,7 +729,7 @@ void main()
     clamp(
         maxEdge,
         0.0,
-        1.0
+        10.0
     );
 
 
@@ -754,8 +754,8 @@ void main()
 
     float dispersion =
     mix(
-        0.002,
-        0.012,
+        0.05,
+        0.25,
         edgeStrength
     )
     *
@@ -799,12 +799,6 @@ void main()
         vec2(0.999)
     );
 
-
-/*
-     * ========================================================
-     * RGB Sampling
-     * ========================================================
-     */
 
     float r =
     texture(

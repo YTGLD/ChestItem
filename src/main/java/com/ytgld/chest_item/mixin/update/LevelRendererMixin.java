@@ -3,6 +3,7 @@ package com.ytgld.chest_item.mixin.update;
 
 import com.mojang.blaze3d.framegraph.FrameGraphBuilder;
 import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
+import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.renderer.warp.ChestItemFrameGraph;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LevelTargetBundle;
@@ -30,7 +31,10 @@ public abstract class LevelRendererMixin {
     private void chest_light$afterAddMainPass(
             FrameGraphBuilder frame, FeatureRenderDispatcher.PreparedFrame featureFrame, GpuBufferSlice terrainFog, ChunkSectionsToRender chunkSectionsToRender, boolean consistentDepthRequired, CallbackInfo ci
     ) {
-        ChestItemFrameGraph.addPostPass(frame, targets);
+        if (HandlerClient.showRenderWarped) {
+            ChestItemFrameGraph.addPostPass(frame, targets);
+            HandlerClient.showRenderWarped =false;
+        }
     }
     @Inject(
             method = "submitFeatures",
