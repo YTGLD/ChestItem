@@ -151,7 +151,7 @@ public class ChaosBookScreen extends Screen {
                                     Identifier.fromNamespaceAndPath(Chestitem.MODID, "textures/item_glowing/cube.png"),
                                     MRender.RenderPs.GUI_TEXTURED,
                                     new Vector2f(),
-                                    new Vector2f(0,-0.007f),
+                                    new Vector2f(0,-0.02f),
                                     new Vector2f(), true), 5, textAlpha);
                 }
 

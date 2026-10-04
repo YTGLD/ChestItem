@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.mixin.cilent;
 
 import com.ytgld.chest_item.renderer.VowsSettingsUniform;
+import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
