@@ -4,7 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.HandlerClient;
+import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
+import com.ytgld.chest_item.renderer.warp.ChestItemFrameGraph;
 import com.ytgld.chest_item.utils.RenderObjects;
 import com.ytgld.chest_item.utils.WorldRenderObject;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -18,13 +20,16 @@ import org.joml.Matrix4f;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FatalSword extends WorldRenderObject {
+public class FatalSwordRenderObject extends WorldRenderObject {
     public Vec3 pitch;
     public float size = 1;
     public int color = 0xffffffff;
-    public FatalSword(Vec3 vec3,Vec3 pitch,float size) {
+
+    public static final int maxAge = 60;
+
+    public FatalSwordRenderObject(Vec3 vec3, Vec3 pitch, float size) {
         super(vec3);
-        this.maxTime = 25;
+        this.maxTime = maxAge;
         this.pitch = pitch;
         this.size = size;
     }
@@ -40,11 +45,12 @@ public class FatalSword extends WorldRenderObject {
             imageNumber = 1;
         }
         newAlpha = maxTime - age;
+        newAlpha = Math.max(0,newAlpha);
     }
 
     @Override
     public void render(PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera, float partialTick) {
-
+        HandlerClient.setShowRenderWarped(true);
         Vec3 cameraPos = camera.pos;
         poseStack.pushPose();
         poseStack.translate(
@@ -57,32 +63,25 @@ public class FatalSword extends WorldRenderObject {
         int rs = (color >> 16) & 0xFF;
         int gs = (color >> 8) & 0xFF;
         int bs = color & 0xFF;
+        float value = maxTime - age;
 
-        render(poseStack,collector,size,
-                RenderObjects.renderTypeFunctionLive.apply(
-                        integerIdentifierMap().get(imageNumber)
-                ),
-                Light.ARGB.color(newAlpha * 10,rs,gs,bs));
-        render(poseStack,collector,size,
-                RenderObjects.renderTypeFunctionLiveOutline.apply(
-                        integerIdentifierMap().get(imageNumber)
-                ),
-                Light.ARGB.color(newAlpha * 10,rs,gs,bs));
+        ChestItemFrameGraph.putWarpedVec3(new ChestItemFrameGraph.WarpedVec3(
+                this.position,
+                value / 10f,
+                rs,
+                gs,
+                bs
+        ));
+
+        Identifier identifier =  Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/fatal.png");
+        render(poseStack,collector,3.35f, RenderObjects.renderTypeFunctionLiveOutline
+                .apply(identifier),Light.ARGB.color(newAlpha * 4,rs,gs,bs));
 
         poseStack.popPose();
     }
 
-    private Map<Integer , Identifier> integerIdentifierMap (){
-        Map<Integer ,Identifier> map = new HashMap<>();
-        map.put(1,Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/sword_energy_1.png"));
-        map.put(2,Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/sword_energy_2.png"));
-        map.put(3,Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/sword_energy_3.png"));
-        map.put(4,Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/sword_energy_4.png"));
-        map.put(5,Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/sword_energy_5.png"));
-        return map ;
-    }
-
     private void render(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, float size, RenderType renderType, int color){
+        float offset = 5;
         poseStack.pushPose();
         poseStack.rotate(Axis.XN.rotation((float) pitch.x));
         poseStack.rotate(Axis.YN.rotation((float) pitch.y));
@@ -90,28 +89,28 @@ public class FatalSword extends WorldRenderObject {
         submitNodeCollector.submitCustomGeometry(poseStack, renderType,
                 (pose, vc) -> {
                     Matrix4f mat = pose.pose();
-                    vc.addVertex(mat, -size, -size, 0)
+                    vc.addVertex(mat, -size * offset, -size * offset, 0)
                             .setColor(color)
                             .setUv(0, 1)
                             .setOverlay(OverlayTexture.NO_OVERLAY)
                             .setUv2(255,255)
                             .setNormal(0, 0, 1);
 
-                    vc.addVertex(mat, size, -size, 0)
+                    vc.addVertex(mat, size/offset, -size/offset, 0)
                             .setColor(color)
                             .setUv(1, 1)
                             .setOverlay(OverlayTexture.NO_OVERLAY)
                             .setUv2(255,255)
                             .setNormal(0, 0, 1);
 
-                    vc.addVertex(mat, size, size, 0)
+                    vc.addVertex(mat, size * offset, size * offset, 0)
                             .setColor(color)
                             .setUv(1, 0)
                             .setOverlay(OverlayTexture.NO_OVERLAY)
                             .setUv2(255,255)
                             .setNormal(0, 0, 1);
 
-                    vc.addVertex(mat, -size, size, 0)
+                    vc.addVertex(mat, -size/offset, size/offset, 0)
                             .setColor(color)
                             .setUv(0, 0)
                             .setOverlay(OverlayTexture.NO_OVERLAY)

@@ -11,9 +11,18 @@ public class HandlerClient {
     public static boolean doPass = false;
 
 
-    public static boolean showRenderWarped = false;
+    private static boolean showRenderWarped = false;
 
+    public static boolean isShowRenderWarped() {
+        return showRenderWarped;
+    }
 
+    public static void setShowRenderWarped(boolean showRenderWarped) {
+        if (!ConfigC.config.Render.get()) {
+            return;
+        }
+        HandlerClient.showRenderWarped = showRenderWarped;
+    }
 
     public static void renderBlood(PoseStack.Pose poseStack, VertexConsumer vertexConsumer, Vec3 start, Vec3 end, float a, float r) {
         int segmentCount = 16; // 圆柱横向细分数
@@ -104,4 +113,6 @@ public class HandlerClient {
             }
         }
     }
+
+
 }

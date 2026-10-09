@@ -1,19 +1,13 @@
 package com.ytgld.chest_item.mixin.outline;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.renderpearl.api.commands.RenderPass;
 import com.ytgld.chest_item.renderer.outline.IPreparedFrame;
 import com.ytgld.chest_item.renderer.outline.ISubmitNodeCollection;
-import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import net.minecraft.client.renderer.SubmitNodeCollection;
-import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.SubmitNodeStorage;
-import net.minecraft.client.renderer.feature.CustomFeatureRenderer;
 import net.minecraft.client.renderer.feature.FeatureFrameContext;
 import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
 import net.minecraft.client.renderer.feature.phase.FeatureRenderPhase;
-import net.minecraft.client.renderer.feature.phase.SimpleFeatureRenderPhase;
-import net.minecraft.client.renderer.rendertype.RenderType;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -51,7 +45,7 @@ public abstract class PreparedFrameMixin
 
             if (collection instanceof ISubmitNodeCollection custom) {
                 this.executePhase(
-                        custom.reactorGlow(),
+                        custom.chest26_3$reactorGlow(),
                         context,
                         renderPass
                 );

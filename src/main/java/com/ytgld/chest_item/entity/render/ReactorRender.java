@@ -55,7 +55,7 @@ public class ReactorRender extends EntityRenderer<Reactor, ReactorRenderState> {
 
     @Override
     public void submit(ReactorRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
-        HandlerClient.showRenderWarped = true;
+        HandlerClient.setShowRenderWarped(true);
         int age = renderState.entity.tickCount;
         if (age > 100) {
             age = 100;
@@ -98,26 +98,6 @@ public class ReactorRender extends EntityRenderer<Reactor, ReactorRenderState> {
                     poseStack.rotate(Axis.YN.rotationDegrees((float) ((Math.sin(entity.tickCount) + renderState.partialTick)  * 8)));
                     poseStack.rotate(Axis.ZN.rotationDegrees((float) ((Math.sin(entity.tickCount) + renderState.partialTick)  * 8)));
                 }
-                poseStack.translate(-size, -size, -size);
-                ((ISubmitReactorGlow) collector).chest_item$submitReactorGlow(
-                        poseStack,
-                        MRender.colorOutline,
-                        (pose, bufferSource) -> {
-                            Matrix4f mat = new Matrix4f(pose.pose());
-                            float a = (float) (Math.sin(entity.tickCount / 20f) / 2f);
-                            if (a < 0) {
-                                a = -a;
-                            }
-                            float colorMixin = 1 - a;
-                            renderCubeFace(
-                                    mat,
-                                    bufferSource,
-                                    6,
-                                    Light.ARGB.color(50, (int) (50 * colorMixin), (int) (128* colorMixin), (int) (25* colorMixin)),
-                                    size
-                            );
-                        }
-                );
                 poseStack.popPose();
             }
             poseStack.popPose();

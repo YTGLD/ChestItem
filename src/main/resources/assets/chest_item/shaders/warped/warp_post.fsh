@@ -238,7 +238,7 @@ void main()
         length(delta);
 
 
-        const float radius = 0.18;
+        float radius =0.1 +  WarpPosition[i].w / 50.0;
 
 
         if (distance > radius)

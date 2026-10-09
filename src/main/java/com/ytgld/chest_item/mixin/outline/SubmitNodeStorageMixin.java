@@ -32,7 +32,7 @@ public abstract class SubmitNodeStorageMixin
                 );
 
         ((ISubmitNodeCollection) this.order(0))
-                .reactorGlow()
+                .chest26_3$reactorGlow()
                 .submit(submit);
     }
 }

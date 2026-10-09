@@ -1,6 +1,7 @@
 package com.ytgld.chest_item.utils.network;
 
 
+import com.ytgld.chest_item.utils.CIPacketPayload;
 import com.ytgld.chest_item.utils.RenderObjectManager;
 import com.ytgld.chest_item.utils.dout.SwordRenderObject;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -17,7 +18,7 @@ import org.joml.Vector3f;
 public record SwordRenderPacket(double x, double y, double z,
                                 float rotationX, float rotationY, float rotationZ,
                                 int color, int size)
-        implements CustomPacketPayload {
+        implements CIPacketPayload {
 
     public static final Type<SwordRenderPacket> TYPE =
             new Type<>(

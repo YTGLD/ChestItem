@@ -49,7 +49,7 @@ public abstract class SubmitNodeCollectionMixin
     }
 
     @Override
-    public SimpleFeatureRenderPhase reactorGlow() {
+    public SimpleFeatureRenderPhase chest26_3$reactorGlow() {
         return this.chest_item$reactorGlow;
     }
 }

@@ -31,9 +31,9 @@ public abstract class LevelRendererMixin {
     private void chest_light$afterAddMainPass(
             FrameGraphBuilder frame, FeatureRenderDispatcher.PreparedFrame featureFrame, GpuBufferSlice terrainFog, ChunkSectionsToRender chunkSectionsToRender, boolean consistentDepthRequired, CallbackInfo ci
     ) {
-        if (HandlerClient.showRenderWarped) {
+        if (HandlerClient.isShowRenderWarped()) {
             ChestItemFrameGraph.addPostPass(frame, targets);
-            HandlerClient.showRenderWarped =false;
+            HandlerClient.setShowRenderWarped(false);
         }
     }
     @Inject(
