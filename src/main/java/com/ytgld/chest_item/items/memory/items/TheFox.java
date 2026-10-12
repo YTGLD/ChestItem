@@ -50,7 +50,7 @@ public class TheFox extends MemoryBase {
         public void config(ModConfigSpec.Builder builder) {
             builder.push("TheFox");
             intValue =  builder.translation("chest_item.config.TheFox")
-                    .defineInRange("number",1f,0,Integer.MAX_VALUE);
+                    .defineInRange("number",0.5f,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.TheFox2")
                     .define("number2",true);
             builder.pop();

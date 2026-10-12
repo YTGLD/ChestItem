@@ -6,7 +6,6 @@ import com.mojang.renderpearl.api.pipeline.*;
 import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import net.minecraft.client.renderer.BindGroupLayouts;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -63,7 +62,7 @@ public abstract class MRender {
                             .withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
                             .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
                             .withPrimitiveTopology(PrimitiveTopology.QUADS)
-
+                            .withDepthStencilState(DepthStencilState.DEFAULT)
                             .withVertexBinding(0, DefaultVertexFormat.POSITION_COLOR).withCull(false).build())
                     .sortOnUpload().createRenderSetup()
     );
@@ -89,14 +88,6 @@ public abstract class MRender {
                             ONE,
                             ZERO))).
                     withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/vows_glow")).build());
-
-
-    public static RenderType endBlackOutline = RenderType.create(
-            "end_gateway",
-            RenderSetup.builder(RenderPipeline.builder(END_PORTAL_SNIPPET).withLocation("pipeline/end_portal").withShaderDefine("PORTAL_LAYERS", 15).build())
-                    .withTexture("Sampler0", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
-                    .withTexture("Sampler1", Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/red_all.png"))
-                    .createRenderSetup());
 
 
     public static RenderType endBlack =RenderType.create(

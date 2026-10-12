@@ -136,7 +136,8 @@ public class SwordHandler {
                     LivingEntity entity = living.getLastHurtByMob();
                     if (entity instanceof Player player) {
                         addMan(living,swordIntent,player);
-                        living.setInvulnerableTime(0);
+                        entity.setInvulnerableTime(0);
+                        entity.damageCooldownTime = 0;
                         living.hurt(living.damageSources().playerAttack(player),
                                 (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE) / 2
                         );
@@ -159,6 +160,8 @@ public class SwordHandler {
                         }
                     }else {
                         living.setInvulnerableTime(0);
+                        living.damageCooldownTime = 0;
+                        living.setInvulnerableTime(1);
                         living.hurt(living.damageSources().magic(),
                                 4
                         );

@@ -43,10 +43,11 @@ public class WindKnife extends ItemBase {
         @Override
         public void config(ModConfigSpec.Builder builder) {
             builder.push("WindKnife");
+
             intValue =  builder.translation("chest_item.config.WindKnife")
-                    .defineInRange("number",0.8f,0,Integer.MAX_VALUE);
+                    .defineInRange("number",0.9f,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.WindKnife2")
-                    .defineInRange("number2",1.5f,0,Integer.MAX_VALUE);
+                    .defineInRange("number2",1.2f,0,Integer.MAX_VALUE);
             builder.pop();
         }
 

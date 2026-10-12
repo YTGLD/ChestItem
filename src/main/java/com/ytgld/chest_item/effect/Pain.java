@@ -11,15 +11,15 @@ public class Pain extends MobEffect {
     public Pain() {
         super(MobEffectCategory.BENEFICIAL, 0xff0000);
         this.addAttributeModifier(Attributes.MAX_HEALTH, Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                "pain"),2, AttributeModifier.Operation.ADD_VALUE);
-        this.addAttributeModifier(Attributes.ARMOR, Identifier.fromNamespaceAndPath(Chestitem.MODID,
                 "pain"),1, AttributeModifier.Operation.ADD_VALUE);
+        this.addAttributeModifier(Attributes.ARMOR, Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                "pain"),0.5f, AttributeModifier.Operation.ADD_VALUE);
         this.addAttributeModifier(Attributes.ATTACK_DAMAGE, Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                "pain"),0.5F, AttributeModifier.Operation.ADD_VALUE);
+                "pain"),0.25F, AttributeModifier.Operation.ADD_VALUE);
         this.addAttributeModifier(Attributes.ATTACK_SPEED, Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                "pain"),0.05F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+                "pain"),0.025F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         this.addAttributeModifier(Attributes.MOVEMENT_SPEED, Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                "pain"),0.03F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+                "pain"),0.015F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     }
 }
 

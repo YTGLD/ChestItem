@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.other.blood;
+package com.ytgld.chest_item.items.other;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -58,11 +58,8 @@ public class LifeCrystal extends ItemBase implements SkillList{
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
 
-            modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.Life_Crystal.asItem().getDescriptionId()),
-                    ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_VALUE));
-
-        modifiers.put(AttReg.hyperplasia, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.Life_Crystal.asItem().getDescriptionId()),
-                4, AttributeModifier.Operation.ADD_VALUE));
+        modifiers.put(Attributes.MAX_HEALTH, new AttributeModifier(Identifier.parse(Chestitem.MODID + InitItems.Life_Crystal.asItem().getDescriptionId()),
+                ConfigItem.intValue.get().floatValue(), AttributeModifier.Operation.ADD_VALUE));
 
         return modifiers;
     }

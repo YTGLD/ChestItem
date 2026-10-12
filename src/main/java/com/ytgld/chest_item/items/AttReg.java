@@ -77,17 +77,17 @@ public class AttReg {
             "hyperplasia", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler()).serialize(Codec.FLOAT.fieldOf("hyperplasia")).build()
     );
     public static final DeferredHolder<Attribute,?> hyperplasia = REGISTRY.register("hyperplasia",()->{
-        return new RangedAttribute("attribute.name.chest_item.hyperplasia", 0, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.hyperplasia", 0, 0, 1024).setSyncable(true);
     });
 
     public static final DeferredHolder<Attribute,?> hyperplasia_speed = REGISTRY.register("hyperplasia_speed",()->{
-        return new RangedAttribute("attribute.name.chest_item.hyperplasia_speed", 1, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.hyperplasia_speed", 1, 0, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> hyperplasia_stronger = REGISTRY.register("hyperplasia_stronger",()->{
-        return new RangedAttribute("attribute.name.chest_item.hyperplasia_stronger", 1, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.hyperplasia_stronger", 1, 0, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> hyperplasiaCooldown= REGISTRY.register("hyperplasia_cooldown",()->{
-        return new RangedAttribute("attribute.name.chest_item.hyperplasia_cooldown", 8, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.hyperplasia_cooldown", 8, 0, 1024).setSyncable(true);
     });
     public static final Supplier<AttachmentType<Integer>> hyperplasiaCooldownAttachmentType = ATTACHMENT_TYPES.register(
             "hyperplasia_cooldown_data", () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler()).serialize(Codec.INT.

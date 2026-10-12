@@ -48,7 +48,7 @@ public class EvilMotherSpiritRender extends EntityRenderer<EvilMotherSpirit, Evi
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
-        collector.submitCustomGeometry(poseStack, RenderTypes.lines(), (pose, bufferSource) -> {
+        collector.submitCustomGeometry(poseStack, RenderTypes.linesTranslucent(), (pose, bufferSource) -> {
             setT2(pose, entity, bufferSource);
         });
         poseStack.popPose();

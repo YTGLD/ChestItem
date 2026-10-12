@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttackEndComing extends ThrowableItemProjectile {
+public class AttackEndComing extends ThrowableItemProjectile implements TrailEntity{
     private LivingEntity target;
     private final List<Vec3> trailPositions = new ArrayList<>();
     public float damages = 4;
@@ -113,7 +113,6 @@ public class AttackEndComing extends ThrowableItemProjectile {
                         Identifier entitys = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
                         if (!entitys.getNamespace().equals(Chestitem.MODID)) {
                             if (entity.isAlive()) {
-                                entity.setInvulnerableTime(0);
 
                                 if (entity instanceof OwnableEntity ownableEntity) {
                                     if (ownableEntity.getOwner() != null) {
@@ -130,11 +129,11 @@ public class AttackEndComing extends ThrowableItemProjectile {
                                 if (follow) {
                                     this.level().addParticle(ParticleTypes.SONIC_BOOM, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
                                 }
-                                setCanSee(false);
-                            }else {
-                                setCanSee(false);
-
                             }
+
+                            entity.setInvulnerableTime(0);
+                            entity.damageCooldownTime = 0;
+                            setCanSee(false);
                         }
                     }
                 }
@@ -267,5 +266,10 @@ public class AttackEndComing extends ThrowableItemProjectile {
         if (Handler.chestEntity(closestEntity,this.getOwner())){
             this.target = closestEntity;
         }
+    }
+
+    @Override
+    public List<Vec3> trailPositions() {
+        return trailPositions;
     }
 }

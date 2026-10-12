@@ -86,7 +86,7 @@ public class TerriblePotion extends SkillBase {
 
     @Override
     public float aneLvlForModify(ItemStack stack) {
-        return Handler.isBlackAddPower(stack,1.25f) *   0.05f;
+        return Handler.isBlackAddPower(stack,1.25f) *   0.02f;
     }
 
     @Override

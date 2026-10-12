@@ -31,10 +31,10 @@ import java.util.*;
 
 import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndComing;
 
-    public class EndComing  extends TamableAnimal {
+    public class EndComing  extends TamableAnimal implements TrailEntity{
 
 
-        private final List<Handler.Vec3Color> trailPositions = new ArrayList<>();
+        private final List<Vec3> trailPositions = new ArrayList<>();
         public int color1Add = 0;
         private int attackTIME = 0;
         private int notAttackTime = 10;
@@ -50,12 +50,6 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
         }
         @Override
         public void die(@NotNull DamageSource p_21809_) {
-        }
-        public List<Handler.Vec3Color> getTrailPositions() {
-            return trailPositions;
-        }
-        public int getDoSize() {
-            return doSize;
         }
 
         public void dis(){
@@ -105,30 +99,34 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
             }
         }
 
-        public static final class ColorBlood {
-            public int c1;
-            public int c2;
-            public int c3;
-            public int c4;
-            public int c5;
-            public int c6;
-
-            public ColorBlood() {
-                this.c1 = 0;
-                this.c2 = 0;
-                this.c3 = 0;
-                this.c4 = 0;
-                this.c5 = 0;
-                this.c6 = 0;
-            }
+        @Override
+        public List<Vec3> trailPositions() {
+            return trailPositions;
         }
 
-        public ColorBlood colorBlood = null;
-
-
+        @Override
+        public void move(MoverType type, Vec3 movement) {
+        }
         @Override
         public void tick() {
             super.tick();
+
+            this.setPos(
+                    this.getX() + this.getDeltaMovement().x,
+                    this.getY() + this.getDeltaMovement().y,
+                    this.getZ() + this.getDeltaMovement().z
+            );
+
+            if (this.level() instanceof ServerLevel level) {
+                level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                new Vec3(
+                                        this.getDeltaMovement().x * 1.5f ,
+                                        this.getDeltaMovement().y * 1.5f ,
+                                        this.getDeltaMovement().z * 1.5f
+                                ),
+                                true, Light.ARGB.color(255, 255, 10, 50), 2),
+                        this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+            }
             if (this.tickCount == 10) {
                 if (this.level() instanceof ServerLevel level) {
                     level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
@@ -142,44 +140,6 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
                     level.sendParticles(Particles.FireBlock_.get(), getX() + 0, getY() + 0, getZ() + 0, 16, 0, 0, 0, 0.2f);
                 }
             }
-
-            if (colorBlood == null) {
-                colorBlood = new ColorBlood();
-            }else {
-                int l = 10;
-                if (tickCount % 20 == 1) {
-                    if (new Random().nextInt(100)< l) {
-                        colorBlood.c1 = 20;
-                    }
-                    if (new Random().nextInt(100)< l) {
-                        colorBlood.c2 = 20;
-                    }
-                    if (new Random().nextInt(100)< l) {
-                        colorBlood.c3 = 20;
-                    }
-                    if (new Random().nextInt(100)< l) {
-                        colorBlood.c4 = 20;
-                    }
-                    if (new Random().nextInt(100)< l) {
-                        colorBlood.c5 = 20;
-                    }
-                    if (new Random().nextInt(100)< l) {
-                        colorBlood.c6 = 20;
-                    }
-                }
-
-
-
-                if (colorBlood.c1 > 0) {colorBlood.c1--;}
-                if (colorBlood.c2 > 0) {colorBlood.c2--;}
-                if (colorBlood.c3 > 0) {colorBlood.c3--;}
-                if (colorBlood.c4 > 0) {colorBlood.c4--;}
-                if (colorBlood.c5 > 0) {colorBlood.c5--;}
-                if (colorBlood.c6 > 0) {colorBlood.c6--;}
-            }
-
-
-
             if (attackTIME > 0) {
                 attackTIME --;
             }
@@ -195,27 +155,32 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
                 this.discard();
             }
             LivingEntity owner = getOwner();
-            if (owner != null){
-                double desiredDistance = 2; // 设置想要保持的距离
-                Vec3 targetPos = owner.position().add(0, 3, -1.5); // 获取玩家位置并抬高
-
-                Vec3 forward = owner.getLookAngle(); // 获取玩家的朝向向量
-                Vec3 direction = forward.scale(-1).normalize(); // 计算背后的方向（逆向）
-
-                Vec3 newTargetPos = targetPos.add(direction.scale(desiredDistance)); // 计算新的目标位置
-
-                if (owner.level() instanceof ServerLevel serverLevel) {
-                    this.teleportTo(serverLevel, newTargetPos.x, newTargetPos.y, newTargetPos.z,
-                            Set.of(), this.getYRot(), this.getXRot(), false);
+            if (owner != null) {
+                if (owner.isDeadOrDying()) {
+                    this.discard();
                 }
+                Vec3 currentPos = this.position();
+                float speed = (float) (0.25f - (8 - owner.position().distanceTo(currentPos)) / 10f);
+                if (speed < 0) {
+                    speed = 0;
+                }
+                double desiredDistance = 2;
+                Vec3 targetPos = owner.position().add(0, 3, 1);
+
+                Vec3 forward = owner.getLookAngle();
+                Vec3 direction = forward.scale(-1).normalize();
+
+                Vec3 newTargetPos = targetPos.add(direction.scale(desiredDistance));
+
+                this.setDeltaMovement(newTargetPos.subtract(currentPos).normalize().scale(speed));
             }
 
             if (this.level().isClientSide()) {
-                trailPositions.add(new Handler.Vec3Color(new Vec3(this.getX(), this.getY(), this.getZ()), Light.ARGB.color(255, 255, 0, blueColor)));
+                trailPositions.add(this.position());
                 if (blueColor > 0) {
                     blueColor -= 5;
                 }
-                if (trailPositions.size() > 85) {
+                if (trailPositions.size() > 16) {
                     trailPositions.removeFirst();
                 }
             }
@@ -291,20 +256,6 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
         protected void doPush(Entity p_27415_) {
         }
         protected void pushEntities() {
-        }
-
-        @Override
-        protected void registerGoals() {
-            this.goalSelector.addGoal(1, new FloatGoal(this));
-            this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
-            this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
-            this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
-            this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
-            this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-            this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-            this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
-
-            this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Monster.class, false));
         }
 
         @Nullable

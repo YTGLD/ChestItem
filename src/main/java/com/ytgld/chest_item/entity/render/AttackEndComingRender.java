@@ -40,8 +40,6 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
 
     @Override
     public void submit(AttackEndComingRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
-        HandlerClient.showOutline = true;
-        HandlerClient.doPass = true;
 
         AttackEndComing entity = renderState.entity;
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
@@ -50,58 +48,17 @@ public class AttackEndComingRender extends EntityRenderer<AttackEndComing, Attac
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
 
-        if (!entity.entityTags().contains(EndComing.isTrial)) {
-            collector.submitCustomGeometry(poseStack, MRender.endBlackOutline, (pose, bufferSource) -> {
-                setT2(pose, entity, bufferSource);
-            });
-            collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
-                setT2(pose, entity, bufferSource);
-            });
-        }
+        collector.submitCustomGeometry(poseStack, MRender.colorOutline, (pose, bufferSource) -> {
+            HandlerClient.addTrail(pose,entity,entity,bufferSource,1,0,0,0.15f);
+        });
 
 
         if (entity.canSee) {
-            if (!entity.entityTags().contains(EndComing.isTrial)) {
-                collector.submitCustomGeometry(poseStack, MRender.endBlackOutline, (pose, bufferSource) -> {
-                    renderSphere1(pose, bufferSource, 0, 0.15f);
-                });
-                collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
-                    renderSphere1(pose, bufferSource, 0, 0.15f);
-                });
-            }
+            collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
+                renderSphere1(pose, bufferSource, 0, 0.15f);
+            });
         }
         poseStack.popPose();
-    }
-    private void setT2(PoseStack.Pose matrices,
-                      AttackEndComing entity,
-                      VertexConsumer vertexConsumers)
-    {
-        for (int i = 1; i < entity.getTrailPositions().size(); i++){
-            Vec3 prevPos = entity.getTrailPositions().get(i - 1);
-            Vec3 currPos = entity.getTrailPositions().get(i);
-            Vec3 adjustedPrevPos = new Vec3(prevPos.x - entity.getX(), prevPos.y - entity.getY(), prevPos.z - entity.getZ());
-            Vec3 adjustedCurrPos = new Vec3(currPos.x - entity.getX(), currPos.y - entity.getY(), currPos.z - entity.getZ());
-            float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
-            HandlerClient.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha,alpha/10f);
-            HandlerClient.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha,alpha/10f);
-
-        }
-    }
-
-    private void setT(PoseStack.Pose matrices,
-                      AttackEndComing entity,
-                      VertexConsumer vertexConsumers)
-    {
-        for (int i = 1; i < entity.getTrailPositions().size(); i++){
-            Vec3 prevPos = entity.getTrailPositions().get(i - 1);
-            Vec3 currPos = entity.getTrailPositions().get(i);
-            Vec3 adjustedPrevPos = new Vec3(prevPos.x - entity.getX(), prevPos.y - entity.getY(), prevPos.z - entity.getZ());
-            Vec3 adjustedCurrPos = new Vec3(currPos.x - entity.getX(), currPos.y - entity.getY(), currPos.z - entity.getZ());
-            float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
-            HandlerClient.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha,alpha/10f);
-            HandlerClient.renderBlood(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha,alpha/10f);
-
-        }
     }
 
     public void renderSphere1(@NotNull PoseStack.Pose matrices, @NotNull VertexConsumer vertexConsumer, int light, float a ) {

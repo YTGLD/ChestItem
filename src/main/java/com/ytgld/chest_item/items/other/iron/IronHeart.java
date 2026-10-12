@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.iron;
+package com.ytgld.chest_item.items.other.iron;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -24,12 +24,9 @@ public class IronHeart  extends ItemBase {
     }
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-        modifiers.put(AttReg.instability, new AttributeModifier(Identifier.parse(Chestitem.MODID +
-                InitItems.IronHeart_.asItem().getDescriptionId()),
-                0.3, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Identifier.parse(Chestitem.MODID +
                 InitItems.IronHeart_.asItem().getDescriptionId()),
-                4, AttributeModifier.Operation.ADD_VALUE));
+                2, AttributeModifier.Operation.ADD_VALUE));
         return modifiers;
     }
     @Override

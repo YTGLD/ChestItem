@@ -63,11 +63,10 @@ public class DefeatTheArmy extends ItemBlackShadow implements IBlackLight {
             now = 0;
         }
         now /= 100f;
-
-        float speed = 1.0f * now * ConfigItem.intValue.get().floatValue();
-        float damage = 0.5f * now * ConfigItem.intValue.get().floatValue();
-        float attSpeed = 0.8f * now * ConfigItem.intValue.get().floatValue();
-        float chaosArmorSpeed = 0.8f * now * ConfigItem.intValue.get().floatValue();
+        float speed = 0.5f * now * ConfigItem.intValue.get().floatValue();
+        float damage = 0.2f * now * ConfigItem.intValue.get().floatValue();
+        float attSpeed = 0.3f * now * ConfigItem.intValue.get().floatValue();
+        float chaosArmorSpeed = 0.4f * now * ConfigItem.intValue.get().floatValue();
         chaosArmorSpeed = -chaosArmorSpeed;
 
 

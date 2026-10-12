@@ -46,11 +46,11 @@ public class HeavyBlade extends ItemBase implements Meat {
         public void config(ModConfigSpec.Builder builder) {
             builder.push("HeavyBlade");
             intValue =  builder.translation("chest_item.config.HeavyBlade")
-                    .defineInRange("number",30f,0,Integer.MAX_VALUE);
+                    .defineInRange("number",8f,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.HeavyBlade2")
-                    .defineInRange("number2",25f,0,Integer.MAX_VALUE);
+                    .defineInRange("number2",8f,0,Integer.MAX_VALUE);
             intValue3 =  builder.translation("chest_item.config.HeavyBlade2")
-                    .defineInRange("number3",20f,0,Integer.MAX_VALUE);
+                    .defineInRange("number3",8f,0,Integer.MAX_VALUE);
             builder.pop();
         }
 
@@ -86,9 +86,9 @@ public class HeavyBlade extends ItemBase implements Meat {
 
 
 
-    private static float damage(Player player){
-        float s = -20;
 
+
+    private static float damage(Player player){
         float a = player.getArmorValue();
         if (a > ConfigItem.intValue2.get().byteValue()){
             a = ConfigItem.intValue2.get().byteValue();
@@ -101,7 +101,11 @@ public class HeavyBlade extends ItemBase implements Meat {
         if (h > ConfigItem.intValue.get().floatValue()) {
             h = ConfigItem.intValue.get().floatValue();
         }
-        return (s+a+f+h)/100f;
+        float damage =  (a+f+h)/100f;
+        if (damage < 0) {
+            damage = 0;
+        }
+        return damage;
     }
     @Override
      public void text(ItemStack stack,java.util.function.Consumer<Component> tooltipComponents,TooltipFlag flag){
@@ -109,7 +113,5 @@ public class HeavyBlade extends ItemBase implements Meat {
         tooltipComponents.accept(Component.translatable("item.chest_item.heavy_blade.string.2",ConfigItem.intValue2.get().floatValue()).withStyle(ChatFormatting.GOLD));
         tooltipComponents.accept(Component.translatable("item.chest_item.heavy_blade.string.3",ConfigItem.intValue3.get().floatValue()).withStyle(ChatFormatting.GOLD));
         tooltipComponents.accept(Component.literal(""));
-        tooltipComponents.accept(Component.translatable("item.chest_item.heavy_blade.string.4").withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC));
-
     }
 }

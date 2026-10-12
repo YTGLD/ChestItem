@@ -799,6 +799,7 @@
   "item.chest_item.one_eye_spider.string.2": "Maximum health",
   "item.chest_item.one_eye_spider.string.3": "ARMOR",
   "item.chest_item.one_eye_spider.string.4": "Movement speed",
+  "item.chest_item.one_eye_spider.string.5": "Food Number",
 
   "item.chest_item.the_bell": "The Bell of the End",
   "item.chest_item.the_bell.string.1": "Inflicts on creatures within 16 tiles when HP drops below 50%",

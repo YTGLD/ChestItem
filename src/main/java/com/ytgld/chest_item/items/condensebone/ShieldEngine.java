@@ -28,7 +28,7 @@ public class ShieldEngine extends ItemBone {
         public void config(ModConfigSpec.Builder builder) {
             builder.push("ShieldEngine");
             intValue =  builder.translation("chest_item.config.ShieldEngine")
-                    .defineInRange("number",3f,0,Integer.MAX_VALUE);
+                    .defineInRange("number",5f,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.ShieldEngine2")
                     .defineInRange("number2",1f,0,Integer.MAX_VALUE);
             builder.pop();

@@ -61,7 +61,9 @@ public interface IEvilGift {
     static boolean isHasEvilGift(ItemStack stack , EvilGiftBase giftBase){
         if (stack.getItem() instanceof IEvilGift iEvilGift) {
             EvilGiftData evilGiftData = iEvilGift.evilData(stack);
-            return evilGiftData.hashSet().contains(giftBase.id().toString());
+            if (evilGiftData != null) {
+                return evilGiftData.hashSet().contains(giftBase.id().toString());
+            }
         }
         return false;
     }

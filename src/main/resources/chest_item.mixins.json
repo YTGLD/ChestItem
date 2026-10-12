@@ -6,6 +6,7 @@
     "ApplyBonusCountMixin",
     "EntityMixin",
     "ExperienceOrbMixin",
+    "ExplosionMixin",
     "FoodDataMixin",
     "ItemStackMixin",
     "LivingEntityMixin",

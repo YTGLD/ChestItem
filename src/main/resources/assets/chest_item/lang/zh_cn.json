@@ -880,6 +880,7 @@
   "item.chest_item.one_eye_spider.string.2": "最大生命值",
   "item.chest_item.one_eye_spider.string.3": "护甲",
   "item.chest_item.one_eye_spider.string.4": "移动速度",
+  "item.chest_item.one_eye_spider.string.5": "吃下的食物总数",
 
   "item.chest_item.the_bell": "末路震钟",
   "item.chest_item.the_bell.string.1": "生命值低于50%时对16格内生物造成",

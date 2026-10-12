@@ -28,9 +28,9 @@ public class MassEnergyConverter extends ItemBone {
         public void config(ModConfigSpec.Builder builder) {
             builder.push("MassEnergyConverter");
             intValue =  builder.translation("chest_item.config.MassEnergyConverter")
-                    .defineInRange("number",0.3f,0,Integer.MAX_VALUE);
+                    .defineInRange("number",0.15f,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.MassEnergyConverter2")
-                    .defineInRange("number2",0.5f,0,Integer.MAX_VALUE);
+                    .defineInRange("number2",0.2f,0,Integer.MAX_VALUE);
             builder.pop();
         }
 

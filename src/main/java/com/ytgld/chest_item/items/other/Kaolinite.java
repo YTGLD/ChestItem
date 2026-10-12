@@ -71,7 +71,7 @@ public class Kaolinite extends ItemBase {
             if (stack.getMaxDamage() != 0) {
                 if (stack.getDamageValue() > 0) {
                     stack.setDamageValue(stack.getDamageValue() - ConfigItem.intValue2.get().intValue());
-                    player.giveExperiencePoints(-1);
+                    player.giveExperiencePoints(-5);
                 }
             }
         }

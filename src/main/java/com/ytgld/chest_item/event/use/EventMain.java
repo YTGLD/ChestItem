@@ -11,6 +11,7 @@ import com.ytgld.chest_item.event.activated.ci.ItemStackAttackEvent;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.*;
 import com.ytgld.chest_item.items.black.ChaosConstructor;
+import com.ytgld.chest_item.items.black.OneEyedSpider;
 import com.ytgld.chest_item.items.black.ShadowMint;
 import com.ytgld.chest_item.items.black.celestial.Blood;
 import com.ytgld.chest_item.items.black.celestial.Chaos;
@@ -26,8 +27,8 @@ import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.EvilGiftBase;
 import com.ytgld.chest_item.items.evil_mother.evil_gift.IEvilGift;
-import com.ytgld.chest_item.items.other.blood.BoneHead;
-import com.ytgld.chest_item.items.other.blood.GodBlood;
+import com.ytgld.chest_item.items.other.BoneHead;
+import com.ytgld.chest_item.items.other.GodBlood;
 import com.ytgld.chest_item.items.condensebone.AlienationDiodes;
 import com.ytgld.chest_item.items.condensebone.MassEnergyConverter;
 import com.ytgld.chest_item.items.condensebone.ShieldEngine;
@@ -409,21 +410,23 @@ public class EventMain {
                         int newData = (int) (data - 1 - ((int) (damage * 0.5f)));
                         Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES, living, (float) newData);
                         float modify = (float) Math.sqrt(value);
-                        if (modify < 0.3f) {
-                            modify = 0.3f;
+                        float damageModify = 0.75f;
+                        float minDamageModify = 0.5f;
+                        if (modify < minDamageModify) {
+                            modify = minDamageModify;
                         }
-                        float newDamage = damage * (0.3f / modify);
+                        float newDamage = damage * (damageModify / modify);
                         if (!ComplexComponents.absorptionDamage(living)) {
                             event.setNewDamage(newDamage);
-                        } else {
+                        }else {
                             event.setNewDamage(0);
                         }
                     } else {
-                        Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES, living, 0f);
+                        Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,living,0f);
                         AttributeInstance time = living.getAttribute(AttReg.hyperplasiaCooldown);
                         if (time != null) {
                             int cooldown = (int) time.getValue();
-                            Handler.setDataValue(AttReg.hyperplasiaCooldownAttachmentType, living, cooldown);
+                            Handler.setDataValue(AttReg.hyperplasiaCooldownAttachmentType,living,cooldown);
                         }
                     }
                 }
@@ -639,6 +642,7 @@ public class EventMain {
         SpeedHeart.eat(event);
         Glutton.eatFinish(event);
         GiveEvilGiftHandler.event(event);
+        OneEyedSpider.event(event);
     }
     @SubscribeEvent
     public void LeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {

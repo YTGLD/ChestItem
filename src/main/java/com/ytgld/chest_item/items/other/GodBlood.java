@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.other.blood;
+package com.ytgld.chest_item.items.other;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;

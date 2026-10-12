@@ -79,9 +79,11 @@ public class TheBell extends ItemBase {
                         player.level().playSound(null, player.blockPosition(), SoundEvents.BELL_BLOCK, SoundSource.AMBIENT, 1, 1);
                         for (LivingEntity living : livingEntities) {
                             if (!living.is(player)) {
-                                float damage = (float) (player.getAttributeValue(Attributes.MAX_HEALTH)
-                                        + player.getAttributeValue(Attributes.ARMOR) * 0.5f
-                                        + player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.5f);
+                                float damage = (float) (
+                                        player.getAttributeValue(Attributes.MAX_HEALTH) * 0.25f
+                                                + player.getAttributeValue(Attributes.ARMOR) * 0.25f
+                                                + player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.25f
+                                );
                                 living.hurt(living.damageSources().playerAttack(player), damage);
                                 living.setDeltaMovement(0, 1, 0);
                             }

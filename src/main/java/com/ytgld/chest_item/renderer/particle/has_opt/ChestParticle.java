@@ -69,7 +69,6 @@ public class ChestParticle extends SingleQuadParticle {
             particle.setColor(rs / 255f,gs / 255f,bs / 255f);
             particle.isLight = simpleParticleType.isLight();
             particle.scale(simpleParticleType.getSize());
-
             particle.setParticleSpeed(simpleParticleType.getVec3().x,simpleParticleType.getVec3().y,simpleParticleType.getVec3().z);
             return particle;
         }

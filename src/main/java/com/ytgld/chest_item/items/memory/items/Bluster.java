@@ -42,7 +42,7 @@ public class Bluster extends MemoryBase {
         public void config(ModConfigSpec.Builder builder) {
             builder.push("Bluster");
             intValue =  builder.translation("chest_item.config.Bluster")
-                    .defineInRange("number",2f,0,Integer.MAX_VALUE);
+                    .defineInRange("number",1.5f,0,Integer.MAX_VALUE);
             intValue2 =  builder.translation("chest_item.config.Bluster2")
                     .defineInRange("number2",2f,0,Integer.MAX_VALUE);
             builder.pop();

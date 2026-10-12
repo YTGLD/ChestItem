@@ -39,88 +39,18 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
         submitOther(renderState, modelView, collector, camera);
     }
     public void submitOther(EndComingRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera) {
-        HandlerClient.showOutline = true;
-        HandlerClient.doPass = true;
-
         EndComing entity = renderState.entity;
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
         double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
         poseStack.pushPose();
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
-        collector.submitCustomGeometry(poseStack, MRender.endBlackOutline, (pose, bufferSource) -> {
-            setT(pose, entity, bufferSource);
-        });
-        collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
-            setT(pose, entity, bufferSource);
-        });
-
-        collector.submitCustomGeometry(poseStack, MRender.endBlackOutline, (pose, bufferSource) -> {
-            renderSphere1(pose, bufferSource, 0, 0.44f);
-        });
         collector.submitCustomGeometry(poseStack, MRender.endBlack, (pose, bufferSource) -> {
             renderSphere1(pose, bufferSource, 0, 0.44f);
         });
         poseStack.popPose();
     }
 
-
-    private void setT(PoseStack.Pose matrices, EndComing entity, VertexConsumer vertexConsumers) {
-        for (int i = 1; i < entity.getTrailPositions().size(); i++){
-            Vec3 prevPos = entity.getTrailPositions().get(i - 1).vec3();
-            Vec3 currPos = entity.getTrailPositions().get(i).vec3();
-            Vec3 adjustedPrevPos = new Vec3(prevPos.x - entity.getX(), prevPos.y - entity.getY(), prevPos.z - entity.getZ());
-            Vec3 adjustedCurrPos = new Vec3(currPos.x - entity.getX(), currPos.y - entity.getY(), currPos.z - entity.getZ());
-            float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
-            renderBloodW(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, Light.ARGB.color((int) (alpha * 255),255,0,0),alpha/3f);
-            renderBloodW(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, Light.ARGB.color((int) (alpha * 255),255,0,0),alpha/3f);
-        }
-    }
-    public static void renderBloodW(PoseStack.Pose poseStack, VertexConsumer vertexConsumer, Vec3 start, Vec3 end, int a, float r) {
-        int segmentCount = 16; // 圆柱横向细分数
-
-        for (int i = 0; i < segmentCount; i++) {
-            double angle1 = (2 * Math.PI * i) / segmentCount;
-            double angle2 = (2 * Math.PI * (i + 1)) / segmentCount;
-
-            double x1 = Math.cos(angle1) * r;
-            double z1 = Math.sin(angle1) * r;
-            double x2 = Math.cos(angle2) * r;
-            double z2 = Math.sin(angle2) * r;
-
-            Vec3 up1 = start.add(x1, 0, z1);
-            Vec3 up2 = start.add(x2, 0, z2);
-            Vec3 down1 = end.add(x1, 0, z1);
-            Vec3 down2 = end.add(x2, 0, z2);
-
-
-            addSquare(vertexConsumer, poseStack, up1, up2, down1, down2, a);
-        }
-    }
-
-
-    private static void addSquare(VertexConsumer vertexConsumer, PoseStack.Pose poseStack, Vec3 up1, Vec3 up2, Vec3 down1, Vec3 down2, int c) {
-        // 添加四个顶点来绘制一个矩形
-        vertexConsumer.addVertex(poseStack, (float) up1.x, (float) up1.y, (float) up1.z)
-                .setColor(c)
-                .setUv2(255, 255)
-                .setNormal(poseStack,0, 0, 1);
-
-        vertexConsumer.addVertex(poseStack, (float) down1.x, (float) down1.y, (float) down1.z)
-                .setColor(c)
-                .setUv2(255, 255)
-                .setNormal(poseStack,0, 0, 1);
-
-        vertexConsumer.addVertex(poseStack, (float) down2.x, (float) down2.y, (float) down2.z)
-                .setColor(c)
-                .setUv2(255, 255)
-                .setNormal(poseStack,0, 0, 1);
-
-        vertexConsumer.addVertex(poseStack, (float) up2.x, (float) up2.y, (float) up2.z)
-                .setColor(c)
-                .setUv2(255, 255)
-                .setNormal(poseStack,0, 0, 1);
-    }
     public void renderSphere1(@NotNull PoseStack.Pose matrices, @NotNull VertexConsumer vertexConsumer, int light, float s ) {
 
         int stacks = 10; // 垂直方向的分割数
