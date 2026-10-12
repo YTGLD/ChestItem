@@ -62,7 +62,7 @@ public class WarGodCommand extends EvilMother {
                 intValue2 = builder.translation("chest_item.config.WarGodCommand2")
                         .defineInRange("number2", 1F, 0, 100);
                 intValue3 = builder.translation("chest_item.config.WarGodCommand3")
-                        .defineInRange("number3", 25, 0, 100);
+                        .defineInRange("number3", 15, 0, 100);
                 builder.pop();
             }
 
@@ -154,10 +154,10 @@ public class WarGodCommand extends EvilMother {
             }
             now /= 100f;
 
-            float speed = 1.3f * now * ConfigItem.intValue2.get().floatValue();
-            float attackSpeed = 0.85f * now * ConfigItem.intValue2.get().floatValue();
-            float heal = 0.65f * now * ConfigItem.intValue2.get().floatValue();
-            float res = 0.5f * now * ConfigItem.intValue2.get().floatValue();
+            float speed = 1f * now * ConfigItem.intValue2.get().floatValue();
+            float attackSpeed = 0.6f * now * ConfigItem.intValue2.get().floatValue();
+            float heal = 0.3f * now * ConfigItem.intValue2.get().floatValue();
+            float res = 0.25f * now * ConfigItem.intValue2.get().floatValue();
 
 
             modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +

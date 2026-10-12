@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.other.blood;
+package com.ytgld.chest_item.items.other;
 
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;

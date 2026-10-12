@@ -85,7 +85,7 @@ public class TerriblePotion extends SkillBase {
 
     @Override
     public float aneLvlForModify() {
-        return 0.05f;
+        return 0.02f;
     }
 
     @Override

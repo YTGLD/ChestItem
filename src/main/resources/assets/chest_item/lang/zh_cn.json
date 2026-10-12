@@ -883,7 +883,7 @@
 
   "item.chest_item.the_bell": "末路震钟",
   "item.chest_item.the_bell.string.1": "生命值低于50%时对16格内生物造成",
-  "item.chest_item.the_bell.string.2": "基于自身100%最大生命值，50%攻击属性，50%护甲的伤害",
+  "item.chest_item.the_bell.string.2": "基于自身25%最大生命值，25%攻击属性，25%护甲的伤害",
   "item.chest_item.the_bell.string.3": "并且造成击飞",
   "item.chest_item.the_bell.string.4": "冷却%d秒",
 

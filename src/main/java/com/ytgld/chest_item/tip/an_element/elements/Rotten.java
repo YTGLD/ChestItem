@@ -50,7 +50,7 @@ public class Rotten extends SkillBase implements BlackSkill {
 
     @Override
     public float aneLvlForModify() {
-        return 0.06f;
+        return 0.025f;
     }
 
     @Override

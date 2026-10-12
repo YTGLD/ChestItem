@@ -36,7 +36,7 @@ public class NineDome extends TheCelestial{
         public void config(ModConfigSpec.Builder builder) {
             builder.push("NineDome");
             intValue =  builder.translation("chest_item.config.NineDome")
-                    .defineInRange("number",0.2f,0,Integer.MAX_VALUE);
+                    .defineInRange("number",0.1f,0,Integer.MAX_VALUE);
             builder.pop();
         }
 

@@ -48,7 +48,7 @@ public class Decisively extends SkillBase {
 
     @Override
     public float aneLvlForModify() {
-        return 0.4f;
+        return 0.2f;
     }
 
     @Override

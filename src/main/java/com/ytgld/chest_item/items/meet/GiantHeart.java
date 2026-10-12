@@ -38,7 +38,7 @@ public class GiantHeart extends ItemBase implements Meat {
         public void config(ModConfigSpec.Builder builder) {
             builder.push("GiantHeart");
             intValue =  builder.translation("chest_item.config.GiantHeart")
-                    .defineInRange("number",0.8f,0,Integer.MAX_VALUE);
+                    .defineInRange("number",0.9f,0,Integer.MAX_VALUE);
             builder.pop();
         }
 

@@ -26,12 +26,9 @@ public class IronHeart  extends ItemBase {
     }
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
-        modifiers.put(AttReg.instability, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
-                InitItems.IronHeart_.asItem().getDescriptionId()),
-                0.3, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.parse(Chestitem.MODID +
                 InitItems.IronHeart_.asItem().getDescriptionId()),
-                4, AttributeModifier.Operation.ADD_VALUE));
+                2, AttributeModifier.Operation.ADD_VALUE));
         return modifiers;
     }
     @Override

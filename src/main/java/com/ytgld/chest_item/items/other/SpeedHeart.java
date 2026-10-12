@@ -41,7 +41,7 @@ public class SpeedHeart extends ItemBase {
         public void config(ModConfigSpec.Builder builder) {
             builder.push("SpeedHeart");
             intValue =  builder.translation("chest_item.config.SpeedHeart")
-                    .defineInRange("number",0.33F,0,Integer.MAX_VALUE);
+                    .defineInRange("number",0.1f,0,Integer.MAX_VALUE);
             builder.pop();
         }
 

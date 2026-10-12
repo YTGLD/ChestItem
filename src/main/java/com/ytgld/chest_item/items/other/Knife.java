@@ -32,7 +32,7 @@ public class Knife extends ItemBase {
         public void config(ModConfigSpec.Builder builder) {
             builder.push("Knife");
             doubleValue =  builder.translation("chest_item.config.Knife")
-                    .defineInRange("number_max",1.2f,0,Integer.MAX_VALUE);
+                    .defineInRange("number_max",1.1f,0,Integer.MAX_VALUE);
             doubleValue2 =  builder.translation("chest_item.config.Knife2")
                     .defineInRange("number_min",0.9f,0,Integer.MAX_VALUE);
             builder.pop();
