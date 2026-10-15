@@ -16,7 +16,7 @@ import static com.mojang.renderpearl.api.pipeline.BlendFactor.*;
 import static net.minecraft.client.renderer.RenderPipelines.MATRICES_FOG_LIGHT_DIR_SNIPPET;
 
 public class RenderObjects {
-    private static final ColorTargetState vColorTargetState = new ColorTargetState(new BlendFunction(SRC_ALPHA, ONE, ONE, ZERO));
+    public static final ColorTargetState vColorTargetState = new ColorTargetState(new BlendFunction(SRC_ALPHA, ONE, ONE, ZERO));
 
     private static final RenderPipeline itemLive = RenderPipeline.builder(
             RenderPipeline.builder(RenderPipeline.builder(MATRICES_FOG_LIGHT_DIR_SNIPPET).

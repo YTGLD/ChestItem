@@ -179,7 +179,7 @@ public class BigGlowingModel implements ItemModel {
             poseStack.pushPose();
             poseStack.translate(vec3.x,vec3.y,vec3.z);
             poseStack.translate(vec3A.x,vec3A.y,vec3A.z);
-            submitNodeCollector.submitCustomGeometry(poseStack, MRender.itemCutout(identifier, ConfigC.config.Render.get()),
+            submitNodeCollector.submitCustomGeometry(poseStack, MRender.ITEM_CUTOUT.apply(identifier),
                     (pose, vc) -> {
                         Matrix4f mat = pose.pose();
                         vc.addVertex(mat, -size, -size, 0)

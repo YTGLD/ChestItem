@@ -300,6 +300,9 @@ public class InitItems {
     public static final DeferredItem<Item> SwordHeart_ = register("sword_heart",
             (Identifier)-> new SwordHeart(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
+    public static final DeferredItem<Item> GazeEye_ = register("gaze_eye",
+            (Identifier)-> new GazeEye(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
 
 
     public static final DeferredItem<Item> EmperorCup_ = register("emperor_cup",
@@ -461,6 +464,7 @@ public class InitItems {
                     output.accept(InitItems.SwordHeart_);
                     output.accept(InitItems.SoulBottle_);
                     output.accept(InitItems.DecayFruit_);
+                    output.accept(InitItems.GazeEye_);
 
 
 

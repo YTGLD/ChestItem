@@ -510,6 +510,7 @@
   "effect.chest_item.rage": "rage",
   "effect.chest_item.pain": "pain",
   "effect.chest_item.invulnerable": "invincible",
+  "effect.chest_item.gaze": "gaze",
 
   "effect.chest_item.shadow_erosion": "Shadow Erosion",
   "effect.chest_item.evil_erosion": "Evil rejection",
@@ -1582,6 +1583,12 @@
   "item.chest_item.emperor_cup.string.5": "此物可随时间减少内部寄存伤害的数量",
   "item.chest_item.emperor_cup.string.6": "四种护盾将陷入混沌中而无法使用",
   "item.chest_item.emperor_cup.string.7": "在无敌帧期间无法受到治疗",
+
+
+  "item.chest_item.gaze_eye": "Gaze intently",
+  "item.chest_item.gaze_eye.string.1": "Obtain gaze effect",
+  "item.chest_item.gaze_eye.string.2": "Allow the holder to penetrate the block and see nearby creatures",
+
 
   "chest_item.book.test.main": "通往深渊的门户",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",

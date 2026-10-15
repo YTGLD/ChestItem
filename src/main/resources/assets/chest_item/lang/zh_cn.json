@@ -577,6 +577,7 @@
   "effect.chest_item.pain": "痛楚",
   "effect.chest_item.shadow_erosion": "幽影侵蚀",
   "effect.chest_item.evil_erosion": "邪母之拒",
+  "effect.chest_item.gaze": "凝视",
 
   "item.chest_item.self_increasing_heart.string.0": "自增i，i自减",
   "item.chest_item.self_increasing_heart.string.1": "食用食物获得临时生命值",
@@ -1637,6 +1638,10 @@
   "chest_item.book.lead_of_enlightenment.6": "“为什么，到底是什么在驱使你继续战斗！”",
   "chest_item.book.lead_of_enlightenment.7": "“你我皆是大帝，为什么我永远被你踩在脚下”",
   "chest_item.book.lead_of_enlightenment.8": "“既然你不愿加入魔族，那就给我死吧！”",
+
+  "item.chest_item.gaze_eye": "凝眸",
+  "item.chest_item.gaze_eye.string.1": "获得凝视效果",
+  "item.chest_item.gaze_eye.string.2": "允许持有者穿透方块看到附近的生物",
 
   "chest_item.book.test.main": "通往深渊的“门户”",
   "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",

@@ -149,11 +149,11 @@ public class WarpModel implements ItemModel{
         @Override
         public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int i1, boolean b, int i2) {
             if (quads != null && submitNodeCollector instanceof SubmitNodeStorage submitNodeStorage) {
-                CIItemFeatureRenderer.Submit submit = new CIItemFeatureRenderer.Submit(poseStack.last(), displayContext,
-                        255, OverlayTexture.NO_OVERLAY, 0, new int[]{}, quads.getAll(), ItemStackRenderState.FoilType.NONE, MRender.cutoutItemSheet());
-                submitNodeStorage.order(0).solid.submit(
-                        submit
-                );
+//                CIItemFeatureRenderer.Submit submit = new CIItemFeatureRenderer.Submit(poseStack.last(), displayContext,
+//                        255, OverlayTexture.NO_OVERLAY, 0, new int[]{}, quads.getAll(), ItemStackRenderState.FoilType.NONE, MRender.cutoutItemSheet());
+//                submitNodeStorage.order(0).solid.submit(
+//                        submit
+//                );
             }
         }
 

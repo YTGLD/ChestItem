@@ -10,16 +10,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class ChestItemMenu extends AbstractContainerMenu {
     private final Container container;
-    private final int containerRows;
 
     public ChestItemMenu( int containerId, Inventory playerInventory, Container container, int rows) {
         super(ChestMenuTypes.GENERIC_12.get(), containerId);
         checkContainerSize(container, rows * 12);
         this.container = container;
-        this.containerRows = rows;
         container.startOpen(playerInventory.player);
         this.addChestGrid(container, 8, 0);
-        int j = 18 + this.containerRows * 18 + 13;
+        int j = 18 + rows * 18 + 13;
         this.addStandardInventorySlots(playerInventory, 8, j);
     }
 
@@ -70,9 +68,6 @@ public class ChestItemMenu extends AbstractContainerMenu {
     public void removed(Player player) {
         super.removed(player);
         this.container.stopOpen(player);
-    }
-    public int getRowCount() {
-        return this.containerRows;
     }
 }
 

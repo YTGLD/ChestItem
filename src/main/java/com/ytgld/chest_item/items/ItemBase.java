@@ -72,7 +72,7 @@ public class ItemBase extends Item implements Terror,OtherGift{
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag flag) {
+    public final void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         text(stack, tooltipComponents, flag);
     }
 

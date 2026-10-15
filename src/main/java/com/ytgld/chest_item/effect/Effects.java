@@ -22,5 +22,6 @@ public class Effects {
             ShadowErosion::new);
     public static final DeferredHolder<MobEffect,?> EvilErosion  =EFFECT_DEFERRED_REGISTER.register("evil_erosion",
             EvilErosion::new);
-
+    public static final DeferredHolder<MobEffect,?> gaze =EFFECT_DEFERRED_REGISTER.register("gaze",
+            Gaze::new);
 }

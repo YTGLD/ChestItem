@@ -6,12 +6,15 @@ import com.mojang.renderpearl.api.pipeline.*;
 import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import net.minecraft.client.renderer.BindGroupLayouts;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Util;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 import static com.mojang.renderpearl.api.pipeline.BlendFactor.*;
 import static net.minecraft.client.renderer.RenderPipelines.*;
@@ -34,29 +37,12 @@ public abstract class MRender {
                             ZERO))).withCull(false).withBindGroupLayout(BindGroupLayouts.DYNAMIC_TRANSFORMS)
                     .withShaderDefine("ALPHA_CUTOUT", 0.1F).build();
 
-    private static RenderType ITEM_CUTOUT (Identifier identifier,boolean o) {
-        if (o) {
-            return RenderType.create("item_cutout", RenderSetup.builder(renderPipelineItem)
-                    .withTexture("Sampler0", identifier)
-                    .useLightmap().useOverlay().affectsCrumbling()
-                    .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
-                    .createRenderSetup());
-        }
-
-        return RenderType.create("item_cutout", RenderSetup.builder(renderPipelineItem)
-                .withTexture("Sampler0", identifier)
-                .useLightmap().useOverlay().affectsCrumbling()
-                .setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE)
-                .createRenderSetup());
-    }
-
-    public static RenderType cutoutItemSheet() {
-        return itemCutout(TextureAtlas.LOCATION_ITEMS,true);
-    }
-    public static RenderType itemCutout(Identifier texture,boolean outline) {
-        return ITEM_CUTOUT(texture,outline);
-    }
-
+    public static Function<Identifier, RenderType> ITEM_CUTOUT =
+            Util.memoize((texture) -> {
+        RenderSetup state = RenderSetup.builder(renderPipelineItem)
+                .withTexture("Sampler0", texture).useLightmap().useOverlay().affectsCrumbling().setOutline(RenderSetup.OutlineProperty.AFFECTS_OUTLINE).createRenderSetup();
+        return RenderType.create("item_cutout", state);
+    });
     public static RenderType colorOutline = RenderType.create(
             "lightning", RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
                             .withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
