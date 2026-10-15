@@ -2,6 +2,7 @@ package com.ytgld.chest_item.entity;
 
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.Handler;
+import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.renderer.particle.has_opt.ColorOption;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
@@ -94,9 +95,18 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
     public void setCanSee(boolean canSee) {
         if (!canSee) {
             if (this.level() instanceof ServerLevel level) {
-                level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
-                                Vec3.ZERO, true, Light.ARGB.color(255, 255, 12, 20), 2),
-                        this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                if (getOwner() instanceof Player player) {
+                    int lv = (int) ((EvilMother.getSanValueBase(player) - EvilMother.getSanValue(player)) * 10);
+                    if (this.random.nextInt(100) <= lv) {
+                        level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                        Vec3.ZERO, true, Light.ARGB.color(255, 80, 255, 180), 2),
+                                this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                    }else {
+                        level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                        Vec3.ZERO, true, Light.ARGB.color(255, 255, 12, 20), 2),
+                                this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                    }
+                }
             }
         }
         this.canSee = canSee;

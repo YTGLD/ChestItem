@@ -2,6 +2,7 @@ package com.ytgld.chest_item.entity;
 
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.items.InitItems;
+import com.ytgld.chest_item.items.evil_mother.EvilMother;
 import com.ytgld.chest_item.other.ChestInventory;
 import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
@@ -90,11 +91,26 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
                         attackEndComing.damages += ((float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.1F));
                         this.level().addFreshEntity(attackEndComing);
                         if (this.level() instanceof ServerLevel level) {
-                            level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
-                                            Vec3.ZERO, true, Light.ARGB.color(255, 255, 12, 20), 3),
-                                    this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                            addPart(3,Vec3.ZERO);
                         }
                     }
+                }
+            }
+        }
+        public void addPart(float size,Vec3 speed){
+            if (!(this.level() instanceof ServerLevel level)){
+                return;
+            }
+            if (getOwner() instanceof Player player) {
+                int lv = (int) ((EvilMother.getSanValueBase(player) - EvilMother.getSanValue(player)) * 10);
+                if (this.random.nextInt(100) <= lv) {
+                    level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                    speed, true, Light.ARGB.color(255, 80, 255, 180), size),
+                            this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                }else {
+                    level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
+                                    speed, true, Light.ARGB.color(255, 255, 12, 20), size),
+                            this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
                 }
             }
         }
@@ -118,26 +134,15 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
             );
 
             if (this.level() instanceof ServerLevel level) {
-                level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
-                                new Vec3(
-                                        this.getDeltaMovement().x * 1.5f ,
-                                        this.getDeltaMovement().y * 1.5f ,
-                                        this.getDeltaMovement().z * 1.5f
-                                ),
-                                true, Light.ARGB.color(255, 255, 10, 50), 2),
-                        this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                addPart(2,new Vec3(
+                        this.getDeltaMovement().x * 1.5f ,
+                        this.getDeltaMovement().y * 1.5f ,
+                        this.getDeltaMovement().z * 1.5f
+                ));
             }
             if (this.tickCount == 10) {
                 if (this.level() instanceof ServerLevel level) {
-                    level.sendParticles(ColorOption.creatParticle(Particles.colorOption.get(),
-                                    Vec3.ZERO, true, Light.ARGB.color(255, 255, 12, 20), 10),
-                            this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
-                }
-            }
-            if (tickCount == 10) {
-                if (this.level() instanceof ServerLevel level) {
-                    level.sendParticles(Particles.COLOR_PART.get(), getX() + 0, getY() + 0, getZ() + 0, 24, 0, 0, 0, 0.2f);
-                    level.sendParticles(Particles.FireBlock_.get(), getX() + 0, getY() + 0, getZ() + 0, 16, 0, 0, 0, 0.2f);
+                    addPart(10,Vec3.ZERO);
                 }
             }
             if (attackTIME > 0) {

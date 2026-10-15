@@ -78,7 +78,8 @@ public class DefyLife extends EvilMother{
                                             ServerLevel serverLevel =level.getServer().getLevel(globalPos.dimension());
                                             if (serverLevel != null) {
                                                 player.teleportTo(serverLevel,globalPos.pos().getX(), globalPos.pos().getY(),globalPos.pos().getZ(), Set.of(),0,0,false);
-
+                                                player.setInvulnerableTime(100);
+                                                player.damageCooldownTime = 100;
                                             }
                                         }));
                                         break;

@@ -3,9 +3,11 @@ package com.ytgld.chest_item.items.evil_mother;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.AttReg;
+import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBase;
 import com.ytgld.chest_item.renderer.RenderEvilGift;
 import net.minecraft.core.Holder;
@@ -79,7 +81,9 @@ public abstract class EvilMother extends ItemBase implements IEvil {
     }
     public static void attrib(EntityTickEvent.Post event){
         if (event.getEntity() instanceof Player player){
-            player.getAttributes().addTransientAttributeModifiers(theAttrib(player));
+            if (!player.level().isClientSide()) {
+                player.getAttributes().addTransientAttributeModifiers(theAttrib(player));
+            }
         }
     }
 
@@ -101,6 +105,12 @@ public abstract class EvilMother extends ItemBase implements IEvil {
         Identifier resourceLocation = Identifier.parse(Chestitem.MODID + "evil_mother");
         float value = (float) getSanValue(player);
         float base = (float) getSanValueBase(player);
+
+        if (Handler.has(player, InitItems.StrangeJewelry_.asItem())) {
+           value = 10;
+           base = 10;
+        }
+
         float armor = 0 , damage = 0 ,heal = 0, xp = 0,speed = 0;
         float res = 0;
         if (value != base) {
