@@ -12,6 +12,10 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.random.WeightedList;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -21,12 +25,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.SimpleExplosionDamageCalculator;
 import net.minecraft.world.phys.*;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 public class AttackEndComing extends ThrowableItemProjectile implements TrailEntity{
     private LivingEntity target;
@@ -35,6 +42,12 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
     public float addDamgae = 0;
     public float speeds = 2;
     public boolean follow;
+    public Vec3 offset = Vec3.ZERO;
+
+    public int time =  100;
+    public int live = 50;
+    public boolean canSee = true;
+    public int windChance = 0;
 
     public AttackEndComing(EntityType<? extends AttackEndComing> entityType, Level level) {
         super(entityType, level);
@@ -88,10 +101,6 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
     public float getYRot() {
         return 0;
     }
-    public int live = 50;
-
-    public boolean canSee = true;
-
     public void setCanSee(boolean canSee) {
         if (!canSee) {
             if (this.level() instanceof ServerLevel level) {
@@ -114,7 +123,7 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
 
     public void attack(){
         Vec3 playerPos = this.position().add(0, 0.75, 0);
-        int range = 2;
+        int range = 1;
         if (canSee) {
             List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(playerPos.x - range, playerPos.y - range, playerPos.z - range, playerPos.x + range, playerPos.y + range, playerPos.z + range));
             for (LivingEntity entity : entities) {
@@ -136,8 +145,21 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
                                 damageDoomsdayJudgment *= DoomsdayJudgment.damageModify(player);
                                 entity.hurt(this.getOwner().damageSources().playerAttack(player), damageDoomsdayJudgment);
                                 DoomsdayJudgment.useSkill(this.getOwner());
-                                if (follow) {
-                                    this.level().addParticle(ParticleTypes.SONIC_BOOM, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                                if (windChance > 0) {
+                                    if (this.random.nextInt(100) <= windChance) {
+                                        this.level().explode(player, entity.damageSources().playerAttack(player),
+                                                new SimpleExplosionDamageCalculator(
+                                                        false,
+                                                        true,
+                                                        Optional.of(1.22F),
+                                                        BuiltInRegistries.BLOCK.get(BlockTags.BLOCKS_WIND_CHARGE_EXPLOSIONS).map(Function.identity())),
+                                                position().x(), position().y(), position().z(),
+                                                2,
+                                                false, Level.ExplosionInteraction.TRIGGER,
+                                                ParticleTypes.GUST_EMITTER_SMALL, ParticleTypes.GUST_EMITTER_LARGE,
+                                                WeightedList.of(), SoundEvents.WIND_CHARGE_BURST);
+
+                                    }
                                 }
                             }
 
@@ -170,7 +192,7 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
                 this.getDeltaMovement()
         );
         if (canSee) {
-            if (this.tickCount > 100) {
+            if (this.tickCount > time) {
                 if (follow) {
                     this.level().addParticle(ParticleTypes.SONIC_BOOM,this.getX(),this.getY(),this.getZ(),0,0,0);
                 }
@@ -192,22 +214,12 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
                             Vec3 targetPos = target.position().add(0, 1, 0);
                             Vec3 currentPos = this.position();
                             Vec3 direction = targetPos.subtract(currentPos).normalize();
-
-                            // 获取当前运动方向
                             Vec3 currentDirection = this.getDeltaMovement().normalize();
-
-                            // 计算目标方向与当前方向之间的夹角
                             double angle = Math.acos(currentDirection.dot(direction)) * (180.0 / Math.PI);
-
-                            // 如果夹角超过10度，则限制方向
                             if (angle > 10) {
-                                // 计算旋转后的新方向
                                 double angleLimit = Math.toRadians(10); // 将10度转为弧度
-
-                                // 根据正弦法则计算限制后的方向
                                 Vec3 limitedDirection = currentDirection.scale(Math.cos(angleLimit)) // 计算缩放因子
                                         .add(direction.normalize().scale(Math.sin(angleLimit))); // 根据目标方向进行调整
-
                                 this.setDeltaMovement(limitedDirection.x * (0.125f + s), limitedDirection.y * (0.125f + s), limitedDirection.z * (0.125f + s));
                             } else {
                                 this.setDeltaMovement(direction.x * (0.125f + s), direction.y * (0.125f + s), direction.z * (0.125f + s));
@@ -219,7 +231,7 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
                     }
                 }else if (this.tickCount == 2) {
                     if (!DoomsdayJudgment.isHas(this.getOwner())) {
-                        Vec3 targetPos = target.position().add(0, 0.5, 0);
+                        Vec3 targetPos = target.position().add(0, 0.5, 0).add(offset);
                         Vec3 currentPos = this.position();
                         Vec3 direction = targetPos.subtract(currentPos).normalize();
                         this.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(targetPos.x, targetPos.y, targetPos.z));

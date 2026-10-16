@@ -51,7 +51,7 @@ public class EndComingRender extends EntityRenderer<@NotNull EndComing, EndComin
 
         if (entity.getOwner() instanceof Player player) {
             int alpha = (int) ((EvilMother.getSanValueBase(player)- EvilMother.getSanValue(player)) * 25);
-            collector.submitCustomGeometry(poseStack, RenderTypes.lightning(), (pose, bufferSource) -> {
+            collector.submitCustomGeometry(poseStack, MRender.colorOutline, (pose, bufferSource) -> {
                 renderSphere1(pose, bufferSource, Light.ARGB.color(
                         Math.clamp(alpha, 0, 255),
                         80,

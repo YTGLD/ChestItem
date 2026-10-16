@@ -1598,8 +1598,17 @@
   "item.chest_item.gaze_eye": "Gaze intently",
   "item.chest_item.gaze_eye.string.1": "Obtain gaze effect",
   "item.chest_item.gaze_eye.string.2": "Allow the holder to penetrate the block and see nearby creatures",
+
   "item.chest_item.strange_jewelry": "Strange jewelry",
   "item.chest_item.strange_jewelry.string.1": "The negative and positive bonuses brought by immune rationality",
+
+  "item.chest_item.rage_stone": "Stone of rage",
+  "item.chest_item.rage_stone.string.1": "The corruption of the blood spirit will release blood pearls at an increasingly rapid pace",
+  "item.chest_item.rage_stone.string.2": "The range and accuracy of the Corrupted Blood Spirit decrease as the firing speed increases",
+
+  "item.chest_item.wind_repeater": "Wind repeater",
+  "item.chest_item.wind_repeater.string.1": "The attack that corrupts blood spirits may come with a storm",
+  "item.chest_item.wind_repeater.string.2": "Corrupt blood spirits can only attack targets in the sky",
 
   "chest_item.book.test.main": "通往深渊的门户",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",

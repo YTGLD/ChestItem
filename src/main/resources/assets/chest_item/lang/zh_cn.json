@@ -1656,6 +1656,14 @@
   "item.chest_item.strange_jewelry": "诡异珠宝",
   "item.chest_item.strange_jewelry.string.1": "免疫理智带来的负面和正面加成",
 
+  "item.chest_item.rage_stone": "狂暴石",
+  "item.chest_item.rage_stone.string.1": "腐化血灵释放血珠的速度会越来越快",
+  "item.chest_item.rage_stone.string.2": "随射击速度的增加而降低腐化血灵的射程和精准度",
+
+  "item.chest_item.wind_repeater": "飓风中继器",
+  "item.chest_item.wind_repeater.string.1": "腐化血灵的攻击有可能附带风暴",
+  "item.chest_item.wind_repeater.string.2": "腐化血灵只能攻击天上的目标",
+
   "chest_item.book.test.main": "通往深渊的“门户”",
   "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
   "chest_item.book.test.2": "贡献者：秋季",

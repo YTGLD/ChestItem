@@ -10,15 +10,11 @@ import com.ytgld.chest_item.renderer.particle.has_opt.ColorOption;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -26,7 +22,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import oshi.driver.mac.net.NetStat;
 
 import java.util.*;
 
@@ -36,14 +31,14 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
 
 
         private final List<Vec3> trailPositions = new ArrayList<>();
-        public int color1Add = 0;
         private int attackTIME = 0;
         private int notAttackTime = 10;
         public int doSize= 0;
         public boolean canLive = true;
         public int blueColor = 255;
-        public static final String  isTrial = "isTrial";
 
+        private final String attackSpeedAdd = "attackSpeedAdd";
+        private final int maxAttackDownTime = 50;
 
         public EndComing(EntityType<? extends EndComing> p_21803_, Level p_21804_) {
             super(p_21803_, p_21804_);
@@ -74,29 +69,107 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
             }
             return false;
         }
-
-        public void hurtaTTACK(){
-            int time = 8;
-            if (isHasEffectEnd()) {
-                time = 5;
+        private boolean isSky (){
+            if (!isEvil()) {
+                return false;
             }
+            if (this.getTarget() instanceof LivingEntity living) {
+                double targetYPos = living.getEyePosition().y;
+                double myYPos = this.position().y;
+                return targetYPos - myYPos > 1;
+            }
+            return false;
+        }
+        private void addSpeed (){
+            if (this.getOwner()!= null &&this.getOwner() instanceof Player player) {
+                if (!isEvil()) {
+                    return;
+                }
 
+                if (!Handler.has(player, InitItems.RageStone_.asItem())) {
+                    return;
+                }
+                CompoundTag compoundTag = this.getPersistentData();
+                int now = compoundTag.getIntOr(attackSpeedAdd, 0);
+                if (now < maxAttackDownTime) {
+                    compoundTag.putInt(attackSpeedAdd, now + 2);
+                }
+            }
+        }
+        private int downAttackCooldown(){
+            CompoundTag compoundTag = this.getPersistentData();
+            int now = compoundTag.getIntOr(attackSpeedAdd,0);
+            now /= 10;
+            return now;
+        }
+        private void tickAttack(){
+            CompoundTag compoundTag = this.getPersistentData();
+            int now = compoundTag.getIntOr(attackSpeedAdd,0);
+            if (now > 0 && !level().isClientSide() && tickCount % 20 == 1) {
+                compoundTag.putInt(attackSpeedAdd,now - 1);
+            }
+        }
+        private boolean isEvil(){
+            if (getOwner() instanceof Player player) {
+                return EvilMother.getSanValueBase(player) - EvilMother.getSanValue(player) >= 10;
+            }
+            return false;
+        }
+        public void attack(){
+            int time = 10;
+            if (isHasEffectEnd()) {
+                time = 8;
+            }
+            time -= downAttackCooldown();
+
+            if (time < 1) {
+                time = 1;
+            }
             if (this.getOwner() instanceof Player player && this.getTarget() instanceof LivingEntity living) {
-                if (player.position().distanceTo(living.position()) < 45) {
+                if (player.position().distanceTo(living.position()) < 30) {
+
                     if (this.tickCount % time ==1) {
                         AttackEndComing attackEndComing = new AttackEndComing(Entitys.AttackEndComing_.get(), living.level());
                         attackEndComing.setPos(this.position().add(0, 0, 0));
                         attackEndComing.setOwner(player);
                         attackEndComing.setTarget(living);
                         attackEndComing.damages += ((float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.1F));
+                        if (Handler.has(player, InitItems.WindRepeater_.asItem())) {
+                            if (!isSky()) {
+                                return;
+                            }else {
+                                attackEndComing.windChance = 33;
+                            }
+                        }
+                        if (Handler.has(player, InitItems.RageStone_.asItem())) {
+                            CompoundTag compoundTag = this.getPersistentData();
+                            //50
+                            int now = compoundTag.getIntOr(attackSpeedAdd, 0);
+                            if (now < 1) {
+                                now = 1;
+                            }
+                            float offset = now / 20f;
+                            RandomSource randomSource = this.random;
+                            attackEndComing.offset = new Vec3(
+                                    Mth.nextFloat(randomSource,-offset,offset),
+                                    Mth.nextFloat(randomSource,-offset,offset),
+                                    Mth.nextFloat(randomSource,-offset,offset)
+                                    );
+                            float timeDown = now / 25f;
+                            attackEndComing.time /= timeDown;
+                        }
+
                         this.level().addFreshEntity(attackEndComing);
-                        if (this.level() instanceof ServerLevel level) {
+                        addSpeed();
+
+                        if (this.level() instanceof ServerLevel) {
                             addPart(3,Vec3.ZERO);
                         }
                     }
                 }
             }
         }
+
         public void addPart(float size,Vec3 speed){
             if (!(this.level() instanceof ServerLevel level)){
                 return;
@@ -123,10 +196,11 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
         @Override
         public void move(MoverType type, Vec3 movement) {
         }
+
         @Override
         public void tick() {
             super.tick();
-
+            tickAttack();
             this.setPos(
                     this.getX() + this.getDeltaMovement().x,
                     this.getY() + this.getDeltaMovement().y,
@@ -206,7 +280,7 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
                 }
             }
             clear();
-            hurtaTTACK();
+            attack();
         }
 
         private void clear(){
