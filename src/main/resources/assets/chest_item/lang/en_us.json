@@ -1610,6 +1610,11 @@
   "item.chest_item.wind_repeater.string.1": "The attack that corrupts blood spirits may come with a storm",
   "item.chest_item.wind_repeater.string.2": "Corrupt blood spirits can only attack targets in the sky",
 
+  "item.chest_item.judgment": "Judgment",
+  "item.chest_item.judgment.string.1": "The blood droplets that corrupt the blood spirit move above the target",
+  "item.chest_item.judgment.string.2": "And the speed of the target will be reduced by 60%",
+  "item.chest_item.judgment.string.3": "If the target's immunity is slow, the damage caused by releasing blood droplets doubles",
+
   "chest_item.book.test.main": "通往深渊的门户",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",
   "chest_item.book.test.3": "看看箱子里有什么？",

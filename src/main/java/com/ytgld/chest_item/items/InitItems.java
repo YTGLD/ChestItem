@@ -313,6 +313,9 @@ public class InitItems {
     public static final DeferredItem<Item> WindRepeater_ = register("wind_repeater",
             (Identifier)-> new WindRepeater(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
+    public static final DeferredItem<Item> Judgment_ = register("judgment",
+            (Identifier)-> new Judgment(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
 
 
     public static final DeferredItem<Item> EmperorCup_ = register("emperor_cup",
@@ -478,6 +481,7 @@ public class InitItems {
                     output.accept(InitItems.StrangeJewelry_);
                     output.accept(InitItems.RageStone_);
                     output.accept(InitItems.WindRepeater_);
+                    output.accept(InitItems.Judgment_);
 
 
 

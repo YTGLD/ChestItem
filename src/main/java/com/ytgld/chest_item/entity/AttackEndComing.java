@@ -180,8 +180,8 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
                 this.getY() + this.getDeltaMovement().y,
                 this.getZ() + this.getDeltaMovement().z
         );
-
         this.tickCount++;
+
 
 
 
@@ -261,8 +261,6 @@ public class AttackEndComing extends ThrowableItemProjectile implements TrailEnt
             this.discard();
         }
         this.setNoGravity(true);
-
-
         attack();
     }
     private void findNewTarget() {

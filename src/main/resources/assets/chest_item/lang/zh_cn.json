@@ -1664,6 +1664,10 @@
   "item.chest_item.wind_repeater.string.1": "腐化血灵的攻击有可能附带风暴",
   "item.chest_item.wind_repeater.string.2": "腐化血灵只能攻击天上的目标",
 
+  "item.chest_item.judgment": "审判",
+  "item.chest_item.judgment.string.1": "腐化血灵的血珠移动到目标上方",
+  "item.chest_item.judgment.string.2": "并且目标的速度将降低60%",
+  "item.chest_item.judgment.string.3": "若目标免疫缓慢，则释放血珠的伤害加倍",
   "chest_item.book.test.main": "通往深渊的“门户”",
   "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
   "chest_item.book.test.2": "贡献者：秋季",

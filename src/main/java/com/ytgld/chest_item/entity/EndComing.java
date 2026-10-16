@@ -8,11 +8,15 @@ import com.ytgld.chest_item.other.DataReg;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.renderer.particle.has_opt.ColorOption;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -69,6 +73,20 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
             }
             return false;
         }
+        private boolean hasJudgment(){
+            if (!isEvil()) {
+                return false;
+            }
+            if (this.getOwner()!= null &&this.getOwner() instanceof Player player){
+                return Handler.has(player, InitItems.Judgment_.asItem());
+            }
+            return false;
+        }
+        private boolean invEffect(LivingEntity living, Holder<MobEffect> effect){
+            return !living.addEffect(new MobEffectInstance(effect,100,3));
+        }
+
+
         private boolean isSky (){
             if (!isEvil()) {
                 return false;
@@ -127,10 +145,18 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
             }
             if (this.getOwner() instanceof Player player && this.getTarget() instanceof LivingEntity living) {
                 if (player.position().distanceTo(living.position()) < 30) {
+                    RandomSource randomSource = this.random;
 
                     if (this.tickCount % time ==1) {
                         AttackEndComing attackEndComing = new AttackEndComing(Entitys.AttackEndComing_.get(), living.level());
-                        attackEndComing.setPos(this.position().add(0, 0, 0));
+                        if (hasJudgment()) {
+                            attackEndComing.setPos(living.getEyePosition().add(Mth.nextFloat(randomSource,-5,5), Mth.nextFloat(randomSource,2,4), Mth.nextFloat(randomSource,-5,5)));
+                            if (invEffect(living, MobEffects.SLOWNESS)) {
+                                attackEndComing.damages *= 2;
+                            }
+                        }else {
+                            attackEndComing.setPos(this.position().add(0, 0, 0));
+                        }
                         attackEndComing.setOwner(player);
                         attackEndComing.setTarget(living);
                         attackEndComing.damages += ((float) (player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.1F));
@@ -149,7 +175,6 @@ import static com.ytgld.chest_item.items.other.end.TheEndIsComing.chestHasEndCom
                                 now = 1;
                             }
                             float offset = now / 20f;
-                            RandomSource randomSource = this.random;
                             attackEndComing.offset = new Vec3(
                                     Mth.nextFloat(randomSource,-offset,offset),
                                     Mth.nextFloat(randomSource,-offset,offset),
