@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static com.mojang.renderpearl.api.pipeline.BlendFactor.*;
+import static com.ytgld.chest_item.utils.RenderObjects.vColorTargetState;
 import static net.minecraft.client.renderer.RenderPipelines.*;
 
 public abstract class MRender {
@@ -75,6 +76,29 @@ public abstract class MRender {
                             ZERO))).
                     withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,"pipeline/vows_glow")).build());
 
+
+    private static final RenderPipeline renderPipeline = RenderPipeline.builder(
+                    RenderPipeline.builder(RenderPipeline.builder(MATRICES_FOG_LIGHT_DIR_SNIPPET).
+                                    withVertexShader(
+                                            "core/item")
+                                    .withFragmentShader("core/item")
+                                    .withBindGroupLayout(BindGroupLayouts.SAMPLER0_SAMPLER1_SAMPLER2)
+                                    .withCull(false)
+                                    .withVertexBinding(0, DefaultVertexFormat.ENTITY).withPrimitiveTopology(PrimitiveTopology.QUADS).
+                                    withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, true)).withColorTargetState(vColorTargetState).buildSnippet())
+                            .withLocation("pipeline/item_gaze")
+                            .buildSnippet()).withLocation("pipeline/item_gaze")
+            .withShaderDefine("ALPHA_CUTOUT", 0.1F).build();
+
+    public static final Function<Identifier, RenderType> renderTypeFunction = Util.memoize((texture) -> {
+        RenderSetup state = RenderSetup.builder(renderPipeline)
+                .withTexture("Sampler0", texture)
+                .useLightmap()
+                .useOverlay()
+                .affectsCrumbling()
+                .createRenderSetup();
+        return RenderType.create("chest_vows_item", state);
+    });
 
     public static RenderType endBlack =RenderType.create(
                 "end_gateway",

@@ -38,7 +38,9 @@ import com.ytgld.chest_item.tip.SkillEvent;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import com.ytgld.chest_item.utils.UtilEvent;
 import com.ytgld.chest_item.utils.network.FatalSwordRenderPacket;
+import com.ytgld.chest_item.utils.network.StarRenderPacket;
 import com.ytgld.chest_item.utils.network.SwordRenderPacket;
+import com.ytgld.chest_item.utils.network.WrathHeavenRenderPacket;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -139,6 +141,8 @@ public class Chestitem {
         UseCuriosHandler.register(evt.registrar("1.0"));
         MysteriousMetal.register(evt);
         OppressionHandler.register(evt);
+        WrathHeavenRenderPacket.registerPayloads(evt);
+        StarRenderPacket.registerPayloads(evt);
 
 
         SwordRenderPacket.registerPayloads(evt);
@@ -169,6 +173,7 @@ public class Chestitem {
             event.registerEntityRenderer(Entitys.EvilMotherSpirit_.get(), EvilMotherSpiritRender::new);
             event.registerEntityRenderer(Entitys.ChaosCube_.get(), ChaosCubeRender::new);
             event.registerEntityRenderer(Entitys.Reactor_.get(), ReactorRender::new);
+            event.registerEntityRenderer(Entitys.Tombstone_.get(), TombstoneRender::new);
         }
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent evt) {

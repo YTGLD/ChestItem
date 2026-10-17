@@ -306,7 +306,6 @@ public class EventMain {
         WallowAxe.damage(event);
         WarGodCommand.notDie(event);
         Triangle.hurtSize(event);
-        Test.event(event);
 
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);

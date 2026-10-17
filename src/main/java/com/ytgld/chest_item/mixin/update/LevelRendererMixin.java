@@ -4,6 +4,8 @@ package com.ytgld.chest_item.mixin.update;
 import com.mojang.blaze3d.framegraph.FrameGraphBuilder;
 import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
 import com.ytgld.chest_item.HandlerClient;
+import com.ytgld.chest_item.renderer.light.LightFrameGraph;
+import com.ytgld.chest_item.renderer.light.LightRenders;
 import com.ytgld.chest_item.renderer.warp.ChestItemFrameGraph;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LevelTargetBundle;
@@ -35,6 +37,10 @@ public abstract class LevelRendererMixin {
             ChestItemFrameGraph.addPostPass(frame, targets);
             HandlerClient.setShowRenderWarped(false);
         }
+        if (HandlerClient.isShowRenderLight()) {
+            LightFrameGraph.addPostPass(frame, targets);
+            HandlerClient.setShowRenderLight(false);
+        }
     }
     @Inject(
             method = "submitFeatures",
@@ -44,6 +50,7 @@ public abstract class LevelRendererMixin {
             LevelRenderState levelRenderState, SubmitNodeCollector submitNodeCollector, boolean renderOutline, CallbackInfo ci
     ) {
         ChestItemFrameGraph.clear();
+        LightRenders.clearLights();
     }
     @Inject(
             method = "submitFeatures",
@@ -54,6 +61,12 @@ public abstract class LevelRendererMixin {
     ) {
         CameraRenderState camera = levelRenderState.cameraRenderState;
         ChestItemFrameGraph.upload(
+                camera.pos.x,
+                camera.pos.y,
+                camera.pos.z,
+                camera.viewRotationMatrix
+        );
+        LightRenders.uploadLights(
                 camera.pos.x,
                 camera.pos.y,
                 camera.pos.z,

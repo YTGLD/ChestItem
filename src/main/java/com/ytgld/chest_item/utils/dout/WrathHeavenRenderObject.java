@@ -61,15 +61,6 @@ public class WrathHeavenRenderObject extends WorldRenderObject {
                 position.y - cameraPos.y,
                 position.z - cameraPos.z
         );
-
-        if (age % 2 == 1 && newAlpha > 0) {
-            StarRenderObject starRenderObject = new StarRenderObject(
-                    position.add(Math.cos(age / 2f) * size / 1.5f,0,Math.sin(age / 2f) * size / 1.5f), new Vec3(source.nextFloat() * 360, source.nextFloat() * 360, source.nextFloat() * 360),
-                    1, hasDown
-            );
-            starRenderObject.color = color;
-            RenderObjectManager.add(starRenderObject);
-        }
         renderText(poseStack, collector, partialTick);
         doRender(poseStack, collector, partialTick);
         rednerStar(poseStack, collector, partialTick);
@@ -80,20 +71,7 @@ public class WrathHeavenRenderObject extends WorldRenderObject {
         poseStack.popPose();
     }
     private void renderText(PoseStack poseStack, SubmitNodeCollector collector, float partialTick) {
-        poseStack.pushPose();
-        poseStack.translate(0,8,0);
-        renderText(poseStack, collector, partialTick,Identifier.fromNamespaceAndPath(
-                Chestitem.MODID,"textures/render_object/text_2.png"
-        ));
-        poseStack.popPose();
 
-
-        poseStack.pushPose();
-        poseStack.translate(0,2,0);
-        renderText(poseStack, collector, partialTick,Identifier.fromNamespaceAndPath(
-                Chestitem.MODID,"textures/render_object/text_4.png"
-        ));
-        poseStack.popPose();
     }
     private void renderText(PoseStack poseStack, SubmitNodeCollector collector, float partialTick,Identifier identifier){
         if (!hasDown) {

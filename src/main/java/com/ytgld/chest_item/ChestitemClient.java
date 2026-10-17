@@ -11,6 +11,7 @@ import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.book.CIBookScreen;
 import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
+import com.ytgld.chest_item.renderer.light.LightRenders;
 import com.ytgld.chest_item.renderer.model.BigGlowingModel;
 import com.ytgld.chest_item.renderer.model.CIItemFeatureRenderer;
 import com.ytgld.chest_item.renderer.model.WarpModel;
@@ -178,6 +179,7 @@ public class ChestitemClient{
     @SubscribeEvent
     public static void registerPipelines(RegisterRenderPipelinesEvent event) {
         ChestItemFrameGraph.registerPipelines(event);
+        LightRenders.registerPipelines(event);
     }
     @SubscribeEvent
     public static void event(RecipesReceivedEvent event) {

@@ -317,6 +317,9 @@ public class InitItems {
             (Identifier)-> new Judgment(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
 
+    public static final DeferredItem<Item> Tombstone_client = register("tombstone_client",
+            (Identifier)-> new Item(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
 
     public static final DeferredItem<Item> EmperorCup_ = register("emperor_cup",
             (Identifier)-> new EmperorCup(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));

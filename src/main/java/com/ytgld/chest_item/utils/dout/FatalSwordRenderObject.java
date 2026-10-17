@@ -50,7 +50,6 @@ public class FatalSwordRenderObject extends WorldRenderObject {
 
     @Override
     public void render(PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera, float partialTick) {
-        HandlerClient.setShowRenderWarped(true);
         Vec3 cameraPos = camera.pos;
         poseStack.pushPose();
         poseStack.translate(
@@ -59,29 +58,22 @@ public class FatalSwordRenderObject extends WorldRenderObject {
                 position.z - cameraPos.z
         );
 
-        int as = (color >> 24) & 0xFF;
         int rs = (color >> 16) & 0xFF;
         int gs = (color >> 8) & 0xFF;
         int bs = color & 0xFF;
-        float value = maxTime - age;
-
-        ChestItemFrameGraph.putWarpedVec3(new ChestItemFrameGraph.WarpedVec3(
-                this.position,
-                value / 10f,
-                rs,
-                gs,
-                bs
-        ));
-
+        float offset = Math.min(5,age);
+        int alpha = (int) (( 5 -offset) * 50f);
+        if (alpha < 10) {
+            alpha = 0;
+        }
         Identifier identifier =  Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/fatal.png");
         render(poseStack,collector,3.35f, RenderObjects.renderTypeFunctionLiveOutline
-                .apply(identifier),Light.ARGB.color(newAlpha * 4,rs,gs,bs));
+                .apply(identifier),Light.ARGB.color(alpha,rs,gs,bs),5 - offset);
 
         poseStack.popPose();
     }
 
-    private void render(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, float size, RenderType renderType, int color){
-        float offset = 5;
+    private void render(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, float size, RenderType renderType, int color,float offset){
         poseStack.pushPose();
         poseStack.rotate(Axis.XN.rotation((float) pitch.x));
         poseStack.rotate(Axis.YN.rotation((float) pitch.y));

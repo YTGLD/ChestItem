@@ -82,7 +82,7 @@ public class GazeRender {
 
     private static void render(PoseStack poseStack, SubmitNodeCollector submitNodeCollector,float size, Identifier identifier,int color){
         poseStack.pushPose();
-        submitNodeCollector.submitCustomGeometry(poseStack, renderTypeFunction.apply(identifier),
+        submitNodeCollector.submitCustomGeometry(poseStack, MRender.renderTypeFunction.apply(identifier),
                 (pose, vc) -> {
                     Matrix4f mat = pose.pose();
                     vc.addVertex(mat, -size, -size, 0)
@@ -116,26 +116,4 @@ public class GazeRender {
         poseStack.popPose();
     }
 
-    private static final RenderPipeline renderPipeline = RenderPipeline.builder(
-            RenderPipeline.builder(RenderPipeline.builder(MATRICES_FOG_LIGHT_DIR_SNIPPET).
-                            withVertexShader(
-                                    "core/item")
-                            .withFragmentShader("core/item")
-                            .withBindGroupLayout(BindGroupLayouts.SAMPLER0_SAMPLER1_SAMPLER2)
-                            .withCull(false)
-                            .withVertexBinding(0, DefaultVertexFormat.ENTITY).withPrimitiveTopology(PrimitiveTopology.QUADS).
-                            withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, true)).withColorTargetState(vColorTargetState).buildSnippet())
-                    .withLocation("pipeline/item_gaze")
-                    .buildSnippet()).withLocation("pipeline/item_gaze")
-            .withShaderDefine("ALPHA_CUTOUT", 0.1F).build();
-
-    public static final Function<Identifier, RenderType> renderTypeFunction = Util.memoize((texture) -> {
-        RenderSetup state = RenderSetup.builder(renderPipeline)
-                .withTexture("Sampler0", texture)
-                .useLightmap()
-                .useOverlay()
-                .affectsCrumbling()
-                .createRenderSetup();
-        return RenderType.create("vows_item", state);
-    });
 }

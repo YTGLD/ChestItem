@@ -15,9 +15,20 @@ public class HandlerClient {
 
 
     private static boolean showRenderWarped = false;
+    private static boolean showRenderLight = false;
+    public static boolean isShowRenderLight() {
 
+        return showRenderLight;
+    }
     public static boolean isShowRenderWarped() {
         return showRenderWarped;
+    }
+
+    public static void setShowRenderLight(boolean showRenderLight) {
+        if (!ConfigC.config.Render.get()) {
+            return;
+        }
+        HandlerClient.showRenderLight = showRenderLight;
     }
 
     public static void setShowRenderWarped(boolean showRenderWarped) {
@@ -78,5 +89,6 @@ public class HandlerClient {
                     .setColor(r, g, b, alpha).setUv(0, 1);
         }
     }
+
 
 }

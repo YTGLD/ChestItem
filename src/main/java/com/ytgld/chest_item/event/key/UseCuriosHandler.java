@@ -1,9 +1,14 @@
 package com.ytgld.chest_item.event.key;
 
+import com.ytgld.chest_item.entity.Tombstone;
+import com.ytgld.chest_item.entity.Entitys;
+import com.ytgld.chest_item.items.Test;
 import com.ytgld.chest_item.items.black.celestial.Blood;
 import com.ytgld.chest_item.items.other.Agreement;
 import com.ytgld.chest_item.items.other.end.TheEndIsComing;
+import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.tip.an_element.elements.PlagueSpores;
+import com.ytgld.chest_item.utils.AddUtil;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -23,6 +28,7 @@ public class UseCuriosHandler {
                 PlagueSpores.useSkill(player);
                 Blood.onKeyIsDown(player);
                 Agreement.onKeyIsDown(player);
+                Test.event(player);
             });
         }
     }

@@ -42,6 +42,9 @@ public class Entitys {
     public static final DeferredHolder<EntityType<?>, EntityType<Reactor>> Reactor_ = REGISTRY.register("reactor", () ->
             EntityType.Builder.of(Reactor::new, MobCategory.MISC).sized(1, 1).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
                     Identifier.fromNamespaceAndPath(Chestitem.MODID, "reactor"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<Tombstone>> Tombstone_ = REGISTRY.register("tombstone", () ->
+            EntityType.Builder.of(Tombstone::new, MobCategory.MISC).sized(2.5f, 3.75f).clientTrackingRange(50).build(ResourceKey.create(Registries.ENTITY_TYPE,
+                    Identifier.fromNamespaceAndPath(Chestitem.MODID, "tombstone"))));
 
 
     public static final DeferredHolder<EntityType<?>, EntityType<ChaosCube>> ChaosCube_ = REGISTRY.register("chaos_cube", () ->
@@ -54,5 +57,7 @@ public class Entitys {
         event.put(Entitys.LaserColumn_.get(), Zombie.createAttributes().build());
         event.put(Entitys.ChaosCube_.get(), Zombie.createAttributes().build());
         event.put(Entitys.Reactor_.get(), IronGolem.createAttributes().build());
+
+        event.put(Entitys.Tombstone_.get(), Tombstone.createAttributes().build());
     }
 }
