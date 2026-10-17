@@ -56,7 +56,7 @@ public class AddUtil {
         sendToNearbyPlayers(living, packet, 64.0);
     }
 
-    public static void addScratchEffect(LivingEntity living,Vec3 pos, int color,int size) {
+    public static void addScratchEffect(LivingEntity living,Vec3 pos, int color,int endColor,int size) {
         RandomSource random = living.getRandom();
         float rotationX =  Mth.nextInt(random, -360, 360);
         float rotationY = Mth.nextInt(random, -360, 360);
@@ -64,7 +64,7 @@ public class AddUtil {
         ScratchPacket packet = new ScratchPacket(
                 pos.x, pos.y, pos.z,
                 rotationX, rotationY, rotationZ,
-                color, size
+                color, size,endColor
         );
         sendToNearbyPlayers(living, packet, 64.0);
     }

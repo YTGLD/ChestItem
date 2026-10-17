@@ -96,8 +96,8 @@ public final class LightRenders {
                 UniformType.UNIFORM_BUFFER).build();
         COLORED_LIGHT_POST = RenderPipeline.builder().withLocation(Identifier.fromNamespaceAndPath(Chestitem.MODID,
                 "pipeline/colored_light_post")).withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                "core/light/screenquad")).withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                "core/light/colored_light_post")).withBindGroupLayout(COLORED_LIGHTS)
+                "light/screenquad")).withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                "light/colored_light_post")).withBindGroupLayout(COLORED_LIGHTS)
                 .withColorTargetState(ColorTargetState.DEFAULT)
                 .withPrimitiveTopology(PrimitiveTopology.TRIANGLES).build();
         

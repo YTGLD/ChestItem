@@ -39,9 +39,6 @@ public class UnstableSpheresRender extends EntityRenderer<UnstableSpheres, Unsta
     }
     @Override
     public void submit(UnstableSpheresState renderState, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
-        HandlerClient.showOutline = true;
-        HandlerClient.doPass = true;
-
         UnstableSpheres entity = renderState.entity;
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
         double y = Mth.lerp(renderState.partialTick, entity.yOld, entity.getY());

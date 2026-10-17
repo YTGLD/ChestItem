@@ -65,10 +65,10 @@ public class LevelRendererMixin {
     private void blitEntityOutline(CallbackInfo ci) {
         if (Minecraft.getInstance().gameRenderer.mainRenderTarget().getDepthTextureView() != null) {
             if (Minecraft.getInstance().gameRenderer.mainRenderTarget().getColorTextureView() != null) {
-                if (HandlerClient.showOutline) {
+                if (HandlerClient.isShowOutline()) {
                     chest26_3$blitAndBlendToTexture(Minecraft.getInstance().gameRenderer.mainRenderTarget().getColorTextureView(),
                             Minecraft.getInstance().gameRenderer.mainRenderTarget().getDepthTextureView());
-                    HandlerClient.showOutline = false;
+                    HandlerClient.setShowOutline(false);
                 }
 
             }
@@ -118,9 +118,9 @@ public class LevelRendererMixin {
         PostChain postchain1 = Minecraft.getInstance().getShaderManager().getPostChain(Chestitem.POST_BLACK,
                 Set.of(BlackFramebufferSets.MAIN, BlackFramebufferSets.BLACK));
         if (postchain1 != null) {
-            if (HandlerClient.doPass) {
+            if (HandlerClient.isDoPass()) {
                 postchain1.addToFrame(frame, i, j, this.chest26_3$blackFramebufferSets);
-                HandlerClient.doPass = false;
+                HandlerClient.setDoPass(false);
             }
         }
 

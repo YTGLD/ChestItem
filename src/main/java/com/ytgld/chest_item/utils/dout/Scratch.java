@@ -17,7 +17,8 @@ import org.joml.Matrix4f;
 public class Scratch extends WorldRenderObject {
     public Vec3 pitch;
     public float size = 1;
-    public int color = 0xffffffff;
+    public int startColor = 0xffffffff;
+    public int endColor = 0xffffffff;
     public float xx = 1f;
 
     public static final int maxAge = 60;
@@ -42,6 +43,33 @@ public class Scratch extends WorldRenderObject {
         newAlpha = maxTime - age;
         newAlpha = Math.max(0,newAlpha);
         xx += 0.05f;
+        int as = (startColor >> 24) & 0xFF;
+        int rs = (startColor >> 16) & 0xFF;
+        int gs = (startColor >> 8) & 0xFF;
+        int bs = (startColor) & 0xFF;
+
+        int ae = (endColor >> 24) & 0xFF;
+        int re = (endColor >> 16) & 0xFF;
+        int ge = (endColor >> 8) & 0xFF;
+        int be = (endColor) & 0xFF;
+
+        startColor = Light.ARGB.color(
+                AToB(as,ae,10),
+                AToB(rs,re,10),
+                AToB(gs,ge,10),
+                AToB(bs,be,10)
+        );
+
+    }
+    private int AToB(int a ,int b,int add){
+        if (a < b) {
+            a += add;
+            a = Math.min(b,a);
+        }else {
+            a -= add;
+            a = Math.max(b,a);
+        }
+        return a;
     }
 
     @Override
@@ -53,7 +81,8 @@ public class Scratch extends WorldRenderObject {
                 position.y - cameraPos.y,
                 position.z - cameraPos.z
         );
-        render(poseStack,collector,color,size);
+        render(poseStack,collector, startColor, size);
+
         poseStack.popPose();
     }
 
@@ -69,8 +98,11 @@ public class Scratch extends WorldRenderObject {
         int alpha = (int) (( maxSize - offset) * (255 / maxSize));
         alpha = Math.max(0,alpha);
         Identifier identifier =  Identifier.fromNamespaceAndPath(Chestitem.MODID,"textures/render_object/fatal.png");
+
         render(poseStack,submitNodeCollector,2, RenderObjects.renderTypeFunctionLiveOutline
-                .apply(identifier), Light.ARGB.color(alpha,rs,gs,bs),maxSize - offset,xx);
+                .apply(identifier),
+                Light.ARGB.color(alpha,rs,gs,bs),
+                maxSize - offset,xx);
 
 
     }

@@ -10,34 +10,24 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public class HandlerClient {
-    public static boolean showOutline = false;
-    public static boolean doPass = false;
+    private static boolean showOutline = false;
+    private static boolean doPass = false;
 
 
     private static boolean showRenderWarped = false;
     private static boolean showRenderLight = false;
-    public static boolean isShowRenderLight() {
+    private static boolean showRenderVisual = false;
 
-        return showRenderLight;
-    }
-    public static boolean isShowRenderWarped() {
-        return showRenderWarped;
+    public static boolean isShowOutline() {
+        return showOutline;
     }
 
-    public static void setShowRenderLight(boolean showRenderLight) {
+    public static void setShowOutline(boolean showOutline) {
         if (!ConfigC.config.Render.get()) {
             return;
         }
-        HandlerClient.showRenderLight = showRenderLight;
+        HandlerClient.showOutline = showOutline;
     }
-
-    public static void setShowRenderWarped(boolean showRenderWarped) {
-        if (!ConfigC.config.Render.get()) {
-            return;
-        }
-        HandlerClient.showRenderWarped = showRenderWarped;
-    }
-
     public static void addTrail(PoseStack.Pose matrices,
                           TrailEntity trailEntity,
                           Entity entity,
@@ -90,5 +80,47 @@ public class HandlerClient {
         }
     }
 
+    public static boolean isShowRenderLight() {
+        return showRenderLight;
+    }
+    public static boolean isShowRenderWarped() {
+        return showRenderWarped;
+    }
 
+    public static void setShowRenderLight(boolean showRenderLight) {
+        if (!ConfigC.config.Render.get()) {
+            return;
+        }
+        HandlerClient.showRenderLight = showRenderLight;
+    }
+
+    public static void setShowRenderWarped(boolean showRenderWarped) {
+        if (!ConfigC.config.Render.get()) {
+            return;
+        }
+        HandlerClient.showRenderWarped = showRenderWarped;
+    }
+
+    public static boolean isDoPass() {
+        return doPass;
+    }
+
+    public static void setDoPass(boolean doPass) {
+        if (!ConfigC.config.Render.get()) {
+            return;
+        }
+        HandlerClient.doPass = doPass;
+    }
+
+    public static boolean isShowRenderVisual() {
+
+        return showRenderVisual;
+    }
+
+    public static void setShowRenderVisual(boolean showRenderVisual) {
+        if (!ConfigC.config.Render.get()) {
+            return;
+        }
+        HandlerClient.showRenderVisual = showRenderVisual;
+    }
 }

@@ -17,7 +17,7 @@ import org.joml.Vector3f;
 
 public record ScratchPacket (double x, double y, double z,
                              float rotationX, float rotationY, float rotationZ,
-                             int color, int size)
+                             int color, int size,int colorEnd)
         implements CIPacketPayload {
 
     public static final Type<ScratchPacket> TYPE =
@@ -54,6 +54,9 @@ public record ScratchPacket (double x, double y, double z,
             ByteBufCodecs.INT,
             ScratchPacket::size,
 
+            ByteBufCodecs.INT,
+            ScratchPacket::colorEnd,
+
             ScratchPacket::new
     );
 
@@ -76,7 +79,8 @@ public record ScratchPacket (double x, double y, double z,
                     packet.size());
 
             sword.vector3f = new Vector3f(0, 0, 0);
-            sword.color = packet.color();
+            sword.startColor = packet.color();
+            sword.endColor = packet.colorEnd();
             RenderObjectManager.add(sword);
         });
     }

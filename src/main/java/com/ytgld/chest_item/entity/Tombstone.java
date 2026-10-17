@@ -29,12 +29,14 @@ public class Tombstone extends TamableAnimal {
     public int lastFace = 0;
     private final int time = 400;
     public boolean attack = false;
+    public int lastTick = 0;
     public Tombstone(EntityType<? extends Tombstone> type, Level level) {
         super(type, level);
     }
 
     @Override
     public void tick() {
+        lastTick = tickCount;
         super.tick();
         if (face <= 1) {
             face = this.getId();
@@ -68,7 +70,8 @@ public class Tombstone extends TamableAnimal {
                                 Mth.nextFloat(random,0,offSet/ 2f),
                                 Mth.nextFloat(random,-offSet,offSet)
                         )),
-                        Light.ARGB.color(255,235,50,245),
+                        Light.ARGB.color(255,240,50,255),
+                        Light.ARGB.color(255,200,0,0),
                         16
                 );
 

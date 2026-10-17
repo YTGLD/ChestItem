@@ -51,9 +51,6 @@ public class WrathHeavenRenderObject extends WorldRenderObject {
 
     @Override
     public void render(PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera, float partialTick) {
-        HandlerClient.showOutline = true;
-        HandlerClient.doPass = true;
-
         Vec3 cameraPos = camera.pos;
         poseStack.pushPose();
         poseStack.translate(

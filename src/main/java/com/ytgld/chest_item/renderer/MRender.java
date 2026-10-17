@@ -46,7 +46,8 @@ public abstract class MRender {
     });
     public static RenderType colorOutline = RenderType.create(
             "lightning", RenderSetup.builder(RenderPipeline.builder(MATRICES_FOG_SNIPPET).withLocation("pipeline/lightning")
-                            .withVertexShader("core/rendertype_lightning").withFragmentShader("core/rendertype_lightning")
+                            .withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/rendertype_lightning"))
+                            .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/rendertype_lightning"))
                             .withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
                             .withPrimitiveTopology(PrimitiveTopology.QUADS)
                             .withDepthStencilState(DepthStencilState.DEFAULT)
