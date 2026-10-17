@@ -37,10 +37,7 @@ import com.ytgld.chest_item.sounds.Sounds;
 import com.ytgld.chest_item.tip.SkillEvent;
 import com.ytgld.chest_item.tip.an_element.SkillTooltip;
 import com.ytgld.chest_item.utils.UtilEvent;
-import com.ytgld.chest_item.utils.network.FatalSwordRenderPacket;
-import com.ytgld.chest_item.utils.network.StarRenderPacket;
-import com.ytgld.chest_item.utils.network.SwordRenderPacket;
-import com.ytgld.chest_item.utils.network.WrathHeavenRenderPacket;
+import com.ytgld.chest_item.utils.network.*;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -143,6 +140,7 @@ public class Chestitem {
         OppressionHandler.register(evt);
         WrathHeavenRenderPacket.registerPayloads(evt);
         StarRenderPacket.registerPayloads(evt);
+        ScratchPacket.registerPayloads(evt);
 
 
         SwordRenderPacket.registerPayloads(evt);

@@ -316,6 +316,9 @@ public class InitItems {
     public static final DeferredItem<Item> Judgment_ = register("judgment",
             (Identifier)-> new Judgment(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
+    public static final DeferredItem<Item> BurialDemonStet_ = register("burial_demon_stet",
+            (Identifier)-> new BurialDemonStet(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
 
     public static final DeferredItem<Item> Tombstone_client = register("tombstone_client",
             (Identifier)-> new Item(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
@@ -443,6 +446,7 @@ public class InitItems {
 //                    output.accept(InitItems.EmperorCup_);
 //                    output.accept(InitItems.GreatToken_);
 //                    output.accept(InitItems.ThreeRealms_);
+                    output.accept(InitItems.BurialDemonStet_);
 
 
                     output.accept(InitItems.DevilCoins_);

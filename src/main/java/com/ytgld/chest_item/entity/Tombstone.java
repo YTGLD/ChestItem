@@ -7,6 +7,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
@@ -27,6 +28,7 @@ public class Tombstone extends TamableAnimal {
     public int face = 0;
     public int lastFace = 0;
     private final int time = 400;
+    public boolean attack = false;
     public Tombstone(EntityType<? extends Tombstone> type, Level level) {
         super(type, level);
     }
@@ -59,11 +61,17 @@ public class Tombstone extends TamableAnimal {
                 living.hurt(living.damageSources().playerAttack(player), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                 living.setInvulnerableTime(0);
                 living.damageCooldownTime = 0;
-                AddUtil.addFatalEffect(
-                        living,
-                        Light.ARGB.color(255,235,100,245),
-                        24
+                float offSet = 3f;
+                AddUtil.addScratchEffect(
+                        living,living.getEyePosition().add(new Vec3(
+                                Mth.nextFloat(random,-offSet,offSet),
+                                Mth.nextFloat(random,0,offSet/ 2f),
+                                Mth.nextFloat(random,-offSet,offSet)
+                        )),
+                        Light.ARGB.color(255,235,50,245),
+                        16
                 );
+
             }
         }
     }

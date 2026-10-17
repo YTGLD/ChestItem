@@ -1664,6 +1664,9 @@
   "item.chest_item.wind_repeater.string.1": "腐化血灵的攻击有可能附带风暴",
   "item.chest_item.wind_repeater.string.2": "腐化血灵只能攻击天上的目标",
 
+  "item.chest_item.burial_demon_stet": "葬魔碑",
+  "item.chest_item.burial_demon_stet.string.1": "按下技能键释放“墓碑三绝阵”",
+
   "item.chest_item.judgment": "审判",
   "item.chest_item.judgment.string.1": "腐化血灵的血珠移动到目标上方",
   "item.chest_item.judgment.string.2": "并且目标的速度将降低60%",

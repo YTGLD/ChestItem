@@ -3,6 +3,7 @@ package com.ytgld.chest_item.event.key;
 import com.ytgld.chest_item.entity.Tombstone;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.items.Test;
+import com.ytgld.chest_item.items.black.BurialDemonStet;
 import com.ytgld.chest_item.items.black.celestial.Blood;
 import com.ytgld.chest_item.items.other.Agreement;
 import com.ytgld.chest_item.items.other.end.TheEndIsComing;
@@ -29,6 +30,7 @@ public class UseCuriosHandler {
                 Blood.onKeyIsDown(player);
                 Agreement.onKeyIsDown(player);
                 Test.event(player);
+                BurialDemonStet.event(player);
             });
         }
     }

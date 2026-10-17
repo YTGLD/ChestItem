@@ -13,6 +13,9 @@ public class Test extends ItemBlackShadow implements SkillItem {
         super(properties);
     }
     public static void event(Player player){
+        if (!Handler.has(player, InitItems.Test_.asItem())) {
+            return;
+        }
         int count = 3;
         double radius = 8;
 
@@ -26,7 +29,6 @@ public class Test extends ItemBlackShadow implements SkillItem {
                     Entitys.Tombstone_.get(),
                     player.level()
             );
-
             tombstone.setPos(x, player.getY(), z);
             tombstone.setOwner(player);
             tombstone.tame(player);

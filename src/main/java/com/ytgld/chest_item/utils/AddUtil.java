@@ -4,6 +4,7 @@ import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.utils.network.FatalSwordRenderPacket;
+import com.ytgld.chest_item.utils.network.ScratchPacket;
 import com.ytgld.chest_item.utils.network.SwordRenderPacket;
 import com.ytgld.chest_item.utils.network.WrathHeavenRenderPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -42,19 +43,31 @@ public class AddUtil {
         sendToNearbyPlayers(living, packet, 64.0);
     }
 
-    public static void addFatalEffect(LivingEntity living, int color,int size) {
+    public static void addFatalEffect(LivingEntity living,Vec3 pos, int color,int size) {
         RandomSource random = living.getRandom();
         float rotationX =  Mth.nextInt(random, -360, 360);
         float rotationY = Mth.nextInt(random, -360, 360);
         float rotationZ = Mth.nextInt(random, -360, 360);
         FatalSwordRenderPacket packet = new FatalSwordRenderPacket(
-                living.getX(), living.getEyeY(), living.getZ(),
+                pos.x, pos.y, pos.z,
                 rotationX, rotationY, rotationZ,
                 color, size
         );
         sendToNearbyPlayers(living, packet, 64.0);
     }
 
+    public static void addScratchEffect(LivingEntity living,Vec3 pos, int color,int size) {
+        RandomSource random = living.getRandom();
+        float rotationX =  Mth.nextInt(random, -360, 360);
+        float rotationY = Mth.nextInt(random, -360, 360);
+        float rotationZ = Mth.nextInt(random, -360, 360);
+        ScratchPacket packet = new ScratchPacket(
+                pos.x, pos.y, pos.z,
+                rotationX, rotationY, rotationZ,
+                color, size
+        );
+        sendToNearbyPlayers(living, packet, 64.0);
+    }
     public static void addWrathHeaven(LivingEntity living, Vec3 pos, int color, int size, boolean a) {
         WrathHeavenRenderPacket packet = new WrathHeavenRenderPacket(
                 pos.x, pos.y, pos.z,

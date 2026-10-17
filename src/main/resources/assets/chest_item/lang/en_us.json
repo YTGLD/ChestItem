@@ -1610,6 +1610,9 @@
   "item.chest_item.wind_repeater.string.1": "The attack that corrupts blood spirits may come with a storm",
   "item.chest_item.wind_repeater.string.2": "Corrupt blood spirits can only attack targets in the sky",
 
+  "item.chest_item.burial_demon_stet": "Burial Demon Stet",
+  "item.chest_item.burial_demon_stet.string.1": "按下技能键释放“墓碑三绝阵”",
+
   "item.chest_item.judgment": "Judgment",
   "item.chest_item.judgment.string.1": "The blood droplets that corrupt the blood spirit move above the target",
   "item.chest_item.judgment.string.2": "And the speed of the target will be reduced by 60%",
