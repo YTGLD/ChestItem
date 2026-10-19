@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.utils;
+package com.ytgld.chest_item.client_utils;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;

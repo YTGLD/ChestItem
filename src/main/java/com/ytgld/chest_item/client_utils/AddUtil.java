@@ -1,12 +1,12 @@
-package com.ytgld.chest_item.utils;
+package com.ytgld.chest_item.client_utils;
 
 import com.ytgld.chest_item.effect.Effects;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.utils.network.FatalSwordRenderPacket;
-import com.ytgld.chest_item.utils.network.ScratchPacket;
-import com.ytgld.chest_item.utils.network.SwordRenderPacket;
-import com.ytgld.chest_item.utils.network.WrathHeavenRenderPacket;
+import com.ytgld.chest_item.client_utils.network.FatalSwordRenderPacket;
+import com.ytgld.chest_item.client_utils.network.ScratchPacket;
+import com.ytgld.chest_item.client_utils.network.SwordRenderPacket;
+import com.ytgld.chest_item.client_utils.network.WrathHeavenRenderPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;

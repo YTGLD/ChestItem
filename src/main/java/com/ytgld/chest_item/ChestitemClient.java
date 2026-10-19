@@ -30,7 +30,7 @@ import com.ytgld.chest_item.renderer.particle.sword.SwordShadow2;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow3;
 import com.ytgld.chest_item.renderer.particle.sword.SwordShadow4;
 import com.ytgld.chest_item.renderer.warp.ChestItemFrameGraph;
-import com.ytgld.chest_item.utils.RenderObjectManager;
+import com.ytgld.chest_item.client_utils.RenderObjectManager;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;

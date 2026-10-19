@@ -1,7 +1,7 @@
 package com.ytgld.chest_item.entity;
 
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.utils.AddUtil;
+import com.ytgld.chest_item.client_utils.AddUtil;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;

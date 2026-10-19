@@ -1,14 +1,11 @@
-package com.ytgld.chest_item.utils.dout;
+package com.ytgld.chest_item.client_utils.dout;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.HandlerClient;
-import com.ytgld.chest_item.renderer.MRender;
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.renderer.warp.ChestItemFrameGraph;
-import com.ytgld.chest_item.utils.RenderObjects;
-import com.ytgld.chest_item.utils.WorldRenderObject;
+import com.ytgld.chest_item.client_utils.RenderObjects;
+import com.ytgld.chest_item.client_utils.WorldRenderObject;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
@@ -16,9 +13,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class FatalSwordRenderObject extends WorldRenderObject {
     public Vec3 pitch;

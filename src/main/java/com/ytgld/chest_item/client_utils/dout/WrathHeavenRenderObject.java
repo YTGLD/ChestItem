@@ -1,13 +1,11 @@
-package com.ytgld.chest_item.utils.dout;
+package com.ytgld.chest_item.client_utils.dout;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.utils.RenderObjectManager;
-import com.ytgld.chest_item.utils.RenderObjects;
-import com.ytgld.chest_item.utils.WorldRenderObject;
+import com.ytgld.chest_item.client_utils.RenderObjects;
+import com.ytgld.chest_item.client_utils.WorldRenderObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.renderer.SubmitNodeCollector;

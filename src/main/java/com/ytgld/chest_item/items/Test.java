@@ -4,9 +4,8 @@ import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.entity.Entitys;
 import com.ytgld.chest_item.entity.Tombstone;
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.utils.AddUtil;
+import com.ytgld.chest_item.client_utils.AddUtil;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 public class Test extends ItemBlackShadow implements SkillItem {
     public Test(Properties properties) {

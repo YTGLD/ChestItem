@@ -1,9 +1,9 @@
-package com.ytgld.chest_item.utils.network;
+package com.ytgld.chest_item.client_utils.network;
 
-import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.utils.CIPacketPayload;
-import com.ytgld.chest_item.utils.RenderObjectManager;
-import com.ytgld.chest_item.utils.dout.Scratch;
+
+import com.ytgld.chest_item.client_utils.CIPacketPayload;
+import com.ytgld.chest_item.client_utils.RenderObjectManager;
+import com.ytgld.chest_item.client_utils.dout.SwordRenderObject;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -15,49 +15,49 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.joml.Vector3f;
 
-public record ScratchPacket (double x, double y, double z,
-                             float rotationX, float rotationY, float rotationZ,
-                             int color, int size,int colorEnd)
+public record SwordRenderPacket(double x, double y, double z,
+                                float rotationX, float rotationY, float rotationZ,
+                                int color, int size)
         implements CIPacketPayload {
 
-    public static final Type<ScratchPacket> TYPE =
-            new Type<>(Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                    "scratch"
-            ));
+    public static final Type<SwordRenderPacket> TYPE =
+            new Type<>(
+                    Identifier.fromNamespaceAndPath(
+                            "chest_item",
+                            "sword_render"
+                    )
+            );
 
     public static final StreamCodec<
             RegistryFriendlyByteBuf,
-            ScratchPacket
+            SwordRenderPacket
             > STREAM_CODEC = StreamCodec.composite(
 
             ByteBufCodecs.DOUBLE,
-            ScratchPacket::x,
+            SwordRenderPacket::x,
 
             ByteBufCodecs.DOUBLE,
-            ScratchPacket::y,
+            SwordRenderPacket::y,
 
             ByteBufCodecs.DOUBLE,
-            ScratchPacket::z,
+            SwordRenderPacket::z,
 
             ByteBufCodecs.FLOAT,
-            ScratchPacket::rotationX,
+            SwordRenderPacket::rotationX,
 
             ByteBufCodecs.FLOAT,
-            ScratchPacket::rotationY,
+            SwordRenderPacket::rotationY,
 
             ByteBufCodecs.FLOAT,
-            ScratchPacket::rotationZ,
+            SwordRenderPacket::rotationZ,
 
             ByteBufCodecs.INT,
-            ScratchPacket::color,
+            SwordRenderPacket::color,
 
             ByteBufCodecs.INT,
-            ScratchPacket::size,
+            SwordRenderPacket::size,
 
-            ByteBufCodecs.INT,
-            ScratchPacket::colorEnd,
-
-            ScratchPacket::new
+            SwordRenderPacket::new
     );
 
     @Override
@@ -69,18 +69,17 @@ public record ScratchPacket (double x, double y, double z,
         return new Vec3(x, y, z);
     }
     public static void handle(
-            ScratchPacket packet,
+            SwordRenderPacket packet,
             IPayloadContext context
     ) {
         context.enqueueWork(() -> {
-            Scratch sword = new Scratch(
+            SwordRenderObject sword = new SwordRenderObject(
                     packet.position(),
                     new Vec3(packet.rotationX(), packet.rotationY(), packet.rotationZ()),
                     packet.size());
 
             sword.vector3f = new Vector3f(0, 0, 0);
-            sword.startColor = packet.color();
-            sword.endColor = packet.colorEnd();
+            sword.color = packet.color();
             RenderObjectManager.add(sword);
         });
     }
@@ -88,9 +87,9 @@ public record ScratchPacket (double x, double y, double z,
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
         registrar.playToClient(
-                ScratchPacket.TYPE,
-                ScratchPacket.STREAM_CODEC,
-                ScratchPacket::handle
+                SwordRenderPacket.TYPE,
+                SwordRenderPacket.STREAM_CODEC,
+                SwordRenderPacket::handle
         );
     }
 }

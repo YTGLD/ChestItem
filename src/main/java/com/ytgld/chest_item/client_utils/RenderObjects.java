@@ -1,9 +1,8 @@
-package com.ytgld.chest_item.utils;
+package com.ytgld.chest_item.client_utils;
 
 import com.mojang.renderpearl.api.pipeline.*;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.renderer.MRender;
 import net.minecraft.client.renderer.BindGroupLayouts;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;

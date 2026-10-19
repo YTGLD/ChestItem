@@ -6,10 +6,8 @@ import com.mojang.renderpearl.api.pipeline.*;
 import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import com.ytgld.chest_item.Chestitem;
 import net.minecraft.client.renderer.BindGroupLayouts;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
 
@@ -17,7 +15,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static com.mojang.renderpearl.api.pipeline.BlendFactor.*;
-import static com.ytgld.chest_item.utils.RenderObjects.vColorTargetState;
+import static com.ytgld.chest_item.client_utils.RenderObjects.vColorTargetState;
 import static net.minecraft.client.renderer.RenderPipelines.*;
 
 public abstract class MRender {

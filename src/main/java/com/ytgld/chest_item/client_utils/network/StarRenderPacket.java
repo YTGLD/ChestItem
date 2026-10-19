@@ -1,10 +1,9 @@
-package com.ytgld.chest_item.utils.network;
-
+package com.ytgld.chest_item.client_utils.network;
 
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.utils.CIPacketPayload;
-import com.ytgld.chest_item.utils.RenderObjectManager;
-import com.ytgld.chest_item.utils.dout.FatalSwordRenderObject;
+import com.ytgld.chest_item.client_utils.CIPacketPayload;
+import com.ytgld.chest_item.client_utils.RenderObjectManager;
+import com.ytgld.chest_item.client_utils.dout.SwordRenderObject;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -16,46 +15,49 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.joml.Vector3f;
 
-public record FatalSwordRenderPacket(double x, double y, double z,
-                                     float rotationX, float rotationY, float rotationZ,
-                                     int color, int size)
+public record StarRenderPacket(double x, double y, double z,
+                         float rotationX, float rotationY, float rotationZ,
+                         int color, int size)
         implements CIPacketPayload {
 
-    public static final Type<FatalSwordRenderPacket> TYPE =
-            new Type<>(Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                    "fatal_sword_render"
-            ));
+    public static final Type<StarRenderPacket> TYPE =
+            new Type<>(
+                    Identifier.fromNamespaceAndPath(
+                            Chestitem.MODID,
+                            "star"
+                    )
+            );
 
     public static final StreamCodec<
             RegistryFriendlyByteBuf,
-            FatalSwordRenderPacket
+            StarRenderPacket
             > STREAM_CODEC = StreamCodec.composite(
 
             ByteBufCodecs.DOUBLE,
-            FatalSwordRenderPacket::x,
+            StarRenderPacket::x,
 
             ByteBufCodecs.DOUBLE,
-            FatalSwordRenderPacket::y,
+            StarRenderPacket::y,
 
             ByteBufCodecs.DOUBLE,
-            FatalSwordRenderPacket::z,
+            StarRenderPacket::z,
 
             ByteBufCodecs.FLOAT,
-            FatalSwordRenderPacket::rotationX,
+            StarRenderPacket::rotationX,
 
             ByteBufCodecs.FLOAT,
-            FatalSwordRenderPacket::rotationY,
+            StarRenderPacket::rotationY,
 
             ByteBufCodecs.FLOAT,
-            FatalSwordRenderPacket::rotationZ,
+            StarRenderPacket::rotationZ,
 
             ByteBufCodecs.INT,
-            FatalSwordRenderPacket::color,
+            StarRenderPacket::color,
 
             ByteBufCodecs.INT,
-            FatalSwordRenderPacket::size,
+            StarRenderPacket::size,
 
-            FatalSwordRenderPacket::new
+            StarRenderPacket::new
     );
 
     @Override
@@ -67,11 +69,11 @@ public record FatalSwordRenderPacket(double x, double y, double z,
         return new Vec3(x, y, z);
     }
     public static void handle(
-            FatalSwordRenderPacket packet,
+            StarRenderPacket packet,
             IPayloadContext context
     ) {
         context.enqueueWork(() -> {
-            FatalSwordRenderObject sword = new FatalSwordRenderObject(
+            SwordRenderObject sword = new SwordRenderObject(
                     packet.position(),
                     new Vec3(packet.rotationX(), packet.rotationY(), packet.rotationZ()),
                     packet.size());
@@ -85,9 +87,9 @@ public record FatalSwordRenderPacket(double x, double y, double z,
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
         registrar.playToClient(
-                FatalSwordRenderPacket.TYPE,
-                FatalSwordRenderPacket.STREAM_CODEC,
-                FatalSwordRenderPacket::handle
+                StarRenderPacket.TYPE,
+                StarRenderPacket.STREAM_CODEC,
+                StarRenderPacket::handle
         );
     }
 }

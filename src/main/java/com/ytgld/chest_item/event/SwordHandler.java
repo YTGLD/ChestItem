@@ -7,7 +7,7 @@ import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.renderer.particle.other.Particles;
 import com.ytgld.chest_item.renderer.particle.other.SwordEnergyOption;
 import com.ytgld.chest_item.sounds.Sounds;
-import com.ytgld.chest_item.utils.AddUtil;
+import com.ytgld.chest_item.client_utils.AddUtil;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.registries.Registries;

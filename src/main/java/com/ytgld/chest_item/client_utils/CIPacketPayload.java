@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.utils;
+package com.ytgld.chest_item.client_utils;
 
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 

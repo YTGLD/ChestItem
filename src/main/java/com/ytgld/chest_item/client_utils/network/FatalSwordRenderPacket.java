@@ -1,9 +1,10 @@
-package com.ytgld.chest_item.utils.network;
+package com.ytgld.chest_item.client_utils.network;
+
 
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.utils.CIPacketPayload;
-import com.ytgld.chest_item.utils.RenderObjectManager;
-import com.ytgld.chest_item.utils.dout.SwordRenderObject;
+import com.ytgld.chest_item.client_utils.CIPacketPayload;
+import com.ytgld.chest_item.client_utils.RenderObjectManager;
+import com.ytgld.chest_item.client_utils.dout.FatalSwordRenderObject;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -15,49 +16,46 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.joml.Vector3f;
 
-public record StarRenderPacket(double x, double y, double z,
-                         float rotationX, float rotationY, float rotationZ,
-                         int color, int size)
+public record FatalSwordRenderPacket(double x, double y, double z,
+                                     float rotationX, float rotationY, float rotationZ,
+                                     int color, int size)
         implements CIPacketPayload {
 
-    public static final Type<StarRenderPacket> TYPE =
-            new Type<>(
-                    Identifier.fromNamespaceAndPath(
-                            Chestitem.MODID,
-                            "star"
-                    )
-            );
+    public static final Type<FatalSwordRenderPacket> TYPE =
+            new Type<>(Identifier.fromNamespaceAndPath(Chestitem.MODID,
+                    "fatal_sword_render"
+            ));
 
     public static final StreamCodec<
             RegistryFriendlyByteBuf,
-            StarRenderPacket
+            FatalSwordRenderPacket
             > STREAM_CODEC = StreamCodec.composite(
 
             ByteBufCodecs.DOUBLE,
-            StarRenderPacket::x,
+            FatalSwordRenderPacket::x,
 
             ByteBufCodecs.DOUBLE,
-            StarRenderPacket::y,
+            FatalSwordRenderPacket::y,
 
             ByteBufCodecs.DOUBLE,
-            StarRenderPacket::z,
+            FatalSwordRenderPacket::z,
 
             ByteBufCodecs.FLOAT,
-            StarRenderPacket::rotationX,
+            FatalSwordRenderPacket::rotationX,
 
             ByteBufCodecs.FLOAT,
-            StarRenderPacket::rotationY,
+            FatalSwordRenderPacket::rotationY,
 
             ByteBufCodecs.FLOAT,
-            StarRenderPacket::rotationZ,
+            FatalSwordRenderPacket::rotationZ,
 
             ByteBufCodecs.INT,
-            StarRenderPacket::color,
+            FatalSwordRenderPacket::color,
 
             ByteBufCodecs.INT,
-            StarRenderPacket::size,
+            FatalSwordRenderPacket::size,
 
-            StarRenderPacket::new
+            FatalSwordRenderPacket::new
     );
 
     @Override
@@ -69,11 +67,11 @@ public record StarRenderPacket(double x, double y, double z,
         return new Vec3(x, y, z);
     }
     public static void handle(
-            StarRenderPacket packet,
+            FatalSwordRenderPacket packet,
             IPayloadContext context
     ) {
         context.enqueueWork(() -> {
-            SwordRenderObject sword = new SwordRenderObject(
+            FatalSwordRenderObject sword = new FatalSwordRenderObject(
                     packet.position(),
                     new Vec3(packet.rotationX(), packet.rotationY(), packet.rotationZ()),
                     packet.size());
@@ -87,9 +85,9 @@ public record StarRenderPacket(double x, double y, double z,
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
         registrar.playToClient(
-                StarRenderPacket.TYPE,
-                StarRenderPacket.STREAM_CODEC,
-                StarRenderPacket::handle
+                FatalSwordRenderPacket.TYPE,
+                FatalSwordRenderPacket.STREAM_CODEC,
+                FatalSwordRenderPacket::handle
         );
     }
 }

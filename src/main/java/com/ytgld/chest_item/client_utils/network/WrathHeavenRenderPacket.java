@@ -1,9 +1,9 @@
-package com.ytgld.chest_item.utils.network;
+package com.ytgld.chest_item.client_utils.network;
 
 import com.ytgld.chest_item.Chestitem;
-import com.ytgld.chest_item.utils.CIPacketPayload;
-import com.ytgld.chest_item.utils.RenderObjectManager;
-import com.ytgld.chest_item.utils.dout.WrathHeavenRenderObject;
+import com.ytgld.chest_item.client_utils.CIPacketPayload;
+import com.ytgld.chest_item.client_utils.RenderObjectManager;
+import com.ytgld.chest_item.client_utils.dout.WrathHeavenRenderObject;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

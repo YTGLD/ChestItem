@@ -7,7 +7,7 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.items.SkillItem;
 import com.ytgld.chest_item.renderer.light.Light;
-import com.ytgld.chest_item.utils.AddUtil;
+import com.ytgld.chest_item.client_utils.AddUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.player.Player;
