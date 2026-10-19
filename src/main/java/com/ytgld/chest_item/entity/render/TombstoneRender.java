@@ -7,7 +7,6 @@ import com.ytgld.chest_item.entity.Tombstone;
 import com.ytgld.chest_item.entity.state.TombstoneRenderState;
 import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.renderer.light.LightRenders;
-import com.ytgld.chest_item.renderer.visual.Visual;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -48,22 +47,12 @@ public class TombstoneRender extends EntityRenderer<Tombstone, TombstoneRenderSt
     @Override
     public void submit(TombstoneRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
         HandlerClient.setShowRenderLight(true);
-        HandlerClient.setDoPass(true);
-        HandlerClient.setShowRenderVisual(true);
-
         Tombstone entity = renderState.entity;
-
-        Visual.putVisualVec3(
-                new Visual.VisualVec3(entity.position(),
-                        2,
-                        2,0.5f,2.5f));
-
         LightRenders.addLight(
                 entity.position().x,entity.position().y,entity.position().z,
                 24,
                 235/255f,100/255f,245/255f,
                 1);
-
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
         double y = Mth.lerp(renderState.partialTick, entity.yOld , entity.getY() );
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
@@ -72,15 +61,14 @@ public class TombstoneRender extends EntityRenderer<Tombstone, TombstoneRenderSt
         poseStack.rotate(Axis.YP.rotation(entity.getId()));
         {
             poseStack.pushPose();
-            poseStack.scale(2, 2, 2);
+            poseStack.scale(3, 3, 3);
             poseStack.translate(0, 0.5f, 0);
             renderState.item.submit(poseStack, collector, renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor);
             poseStack.popPose();
         }
         poseStack.popPose();
     }
-
-}
+    }
 
 
 

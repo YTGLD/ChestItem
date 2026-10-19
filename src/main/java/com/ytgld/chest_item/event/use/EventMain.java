@@ -663,20 +663,30 @@ public class EventMain {
     }
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event){
+
         if (event.getItemStack().getItem() instanceof ReinforcedBaseItem item) {
             event.getToolTip().add(1, Component.literal(""));
             event.getToolTip().add(1, Component.translatable("item.chest_item.reinforced.equipped").withStyle(Style.EMPTY
                     .withColor(item.theColor())));
         }
-        if (event.getItemStack().getItem() instanceof ItemBase) {
+        if (event.getItemStack().getItem() instanceof ItemBase itemBase) {
             if (event.getItemStack().getItem() instanceof EvilMother evilMother) {
                 event.getToolTip().add(1, Component.literal(""));
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
                         .withColor(evilMother.theColor())));
-
+                if (itemBase instanceof SkillItem) {
+                    event.getToolTip().add(1, Component.translatable("item.chest_item.skill",
+                            Keys.KEY_MAPPING_LAZY_C.getKey().getDisplayName()).
+                            withStyle(Style.EMPTY.withColor(evilMother.theColor())));
+                }
             }
             if (event.getItemStack().getItem() instanceof ItemBlackShadow) {
                 event.getToolTip().add(1, Component.literal(""));
+                if (itemBase instanceof SkillItem) {
+                    event.getToolTip().add(1, Component.translatable("item.chest_item.skill",
+                                    Keys.KEY_MAPPING_LAZY_C.getKey().getDisplayName()).
+                            withStyle(Style.EMPTY.withColor(Light.ARGB.color(255, 255, 0, 100))));
+                }
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest",Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(Style.EMPTY
                         .withColor(Light.ARGB.color(255, 255, 0, 100))));
                 if (event.getItemStack().getItem() instanceof CommonCelestial celestial) {
@@ -695,6 +705,11 @@ public class EventMain {
                     && !(event.getItemStack().getItem() instanceof CommonCelestial)
                     && !(event.getItemStack().getItem() instanceof EvilMother)) {
                 event.getToolTip().add(1, Component.literal(""));
+                if (itemBase instanceof SkillItem) {
+                    event.getToolTip().add(1, Component.translatable("item.chest_item.skill",
+                                    Keys.KEY_MAPPING_LAZY_C.getKey().getDisplayName()).
+                            withStyle(ChatFormatting.GOLD));
+                }
                 event.getToolTip().add(1, Component.translatable("item.chest_item.chest", Keys.KEY_MAPPING_LAZY_R.getKey().getDisplayName()).withStyle(ChatFormatting.GOLD));
             }
         }

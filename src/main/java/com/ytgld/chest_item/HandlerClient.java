@@ -16,7 +16,6 @@ public class HandlerClient {
 
     private static boolean showRenderWarped = false;
     private static boolean showRenderLight = false;
-    private static boolean showRenderVisual = false;
 
     public static boolean isShowOutline() {
         return showOutline;
@@ -110,17 +109,5 @@ public class HandlerClient {
             return;
         }
         HandlerClient.doPass = doPass;
-    }
-
-    public static boolean isShowRenderVisual() {
-
-        return showRenderVisual;
-    }
-
-    public static void setShowRenderVisual(boolean showRenderVisual) {
-        if (!ConfigC.config.Render.get()) {
-            return;
-        }
-        HandlerClient.showRenderVisual = showRenderVisual;
     }
 }

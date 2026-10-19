@@ -59,7 +59,7 @@ public class Tombstone extends TamableAnimal {
             if (living.is(this)) {
                 continue;
             }
-            if (!living.is(player) && living.tickCount % 4 == 1) {
+            if (!living.is(player) && living.tickCount % 3 == 1) {
                 living.hurt(living.damageSources().playerAttack(player), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                 living.setInvulnerableTime(0);
                 living.damageCooldownTime = 0;
@@ -74,7 +74,7 @@ public class Tombstone extends TamableAnimal {
                         Light.ARGB.color(255,200,0,0),
                         16
                 );
-
+                break;
             }
         }
     }
