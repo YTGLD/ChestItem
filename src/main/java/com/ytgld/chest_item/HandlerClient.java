@@ -16,17 +16,8 @@ public class HandlerClient {
 
     private static boolean showRenderWarped = false;
     private static boolean showRenderLight = false;
+    private static boolean showRenderVisualFire = false;
 
-    public static boolean isShowOutline() {
-        return showOutline;
-    }
-
-    public static void setShowOutline(boolean showOutline) {
-        if (!ConfigC.config.Render.get()) {
-            return;
-        }
-        HandlerClient.showOutline = showOutline;
-    }
     public static void addTrail(PoseStack.Pose matrices,
                           TrailEntity trailEntity,
                           Entity entity,
@@ -109,5 +100,24 @@ public class HandlerClient {
             return;
         }
         HandlerClient.doPass = doPass;
+    }
+
+    public static boolean isShowOutline() {
+        return showOutline;
+    }
+
+    public static void setShowOutline(boolean showOutline) {
+        if (!ConfigC.config.Render.get()) {
+            return;
+        }
+        HandlerClient.showOutline = showOutline;
+    }
+
+    public static boolean isShowRenderVisualFire() {
+        return showRenderVisualFire;
+    }
+
+    public static void setShowRenderVisualFire(boolean showRenderVisualFire) {
+        HandlerClient.showRenderVisualFire = showRenderVisualFire;
     }
 }

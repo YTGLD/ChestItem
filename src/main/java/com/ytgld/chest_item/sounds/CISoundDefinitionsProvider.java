@@ -60,5 +60,13 @@ public class CISoundDefinitionsProvider extends SoundDefinitionsProvider {
                 .subtitle("sound.chest_item.kill")
                 .replace(true)
         );
+        add(Sounds.bass, SoundDefinition.definition()
+                .with(sound("chest_item:bass",SoundDefinition.SoundType.SOUND)
+                        .stream(true)
+                        .preload(false)
+                )
+                .subtitle("sound.chest_item.bass")
+                .replace(true)
+        );
     }
 }

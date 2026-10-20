@@ -6,14 +6,11 @@ import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.client_utils.RenderObjects;
 import com.ytgld.chest_item.client_utils.WorldRenderObject;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
@@ -41,7 +38,7 @@ public class WrathHeavenRenderObject extends WorldRenderObject {
                 newAlpha -= 5;
             }
         }else {
-            if (newAlpha < 255) {
+            if (newAlpha < 150) {
                 newAlpha += 15;
             }
         }
@@ -66,31 +63,6 @@ public class WrathHeavenRenderObject extends WorldRenderObject {
         poseStack.popPose();
     }
     private void renderText(PoseStack poseStack, SubmitNodeCollector collector, float partialTick) {
-
-    }
-    private void renderText(PoseStack poseStack, SubmitNodeCollector collector, float partialTick,Identifier identifier){
-        if (!hasDown) {
-
-            poseStack.pushPose();
-            Quaternionf quaternionf = new Quaternionf();
-            Quaternionf rotation = new Quaternionf();
-            SingleQuadParticle.FacingCameraMode.LOOKAT_Y.setRotation(rotation, Minecraft.getInstance().gameRenderer.mainCamera(),
-                    partialTick);
-            rotation.rotateZ(Mth.lerp(partialTick, 0, 0));
-            poseStack.rotate(quaternionf);
-            int as = (color >> 24) & 0xFF;
-            int rs = (color >> 16) & 0xFF;
-            int gs = (color >> 8) & 0xFF;
-            int bs = color & 0xFF;
-            render(poseStack, collector, 4,
-                    RenderObjects.renderTypeFunctionLive.apply(
-                            identifier
-                    ),
-                    Light.ARGB.color(newAlpha, rs, gs, bs));
-            poseStack.popPose();
-
-        }
-
 
     }
 

@@ -6,6 +6,7 @@ import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
 import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.renderer.light.LightFrameGraph;
 import com.ytgld.chest_item.renderer.light.LightRenders;
+import com.ytgld.chest_item.renderer.visual.Visual;
 import com.ytgld.chest_item.renderer.warp.ChestItemFrameGraph;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LevelTargetBundle;
@@ -14,6 +15,7 @@ import net.minecraft.client.renderer.chunk.ChunkSectionsToRender;
 import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,6 +43,10 @@ public abstract class LevelRendererMixin {
             LightFrameGraph.addPostPass(frame, targets);
             HandlerClient.setShowRenderLight(false);
         }
+        if (HandlerClient.isShowRenderVisualFire()) {
+            Visual.addPostPass(frame, targets);
+            HandlerClient.setShowRenderVisualFire(false);
+        }
     }
     @Inject(
             method = "submitFeatures",
@@ -51,6 +57,7 @@ public abstract class LevelRendererMixin {
     ) {
         ChestItemFrameGraph.clear();
         LightRenders.clearLights();
+        Visual.clear();
     }
     @Inject(
             method = "submitFeatures",
@@ -68,5 +75,8 @@ public abstract class LevelRendererMixin {
                 camera.pos.x, camera.pos.y, camera.pos.z,
                 camera.viewRotationMatrix
         );
+
+        Visual.upload( camera.pos.x, camera.pos.y, camera.pos.z,
+                camera.viewRotationMatrix);
     }
 }

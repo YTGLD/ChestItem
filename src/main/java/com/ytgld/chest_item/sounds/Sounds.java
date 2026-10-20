@@ -29,4 +29,8 @@ public class Sounds {
             "fly_sword",
             SoundEvent::createVariableRangeEvent
     );
+    public static final Holder<SoundEvent> bass = REGISTRY.register(
+            "bass",
+            SoundEvent::createVariableRangeEvent
+    );
 }

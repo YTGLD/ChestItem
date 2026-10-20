@@ -1,4 +1,14 @@
 {
+  "bass": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:bass",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.bass"
+  },
   "fly_sword": {
     "replace": true,
     "sounds": [

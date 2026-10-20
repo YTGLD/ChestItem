@@ -2,11 +2,14 @@ package com.ytgld.chest_item.entity;
 
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.client_utils.AddUtil;
+import com.ytgld.chest_item.sounds.Sounds;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -22,14 +25,16 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Tombstone extends TamableAnimal {
+public class Tombstone extends TamableAnimal implements TrailEntity{
     public int face = 0;
     public int lastFace = 0;
     private final int time = 400;
     public boolean attack = false;
     public int lastTick = 0;
+    private final List<Vec3> trailPositions = new ArrayList<>();
     public Tombstone(EntityType<? extends Tombstone> type, Level level) {
         super(type, level);
     }
@@ -38,6 +43,12 @@ public class Tombstone extends TamableAnimal {
     public void tick() {
         lastTick = tickCount;
         super.tick();
+
+        if (this.level().isClientSide()) {
+            if (trailPositions.size() < 10) {
+                trailPositions.add(this.position());
+            }
+        }
         if (face <= 1) {
             face = this.getId();
         }
@@ -119,6 +130,7 @@ public class Tombstone extends TamableAnimal {
     @Override
     public boolean isInvulnerableTo(ServerLevel level, DamageSource source) {
         if (source.is(DamageTypes.FALL)) {
+            this.level().playSound(null,blockPosition(),SoundEvents.MACE_SMASH_GROUND, SoundSource.MASTER,1,1);
             return true;
         }
         return super.isInvulnerableTo(level, source);
@@ -142,5 +154,10 @@ public class Tombstone extends TamableAnimal {
     @Override
     public @Nullable AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
         return null;
+    }
+
+    @Override
+    public List<Vec3> trailPositions() {
+        return trailPositions;
     }
 }

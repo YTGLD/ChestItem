@@ -8,11 +8,18 @@ import com.ytgld.chest_item.items.ItemBlackShadow;
 import com.ytgld.chest_item.items.SkillItem;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.client_utils.AddUtil;
+import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Consumer;
 
@@ -40,15 +47,18 @@ public class BurialDemonStet extends ItemBlackShadow implements SkillItem {
                     Entitys.Tombstone_.get(),
                     player.level()
             );
-            tombstone.setPos(x, player.getY(), z);
+            tombstone.setPos(x, player.getY() + 12, z);
             tombstone.setOwner(player);
             tombstone.tame(player);
 
+
+            AddUtil.addWrathHeaven(player,new Vec3(x,player.getY() + 0.1f,z),
+                    Light.ARGB.color(255,235,100,245),12,false);
+
             player.level().addFreshEntity(tombstone);
         }
-
-        AddUtil.addWrathHeaven(player,player.position().add(0,0.1f,0),
-                Light.ARGB.color(255,235,100,245),12,false);
+        player.level().playSound(null,player.blockPosition(), Sounds.bass.value(), SoundSource.MASTER,1,0.8f);
+        player.level().playSound(null,player.blockPosition(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.MASTER,0.5F,0.25F);
 
         player.getCooldowns().addCooldown(InitItems.BurialDemonStet_.asItem().getDefaultInstance(),600);
     }

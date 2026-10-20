@@ -19,8 +19,8 @@ public class RenderObjects {
 
     private static final RenderPipeline itemLive = RenderPipeline.builder(
             RenderPipeline.builder(RenderPipeline.builder(MATRICES_FOG_LIGHT_DIR_SNIPPET).
-                            withVertexShader("core/item")
-                            .withFragmentShader("core/item")
+                            withVertexShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/item"))
+                            .withFragmentShader(Identifier.fromNamespaceAndPath(Chestitem.MODID,"core/item"))
                             .withBindGroupLayout(BindGroupLayouts.SAMPLER0_SAMPLER1_SAMPLER2)
                             .withCull(false)
                             .withVertexBinding(0, DefaultVertexFormat.ENTITY).withPrimitiveTopology(PrimitiveTopology.QUADS).
