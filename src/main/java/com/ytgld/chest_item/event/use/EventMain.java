@@ -266,6 +266,7 @@ public class EventMain {
         BrassCoins.die(event);
         Warmaker.die(event);
         LeadOfEnlightenment.die(event);
+        LeadOfEnlightenment.wither(event);
         ChaosFortress.killArmor(event);
         GiveEvilGiftHandler.event(event);
     }

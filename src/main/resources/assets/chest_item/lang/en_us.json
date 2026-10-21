@@ -361,6 +361,7 @@
   "entity.chest_item.hyperplasia": "?",
   "entity.chest_item.reactor": "reactor",
   "entity.chest_item.spirit": "???",
+  "entity.chest_item.tombstone": "tombstone",
   "event.chest_item.equip": "When placed in a magic box：",
   "item.chest_item.reinforced.equipped": "You can right-click to equip it",
   "event.chest_item.reinforced.can_not": "You can no longer equip more enhancements",
@@ -1618,6 +1619,11 @@
   "item.chest_item.judgment.string.1": "The blood droplets that corrupt the blood spirit move above the target",
   "item.chest_item.judgment.string.2": "And the speed of the target will be reduced by 60%",
   "item.chest_item.judgment.string.3": "If the target's immunity is slow, the damage caused by releasing blood droplets doubles",
+
+
+  "chest_item.book.burial_demon_stet.main": "葬魔碑",
+  "chest_item.book.burial_demon_stet.text": "人与魔的阴阳界碑\n它象征着绝对的两立\n\n葬魔碑被魔帝轰碎后，碎片被保存在启明之铅中\n杀死足够多的凋零即可重新组成葬魔碑\n但组成的葬魔碑仅有原先亿万分之一的力量\n\n本帝...\n看到了万家灯火...",
+
 
   "chest_item.book.test.main": "通往深渊的门户",
   "chest_item.book.test.1": "Author: Artgrad (YTGLD)",

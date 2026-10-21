@@ -74,6 +74,15 @@ public class ChaosPage implements RegisterBookPage {
                 color,
                 CIBookScreen.ThePage.BLACK,
                 color,List.of(),true,true));
+        list.add(new CIBookScreen.CIBookGuiAdd(InitItems.BurialDemonStet_.asItem(), new Vec2(aInt * 3, 0),
+                Component.translatable("chest_item.book.burial_demon_stet.main"),
+                List.of(
+                        Component.translatable("chest_item.book.burial_demon_stet.text")
+                ),
+                color,
+                color,
+                CIBookScreen.ThePage.BLACK,
+                color,List.of(),true,true));
 
 
 

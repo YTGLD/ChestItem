@@ -1,4 +1,4 @@
-package com.ytgld.chest_item.items.black;
+package com.ytgld.chest_item.items.black.chaos_item;
 
 import com.ytgld.chest_item.Handler;
 import com.ytgld.chest_item.entity.Entitys;
@@ -11,9 +11,6 @@ import com.ytgld.chest_item.client_utils.AddUtil;
 import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -53,7 +50,7 @@ public class BurialDemonStet extends ItemBlackShadow implements SkillItem {
 
 
             AddUtil.addWrathHeaven(player,new Vec3(x,player.getY() + 0.1f,z),
-                    Light.ARGB.color(255,235,100,245),12,false);
+                    Light.ARGB.color(255,255,50,255),12,false);
 
             player.level().addFreshEntity(tombstone);
         }

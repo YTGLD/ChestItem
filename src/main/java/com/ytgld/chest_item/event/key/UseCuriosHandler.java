@@ -1,7 +1,7 @@
 package com.ytgld.chest_item.event.key;
 
 import com.ytgld.chest_item.items.Test;
-import com.ytgld.chest_item.items.black.BurialDemonStet;
+import com.ytgld.chest_item.items.black.chaos_item.BurialDemonStet;
 import com.ytgld.chest_item.items.black.celestial.Blood;
 import com.ytgld.chest_item.items.other.Agreement;
 import com.ytgld.chest_item.items.other.end.TheEndIsComing;

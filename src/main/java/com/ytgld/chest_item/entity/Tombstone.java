@@ -32,6 +32,7 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
     public int face = 0;
     public int lastFace = 0;
     private final int time = 400;
+    public int onGroundTime = 0;
     public boolean attack = false;
     public int lastTick = 0;
     private final List<Vec3> trailPositions = new ArrayList<>();
@@ -43,6 +44,9 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
     public void tick() {
         lastTick = tickCount;
         super.tick();
+        if (onGround()) {
+            onGroundTime ++;
+        }
 
         if (this.level().isClientSide()) {
             if (trailPositions.size() < 10) {
@@ -71,7 +75,10 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
                 continue;
             }
             if (!living.is(player) && living.tickCount % 3 == 1) {
-                living.hurt(living.damageSources().playerAttack(player), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                living.hurt(living.damageSources().playerAttack(player),
+                        (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE)
+                                + (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE) / 4F
+                                + (float) player.getAttributeValue(Attributes.MAX_HEALTH) / 8F);
                 living.setInvulnerableTime(0);
                 living.damageCooldownTime = 0;
                 float offSet = 3f;
@@ -81,8 +88,8 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
                                 Mth.nextFloat(random,0,offSet/ 2f),
                                 Mth.nextFloat(random,-offSet,offSet)
                         )),
-                        Light.ARGB.color(255,240,50,255),
-                        Light.ARGB.color(255,200,0,0),
+                        Light.ARGB.color(255,255,120,255),
+                        Light.ARGB.color(255,255,120,255),
                         16
                 );
                 break;
@@ -96,7 +103,9 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
                 .add(Attributes.MOVEMENT_SPEED, (double)0)
                 .add(Attributes.ATTACK_DAMAGE, (double)3.0F)
                 .add(Attributes.ARMOR, (double)10)
-                .add(Attributes.KNOCKBACK_RESISTANCE,50);
+                .add(Attributes.KNOCKBACK_RESISTANCE,50)
+                .add(Attributes.MAX_HEALTH,50)
+                ;
     }
 
     @Override
@@ -130,6 +139,25 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
     @Override
     public boolean isInvulnerableTo(ServerLevel level, DamageSource source) {
         if (source.is(DamageTypes.FALL)) {
+            Vec3 thisPos = this.position();
+            int range = 8;
+            List<LivingEntity> livingEntities = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(thisPos.x - range, thisPos.y - range, thisPos.z - range, thisPos.x + range, thisPos.y + range, thisPos.z + range));
+            for (LivingEntity living : livingEntities){
+                if (living.is(this)) {
+                    continue;
+                }
+                if (!(living instanceof Player player)) {
+                    continue;
+                }
+                if (!living.is(player)) {
+                    living.hurt(living.damageSources().playerAttack(player),
+                            (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE)
+                                    + (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE)
+                                    + (float) player.getAttributeValue(Attributes.MAX_HEALTH));
+                    living.setInvulnerableTime(0);
+                    living.damageCooldownTime = 0;
+                }
+            }
             this.level().playSound(null,blockPosition(),SoundEvents.MACE_SMASH_GROUND, SoundSource.MASTER,1,1);
             return true;
         }
@@ -143,7 +171,7 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
 
     @Override
     protected @Nullable SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ZOMBIE_BREAK_WOODEN_DOOR;
+        return null;
     }
 
     @Override

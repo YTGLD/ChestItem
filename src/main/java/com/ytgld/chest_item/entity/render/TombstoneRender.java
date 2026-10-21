@@ -62,11 +62,13 @@ public class TombstoneRender extends EntityRenderer<Tombstone, TombstoneRenderSt
         Tombstone entity = renderState.entity;
         LightRenders.addLight(
                 entity.position().x,entity.position().y,entity.position().z,
-                24,
-                235/200f,100/200f,245/200f,
-                1.25f);
+                36,
+                0.8f,0.1f,1,
+                1);
+
         Visual.putVisualVec3(new Visual.VisualVec3(new Vec3(entity.position().x,entity.position().y,entity.position().z)
         ,1,235/200f,100/200f,245/200f));
+
         double x = Mth.lerp(renderState.partialTick, entity.xOld, entity.getX());
         double y = Mth.lerp(renderState.partialTick, entity.yOld , entity.getY() );
         double z = Mth.lerp(renderState.partialTick, entity.zOld, entity.getZ());
@@ -74,17 +76,11 @@ public class TombstoneRender extends EntityRenderer<Tombstone, TombstoneRenderSt
 
         poseStack.translate(entity.getX()-x, entity.getY()-y,entity.getZ() -z);
 
-
         ((ISubmitReactorGlow)collector).chest_item$submitReactorGlow(poseStack, MRender.colorOutline, (pose, bufferSource) -> {
-            HandlerClient.addTrail(pose,entity,entity,bufferSource,
-                    235/255f,100/255f,245/255f,0.88f);
-        });
-
-        ((ISubmitReactorGlow)collector).chest_item$submitReactorGlow(poseStack, MRender.colorOutline, (pose, bufferSource) -> {
-            int a = Math.max(0,255 - entity.tickCount * 15);
+            int a = Math.max(0,255 - entity.onGroundTime * 15);
             if (a > 0) {
                 renderSphere1(pose, bufferSource, Light.ARGB.color(a,235,100,245),
-                        (float) Math.sqrt(entity.tickCount * 3f));
+                        (float) Math.sqrt(entity.onGroundTime * 3f));
             }
         });
 

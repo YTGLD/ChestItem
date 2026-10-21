@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +31,7 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
     public static final String killWarmaker = "killWarmaker";
     public static final String hurtGiveChaosFortress = "hurtGiveChaosFortress";
     public static final String xpGiveEmperorCup = "xpGiveEmperorCup";
+    public static final String witherBurialDemonStet = "witherBurialDemonStet";
 
     public LeadOfEnlightenment(Properties properties) {
         super(properties);
@@ -43,6 +45,7 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
         public static ModConfigSpec.IntValue intValue ;
         public static ModConfigSpec.IntValue intValue2 ;
         public static ModConfigSpec.IntValue intValue3 ;
+        public static ModConfigSpec.IntValue intValue4 ;
         @Override
         public void config(ModConfigSpec.Builder builder) {
             builder.push("LeadOfEnlightenment");
@@ -52,6 +55,8 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
                     .defineInRange("number2",500,1,Integer.MAX_VALUE);
             intValue3 =  builder.translation("chest_item.config.LeadOfEnlightenment3")
                     .defineInRange("number3",10000,0,Integer.MAX_VALUE);
+            intValue4 =  builder.translation("chest_item.config.LeadOfEnlightenment4")
+                    .defineInRange("number4",3,1,Integer.MAX_VALUE);
             builder.pop();
         }
 
@@ -63,7 +68,9 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
                     new CIString("LeadOfEnlightenment2",
                             "启明之铅2","需要杀死多少生物来获取“战争缔造者”"),
                     new CIString("LeadOfEnlightenment3",
-                            "启明之铅3","需要多少经验值才能解锁“帝王槃”")
+                            "启明之铅3","需要多少经验值才能解锁“帝王槃”"),
+                    new CIString("LeadOfEnlightenment4",
+                            "启明之铅4","杀死多少凋零才能获取“葬魔碑”")
 
             );
         }
@@ -149,6 +156,39 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
             }
         }
     }
+    public static void wither(LivingDeathEvent event){
+        if (event.getSource().getEntity() instanceof Player player){
+            ChestInventory chestInventory = Handler.getItem(player);
+            if (Handler.has(player, InitItems.BurialDemonStet_.asItem())) {
+                return;
+            }
+            if (!(event.getEntity() instanceof WitherBoss)) {
+                return;
+            }
+            if (chestInventory != null) {
+                for (int i = 0; i < chestInventory.getContainerSize(); i++) {
+                    ItemStack stack = chestInventory.getItem(i);
+                    if (stack.is(InitItems.LeadOfEnlightenment_)) {
+                        CompoundTag component = stack.get(DataReg.tag);
+                        if (component == null) {
+                            stack.set(DataReg.tag,new CompoundTag());
+                        }
+                        if (component != null) {
+                            int now = component.getIntOr(witherBurialDemonStet,0);
+                            int end = now + 1;
+                            int max =ConfigItem.intValue4.getAsInt();
+
+                            component.putInt(witherBurialDemonStet,end);
+                            if (end >= max) {
+                                player.level().playSound(null,player.blockPosition(), SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.AMBIENT);
+                                chestInventory.setItem(i,new ItemStack(InitItems.BurialDemonStet_.asItem()));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     private static boolean isTrue (ItemStack target, int max, String tag){
         CompoundTag component = target.get(DataReg.tag);
         if (component != null) {
@@ -173,6 +213,10 @@ public class LeadOfEnlightenment extends ItemBlackShadow implements ITheChaos {
 
             tooltipComponents.accept(Component.translatable("item.chest_item.lead_of_enlightenment.string.1").append(
                     String.valueOf(component.getIntOr(killWarmaker,0))
+            ).setStyle(Style.EMPTY.withColor(color(stack))));
+
+            tooltipComponents.accept(Component.translatable("entity.minecraft.wither").append(": ").append(
+                    String.valueOf(component.getIntOr(witherBurialDemonStet,0))
             ).setStyle(Style.EMPTY.withColor(color(stack))));
         }
     }
