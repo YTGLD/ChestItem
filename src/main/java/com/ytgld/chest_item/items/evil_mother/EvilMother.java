@@ -64,7 +64,7 @@ public abstract class EvilMother extends ItemBase implements IEvil {
         return co;
     }
     public static void attrib(EntityTickEvent.Post event){
-        if (event.getEntity() instanceof Player player){
+        if (event.getEntity() instanceof Player player && !player.level().isClientSide()){
             player.getAttributes().addTransientAttributeModifiers(theAttrib(player));
         }
     }
