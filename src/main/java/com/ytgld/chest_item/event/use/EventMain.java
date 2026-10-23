@@ -292,7 +292,6 @@ public class EventMain {
         Complementary.damage(event);
         ChaosShield(event);
         hyperplasiaShield(event);
-        GodApple.event(event);
         ShadowMint.hurtAttacker(event);
         MadnessTheory.attackEXP(event);
         HardwoodTotemPole.tick(event);
@@ -539,7 +538,6 @@ public class EventMain {
         DrugHeal.tick(event);
         Ring.tick(event);
         Stomach.tick(event);
-        GodApple.event(event);
         Kaolinite.event(event);
         EyeBook.tick(event);
         TheOrderOfTheUndead.hunger(event);
@@ -936,6 +934,7 @@ public class EventMain {
     }
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void eventLivingDamageEvent(LivingDamageEvent.Pre event) {
+        GodApple.event(event);
         EmperorCup.event(event);
     }
     @SubscribeEvent

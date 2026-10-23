@@ -67,78 +67,59 @@ public class GodApple extends ItemBase implements Meat  {
         }
     }
 
-    public static final int TIME = 10 * 20;
+    public static final int TIME = 10;
 
-    public static final String bloodTime = "bloodTime";
-    public static final String bloodDamage = "bloodDamage";
+    private static final String lastDamage = "GodAppleLastDamage";
+    private static final String damageTime = "GodAppleDamageTime";
 
     public GodApple(Properties properties) {
         super(properties);
     }
 
     public static void event(LivingDamageEvent.Pre event){
-        if (!event.getSource().is(DamageTypes.GENERIC_KILL)) {
-            if (event.getEntity() instanceof Player player) {
-                if (!player.level().isClientSide()) {
-                    ChestInventory chestInventory = Handler.getItem(player);
-                    if (chestInventory != null) {
-                        for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                            ItemStack stack = chestInventory.getItem(i);
-                            if (stack.is(InitItems.God_Apple.get())) {
-                                CompoundTag compoundTag = stack.get(DataReg.tag);
-                                if (compoundTag != null) {
-                                    float s = event.getNewDamage() - ConfigItem.intValue.get().floatValue();
-                                    if (s > ConfigItem.intValue.get().floatValue()) {
-                                        compoundTag.putFloat(bloodDamage, compoundTag.getFloatOr(bloodDamage,0) + s);
-                                        compoundTag.putInt(bloodTime, TIME);
-                                        event.setNewDamage(ConfigItem.intValue.get().floatValue());
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public static void event(ItemStackTickEvent event) {
-        Player player = event.player;
-        ChestInventory chestInventory = event.chestInventory;
-        if (!player.level().isClientSide()&&chestInventory!=null){
-            for (int i = 0; i < chestInventory.getContainerSize(); i++) {
-                ItemStack stack = chestInventory.getItem(i);
-                if (stack.is(InitItems.God_Apple.get())) {
-                    CompoundTag compoundTag = stack.get(DataReg.tag);
-                    if (compoundTag != null) {
-                        if (compoundTag.getIntOr(bloodTime,0) <= 0) {
-                            compoundTag.putFloat(bloodDamage, 0);
-                        }
-                        if (compoundTag.getIntOr(bloodDamage,0) <= 0) {
-                            compoundTag.putFloat(bloodTime, 0);
-                        }
-                        if (player.isDeadOrDying()) {
-                            compoundTag.putFloat(bloodDamage, 0);
-                            compoundTag.putFloat(bloodTime, 0);
-                        }
+        if (event.getEntity() instanceof Player player) {
+            if (Handler.has(player, InitItems.God_Apple.get())) {
+                if (!event.getSource().is(DamageTypes.GENERIC_KILL)) {
+                    CompoundTag compoundTag = player.getPersistentData();
+                    float max = ConfigItem.intValue.get().floatValue();
+                    if (event.getNewDamage() > max) {
+                        float damage = event.getNewDamage() - max;
 
-                        if (!player.level().isClientSide()
-                                && player.tickCount % 20 == 1) {
-                            if (compoundTag.getIntOr(bloodTime,0) > 0 && compoundTag.getFloatOr(bloodDamage,0) > 0) {
-                                compoundTag.putInt(bloodTime, compoundTag.getIntOr(bloodTime,0) - TIME / 10);
-                                float dmg = compoundTag.getFloatOr(bloodDamage,0) / 10f;
-                                compoundTag.putFloat(bloodDamage, compoundTag.getFloatOr(bloodDamage,0) - dmg);
-                                player.hurt(player.damageSources().genericKill(), dmg);
-                            }
-                        }
-                        break;
-                    }else {
-                        stack.set(DataReg.tag,new CompoundTag());
+                        compoundTag.putFloat(lastDamage,
+                                compoundTag.getIntOr(lastDamage,0) + damage);
+                        compoundTag.putInt(damageTime,TIME);
+
+                        event.setNewDamage(max);
                     }
                 }
             }
         }
     }
+
+    @Override
+    public void tick(Player entity, ItemStack stack) {
+        super.tick(entity, stack);
+
+        CompoundTag compoundTag = entity.getPersistentData();
+
+        if (entity.isDeadOrDying()) {
+            compoundTag.putFloat(lastDamage, 0);
+            compoundTag.putInt(damageTime, 0);
+        }
+        if (entity.tickCount % 20 == 1) {
+            if (compoundTag.getFloatOr(lastDamage,0) > 0 && compoundTag.getIntOr(damageTime,0) > 0) {
+                entity.setInvulnerableTime(0);
+                entity.damageCooldownTime = 0;
+                entity.hurt(entity.damageSources().genericKill(),compoundTag.getFloatOr(lastDamage,0) / TIME);
+                compoundTag.putInt(damageTime,compoundTag.getIntOr(damageTime,0) - 1);
+            }else {
+                compoundTag.putInt(damageTime,0);
+                compoundTag.putFloat(lastDamage,0);
+
+            }
+        }
+    }
+
     @Nullable
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> muAttribute(Player player,ItemStack stack) {
