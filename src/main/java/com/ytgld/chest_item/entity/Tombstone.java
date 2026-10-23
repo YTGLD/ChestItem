@@ -36,6 +36,10 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
     public boolean attack = false;
     public int lastTick = 0;
     private final List<Vec3> trailPositions = new ArrayList<>();
+
+    public boolean playSound = false;
+
+
     public Tombstone(EntityType<? extends Tombstone> type, Level level) {
         super(type, level);
     }
@@ -48,6 +52,15 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
             onGroundTime ++;
         }
 
+        if (!(this.getOwner() instanceof Player player)) {
+            return;
+        }
+        if (playSound &&!this.level().isClientSide() &&  tickCount % 20 == 1) {
+            this.level().playSound(null,player.blockPosition(),Sounds.tombstone.value(),
+                    SoundSource.NEUTRAL,0.8f,
+                    Mth.nextFloat(random,0.8f,1.2f));
+        }
+
         if (this.level().isClientSide()) {
             if (trailPositions.size() < 10) {
                 trailPositions.add(this.position());
@@ -58,9 +71,6 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
         }
         lastFace = face;
         face++;
-        if (!(this.getOwner() instanceof Player player)) {
-            return;
-        }
         this.setDeltaMovement(new Vec3(0, -5, 0));
         if (!level().isClientSide()) {
             if (this.tickCount > time) {
@@ -146,7 +156,7 @@ public class Tombstone extends TamableAnimal implements TrailEntity{
                 if (living.is(this)) {
                     continue;
                 }
-                if (!(living instanceof Player player)) {
+                if (!(this.getOwner() instanceof Player player)) {
                     continue;
                 }
                 if (!living.is(player)) {

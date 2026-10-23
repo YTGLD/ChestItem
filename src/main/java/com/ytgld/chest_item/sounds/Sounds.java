@@ -33,4 +33,19 @@ public class Sounds {
             "bass",
             SoundEvent::createVariableRangeEvent
     );
+
+    public static final Holder<SoundEvent> shadow_shield_heal_max = REGISTRY.register(
+            "shadow_shield_heal_max",
+            SoundEvent::createVariableRangeEvent
+    );
+
+    public static final Holder<SoundEvent> shadow_shield_heal = REGISTRY.register(
+            "shadow_shield_heal",
+            SoundEvent::createVariableRangeEvent
+    );
+
+    public static final Holder<SoundEvent> tombstone = REGISTRY.register(
+            "tombstone",
+            SoundEvent::createVariableRangeEvent
+    );
 }

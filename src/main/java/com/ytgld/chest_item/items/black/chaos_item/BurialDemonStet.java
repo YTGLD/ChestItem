@@ -47,14 +47,16 @@ public class BurialDemonStet extends ItemBlackShadow implements SkillItem {
             tombstone.setPos(x, player.getY() + 12, z);
             tombstone.setOwner(player);
             tombstone.tame(player);
-
+            if (i == 1) {
+                tombstone.playSound = true;
+            }
 
             AddUtil.addWrathHeaven(player,new Vec3(x,player.getY() + 0.1f,z),
                     Light.ARGB.color(255,255,50,255),12,false);
 
             player.level().addFreshEntity(tombstone);
         }
-        player.level().playSound(null,player.blockPosition(), Sounds.bass.value(), SoundSource.MASTER,1,0.8f);
+        player.level().playSound(null,player.blockPosition(), Sounds.bass.value(), SoundSource.MASTER,0.2f,0.8f);
         player.level().playSound(null,player.blockPosition(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.MASTER,0.5F,0.25F);
 
         player.getCooldowns().addCooldown(InitItems.BurialDemonStet_.asItem().getDefaultInstance(),600);

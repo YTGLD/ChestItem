@@ -556,67 +556,69 @@ public class EventMain {
         PainShieldHandler.tickShield(living);
         upDataHyperplasiaCooldown(living);
 
-        if (PainShieldHandler.canHeal(living)){
-            int cooldown = living.getData(AttReg.hyperplasiaCooldownAttachmentType);
-            if (cooldown <= 0) {
-                AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
-                AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
-                if (hyperplasia != null && hyperplasia_speed != null) {
-                    float time = (float) (15 * hyperplasia_speed.getValue());
-                    if (time < 1) {
-                        time = 1;
-                    }
-                    float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
-                    if (living.tickCount % (time * 7) == 1) {
-                        Handler.addHyperplasiaData(living, 1);
-                    }
-                    if (data < 0) {
-                        Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES, living, 0f);
+        if (living.isAlive()) {
+            if (PainShieldHandler.canHeal(living)) {
+                int cooldown = living.getData(AttReg.hyperplasiaCooldownAttachmentType);
+                if (cooldown <= 0) {
+                    AttributeInstance hyperplasia = living.getAttribute(AttReg.hyperplasia);
+                    AttributeInstance hyperplasia_speed = living.getAttribute(AttReg.hyperplasia_speed);
+                    if (hyperplasia != null && hyperplasia_speed != null) {
+                        float time = (float) (15 * hyperplasia_speed.getValue());
+                        if (time < 1) {
+                            time = 1;
+                        }
+                        float data = living.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
+                        if (living.tickCount % (time * 7) == 1) {
+                            Handler.addHyperplasiaData(living, 1);
+                        }
+                        if (data < 0) {
+                            Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES, living, 0f);
+                        }
                     }
                 }
             }
-        }
-        if (PainShieldHandler.canHeal(living)){
-            AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
-            if (attributeInstance != null ) {
-                float timeModify = (float) living.getAttributeValue(AttReg.chaos_armor_speed);
+            if (PainShieldHandler.canHeal(living)) {
+                AttributeInstance attributeInstance = living.getAttribute(AttReg.chaos_armor);
+                if (attributeInstance != null) {
+                    float timeModify = (float) living.getAttributeValue(AttReg.chaos_armor_speed);
 
-                int doTime = (int) (100 * timeModify);
+                    int doTime = (int) (100 * timeModify);
 
-                if (doTime < 10) {
-                    doTime = 10;
-                }
-                float sNumber = (float) attributeInstance.getValue();
-                float data = living.getData(AttReg.chaosWinds);
-
-                if (living.tickCount % doTime == 1) {
-                    if (data < sNumber) {
-                        Handler.setDataValue(AttReg.chaosWinds,living, data + 1);
+                    if (doTime < 10) {
+                        doTime = 10;
                     }
-                }
-                if (data < 0) {
-                    Handler.setDataValue(AttReg.chaosWinds,living, 0f);
-                }
-            }
-        }
-        upDataShadowCooldown(living);
-        if (PainShieldHandler.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
-            if (living.getData(AttReg.shadow_shield_cooldown_dataAttachmentType) <= 0) {
-                AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
-                AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
+                    float sNumber = (float) attributeInstance.getValue();
+                    float data = living.getData(AttReg.chaosWinds);
 
-                if (shadow_shield != null && shadow_shield_speed != null) {
-                    float time = 300;
-                    time /= (float) shadow_shield_speed.getValue();
-                    if (time < 20) {
-                        time = 20f;
-                    }
-                    float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
-                    if (living.tickCount % (int) time == 1) {
-                        Handler.addShadowBlackShieldData(living,1);
+                    if (living.tickCount % doTime == 1) {
+                        if (data < sNumber) {
+                            Handler.setDataValue(AttReg.chaosWinds, living, data + 1);
+                        }
                     }
                     if (data < 0) {
-                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES, living, 0f);
+                        Handler.setDataValue(AttReg.chaosWinds, living, 0f);
+                    }
+                }
+            }
+            upDataShadowCooldown(living);
+            if (PainShieldHandler.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
+                if (living.getData(AttReg.shadow_shield_cooldown_dataAttachmentType) <= 0) {
+                    AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
+                    AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
+
+                    if (shadow_shield != null && shadow_shield_speed != null) {
+                        float time = 150;
+                        time /= (float) shadow_shield_speed.getValue();
+                        if (time < 20) {
+                            time = 20f;
+                        }
+                        float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                        if (living.tickCount % (int) time == 1) {
+                            Handler.addShadowBlackShieldData(living, 1);
+                        }
+                        if (data < 0) {
+                            Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES, living, 0f);
+                        }
                     }
                 }
             }

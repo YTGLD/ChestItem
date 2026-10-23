@@ -1,13 +1,16 @@
 package com.ytgld.chest_item.renderer;
 
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
 import com.ytgld.chest_item.renderer.light.Light;
+import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
@@ -21,6 +24,7 @@ public class BlackShieldRenderHandler {
     public static float aGlowMin = 0F;
     public static float aGlowDOLDOWN = 0f;
     public static float glowRed = 0f;
+    public static boolean isFull = false;
 
     public static void tick(ClientTickEvent event) {
         var player = Minecraft.getInstance().player;
@@ -43,15 +47,19 @@ public class BlackShieldRenderHandler {
                 if (now < max) {
                     aFloat = 1;
                     aFloatCool = 40;
+                    isFull = false;
                 }else {
-                    if (aFloatCool <= 0) {
-                        if (aFloat > 0) {
-                            aFloat -= 0.025f;
-                        }
-
-                        if (aFloat <= 0) {
-                            aFloat = 0;
-                        }
+                    //满了
+                    if (!isFull) {
+                        HandlerClient.sound(Sounds.shadow_shield_heal_max.value(),
+                                1,0.8f);
+                        isFull = true;
+                    }
+                    if (aFloat > 0) {
+                        aFloat -= 0.1f;
+                    }
+                    if (aFloat <= 0) {
+                        aFloat = 0;
                     }
                 }
                 if (glow > 0) {
@@ -62,6 +70,24 @@ public class BlackShieldRenderHandler {
                     aGlowDOLDOWN = 1;
                     aGlow = 1f;
                     aGlowMin = 0f;
+                    if (lastShield < now) {
+                        float delta = (float) (player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) / max);
+                        if (delta > 1) {
+                            delta = 1;
+                        }
+                        float p = 0.2f;
+                        if (delta <= 0.25 && delta > 0.1f) {
+                            p += 0.25f;
+                        } else if (delta > 0.25 && delta <= 0.5) {
+                            p += 0.5f;
+                        }else if (delta > 0.5 && delta <= 0.75) {
+                            p += 0.75f;
+                        }else if (delta > 0.75 && delta <= 1) {
+                            p += 1f;
+                        }
+                        HandlerClient.sound(Sounds.shadow_shield_heal.value(),
+                                p,0.45f);
+                    }
                 }
                 if (aFloat < 1) {
                     aGlow = 1f;
@@ -86,15 +112,11 @@ public class BlackShieldRenderHandler {
 
                 lastShield = now;
                 time += 1;
-                if (soundCool > 0) {
-                    soundCool--;
-                }
             }
         }
     }
     public static float aFloat = 1;
     public static float aFloatCool = 40;
-    public static int soundCool = 1;
 
     public static void renderShield(GuiGraphicsExtractor guiGraphics) {
         var minecraft = Minecraft.getInstance();

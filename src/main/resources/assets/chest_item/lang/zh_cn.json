@@ -1695,6 +1695,13 @@
   "item.chest_item.judgment.string.1": "腐化血灵的血珠移动到目标上方",
   "item.chest_item.judgment.string.2": "并且目标的速度将降低60%",
   "item.chest_item.judgment.string.3": "若目标免疫缓慢，则释放血珠的伤害加倍",
+
+  "sound.chest_item.shadow_shield_heal_max" : "幽影护盾：恢复完毕",
+  "sound.chest_item.shadow_shield_heal" : "幽影护盾：恢复",
+  "sound.chest_item.tombstone" : "墓碑：嗡鸣",
+
+
+
   "chest_item.book.test.main": "通往深渊的“门户”",
   "chest_item.book.test.1": "作者：亚特格拉德（YTGLD）",
   "chest_item.book.test.2": "贡献者：秋季",

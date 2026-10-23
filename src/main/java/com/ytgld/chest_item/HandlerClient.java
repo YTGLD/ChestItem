@@ -5,6 +5,8 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.ytgld.chest_item.entity.TrailEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +19,13 @@ public class HandlerClient {
     private static boolean showRenderWarped = false;
     private static boolean showRenderLight = false;
     private static boolean showRenderVisualFire = false;
-
+    public static void sound(SoundEvent event,float p, float v){
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(
+                event,
+                p,
+                v
+        ));
+    }
     public static void addTrail(PoseStack.Pose matrices,
                           TrailEntity trailEntity,
                           Entity entity,

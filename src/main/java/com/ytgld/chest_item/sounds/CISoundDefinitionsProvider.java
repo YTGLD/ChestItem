@@ -68,5 +68,35 @@ public class CISoundDefinitionsProvider extends SoundDefinitionsProvider {
                 .subtitle("sound.chest_item.bass")
                 .replace(true)
         );
+
+
+        add(Sounds.tombstone, SoundDefinition.definition()
+                .with(sound("chest_item:tombstone",SoundDefinition.SoundType.SOUND)
+                        .stream(true)
+                        .preload(false)
+                )
+                .subtitle("sound.chest_item.tombstone")
+                .replace(false)
+        );
+        add(Sounds.shadow_shield_heal_max, SoundDefinition.definition()
+                .with(sound("chest_item:shadow_shield_heal_max",SoundDefinition.SoundType.SOUND)
+                        .stream(true)
+                        .preload(false)
+                )
+                .subtitle("sound.chest_item.shadow_shield_heal_max")
+                .replace(true)
+        );
+        add(Sounds.shadow_shield_heal, SoundDefinition.definition()
+                .with(sound("chest_item:shadow_shield_heal_1",SoundDefinition.SoundType.SOUND)
+                        .stream(true)
+                        .preload(false)
+                )
+                .with(sound("chest_item:shadow_shield_heal_2",SoundDefinition.SoundType.SOUND)
+                        .stream(true)
+                        .preload(false)
+                )
+                .subtitle("sound.chest_item.shadow_shield_heal")
+                .replace(true)
+        );
     }
 }

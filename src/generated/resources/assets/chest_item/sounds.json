@@ -49,6 +49,30 @@
     ],
     "subtitle": "sound.chest_item.sound_1"
   },
+  "shadow_shield_heal": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:shadow_shield_heal_1",
+        "stream": true
+      },
+      {
+        "name": "chest_item:shadow_shield_heal_2",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.shadow_shield_heal"
+  },
+  "shadow_shield_heal_max": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:shadow_shield_heal_max",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.shadow_shield_heal_max"
+  },
   "sword": {
     "replace": true,
     "sounds": [
@@ -66,5 +90,14 @@
       }
     ],
     "subtitle": "sound.chest_item.sword"
+  },
+  "tombstone": {
+    "sounds": [
+      {
+        "name": "chest_item:tombstone",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.tombstone"
   }
 }
