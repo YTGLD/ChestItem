@@ -3,7 +3,6 @@ package com.ytgld.chest_item.renderer;
 import com.ytgld.chest_item.Chestitem;
 import com.ytgld.chest_item.HandlerClient;
 import com.ytgld.chest_item.items.AttReg;
-import com.ytgld.chest_item.renderer.gui_particles.BlackKey;
 import com.ytgld.chest_item.renderer.light.Light;
 import com.ytgld.chest_item.sounds.Sounds;
 import net.minecraft.client.Minecraft;
@@ -11,7 +10,6 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
@@ -20,7 +18,6 @@ public class BlackShieldRenderHandler {
     public static int glow;
     public static double lastShield;
     public static float time = 0;
-    public static float aSize = 1;
     public static float aGlow = 1f;
     public static float aGlowMin = 0F;
     public static float aGlowDOLDOWN = 0f;
@@ -46,7 +43,7 @@ public class BlackShieldRenderHandler {
         var player = Minecraft.getInstance().player;
         if (player != null) {
             double max = player.getAttributeValue(AttReg.shadow_shield);
-            double now = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+            double now = player.getData(AttReg.shadowShieldTypes);
             if (max > 0) {
                 if (glowRed > 0) {
                     glowRed -= 0.05f;
@@ -89,7 +86,7 @@ public class BlackShieldRenderHandler {
                     aGlow = 1f;
                     aGlowMin = 0f;
                     if (lastShield < now) {
-                        float delta = (float) (player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) / max);
+                        float delta = (float) (player.getData(AttReg.shadowShieldTypes) / max);
                         if (delta > 1) {
                             delta = 1;
                         }
@@ -121,14 +118,6 @@ public class BlackShieldRenderHandler {
                         aGlow -= 0.1f;
                     }
                 }
-                if (aFloat < 1) {
-                    if (aSize < 1.5f) {
-                        aSize += 0.003f;
-                    }
-                }else {
-                    aSize = 1;
-                }
-
                 lastShield = now;
                 time += 1;
             }
@@ -144,7 +133,7 @@ public class BlackShieldRenderHandler {
         var player = minecraft.player;
         if (player != null && minecraft.level != null) {
             if (!player.isCreative() && !player.isSpectator()) {
-                if (player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) <= 0) {
+                if (player.getData(AttReg.shadowShieldTypes) <= 0) {
                     return;
                 }
 
@@ -162,24 +151,6 @@ public class BlackShieldRenderHandler {
 
 
                 double max = player.getAttributeValue(AttReg.shadow_shield);
-                if (max > 0) {
-                    if (aFloat < 1 && sanValue(player) < 10) {
-                        poseStack.pushMatrix();
-                        poseStack.translate(
-                                ((guiGraphics.guiWidth() / 2f) - (24 * aSize) / 2),
-                                ((guiGraphics.guiHeight() - 47f) - (24 * aSize) / 2));
-                        poseStack.scale(aSize, aSize);
-
-                        guiGraphics.blit(MRender.RenderPs.GUI_TEXTURED
-                                , Identifier.fromNamespaceAndPath(Chestitem.MODID,
-                                        "textures/gui/black_shadow_glow_4.png"),0,0,0,0,
-                                24,24,
-                                24,24,
-                                Light.ARGB.color((int) (aFloat * 255),255,255, 255));
-
-                        poseStack.popMatrix();
-                    }
-                }
                 poseStack.pushMatrix();
                 poseStack.translate(
                         (guiGraphics.guiWidth() / 2f) - (float) (24) / 2,
@@ -189,7 +160,7 @@ public class BlackShieldRenderHandler {
                     if (s < 0) {
                         s = 0;
                     }
-                    float delta = (float) (player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) / max);
+                    float delta = (float) (player.getData(AttReg.shadowShieldTypes) / max);
 
                     if (delta > 1) {
                         delta = 1;

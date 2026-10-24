@@ -40,15 +40,15 @@ public class ShadowMint extends ItemBlackShadow {
                         if (stack.is(InitItems.ShadowMint_)) {
 
                             if (event.getSource().getEntity() instanceof LivingEntity living) {
-                                float shadow_shield = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                                float shadow_shield = player.getData(AttReg.shadowShieldTypes);
 
                                 if (shadow_shield > 0) {
                                     living.hurt(living.damageSources().magic(),10);
                                     if (living.isDeadOrDying()){
-                                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, shadow_shield + 4);
+                                        Handler.setDataValue(AttReg.shadowShieldTypes,player, shadow_shield + 4);
                                         player.heal(4);
                                     }
-                                    Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, shadow_shield - 1);
+                                    Handler.setDataValue(AttReg.shadowShieldTypes,player, shadow_shield - 1);
                                     break;
                                 }
                             }

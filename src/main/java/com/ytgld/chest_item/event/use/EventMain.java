@@ -286,7 +286,7 @@ public class EventMain {
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent.Pre event){
         thepainShield(event);
-        ShiedHandler.ShadowShield(event);
+        ShiedHandler.shadowShield(event);
         Adjudication.addSword(event);
 
         Complementary.damage(event);
@@ -395,7 +395,7 @@ public class EventMain {
     }
     public void hyperplasiaShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player living) {
-            float shadow_shield = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+            float shadow_shield = living.getData(AttReg.shadowShieldTypes);
             if (shadow_shield > 0) {
                 return;
             }
@@ -448,7 +448,7 @@ public class EventMain {
 
     public void ChaosShield (LivingDamageEvent.Pre event) {
         if (event.getEntity() instanceof Player living) {
-            float shadow_shield = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+            float shadow_shield = living.getData(AttReg.shadowShieldTypes);
             if (shadow_shield > 0) {
                 return;
             }
@@ -602,7 +602,7 @@ public class EventMain {
             }
             upDataShadowCooldown(living);
             if (PainShieldHandler.canHeal(living) && Contradiction.ContradictionTooltip.canHeal(living)) {
-                if (living.getData(AttReg.shadow_shield_cooldown_dataAttachmentType) <= 0) {
+                if (living.getData(AttReg.shadowShieldCooldownType) <= 0) {
                     AttributeInstance shadow_shield = living.getAttribute(AttReg.shadow_shield);
                     AttributeInstance shadow_shield_speed = living.getAttribute(AttReg.shadow_shield_speed);
 
@@ -612,12 +612,12 @@ public class EventMain {
                         if (time < 20) {
                             time = 20f;
                         }
-                        float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                        float data = living.getData(AttReg.shadowShieldTypes);
                         if (living.tickCount % (int) time == 1) {
                             Handler.addShadowBlackShieldData(living, 1);
                         }
                         if (data < 0) {
-                            Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES, living, 0f);
+                            Handler.setDataValue(AttReg.shadowShieldTypes, living, 0f);
                         }
                     }
                 }
@@ -626,12 +626,12 @@ public class EventMain {
     }
     public static void upDataShadowCooldown(Player player){
         if (player.tickCount % 20 == 1) {
-            int c = player.getData(AttReg.shadow_shield_cooldown_dataAttachmentType);
+            int c = player.getData(AttReg.shadowShieldCooldownType);
             int newV = c - 1;
             if (newV < 0) {
                 newV = 0;
             }
-            Handler.setDataValue(AttReg.shadow_shield_cooldown_dataAttachmentType, player, newV);
+            Handler.setDataValue(AttReg.shadowShieldCooldownType, player, newV);
         }
     }
     @SubscribeEvent

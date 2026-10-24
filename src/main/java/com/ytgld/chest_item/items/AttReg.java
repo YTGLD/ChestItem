@@ -96,23 +96,23 @@ public class AttReg {
     /**
      * 失败的理论——探索未知
      */
-    public static final Supplier<AttachmentType<Float>> shadow_shield_ATTACHMENT_TYPES = ATTACHMENT_TYPES.register(
+    public static final Supplier<AttachmentType<Float>> shadowShieldTypes = ATTACHMENT_TYPES.register(
             "shadow_shield", () -> AttachmentType.builder(() -> 0f).sync(new SyncHandler())
                     .serialize(Codec.FLOAT.fieldOf("shadow_shield")).build()
     );
     public static final DeferredHolder<Attribute,?> shadow_shield = REGISTRY.register("shadow_shield",()->{
-        return new RangedAttribute("attribute.name.chest_item.shadow_shield", 0, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.shadow_shield", 0, 0, 80).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> shadow_shield_speed = REGISTRY.register("shadow_shield_speed",()->{
         return new RangedAttribute("attribute.name.chest_item.shadow_shield_speed", 1, -1024, 1024).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> shadow_shield_stronger = REGISTRY.register("shadow_shield_stronger",()->{
-        return new RangedAttribute("attribute.name.chest_item.shadow_shield_stronger", 1, -1024, 1024).setSyncable(true);
+        return new RangedAttribute("attribute.name.chest_item.shadow_shield_stronger", 1, 0.1f, 2).setSyncable(true);
     });
     public static final DeferredHolder<Attribute,?> shadow_shield_conversion = REGISTRY.register("shadow_shield_conversion",()->{
         return new RangedAttribute("attribute.name.chest_item.shadow_shield_conversion", 1, -1024, 1024).setSyncable(true);
     });
-    public static final Supplier<AttachmentType<Integer>> shadow_shield_cooldown_dataAttachmentType = ATTACHMENT_TYPES.register(
+    public static final Supplier<AttachmentType<Integer>> shadowShieldCooldownType = ATTACHMENT_TYPES.register(
             "shadow_shield_cooldown_data", () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler()).serialize(Codec.INT.
                     fieldOf("shadow_shield_cooldown_data")).build()
     );

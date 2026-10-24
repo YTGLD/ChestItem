@@ -34,10 +34,10 @@ public class PainShieldHandler {
                                 }
                             }
                             {
-                                float other = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                                float other = player.getData(AttReg.shadowShieldTypes);
                                 if (other > 0) {
                                     addPain(player, speed.getValue(), other);
-                                    Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES, player, player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES) - 1);
+                                    Handler.setDataValue(AttReg.shadowShieldTypes, player, player.getData(AttReg.shadowShieldTypes) - 1);
                                 }
                             }
                             {
@@ -50,7 +50,7 @@ public class PainShieldHandler {
                         }
                     } else {
                         Handler.setDataValue(AttReg.chaosWinds,player, 0f);
-                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, 0f);
+                        Handler.setDataValue(AttReg.shadowShieldTypes,player, 0f);
                         Handler.setDataValue(AttReg.hyperplasiaATTACHMENT_TYPES,player, 0f);
                     }
                 }

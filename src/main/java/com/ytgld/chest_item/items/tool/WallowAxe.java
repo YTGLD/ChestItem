@@ -45,7 +45,7 @@ public class WallowAxe extends Item implements IBlackLight , ITheChaos {
             if (event.getEntity().getMainHandItem().is(InitItems.WallowAxe_.get())) {
                 if (Handler.has(player, InitItems.DryBones_.asItem())) {
                     float vValue = (float) player.getAttributeValue(AttReg.shadow_shield);
-                    float attachment = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                    float attachment = player.getData(AttReg.shadowShieldTypes);
 
                     float a = attachment / vValue;
 
@@ -56,7 +56,7 @@ public class WallowAxe extends Item implements IBlackLight , ITheChaos {
                         if (c < 0) {
                             c = 0;
                         }
-                        Handler.setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player, c);
+                        Handler.setDataValue(AttReg.shadowShieldTypes,player, c);
                     }
                 }
             }

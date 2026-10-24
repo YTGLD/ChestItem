@@ -36,12 +36,12 @@ public class Handler {
         if (living instanceof Player player) {
             AttributeInstance shadowAttributeInstance = player.getAttribute(AttReg.shadow_shield);
             if (shadowAttributeInstance != null ) {
-                int cooldown = player.getData(AttReg.shadow_shield_cooldown_dataAttachmentType);
+                int cooldown = player.getData(AttReg.shadowShieldCooldownType);
                 if (cooldown > 0) {
                     number = 0;
                 }
                 float shadowValue = (float) shadowAttributeInstance.getValue();
-                float data = living.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+                float data = living.getData(AttReg.shadowShieldTypes);
                 float newValue = data + number;
                 if (data > shadowValue) {
                     return;
@@ -50,7 +50,7 @@ public class Handler {
                     newValue = shadowValue;
                 }
 
-                setDataValue(AttReg.shadow_shield_ATTACHMENT_TYPES,player,newValue);
+                setDataValue(AttReg.shadowShieldTypes,player,newValue);
             }
         }
     }

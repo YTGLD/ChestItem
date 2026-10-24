@@ -62,7 +62,7 @@ public class DryBones extends ItemBlackShadow {
     public Multimap<Holder<Attribute>, AttributeModifier> doAttribute(ItemStack stack,Player player) {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers = HashMultimap.create();
         float hyperplasia = player.getData(AttReg.hyperplasiaATTACHMENT_TYPES);
-        float shadow_shield = player.getData(AttReg.shadow_shield_ATTACHMENT_TYPES);
+        float shadow_shield = player.getData(AttReg.shadowShieldTypes);
         float a =0;
         float s =0;
         float d =0;
