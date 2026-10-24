@@ -8,44 +8,18 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class Sounds {
     public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(Registries.SOUND_EVENT,Chestitem.MODID);
-    public static final Holder<SoundEvent> LASER = REGISTRY.register(
-            "laser_column",
-            SoundEvent::createVariableRangeEvent
-    );
-    public static final Holder<SoundEvent> Heart = REGISTRY.register(
-            "heart",
-            SoundEvent::createVariableRangeEvent
-    );
-    public static final Holder<SoundEvent> Sword = REGISTRY.register(
-            "sword",
-            SoundEvent::createVariableRangeEvent
-    );
+    public static final Holder<SoundEvent> LASER = REGISTRY.register("laser_column", SoundEvent::createVariableRangeEvent);
+    public static final Holder<SoundEvent> Heart = REGISTRY.register("heart", SoundEvent::createVariableRangeEvent);
+    public static final Holder<SoundEvent> Sword = REGISTRY.register("sword", SoundEvent::createVariableRangeEvent);
+    public static final Holder<SoundEvent> Kill = REGISTRY.register("kill", SoundEvent::createVariableRangeEvent);
+    public static final Holder<SoundEvent> FlySword = REGISTRY.register("fly_sword", SoundEvent::createVariableRangeEvent);
+    public static final Holder<SoundEvent> bass = REGISTRY.register("bass", SoundEvent::createVariableRangeEvent);
+    public static final Holder<SoundEvent> shadow_shield_heal_max = REGISTRY.register("shadow_shield_heal_max", SoundEvent::createVariableRangeEvent);
+    public static final Holder<SoundEvent> shadow_shield_heal = REGISTRY.register("shadow_shield_heal", SoundEvent::createVariableRangeEvent);
+    public static final Holder<SoundEvent> tombstone = REGISTRY.register("tombstone", SoundEvent::createVariableRangeEvent);
 
-    public static final Holder<SoundEvent> Kill = REGISTRY.register(
-            "kill",
-            SoundEvent::createVariableRangeEvent
-    );
-    public static final Holder<SoundEvent> FlySword = REGISTRY.register(
-            "fly_sword",
-            SoundEvent::createVariableRangeEvent
-    );
-    public static final Holder<SoundEvent> bass = REGISTRY.register(
-            "bass",
-            SoundEvent::createVariableRangeEvent
-    );
+    public static final Holder<SoundEvent> evil_shield_full = REGISTRY.register("evil_shield_full", SoundEvent::createVariableRangeEvent);
+    public static final Holder<SoundEvent> evil_shield_heal = REGISTRY.register("evil_shield_heal", SoundEvent::createVariableRangeEvent);
 
-    public static final Holder<SoundEvent> shadow_shield_heal_max = REGISTRY.register(
-            "shadow_shield_heal_max",
-            SoundEvent::createVariableRangeEvent
-    );
 
-    public static final Holder<SoundEvent> shadow_shield_heal = REGISTRY.register(
-            "shadow_shield_heal",
-            SoundEvent::createVariableRangeEvent
-    );
-
-    public static final Holder<SoundEvent> tombstone = REGISTRY.register(
-            "tombstone",
-            SoundEvent::createVariableRangeEvent
-    );
 }

@@ -9,6 +9,26 @@
     ],
     "subtitle": "sound.chest_item.bass"
   },
+  "evil_shield_full": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:evil_shield_full",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.evil_shield_full"
+  },
+  "evil_shield_heal": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chest_item:evil_shield_heal",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.chest_item.evil_shield_heal"
+  },
   "fly_sword": {
     "replace": true,
     "sounds": [

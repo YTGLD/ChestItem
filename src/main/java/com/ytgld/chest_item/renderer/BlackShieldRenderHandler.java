@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -26,6 +27,21 @@ public class BlackShieldRenderHandler {
     public static float glowRed = 0f;
     public static boolean isFull = false;
 
+    private static void applySound(Player player,float p ,float v, SoundEvent event,SoundEvent evil){
+        //4
+        int value = (int) player.getAttributeValue(AttReg.theSanity);
+        //10
+        int base = (int) player.getAttributeBaseValue(AttReg.theSanity);
+
+        int cha = base - value;
+
+        if (cha >= base) {
+            HandlerClient.sound(evil, p,v);
+        }else {
+            HandlerClient.sound(event, p,v);
+        }
+
+    }
     public static void tick(ClientTickEvent event) {
         var player = Minecraft.getInstance().player;
         if (player != null) {
@@ -51,8 +67,10 @@ public class BlackShieldRenderHandler {
                 }else {
                     //满了
                     if (!isFull) {
-                        HandlerClient.sound(Sounds.shadow_shield_heal_max.value(),
-                                1,0.8f);
+                        applySound(player,1,1.1f,
+                                Sounds.shadow_shield_heal_max.value(),
+                                Sounds.evil_shield_full.value());
+
                         isFull = true;
                     }
                     if (aFloat > 0) {
@@ -85,8 +103,9 @@ public class BlackShieldRenderHandler {
                         }else if (delta > 0.75 && delta <= 1) {
                             p += 1f;
                         }
-                        HandlerClient.sound(Sounds.shadow_shield_heal.value(),
-                                p,0.45f);
+                        applySound(player,p,0.75f,
+                                Sounds.shadow_shield_heal.value(),
+                                Sounds.evil_shield_heal.value());
                     }
                 }
                 if (aFloat < 1) {
@@ -117,6 +136,7 @@ public class BlackShieldRenderHandler {
     }
     public static float aFloat = 1;
     public static float aFloatCool = 40;
+
 
     public static void renderShield(GuiGraphicsExtractor guiGraphics) {
         var minecraft = Minecraft.getInstance();

@@ -1627,6 +1627,8 @@
   "sound.chest_item.shadow_shield_heal_max" : "幽影护盾：恢复完毕",
   "sound.chest_item.shadow_shield_heal" : "幽影护盾：恢复",
   "sound.chest_item.tombstone" : "墓碑：嗡鸣",
+  "sound.chest_item.evil_shield_full" : "邪母护盾：恢复完毕",
+  "sound.chest_item.evil_shield_heal" : "邪母护盾：恢复",
 
 
   "chest_item.book.test.main": "通往深渊的门户",
