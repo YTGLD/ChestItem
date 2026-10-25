@@ -19,6 +19,15 @@
     "chest_item:distillation",
     "chest_item:mystery_liner",
     "chest_item:fusion",
+    "chest_item:judgment",
+    "chest_item:rage_stone",
+    "chest_item:strange_jewelry",
+    "chest_item:wind_repeater",
+    "chest_item:gaze_eye",
+    "chest_item:barrier_construct",
+    "chest_item:parent_rock",
+    "chest_item:first_aid_kit",
+    "chest_item:rotten_reed",
     "chest_item:evil_belt"
   ]
 }

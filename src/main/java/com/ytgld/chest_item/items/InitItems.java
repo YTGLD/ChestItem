@@ -323,6 +323,18 @@ public class InitItems {
     public static final DeferredItem<Item> EmperorCup_ = register("emperor_cup",
             (Identifier)-> new EmperorCup(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
 
+    public static final DeferredItem<Item> BarrierConstruct_ = register("barrier_construct",
+            (Identifier)-> new BarrierConstruct(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<Item> ParentRock_ = register("parent_rock",
+            (Identifier)-> new ParentRock(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<Item> FirstAidKit_ = register("first_aid_kit",
+            (Identifier)-> new FirstAidKit(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
+    public static final DeferredItem<Item> RottenReed_ = register("rotten_reed",
+            (Identifier)-> new RottenReed(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
+
 
     public static final DeferredItem<Item> Reactor_ = register("reactor",
             (Identifier)-> new Item(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,Identifier))));
@@ -485,6 +497,10 @@ public class InitItems {
                     output.accept(InitItems.RageStone_);
                     output.accept(InitItems.WindRepeater_);
                     output.accept(InitItems.Judgment_);
+                    output.accept(InitItems.BarrierConstruct_);
+                    output.accept(InitItems.ParentRock_);
+                    output.accept(InitItems.FirstAidKit_);
+                    output.accept(InitItems.RottenReed_);
 
 
 
@@ -532,6 +548,16 @@ public class InitItems {
                     ReinforcedItems.Distillation_.getKey(),
                     ReinforcedItems.MysteryLiner_.getKey(),
                     ReinforcedItems.Fusion_.getKey(),
+
+                    Judgment_.getKey(),
+                    RageStone_.getKey(),
+                    StrangeJewelry_.getKey(),
+                    WindRepeater_.getKey(),
+                    GazeEye_.getKey(),
+                    BarrierConstruct_.getKey(),
+                    ParentRock_.getKey(),
+                    FirstAidKit_.getKey(),
+                    RottenReed_.getKey(),
 
                     EvilBelt_.getKey()
 

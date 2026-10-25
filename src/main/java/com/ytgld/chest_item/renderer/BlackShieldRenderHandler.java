@@ -33,7 +33,7 @@ public class BlackShieldRenderHandler {
         int cha = base - value;
 
         if (cha >= base) {
-            HandlerClient.sound(evil, p,v);
+            HandlerClient.sound(evil, p,v + 0.5f);
         }else {
             HandlerClient.sound(event, p,v);
         }

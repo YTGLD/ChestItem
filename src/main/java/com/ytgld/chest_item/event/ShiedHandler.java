@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -54,16 +55,20 @@ public class ShiedHandler {
                     float resDamage = (5 +  (max * 0.5f)) * value;
                     if (data <= 0) {
                         resDamage *= 0.25f;
-                        Handler.setDataValue(AttReg.shadowShieldCooldownType, player, 10);
+                        Handler.setDataValue(AttReg.shadowShieldCooldownType, player,
+                                (int) player.getAttributeValue(AttReg.shadowShieldCooldown));
                     }
-                    float endDamageCommon = damage * (100f - resDamage) / 100f;
+                    float doIt  = (100f - resDamage) / 100f;
+                    float endDamageCommon = damage * doIt;
                     float magicDamageRes = 0.05f;
                     if (theSanValue >= 10) {
                         float magicEndDamage = magicDamageRes * theSanValue;
                         float endDamageMagic = Math.max(0,1 - magicEndDamage);
-                        if (event.getSource().is(Tags.DamageTypes.IS_MAGIC)) {
+                        if (event.getSource().is(Tags.DamageTypes.IS_MAGIC) || event.getSource().is(DamageTypes.MAGIC)) {
                             float doMagic = event.getNewDamage() * endDamageMagic;
-                            event.setNewDamage(Math.max(0.1f,doMagic));
+                            event.setNewDamage(Math.max(0.1f,doMagic * doIt));
+                        }else {
+                            event.setNewDamage(Math.max(0.1f,endDamageCommon));
                         }
                     } else {
                         event.setNewDamage(Math.max(0.1f,endDamageCommon));
@@ -74,7 +79,9 @@ public class ShiedHandler {
         }
     }
     public static float sanValue (Player player){
+        //10
         float base = (float) player.getAttributeBaseValue(AttReg.theSanity);
+        //4
         float san = (float) player.getAttributeValue(AttReg.theSanity) - base;
         if (san < 0) {
             san = -san;

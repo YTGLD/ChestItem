@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A":  "minecraft:crying_obsidian",
+    "B":  "chest_item:mother_remains",
+    "C":  "chest_item:drug_heal"
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:first_aid_kit"
+  }
+}

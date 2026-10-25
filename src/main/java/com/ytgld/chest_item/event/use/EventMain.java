@@ -254,6 +254,7 @@ public class EventMain {
         Silent.livingHealEventSilent_(event);
         WarGodCommand.healOFf(event);
         EmperorCup.event(event);
+        FirstAidKit.event(event);
     }
     @SubscribeEvent
     public void LivingDeathEvent(PlayerEvent.PlayerRespawnEvent event){
@@ -306,6 +307,8 @@ public class EventMain {
         WallowAxe.damage(event);
         WarGodCommand.notDie(event);
         Triangle.hurtSize(event);
+        ParentRock.event(event);
+
 
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);

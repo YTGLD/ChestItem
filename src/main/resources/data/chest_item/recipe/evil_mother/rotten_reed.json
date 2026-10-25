@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A":  "minecraft:rotten_flesh",
+    "B":  "chest_item:mother_remains",
+    "C":  "chest_item:condense_bone_cube"
+  },
+  "pattern": [
+    " BA",
+    "BCB",
+    "BB "
+  ],
+  "result": {
+    "count": 1,
+    "id": "chest_item:rotten_reed"
+  }
+}
