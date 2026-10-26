@@ -8,6 +8,7 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
+import com.ytgld.chest_item.renderer.RenderIBlackLightItem;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.book.CIBookScreen;
 import com.ytgld.chest_item.renderer.gui_particles.BlackParticlesAdd;
@@ -71,6 +72,7 @@ public class ChestitemClient{
         BlackParticlesAdd.tick();
         RenderObjectManager.event(event);
         CIBookScreen.event(event);
+        RenderIBlackLightItem.clientTick(event);
     }
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiLayersEvent event) {

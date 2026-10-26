@@ -131,6 +131,9 @@ public class BlackShieldRenderHandler {
         var minecraft = Minecraft.getInstance();
         var poseStack = guiGraphics.pose();
         var player = minecraft.player;
+        if (minecraft.gui.hud.isHidden()) {
+            return;
+        }
         if (player != null && minecraft.level != null) {
             if (!player.isCreative() && !player.isSpectator()) {
                 if (player.getData(AttReg.shadowShieldTypes) <= 0) {

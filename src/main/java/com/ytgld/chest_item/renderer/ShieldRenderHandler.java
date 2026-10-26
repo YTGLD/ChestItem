@@ -197,6 +197,9 @@ public class ShieldRenderHandler {
         var minecraft = Minecraft.getInstance();
         var poseStack = guiGraphics.pose();
         var player = minecraft.player;
+        if (minecraft.gui.hud.isHidden()) {
+            return;
+        }
         if (player != null && minecraft.level != null) {
             if (!player.isCreative() && !player.isSpectator()) {
                 double maxShield = player.getAttributeValue(AttReg.painShield_number);

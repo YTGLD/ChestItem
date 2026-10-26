@@ -13,6 +13,7 @@ import com.ytgld.chest_item.items.black.soul.chaos.ChaosSeven;
 import com.ytgld.chest_item.items.black.soul.treaty.Complementary;
 import com.ytgld.chest_item.items.evil_mother.decay.DecayFruit;
 import com.ytgld.chest_item.items.evil_mother.soul.SoulBottle;
+import com.ytgld.chest_item.items.meet.trauma.ActualSuffering;
 import com.ytgld.chest_item.items.other.BoneHead;
 import com.ytgld.chest_item.items.other.GodBlood;
 import com.ytgld.chest_item.items.other.LifeCrystal;
@@ -431,6 +432,7 @@ public class InitItems {
                     output.accept(ReinforcedItems.RegenerationPlugin_);
                     output.accept(ReinforcedItems.ComplexComponents_);
                     output.accept(ReinforcedItems.StabilizingDevice_);
+                    output.accept(InitItems.ActualSuffering_);
 
 
 
@@ -446,7 +448,6 @@ public class InitItems {
                     output.accept(InitItems.OneEyedSpider_);
                     output.accept(InitItems.LeadOfEnlightenment_);
                     output.accept(InitItems.DefeatTheArmy_);
-                    output.accept(InitItems.ActualSuffering_);
                     output.accept(InitItems.WallowAxe_);
 
 //                    output.accept(InitItems.Warmaker_);

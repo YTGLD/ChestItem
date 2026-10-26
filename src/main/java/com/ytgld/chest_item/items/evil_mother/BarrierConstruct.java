@@ -64,8 +64,9 @@ public class BarrierConstruct extends EvilMother{
         int san = (int) player.getAttributeValue(AttReg.theSanity);
         int config = ConfigItem.intValue.getAsInt();
         float value = -san * config;
+        value /= 100f;
         modifiers.put(AttReg.shadow_shield_stronger, new AttributeModifier(identifier(),
-                value, AttributeModifier.Operation.ADD_VALUE));
+                value, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         return modifiers;
     }

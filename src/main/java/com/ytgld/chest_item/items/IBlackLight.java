@@ -16,6 +16,9 @@ public interface IBlackLight {
         return Identifier.fromNamespaceAndPath(Chestitem.MODID,
                 "textures/shadow/ci_star.png");
     }
+    default float stronger(){
+        return 1;
+    }
 
     default DoBlack colorBlack(){
         return new DoBlack(200,20,0,10, MRender.RenderPs.GUI_TEXTURED_BLACK_BlendFunction);

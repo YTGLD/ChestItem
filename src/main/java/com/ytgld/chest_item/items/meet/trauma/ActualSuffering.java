@@ -1,9 +1,10 @@
-package com.ytgld.chest_item.items.meet;
+package com.ytgld.chest_item.items.meet.trauma;
 
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.config.ConfigPlugin;
 import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.items.*;
+import com.ytgld.chest_item.items.meet.Meat;
 import com.ytgld.chest_item.renderer.MRender;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -26,7 +27,7 @@ import java.util.function.Consumer;
  * <p>
  * 伤痛会带来极大的加成和防御
  */
-public class ActualSuffering extends ItemBase implements Meat, IBlackLight , ITextColor {
+public class ActualSuffering extends TraumaItem {
     public ActualSuffering(Properties properties) {
         super(properties);
     }
@@ -75,13 +76,4 @@ public class ActualSuffering extends ItemBase implements Meat, IBlackLight , ITe
         return attribute;
     }
 
-    @Override
-    public DoBlack colorBlack() {
-        return new DoBlack(50 ,100,0,0, MRender.RenderPs.GUI_TEXTURED);
-    }
-
-    @Override
-    public int colorText() {
-        return 16755200;
-    }
 }
