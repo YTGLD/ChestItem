@@ -209,6 +209,24 @@ public class AttReg {
                     "slashing")).build()
 
     );
+    public static final DeferredHolder<Attribute, ?> counter =  REGISTRY.register("counter",
+            () -> (new RangedAttribute("attribute.name.chest_item.counter",
+                    0.0F, 0, 100)).setSyncable(true));
+
+    public static final Supplier<AttachmentType<Integer>> counter_data=
+            ATTACHMENT_TYPES.register("counter_data",
+                    () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler())
+                            .serialize(Codec.INT.fieldOf("counter_data")).build());
+
+    public static final Supplier<AttachmentType<Integer>> counter_data_cooldown=
+            ATTACHMENT_TYPES.register("counter_data_cooldown",
+                    () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler())
+                            .serialize(Codec.INT.fieldOf("counter_data_cooldown")).build());
+
+    public static final Supplier<AttachmentType<Integer>> score_consecutive_victories=
+            ATTACHMENT_TYPES.register("score_consecutive_victories",
+                    () -> AttachmentType.builder(() -> 0).sync(new IntSyncHandler())
+                            .serialize(Codec.INT.fieldOf("score_consecutive_victories")).build());
 
     @SubscribeEvent
     public static void EntityAttributeCreationEvent(EntityAttributeModificationEvent event){
@@ -250,6 +268,7 @@ public class AttReg {
         event.add(EntityTypes.PLAYER , AttReg.theSanity,10);
         event.add(EntityTypes.PLAYER , AttReg.oppression,0);
         event.add(EntityTypes.PLAYER , AttReg.shield_cooldown,200);
+        event.add(EntityTypes.PLAYER , AttReg.counter,0);
 
     }
 }

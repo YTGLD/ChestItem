@@ -423,7 +423,7 @@
   "attribute.name.chest_item.shadow_shield_conversion": "Shadow transformation",
   "attribute.name.chest_item.oppression": "Oppression",
   "attribute.name.chest_item.shadow_shield_cooldown": "Shadow Shield Cooldown",
-
+  "attribute.name.chest_item.counter": "反制暂存容量",
 
   "itemGroup.chest_item": "Trinkets in the chest",
 

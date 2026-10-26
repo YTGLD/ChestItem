@@ -8,6 +8,7 @@ import com.ytgld.chest_item.items.InitItems;
 import com.ytgld.chest_item.other.ChestMenuScreen;
 import com.ytgld.chest_item.other.ChestMenuTypes;
 import com.ytgld.chest_item.renderer.BlackShieldRenderHandler;
+import com.ytgld.chest_item.renderer.CounterRender;
 import com.ytgld.chest_item.renderer.RenderIBlackLightItem;
 import com.ytgld.chest_item.renderer.ShieldRenderHandler;
 import com.ytgld.chest_item.renderer.book.CIBookScreen;
@@ -73,6 +74,7 @@ public class ChestitemClient{
         RenderObjectManager.event(event);
         CIBookScreen.event(event);
         RenderIBlackLightItem.clientTick(event);
+        CounterRender.tick(event);
     }
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiLayersEvent event) {
@@ -80,6 +82,8 @@ public class ChestitemClient{
                 (guiGraphics,tracker)->ShieldRenderHandler.renderShield(guiGraphics));
         event.registerAbove(VanillaGuiLayers.FOOD_LEVEL, Identifier.fromNamespaceAndPath(Chestitem.MODID,"black_shield"),
                 (guiGraphics,tracker)-> BlackShieldRenderHandler.renderShield(guiGraphics));
+        event.registerAbove(VanillaGuiLayers.TITLE, Identifier.fromNamespaceAndPath(Chestitem.MODID, "counter"),
+                (guiGraphics, tracker) -> CounterRender.renderShield(guiGraphics));
     }
     @SubscribeEvent
     public static void regMenu(RegisterMenuScreensEvent event){

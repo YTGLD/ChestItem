@@ -492,6 +492,7 @@
   "attribute.name.chest_item.hyperplasia_cooldown": "休眠时间",
   "attribute.name.chest_item.shadow_shield_conversion": "幽影转换",
   "attribute.name.chest_item.oppression": "威压锁定",
+  "attribute.name.chest_item.counter": "反制暂存容量",
 
   "key.category.chest_item.chest": "箱子里的小饰品",
   "key.chest_item.r": "打开神奇箱子",

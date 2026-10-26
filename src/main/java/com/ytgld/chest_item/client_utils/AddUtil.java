@@ -43,6 +43,29 @@ public class AddUtil {
         sendToNearbyPlayers(living, packet, 64.0);
     }
 
+    public static void addSwordCounter(@Nullable Player player, LivingEntity living,int color) {
+        if (player != null) {
+            int san = (int) (player.getAttributeBaseValue(AttReg.theSanity) - player.getAttributeValue(AttReg.theSanity));
+            if (san >= 10) {
+                living.addEffect(new MobEffectInstance(Effects.EvilErosion, 200, 1));
+                color = Light.ARGB.color(255, 0, 255, 150);
+            }
+        }
+        RandomSource random = living.getRandom();
+
+        float rotationX =  Mth.nextInt(random, -360, 360);
+        float rotationY = Mth.nextInt(random, -360, 360);
+        float rotationZ = Mth.nextInt(random, -360, 360);
+
+        SwordRenderPacket packet = new SwordRenderPacket(
+                living.getX(), living.getEyeY(), living.getZ(),
+                rotationX, rotationY, rotationZ,
+                color, 2
+        );
+
+        sendToNearbyPlayers(living, packet, 64.0);
+    }
+
     public static void addFatalEffect(LivingEntity living,Vec3 pos, int color,int size) {
         RandomSource random = living.getRandom();
         float rotationX =  Mth.nextInt(random, -360, 360);

@@ -130,6 +130,7 @@ public class EventMain {
         EvilMother.attrib(event);
         Fusion.event(event);
         GiveEvilGiftHandler.event(event);
+        CounterHandler.event(event);
     }
     @SubscribeEvent
     public void  knock(LivingKnockBackEvent event){
@@ -308,7 +309,7 @@ public class EventMain {
         WarGodCommand.notDie(event);
         Triangle.hurtSize(event);
         ParentRock.event(event);
-
+        CounterHandler.event(event);
 
         if (event.getEntity() instanceof Player player) {
             AttributeInstance resistance = player.getAttribute(AttReg.resistance);
