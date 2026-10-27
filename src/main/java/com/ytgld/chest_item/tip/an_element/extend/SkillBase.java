@@ -11,6 +11,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public abstract class SkillBase {
+    public static final String theConfigCategory = "SkillBaseConfigCategory";
+
     public static final String skillBaseXP = "SkillBaseXP";
     public abstract String baneName();
     public abstract boolean isPercentage();

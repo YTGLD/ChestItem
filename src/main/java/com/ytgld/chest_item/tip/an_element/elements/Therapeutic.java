@@ -3,6 +3,8 @@ package com.ytgld.chest_item.tip.an_element.elements;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.chest_item.Chestitem;
+import com.ytgld.chest_item.config.ConfigPlugin;
+import com.ytgld.chest_item.config.RegisterItemConfig;
 import com.ytgld.chest_item.event.activated.ci.ItemStackTickEvent;
 import com.ytgld.chest_item.items.AttReg;
 import com.ytgld.chest_item.other.ChestInventory;
@@ -14,13 +16,36 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.ModConfigSpec;
+
+import java.util.List;
 
 /**
  * 生命值高于50%时增加治疗效果
  */
 public class Therapeutic  extends SkillBase {
-    public Therapeutic(){
+    @ConfigPlugin
+    public static class ConfigItem implements RegisterItemConfig {
+        @Override
+        public String theCategory() {
+            return theConfigCategory;
+        }
+        public static ModConfigSpec.DoubleValue intValue ;
+        @Override
+        public void config(ModConfigSpec.Builder builder) {
+            builder.push("Therapeutic");
+            intValue =  builder.translation("chest_item.config.Therapeutic")
+                    .defineInRange("number",0.08f,0,Integer.MAX_VALUE);
+            builder.pop();
+        }
 
+        @Override
+        public List<CIString> theLanguageProvider() {
+            return List.of(new CIString("Therapeutic",
+                    "医者意志","每级的额外治疗"));
+        }
+    }
+    public Therapeutic(){
     }
     public static void pPlagueSpores(ItemStackTickEvent event){
         ChestInventory chestInventory = event.chestInventory;
@@ -72,7 +97,7 @@ public class Therapeutic  extends SkillBase {
 
     @Override
     public float aneLvlForModify() {
-        return 0.08f;
+        return ConfigItem.intValue.get().floatValue();
     }
 
     @Override
